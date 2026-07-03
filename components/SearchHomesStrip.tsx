@@ -10,10 +10,11 @@ export default function SearchHomesStrip() {
             Ready to see homes for sale?
           </p>
           <p className="text-caption text-lvinit-warmgray">
-            Full home search is coming in a future update.
+            Live Las Vegas home search is now available on the LVINIT search
+            page.
           </p>
         </div>
-        <ButtonLink href="#" variant="secondary">
+        <ButtonLink href="/search" variant="secondary">
           Search Homes
         </ButtonLink>
       </Container>
