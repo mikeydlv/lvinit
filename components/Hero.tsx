@@ -2,18 +2,42 @@ import Image from "next/image";
 import Container from "./ui/Container";
 import { ButtonLink } from "./ui/Button";
 
+// Hero background photo. If this file isn't present yet, upload it to
+// public/images/hero/ (keep the name) — the layout already points at it.
+// TODO(real-photo): swap for the final approved hero image if this changes.
+const HERO_IMAGE = "/images/hero/summerlin-drone-overlook-golden-hour.webp";
+
 export default function Hero() {
   return (
     <section className="relative flex min-h-screen items-center overflow-hidden bg-lvinit-white">
-      {/* Subtle warm-gray wash keeps the white bright, not clinical */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 bg-gradient-to-b from-lvinit-lightgray/40 via-lvinit-white to-lvinit-white"
+      {/* Full-bleed landscape background photo */}
+      <Image
+        src={HERO_IMAGE}
+        alt="Aerial view of a Las Vegas hillside neighborhood at golden hour — homes and a green golf course below the desert mountains"
+        fill
+        priority
+        sizes="100vw"
+        className="object-cover object-center"
       />
 
-      <Container className="relative z-10 grid grid-cols-1 items-center gap-14 pb-24 pt-32 sm:pt-40 lg:grid-cols-12 lg:gap-20 lg:pb-32">
-        {/* Editorial text column */}
-        <div className="lg:col-span-6 xl:col-span-5">
+      {/* Airy cream wash keeps the photo subtle (~30–40% visible), never dark */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 bg-lvinit-white/55"
+      />
+      {/* Stronger white gradient behind the text on the left for easy reading */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 bg-gradient-to-r from-lvinit-white via-lvinit-white/85 to-transparent"
+      />
+      {/* Whisper-warm tint at the base so the bright white stays inviting */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 bg-gradient-to-t from-lvinit-lightgray/30 to-transparent"
+      />
+
+      <Container className="relative z-10 pb-24 pt-32 sm:pt-40 lg:pb-32">
+        <div className="max-w-xl">
           <p className="flex items-center gap-3 text-caption uppercase tracking-wide text-lvinit-warmgray">
             <span className="h-px w-8 bg-lvinit-blue" aria-hidden="true" />
             Las Vegas · A Local&apos;s Guide
@@ -37,36 +61,6 @@ export default function Hero() {
               Watch the guide
             </ButtonLink>
           </div>
-        </div>
-
-        {/* Luxury lifestyle photography column */}
-        <div className="lg:col-span-6 xl:col-span-7">
-          <figure className="relative">
-            {/* Warm-gray panel offset behind the image for editorial depth */}
-            <div
-              aria-hidden="true"
-              className="absolute -bottom-6 -right-6 hidden h-full w-full bg-lvinit-lightgray/50 lg:block"
-            />
-            <div className="relative aspect-[4/5] w-full overflow-hidden sm:aspect-[3/4] lg:aspect-[4/5]">
-              <Image
-                src="/images/hero/summerlin-drone-overlook-golden-hour.webp"
-                alt="Aerial view of a Las Vegas hillside neighborhood at golden hour — homes and a green golf course below the desert mountains"
-                fill
-                priority
-                sizes="(max-width: 1024px) 100vw, 58vw"
-                className="object-cover"
-              />
-              {/* Soft dark gradient on the left edge only, kept subtle so the
-                  photo stays natural while anchoring it toward the headline. */}
-              <div
-                aria-hidden="true"
-                className="pointer-events-none absolute inset-0 bg-gradient-to-r from-black/15 via-transparent to-transparent"
-              />
-            </div>
-            <figcaption className="relative mt-4 text-caption uppercase tracking-wide text-lvinit-warmgray">
-              Summerlin — the quiet hour before the heat
-            </figcaption>
-          </figure>
         </div>
       </Container>
     </section>
