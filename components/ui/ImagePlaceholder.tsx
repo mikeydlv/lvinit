@@ -1,7 +1,7 @@
 type ImagePlaceholderProps = {
   label: string;
   /**
-   * Local placeholder asset in /public/images (e.g. "/images/hero-las-vegas-lifestyle.svg").
+   * Local placeholder asset in /public/images (e.g. "/images/hero-las-vegas-lifestyle.jpg").
    * Swap the file — or this path — for real photography when it's ready.
    * When omitted, the original labeled gray placeholder is shown.
    */

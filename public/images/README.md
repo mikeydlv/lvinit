@@ -1,36 +1,35 @@
-# Placeholder images — REPLACE THESE
+# Photography placeholders — REPLACE THESE
 
-These are **temporary, generated SVG placeholders** so the homepage never shows
-empty/gray image blocks. They are original generated vector art (no third-party
-or copyrighted photos). Swap each one for your own real photo when ready.
+These are **temporary, neutral photography placeholders** (plain warm-neutral
+JPGs — no scenery, no illustration, no artwork) so the homepage looks clean and
+finished until real Las Vegas photography is shot. They are intentionally blank
+so they never pretend to be something they're not.
 
-**How to replace:** drop a real image at the same path (e.g. save your photo as
-`hero-las-vegas-lifestyle.jpg`) and update the matching `src` in the component
-listed below (change `.svg` → your file). Keep it local — never hotlink.
-
-Regenerate the current placeholders anytime with:
-`node scripts/generate-placeholder-images.mjs`
+**How to replace:** drop your real photo at the same path with the same
+filename (e.g. overwrite `hero-las-vegas-lifestyle.jpg` with your shot). No code
+change needed — the components already point at these paths. Keep images local
+(never hotlink) and use only photography you have the rights to.
 
 | File | Used in | Shot it stands in for |
 |------|---------|-----------------------|
-| `hero-las-vegas-lifestyle.svg` | `components/Hero.tsx` | Luxury LV lifestyle, golden hour, desert-modern home |
-| `neighborhood-summerlin.svg` | Journey + grid (`NeighborhoodJourney`, `NeighborhoodGrid`) | Summerlin / Red Rock trail |
-| `neighborhood-henderson.svg` | Journey + grid | Henderson parks, tree-lined |
-| `neighborhood-downtown-arts-district.svg` | Journey + grid | Downtown Arts District at dusk |
-| `neighborhood-green-valley.svg` | Journey + grid | Green Valley, established & shaded |
-| `neighborhood-lake-las-vegas.svg` | Journey + grid | Lake Las Vegas water at dusk |
-| `breathing-downtown-arts-district.svg` | `app/page.tsx` (BreathingPhoto #1) | Arts District street photography |
-| `breathing-red-rock-trailhead.svg` | `app/page.tsx` (BreathingPhoto #2) | Red Rock / Summerlin trailhead |
-| `resident-voice-backdrop.svg` | `components/ResidentVoice.tsx` | Quiet, low-contrast lifestyle backdrop |
-| `meet-your-guide-mikey-portrait.svg` | `components/MeetYourGuide.tsx` | Environmental portrait of Mikey |
-| `guide-summerlin-vs-henderson.svg` | `components/LocalGuides.tsx` | Guide lead image |
-| `guide-cost-of-living-2026.svg` | `components/LocalGuides.tsx` | Guide image |
-| `guide-downtown-arts-district-guide.svg` | `components/LocalGuides.tsx` | Guide image |
-| `guide-first-summer-in-vegas.svg` | `components/LocalGuides.tsx` | Guide image |
-| `video-affordability.svg` | `components/Videos.tsx` | Video poster/thumbnail |
-| `video-heat.svg` | `components/Videos.tsx` | Video poster/thumbnail |
-| `video-rent-vs-buy.svg` | `components/Videos.tsx` | Video poster/thumbnail |
-| `video-schools.svg` | `components/Videos.tsx` | Video poster/thumbnail |
+| `hero-las-vegas-lifestyle.jpg` | `components/Hero.tsx` | Luxury LV lifestyle, golden hour, desert-modern home |
+| `neighborhood-summerlin.jpg` | Journey + grid (`NeighborhoodJourney`, `NeighborhoodGrid`) | Summerlin / Red Rock |
+| `neighborhood-henderson.jpg` | Journey + grid | Henderson, parks, tree-lined |
+| `neighborhood-downtown-arts-district.jpg` | Journey + grid | Downtown Arts District |
+| `neighborhood-green-valley.jpg` | Journey + grid | Green Valley, established & shaded |
+| `neighborhood-lake-las-vegas.jpg` | Journey + grid | Lake Las Vegas |
+| `breathing-downtown-arts-district.jpg` | `app/page.tsx` (BreathingPhoto #1) | Arts District street photography |
+| `breathing-red-rock-trailhead.jpg` | `app/page.tsx` (BreathingPhoto #2) | Red Rock / Summerlin trailhead |
+| `resident-voice-backdrop.jpg` | `components/ResidentVoice.tsx` | Quiet, low-contrast lifestyle backdrop |
+| `meet-your-guide-mikey-portrait.jpg` | `components/MeetYourGuide.tsx` | Environmental portrait of Mikey |
+| `guide-summerlin-vs-henderson.jpg` | `components/LocalGuides.tsx` | Guide lead image |
+| `guide-cost-of-living-2026.jpg` | `components/LocalGuides.tsx` | Guide image |
+| `guide-downtown-arts-district-guide.jpg` | `components/LocalGuides.tsx` | Guide image |
+| `guide-first-summer-in-vegas.jpg` | `components/LocalGuides.tsx` | Guide image |
+| `video-affordability.jpg` | `components/Videos.tsx` | Video poster/thumbnail |
+| `video-heat.jpg` | `components/Videos.tsx` | Video poster/thumbnail |
+| `video-rent-vs-buy.jpg` | `components/Videos.tsx` | Video poster/thumbnail |
+| `video-schools.jpg` | `components/Videos.tsx` | Video poster/thumbnail |
 
 Neighborhood/guide/video assets are keyed by slug/id, so a real file at the same
 name is picked up automatically.
