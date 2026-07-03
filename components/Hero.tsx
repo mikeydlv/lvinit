@@ -20,15 +20,16 @@ export default function Hero() {
         className="object-cover object-center"
       />
 
-      {/* Airy cream wash keeps the photo subtle (~30–40% visible), never dark */}
+      {/* Airy cream wash keeps the photo subtle (~35–45% visible), never dark */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 bg-lvinit-white/55"
+        className="pointer-events-none absolute inset-0 bg-lvinit-white/45"
       />
-      {/* Stronger white gradient behind the text on the left for easy reading */}
+      {/* Softer white gradient behind the text — lets a bit more photo show
+          through the copy while keeping the headline easy to read */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 bg-gradient-to-r from-lvinit-white via-lvinit-white/85 to-transparent"
+        className="pointer-events-none absolute inset-0 bg-gradient-to-r from-lvinit-white/85 via-lvinit-white/70 to-transparent"
       />
       {/* Whisper-warm tint at the base so the bright white stays inviting */}
       <div
