@@ -1,6 +1,6 @@
+import Image from "next/image";
 import Container from "./ui/Container";
 import { ButtonLink } from "./ui/Button";
-import ImagePlaceholder from "./ui/ImagePlaceholder";
 
 export default function Hero() {
   return (
@@ -47,12 +47,22 @@ export default function Hero() {
               aria-hidden="true"
               className="absolute -bottom-6 -right-6 hidden h-full w-full bg-lvinit-lightgray/50 lg:block"
             />
-            <ImagePlaceholder
-              src="/images/hero-las-vegas-lifestyle.jpg"
-              label="Placeholder — luxury Las Vegas lifestyle at golden hour: an open desert-modern home, Red Rock glowing beyond, someone living in it — no Strip, no neon"
-              aspect="aspect-[4/5] sm:aspect-[3/4] lg:aspect-[4/5]"
-              className="relative w-full"
-            />
+            <div className="relative aspect-[4/5] w-full overflow-hidden sm:aspect-[3/4] lg:aspect-[4/5]">
+              <Image
+                src="/images/hero/summerlin-drone-overlook-golden-hour.webp"
+                alt="Aerial view of a Las Vegas hillside neighborhood at golden hour — homes and a green golf course below the desert mountains"
+                fill
+                priority
+                sizes="(max-width: 1024px) 100vw, 58vw"
+                className="object-cover"
+              />
+              {/* Soft dark gradient on the left edge only, kept subtle so the
+                  photo stays natural while anchoring it toward the headline. */}
+              <div
+                aria-hidden="true"
+                className="pointer-events-none absolute inset-0 bg-gradient-to-r from-black/15 via-transparent to-transparent"
+              />
+            </div>
             <figcaption className="relative mt-4 text-caption uppercase tracking-wide text-lvinit-warmgray">
               Summerlin — the quiet hour before the heat
             </figcaption>

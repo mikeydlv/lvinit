@@ -12,7 +12,7 @@ change needed — the components already point at these paths. Keep images local
 
 | File | Used in | Shot it stands in for |
 |------|---------|-----------------------|
-| `hero-las-vegas-lifestyle.jpg` | `components/Hero.tsx` | Luxury LV lifestyle, golden hour, desert-modern home |
+| `hero/summerlin-drone-overlook-golden-hour.webp` | `components/Hero.tsx` | **Real photo** — golden-hour drone overlook (via next/image); not a placeholder |
 | `neighborhood-summerlin.jpg` | Journey + grid (`NeighborhoodJourney`, `NeighborhoodGrid`) | Summerlin / Red Rock |
 | `neighborhood-henderson.jpg` | Journey + grid | Henderson, parks, tree-lined |
 | `neighborhood-downtown-arts-district.jpg` | Journey + grid | Downtown Arts District |
