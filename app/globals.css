@@ -1,0 +1,57 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+body {
+  @apply bg-lvinit-white text-lvinit-black font-sans antialiased;
+}
+
+/* Anchor targets sit under the sticky header without headings hiding behind it */
+section[id] {
+  scroll-margin-top: 96px;
+}
+
+/* Skip-to-content link — hidden until focused, per Doc 02 §20 / Doc 03 §6 */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 100;
+  background: #2b6cb0;
+  color: #ffffff;
+  padding: 12px 20px;
+  font-family: var(--font-inter), system-ui, sans-serif;
+  font-size: 14px;
+  border-radius: 0 0 4px 0;
+}
+
+.skip-link:focus {
+  left: 0;
+}
+
+/* Visible focus state in Scofield Blue, everywhere — Doc 02 §20 */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid #2b6cb0;
+  outline-offset: 3px;
+}
