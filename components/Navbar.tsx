@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import Container from "./ui/Container";
 
 const primaryLinks = [
@@ -62,13 +63,12 @@ export default function Navbar() {
         </nav>
 
         <div className="hidden lg:flex items-center gap-6">
-          <a
-            href="#"
-            title="Coming soon — Phase 2"
+          <Link
+            href="/search"
             className="text-caption uppercase tracking-wide text-lvinit-warmgray hover:text-lvinit-blue transition-colors duration-200"
           >
             Search Homes
-          </a>
+          </Link>
         </div>
 
         <button
@@ -112,13 +112,13 @@ export default function Navbar() {
                 {link.label}
               </a>
             ))}
-            <a
-              href="#"
+            <Link
+              href="/search"
               onClick={() => setMenuOpen(false)}
               className="text-caption uppercase tracking-wide text-lvinit-warmgray"
             >
               Search Homes
-            </a>
+            </Link>
           </nav>
         </div>
       )}
