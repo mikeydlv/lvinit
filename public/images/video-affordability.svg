@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1200" width="1600" height="1200" role="img" preserveAspectRatio="xMidYMid slice"><defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#171b2e"/>
+      <stop offset="0.55" stop-color="#2f2c48"/>
+      <stop offset="1" stop-color="#7a4f4a"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="60.0%" cy="60.0%" r="55%">
+      <stop offset="0" stop-color="#c76a45" stop-opacity="0.95"/>
+      <stop offset="0.5" stop-color="#c76a45" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="#c76a45" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="vig" cx="50%" cy="42%" r="78%">
+      <stop offset="0.55" stop-color="#0a0a0a" stop-opacity="0"/>
+      <stop offset="1" stop-color="#0a0a0a" stop-opacity="0.34"/>
+    </radialGradient>
+    <filter id="soft"><feGaussianBlur stdDeviation="26"/></filter>
+    <filter id="grain"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter></defs><rect width="1600" height="1200" fill="url(#sky)"/><rect width="1600" height="1200" fill="url(#glow)"/><circle cx="960" cy="720" r="170" fill="#f0a86a" opacity="0.35" filter="url(#soft)"/><circle cx="960" cy="720" r="71.39999999999999" fill="#f0a86a" opacity="0.95"/><path d="M-40,1200 L-40,640 L150,588 L340,630 L530,609 L720,677 L910,586 L1100,570 L1290,681 L1480,546 L1640,1200 Z" fill="#2a2b3d" opacity="0.7"/><path d="M-40,1200 L-40,651 L150,645 L340,694 L530,702 L720,570 L910,646 L1100,646 L1290,654 L1480,579 L1640,1200 Z" fill="#1c1c2a" opacity="0.9"/><path d="M-40,1200 L-40,803 L150,626 L340,684 L530,725 L720,741 L910,700 L1100,811 L1290,670 L1480,683 L1640,1200 Z" fill="#101018"/><rect width="1600" height="1200" fill="url(#vig)"/><rect width="1600" height="1200" fill="#000" opacity="0.06" filter="url(#grain)"/></svg>

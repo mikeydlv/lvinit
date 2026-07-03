@@ -23,6 +23,7 @@ export default function Videos() {
 
         <div className="mt-10">
           <VideoPlaceholder
+            src={`/images/video-${featured.id}.svg`}
             label={`Placeholder — ${featured.title}`}
             className="w-full"
           />
@@ -39,6 +40,7 @@ export default function Videos() {
               className="text-left group"
             >
               <VideoPlaceholder
+                src={`/images/video-${video.id}.svg`}
                 label={`Placeholder — ${video.title}`}
                 className="transition-opacity duration-300 ease-calm group-hover:opacity-90"
               />

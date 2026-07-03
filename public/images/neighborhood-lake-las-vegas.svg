@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1200" width="1600" height="1200" role="img" preserveAspectRatio="xMidYMid slice"><defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#26305a"/>
+      <stop offset="0.55" stop-color="#574a76"/>
+      <stop offset="1" stop-color="#b06d88"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="52.0%" cy="50.0%" r="55%">
+      <stop offset="0" stop-color="#c77a8f" stop-opacity="0.95"/>
+      <stop offset="0.5" stop-color="#c77a8f" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="#c77a8f" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="vig" cx="50%" cy="42%" r="78%">
+      <stop offset="0.55" stop-color="#0a0a0a" stop-opacity="0"/>
+      <stop offset="1" stop-color="#0a0a0a" stop-opacity="0.34"/>
+    </radialGradient>
+    <filter id="soft"><feGaussianBlur stdDeviation="26"/></filter>
+    <filter id="grain"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter></defs><rect width="1600" height="1200" fill="url(#sky)"/><rect width="1600" height="1200" fill="url(#glow)"/><circle cx="832" cy="600" r="200" fill="#ffd9c2" opacity="0.35" filter="url(#soft)"/><circle cx="832" cy="600" r="84" fill="#ffd9c2" opacity="0.95"/><path d="M-40,1200 L-40,643 L150,669 L340,665 L530,587 L720,575 L910,644 L1100,653 L1290,652 L1480,611 L1640,1200 Z" fill="#7a6c88" opacity="0.7"/><path d="M-40,1200 L-40,626 L150,585 L340,739 L530,672 L720,683 L910,725 L1100,704 L1290,589 L1480,723 L1640,1200 Z" fill="#4f4862" opacity="0.9"/><rect x="0" y="814" width="1600" height="386" fill="#2c2838"/><linearGradient id="wg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#b06d88" stop-opacity="0.5"/><stop offset="1" stop-color="#26305a" stop-opacity="0.15"/></linearGradient><rect x="0" y="814" width="1600" height="386" fill="url(#wg)"/><ellipse cx="832" cy="934" rx="100" ry="150" fill="#ffd9c2" opacity="0.3" filter="url(#soft)"/><rect width="1600" height="1200" fill="url(#vig)"/><rect width="1600" height="1200" fill="#000" opacity="0.06" filter="url(#grain)"/></svg>

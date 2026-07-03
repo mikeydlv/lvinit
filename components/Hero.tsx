@@ -48,6 +48,7 @@ export default function Hero() {
               className="absolute -bottom-6 -right-6 hidden h-full w-full bg-lvinit-lightgray/50 lg:block"
             />
             <ImagePlaceholder
+              src="/images/hero-las-vegas-lifestyle.svg"
               label="Placeholder — luxury Las Vegas lifestyle at golden hour: an open desert-modern home, Red Rock glowing beyond, someone living in it — no Strip, no neon"
               aspect="aspect-[4/5] sm:aspect-[3/4] lg:aspect-[4/5]"
               className="relative w-full"

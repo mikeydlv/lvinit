@@ -38,6 +38,7 @@ export default function NeighborhoodJourney() {
             className="relative flex h-[70vh] sm:h-[80vh] w-full flex-none snap-start items-end"
           >
             <ImagePlaceholder
+              src={`/images/neighborhood-${n.slug}.svg`}
               label={`Placeholder — ${n.photoDirection}`}
               aspect="aspect-auto"
               className="absolute inset-0 h-full w-full"

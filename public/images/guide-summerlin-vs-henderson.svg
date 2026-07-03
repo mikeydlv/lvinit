@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1200" width="1600" height="1200" role="img" preserveAspectRatio="xMidYMid slice"><defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#37426a"/>
+      <stop offset="0.55" stop-color="#8a5f73"/>
+      <stop offset="1" stop-color="#d98a55"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50.0%" cy="62.0%" r="55%">
+      <stop offset="0" stop-color="#f4a962" stop-opacity="0.95"/>
+      <stop offset="0.5" stop-color="#f4a962" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="#f4a962" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="vig" cx="50%" cy="42%" r="78%">
+      <stop offset="0.55" stop-color="#0a0a0a" stop-opacity="0"/>
+      <stop offset="1" stop-color="#0a0a0a" stop-opacity="0.34"/>
+    </radialGradient>
+    <filter id="soft"><feGaussianBlur stdDeviation="26"/></filter>
+    <filter id="grain"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter></defs><rect width="1600" height="1200" fill="url(#sky)"/><rect width="1600" height="1200" fill="url(#glow)"/><circle cx="800" cy="744" r="180" fill="#ffdda6" opacity="0.35" filter="url(#soft)"/><circle cx="800" cy="744" r="75.6" fill="#ffdda6" opacity="0.95"/><path d="M-40,1200 L-40,641 L150,560 L340,584 L530,570 L720,576 L910,579 L1100,664 L1290,579 L1480,572 L1640,1200 Z" fill="#c48f68" opacity="0.7"/><path d="M-40,1200 L-40,679 L150,659 L340,636 L530,614 L720,577 L910,564 L1100,707 L1290,666 L1480,637 L1640,1200 Z" fill="#9a6b53" opacity="0.9"/><path d="M-40,1200 L-40,798 L150,781 L340,647 L530,779 L720,826 L910,791 L1100,674 L1290,636 L1480,680 L1640,1200 Z" fill="#5e463c"/><g fill="#5e463c"><rect x="1197" y="890" width="6" height="40"/><circle cx="1200" cy="884" r="26"/><circle cx="1184.4" cy="894" r="18.2"/><circle cx="1215.6" cy="894" r="18.2"/></g><g fill="#5e463c"><rect x="1337" y="890" width="6" height="40"/><circle cx="1340" cy="884" r="26"/><circle cx="1324.4" cy="894" r="18.2"/><circle cx="1355.6" cy="894" r="18.2"/></g><rect width="1600" height="1200" fill="url(#vig)"/><rect width="1600" height="1200" fill="#000" opacity="0.06" filter="url(#grain)"/></svg>
