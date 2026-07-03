@@ -18,7 +18,7 @@ export default function LocalGuides() {
 
         <a href="#" className="mt-10 grid grid-cols-1 lg:grid-cols-2 gap-8 group block">
           <ImagePlaceholder
-            label={`Placeholder — editorial photograph for "${featured.title}"`}
+            label={`Placeholder — editorial lead image for "${featured.title}" (documentary Las Vegas lifestyle, warm natural light, people living not posing)`}
             aspect="aspect-[4/3]"
           />
           <div className="flex flex-col justify-center">
@@ -46,7 +46,7 @@ export default function LocalGuides() {
           {rest.map((guide) => (
             <a key={guide.slug} href="#" className="group block">
               <ImagePlaceholder
-                label={`Placeholder — editorial photograph for "${guide.title}"`}
+                label={`Placeholder — editorial image for "${guide.title}" (documentary Las Vegas lifestyle, warm natural light)`}
                 aspect="aspect-[4/3]"
               />
               <p className="mt-3 text-caption uppercase tracking-wide text-lvinit-blue">

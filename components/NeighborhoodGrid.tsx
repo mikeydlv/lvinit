@@ -51,7 +51,7 @@ export default function NeighborhoodGrid() {
         {visible.map((n) => (
           <a key={n.slug} href="#" className="group block">
             <ImagePlaceholder
-              label={`Placeholder — ${n.name} card photograph`}
+              label={`Placeholder — ${n.photoDirection} (portrait crop)`}
               aspect="aspect-[4/5]"
               className="transition-opacity duration-300 ease-calm group-hover:opacity-90"
             />

@@ -20,6 +20,9 @@ export type Neighborhood = {
     | "up-and-coming"
   >;
   description: string;
+  /** Art direction for this neighborhood's placeholder photography — documentary
+   * lifestyle per Doc 02 §8: people living, warm natural light, never Strip/neon. */
+  photoDirection: string;
   metrics: {
     medianPrice: number; // USD
     walkScore: number; // 0–100
@@ -36,6 +39,8 @@ export const neighborhoods: Neighborhood[] = [
     tags: ["top-schools", "quiet-suburban"],
     description:
       "Master-planned, trail-laced, and built around the sunset light hitting Red Rock.",
+    photoDirection:
+      "Summerlin at golden hour — a runner on a Red Rock trail before the heat, red sandstone glowing behind low master-planned rooftops",
     metrics: { medianPrice: 615000, walkScore: 54, commuteToStrip: 27, schoolRating: 8.2 },
   },
   {
@@ -45,6 +50,8 @@ export const neighborhoods: Neighborhood[] = [
     tags: ["top-schools", "quiet-suburban"],
     description:
       "Vegas's quiet second city — parks, good schools, and a slower pace ten minutes from everything.",
+    photoDirection:
+      "Henderson in early evening — families on a tree-lined park path, water-district green against the desert, unhurried and easy",
     metrics: { medianPrice: 525000, walkScore: 48, commuteToStrip: 24, schoolRating: 8.0 },
   },
   {
@@ -54,6 +61,8 @@ export const neighborhoods: Neighborhood[] = [
     tags: ["walkable", "up-and-coming", "close-to-strip"],
     description:
       "Murals, coffee counters, and the closest thing Vegas has to a walk-everywhere neighborhood.",
+    photoDirection:
+      "Downtown Arts District mid-morning — muralled brick, a coffee counter spilling onto the sidewalk, regulars who clearly know each other",
     metrics: { medianPrice: 410000, walkScore: 88, commuteToStrip: 12, schoolRating: 6.4 },
   },
   {
@@ -63,6 +72,8 @@ export const neighborhoods: Neighborhood[] = [
     tags: ["top-schools", "quiet-suburban"],
     description:
       "Established, tree-lined, and consistently the answer when someone asks about schools first.",
+    photoDirection:
+      "Green Valley after school — kids biking a shaded, established street, mature trees and open garages, lived-in and settled",
     metrics: { medianPrice: 495000, walkScore: 51, commuteToStrip: 22, schoolRating: 8.6 },
   },
   {
@@ -72,6 +83,8 @@ export const neighborhoods: Neighborhood[] = [
     tags: ["quiet-suburban"],
     description:
       "Water where you don't expect it, and a resort-quiet pace year-round.",
+    photoDirection:
+      "Lake Las Vegas at dusk — still water catching the last light, a couple walking the promenade, resort-quiet and unhurried",
     metrics: { medianPrice: 780000, walkScore: 39, commuteToStrip: 32, schoolRating: 7.8 },
   },
 ];

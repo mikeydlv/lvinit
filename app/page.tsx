@@ -29,7 +29,7 @@ export default function HomePage() {
         <Comparisons />
 
         <BreathingPhoto
-          label="Placeholder — Downtown Arts District street photography"
+          label="Placeholder — Downtown Arts District street photography: warm evening light on muralled brick, people out walking, unposed and lived-in"
           caption="Two blocks from the light rail. Around the corner from a bakery that remembers your order."
         />
 
@@ -37,7 +37,7 @@ export default function HomePage() {
         <Videos />
 
         <BreathingPhoto
-          label="Placeholder — Red Rock / Summerlin trailhead photography"
+          label="Placeholder — Red Rock / Summerlin trailhead at first light: a lone hiker heading out before the heat, red rock warming, wide and quiet"
           caption="Where the trailhead starts before the heat does."
         />
 

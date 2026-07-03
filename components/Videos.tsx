@@ -50,7 +50,7 @@ export default function Videos() {
 
         <div className="mt-10">
           <ButtonLink href="#" variant="tertiary">
-            Visit the Video Library
+            See all the videos
           </ButtonLink>
         </div>
       </Container>

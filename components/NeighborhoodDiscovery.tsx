@@ -13,8 +13,9 @@ export default function NeighborhoodDiscovery() {
           Explore Las Vegas by Neighborhood
         </h2>
         <p className="mt-3 max-w-xl text-body text-lvinit-warmgray">
-          Five flagship neighborhoods to start — then narrow by what actually
-          matters to you.
+          I started with five I know street by street. Filter down to what
+          actually matters to you — the schools, the walkability, the commute
+          you&rsquo;ll really drive.
         </p>
       </Container>
 

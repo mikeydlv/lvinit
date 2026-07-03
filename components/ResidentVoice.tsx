@@ -15,7 +15,7 @@ export default function ResidentVoice({ quote, name, context }: ResidentQuote) {
       className="relative flex min-h-[70vh] items-center justify-center overflow-hidden bg-lvinit-black"
     >
       <ImagePlaceholder
-        label="Placeholder — quiet, low-contrast lifestyle photograph"
+        label="Placeholder — quiet, low-contrast lifestyle moment: soft morning light across a lived-in Las Vegas street, no one posing (kept muted so the quote reads)"
         aspect="aspect-auto"
         className="absolute inset-0 h-full w-full opacity-40 border-none"
       />

@@ -48,7 +48,7 @@ export default function MovingToLasVegas() {
 
         <div className="mt-8">
           <ButtonLink href="#" variant="tertiary">
-            Visit the Relocation Hub
+            Start with the moving-to-Vegas guide
           </ButtonLink>
         </div>
       </Container>

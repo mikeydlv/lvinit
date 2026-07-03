@@ -51,8 +51,9 @@ export default function Footer() {
               LVINIT
             </p>
             <p className="mt-3 max-w-[220px] text-caption text-lvinit-warmgray">
-              The guide to living in Las Vegas — neighborhoods, comparisons,
-              and the local expertise to decide with confidence.
+              An honest guide to actually living in Las Vegas — the
+              neighborhoods, the tradeoffs, and a local who&rsquo;ll tell you
+              the parts a brochure won&rsquo;t.
             </p>
           </div>
 

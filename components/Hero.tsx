@@ -5,13 +5,13 @@ import ImagePlaceholder from "./ui/ImagePlaceholder";
 export default function Hero() {
   return (
     <section className="relative flex min-h-screen items-center overflow-hidden bg-lvinit-white">
-      {/* Subtle warm-gray wash keeps the white bright but not clinical */}
+      {/* Subtle warm-gray wash keeps the white bright, not clinical */}
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 bg-gradient-to-b from-lvinit-lightgray/40 via-lvinit-white to-lvinit-white"
       />
 
-      <Container className="relative z-10 grid grid-cols-1 items-center gap-12 pb-24 pt-32 sm:pt-40 lg:grid-cols-12 lg:gap-16 lg:pb-32">
+      <Container className="relative z-10 grid grid-cols-1 items-center gap-14 pb-24 pt-32 sm:pt-40 lg:grid-cols-12 lg:gap-20 lg:pb-32">
         {/* Editorial text column */}
         <div className="lg:col-span-6 xl:col-span-5">
           <p className="flex items-center gap-3 text-caption uppercase tracking-wide text-lvinit-warmgray">
@@ -41,35 +41,23 @@ export default function Hero() {
 
         {/* Luxury lifestyle photography column */}
         <div className="lg:col-span-6 xl:col-span-7">
-          <div className="relative">
+          <figure className="relative">
             {/* Warm-gray panel offset behind the image for editorial depth */}
             <div
               aria-hidden="true"
               className="absolute -bottom-6 -right-6 hidden h-full w-full bg-lvinit-lightgray/50 lg:block"
             />
             <ImagePlaceholder
-              label="Placeholder — luxury Las Vegas lifestyle at golden hour: an open desert-modern home, Red Rock beyond"
+              label="Placeholder — luxury Las Vegas lifestyle at golden hour: an open desert-modern home, Red Rock glowing beyond, someone living in it — no Strip, no neon"
               aspect="aspect-[4/5] sm:aspect-[3/4] lg:aspect-[4/5]"
               className="relative w-full"
             />
-          </div>
+            <figcaption className="relative mt-4 text-caption uppercase tracking-wide text-lvinit-warmgray">
+              Summerlin — the quiet hour before the heat
+            </figcaption>
+          </figure>
         </div>
       </Container>
-
-      <div
-        aria-hidden="true"
-        className="absolute bottom-8 left-1/2 z-10 hidden -translate-x-1/2 animate-pulse sm:block motion-reduce:animate-none"
-      >
-        <svg width="16" height="26" viewBox="0 0 16 26" fill="none">
-          <path
-            d="M1 1L8 24L15 1"
-            stroke="#2B6CB0"
-            strokeWidth="1.5"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </svg>
-      </div>
     </section>
   );
 }

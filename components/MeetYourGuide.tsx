@@ -9,7 +9,7 @@ export default function MeetYourGuide() {
       className="relative flex min-h-screen items-end overflow-hidden bg-lvinit-black"
     >
       <ImagePlaceholder
-        label="Placeholder — environmental portrait of Mikey Del Rosario on location"
+        label="Placeholder — environmental portrait of Mikey Del Rosario on location in a real Las Vegas neighborhood at golden hour, relaxed and mid-conversation, magazine-cover crop — not a studio backdrop"
         aspect="aspect-auto"
         className="absolute inset-0 h-full w-full"
       />
