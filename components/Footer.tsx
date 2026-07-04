@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Container from "./ui/Container";
 
 const columns = [
@@ -56,6 +57,26 @@ export default function Footer() {
               neighborhoods, the tradeoffs, and a local who&rsquo;ll tell you
               the parts a brochure won&rsquo;t.
             </p>
+
+            <div className="mt-6 flex items-center gap-3">
+              <div className="relative h-16 w-16 overflow-hidden rounded-full bg-lvinit-lightgray/50">
+                <Image
+                  src="/images/team/mikey-del-rosario.webp"
+                  alt="Mikey Del Rosario"
+                  fill
+                  sizes="64px"
+                  className="object-cover object-top"
+                />
+              </div>
+              <div>
+                <p className="text-body font-medium text-lvinit-black">
+                  Mikey Del Rosario
+                </p>
+                <p className="text-caption text-lvinit-warmgray">
+                  Las Vegas Real Estate Advisor
+                </p>
+              </div>
+            </div>
           </div>
 
           {columns.map((col) => (
@@ -82,9 +103,25 @@ export default function Footer() {
         {/* Required compliance block — Doc 03 §3.16 / §3.14. Do not remove
             or visually diminish; every element here was specified explicitly. */}
         <div className="mt-16 border-t border-lvinit-lightgray pt-10">
-          <div className="flex flex-wrap items-center gap-4">
-            <LogoPlaceholder label="The Scofield Group" />
-            <LogoPlaceholder label="Equal Housing Opportunity" />
+          <div className="flex flex-wrap items-center gap-x-8 gap-y-6">
+            <div className="relative h-12 w-52">
+              <Image
+                src="/images/logos/the-scofield-group.webp"
+                alt="The Scofield Group"
+                fill
+                sizes="208px"
+                className="object-contain object-left"
+              />
+            </div>
+            <div className="relative h-14 w-14">
+              <Image
+                src="/images/logos/equal-housing-opportunity.webp"
+                alt="Equal Housing Opportunity"
+                fill
+                sizes="56px"
+                className="object-contain"
+              />
+            </div>
             <LogoPlaceholder label="REALTOR®" />
           </div>
 
