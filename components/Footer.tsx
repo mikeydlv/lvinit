@@ -92,7 +92,7 @@ export default function Footer() {
             or visually diminish; every element here was specified explicitly. */}
         <div className="mt-16 border-t border-lvinit-lightgray pt-10">
           <div className="flex flex-wrap items-center gap-x-8 gap-y-6">
-            <div className="relative h-12 w-52">
+            <div className="relative h-14 w-52">
               <Image
                 src="/images/logos/the-scofield-group.webp"
                 alt="The Scofield Group"
