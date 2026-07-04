@@ -43,7 +43,7 @@ export default function Navbar() {
         <a
           href="#main-content"
           aria-label="LVINIT — home"
-          className="font-sans text-subhead font-extrabold tracking-tight"
+          className="font-sans text-subhead font-extrabold tracking-[0.1em]"
         >
           <span className="text-lvinit-black">LVI</span>
           <span className="text-lvinit-gold">NIT</span>

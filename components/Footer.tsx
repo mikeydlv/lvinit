@@ -30,25 +30,13 @@ const columns = [
   },
 ];
 
-function LogoPlaceholder({ label }: { label: string }) {
-  return (
-    <div
-      role="img"
-      aria-label={`${label} — logo placeholder`}
-      className="flex h-14 w-32 items-center justify-center border border-dashed border-lvinit-warmgray/50 px-3 text-center text-[11px] leading-tight text-lvinit-warmgray"
-    >
-      {label}
-    </div>
-  );
-}
-
 export default function Footer() {
   return (
     <footer className="border-t border-lvinit-lightgray bg-lvinit-white">
       <Container className="pt-16 pb-10">
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-10">
           <div className="col-span-2 sm:col-span-1">
-            <p className="font-sans text-subhead font-extrabold tracking-tight">
+            <p className="font-sans text-subhead font-extrabold tracking-[0.1em]">
               <span className="text-lvinit-black">LVI</span>
               <span className="text-lvinit-gold">NIT</span>
             </p>
@@ -122,7 +110,15 @@ export default function Footer() {
                 className="object-contain"
               />
             </div>
-            <LogoPlaceholder label="REALTOR®" />
+            <div className="relative h-14 w-14">
+              <Image
+                src="/images/logos/realtor.webp"
+                alt="REALTOR®"
+                fill
+                sizes="56px"
+                className="object-contain"
+              />
+            </div>
           </div>
 
           <div className="mt-6 space-y-1 text-caption text-lvinit-warmgray">
