@@ -13,6 +13,8 @@ const config: Config = {
           warmgray: "#6E6A63",
           lightgray: "#E8E6E1",
           blue: "#2B6CB0",
+          // Brand wordmark gold — the "NIT" in the LVINIT logo lockup.
+          gold: "#C8A46A",
         },
       },
       fontFamily: {
