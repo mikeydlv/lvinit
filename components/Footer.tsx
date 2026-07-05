@@ -15,7 +15,7 @@ const columns = [
   {
     heading: "Company",
     links: [
-      { label: "About", href: "#" },
+      { label: "About", href: "#meet-your-guide" },
       { label: "Meet Your Guide", href: "#meet-your-guide" },
       { label: "Contact", href: "mailto:hello@lvinit.com" },
     ],

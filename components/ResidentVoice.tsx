@@ -16,7 +16,7 @@ export default function ResidentVoice({ quote, name, context }: ResidentQuote) {
     >
       <ImagePlaceholder
         src="/images/resident-voice-backdrop.jpg"
-        label="Placeholder — quiet, low-contrast lifestyle moment: soft morning light across a lived-in Las Vegas street, no one posing (kept muted so the quote reads)"
+        label="A quiet Las Vegas street in the morning light"
         aspect="aspect-auto"
         className="absolute inset-0 h-full w-full opacity-40 border-none"
       />

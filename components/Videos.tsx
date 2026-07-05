@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import Container from "./ui/Container";
-import { ButtonLink } from "./ui/Button";
 import VideoPlaceholder from "./ui/VideoPlaceholder";
 import { videos } from "@/lib/content";
 
@@ -24,7 +23,7 @@ export default function Videos() {
         <div className="mt-10">
           <VideoPlaceholder
             src={`/images/video-${featured.id}.jpg`}
-            label={`Placeholder — ${featured.title}`}
+            label={featured.title}
             className="w-full"
           />
           <p className="mt-4 text-body-lg text-lvinit-black">{featured.title}</p>
@@ -41,19 +40,13 @@ export default function Videos() {
             >
               <VideoPlaceholder
                 src={`/images/video-${video.id}.jpg`}
-                label={`Placeholder — ${video.title}`}
+                label={video.title}
                 className="transition-opacity duration-300 ease-calm group-hover:opacity-90"
               />
               <p className="mt-3 text-body text-lvinit-black">{video.title}</p>
               <p className="text-caption text-lvinit-warmgray">{video.duration}</p>
             </button>
           ))}
-        </div>
-
-        <div className="mt-10">
-          <ButtonLink href="#" variant="tertiary">
-            See all the videos
-          </ButtonLink>
         </div>
       </Container>
     </section>

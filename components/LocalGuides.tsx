@@ -1,6 +1,5 @@
 import Container from "./ui/Container";
 import ImagePlaceholder from "./ui/ImagePlaceholder";
-import { ButtonLink } from "./ui/Button";
 import { guides } from "@/lib/content";
 
 export default function LocalGuides() {
@@ -16,17 +15,17 @@ export default function LocalGuides() {
           Local Guides
         </h2>
 
-        <a href="#" className="mt-10 grid grid-cols-1 lg:grid-cols-2 gap-8 group block">
+        <article className="mt-10 grid grid-cols-1 lg:grid-cols-2 gap-8">
           <ImagePlaceholder
             src={`/images/guide-${featured.slug}.jpg`}
-            label={`Placeholder — editorial lead image for "${featured.title}" (documentary Las Vegas lifestyle, warm natural light, people living not posing)`}
+            label={featured.title}
             aspect="aspect-[4/3]"
           />
           <div className="flex flex-col justify-center">
             <p className="text-caption uppercase tracking-wide text-lvinit-blue">
               {featured.category}
             </p>
-            <h3 className="mt-2 font-display text-heading font-bold text-lvinit-black group-hover:text-lvinit-blue transition-colors duration-200 ease-calm">
+            <h3 className="mt-2 font-display text-heading font-bold text-lvinit-black">
               {featured.title}
             </h3>
             <p className="mt-4 text-body-lg text-lvinit-warmgray">
@@ -41,33 +40,27 @@ export default function LocalGuides() {
               {featured.byline} · {featured.date}
             </p>
           </div>
-        </a>
+        </article>
 
         <div className="mt-16 grid grid-cols-1 sm:grid-cols-3 gap-8 border-t border-lvinit-lightgray pt-10">
           {rest.map((guide) => (
-            <a key={guide.slug} href="#" className="group block">
+            <article key={guide.slug}>
               <ImagePlaceholder
                 src={`/images/guide-${guide.slug}.jpg`}
-                label={`Placeholder — editorial image for "${guide.title}" (documentary Las Vegas lifestyle, warm natural light)`}
+                label={guide.title}
                 aspect="aspect-[4/3]"
               />
               <p className="mt-3 text-caption uppercase tracking-wide text-lvinit-blue">
                 {guide.category}
               </p>
-              <h3 className="mt-1 font-display text-heading-sm font-bold text-lvinit-black group-hover:text-lvinit-blue transition-colors duration-200 ease-calm">
+              <h3 className="mt-1 font-display text-heading-sm font-bold text-lvinit-black">
                 {guide.title}
               </h3>
               <p className="mt-2 text-caption text-lvinit-warmgray">
                 {guide.byline} · {guide.date}
               </p>
-            </a>
+            </article>
           ))}
-        </div>
-
-        <div className="mt-12">
-          <ButtonLink href="#" variant="tertiary">
-            Read All Guides
-          </ButtonLink>
         </div>
       </Container>
     </section>

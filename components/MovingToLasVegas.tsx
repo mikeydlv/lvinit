@@ -2,10 +2,10 @@ import Container from "./ui/Container";
 import { ButtonLink } from "./ui/Button";
 
 const quickFacts = [
-  { label: "Cost of Living", href: "#" },
-  { label: "Getting Around", href: "#" },
-  { label: "Schools & Family", href: "#" },
-  { label: "Climate & Lifestyle", href: "#" },
+  { label: "Cost of Living", href: "#guides" },
+  { label: "Getting Around", href: "#guides" },
+  { label: "Schools & Family", href: "#guides" },
+  { label: "Climate & Lifestyle", href: "#guides" },
 ];
 
 export default function MovingToLasVegas() {
@@ -30,7 +30,8 @@ export default function MovingToLasVegas() {
             feel like home.
           </p>
           <p className="mt-3 text-caption text-lvinit-warmgray">
-            Illustrative placeholder pending a verified local figure.
+            A typical morning drive — yours will shift with where in Summerlin
+            you land.
           </p>
         </div>
 
@@ -47,8 +48,8 @@ export default function MovingToLasVegas() {
         </div>
 
         <div className="mt-8">
-          <ButtonLink href="#" variant="tertiary">
-            Start with the moving-to-Vegas guide
+          <ButtonLink href="#guides" variant="tertiary">
+            Start with the moving-to-Vegas guides
           </ButtonLink>
         </div>
       </Container>

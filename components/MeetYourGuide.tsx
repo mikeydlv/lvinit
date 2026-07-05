@@ -10,7 +10,7 @@ export default function MeetYourGuide() {
     >
       <ImagePlaceholder
         src="/images/meet-your-guide-mikey-portrait.jpg"
-        label="Placeholder — environmental portrait of Mikey Del Rosario on location in a real Las Vegas neighborhood at golden hour, relaxed and mid-conversation, magazine-cover crop — not a studio backdrop"
+        label="Mikey Del Rosario, on location in Las Vegas"
         aspect="aspect-auto"
         className="absolute inset-0 h-full w-full"
       />

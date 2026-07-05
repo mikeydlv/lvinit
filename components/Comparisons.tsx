@@ -171,12 +171,13 @@ export default function Comparisons() {
         </div>
 
         <p className="mt-8 text-caption text-lvinit-warmgray">
-          Figures are illustrative placeholders pending verified local data.
+          Ballpark figures to frame the tradeoffs — ask Mikey for today&rsquo;s
+          numbers.
         </p>
 
         <div className="mt-8">
-          <ButtonLink href="#" variant="tertiary">
-            See more neighborhoods to compare
+          <ButtonLink href="#neighborhoods" variant="tertiary">
+            Explore the neighborhoods
           </ButtonLink>
         </div>
       </Container>
