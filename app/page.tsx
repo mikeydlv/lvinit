@@ -2,7 +2,6 @@ import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import ThesisBeat from "@/components/ThesisBeat";
 import NeighborhoodDiscovery from "@/components/NeighborhoodDiscovery";
-import ResidentVoice from "@/components/ResidentVoice";
 import Comparisons from "@/components/Comparisons";
 import BreathingPhoto from "@/components/BreathingPhoto";
 import MovingToLasVegas from "@/components/MovingToLasVegas";
@@ -12,7 +11,6 @@ import MeetYourGuide from "@/components/MeetYourGuide";
 import SearchHomesStrip from "@/components/SearchHomesStrip";
 import Newsletter from "@/components/Newsletter";
 import Footer from "@/components/Footer";
-import { residentQuotes } from "@/lib/content";
 
 export default function HomePage() {
   return (
@@ -23,8 +21,6 @@ export default function HomePage() {
         <Hero />
         <ThesisBeat />
         <NeighborhoodDiscovery />
-
-        <ResidentVoice {...residentQuotes[0]} />
 
         <Comparisons />
 
@@ -42,8 +38,6 @@ export default function HomePage() {
           label="The Red Rock trailhead near Summerlin at first light"
           caption="Where the trailhead starts before the heat does."
         />
-
-        <ResidentVoice {...residentQuotes[1]} />
 
         <LocalGuides />
         <MeetYourGuide />

@@ -17,7 +17,7 @@ const columns = [
     links: [
       { label: "About", href: "#meet-your-guide" },
       { label: "Meet Your Guide", href: "#meet-your-guide" },
-      { label: "Contact", href: "mailto:hello@lvinit.com" },
+      { label: "Contact", href: "/contact" },
     ],
   },
   {

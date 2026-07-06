@@ -133,7 +133,7 @@ export default function SummerlinPage() {
               you to instead if it&rsquo;s not the fit.
             </p>
             <div className="mt-8 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
-              <ButtonLink href="mailto:hello@lvinit.com" variant="primary">
+              <ButtonLink href="/contact" variant="primary">
                 Get in touch
               </ButtonLink>
               <ButtonLink href="/search" variant="tertiary">

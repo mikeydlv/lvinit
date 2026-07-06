@@ -100,28 +100,6 @@ export const filterChips: Array<{
   { label: "Up-and-Coming", value: "up-and-coming" },
 ];
 
-export type ResidentQuote = {
-  quote: string;
-  name: string;
-  context: string;
-};
-
-// PLACEHOLDER — replace with real, sourced resident interviews before launch.
-export const residentQuotes: ResidentQuote[] = [
-  {
-    quote:
-      "I didn't expect to fall in love with a neighborhood before I fell in love with a house. But that's exactly what happened.",
-    name: "Jenna",
-    context: "Green Valley",
-  },
-  {
-    quote:
-      "He told me not to buy in the first neighborhood I liked. That's when I trusted him.",
-    name: "Marcus",
-    context: "formerly of Chicago, on working with Mikey",
-  },
-];
-
 export type VideoItem = {
   id: string;
   title: string;
