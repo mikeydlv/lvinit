@@ -130,11 +130,14 @@ export default function Footer() {
             </p>
           </div>
 
-          {/* Global photography credit — NOT YET IMPLEMENTED. When ready, add a
-              single fine-print line here (do not credit images individually):
-              "Unless otherwise noted, all photography and aerial imagery on
-              LVINIT is original content captured by Mikey Del Rosario." */}
-          <p className="mt-6 text-caption text-lvinit-warmgray/70">
+          {/* Global photography credit — covers all original imagery site-wide,
+              so individual photos are not credited on the image itself. */}
+          <p className="mt-6 text-caption text-lvinit-warmgray">
+            Unless otherwise noted, photography throughout LVINIT was captured by
+            Mikey Del Rosario.
+          </p>
+
+          <p className="mt-4 text-caption text-lvinit-warmgray/70">
             © {new Date().getFullYear()} LVINIT. All rights reserved.
           </p>
         </div>
