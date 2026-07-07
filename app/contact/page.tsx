@@ -8,6 +8,7 @@ export const metadata: Metadata = {
   title: "Contact Mikey — LVINIT",
   description:
     "Tell Mikey Del Rosario what you're weighing about moving to Las Vegas — timeline, neighborhoods, questions — and get the honest local version back.",
+  alternates: { canonical: "/contact" },
 };
 
 export default function ContactPage() {

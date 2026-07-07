@@ -10,6 +10,7 @@ export const metadata: Metadata = {
   title: "Summerlin — A Neighborhood Guide | LVINIT",
   description:
     "The honest local guide to living in Summerlin, Las Vegas — the setting, the daily life, the commute, the tradeoffs, and who it actually fits.",
+  alternates: { canonical: "/neighborhoods/summerlin" },
 };
 
 const HERO_IMAGE = "/images/hero/summerlin-drone-overlook-golden-hour.webp";

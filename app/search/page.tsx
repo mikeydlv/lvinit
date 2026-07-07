@@ -7,6 +7,7 @@ export const metadata: Metadata = {
   title: "Search Homes — LVINIT",
   description:
     "Search homes for sale across Las Vegas on the live GLVAR MLS — by neighborhood, price, and what actually matters to you.",
+  alternates: { canonical: "/search" },
 };
 
 export default function SearchPage() {
