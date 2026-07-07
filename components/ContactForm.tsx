@@ -26,38 +26,71 @@ const labelClass =
 const fieldClass =
   "w-full border border-lvinit-lightgray bg-lvinit-white px-4 py-3 text-body text-lvinit-black placeholder:text-lvinit-warmgray focus-visible:outline-lvinit-blue";
 
+type Status = "idle" | "sending" | "sent" | "mailto" | "error";
+
+type GtagWindow = Window & { gtag?: (...args: unknown[]) => void };
+
 export default function ContactForm() {
-  const [submitted, setSubmitted] = useState(false);
+  const [status, setStatus] = useState<Status>("idle");
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    const data = new FormData(e.currentTarget);
-    const get = (k: string) => (data.get(k) ?? "").toString().trim();
-    const name = get("name");
-
-    // ---------------------------------------------------------------------
-    // FORM HANDLER — currently a mailto fallback (no backend / no CRM wired).
-    // Replace this block with a real handler when ready: POST these fields to
-    // a Next.js route handler that sends via Resend / forwards to a CRM.
-    // Keep the field names (name/email/phone/timeline/area/message) stable so
-    // the swap is drop-in. Do NOT wire a fake/placeholder CRM.
-    // ---------------------------------------------------------------------
-    const subject = `LVINIT inquiry — ${name || "Website"}`;
+  function mailtoFallback(payload: Record<string, string>) {
+    const subject = `LVINIT inquiry — ${payload.name || "Website"}`;
     const body = [
-      `Name: ${name}`,
-      `Email: ${get("email")}`,
-      `Phone: ${get("phone")}`,
-      `Timeline: ${get("timeline")}`,
-      `Area of interest: ${get("area")}`,
+      `Name: ${payload.name}`,
+      `Email: ${payload.email}`,
+      `Phone: ${payload.phone}`,
+      `Timeline: ${payload.timeline}`,
+      `Area of interest: ${payload.area}`,
       "",
       "Message:",
-      get("message"),
+      payload.message,
     ].join("\n");
-
     window.location.href = `mailto:hello@lvinit.com?subject=${encodeURIComponent(
       subject
     )}&body=${encodeURIComponent(body)}`;
-    setSubmitted(true);
+  }
+
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const form = e.currentTarget;
+    const data = new FormData(form);
+    const get = (k: string) => (data.get(k) ?? "").toString().trim();
+    const payload = {
+      name: get("name"),
+      email: get("email"),
+      phone: get("phone"),
+      timeline: get("timeline"),
+      area: get("area"),
+      message: get("message"),
+    };
+
+    // Count the intent as a lead (no-op unless analytics is configured).
+    (window as GtagWindow).gtag?.("event", "generate_lead", {
+      form: "contact",
+      area: payload.area || undefined,
+    });
+
+    setStatus("sending");
+    try {
+      // Real handler: POST to /api/contact (Resend). Falls back to a mailto
+      // draft whenever the API isn't configured yet or the send fails, so a
+      // lead is never lost.
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+      if (res.ok) {
+        form.reset();
+        setStatus("sent");
+        return;
+      }
+      mailtoFallback(payload);
+      setStatus("mailto");
+    } catch {
+      mailtoFallback(payload);
+      setStatus("mailto");
+    }
   }
 
   return (
@@ -130,11 +163,17 @@ export default function ContactForm() {
       </div>
 
       <div className="sm:col-span-2">
-        <Button type="submit" variant="primary">
-          Send to Mikey
+        <Button type="submit" variant="primary" disabled={status === "sending"}>
+          {status === "sending" ? "Sending…" : "Send to Mikey"}
         </Button>
 
-        {submitted && (
+        {status === "sent" && (
+          <p className="mt-4 text-body text-lvinit-blue">
+            Thanks — I got it, and I&rsquo;ll get back to you, usually the same
+            day.
+          </p>
+        )}
+        {status === "mailto" && (
           <p className="mt-4 text-body text-lvinit-blue">
             Your email draft is ready — hit send and I&rsquo;ll get back to you,
             usually the same day.
@@ -142,7 +181,7 @@ export default function ContactForm() {
         )}
 
         <p className="mt-4 text-caption text-lvinit-warmgray">
-          This opens your email app so you can send it. Prefer to write directly?{" "}
+          Prefer to write directly?{" "}
           <a href="mailto:hello@lvinit.com" className="text-lvinit-blue underline underline-offset-4">
             hello@lvinit.com
           </a>
