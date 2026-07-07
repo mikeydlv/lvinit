@@ -179,7 +179,7 @@ export default function ParadeFeaturePage() {
                 </p>
                 <div className="relative mt-8 aspect-video w-full overflow-hidden border border-lvinit-lightgray bg-lvinit-black">
                   <iframe
-                    src="https://www.youtube-nocookie.com/embed/hTEzzxcYhkg?start=342"
+                    src="https://www.youtube-nocookie.com/embed/hTEzzxcYhkg"
                     title="Summerlin Fourth of July Parade — video by Mikey Del Rosario"
                     loading="lazy"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
