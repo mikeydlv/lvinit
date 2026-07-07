@@ -13,7 +13,9 @@ export const metadata: Metadata = {
   alternates: { canonical: "/neighborhoods/summerlin" },
 };
 
-const HERO_IMAGE = "/images/hero/summerlin-drone-overlook-golden-hour.webp";
+// Original LVINIT photography by Mikey Del Rosario.
+const HERO_IMAGE =
+  "/images/hero/summerlin-fox-hill-park-red-rock-aerial-drone.webp";
 
 const beats = [
   {
@@ -44,7 +46,8 @@ export default function SummerlinPage() {
         <section className="relative flex min-h-[78vh] items-end overflow-hidden">
           <Image
             src={HERO_IMAGE}
-            alt="Summerlin at golden hour — homes and a golf course below the Red Rock foothills"
+            alt="Aerial view of Fox Hill Park in Summerlin with Red Rock Canyon in the background, photographed by Mikey Del Rosario."
+            title="Fox Hill Park, Summerlin — Photo by Mikey Del Rosario"
             fill
             priority
             sizes="100vw"
@@ -52,7 +55,7 @@ export default function SummerlinPage() {
           />
           <div
             aria-hidden="true"
-            className="absolute inset-0 bg-gradient-to-t from-lvinit-black/70 via-lvinit-black/10 to-transparent"
+            className="absolute inset-0 bg-gradient-to-t from-lvinit-black/45 via-lvinit-black/10 to-transparent"
           />
           <Container className="relative z-10 pb-14 pt-40 sm:pb-20">
             <Link
