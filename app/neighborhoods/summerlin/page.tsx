@@ -125,6 +125,46 @@ export default function SummerlinPage() {
           </div>
         </Container>
 
+        {/* Related lifestyle feature */}
+        <Container className="pb-20 sm:pb-28">
+          <Link
+            href="/neighborhoods/summerlin/fourth-of-july-parade"
+            className="group grid grid-cols-1 gap-6 border-t border-lvinit-lightgray pt-12 sm:grid-cols-2 sm:items-center sm:gap-10"
+          >
+            <div className="relative aspect-[3/2] w-full overflow-hidden">
+              <Image
+                src="/images/features/summerlin-fourth-of-july-parade-banner.webp"
+                alt="Summerlin Fourth of July Parade"
+                fill
+                sizes="(max-width: 640px) 100vw, 50vw"
+                className="object-cover"
+              />
+            </div>
+            <div>
+              <p className="text-caption uppercase tracking-wide text-lvinit-blue">
+                Local feature
+              </p>
+              <h2 className="mt-3 font-display text-heading-sm font-bold text-lvinit-black transition-colors duration-200 ease-calm group-hover:text-lvinit-blue">
+                Summerlin Fourth of July Parade
+              </h2>
+              <p className="mt-3 max-w-md text-body text-lvinit-warmgray">
+                A local&rsquo;s look at one of the community&rsquo;s most beloved
+                traditions — and what a morning like it tells you about living
+                here.
+              </p>
+              <span className="mt-5 inline-flex items-center gap-2 text-body font-medium text-lvinit-blue">
+                Read the feature
+                <span
+                  aria-hidden="true"
+                  className="transition-transform duration-200 ease-calm group-hover:translate-x-1"
+                >
+                  →
+                </span>
+              </span>
+            </div>
+          </Link>
+        </Container>
+
         {/* Gentle contact CTA — not a brokerage hard sell */}
         <section className="bg-lvinit-lightgray/50">
           <Container className="py-16 text-center sm:py-20">

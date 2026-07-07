@@ -1,9 +1,10 @@
+import Link from "next/link";
 import Container from "./ui/Container";
 import ImagePlaceholder from "./ui/ImagePlaceholder";
 import { guides } from "@/lib/content";
 
 export default function LocalGuides() {
-  const [featured, ...rest] = guides;
+  const rest = guides.slice(1);
 
   return (
     <section id="guides" aria-labelledby="guides-heading" className="py-16 sm:py-24">
@@ -15,32 +16,38 @@ export default function LocalGuides() {
           Local Guides
         </h2>
 
-        <article className="mt-10 grid grid-cols-1 lg:grid-cols-2 gap-8">
+        {/* Featured: our first real published feature (links to the article) */}
+        <Link
+          href="/neighborhoods/summerlin/fourth-of-july-parade"
+          className="group mt-10 grid grid-cols-1 lg:grid-cols-2 gap-8"
+        >
           <ImagePlaceholder
-            src={`/images/guide-${featured.slug}.jpg`}
-            label={featured.title}
+            src="/images/features/summerlin-fourth-of-july-parade-banner.webp"
+            label="Summerlin Fourth of July Parade"
             aspect="aspect-[4/3]"
           />
           <div className="flex flex-col justify-center">
             <p className="text-caption uppercase tracking-wide text-lvinit-blue">
-              {featured.category}
+              Local Feature
             </p>
-            <h3 className="mt-2 font-display text-heading font-bold text-lvinit-black">
-              {featured.title}
+            <h3 className="mt-2 font-display text-heading font-bold text-lvinit-black transition-colors duration-200 ease-calm group-hover:text-lvinit-blue">
+              Summerlin Fourth of July Parade
             </h3>
             <p className="mt-4 text-body-lg text-lvinit-warmgray">
-              {featured.dek}
+              One of Las Vegas&rsquo; most beloved Independence Day traditions —
+              and a window into what living in Summerlin actually feels like.
             </p>
-            {featured.pullQuote && (
-              <p className="mt-4 font-display italic text-subhead text-lvinit-black">
-                &ldquo;{featured.pullQuote}&rdquo;
-              </p>
-            )}
-            <p className="mt-6 text-caption text-lvinit-warmgray">
-              {featured.byline} · {featured.date}
-            </p>
+            <span className="mt-6 inline-flex items-center gap-2 text-body font-medium text-lvinit-blue">
+              Read the feature
+              <span
+                aria-hidden="true"
+                className="transition-transform duration-200 ease-calm group-hover:translate-x-1"
+              >
+                →
+              </span>
+            </span>
           </div>
-        </article>
+        </Link>
 
         <div className="mt-16 grid grid-cols-1 sm:grid-cols-3 gap-8 border-t border-lvinit-lightgray pt-10">
           {rest.map((guide) => (
