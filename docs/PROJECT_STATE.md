@@ -209,6 +209,23 @@ All in `components/`. Server components unless marked **client**.
 **Shared hook:** `lib/useInViewFade.ts` — one-time IntersectionObserver fade-in
 for quiet sections.
 
+### Story Page pattern (`components/story/` + `lib/story.ts`)
+
+A reusable editorial system for LVINIT **stories** (lifestyle features, events,
+attractions, local experiences), extracted from the Summerlin guide + parade
+feature without changing them. Authoring standard:
+[docs/STORY_PAGE_STANDARD.md](STORY_PAGE_STANDARD.md).
+
+- `lib/story.ts` — `StoryMeta` type + `buildStoryMetadata()` /
+  `buildStoryJsonLd()` (Article + BreadcrumbList) so SEO and schema never drift.
+- `components/story/` — composable blocks: `StoryPage` (wrapper: nav, hero,
+  breadcrumbs, related, CTAs, JSON-LD), `StoryHero` (photo or photoless mode),
+  `StoryBreadcrumbs`, `StoryLede`, `StorySection`, `StoryVideo`,
+  `StoryPullQuote`, `StoryGallery`, `RelatedStories`, `RelatedNeighborhood`,
+  `StoryCTAs`. Barrel export at `components/story/index.ts`.
+- Not yet used by any live page — it's the standard the next stories (Henderson
+  featured stories, etc.) will be built on.
+
 ---
 
 ## Photography Standards
@@ -310,6 +327,9 @@ links flowing both up (feature → guide → homepage) and down (guide → featu
   widest range of communities; honest "beats," a "Why people choose Henderson"
   section, a 7-community roster, and 4 coming-soon featured stories. Linked from
   the homepage; Breadcrumb JSON-LD; sitemap entry.
+- Reusable **Story Page pattern** (`components/story/` + `lib/story.ts`) with the
+  authoring standard in `docs/STORY_PAGE_STANDARD.md` — the shared structure all
+  future editorial stories will use.
 - Live IDX search page (Matrix / GLVAR).
 - Contact form with Resend handler + mailto fallback + GA4 lead event.
 - GA4 analytics scaffolding (opt-in via env var).
