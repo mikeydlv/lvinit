@@ -70,6 +70,7 @@ app/
 | `/` | Homepage | Live | 12 assembled sections; still contains placeholder content (see Pending Work) |
 | `/neighborhoods/summerlin` | Neighborhood guide | Live | Real Mikey photography (Fox Hill Park drone hero); honest editorial "beats" |
 | `/neighborhoods/summerlin/fourth-of-july-parade` | Editorial feature | Live | Full Article + Breadcrumb JSON-LD, embedded YouTube (nocookie), real banner photo |
+| `/neighborhoods/henderson` | Neighborhood guide | Live | Second pillar; community roster (7 areas) + 4 coming-soon stories; Breadcrumb JSON-LD; **hero is Option B** (bright editorial treatment, no photo yet) |
 | `/search` | IDX search | Live | Matrix IDX embed `idx=3652dd5`; do not modify embed behavior without instruction |
 | `/contact` | Contact | Live | ContactForm → `/api/contact` (Resend) with mailto fallback |
 | `/api/contact` | Route handler | Live | Returns 503 until `RESEND_API_KEY` is set, so no fake service ships |
@@ -91,13 +92,20 @@ scaffolding, not verified market data — see the header comment in that file).
 | Slug | Name | Headline stat | Has a page? | Tags |
 |---|---|---|---|---|
 | `summerlin` | Summerlin | Walk Score 54 | ✅ Full guide + parade feature | top-schools, quiet-suburban |
-| `henderson` | Henderson | Median $525K | ❌ **Next build** | top-schools, quiet-suburban |
+| `henderson` | Henderson | Median $525K | ✅ Full guide (pillar) | top-schools, quiet-suburban |
 | `downtown-arts-district` | Downtown Arts District | Walk Score 88 | ❌ | walkable, up-and-coming, close-to-strip |
-| `green-valley` | Green Valley | School 8.6/10 | ❌ | top-schools, quiet-suburban |
-| `lake-las-vegas` | Lake Las Vegas | Median $780K | ❌ | quiet-suburban |
+| `green-valley` | Green Valley | School 8.6/10 | ❌ (also a Henderson sub-area) | top-schools, quiet-suburban |
+| `lake-las-vegas` | Lake Las Vegas | Median $780K | ❌ (also a Henderson sub-area) | quiet-suburban |
 
-Only **Summerlin** has real pages. The other four exist as editorial snapshots on
-the homepage and as selectable options in the Comparison tool and contact form.
+**Summerlin** and **Henderson** have real pillar pages. The other three exist as
+editorial snapshots on the homepage and as selectable options in the Comparison
+tool and contact form.
+
+**IA note:** the Henderson guide treats **Green Valley** and **Lake Las Vegas** as
+communities *inside* Henderson, while `lib/content.ts` still lists them as
+standalone top-level neighborhoods (the homepage compare tool depends on those
+slugs). `content.ts` is intentionally left untouched for now to avoid breaking the
+homepage — this reconciliation is deferred, not forgotten.
 
 ---
 
@@ -298,6 +306,10 @@ links flowing both up (feature → guide → homepage) and down (guide → featu
 - Design system implemented as Tailwind tokens traceable to Doc 02.
 - Summerlin neighborhood guide with real drone photography.
 - Summerlin Fourth of July Parade editorial feature (JSON-LD, embedded video).
+- Henderson neighborhood guide — second pillar, positioned around the valley's
+  widest range of communities; honest "beats," a "Why people choose Henderson"
+  section, a 7-community roster, and 4 coming-soon featured stories. Linked from
+  the homepage; Breadcrumb JSON-LD; sitemap entry.
 - Live IDX search page (Matrix / GLVAR).
 - Contact form with Resend handler + mailto fallback + GA4 lead event.
 - GA4 analytics scaffolding (opt-in via env var).
@@ -308,10 +320,14 @@ links flowing both up (feature → guide → homepage) and down (guide → featu
 
 ## Current Content Clusters
 
-1. **Summerlin cluster** (the only real cluster today):
+1. **Summerlin cluster:**
    - `/neighborhoods/summerlin` — the pillar guide
    - `/neighborhoods/summerlin/fourth-of-july-parade` — lifestyle feature
    - *Planned children:* Downtown Summerlin, Fox Hill Park (marked "coming soon")
+2. **Henderson cluster:**
+   - `/neighborhoods/henderson` — the pillar guide
+   - *Planned featured stories* (marked "coming soon", non-linked): Four Seasons
+     Private Residences, Lake Las Vegas, Green Valley Ranch, Water Street District
 
 All other homepage guide/video cards are placeholders that do not yet resolve to
 pages.
@@ -322,14 +338,14 @@ pages.
 
 Build order follows the current priority and existing `neighborhoods[]` data:
 
-1. **Henderson** — *the next major content pillar* (this sprint). Green Valley
-   sits inside/adjacent to the Henderson story, so decide early whether Green
-   Valley is its own pillar or a section within Henderson.
-2. Downtown Arts District (the walkable, up-and-coming counterpoint).
-3. Green Valley.
-4. Lake Las Vegas.
-5. Four Seasons / high-rise living (appears in the contact form's area list;
-   a current stated content priority).
+1. ~~Henderson~~ — ✅ **Built** (`/neighborhoods/henderson`). Green Valley and
+   Lake Las Vegas are handled as communities *within* Henderson (see IA note under
+   Existing Neighborhoods).
+2. **Henderson featured stories** — Four Seasons Private Residences, Lake Las
+   Vegas, Green Valley Ranch, Water Street District (currently coming-soon cards
+   on the Henderson page; flip to real links as each publishes).
+3. Downtown Arts District (the walkable, up-and-coming counterpoint).
+4. Additional flagship areas as photography and content land.
 
 Each should follow the Summerlin guide's shape: real hero photo, honest "beats,"
 a "who it's / isn't for" block, a related-stories cluster (real links only), a
@@ -422,6 +438,13 @@ Placeholder content that must be replaced before it can be considered "done"
   real articles/videos and real destination pages before they link out.
 - **Neutral photo placeholders** in `/public/images/` — replace in place with
   real Mikey photography (keep filenames).
+- **Henderson hero (Option B)** — the page ships with a bright text hero and no
+  photo. Swap in Mikey's real Henderson photography at
+  `/images/hero/henderson-<name>.webp` and restore the full-bleed `<Image>` +
+  dark-gradient treatment (mirror Summerlin) when it lands.
+- **Henderson community copy** — the 7 community descriptions are honest,
+  qualitative scaffolding (no stats) and are flagged in-file for Mikey's local
+  accuracy/tone review; the Anthem entry especially should be confirmed.
 - **Newsletter** — no backend; wire to a real provider or serverless function.
 - **Footer legal links** — Privacy / Terms / Accessibility are `href="#"`.
 
@@ -429,13 +452,15 @@ Placeholder content that must be replaced before it can be considered "done"
 
 ## Roadmap
 
-**Now (this sprint):** Henderson neighborhood guide — the next major content
-pillar. (Awaiting plan approval before any code.)
+**Now (this sprint):** ✅ Henderson neighborhood guide shipped. Immediate
+follow-ups: swap in real Henderson hero photography (Option B placeholder today)
+and have Mikey review the community roster copy for local accuracy.
 
 **Next:**
+- Henderson featured stories (Four Seasons, Lake Las Vegas, Green Valley Ranch,
+  Water Street District) — build and flip the coming-soon cards to real links.
 - Neighborhood Profile page spec (design doc) to standardize guide structure.
-- Remaining neighborhood pages (Downtown Arts District, Green Valley, Lake Las
-  Vegas, Four Seasons/high-rise).
+- Remaining neighborhood pages (Downtown Arts District, Four Seasons/high-rise).
 - Real guide articles + real videos; wire up their cards.
 - Relocation Hub landing.
 - Replace remaining placeholder photography and all placeholder metrics.

@@ -49,7 +49,7 @@ export const neighborhoods: Neighborhood[] = [
     headlineStat: { label: "Median Price", value: "$525K" },
     tags: ["top-schools", "quiet-suburban"],
     description:
-      "Vegas's quiet second city — parks, good schools, and a slower pace ten minutes from everything.",
+      "The valley's widest range of communities — new master-plans, a lake, hillside estates, and a historic downtown, each a different way to live.",
     photoDirection:
       "Henderson in early evening — families on a tree-lined park path, water-district green against the desert, unhurried and easy",
     metrics: { medianPrice: 525000, walkScore: 48, commuteToStrip: 24, schoolRating: 8.0 },

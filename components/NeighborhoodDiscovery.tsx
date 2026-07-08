@@ -67,19 +67,50 @@ export default function NeighborhoodDiscovery() {
             More of the valley
           </p>
           <ul className="mt-8 grid grid-cols-1 gap-x-12 gap-y-8 sm:grid-cols-2">
-            {others.map((n) => (
-              <li
-                key={n.slug}
-                className="border-b border-lvinit-lightgray pb-6"
-              >
-                <h4 className="font-display text-subhead font-bold text-lvinit-black">
-                  {n.name}
-                </h4>
-                <p className="mt-2 text-body text-lvinit-warmgray">
-                  {n.description}
-                </p>
-              </li>
-            ))}
+            {others.map((n) => {
+              // Only real, live guides are linked (Summerlin is featured above;
+              // Henderson now has its own pillar). The rest stay honest text
+              // snapshots until their pages exist — no dead links.
+              if (n.slug === "henderson") {
+                return (
+                  <li
+                    key={n.slug}
+                    className="border-b border-lvinit-lightgray pb-6"
+                  >
+                    <Link href="/neighborhoods/henderson" className="group block">
+                      <h4 className="font-display text-subhead font-bold text-lvinit-black transition-colors duration-200 ease-calm group-hover:text-lvinit-blue">
+                        {n.name}
+                      </h4>
+                      <p className="mt-2 text-body text-lvinit-warmgray">
+                        {n.description}
+                      </p>
+                      <span className="mt-3 inline-flex items-center gap-2 text-body font-medium text-lvinit-blue">
+                        Read the Henderson guide
+                        <span
+                          aria-hidden="true"
+                          className="transition-transform duration-200 ease-calm group-hover:translate-x-1"
+                        >
+                          →
+                        </span>
+                      </span>
+                    </Link>
+                  </li>
+                );
+              }
+              return (
+                <li
+                  key={n.slug}
+                  className="border-b border-lvinit-lightgray pb-6"
+                >
+                  <h4 className="font-display text-subhead font-bold text-lvinit-black">
+                    {n.name}
+                  </h4>
+                  <p className="mt-2 text-body text-lvinit-warmgray">
+                    {n.description}
+                  </p>
+                </li>
+              );
+            })}
           </ul>
         </div>
       </Container>
