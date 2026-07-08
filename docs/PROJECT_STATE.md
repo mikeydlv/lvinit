@@ -300,6 +300,10 @@ breathing-*, resident-voice-backdrop) is still a neutral placeholder — see
 
 ## Internal Linking Strategy
 
+> Full strategy, URL conventions, navigation model, breadcrumb rules, and the
+> content relationship map live in
+> [INFORMATION_ARCHITECTURE.md](INFORMATION_ARCHITECTURE.md). Summary below.
+
 The goal is discoverable **content clusters** around each neighborhood, with
 links flowing both up (feature → guide → homepage) and down (guide → feature).
 
