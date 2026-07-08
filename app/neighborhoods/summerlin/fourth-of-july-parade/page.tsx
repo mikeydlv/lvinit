@@ -369,12 +369,15 @@ export default function ParadeFeaturePage() {
                 community can still feel like a neighborhood. Here&rsquo;s the
                 honest guide.
               </p>
-              <div className="mt-8 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
+              <div className="mt-8 flex flex-col items-center gap-4 sm:flex-row sm:flex-wrap sm:justify-center">
                 <ButtonLink href="/neighborhoods/summerlin" variant="primary">
-                  Explore the Summerlin guide
+                  Explore the full Summerlin guide
+                </ButtonLink>
+                <ButtonLink href="/search" variant="secondary">
+                  Search homes
                 </ButtonLink>
                 <ButtonLink href="/contact" variant="tertiary">
-                  Talk to Mikey
+                  Ask Mikey about Summerlin
                 </ButtonLink>
               </div>
               <p className="mt-8 text-caption text-lvinit-warmgray">

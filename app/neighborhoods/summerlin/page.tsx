@@ -148,9 +148,8 @@ export default function SummerlinPage() {
                 Summerlin Fourth of July Parade
               </h2>
               <p className="mt-3 max-w-md text-body text-lvinit-warmgray">
-                A local&rsquo;s look at one of the community&rsquo;s most beloved
-                traditions — and what a morning like it tells you about living
-                here.
+                See how one local tradition shows the community side of
+                Summerlin.
               </p>
               <span className="mt-5 inline-flex items-center gap-2 text-body font-medium text-lvinit-blue">
                 Read the feature
@@ -163,6 +162,52 @@ export default function SummerlinPage() {
               </span>
             </div>
           </Link>
+        </Container>
+
+        {/* Related Summerlin Stories — content cluster (only real pages link) */}
+        <Container className="pb-20 sm:pb-28">
+          <div className="border-t border-lvinit-lightgray pt-12">
+            <h2 className="font-display text-heading-sm font-bold text-lvinit-black">
+              Related Summerlin Stories
+            </h2>
+            <ul className="mt-8 grid grid-cols-1 gap-x-10 gap-y-8 sm:grid-cols-3">
+              <li>
+                <Link
+                  href="/neighborhoods/summerlin/fourth-of-july-parade"
+                  className="group block border-t border-lvinit-black pt-4"
+                >
+                  <p className="text-caption uppercase tracking-wide text-lvinit-blue">
+                    Local feature
+                  </p>
+                  <h3 className="mt-2 font-display text-subhead font-bold text-lvinit-black transition-colors duration-200 ease-calm group-hover:text-lvinit-blue">
+                    Summerlin Fourth of July Parade
+                  </h3>
+                  <span className="mt-3 inline-flex items-center gap-2 text-body text-lvinit-blue">
+                    Read
+                    <span
+                      aria-hidden="true"
+                      className="transition-transform duration-200 ease-calm group-hover:translate-x-1"
+                    >
+                      →
+                    </span>
+                  </span>
+                </Link>
+              </li>
+              {["Downtown Summerlin", "Fox Hill Park"].map((title) => (
+                <li key={title} className="border-t border-lvinit-lightgray pt-4">
+                  <p className="text-caption uppercase tracking-wide text-lvinit-warmgray">
+                    Coming soon
+                  </p>
+                  <h3 className="mt-2 font-display text-subhead font-bold text-lvinit-warmgray">
+                    {title}
+                  </h3>
+                  <span className="mt-3 inline-block text-body text-lvinit-warmgray/70">
+                    In the works
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </div>
         </Container>
 
         {/* Gentle contact CTA — not a brokerage hard sell */}

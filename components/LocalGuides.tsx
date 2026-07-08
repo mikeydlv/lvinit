@@ -34,8 +34,8 @@ export default function LocalGuides() {
               Summerlin Fourth of July Parade
             </h3>
             <p className="mt-4 text-body-lg text-lvinit-warmgray">
-              One of Las Vegas&rsquo; most beloved Independence Day traditions —
-              and a window into what living in Summerlin actually feels like.
+              A local look at one of Summerlin&rsquo;s favorite traditions — and
+              what it says about living here.
             </p>
             <span className="mt-6 inline-flex items-center gap-2 text-body font-medium text-lvinit-blue">
               Read the feature
