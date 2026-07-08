@@ -179,9 +179,9 @@ export default function HendersonPage() {
             Las Vegas · A Neighborhood Guide
           </p>
           <p className="mt-8 max-w-3xl font-display text-[28px] leading-[38px] text-lvinit-black sm:text-thesis sm:leading-[64px]">
-            If Las Vegas has a city of choices, it&rsquo;s Henderson — more
-            distinct communities, and more different ways to live, than anywhere
-            else in Southern Nevada.
+            From lakeside living to luxury estates to family-friendly
+            master-planned communities, Henderson offers more variety than
+            anywhere else in Southern Nevada.
           </p>
           <p className="mt-8 max-w-2xl text-body-lg text-lvinit-warmgray">
             That&rsquo;s the honest headline here. &ldquo;Henderson&rdquo; isn&rsquo;t

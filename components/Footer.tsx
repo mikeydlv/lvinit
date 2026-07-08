@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import Container from "./ui/Container";
 
 const columns = [
@@ -36,10 +37,14 @@ export default function Footer() {
       <Container className="pt-16 pb-10">
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-10">
           <div className="col-span-2 sm:col-span-1">
-            <p className="font-sans text-subhead font-extrabold tracking-[0.1em]">
+            <Link
+              href="/"
+              aria-label="LVINIT — home"
+              className="inline-block font-sans text-subhead font-extrabold tracking-[0.1em]"
+            >
               <span className="text-lvinit-black">LVI</span>
               <span className="text-lvinit-gold">NIT</span>
-            </p>
+            </Link>
             <p className="mt-3 max-w-[220px] text-caption text-lvinit-warmgray">
               An honest guide to actually living in Las Vegas — the
               neighborhoods, the tradeoffs, and a local who&rsquo;ll tell you
