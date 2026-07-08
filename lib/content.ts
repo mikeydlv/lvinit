@@ -89,17 +89,6 @@ export const neighborhoods: Neighborhood[] = [
   },
 ];
 
-export const filterChips: Array<{
-  label: string;
-  value: Neighborhood["tags"][number];
-}> = [
-  { label: "Walkable", value: "walkable" },
-  { label: "Top Schools", value: "top-schools" },
-  { label: "Quiet & Suburban", value: "quiet-suburban" },
-  { label: "Close to the Strip", value: "close-to-strip" },
-  { label: "Up-and-Coming", value: "up-and-coming" },
-];
-
 export type VideoItem = {
   id: string;
   title: string;
