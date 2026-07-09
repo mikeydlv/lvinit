@@ -111,14 +111,15 @@ const communities: Array<{ name: string; body: string }> = [
   },
 ];
 
-// Featured stories — none of these pages exist yet, so every card is a
-// non-linked "in the works" placeholder (same honesty rule as the Summerlin
-// cluster: we never ship a dead internal link). Flip a card to a <Link> as each
-// story is actually published, per the New Page Checklist.
-const stories = [
+// Featured stories — cards with an `href` are live and link out; the rest are
+// non-linked "in the works" placeholders (same honesty rule as the Summerlin
+// cluster: we never ship a dead internal link). Flip a card to a real link by
+// adding its `href` as each story is published, per the New Page Checklist.
+const stories: Array<{ name: string; dek: string; href?: string }> = [
   {
     name: "Four Seasons Private Residences",
     dek: "A closer look at branded, service-forward residential living arriving in Henderson.",
+    href: "/neighborhoods/henderson/four-seasons-private-residences",
   },
   {
     name: "Lake Las Vegas",
@@ -301,25 +302,53 @@ export default function HendersonPage() {
               These are in production — check back as they publish.
             </p>
             <ul className="mt-10 grid grid-cols-1 gap-x-10 gap-y-8 sm:grid-cols-2">
-              {stories.map((story) => (
-                <li
-                  key={story.name}
-                  className="border-t border-lvinit-lightgray pt-4"
-                >
-                  <p className="text-caption uppercase tracking-wide text-lvinit-warmgray">
-                    Coming soon
-                  </p>
-                  <h3 className="mt-2 font-display text-subhead font-bold text-lvinit-warmgray">
-                    {story.name}
-                  </h3>
-                  <p className="mt-2 text-body text-lvinit-warmgray/80">
-                    {story.dek}
-                  </p>
-                  <span className="mt-3 inline-block text-body text-lvinit-warmgray/70">
-                    In the works
-                  </span>
-                </li>
-              ))}
+              {stories.map((story) =>
+                story.href ? (
+                  <li key={story.name}>
+                    <Link
+                      href={story.href}
+                      className="group block border-t border-lvinit-black pt-4"
+                    >
+                      <p className="text-caption uppercase tracking-wide text-lvinit-blue">
+                        Local feature
+                      </p>
+                      <h3 className="mt-2 font-display text-subhead font-bold text-lvinit-black transition-colors duration-200 ease-calm group-hover:text-lvinit-blue">
+                        {story.name}
+                      </h3>
+                      <p className="mt-2 text-body text-lvinit-warmgray">
+                        {story.dek}
+                      </p>
+                      <span className="mt-3 inline-flex items-center gap-2 text-body text-lvinit-blue">
+                        Read
+                        <span
+                          aria-hidden="true"
+                          className="transition-transform duration-200 ease-calm group-hover:translate-x-1"
+                        >
+                          →
+                        </span>
+                      </span>
+                    </Link>
+                  </li>
+                ) : (
+                  <li
+                    key={story.name}
+                    className="border-t border-lvinit-lightgray pt-4"
+                  >
+                    <p className="text-caption uppercase tracking-wide text-lvinit-warmgray">
+                      Coming soon
+                    </p>
+                    <h3 className="mt-2 font-display text-subhead font-bold text-lvinit-warmgray">
+                      {story.name}
+                    </h3>
+                    <p className="mt-2 text-body text-lvinit-warmgray/80">
+                      {story.dek}
+                    </p>
+                    <span className="mt-3 inline-block text-body text-lvinit-warmgray/70">
+                      In the works
+                    </span>
+                  </li>
+                )
+              )}
             </ul>
           </div>
         </Container>

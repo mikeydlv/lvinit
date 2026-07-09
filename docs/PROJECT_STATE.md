@@ -70,7 +70,8 @@ app/
 | `/` | Homepage | Live | 12 assembled sections; still contains placeholder content (see Pending Work) |
 | `/neighborhoods/summerlin` | Neighborhood guide | Live | Real Mikey photography (Fox Hill Park drone hero); honest editorial "beats" |
 | `/neighborhoods/summerlin/fourth-of-july-parade` | Editorial feature | Live | Full Article + Breadcrumb JSON-LD, embedded YouTube (nocookie), real banner photo |
-| `/neighborhoods/henderson` | Neighborhood guide | Live | Second pillar; community roster (7 areas) + 4 coming-soon stories; Breadcrumb JSON-LD; **hero is Option B** (bright editorial treatment, no photo yet) |
+| `/neighborhoods/henderson` | Neighborhood guide | Live | Second pillar; community roster (7 areas); Breadcrumb JSON-LD; **hero is Option B** (bright editorial treatment, no photo yet) |
+| `/neighborhoods/henderson/four-seasons-private-residences` | Story (feature) | Live | First page built on the Story Page pattern; drone film embedded (id `ZDp8KSvNK6w`); photoless hero (no real stills yet); Article + Breadcrumb JSON-LD |
 | `/search` | IDX search | Live | Matrix IDX embed `idx=3652dd5`; do not modify embed behavior without instruction |
 | `/contact` | Contact | Live | ContactForm → `/api/contact` (Resend) with mailto fallback |
 | `/api/contact` | Route handler | Live | Returns 503 until `RESEND_API_KEY` is set, so no fake service ships |
@@ -334,6 +335,10 @@ links flowing both up (feature → guide → homepage) and down (guide → featu
 - Reusable **Story Page pattern** (`components/story/` + `lib/story.ts`) with the
   authoring standard in `docs/STORY_PAGE_STANDARD.md` — the shared structure all
   future editorial stories will use.
+- **Four Seasons Private Residences** feature (Henderson cluster) — first real
+  page built on the Story Page pattern; embeds Mikey's drone film, honest
+  no-invented-specs editorial voice; linked from the Henderson guide and the
+  homepage Guides section; sitemap entry.
 - Live IDX search page (Matrix / GLVAR).
 - Contact form with Resend handler + mailto fallback + GA4 lead event.
 - GA4 analytics scaffolding (opt-in via env var).
@@ -350,8 +355,9 @@ links flowing both up (feature → guide → homepage) and down (guide → featu
    - *Planned children:* Downtown Summerlin, Fox Hill Park (marked "coming soon")
 2. **Henderson cluster:**
    - `/neighborhoods/henderson` — the pillar guide
-   - *Planned featured stories* (marked "coming soon", non-linked): Four Seasons
-     Private Residences, Lake Las Vegas, Green Valley Ranch, Water Street District
+   - `/neighborhoods/henderson/four-seasons-private-residences` — **live** feature
+   - *Planned featured stories* (marked "coming soon", non-linked): Lake Las
+     Vegas, Green Valley Ranch, Water Street District
 
 All other homepage guide/video cards are placeholders that do not yet resolve to
 pages.
@@ -481,8 +487,12 @@ follow-ups: swap in real Henderson hero photography (Option B placeholder today)
 and have Mikey review the community roster copy for local accuracy.
 
 **Next:**
-- Henderson featured stories (Four Seasons, Lake Las Vegas, Green Valley Ranch,
-  Water Street District) — build and flip the coming-soon cards to real links.
+- Remaining Henderson featured stories (Lake Las Vegas, Green Valley Ranch,
+  Water Street District) — build on the Story Page pattern and flip the
+  coming-soon cards to real links (Four Seasons is done).
+- Real Four Seasons drone stills — add a hero/OG image at
+  `/images/hero/henderson-four-seasons-*.webp` and swap the photoless hero (the
+  feature ships film-only until then).
 - Neighborhood Profile page spec (design doc) to standardize guide structure.
 - Remaining neighborhood pages (Downtown Arts District, Four Seasons/high-rise).
 - Real guide articles + real videos; wire up their cards.

@@ -4,7 +4,9 @@ import ImagePlaceholder from "./ui/ImagePlaceholder";
 import { guides } from "@/lib/content";
 
 export default function LocalGuides() {
-  const rest = guides.slice(1);
+  // Two placeholder guide cards follow the real Four Seasons feature card below,
+  // keeping the row at three without shipping an extra dead placeholder.
+  const rest = guides.slice(1, 3);
 
   return (
     <section id="guides" aria-labelledby="guides-heading" className="py-16 sm:py-24">
@@ -50,6 +52,27 @@ export default function LocalGuides() {
         </Link>
 
         <div className="mt-16 grid grid-cols-1 sm:grid-cols-3 gap-8 border-t border-lvinit-lightgray pt-10">
+          {/* Four Seasons feature — real, linked story (label-mode placeholder,
+              no fabricated image until real photography lands). */}
+          <Link
+            href="/neighborhoods/henderson/four-seasons-private-residences"
+            className="group block"
+          >
+            <ImagePlaceholder
+              label="Four Seasons Private Residences"
+              aspect="aspect-[4/3]"
+            />
+            <p className="mt-3 text-caption uppercase tracking-wide text-lvinit-blue">
+              Local Feature
+            </p>
+            <h3 className="mt-1 font-display text-heading-sm font-bold text-lvinit-black transition-colors duration-200 ease-calm group-hover:text-lvinit-blue">
+              Four Seasons Private Residences
+            </h3>
+            <p className="mt-2 text-caption text-lvinit-warmgray">
+              Henderson · MacDonald Highlands
+            </p>
+          </Link>
+
           {rest.map((guide) => (
             <article key={guide.slug}>
               <ImagePlaceholder
