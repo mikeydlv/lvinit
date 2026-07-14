@@ -67,6 +67,30 @@ export default function NeighborhoodDiscovery() {
             More of the valley
           </p>
           <ul className="mt-8 grid grid-cols-1 gap-x-12 gap-y-8 sm:grid-cols-2">
+            {/* North Las Vegas — a live area guide, linked here directly (kept
+                out of the content.ts metrics array so it never shows fabricated
+                numbers in the Compare tool). */}
+            <li className="border-b border-lvinit-lightgray pb-6">
+              <Link href="/neighborhoods/north-las-vegas" className="group block">
+                <h4 className="font-display text-subhead font-bold text-lvinit-black transition-colors duration-200 ease-calm group-hover:text-lvinit-blue">
+                  North Las Vegas
+                </h4>
+                <p className="mt-2 text-body text-lvinit-warmgray">
+                  Its own city at the north end of the valley — established
+                  streets, big master-planned communities, and brand-new desert
+                  growth, all under one name.
+                </p>
+                <span className="mt-3 inline-flex items-center gap-2 text-body font-medium text-lvinit-blue">
+                  Read the North Las Vegas guide
+                  <span
+                    aria-hidden="true"
+                    className="transition-transform duration-200 ease-calm group-hover:translate-x-1"
+                  >
+                    →
+                  </span>
+                </span>
+              </Link>
+            </li>
             {others.map((n) => {
               // Only real, live guides are linked (Summerlin is featured above;
               // Henderson now has its own pillar). The rest stay honest text

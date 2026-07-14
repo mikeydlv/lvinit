@@ -14,6 +14,7 @@ const timelines = [
 const areas = [
   "Summerlin",
   "Henderson",
+  "North Las Vegas",
   "Green Valley",
   "Downtown / Arts District",
   "Lake Las Vegas",

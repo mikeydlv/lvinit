@@ -72,6 +72,7 @@ app/
 | `/neighborhoods/summerlin/fourth-of-july-parade` | Editorial feature | Live | Full Article + Breadcrumb JSON-LD, embedded YouTube (nocookie), real banner photo |
 | `/neighborhoods/henderson` | Neighborhood guide | Live | Second pillar; community roster (7 areas); Breadcrumb JSON-LD; **hero is Option B** (bright editorial treatment, no photo yet) |
 | `/neighborhoods/henderson/four-seasons-private-residences` | Story (feature) | Live | First page built on the Story Page pattern; drone film embedded (id `ZDp8KSvNK6w`); photoless hero (no real stills yet); Article + Breadcrumb JSON-LD |
+| `/neighborhoods/north-las-vegas` | Area guide (pillar) | Live | Real aerial hero photo (`hero/north-las-vegas-aerial.jpg`, focal `object-[center_40%]`); The Local's Note; at-a-glance; home-tour video (id `HuUUHgq2Sn8` via `StoryVideo`); areas roster; Breadcrumb JSON-LD |
 | `/search` | IDX search | Live | Matrix IDX embed `idx=3652dd5`; do not modify embed behavior without instruction |
 | `/contact` | Contact | Live | ContactForm → `/api/contact` (Resend) with mailto fallback |
 | `/api/contact` | Route handler | Live | Returns 503 until `RESEND_API_KEY` is set, so no fake service ships |
@@ -101,6 +102,11 @@ scaffolding, not verified market data — see the header comment in that file).
 **Summerlin** and **Henderson** have real pillar pages. The other three exist as
 editorial snapshots on the homepage and as selectable options in the Comparison
 tool and contact form.
+
+**North Las Vegas** also has a live pillar guide (`/neighborhoods/north-las-vegas`)
+but is intentionally **not** in the `neighborhoods[]` array — it's linked directly
+from the homepage discovery so it never surfaces fabricated metrics in the Compare
+tool. Add it to the array only once real, verifiable metrics exist.
 
 **IA note:** the Henderson guide treats **Green Valley** and **Lake Las Vegas** as
 communities *inside* Henderson, while `lib/content.ts` still lists them as
@@ -339,6 +345,11 @@ links flowing both up (feature → guide → homepage) and down (guide → featu
   page built on the Story Page pattern; embeds Mikey's drone film, honest
   no-invented-specs editorial voice; linked from the Henderson guide and the
   homepage Guides section; sitemap entry.
+- **North Las Vegas** area guide — third valley pillar; real aerial hero photo,
+  The Local's Note, at-a-glance, home-tour video, an areas roster (Aliante, Tule
+  Springs, Valley Vista, Craig Ranch, northern growth), an honest take, and a
+  compare section linking the Henderson/Summerlin guides. Linked from the
+  homepage discovery and contact form; sitemap entry.
 - Live IDX search page (Matrix / GLVAR).
 - Contact form with Resend handler + mailto fallback + GA4 lead event.
 - GA4 analytics scaffolding (opt-in via env var).
@@ -475,6 +486,15 @@ Placeholder content that must be replaced before it can be considered "done"
 - **Henderson community copy** — the 7 community descriptions are honest,
   qualitative scaffolding (no stats) and are flagged in-file for Mikey's local
   accuracy/tone review; the Anthem entry especially should be confirmed.
+- **North Las Vegas hero image authorship** — `hero/north-las-vegas-aerial.jpg`
+  came from the SG social-assets library; it is deliberately **not** credited to
+  Mikey on-image (the footer implies all photography is his "unless otherwise
+  noted"). Confirm whether it's Mikey's own drone work (add the credit) or
+  licensed (add an appropriate note/caption).
+- **North Las Vegas areas copy** — the 5 areas (Aliante, Tule Springs, Valley
+  Vista, Craig Ranch, northern growth) are qualitative, no invented boundaries;
+  flagged in-file for Mikey's local review. Each is structured to become its own
+  linked sub-guide later.
 - **Newsletter** — no backend; wire to a real provider or serverless function.
 - **Footer legal links** — Privacy / Terms / Accessibility are `href="#"`.
 
