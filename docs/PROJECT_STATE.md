@@ -486,11 +486,13 @@ Placeholder content that must be replaced before it can be considered "done"
 - **Henderson community copy** — the 7 community descriptions are honest,
   qualitative scaffolding (no stats) and are flagged in-file for Mikey's local
   accuracy/tone review; the Anthem entry especially should be confirmed.
-- **North Las Vegas hero image authorship** — `hero/north-las-vegas-aerial.jpg`
-  came from the SG social-assets library; it is deliberately **not** credited to
-  Mikey on-image (the footer implies all photography is his "unless otherwise
-  noted"). Confirm whether it's Mikey's own drone work (add the credit) or
-  licensed (add an appropriate note/caption).
+- **North Las Vegas hero image authorship** — ✅ **Resolved.**
+  `hero/north-las-vegas-aerial.jpg` is licensed through **Shutterstock**
+  (asset ID **1094171159**, contributor **Little Vignettes Photo**). It is **not**
+  Mikey Del Rosario photography and is not credited to him. A visible, muted image
+  credit — "Photo: Little Vignettes Photo / Shutterstock" — has been added to the
+  North Las Vegas hero, which satisfies the footer's global "photography by Mikey
+  unless otherwise noted."
 - **North Las Vegas areas copy** — the 5 areas (Aliante, Tule Springs, Valley
   Vista, Craig Ranch, northern growth) are qualitative, no invented boundaries;
   flagged in-file for Mikey's local review. Each is structured to become its own
