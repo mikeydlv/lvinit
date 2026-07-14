@@ -9,13 +9,12 @@ import { StoryVideo } from "@/components/story";
 import { buildStoryMetadata, SITE_URL, type StoryMeta } from "@/lib/story";
 
 const PATH = "/neighborhoods/north-las-vegas";
-// Provided by Mikey and placed in the repo hero folder. Real photograph — no
-// fabricated/AI imagery. next/image optimizes it (responsive sizes + modern
+// Real photograph LICENSED THROUGH SHUTTERSTOCK (asset 1094171159, contributor
+// "Little Vignettes Photo") — NOT Mikey's own work, so it is NOT credited to him.
+// A subtle "Photo: Little Vignettes Photo / Shutterstock" credit sits at the
+// bottom of the hero, which satisfies the footer's global "photography by Mikey
+// unless otherwise noted." next/image optimizes it (responsive sizes + modern
 // formats) at serve time; the source file is left unaltered.
-// Authorship note: sourced from the SG social-assets library. Not credited to
-// Mikey on-image (unlike the Summerlin drone photos) until authorship is
-// confirmed, so the site's global "photography by Mikey" footer note isn't
-// implied for a possibly-licensed image.
 const HERO_IMAGE = "/images/hero/north-las-vegas-aerial.jpg";
 const HERO_ALT =
   "Aerial view of North Las Vegas at golden hour — the residential street grid of the northern Las Vegas Valley stretching toward the desert mountains on the horizon.";
@@ -74,7 +73,7 @@ const glance = [
   },
   {
     heading: "Nellis Air Force Base",
-    body: "Nellis Air Force Base sits in North Las Vegas — a major local employer and a real factor for military families. It also means some areas sit near flight paths, which is worth experiencing in person before you decide.",
+    body: "Nellis Air Force Base sits along the northeast side of the Las Vegas Valley, near North Las Vegas — a major local employer and a real factor for military families considering this side of town. Military flight activity can also be part of life in some nearby areas, which is worth experiencing in person before you decide.",
   },
   {
     heading: "Room to grow",
@@ -132,6 +131,11 @@ export default function NorthLasVegasPage() {
             aria-hidden="true"
             className="absolute inset-0 bg-gradient-to-t from-lvinit-black/55 via-lvinit-black/15 to-transparent"
           />
+          {/* Subtle licensed-image credit — muted, bottom edge, out of the way
+              of the headline/subheadline. */}
+          <p className="absolute bottom-2 right-4 z-10 text-[11px] leading-none tracking-wide text-lvinit-white/50">
+            Photo: Little Vignettes Photo / Shutterstock
+          </p>
           <Container className="relative z-10 pb-14 pt-40 sm:pb-20">
             <Link
               href="/#neighborhoods"
@@ -157,8 +161,8 @@ export default function NorthLasVegasPage() {
             Las Vegas Valley · An Area Guide
           </p>
           <p className="mt-8 max-w-3xl font-display text-[28px] leading-[38px] text-lvinit-black sm:text-thesis sm:leading-[64px]">
-            One of the most misunderstood parts of the valley — because it&rsquo;s
-            treated as one place when it&rsquo;s really a dozen.
+            One of the most misunderstood parts of the valley — mostly because
+            people talk about North Las Vegas like every part of it is the same.
           </p>
         </Container>
 
@@ -173,8 +177,8 @@ export default function NorthLasVegasPage() {
               their actual home search usually spans three different cities —
               Las Vegas, Henderson, and North Las Vegas — without them realizing
               it. North Las Vegas especially gets treated like one single kind of
-              place. It isn&rsquo;t. Where you land inside the city matters more
-              here than almost anywhere else in the valley.
+              place. It isn&rsquo;t. Where you land inside the city can completely
+              change your experience of living here.
             </p>
             <p className="mt-5 text-caption uppercase tracking-wide text-lvinit-warmgray">
               Mikey Del Rosario
@@ -240,8 +244,9 @@ export default function NorthLasVegasPage() {
             <p className="mt-5 text-body-lg text-lvinit-warmgray">
               The mistake I see relocating buyers make is judging all of North
               Las Vegas by the one neighborhood they happened to drive through, or
-              the one listing they found online. Three streets over can be a
-              different decade, a different price, and a different life.
+              the one listing they found online. In some parts of North Las
+              Vegas, you can drive a few minutes and go from older established
+              neighborhoods to areas filled with much newer construction.
             </p>
           </div>
         </Container>
