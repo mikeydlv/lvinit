@@ -264,9 +264,16 @@ feature without changing them. Authoring standard:
 `hero/summerlin-drone-overlook-golden-hour.webp`,
 `hero/summerlin-fox-hill-park-red-rock-aerial-drone.webp`,
 `features/summerlin-fourth-of-july-parade-banner.webp`,
-`team/mikey-del-rosario.webp`, and the three compliance logos.
-Everything else in `/public/images/` (neighborhood-*, guide-*, video-*,
-breathing-*, resident-voice-backdrop) is still a neutral placeholder — see
+`team/mikey-del-rosario.webp`, the three compliance logos, and — from the
+2026-07-15 shoot — the two homepage `BreathingPhoto` bands
+(`breathing-arts-district-joie-de-vivre-mural.webp`,
+`breathing-red-rock-canyon-scenic-drive.webp`) plus the Arts District guide
+card (`guide-arts-district-walkable-sidewalk.webp`, wired via the new optional
+`Guide.image` field). The prior `breathing-downtown-arts-district.jpg`,
+`breathing-red-rock-trailhead.jpg`, and `guide-downtown-arts-district-guide.jpg`
+stand-ins are now orphaned (kept in place for now; safe to prune).
+Everything else in `/public/images/` (neighborhood-*, remaining guide-*,
+video-*, resident-voice-backdrop) is still a neutral placeholder — see
 [`public/images/README.md`](../public/images/README.md).
 
 ---

@@ -76,7 +76,7 @@ export default function LocalGuides() {
           {rest.map((guide) => (
             <article key={guide.slug}>
               <ImagePlaceholder
-                src={`/images/guide-${guide.slug}.jpg`}
+                src={guide.image ?? `/images/guide-${guide.slug}.jpg`}
                 label={guide.title}
                 aspect="aspect-[4/3]"
               />

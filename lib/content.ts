@@ -112,6 +112,9 @@ export type Guide = {
   date: string;
   category: string;
   pullQuote?: string;
+  /** Real card photograph in /public/images. Falls back to the labeled
+   * stand-in (`/images/guide-{slug}.jpg`) when omitted. */
+  image?: string;
 };
 
 // PLACEHOLDER — replace with real published guides before launch.
@@ -141,6 +144,7 @@ export const guides: Guide[] = [
     byline: "Mikey Del Rosario",
     date: "April 2026",
     category: "Neighborhoods",
+    image: "/images/guide-arts-district-walkable-sidewalk.webp",
   },
   {
     slug: "first-summer-in-vegas",

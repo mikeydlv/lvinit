@@ -25,18 +25,18 @@ export default function HomePage() {
         <Comparisons />
 
         <BreathingPhoto
-          src="/images/breathing-downtown-arts-district.jpg"
-          label="The Downtown Arts District at dusk"
-          caption="Two blocks from the light rail. Around the corner from a bakery that remembers your order."
+          src="/images/breathing-arts-district-joie-de-vivre-mural.webp"
+          label="A large, colorful street mural in the Las Vegas Arts District, with the Strat tower rising behind it."
+          caption="The Las Vegas locals know rarely looks like the Strip."
         />
 
         <MovingToLasVegas />
         <Videos />
 
         <BreathingPhoto
-          src="/images/breathing-red-rock-trailhead.jpg"
-          label="The Red Rock trailhead near Summerlin at first light"
-          caption="Where the trailhead starts before the heat does."
+          src="/images/breathing-red-rock-canyon-scenic-drive.webp"
+          label="The scenic drive toward Red Rock Canyon, its red-and-tan escarpment rising past open desert west of the city."
+          caption="Where the city gives way to open desert."
         />
 
         <LocalGuides />
