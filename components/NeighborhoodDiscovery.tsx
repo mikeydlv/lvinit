@@ -121,6 +121,35 @@ export default function NeighborhoodDiscovery() {
                   </li>
                 );
               }
+              if (n.slug === "downtown-arts-district") {
+                return (
+                  <li
+                    key={n.slug}
+                    className="border-b border-lvinit-lightgray pb-6"
+                  >
+                    <Link
+                      href="/neighborhoods/downtown-arts-district"
+                      className="group block"
+                    >
+                      <h4 className="font-display text-subhead font-bold text-lvinit-black transition-colors duration-200 ease-calm group-hover:text-lvinit-blue">
+                        {n.name}
+                      </h4>
+                      <p className="mt-2 text-body text-lvinit-warmgray">
+                        {n.description}
+                      </p>
+                      <span className="mt-3 inline-flex items-center gap-2 text-body font-medium text-lvinit-blue">
+                        Read the Downtown Arts District guide
+                        <span
+                          aria-hidden="true"
+                          className="transition-transform duration-200 ease-calm group-hover:translate-x-1"
+                        >
+                          →
+                        </span>
+                      </span>
+                    </Link>
+                  </li>
+                );
+              }
               return (
                 <li
                   key={n.slug}

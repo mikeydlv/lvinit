@@ -73,24 +73,45 @@ export default function LocalGuides() {
             </p>
           </Link>
 
-          {rest.map((guide) => (
-            <article key={guide.slug}>
-              <ImagePlaceholder
-                src={guide.image ?? `/images/guide-${guide.slug}.jpg`}
-                label={guide.title}
-                aspect="aspect-[4/3]"
-              />
-              <p className="mt-3 text-caption uppercase tracking-wide text-lvinit-blue">
-                {guide.category}
-              </p>
-              <h3 className="mt-1 font-display text-heading-sm font-bold text-lvinit-black">
-                {guide.title}
-              </h3>
-              <p className="mt-2 text-caption text-lvinit-warmgray">
-                {guide.byline} · {guide.date}
-              </p>
-            </article>
-          ))}
+          {rest.map((guide) =>
+            // Guides with a real published destination link out; the rest stay
+            // display-only placeholders (no dead links).
+            guide.href ? (
+              <Link key={guide.slug} href={guide.href} className="group block">
+                <ImagePlaceholder
+                  src={guide.image ?? `/images/guide-${guide.slug}.jpg`}
+                  label={guide.title}
+                  aspect="aspect-[4/3]"
+                />
+                <p className="mt-3 text-caption uppercase tracking-wide text-lvinit-blue">
+                  {guide.category}
+                </p>
+                <h3 className="mt-1 font-display text-heading-sm font-bold text-lvinit-black transition-colors duration-200 ease-calm group-hover:text-lvinit-blue">
+                  {guide.title}
+                </h3>
+                <p className="mt-2 text-caption text-lvinit-warmgray">
+                  {guide.byline} · {guide.date}
+                </p>
+              </Link>
+            ) : (
+              <article key={guide.slug}>
+                <ImagePlaceholder
+                  src={guide.image ?? `/images/guide-${guide.slug}.jpg`}
+                  label={guide.title}
+                  aspect="aspect-[4/3]"
+                />
+                <p className="mt-3 text-caption uppercase tracking-wide text-lvinit-blue">
+                  {guide.category}
+                </p>
+                <h3 className="mt-1 font-display text-heading-sm font-bold text-lvinit-black">
+                  {guide.title}
+                </h3>
+                <p className="mt-2 text-caption text-lvinit-warmgray">
+                  {guide.byline} · {guide.date}
+                </p>
+              </article>
+            )
+          )}
         </div>
       </Container>
     </section>

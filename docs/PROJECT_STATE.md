@@ -64,6 +64,7 @@ app/
   search/page.tsx                               /search — Matrix IDX (GLVAR MLS) iframe embed
   neighborhoods/summerlin/page.tsx              /neighborhoods/summerlin — first full neighborhood guide
   neighborhoods/summerlin/fourth-of-july-parade/page.tsx   Editorial lifestyle feature (Article + Breadcrumb JSON-LD)
+  neighborhoods/downtown-arts-district/page.tsx  /neighborhoods/downtown-arts-district — walkable district guide (Story Page system)
 ```
 
 **Path alias:** `@/*` → project root (see `tsconfig.json`).
@@ -80,6 +81,7 @@ app/
 | `/neighborhoods/henderson` | Neighborhood guide | Live | Second pillar; community roster (7 areas); Breadcrumb JSON-LD; **hero is Option B** (bright editorial treatment, no photo yet) |
 | `/neighborhoods/henderson/four-seasons-private-residences` | Story (feature) | Live | First page built on the Story Page pattern; drone film embedded (id `ZDp8KSvNK6w`); photoless hero (no real stills yet); Article + Breadcrumb JSON-LD |
 | `/neighborhoods/north-las-vegas` | Area guide (pillar) | Live | Real aerial hero photo (`hero/north-las-vegas-aerial.jpg`, focal `object-[center_40%]`); The Local's Note; at-a-glance; home-tour video (id `HuUUHgq2Sn8` via `StoryVideo`); areas roster; Breadcrumb JSON-LD |
+| `/neighborhoods/downtown-arts-district` | Neighborhood guide (pillar) | Live | First pillar built on the **Story Page system**; real Mikey Arts District photography (Main St hero + 3 inline figures); honest "who it's / isn't for" + practical beats; cross-links the Summerlin/Henderson/NLV guides via `RelatedStories`; Article + Breadcrumb JSON-LD; hero = OG image |
 | `/search` | IDX search | Live | Matrix IDX embed `idx=3652dd5`; do not modify embed behavior without instruction |
 | `/contact` | Contact | Live | ContactForm → `/api/contact` (Resend) with mailto fallback |
 | `/api/contact` | Route handler | Live | Returns 503 until `RESEND_API_KEY` is set, so no fake service ships |
@@ -102,13 +104,13 @@ scaffolding, not verified market data — see the header comment in that file).
 |---|---|---|---|---|
 | `summerlin` | Summerlin | Walk Score 54 | ✅ Full guide + parade feature | top-schools, quiet-suburban |
 | `henderson` | Henderson | Median $525K | ✅ Full guide (pillar) | top-schools, quiet-suburban |
-| `downtown-arts-district` | Downtown Arts District | Walk Score 88 | ❌ | walkable, up-and-coming, close-to-strip |
+| `downtown-arts-district` | Downtown Arts District | Walk Score 88 | ✅ Full guide (pillar, Story Page system) | walkable, up-and-coming, close-to-strip |
 | `green-valley` | Green Valley | School 8.6/10 | ❌ (also a Henderson sub-area) | top-schools, quiet-suburban |
 | `lake-las-vegas` | Lake Las Vegas | Median $780K | ❌ (also a Henderson sub-area) | quiet-suburban |
 
-**Summerlin** and **Henderson** have real pillar pages. The other three exist as
-editorial snapshots on the homepage and as selectable options in the Comparison
-tool and contact form.
+**Summerlin**, **Henderson**, and the **Downtown Arts District** have real pillar
+pages. Green Valley and Lake Las Vegas still exist only as editorial snapshots on
+the homepage and as selectable options in the Comparison tool and contact form.
 
 **North Las Vegas** also has a live pillar guide (`/neighborhoods/north-las-vegas`)
 but is intentionally **not** in the `neighborhoods[]` array — it's linked directly
@@ -267,9 +269,13 @@ feature without changing them. Authoring standard:
 `team/mikey-del-rosario.webp`, the three compliance logos, and — from the
 2026-07-15 shoot — the two homepage `BreathingPhoto` bands
 (`breathing-arts-district-joie-de-vivre-mural.webp`,
-`breathing-red-rock-canyon-scenic-drive.webp`) plus the Arts District guide
+`breathing-red-rock-canyon-scenic-drive.webp`), the Arts District guide
 card (`guide-arts-district-walkable-sidewalk.webp`, wired via the new optional
-`Guide.image` field). The prior `breathing-downtown-arts-district.jpg`,
+`Guide.image` field), and the **Downtown Arts District guide** imagery from the
+same shoot: `hero/downtown-arts-district-main-street.webp` (2400×1350 hero + OG)
+and three inline figures `features/downtown-arts-district-{the-colorado-building,
+main-street-shops,sharedowntown-apartments}.webp`. The prior
+`breathing-downtown-arts-district.jpg`,
 `breathing-red-rock-trailhead.jpg`, and `guide-downtown-arts-district-guide.jpg`
 stand-ins are now orphaned (kept in place for now; safe to prune).
 Everything else in `/public/images/` (neighborhood-*, remaining guide-*,
@@ -364,6 +370,15 @@ links flowing both up (feature → guide → homepage) and down (guide → featu
   Springs, Valley Vista, Craig Ranch, northern growth), an honest take, and a
   compare section linking the Henderson/Summerlin guides. Linked from the
   homepage discovery and contact form; sitemap entry.
+- **Downtown Arts District** neighborhood guide — the walkable, up-and-coming
+  counterpoint to the suburbs, and the first pillar built on the reusable Story
+  Page system. Real Mikey photography (Main Street hero + the Colorado building,
+  Main Street shops, and ShareDowntown apartments as inline figures); honest
+  "what it feels like / walkability / food & culture / housing / who it's & isn't
+  for / practical" beats; a clear Strip-vs-Fremont-vs-Arts-District explainer;
+  cross-links the Summerlin/Henderson/North Las Vegas guides; Article + Breadcrumb
+  JSON-LD; hero doubles as the OG image; sitemap entry. Wired from the homepage
+  Local Guides card and the "More of the valley" list.
 - Live IDX search page (Matrix / GLVAR).
 - Contact form with Resend handler + mailto fallback + GA4 lead event.
 - GA4 analytics scaffolding (opt-in via env var).
@@ -383,9 +398,16 @@ links flowing both up (feature → guide → homepage) and down (guide → featu
    - `/neighborhoods/henderson/four-seasons-private-residences` — **live** feature
    - *Planned featured stories* (marked "coming soon", non-linked): Lake Las
      Vegas, Green Valley Ranch, Water Street District
+3. **North Las Vegas cluster:** `/neighborhoods/north-las-vegas` (pillar).
+4. **Downtown Arts District cluster:**
+   - `/neighborhoods/downtown-arts-district` — the pillar guide (Story Page
+     system). No child stories yet; it cross-links the other three pillars as
+     "compare the valley" siblings via `RelatedStories`. A natural future child
+     is a First Friday lifestyle feature (`/lifestyle/...` or `/events/...`).
 
-All other homepage guide/video cards are placeholders that do not yet resolve to
-pages.
+The remaining homepage guide/video cards (Summerlin vs. Henderson, Cost of
+Living, Surviving Your First Vegas Summer, and the four video posters) are
+placeholders that do not yet resolve to pages.
 
 ---
 
@@ -399,7 +421,8 @@ Build order follows the current priority and existing `neighborhoods[]` data:
 2. **Henderson featured stories** — Four Seasons Private Residences, Lake Las
    Vegas, Green Valley Ranch, Water Street District (currently coming-soon cards
    on the Henderson page; flip to real links as each publishes).
-3. Downtown Arts District (the walkable, up-and-coming counterpoint).
+3. ~~Downtown Arts District~~ — ✅ **Built** (`/neighborhoods/downtown-arts-district`),
+   on the Story Page system.
 4. Additional flagship areas as photography and content land.
 
 Each should follow the Summerlin guide's shape: real hero photo, honest "beats,"
@@ -530,8 +553,9 @@ and have Mikey review the community roster copy for local accuracy.
   `/images/hero/henderson-four-seasons-*.webp` and swap the photoless hero (the
   feature ships film-only until then).
 - Neighborhood Profile page spec (design doc) to standardize guide structure.
-- Remaining neighborhood pages (Downtown Arts District, Four Seasons/high-rise).
-- Real guide articles + real videos; wire up their cards.
+- Remaining neighborhood pages (additional flagship areas / high-rise living).
+- A First Friday lifestyle feature as the Arts District cluster's first child.
+- Real guide articles + real videos; wire up their remaining cards.
 - Relocation Hub landing.
 - Replace remaining placeholder photography and all placeholder metrics.
 - Wire the newsletter; add real legal pages.

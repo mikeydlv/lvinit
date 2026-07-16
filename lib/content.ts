@@ -115,6 +115,10 @@ export type Guide = {
   /** Real card photograph in /public/images. Falls back to the labeled
    * stand-in (`/images/guide-{slug}.jpg`) when omitted. */
   image?: string;
+  /** Root-relative link to the published guide. When set, the card becomes a
+   * real link; when omitted, the card is a display-only placeholder (no dead
+   * links). */
+  href?: string;
 };
 
 // PLACEHOLDER — replace with real published guides before launch.
@@ -142,9 +146,10 @@ export const guides: Guide[] = [
     title: "A Local's Guide to the Downtown Arts District",
     dek: "Where to get coffee, who's actually your neighbor, and what changes after 6pm.",
     byline: "Mikey Del Rosario",
-    date: "April 2026",
+    date: "July 2026",
     category: "Neighborhoods",
     image: "/images/guide-arts-district-walkable-sidewalk.webp",
+    href: "/neighborhoods/downtown-arts-district",
   },
   {
     slug: "first-summer-in-vegas",
