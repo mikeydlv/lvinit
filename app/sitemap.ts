@@ -31,6 +31,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     },
     {
+      url: `${BASE_URL}/neighborhoods/southwest-las-vegas`,
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    {
       url: `${BASE_URL}/neighborhoods/henderson/four-seasons-private-residences`,
       changeFrequency: "monthly",
       priority: 0.7,

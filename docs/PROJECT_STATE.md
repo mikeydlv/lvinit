@@ -5,7 +5,7 @@
 > development sprint. Where this file and the code disagree, trust the code and
 > fix this file.
 >
-> **Last audited:** 2026-07-15 · **Branch:** `main` · **Live:** https://www.lvinit.com
+> **Last audited:** 2026-07-16 · **Branch:** `main` · **Live:** https://www.lvinit.com
 >
 > **Content Publisher agent:** a project-scoped Claude Code subagent,
 > `lvinit-content-publisher`, turns Mikey's real photos/videos/notes into
@@ -65,6 +65,7 @@ app/
   neighborhoods/summerlin/page.tsx              /neighborhoods/summerlin — first full neighborhood guide
   neighborhoods/summerlin/fourth-of-july-parade/page.tsx   Editorial lifestyle feature (Article + Breadcrumb JSON-LD)
   neighborhoods/downtown-arts-district/page.tsx  /neighborhoods/downtown-arts-district — walkable district guide (Story Page system)
+  neighborhoods/southwest-las-vegas/page.tsx     /neighborhoods/southwest-las-vegas — fastest-growing side (Story Page system)
 ```
 
 **Path alias:** `@/*` → project root (see `tsconfig.json`).
@@ -82,6 +83,7 @@ app/
 | `/neighborhoods/henderson/four-seasons-private-residences` | Story (feature) | Live | First page built on the Story Page pattern; drone film embedded (id `ZDp8KSvNK6w`); photoless hero (no real stills yet); Article + Breadcrumb JSON-LD |
 | `/neighborhoods/north-las-vegas` | Area guide (pillar) | Live | Real aerial hero photo (`hero/north-las-vegas-aerial.jpg`, focal `object-[center_40%]`); The Local's Note; at-a-glance; home-tour video (id `HuUUHgq2Sn8` via `StoryVideo`); areas roster; Breadcrumb JSON-LD |
 | `/neighborhoods/downtown-arts-district` | Neighborhood guide (pillar) | Live | First pillar built on the **Story Page system**; real Mikey Arts District photography (Main St hero + 3 inline figures); honest "who it's / isn't for" + practical beats; cross-links the Summerlin/Henderson/NLV guides via `RelatedStories`; Article + Breadcrumb JSON-LD; hero = OG image |
+| `/neighborhoods/southwest-las-vegas` | Area guide (pillar) | Live | Story Page system; real Mikey UnCommons/The Bend photography (2026-07-16 shoot) — street hero + 4 inline figures; informal-boundary + unincorporated-Clark-County framing; "My honest take" Local's Note; verified development status (open vs announced); Article + Breadcrumb JSON-LD; hero = OG image |
 | `/search` | IDX search | Live | Matrix IDX embed `idx=3652dd5`; do not modify embed behavior without instruction |
 | `/contact` | Contact | Live | ContactForm → `/api/contact` (Resend) with mailto fallback |
 | `/api/contact` | Route handler | Live | Returns 503 until `RESEND_API_KEY` is set, so no fake service ships |
@@ -112,10 +114,14 @@ scaffolding, not verified market data — see the header comment in that file).
 pages. Green Valley and Lake Las Vegas still exist only as editorial snapshots on
 the homepage and as selectable options in the Comparison tool and contact form.
 
-**North Las Vegas** also has a live pillar guide (`/neighborhoods/north-las-vegas`)
-but is intentionally **not** in the `neighborhoods[]` array — it's linked directly
-from the homepage discovery so it never surfaces fabricated metrics in the Compare
-tool. Add it to the array only once real, verifiable metrics exist.
+**North Las Vegas** and **Southwest Las Vegas** also have live pillar guides
+(`/neighborhoods/north-las-vegas`, `/neighborhoods/southwest-las-vegas`) but are
+intentionally **not** in the `neighborhoods[]` array — they're linked directly
+from the homepage discovery so they never surface fabricated metrics in the Compare
+tool. Add them to the array only once real, verifiable metrics exist. (For
+Southwest this is a hard blocker, not laziness: no median price, walk score, or
+commute figure specific to the Southwest submarket is published anywhere — the
+area has no official boundary to report against.)
 
 **IA note:** the Henderson guide treats **Green Valley** and **Lake Las Vegas** as
 communities *inside* Henderson, while `lib/content.ts` still lists them as
@@ -239,8 +245,8 @@ feature without changing them. Authoring standard:
   `StoryBreadcrumbs`, `StoryLede`, `StorySection`, `StoryVideo`,
   `StoryPullQuote`, `StoryGallery`, `RelatedStories`, `RelatedNeighborhood`,
   `StoryCTAs`. Barrel export at `components/story/index.ts`.
-- Not yet used by any live page — it's the standard the next stories (Henderson
-  featured stories, etc.) will be built on.
+- Now live on the Four Seasons feature, the Downtown Arts District guide, and the
+  Southwest Las Vegas guide — it's the standard all future stories build on.
 
 ---
 
@@ -278,6 +284,21 @@ main-street-shops,sharedowntown-apartments}.webp`. The prior
 `breathing-downtown-arts-district.jpg`,
 `breathing-red-rock-trailhead.jpg`, and `guide-downtown-arts-district-guide.jpg`
 stand-ins are now orphaned (kept in place for now; safe to prune).
+
+From the **2026-07-16 Southwest shoot** (Samsung, ~9:45–10:15am, JPG-sourced —
+DNGs were *not* used): `hero/southwest-las-vegas-uncommons-street.webp`
+(2400×1350 hero + OG) and four inline figures under `features/`:
+`southwest-las-vegas-uncommons-office-street.webp`,
+`southwest-las-vegas-uncommons-vestra-apartments.webp`,
+`southwest-las-vegas-uncommons-paseo.webp`,
+`southwest-las-vegas-the-bend-storefronts.webp` (all 1600×1067, 3:2).
+Source originals (preserved unmodified, outside the repo):
+`C:\Media\UnCommons\20260716_{100032,094833,095434,095656}.jpg` and
+`C:\Media\The Bend\20260716_101503.jpg`. Processing was restrained — auto-orient,
+crop to the component ratio, resize, WebP q74. **No** regrade: these are honest
+mid-morning July daylight frames and must not be made to look like golden hour.
+All are Mikey-owned, so the global footer credit covers them — **no** per-image
+credit, and explicitly **not** the North Las Vegas Shutterstock treatment.
 Everything else in `/public/images/` (neighborhood-*, remaining guide-*,
 video-*, resident-voice-backdrop) is still a neutral placeholder — see
 [`public/images/README.md`](../public/images/README.md).
@@ -379,6 +400,20 @@ links flowing both up (feature → guide → homepage) and down (guide → featu
   cross-links the Summerlin/Henderson/North Las Vegas guides; Article + Breadcrumb
   JSON-LD; hero doubles as the OG image; sitemap entry. Wired from the homepage
   Local Guides card and the "More of the valley" list.
+- **Southwest Las Vegas** area guide — the valley's fastest-growing side, and the
+  counterpoint to Summerlin's master plan. Real Mikey photography from the
+  2026-07-16 UnCommons / The Bend shoot (street hero + 4 inline figures). Leads on
+  the honest structural facts: "Southwest Las Vegas" is an informal term with no
+  legal boundary, and the area is overwhelmingly **unincorporated Clark County**
+  (towns of Enterprise and Spring Valley), not the City of Las Vegas. Carries the
+  verified Enterprise growth figure (~60% 2010–2023 vs ~20% valley-wide, Clark
+  County via the RJ), the CC-215 vs I-215 distinction, a "My honest take" Local's
+  Note on the fragmented/unfinished tradeoff, and a strict open-vs-announced
+  split on UnCommons and The Bend. No commute minutes and no Southwest-specific
+  median are asserted — neither is verifiable; the LVR $490K June 2026 figure is
+  used only as an explicitly-labeled **valley-wide** anchor. Article + Breadcrumb
+  JSON-LD; hero doubles as the OG image; sitemap entry. Wired from the homepage
+  discovery list and the Arts District guide's related cluster.
 - Live IDX search page (Matrix / GLVAR).
 - Contact form with Resend handler + mailto fallback + GA4 lead event.
 - GA4 analytics scaffolding (opt-in via env var).
@@ -401,9 +436,15 @@ links flowing both up (feature → guide → homepage) and down (guide → featu
 3. **North Las Vegas cluster:** `/neighborhoods/north-las-vegas` (pillar).
 4. **Downtown Arts District cluster:**
    - `/neighborhoods/downtown-arts-district` — the pillar guide (Story Page
-     system). No child stories yet; it cross-links the other three pillars as
+     system). No child stories yet; it cross-links the other pillars as
      "compare the valley" siblings via `RelatedStories`. A natural future child
      is a First Friday lifestyle feature (`/lifestyle/...` or `/events/...`).
+5. **Southwest Las Vegas cluster:**
+   - `/neighborhoods/southwest-las-vegas` — the pillar guide (Story Page system).
+     No child stories yet; cross-links Summerlin / Henderson / Arts District via
+     `RelatedStories`. Natural future children: an UnCommons feature and a
+     Mountain's Edge / Rhodes Ranch / Southern Highlands community guide — all
+     named in the guide's copy but deliberately **not** linked (no pages yet).
 
 The remaining homepage guide/video cards (Summerlin vs. Henderson, Cost of
 Living, Surviving Your First Vegas Summer, and the four video posters) are

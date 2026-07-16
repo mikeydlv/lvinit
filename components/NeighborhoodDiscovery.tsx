@@ -91,6 +91,33 @@ export default function NeighborhoodDiscovery() {
                 </span>
               </Link>
             </li>
+            {/* Southwest Las Vegas — a live area guide, linked here directly.
+                Like North Las Vegas, it's deliberately kept out of the
+                content.ts metrics array so it never shows fabricated numbers
+                in the Compare tool. */}
+            <li className="border-b border-lvinit-lightgray pb-6">
+              <Link
+                href="/neighborhoods/southwest-las-vegas"
+                className="group block"
+              >
+                <h4 className="font-display text-subhead font-bold text-lvinit-black transition-colors duration-200 ease-calm group-hover:text-lvinit-blue">
+                  Southwest Las Vegas
+                </h4>
+                <p className="mt-2 text-body text-lvinit-warmgray">
+                  The valley&rsquo;s fastest-growing side — newer housing, the
+                  215 right there, and a place still assembling itself.
+                </p>
+                <span className="mt-3 inline-flex items-center gap-2 text-body font-medium text-lvinit-blue">
+                  Read the Southwest Las Vegas guide
+                  <span
+                    aria-hidden="true"
+                    className="transition-transform duration-200 ease-calm group-hover:translate-x-1"
+                  >
+                    →
+                  </span>
+                </span>
+              </Link>
+            </li>
             {others.map((n) => {
               // Only real, live guides are linked (Summerlin is featured above;
               // Henderson now has its own pillar). The rest stay honest text

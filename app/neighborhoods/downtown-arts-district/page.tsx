@@ -99,6 +99,12 @@ export default function DowntownArtsDistrictPage() {
             category: "Neighborhood guide",
             dek: "Its own city at the north end — established streets, big master-plans, and brand-new desert growth.",
           },
+          {
+            name: "Southwest Las Vegas",
+            href: "/neighborhoods/southwest-las-vegas",
+            category: "Area guide",
+            dek: "The fastest-growing side of the valley — newer housing, easy 215 access, and a life built around the car.",
+          },
         ],
       }}
       ctas={{
