@@ -5,7 +5,14 @@
 > development sprint. Where this file and the code disagree, trust the code and
 > fix this file.
 >
-> **Last audited:** 2026-07-08 · **Branch:** `main` · **Live:** https://www.lvinit.com
+> **Last audited:** 2026-07-15 · **Branch:** `main` · **Live:** https://www.lvinit.com
+>
+> **Content Publisher agent:** a project-scoped Claude Code subagent,
+> `lvinit-content-publisher`, turns Mikey's real photos/videos/notes into
+> complete, honest content packages (guides, stories, video companion pages,
+> photography placement, SEO/schema, internal links, YouTube + social copy).
+> Agent: [`.claude/agents/lvinit-content-publisher.md`](../.claude/agents/lvinit-content-publisher.md)
+> · Usage guide: [CONTENT_PUBLISHER_AGENT.md](CONTENT_PUBLISHER_AGENT.md).
 
 ---
 
