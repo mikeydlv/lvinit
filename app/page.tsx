@@ -27,7 +27,7 @@ export default function HomePage() {
         <BreathingPhoto
           src="/images/breathing-arts-district-joie-de-vivre-mural.webp"
           label="A large, colorful street mural in the Las Vegas Arts District, with the Strat tower rising behind it."
-          caption="The Las Vegas locals know rarely looks like the Strip."
+          caption="Beyond the Strip, Las Vegas has a personality of its own."
         />
 
         <MovingToLasVegas />
