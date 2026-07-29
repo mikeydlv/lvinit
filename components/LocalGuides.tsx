@@ -52,14 +52,17 @@ export default function LocalGuides() {
         </Link>
 
         <div className="mt-16 grid grid-cols-1 sm:grid-cols-3 gap-8 border-t border-lvinit-lightgray pt-10">
-          {/* Four Seasons feature — real, linked story (label-mode placeholder,
-              no fabricated image until real photography lands). */}
+          {/* Four Seasons feature — real, linked story. TEMPORARY card image:
+              the video-thumbnail art (has baked-in title text + unverified "$5B"
+              claim); approved by Mikey as a stand-in. Swap for a clean drone
+              still when one lands. */}
           <Link
             href="/neighborhoods/henderson/four-seasons-private-residences"
             className="group block"
           >
             <ImagePlaceholder
-              label="Four Seasons Private Residences"
+              src="/images/features/four-seasons-private-residences.webp"
+              label="Four Seasons Private Residences construction site in MacDonald Highlands"
               aspect="aspect-[4/3]"
             />
             <p className="mt-3 text-caption uppercase tracking-wide text-lvinit-blue">
