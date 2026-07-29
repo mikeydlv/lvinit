@@ -7,8 +7,10 @@ import { videos } from "@/lib/content";
 
 export default function Videos() {
   const [featuredId, setFeaturedId] = useState(videos[0].id);
+  const [playingId, setPlayingId] = useState<string | null>(null);
   const featured = videos.find((v) => v.id === featuredId) ?? videos[0];
   const secondary = videos.filter((v) => v.id !== featuredId);
+  const isPlaying = playingId === featured.id;
 
   return (
     <section id="videos" aria-labelledby="videos-heading" className="py-16 sm:py-24">
@@ -21,11 +23,40 @@ export default function Videos() {
         </h2>
 
         <div className="mt-10">
-          <VideoPlaceholder
-            src={`/images/video-${featured.id}.jpg`}
-            label={featured.title}
-            className="w-full"
-          />
+          {featured.youtubeId ? (
+            isPlaying ? (
+              <div className="relative aspect-video w-full overflow-hidden bg-lvinit-black">
+                <iframe
+                  src={`https://www.youtube-nocookie.com/embed/${featured.youtubeId}?autoplay=1`}
+                  title={featured.title}
+                  loading="lazy"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  referrerPolicy="strict-origin-when-cross-origin"
+                  allowFullScreen
+                  className="absolute inset-0 h-full w-full border-0"
+                />
+              </div>
+            ) : (
+              <button
+                type="button"
+                onClick={() => setPlayingId(featured.id)}
+                aria-label={`Play video: ${featured.title}`}
+                className="block w-full"
+              >
+                <VideoPlaceholder
+                  src={`/images/video-${featured.id}.jpg`}
+                  label={featured.title}
+                  className="w-full"
+                />
+              </button>
+            )
+          ) : (
+            <VideoPlaceholder
+              src={`/images/video-${featured.id}.jpg`}
+              label={featured.title}
+              className="w-full"
+            />
+          )}
           <p className="mt-4 text-body-lg text-lvinit-black">{featured.title}</p>
           <p className="text-caption text-lvinit-warmgray">{featured.duration}</p>
         </div>

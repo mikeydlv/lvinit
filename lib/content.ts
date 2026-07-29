@@ -93,12 +93,21 @@ export type VideoItem = {
   id: string;
   title: string;
   duration: string;
+  /** Real published YouTube video id. When set, the featured slot renders a live
+   * youtube-nocookie embed instead of the placeholder poster. */
+  youtubeId?: string;
 };
 
-// PLACEHOLDER — titles illustrate the "answer a real doubt" direction from
-// Doc 03 §3.9; replace with real produced content before launch.
+// The featured slot is a real, published video. The three smaller entries are
+// still PLACEHOLDERS — titles illustrate the "answer a real doubt" direction
+// from Doc 03 §3.9; replace with real produced content before launch.
 export const videos: VideoItem[] = [
-  { id: "affordability", title: "Is Las Vegas actually affordable right now?", duration: "6:12" },
+  {
+    id: "moving-to-las-vegas-2026-choose-the-area",
+    youtubeId: "nyK0cchUt14",
+    title: "Moving to Las Vegas in 2026? Choose the Area Before the House",
+    duration: "5:45",
+  },
   { id: "heat", title: "What nobody tells you about the heat", duration: "4:47" },
   { id: "rent-vs-buy", title: "Renting first vs. buying first — what I tell my clients", duration: "8:03" },
   { id: "schools", title: "How to actually judge a school district here", duration: "5:35" },
