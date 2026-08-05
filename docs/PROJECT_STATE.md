@@ -66,6 +66,7 @@ app/
   neighborhoods/summerlin/fourth-of-july-parade/page.tsx   Editorial lifestyle feature (Article + Breadcrumb JSON-LD)
   neighborhoods/downtown-arts-district/page.tsx  /neighborhoods/downtown-arts-district — walkable district guide (Story Page system)
   neighborhoods/southwest-las-vegas/page.tsx     /neighborhoods/southwest-las-vegas — fastest-growing side (Story Page system)
+  guides/what-500k-buys-in-las-vegas/page.tsx    /guides/what-500k-buys-in-las-vegas — video-first buyer guide (Story Page system; first /guides/ route)
 ```
 
 **Path alias:** `@/*` → project root (see `tsconfig.json`).
@@ -84,6 +85,7 @@ app/
 | `/neighborhoods/north-las-vegas` | Area guide (pillar) | Live | Real aerial hero photo (`hero/north-las-vegas-aerial.jpg`, focal `object-[center_40%]`); The Local's Note; at-a-glance; home-tour video (id `HuUUHgq2Sn8` via `StoryVideo`); areas roster; Breadcrumb JSON-LD |
 | `/neighborhoods/downtown-arts-district` | Neighborhood guide (pillar) | Live | First pillar built on the **Story Page system**; real Mikey Arts District photography (Main St hero + 3 inline figures); honest "who it's / isn't for" + practical beats; cross-links the Summerlin/Henderson/NLV guides via `RelatedStories`; Article + Breadcrumb JSON-LD; hero = OG image |
 | `/neighborhoods/southwest-las-vegas` | Area guide (pillar) | Live | Story Page system; real Mikey UnCommons/The Bend photography (2026-07-16 shoot) — street hero + 4 inline figures; informal-boundary + unincorporated-Clark-County framing; "My honest take" Local's Note; verified development status (open vs announced); Article + Breadcrumb JSON-LD; hero = OG image |
+| `/guides/what-500k-buys-in-las-vegas` | Buyer guide (video companion) | Live | First `/guides/` route; Story Page system; companion to the "$500K" home-tour video (id `Tzxid_nM2nA`, via `StoryVideo`); photoless editorial hero (OG = existing local video poster `video-what-500k-gets-you-in-las-vegas.jpg`); page-local responsive comparison (mobile cards / desktop table); Article + Breadcrumb + **VideoObject** JSON-LD; breadcrumb is Home → article only (no `/guides` index exists) |
 | `/search` | IDX search | Live | Matrix IDX embed `idx=3652dd5`; do not modify embed behavior without instruction |
 | `/contact` | Contact | Live | ContactForm → `/api/contact` (Resend) with mailto fallback |
 | `/api/contact` | Route handler | Live | Returns 503 until `RESEND_API_KEY` is set, so no fake service ships |
@@ -239,7 +241,9 @@ feature without changing them. Authoring standard:
 [docs/STORY_PAGE_STANDARD.md](STORY_PAGE_STANDARD.md).
 
 - `lib/story.ts` — `StoryMeta` type + `buildStoryMetadata()` /
-  `buildStoryJsonLd()` (Article + BreadcrumbList) so SEO and schema never drift.
+  `buildStoryJsonLd()` (Article + BreadcrumbList, plus an optional `VideoObject`
+  when `meta.video` is set — used by the $500K buyer guide) so SEO and schema
+  never drift.
 - `components/story/` — composable blocks: `StoryPage` (wrapper: nav, hero,
   breadcrumbs, related, CTAs, JSON-LD), `StoryHero` (photo or photoless mode),
   `StoryBreadcrumbs`, `StoryLede`, `StorySection`, `StoryVideo`,

@@ -18,6 +18,29 @@ export const DEFAULT_AUTHOR = "Mikey Del Rosario";
 export type Breadcrumb = { name: string; path: string };
 
 /**
+ * VideoObject inputs for a story that features a video. When present on a
+ * `StoryMeta`, `buildStoryJsonLd` emits a `VideoObject` into the @graph next to
+ * the Article + BreadcrumbList. Provide only verified metadata — never fabricate
+ * viewCount, ratings, or interactionStatistic.
+ */
+export type StoryVideoMeta = {
+  /** The video's real name/title. */
+  name: string;
+  /** Short, accurate description of the video. */
+  description: string;
+  /** Thumbnail: root-relative (e.g. "/images/…jpg", absolutized here) or a full URL. */
+  thumbnailUrl: string;
+  /** ISO date (YYYY-MM-DD) the video was published. Must be real. */
+  uploadDate: string;
+  /** ISO 8601 duration, e.g. "PT12M16S". Omit if unknown. */
+  duration?: string;
+  /** Player embed URL, e.g. "https://www.youtube.com/embed/ID". */
+  embedUrl?: string;
+  /** Canonical watch URL, e.g. "https://www.youtube.com/watch?v=ID". Sets contentUrl + url. */
+  contentUrl?: string;
+};
+
+/**
  * SEO + schema inputs for a story page. Drives both `buildStoryMetadata`
  * (Next Metadata) and `buildStoryJsonLd` (Article + BreadcrumbList), so the two
  * never drift apart.
@@ -42,6 +65,8 @@ export type StoryMeta = {
   author?: string;
   /** Full breadcrumb trail: Home first, the current page last. */
   breadcrumbs: Breadcrumb[];
+  /** Optional featured video — emits a VideoObject into the JSON-LD @graph. */
+  video?: StoryVideoMeta;
 };
 
 const abs = (path: string) => `${SITE_URL}${path}`;
@@ -118,6 +143,26 @@ export function buildStoryJsonLd(meta: StoryMeta) {
         item: abs(c.path),
       })),
     });
+  }
+
+  if (meta.video) {
+    const v = meta.video;
+    const video: Record<string, unknown> = {
+      "@type": "VideoObject",
+      name: v.name,
+      description: v.description,
+      thumbnailUrl: v.thumbnailUrl.startsWith("http")
+        ? v.thumbnailUrl
+        : abs(v.thumbnailUrl),
+      uploadDate: v.uploadDate,
+    };
+    if (v.duration) video.duration = v.duration;
+    if (v.embedUrl) video.embedUrl = v.embedUrl;
+    if (v.contentUrl) {
+      video.contentUrl = v.contentUrl;
+      video.url = v.contentUrl;
+    }
+    graph.push(video);
   }
 
   return { "@context": "https://schema.org", "@graph": graph };

@@ -1,4 +1,5 @@
 import Container from "@/components/ui/Container";
+import StoryVideoFacade from "./StoryVideoFacade";
 
 export type StoryVideoProps = {
   /** YouTube video id only (not a full URL). Embedded via youtube-nocookie. */
@@ -9,11 +10,20 @@ export type StoryVideoProps = {
   intro?: string;
   /** Anchor id so a hero CTA can jump here. Default "watch". */
   id?: string;
+  /**
+   * Optional local poster (e.g. "/images/video-….jpg"). When set, the frame
+   * shows a crisp local poster + play button and loads the youtube-nocookie
+   * embed only after the visitor clicks (no YouTube request until then). Omit
+   * for the default direct lazy embed — existing usages are unaffected.
+   */
+  poster?: string;
 };
 
 /**
  * Optional privacy-friendly YouTube embed (youtube-nocookie, lazy-loaded), in a
- * slightly wider 900px column so the 16:9 frame breathes. No autoplay, ever.
+ * slightly wider 900px column so the 16:9 frame breathes. No autoplay before a
+ * user gesture. Pass `poster` for a click-to-play facade (no YouTube request
+ * until the click); omit it for the default direct lazy embed.
  */
 export default function StoryVideo({
   youtubeId,
@@ -21,6 +31,7 @@ export default function StoryVideo({
   heading = "See it for yourself",
   intro,
   id = "watch",
+  poster,
 }: StoryVideoProps) {
   return (
     <section id={id} aria-label={heading} className="scroll-mt-24">
@@ -37,15 +48,19 @@ export default function StoryVideo({
             </p>
           )}
           <div className="relative mt-8 aspect-video w-full overflow-hidden border border-lvinit-lightgray bg-lvinit-black">
-            <iframe
-              src={`https://www.youtube-nocookie.com/embed/${youtubeId}`}
-              title={title}
-              loading="lazy"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              referrerPolicy="strict-origin-when-cross-origin"
-              allowFullScreen
-              className="absolute inset-0 h-full w-full border-0"
-            />
+            {poster ? (
+              <StoryVideoFacade youtubeId={youtubeId} title={title} poster={poster} />
+            ) : (
+              <iframe
+                src={`https://www.youtube-nocookie.com/embed/${youtubeId}`}
+                title={title}
+                loading="lazy"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerPolicy="strict-origin-when-cross-origin"
+                allowFullScreen
+                className="absolute inset-0 h-full w-full border-0"
+              />
+            )}
           </div>
         </div>
       </Container>
