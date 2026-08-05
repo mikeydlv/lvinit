@@ -13,18 +13,28 @@ import {
 // MARKET WATCH — "Why aren't Las Vegas prices falling?" explainer.
 //
 // FACT DISCIPLINE (read before editing):
-// - Every number below is attributed and tied to a reporting period. The core
-//   local benchmark is Las Vegas Realtors' June 2026 report, as reported by the
-//   Las Vegas Review-Journal (an approved source). Mortgage rate is Freddie
-//   Mac's PMMS weekly average dated July 30, 2026.
+// - Every market statistic here comes from Las Vegas Realtors' (LVR) official
+//   June 2026 housing report, released July 7, 2026 (data through end of June).
+//   It is verified against TWO accessible full-text carriers of that release:
+//   Nevada Business Magazine and Fox5 Vegas (KVVU). No market stat rests on a
+//   paywalled article. Mortgage rate is Freddie Mac's PMMS weekly average dated
+//   July 30, 2026.
+// - Verified LVR figures: single-family median $490,000 (+1.0% YoY, matches the
+//   May record); condo/townhome median $292,000 (-4.3% YoY); 2,823 total sales;
+//   single-family sales +18.3% YoY; 7,147 single-family homes listed without
+//   offers (+2.2% YoY); ~3.5 months of supply; 78.5% of single-family homes sold
+//   within 60 days (down from 82.8% YoY). Quote: George Kypreos, LVR President.
+// - Do NOT reintroduce a "~30 days on market" figure or "supply up from under
+//   2 months a year earlier" — neither is in the primary source; LVR reports the
+//   % sold within 60 days, and single-family listings were up only ~2% YoY.
 // - Trackers disagree on the June median (single-family MLS vs. all-residential
-//   vs. portal estimates). That conflict is DISCLOSED in-article, not smoothed
-//   over — do not swap in a single "the median is X" claim.
+//   vs. automated estimates). That conflict is DISCLOSED in-article — do not
+//   swap in a single "the median is X" claim.
 // - The new-construction slowdown is referenced ONLY as a trend the RJ reported
-//   (that article is paywalled; headline accessible). No specific builder
-//   figures are asserted. Do not add invented permit/sales numbers.
-// - Reported broker reasoning is paraphrased and attributed, never presented as
-//   a fabricated direct quote. The pull quote is editorial (un-attributed).
+//   (that article is paywalled; headline accessible), clearly attributed, never
+//   as an asserted statistic. Do not add invented builder figures.
+// - The pull quote is editorial (un-attributed); the one named quote (Kypreos)
+//   is from the accessible LVR release.
 // ---------------------------------------------------------------------------
 
 const meta: StoryMeta = {
@@ -57,7 +67,7 @@ const faqJsonLd = {
       name: "Will Las Vegas home prices drop in 2026?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "As of the June 2026 reporting period, they hadn't. Las Vegas Realtors reported the median existing single-family home price at a record $490,000 — roughly 1% above a year earlier — even as inventory and days on market rose. Prices held because relatively few sellers were forced to cut, while buyer demand stayed solid. Market conditions can change; these figures reflect June 2026.",
+        text: "As of the June 2026 reporting period, they hadn't. Las Vegas Realtors reported the median existing single-family home price at a record $490,000 — up 1% from a year earlier — even as inventory rose modestly and homes took a bit longer to sell. Prices held because supply stayed relatively tight (about 3.5 months) and buyer demand stayed strong, with single-family sales up 18.3% year over year. Market conditions can change; these figures reflect June 2026.",
       },
     },
     {
@@ -65,7 +75,7 @@ const faqJsonLd = {
       name: "Is it a buyer's or seller's market in Las Vegas right now?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "As of June 2026 it was moving toward more balance. Supply had risen to roughly three to three-and-a-half months (up from well under two months a year earlier) and homes were taking about a month to sell, which gives buyers more choice and negotiating room than in 2021–2022 — but prices had not fallen, so it was not a clear buyer's market.",
+        text: "As of June 2026 it was moving toward more balance. Supply sat at about 3.5 months and homes took a little longer to sell (78.5% of single-family homes sold within 60 days, down from 82.8% a year earlier), which gives buyers more choice and negotiating room than in 2021–2022 — but prices had not fallen and supply was still short of a balanced five-to-six months, so it was not a clear buyer's market.",
       },
     },
     {
@@ -73,7 +83,7 @@ const faqJsonLd = {
       name: "What is the median home price in Las Vegas?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "It depends on how it's measured. Las Vegas Realtors reported the median existing single-family home at $490,000 for June 2026. Trackers that include condos and townhomes, or that use automated estimates, report lower figures for the same period. Always check the reporting period and whether a number is single-family only.",
+        text: "It depends on how it's measured. Las Vegas Realtors reported the median existing single-family home at $490,000 for June 2026, and the median condo/townhome at $292,000 for the same month. Trackers that blend those property types, or that use automated estimates instead of closed MLS sales, report lower figures. Always check the reporting period and whether a number is single-family only.",
       },
     },
   ],
@@ -87,17 +97,17 @@ const SNAPSHOT: Stat[] = [
   {
     value: "$490,000",
     label: "Median existing single-family price",
-    note: "June 2026 record high, ~1% YoY · Las Vegas Realtors",
+    note: "June 2026 record high, +1% YoY · Las Vegas Realtors",
   },
   {
     value: "~3.5 mo",
-    label: "Months of supply",
-    note: "June 2026, up from under 2 mo a year earlier",
+    label: "Months of housing supply",
+    note: "June 2026 · Las Vegas Realtors",
   },
   {
-    value: "~30 days",
-    label: "Typical time to sell",
-    note: "Mid-2026, up from ~24 days in June 2025",
+    value: "+18.3%",
+    label: "Single-family sales vs. a year ago",
+    note: "June 2026 vs. June 2025 · Las Vegas Realtors",
   },
   {
     value: "6.66%",
@@ -211,22 +221,26 @@ export default function WillLasVegasHomePricesDropPage() {
 
       <StorySection heading="What the June 2026 numbers actually say">
         <p className="text-body-lg text-lvinit-warmgray">
-          According to Las Vegas Realtors&rsquo; June 2026 report, as covered by
-          the <span className="text-lvinit-black">Las Vegas Review-Journal</span>,
-          the median price of an existing single-family home in Southern Nevada
-          was about <span className="text-lvinit-black">$490,000</span> — a record
-          high, and roughly 1% above where it sat a year earlier. That&rsquo;s not
-          a boom. But it&rsquo;s also not the decline a cooling market is supposed
-          to produce.
+          According to Las Vegas Realtors&rsquo; official June 2026 housing report
+          (released July 7, 2026), the median price of an existing single-family
+          home in Southern Nevada was{" "}
+          <span className="text-lvinit-black">$490,000</span> — matching the
+          all-time high set in May, and up 1.0% from a year earlier. That&rsquo;s
+          not a boom. But it&rsquo;s also not the decline a cooling market is
+          supposed to produce.
         </p>
         <p className="mt-5 text-body-lg text-lvinit-warmgray">
-          Underneath that flat-to-slightly-up price, the market genuinely did
-          loosen. Supply climbed to roughly three to three-and-a-half months in
-          June — up sharply from well under two months a year earlier — and homes
-          were taking around a month to sell, versus a little over three weeks in
-          June 2025. At the same time, sales activity was up: single-family home
-          sales rose about 18% year over year. More inventory, more days on
-          market, and more closings, all at once. Prices held anyway.
+          Underneath that flat-to-slightly-up price, the market did soften at the
+          edges. There were more homes to choose from than a year earlier —{" "}
+          <span className="text-lvinit-black">7,147 single-family homes listed
+          without offers</span> at the end of June, up about 2% year over year —
+          and they were taking a little longer to sell: 78.5% of single-family
+          homes sold within 60 days, down from 82.8% a year earlier. Yet supply
+          stayed relatively tight at roughly{" "}
+          <span className="text-lvinit-black">3.5 months</span>, and sales
+          actually jumped — single-family home sales were up 18.3% year over year,
+          part of 2,823 total closings. More listings and a slower clock, but more
+          buyers too. Prices held anyway.
         </p>
       </StorySection>
 
@@ -238,14 +252,16 @@ export default function WillLasVegasHomePricesDropPage() {
           <em> forced</em> selling, and demand didn&rsquo;t disappear.
         </p>
         <p className="mt-5 text-body-lg text-lvinit-warmgray">
-          Brokers interviewed by the Review-Journal pointed to a market where
-          many sellers set a number ahead of time and simply chose not to sell
-          unless they got close to it. When sellers can afford to wait, the
-          listings that would normally drag the median down — the motivated,
-          cut-the-price sales — never hit the board. A lot of today&rsquo;s owners
-          are also sitting on mortgages they locked in years ago at far lower
-          rates, which makes trading up an expensive move and gives them every
-          reason to stay put rather than list into a slower market.
+          Las Vegas Realtors President George Kypreos tied it to the basics in the
+          June report: &ldquo;Prices are staying at this level in part because of
+          our relatively tight housing supply and the strong demand for homes
+          here.&rdquo; My read on <em>why</em> supply stays tight even as listings
+          tick up: many sellers set a number ahead of time and simply won&rsquo;t
+          sell unless they get close to it, so the motivated, cut-the-price
+          listings that would normally drag the median down never hit the board.
+          A lot of today&rsquo;s owners are also sitting on mortgages they locked
+          in years ago at far lower rates, which makes moving expensive and gives
+          them every reason to stay put rather than list into a slower market.
         </p>
         <p className="mt-5 text-body-lg text-lvinit-warmgray">
           On the demand side, borrowing costs eased just enough to keep buyers
@@ -271,9 +287,13 @@ export default function WillLasVegasHomePricesDropPage() {
           figures for Las Vegas in the same month — and that&rsquo;s not anyone
           lying. The $490,000 figure is Las Vegas Realtors&rsquo; median for{" "}
           <span className="text-lvinit-black">existing single-family homes</span>{" "}
-          sold through the local MLS. Trackers that fold in condos and townhomes,
-          or that use automated valuation estimates instead of closed MLS sales,
-          land lower for the same period.
+          sold through the local MLS. For that same June, Las Vegas Realtors put
+          the median condo and townhome at{" "}
+          <span className="text-lvinit-black">$292,000</span>, down 4.3% from a
+          year earlier — so any tracker that blends condos and townhomes into one
+          &ldquo;all homes&rdquo; number, or that uses automated estimates instead
+          of closed MLS sales, lands lower for the same period, even though nothing
+          about the single-family market changed.
         </p>
         <p className="mt-5 text-body-lg text-lvinit-warmgray">
           None of them is &ldquo;the&rdquo; price. They&rsquo;re measuring
@@ -287,14 +307,14 @@ export default function WillLasVegasHomePricesDropPage() {
 
       <StorySection muted heading="Why this matters in Las Vegas">
         <p className="text-body-lg text-lvinit-warmgray">
-          Nationally, the story is similar in shape but not in degree. The U.S.
-          existing-home market has also held near record prices, but it&rsquo;s
-          been running on tighter inventory — closer to two-and-a-half to three
-          months of supply. Las Vegas has actually loosened <em>more</em> than
-          the country as a whole, which is why it can feel softer here even as the
-          price line stays flat. If you&rsquo;re relocating from California or a
-          tighter metro, that extra breathing room is real — you just won&rsquo;t
-          see it in the sticker price yet.
+          Local prices don&rsquo;t always move with the national headline — as
+          Kypreos put it, they don&rsquo;t always follow national trends, though
+          lately they have. A roughly 3.5-month supply is looser than the tight,
+          low-inventory conditions of a few years ago, but it&rsquo;s still short
+          of the five-to-six months that typically signals a balanced market. If
+          you&rsquo;re relocating from California or a tighter metro, that extra
+          breathing room is real — you just won&rsquo;t see it in the sticker
+          price yet.
         </p>
         <p className="mt-5 text-body-lg text-lvinit-warmgray">
           Where you shop changes the math, too. The valley isn&rsquo;t one market.
@@ -437,23 +457,45 @@ export default function WillLasVegasHomePricesDropPage() {
       </StorySection>
 
       <StorySection heading="Sources">
-        <ul className="space-y-2 text-body text-lvinit-warmgray">
+        <ul className="space-y-3 text-body text-lvinit-warmgray">
           <li>
-            Las Vegas Review-Journal, &ldquo;Why aren&rsquo;t home prices dropping
-            in Las Vegas?&rdquo; and related June 2026 housing coverage
-            (reporting Las Vegas Realtors data) —{" "}
+            <span className="text-lvinit-black">Las Vegas Realtors (LVR)</span> —
+            official June 2026 housing report, released July 7, 2026 (data through
+            end of June). The primary source for every local figure here: the
+            $490,000 single-family median (+1.0% YoY), the $292,000 condo/townhome
+            median (&minus;4.3% YoY), 2,823 total sales (single-family +18.3%
+            YoY), 7,147 single-family homes listed without offers (+2.2% YoY),
+            ~3.5 months of supply, and 78.5% of single-family homes selling within
+            60 days. Full release text:{" "}
             <a
-              href="https://www.reviewjournal.com/business/housing/"
+              href="https://nevadabusiness.com/2026/07/lvr-reports-local-home-prices-hovering-at-record-high/"
               className="text-lvinit-blue underline underline-offset-4"
               target="_blank"
               rel="noopener noreferrer"
             >
-              reviewjournal.com/business/housing
+              Nevada Business Magazine
             </a>
+            .
           </li>
           <li>
-            Freddie Mac Primary Mortgage Market Survey, 30-year fixed average,
-            week of July 30, 2026 —{" "}
+            <span className="text-lvinit-black">Fox5 Vegas (KVVU)</span> —
+            &ldquo;Report: Las Vegas home prices hover at record high in June as
+            sales climb,&rdquo; July 7, 2026. Independent local coverage
+            confirming the same LVR figures —{" "}
+            <a
+              href="https://www.fox5vegas.com/2026/07/07/report-las-vegas-home-prices-hover-record-high-june-sales-climb/"
+              className="text-lvinit-blue underline underline-offset-4"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              fox5vegas.com
+            </a>
+            .
+          </li>
+          <li>
+            <span className="text-lvinit-black">Freddie Mac</span> — Primary
+            Mortgage Market Survey, 30-year fixed average of 6.66% for the week of
+            July 30, 2026 —{" "}
             <a
               href="https://www.freddiemac.com/pmms"
               className="text-lvinit-blue underline underline-offset-4"
@@ -462,10 +504,14 @@ export default function WillLasVegasHomePricesDropPage() {
             >
               freddiemac.com/pmms
             </a>
+            .
           </li>
           <li>
-            Las Vegas Review-Journal, reporting on the 2026 slowdown in local
-            homebuilder sales (headline trend; full article subscriber-only) —{" "}
+            <span className="text-lvinit-black">Las Vegas Review-Journal</span> —
+            housing section, cited only for its reporting that local homebuilder
+            sales continued to slow through 2026. Used as attributed context, not
+            as a data source; that specific article is subscriber-only, and no
+            statistic in this piece relies on it —{" "}
             <a
               href="https://www.reviewjournal.com/business/housing/"
               className="text-lvinit-blue underline underline-offset-4"
@@ -474,6 +520,7 @@ export default function WillLasVegasHomePricesDropPage() {
             >
               reviewjournal.com/business/housing
             </a>
+            .
           </li>
         </ul>
         <p className="mt-6 text-caption text-lvinit-warmgray">
