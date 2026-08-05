@@ -52,6 +52,29 @@ export default function LocalGuides() {
         </Link>
 
         <div className="mt-16 grid grid-cols-1 sm:grid-cols-3 gap-8 border-t border-lvinit-lightgray pt-10">
+          {/* $500K buyer guide — real, linked story (video companion). Card image
+              reuses the article's existing local video poster. */}
+          <Link
+            href="/guides/what-500k-buys-in-las-vegas"
+            className="group block"
+          >
+            <ImagePlaceholder
+              src="/images/video-what-500k-gets-you-in-las-vegas.jpg"
+              label="What $500K Buys in Las Vegas"
+              aspect="aspect-[4/3]"
+            />
+            <p className="mt-3 text-caption uppercase tracking-wide text-lvinit-blue">
+              Buyer Guide
+            </p>
+            <h3 className="mt-1 font-display text-heading-sm font-bold text-lvinit-black transition-colors duration-200 ease-calm group-hover:text-lvinit-blue">
+              What $500K Buys in Las Vegas
+            </h3>
+            <p className="mt-2 text-caption text-lvinit-warmgray">
+              Three real home tours showing how different the options can be at
+              roughly the same budget.
+            </p>
+          </Link>
+
           {/* Four Seasons feature — real, linked story. TEMPORARY card image:
               the video-thumbnail art (has baked-in title text + unverified "$5B"
               claim); approved by Mikey as a stand-in. Swap for a clean drone
