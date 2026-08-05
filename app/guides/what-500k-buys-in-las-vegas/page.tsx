@@ -335,7 +335,16 @@ export default function What500KBuysPage() {
 
       <StorySection heading="Home 1 — Southwest, with a pool and no HOA">
         <p className="text-body-lg text-lvinit-warmgray">
-          The first stop is on Julesburg Drive in Blue Diamond Ranch, out in{" "}
+          The first stop is on{" "}
+          <a
+            href="https://mikey.scofieldgroup.com/search/detail/267886642?s[mlsId][0]=2803533&s[mainInputSearch]=false"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-lvinit-blue underline underline-offset-4 decoration-transparent hover:decoration-lvinit-blue"
+          >
+            Julesburg Drive in Blue Diamond Ranch
+          </a>
+          , out in{" "}
           <Link
             href="/neighborhoods/southwest-las-vegas"
             className="text-lvinit-blue underline underline-offset-4 decoration-transparent hover:decoration-lvinit-blue"
@@ -369,8 +378,16 @@ export default function What500KBuysPage() {
       <StorySection heading="Home 2 — a high-rise near the Strip">
         <p className="text-body-lg text-lvinit-warmgray">
           The second home trades the yard for elevation. It&rsquo;s a residence on
-          the 26th floor of The Martin, the high-rise on Dean Martin Drive just
-          off the Strip. Floor-to-ceiling windows pull in city, mountain, and
+          the 26th floor of The Martin, the{" "}
+          <a
+            href="https://mikey.scofieldgroup.com/search/detail/266543823?s[mlsId][0]=2795570&s[mainInputSearch]=false"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-lvinit-blue underline underline-offset-4 decoration-transparent hover:decoration-lvinit-blue"
+          >
+            high-rise on Dean Martin Drive
+          </a>{" "}
+          just off the Strip. Floor-to-ceiling windows pull in city, mountain, and
           Strip views; the layout is open, with a spa-inspired primary bath and a
           second bedroom that works just as well as an office or guest room.
         </p>
@@ -396,8 +413,17 @@ export default function What500KBuysPage() {
 
       <StorySection heading="Home 3 — more room in Spring Valley">
         <p className="text-body-lg text-lvinit-warmgray">
-          The third home, on West Cherokee Avenue in the Villa Bonita Oeste pocket
-          of Spring Valley, makes the case for space. It&rsquo;s the largest of the
+          The third home, on{" "}
+          <a
+            href="https://mikey.scofieldgroup.com/search/detail/260346132?s[mlsId][0]=2759018&s[mainInputSearch]=false"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-lvinit-blue underline underline-offset-4 decoration-transparent hover:decoration-lvinit-blue"
+          >
+            West Cherokee Avenue
+          </a>{" "}
+          in the Villa Bonita Oeste pocket of Spring Valley, makes the case for
+          space. It&rsquo;s the largest of the
           three inside and out — the biggest interior footprint and the biggest
           lot, a corner parcel — and it still has a private in-ground pool. Inside
           there&rsquo;s an open layout with a kitchen island, a gas fireplace,
