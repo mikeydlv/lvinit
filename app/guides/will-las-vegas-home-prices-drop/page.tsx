@@ -422,6 +422,17 @@ export default function WillLasVegasHomePricesDropPage() {
           reaches resale prices too. None of that is a forecast; it&rsquo;s the
           short list I&rsquo;m actually tracking.
         </p>
+        <p className="mt-5 text-body-lg text-lvinit-warmgray">
+          Update: the July 2026 report is in, and the median did finally give
+          a little ground — read{" "}
+          <Link
+            href="/guides/las-vegas-home-prices-july-2026"
+            className="text-lvinit-blue underline underline-offset-4 decoration-transparent hover:decoration-lvinit-blue"
+          >
+            what the July numbers actually show
+          </Link>{" "}
+          for the updated data.
+        </p>
       </StorySection>
 
       <StorySection heading="Mikey's local take">
