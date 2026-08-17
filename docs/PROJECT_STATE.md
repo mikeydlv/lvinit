@@ -67,6 +67,8 @@ app/
   neighborhoods/downtown-arts-district/page.tsx  /neighborhoods/downtown-arts-district — walkable district guide (Story Page system)
   neighborhoods/southwest-las-vegas/page.tsx     /neighborhoods/southwest-las-vegas — fastest-growing side (Story Page system)
   guides/what-500k-buys-in-las-vegas/page.tsx    /guides/what-500k-buys-in-las-vegas — video-first buyer guide (Story Page system; first /guides/ route)
+  guides/will-las-vegas-home-prices-drop/page.tsx  /guides/will-las-vegas-home-prices-drop — Market Watch, June 2026 LVR data (Story Page system)
+  guides/las-vegas-home-prices-july-2026/page.tsx  /guides/las-vegas-home-prices-july-2026 — Market Watch, July 2026 LVR data (Story Page system)
 ```
 
 **Path alias:** `@/*` → project root (see `tsconfig.json`).
