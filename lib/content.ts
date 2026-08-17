@@ -154,12 +154,15 @@ export const guides: Guide[] = [
       "Both are good answers. They're just good answers to different questions.",
   },
   {
-    slug: "cost-of-living-2026",
-    title: "What It Actually Costs to Live in Las Vegas in 2026",
-    dek: "A real budget breakdown, neighborhood by neighborhood.",
-    byline: "LVINIT Editorial",
-    date: "May 2026",
-    category: "Moving Here",
+    slug: "las-vegas-home-prices-july-2026",
+    title:
+      "Las Vegas Home Prices Pulled Back From Their Record High in July 2026",
+    dek: "LVR's July 2026 report shows the median single-family price slipped to $480,000, down 2% from the record set in May and June — the honest read on what changed and what didn't.",
+    byline: "Mikey Del Rosario",
+    date: "August 2026",
+    category: "Market Watch",
+    image: "/images/guide-las-vegas-home-prices-july-2026.webp",
+    href: "/guides/las-vegas-home-prices-july-2026",
   },
   {
     slug: "downtown-arts-district-guide",
