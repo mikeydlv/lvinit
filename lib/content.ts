@@ -98,10 +98,10 @@ export type VideoItem = {
   youtubeId?: string;
 };
 
-// The featured slot and the first secondary entry are real, published videos.
-// The remaining smaller entries are still PLACEHOLDERS — titles illustrate the
-// "answer a real doubt" direction from Doc 03 §3.9; replace with real produced
-// content before launch.
+// The featured slot and two of the secondary entries are real, published
+// videos. The remaining smaller entry ("heat") is still a PLACEHOLDER — its
+// title illustrates the "answer a real doubt" direction from Doc 03 §3.9;
+// replace with real produced content before launch.
 export const videos: VideoItem[] = [
   {
     id: "moving-to-las-vegas-2026-choose-the-area",
@@ -116,7 +116,12 @@ export const videos: VideoItem[] = [
     duration: "12:16",
   },
   { id: "heat", title: "What nobody tells you about the heat", duration: "4:47" },
-  { id: "rent-vs-buy", title: "Renting first vs. buying first — what I tell my clients", duration: "8:03" },
+  {
+    id: "rent-first-or-buy-first-las-vegas",
+    youtubeId: "2rboWkJ9j48",
+    title: "Rent First or Buy First When Moving to Las Vegas?",
+    duration: "8:08",
+  },
 ];
 
 export type Guide = {
