@@ -69,6 +69,7 @@ app/
   guides/what-500k-buys-in-las-vegas/page.tsx    /guides/what-500k-buys-in-las-vegas — video-first buyer guide (Story Page system; first /guides/ route)
   guides/will-las-vegas-home-prices-drop/page.tsx  /guides/will-las-vegas-home-prices-drop — Market Watch, June 2026 LVR data (Story Page system)
   guides/las-vegas-home-prices-july-2026/page.tsx  /guides/las-vegas-home-prices-july-2026 — Market Watch, July 2026 LVR data (Story Page system)
+  guides/summerlin-vs-henderson/page.tsx         /guides/summerlin-vs-henderson — honest comparison guide, no invented stats (Story Page system)
 ```
 
 **Path alias:** `@/*` → project root (see `tsconfig.json`).
@@ -88,6 +89,7 @@ app/
 | `/neighborhoods/downtown-arts-district` | Neighborhood guide (pillar) | Live | First pillar built on the **Story Page system**; real Mikey Arts District photography (Main St hero + 3 inline figures); honest "who it's / isn't for" + practical beats; cross-links the Summerlin/Henderson/NLV guides via `RelatedStories`; Article + Breadcrumb JSON-LD; hero = OG image |
 | `/neighborhoods/southwest-las-vegas` | Area guide (pillar) | Live | Story Page system; real Mikey UnCommons/The Bend photography (2026-07-16 shoot) — street hero + 4 inline figures; informal-boundary + unincorporated-Clark-County framing; "My honest take" Local's Note; verified development status (open vs announced); Article + Breadcrumb JSON-LD; hero = OG image |
 | `/guides/what-500k-buys-in-las-vegas` | Buyer guide (video companion) | Live | First `/guides/` route; Story Page system; companion to the "$500K" home-tour video (id `Tzxid_nM2nA`, via `StoryVideo`); photoless editorial hero (OG = existing local video poster `video-what-500k-gets-you-in-las-vegas.jpg`); page-local responsive comparison (mobile cards / desktop table); Article + Breadcrumb + **VideoObject** JSON-LD; breadcrumb is Home → article only (no `/guides` index exists) |
+| `/guides/summerlin-vs-henderson` | Comparison guide | Live | Story Page system; honest, qualitative comparison of the Summerlin and Henderson pillar guides — no stats cited (the `neighborhoods[]` metrics in `lib/content.ts` are explicitly placeholder, not verified, so none are used); hero + card image reuse the real Summerlin Fox Hill Park drone photo (no real Henderson photography exists yet); Article + Breadcrumb JSON-LD; breadcrumb is Home → article only; cross-linked from both the Summerlin and Henderson pillar pages and the homepage `LocalGuides` card |
 | `/search` | IDX search | Live | Matrix IDX embed `idx=3652dd5`; do not modify embed behavior without instruction |
 | `/contact` | Contact | Live | ContactForm → `/api/contact` (Resend) with mailto fallback |
 | `/api/contact` | Route handler | Live | Returns 503 until `RESEND_API_KEY` is set, so no fake service ships |
@@ -420,6 +422,17 @@ links flowing both up (feature → guide → homepage) and down (guide → featu
   used only as an explicitly-labeled **valley-wide** anchor. Article + Breadcrumb
   JSON-LD; hero doubles as the OG image; sitemap entry. Wired from the homepage
   discovery list and the Arts District guide's related cluster.
+- **Summerlin vs. Henderson** comparison guide — the first real article behind
+  a previously-placeholder homepage guide card. Honest, qualitative comparison
+  built entirely from the two live pillar guides (master-plan structure vs.
+  Henderson's range of communities, commute/location, community character,
+  housing stock, and an explicit "where each one falls short" beat); asserts
+  no stats — the `neighborhoods[]` placeholder metrics in `lib/content.ts` are
+  deliberately not cited. Hero and homepage card reuse the real Summerlin Fox
+  Hill Park drone photo (no real Henderson photography exists yet). Story Page
+  system; Article + Breadcrumb JSON-LD; cross-linked from both the Summerlin
+  and Henderson pillar pages (new "Comparing X to Y?" blocks) and the homepage
+  `LocalGuides` card; sitemap entry.
 - Live IDX search page (Matrix / GLVAR).
 - Contact form with Resend handler + mailto fallback + GA4 lead event.
 - GA4 analytics scaffolding (opt-in via env var).
@@ -451,10 +464,14 @@ links flowing both up (feature → guide → homepage) and down (guide → featu
      `RelatedStories`. Natural future children: an UnCommons feature and a
      Mountain's Edge / Rhodes Ranch / Southern Highlands community guide — all
      named in the guide's copy but deliberately **not** linked (no pages yet).
+6. **Summerlin vs. Henderson comparison:** `/guides/summerlin-vs-henderson` —
+   a standalone comparison guide, not a child of either pillar. Cross-linked
+   both directions with the Summerlin and Henderson pillar guides, plus
+   `/guides/what-500k-buys-in-las-vegas` as tangential reading.
 
-The remaining homepage guide/video cards (Summerlin vs. Henderson, Cost of
-Living, Surviving Your First Vegas Summer, and the four video posters) are
-placeholders that do not yet resolve to pages.
+The remaining homepage guide/video cards (Cost of Living, Surviving Your First
+Vegas Summer, and the four video posters) are placeholders that do not yet
+resolve to pages.
 
 ---
 
@@ -509,10 +526,11 @@ Run through this every time a new page ships, in order:
 
 - Neighborhood lifestyle features in the parade mold (events, parks, trails,
   local traditions) — one strong cluster child per pillar neighborhood.
-- The four homepage guides currently shown as placeholder cards need real
-  articles before their cards should link anywhere:
-  *Summerlin vs. Henderson*, *What It Costs to Live in Las Vegas in 2026*,
-  *A Local's Guide to the Downtown Arts District*, *Surviving Your First Vegas Summer*.
+- Two homepage guide cards still need real articles before they should link
+  anywhere: *What It Costs to Live in Las Vegas in 2026* and *Surviving Your
+  First Vegas Summer*. (*Summerlin vs. Henderson* and *A Local's Guide to the
+  Downtown Arts District* are both real, linked pages now — this list was
+  stale.)
 - Real produced videos to replace the four placeholder posters (topics already
   framed around real doubts: affordability, heat, rent-vs-buy, schools).
 - A **Relocation Hub** ("Moving to Las Vegas") landing destination for the
@@ -560,7 +578,12 @@ Placeholder content that must be replaced before it can be considered "done"
 - **The "27" emotional numeral** (`MovingToLasVegas`) — needs a real, checkable
   commute figure.
 - **Placeholder guide + video cards** (`LocalGuides` secondary, `Videos`) — need
-  real articles/videos and real destination pages before they link out.
+  real articles/videos and real destination pages before they link out. Note:
+  `LocalGuides.tsx` now renders every `guides[]` entry with a real `href`
+  automatically (`guides.filter((g) => g.href)`), so a guide card starts
+  appearing on its own the moment its `href` is set — no component change
+  needed when the remaining two guides (Cost of Living, Surviving Your First
+  Vegas Summer) ship.
 - **Neutral photo placeholders** in `/public/images/` — replace in place with
   real Mikey photography (keep filenames).
 - **Henderson hero (Option B)** — the page ships with a bright text hero and no

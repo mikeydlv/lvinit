@@ -148,10 +148,14 @@ export const guides: Guide[] = [
     title: "Summerlin vs. Henderson: Where Should You Actually Move?",
     dek: "Two of the city's most-recommended suburbs, compared honestly — schools, commute, and the tradeoffs nobody puts in a brochure.",
     byline: "Mikey Del Rosario",
-    date: "June 2026",
+    date: "August 2026",
     category: "Comparisons",
     pullQuote:
       "Both are good answers. They're just good answers to different questions.",
+    // Real, already-live Mikey photography (Fox Hill Park / Red Rock drone
+    // shot) — same asset used on the article hero and the Summerlin guide.
+    image: "/images/hero/summerlin-fox-hill-park-red-rock-aerial-drone.webp",
+    href: "/guides/summerlin-vs-henderson",
   },
   {
     slug: "las-vegas-home-prices-july-2026",
