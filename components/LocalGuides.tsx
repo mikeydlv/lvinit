@@ -4,9 +4,12 @@ import ImagePlaceholder from "./ui/ImagePlaceholder";
 import { guides } from "@/lib/content";
 
 export default function LocalGuides() {
-  // Two placeholder guide cards follow the real Four Seasons feature card below,
-  // keeping the row at three without shipping an extra dead placeholder.
-  const rest = guides.slice(1, 3);
+  // Real, published guide cards follow the real Four Seasons feature card
+  // below. Only guides with a real `href` render as links; guides without one
+  // (still placeholders) are deliberately excluded here rather than shipped as
+  // a non-linked "dead" card — see the `guide-${slug}.jpg` fallback used below
+  // for any that do get shown without a curated real image.
+  const rest = guides.filter((g) => g.href);
 
   return (
     <section id="guides" aria-labelledby="guides-heading" className="py-16 sm:py-24">

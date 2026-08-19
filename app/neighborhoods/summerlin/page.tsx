@@ -210,6 +210,34 @@ export default function SummerlinPage() {
           </div>
         </Container>
 
+        {/* Cross-link to the direct comparison guide (real link only) */}
+        <Container className="pb-20 sm:pb-28">
+          <Link
+            href="/guides/summerlin-vs-henderson"
+            className="group block border-t border-lvinit-lightgray pt-12"
+          >
+            <p className="text-caption uppercase tracking-wide text-lvinit-blue">
+              Comparing Summerlin to Henderson?
+            </p>
+            <h2 className="mt-3 font-display text-heading-sm font-bold text-lvinit-black transition-colors duration-200 ease-calm group-hover:text-lvinit-blue">
+              Summerlin vs. Henderson: Where Should You Actually Move?
+            </h2>
+            <p className="mt-3 max-w-xl text-body text-lvinit-warmgray">
+              The honest side-by-side — master-plan culture, commute, and who
+              actually fits each one, without a brochure in sight.
+            </p>
+            <span className="mt-5 inline-flex items-center gap-2 text-body font-medium text-lvinit-blue">
+              Read the comparison
+              <span
+                aria-hidden="true"
+                className="transition-transform duration-200 ease-calm group-hover:translate-x-1"
+              >
+                →
+              </span>
+            </span>
+          </Link>
+        </Container>
+
         {/* Gentle contact CTA — not a brokerage hard sell */}
         <section className="bg-lvinit-lightgray/50">
           <Container className="py-16 text-center sm:py-20">
