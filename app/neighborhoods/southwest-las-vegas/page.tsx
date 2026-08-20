@@ -9,65 +9,74 @@ import {
   StoryPullQuote,
   StoryGallery,
 } from "@/components/story";
+import {
+  AreaQuickFacts,
+  LVINITMap,
+  LocalsNote,
+  AreaCommunities,
+  DevelopmentWatch,
+  ComparisonBar,
+  AreaVideoSlot,
+  AreaFAQ,
+  AreaSources,
+} from "@/components/area";
+import {
+  quickFacts,
+  mapAsset,
+  mapPlaces,
+  communities,
+  developmentProjects,
+  summerlinComparison,
+  areaVideo,
+  faqItems,
+  sources,
+} from "@/lib/areas/southwest-las-vegas";
 
 // ---------------------------------------------------------------------------
-// SOUTHWEST LAS VEGAS — area guide, built on the Story Page system.
+// SOUTHWEST LAS VEGAS — the first full LVINIT AREA GUIDE.
 //
-// ROUTE: a place people live, so it sits on the place spine (/neighborhoods/…)
-// alongside Summerlin, Henderson, North Las Vegas, and the Arts District.
+// This page is the prototype for the area-guide system: Summerlin, Henderson,
+// Centennial Hills, Skye Canyon, Lake Las Vegas and North Las Vegas should be
+// buildable from the same blocks without copying this file's prose. The blocks
+// live in components/area/; the content lives in lib/areas/. Reuse the
+// structure, not the storytelling — each area's guide should lead with whatever
+// that area's actual story is.
 //
-// It is deliberately NOT added to the neighborhoods[] array in lib/content.ts —
-// same call as North Las Vegas. That array drives the homepage Compare tool,
-// which needs median price / walk score / commute / school figures we do not
-// have verified for this area. Adding it would surface fabricated metrics.
-// It's linked directly from the homepage discovery list instead.
+// ROUTE: unchanged. This page already existed at /neighborhoods/southwest-las-vegas
+// as a shorter editorial guide, and four other pages link to it (the $500K
+// guide, both market-watch guides, and the Arts District guide) plus the
+// homepage discovery list and the sitemap. It was rebuilt in place rather than
+// forked to a new URL, so every inbound link and the canonical stay intact. The
+// verified facts and the photography from the original are carried forward.
 //
-// PHOTOGRAPHY: all real, Mikey-owned frames, shot 2026-07-16 ~9:45–10:15am
-// (Samsung, JPG-sourced). Global footer credit covers them — no per-image
-// credit. Explicitly NOT the North Las Vegas treatment, which carries a visible
-// Shutterstock credit because that hero is licensed, not Mikey's.
-// Kept honest midday July daylight — no golden-hour regrade.
+// STILL DELIBERATELY NOT in the neighborhoods[] array in lib/content.ts — same
+// call as North Las Vegas. That array feeds the homepage Compare tool, which
+// needs a median price, walk score, commute and school rating. None of those
+// exist for an area with no defensible boundary, and inventing them is exactly
+// what this page spends its length arguing against.
 //
-// FACTS — every claim below is sourced; see the research notes:
-//  · "Southwest Las Vegas" is an informal, colloquial term with no legal
-//    boundary; the area is overwhelmingly unincorporated Clark County, mapping
-//    mainly onto the towns of Enterprise and Spring Valley.
-//  · Enterprise grew ~60% 2010–2023 vs ~20% valley-wide (Clark County figures
-//    via Las Vegas Review-Journal); ~46 sq mi; growth driven by developable land.
-//  · West of I-15 the beltway is county-maintained CC-215 (Bruce Woodbury
-//    Beltway, renamed 2004), NOT Interstate 215.
-//  · Blue Diamond Rd = SR-160.
-//  · UnCommons: 40 acres at Durango just south of the 215, across from Durango
-//    Casino & Resort; 4 office buildings (>335,000 sq ft) open and effectively
-//    fully leased; retail/dining, Vestra apartments, The Quad, Kiln coworking
-//    all OPEN. Domus (~455 units) ANNOUNCED. A 5th office building was
-//    ANNOUNCED May 2026, tenant-ready target Q1 2028, no construction start
-//    date given. NOTE: Matter's own site advertises 500,000 sq ft office and
-//    800 residential units — those are FULL BUILD-OUT TARGETS, not built. Do
-//    not restate them as existing. Unit counts conflict across sources
-//    (385 vs 352) so no precise count is stated.
-//  · The Bend: Sunset Rd & Durango Dr (NOT Blue Diamond/Fort Apache), by Dapper
-//    Companies, across from the IKEA, roughly 10 acres. Substantially OPEN.
-//    Square footage conflicts across sources (113k vs 157k) so it is not stated.
-//    Killer Whale Creamery is the only tenant the site marks "coming soon."
-//  · The $490,000 June 2026 median is Las Vegas REALTORS' SOUTHERN NEVADA
-//    MLS-WIDE figure for existing single-family homes — NOT a Southwest
-//    submarket median. It is labeled as such and must stay that way. No
-//    Southwest-specific median is published anywhere I could verify.
-//  · Car-dependence/walkability is framed as Mikey's firsthand observation, not
-//    a cited statistic — no authoritative source quantifies it, and no Walk
-//    Score is asserted.
+// PHOTOGRAPHY: all real, Mikey-owned frames from the 2026-07-16 Southwest shoot
+// (~9:45–10:15am, Samsung, JPG-sourced). Honest midday July daylight, no
+// golden-hour regrade. Global footer credit covers them — no per-image credit,
+// and explicitly not the North Las Vegas licensed-image treatment.
 //
-// FAIR HOUSING: no school ratings, no crime claims, no demographic
-// characterization of residents, no "great for families"-type steering. The
-// population figures used are total counts / growth rates only.
+// THE MAP is a generated asset, not a drawing: scripts/generate-area-map.mjs
+// projects real WGS84 coordinates. See that file for the accuracy model and for
+// why Enterprise and Spring Valley are labeled rather than outlined.
+//
+// FACTS: every claim is sourced. The fact-check log lives at the top of
+// lib/areas/southwest-las-vegas.tsx — read it before editing any figure.
+//
+// FAIR HOUSING: no school ratings, no crime or safety claims, no demographic
+// characterization of residents, no "great for families"-style steering. Fit is
+// expressed through housing stock and location only.
 // ---------------------------------------------------------------------------
 
 const meta: StoryMeta = {
-  title: "Living in Southwest Las Vegas: What It's Actually Like | LVINIT",
-  headline: "Living in Southwest Las Vegas",
+  title: "Southwest Las Vegas: Neighborhoods, Map & Local Guide | LVINIT",
+  headline: "Southwest Las Vegas",
   description:
-    "An honest local guide to Southwest Las Vegas — the valley's fastest-growing residential side. Newer housing, easy 215 access, and a car-dependent life that's still filling in.",
+    "Understand Southwest Las Vegas like a local — neighborhoods, a real map, where Enterprise fits, housing, development, and what the area actually feels like.",
   path: "/neighborhoods/southwest-las-vegas",
   image: "/images/hero/southwest-las-vegas-uncommons-street.webp",
   imageWidth: 2400,
@@ -75,6 +84,7 @@ const meta: StoryMeta = {
   imageAlt:
     "A quiet street through the UnCommons mixed-use campus in southwest Las Vegas at mid-morning, with three- and four-story offices housing BDO and CBRE, young shade trees, and desert landscaping along the curb.",
   datePublished: "2026-07-16",
+  dateModified: "2026-08-20",
   author: "Mikey Del Rosario",
   breadcrumbs: [
     { name: "Home", path: "/" },
@@ -84,51 +94,58 @@ const meta: StoryMeta = {
 
 export const metadata: Metadata = buildStoryMetadata(meta);
 
+const linkClass =
+  "text-lvinit-blue underline underline-offset-4 decoration-transparent hover:decoration-lvinit-blue";
+
 export default function SouthwestLasVegasPage() {
   return (
     <StoryPage
       meta={meta}
       hero={{
-        category: "Las Vegas Valley · An Area Guide",
-        headline: "Living in Southwest Las Vegas",
+        category: "Las Vegas Area Guide",
+        headline: "Southwest Las Vegas",
         subheadline:
-          "Newer than most of the valley, easier to get out of, and still deciding what it wants to be. The honest read on the fastest-growing side of Las Vegas.",
+          "Not one neighborhood. Not one master plan. And that's what makes it interesting.",
         image: "/images/hero/southwest-las-vegas-uncommons-street.webp",
         imageAlt:
           "A quiet street through the UnCommons mixed-use campus in southwest Las Vegas at mid-morning, with three- and four-story offices housing BDO and CBRE, young shade trees, and desert landscaping along the curb.",
         backLink: { label: "Las Vegas neighborhoods", href: "/#neighborhoods" },
-        ctas: [{ label: "Search homes", href: "/search", variant: "tertiary" }],
+        ctas: [{ label: "See the map", href: "#map", variant: "tertiary" }],
       }}
       relatedStories={{
-        heading: "Compare it to the rest of the valley",
+        heading: "Read these next",
         intro:
-          "Southwest is the newer, more spread-out option. If you're weighing it against somewhere with more of a center — or more of a history — these are the honest guides to the alternatives.",
+          "Southwest is the newer, more spread-out answer. If you're weighing it against somewhere with more of a center — or trying to work out what your money buys before you pick a side of town — start here.",
         columns: 3,
         stories: [
           {
             name: "Summerlin",
             href: "/neighborhoods/summerlin",
-            category: "Neighborhood guide",
+            category: "Area guide",
             dek: "The master-planned west side against Red Rock — the comparison most Southwest buyers are actually making.",
           },
           {
             name: "Henderson",
             href: "/neighborhoods/henderson",
-            category: "Neighborhood guide",
-            dek: "The valley's widest range of communities, from new master-plans to a historic downtown and the hillside.",
+            category: "Area guide",
+            dek: "An incorporated city with the valley's widest range of communities, from new master plans to a historic downtown.",
           },
           {
-            name: "Downtown Arts District",
-            href: "/neighborhoods/downtown-arts-district",
-            category: "Neighborhood guide",
-            dek: "The walkable, mural-covered counterpoint — everything the suburbs deliberately aren't.",
+            name: "What $500K Actually Buys in Las Vegas",
+            href: "/guides/what-500k-buys-in-las-vegas",
+            category: "Buyer guide",
+            dek: "Three real homes at the same price, including a Southwest single-family with a pool — and the tradeoffs between them.",
           },
         ],
       }}
       ctas={{
-        heading: "Trying to figure out if Southwest is your side of town?",
+        heading: "Thinking about Southwest?",
         body:
-          "Tell me how you actually spend a week — where you work, what you drive, what you want within ten minutes — and I'll tell you honestly whether this area fits or whether you'd be happier somewhere else.",
+          "Tell me what you're looking for and what matters most about where you live. I'll point you toward the Southwest neighborhoods I'd start with — even if that means I'd tell you to look somewhere else.",
+        buttons: [
+          { label: "Ask Mikey about Southwest", href: "/contact", variant: "primary" },
+          { label: "Help me compare areas", href: "/#compare", variant: "secondary" },
+        ],
         footnote: (
           <>
             Weighing the west side instead?{" "}
@@ -143,101 +160,314 @@ export default function SouthwestLasVegasPage() {
         ),
       }}
     >
+      <AreaQuickFacts facts={quickFacts} id="orientation" />
+
       <StoryLede
-        kicker="Las Vegas Valley · An Area Guide"
+        kicker="Las Vegas Area Guide"
         lead="Drive the southwest valley on a weekday morning and you'll notice the same thing I do: almost none of it looks old. The walls are still tan, the trees are still short, and every few blocks there's a corner that was dirt a couple of years ago and is now framing lumber. This is the part of Las Vegas that is still being finished."
       >
         <p className="mt-6 text-body-lg text-lvinit-warmgray">
-          That&rsquo;s the honest starting point. Southwest Las Vegas isn&rsquo;t
-          a place with a center you can walk to and a history you can point at.
-          It&rsquo;s a big, newer, fast-filling stretch of the valley organized
-          around one very good piece of infrastructure — the 215 — and it asks
-          you to drive for basically everything. Whether that&rsquo;s a fair
-          trade is the whole question, and it&rsquo;s a different answer than
-          you&rsquo;d get from the{" "}
-          <Link
-            href="/neighborhoods/summerlin"
-            className="text-lvinit-blue underline underline-offset-4 decoration-transparent hover:decoration-lvinit-blue"
-          >
-            Summerlin
-          </Link>{" "}
-          or{" "}
-          <Link
-            href="/neighborhoods/downtown-arts-district"
-            className="text-lvinit-blue underline underline-offset-4 decoration-transparent hover:decoration-lvinit-blue"
-          >
-            Arts District
-          </Link>{" "}
-          guides.
+          It&rsquo;s also the part people get most confused about, and the
+          confusion starts with the name.{" "}
+          <span className="text-lvinit-black">
+            &ldquo;Southwest Las Vegas&rdquo; isn&rsquo;t a place any government
+            recognizes.
+          </span>{" "}
+          It&rsquo;s shorthand — for master-planned communities and 1990s
+          subdivisions, larger-lot pockets and apartment corridors, finished
+          streets and half-built ones, all sitting next to each other across a
+          big piece of the valley. This guide is my attempt to tell you what
+          locals actually mean by it, where the lines roughly fall, and what
+          you&rsquo;d be signing up for.
         </p>
       </StoryLede>
 
-      <StorySection heading="Where &ldquo;Southwest&rdquo; actually is">
+      {/* ---------------------------------------------------------------- */}
+      {/* THE MAP                                                           */}
+      {/* ---------------------------------------------------------------- */}
+
+      <LVINITMap
+        id="map"
+        heading="Southwest Las Vegas Map"
+        question="Where exactly is Southwest Las Vegas?"
+        src={mapAsset.src}
+        alt={mapAsset.alt}
+        width={mapAsset.width}
+        height={mapAsset.height}
+        intro={
+          <>
+            <p className="text-body-lg text-lvinit-warmgray">
+              There isn&rsquo;t an official answer, so this is mine. The dashed
+              outline is the area essentially everyone means when they say
+              Southwest: roughly Russell Road down past Blue Diamond, and
+              Hualapai across to about Decatur, with the 215 Beltway curving
+              through the middle of it.
+            </p>
+            <p className="mt-5 text-body-lg text-lvinit-warmgray">
+              The lighter dotted outline is the part people argue about —
+              Southern Highlands down against I-15, and the overlap with Spring
+              Valley up north. I&rsquo;ve drawn both because pretending there
+              was one clean boundary would be the single most misleading thing
+              this page could do.
+            </p>
+          </>
+        }
+        caption="Southwest Las Vegas, as locals generally use the term. A schematic diagram — accurate in its relationships, not a survey."
+        places={mapPlaces}
+        disclaimer={
+          <>
+            Both outlines are LVINIT&rsquo;s reading of how the term is used
+            locally. Neither is a government boundary, and nobody should treat
+            them as one. Enterprise and Spring Valley <em>are</em> real
+            administrative areas with real Clark County boundaries — but because
+            we haven&rsquo;t ingested the county&rsquo;s official land-use
+            geometry, they&rsquo;re labeled on this map rather than outlined.
+            Drawing them by hand would be inventing a legal line. For the actual
+            boundaries, go to{" "}
+            <a
+              href="https://www.clarkcountynv.gov/government/departments/comprehensive_planning_department/divisions/advanced_planning_division/enterprise"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={linkClass}
+            >
+              Clark County Comprehensive Planning
+            </a>
+            .
+          </>
+        }
+      />
+
+      {/* ---------------------------------------------------------------- */}
+      {/* WHERE IS IT                                                       */}
+      {/* ---------------------------------------------------------------- */}
+
+      <StorySection id="where" heading="Where Southwest Las Vegas actually is">
         <p className="text-body-lg text-lvinit-warmgray">
-          First, a clarification that saves people a lot of confusion:{" "}
-          <span className="text-lvinit-black">
-            &ldquo;Southwest Las Vegas&rdquo; isn&rsquo;t an official place.
-          </span>{" "}
-          There&rsquo;s no city limit, no legal boundary, no line on a county map
-          that says where it starts and stops. It&rsquo;s a term locals and
-          agents use loosely, and two people using it can easily mean two
-          different chunks of the valley.
+          Start with the thing that saves people the most confusion. There is no
+          city limit, no legal boundary, and no line on a county map that says
+          where Southwest starts and stops. It&rsquo;s a term locals and agents
+          use loosely, and two people using it can easily mean two different
+          chunks of the valley. Nobody is going to correct you, because
+          there&rsquo;s nothing to correct you against.
         </p>
-        <p className="mt-5 text-body-lg text-lvinit-warmgray">
-          Here&rsquo;s the part that actually matters when you&rsquo;re buying:
-          most of what people call Southwest Las Vegas isn&rsquo;t in the City of
+
+        <h3 className="mt-10 font-display text-subhead font-bold text-lvinit-black">
+          It&rsquo;s mostly not in the City of Las Vegas
+        </h3>
+        <p className="mt-4 text-body-lg text-lvinit-warmgray">
+          Here&rsquo;s the part that actually matters when you&rsquo;re buying.
+          Most of what people call Southwest Las Vegas isn&rsquo;t in the City of
           Las Vegas at all. It&rsquo;s{" "}
           <span className="text-lvinit-black">unincorporated Clark County</span>,
-          falling mainly across the county towns of{" "}
+          falling mainly across the county towns of Enterprise and Spring Valley.
+          Your mailing address says Las Vegas. Your jurisdiction, in most cases,
+          doesn&rsquo;t. That decides who you call about a permit, a pothole or a
+          code question — worth knowing before you&rsquo;re annoyed about it.
+        </p>
+
+        <h3 className="mt-10 font-display text-subhead font-bold text-lvinit-black">
+          So what is Enterprise?
+        </h3>
+        <p className="mt-4 text-body-lg text-lvinit-warmgray">
+          Enterprise is the answer to a question people don&rsquo;t realize
+          they&rsquo;re asking. It&rsquo;s an{" "}
           <a
             href="https://www.clarkcountynv.gov/government/departments/comprehensive_planning_department/divisions/advanced_planning_division/enterprise"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-lvinit-blue underline underline-offset-4 decoration-transparent hover:decoration-lvinit-blue"
+            className={linkClass}
           >
-            Enterprise
-          </a>{" "}
-          and Spring Valley. Your mailing address says Las Vegas. Your
-          jurisdiction, in most cases, doesn&rsquo;t. That affects who you call
-          about a permit, a pothole, or a code question — worth knowing before
-          you&rsquo;re annoyed about it.
+            unincorporated town administered by Clark County
+          </a>
+          , covering 42,950 acres — about 67 square miles. It is not a
+          neighborhood. It has no character of its own, because it&rsquo;s far
+          too big to have one: master plans, 1990s tracts, brand-new infill,
+          horse property and apartment corridors are all &ldquo;in
+          Enterprise.&rdquo;
         </p>
         <p className="mt-5 text-body-lg text-lvinit-warmgray">
-          In practice, when I say Southwest I mean roughly the area framed by
-          Durango, Fort Apache, and Rainbow running north to south, and Warm
-          Springs, Russell, and Blue Diamond Road — that&rsquo;s SR-160 — running
-          east to west, with the 215 curving through the middle of all of it.
-          Push the edges however you like. Nobody&rsquo;s going to correct you,
-          because there&rsquo;s nothing to correct you against.
+          So no, Enterprise and Southwest Las Vegas are not the same thing. They
+          overlap heavily — Enterprise covers most of what people call Southwest
+          — but one is an administrative unit with real boundaries and the other
+          is a name people use. Spring Valley, the other town in play, sits north
+          of Enterprise and picks up the top end of what some people file under
+          Southwest. If a listing tells you a home is in Enterprise, it has told
+          you which town advisory board covers it and almost nothing else. Shop
+          by subdivision.
+        </p>
+
+        <h3 className="mt-10 font-display text-subhead font-bold text-lvinit-black">
+          Where it sits against Summerlin and Henderson
+        </h3>
+        <p className="mt-4 text-body-lg text-lvinit-warmgray">
+          Summerlin is directly north, on the far west side of the valley against
+          Red Rock. From much of the Southwest you get there by running up the
+          beltway, and the two are closer than people assume. Henderson is
+          southeast — a genuinely separate incorporated city with its own
+          government, and a real drive from here across the bottom of the valley.
+          Southwest sits between them geographically and, in a lot of ways,
+          culturally too.
+        </p>
+
+        <h3 className="mt-10 font-display text-subhead font-bold text-lvinit-black">
+          The 215 is the whole reason it works
+        </h3>
+        <p className="mt-4 text-body-lg text-lvinit-warmgray">
+          If you take one practical thing from this guide, take this one. The
+          beltway is the spine the entire Southwest hangs off. It curves through
+          the area and connects you north toward Summerlin and east toward
+          Henderson and the airport without putting you on surface streets for
+          forty minutes. A lot of people move here for exactly that and nothing
+          else.
+        </p>
+        <p className="mt-5 text-body-lg text-lvinit-warmgray">
+          A technicality worth knowing, because people get it wrong: on this side
+          of town it&rsquo;s{" "}
+          <span className="text-lvinit-black">CC-215</span>, the county-maintained
+          Bruce Woodbury Beltway. The Interstate 215 designation only applies east
+          of I-15. Same road in your head, different sign, and it explains why
+          you&rsquo;ll see both written down. Blue Diamond Road is SR-160, the
+          other one people ask about — it&rsquo;s the diagonal that leaves I-15
+          heading west toward Pahrump and cuts across the grid.
+        </p>
+
+        <h3 className="mt-10 font-display text-subhead font-bold text-lvinit-black">
+          Which parts are closest to the Strip and the airport
+        </h3>
+        <p className="mt-4 text-body-lg text-lvinit-warmgray">
+          The eastern edge — anything close to I-15, which in practice means the
+          Silverado Ranch and Southern Highlands side — is nearest to both the
+          south Strip and Harry Reid International. From the Durango corridor
+          you&rsquo;re taking the beltway east instead, which is still an easy
+          run. The far southwest corner around Mountain&rsquo;s Edge is the
+          longest trip of the three, and it&rsquo;s the tradeoff you make for
+          being out on the desert edge.
+        </p>
+        <p className="mt-5 text-body-lg text-lvinit-warmgray">
+          I&rsquo;m not going to hand you drive times in minutes, and be
+          suspicious of any page that does.{" "}
+          <span className="text-lvinit-black">
+            &ldquo;Southwest&rdquo; is far too large for a single number to mean
+            anything
+          </span>{" "}
+          — a home off Blue Diamond and a home at Durango and the 215
+          aren&rsquo;t the same trip — and the answer swings with the hour, the
+          direction and whichever ramp is currently torn up. Drive it yourself at
+          the hour you&rsquo;d actually be driving it. That&rsquo;s the only test
+          that means anything.
         </p>
       </StorySection>
 
-      <StorySection heading="It's growing faster than anywhere else in the valley">
-        <p className="text-body-lg text-lvinit-warmgray">
-          This is the one claim about the Southwest that isn&rsquo;t marketing.
-          Enterprise — the roughly 46-square-mile county town that covers much of
-          this area — grew close to{" "}
-          <span className="text-lvinit-black">60% between 2010 and 2023</span>,
-          against about 20% for the Las Vegas Valley overall, per Clark County
-          figures{" "}
-          <a
-            href="https://www.reviewjournal.com/business/housing/how-fast-is-the-southwest-las-vegas-valley-growing-3046446/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-lvinit-blue underline underline-offset-4 decoration-transparent hover:decoration-lvinit-blue"
-          >
-            reported by the Review-Journal
-          </a>
-          . That&rsquo;s not a small gap. That&rsquo;s the valley&rsquo;s growth
-          happening disproportionately in one corner.
+      {/* ---------------------------------------------------------------- */}
+      {/* THE LOCAL'S NOTE                                                  */}
+      {/* ---------------------------------------------------------------- */}
+
+      <LocalsNote id="locals-note">
+        <p className="text-body-lg text-lvinit-black">
+          Southwest can change surprisingly fast from one intersection to the
+          next. You can have a newer gated subdivision, a large-lot home that
+          feels almost rural, an apartment block, a good restaurant and several
+          acres of raw dirt within a few minutes of each other.
         </p>
         <p className="mt-5 text-body-lg text-lvinit-warmgray">
-          The reason is unglamorous: land. Las Vegas is boxed in by federal
-          ground on most sides — Red Rock&rsquo;s conservation area to the west,
-          Lake Mead to the east — and the southwest had room left to build. So it
-          got built. That&rsquo;s why the housing here skews new, and it&rsquo;s
-          also why so much of it went up at once, which is a thing you can feel
-          when you drive it.
+          <span className="text-lvinit-black">That empty land matters.</span> If
+          you&rsquo;re buying out here, treat the vacant parcels near the house
+          as part of the house. Find out what&rsquo;s zoned for them. Look at
+          what the county has in design for the roads around you — the Southwest
+          has several corridor projects running right now, and the quiet street
+          you viewed on a Sunday may be a construction route next spring. Check
+          whether the view you&rsquo;re paying for is protected by anything other
+          than the fact that nobody has built there yet.
+        </p>
+        <p className="mt-5 text-body-lg text-lvinit-warmgray">
+          I&rsquo;m not going to tell you what any of that does to your home
+          value, because I don&rsquo;t know and neither does anyone else selling
+          you a prediction. What I will tell you is that in an area still being
+          assembled, today&rsquo;s view and today&rsquo;s traffic pattern are the
+          least reliable things about it. Ask the questions before you&rsquo;re
+          in escrow, not after the grading equipment shows up.
+        </p>
+      </LocalsNote>
+
+      {/* ---------------------------------------------------------------- */}
+      {/* IT ISN'T ONE THING                                                */}
+      {/* ---------------------------------------------------------------- */}
+
+      <StorySection id="subareas" heading="Southwest isn't one thing">
+        <p className="text-body-lg text-lvinit-warmgray">
+          People talk about &ldquo;the Southwest&rdquo; as one lifestyle the way
+          they talk about North Las Vegas as one lifestyle, and they&rsquo;re
+          wrong both times. It&rsquo;s at least five or six different
+          propositions sharing a name. These groupings are rough — the edges
+          blur, and locals wouldn&rsquo;t all draw them the same way — but
+          they&rsquo;re a lot closer to how the area actually behaves than
+          treating it as a single block.
+        </p>
+
+        <h3 className="mt-10 font-display text-subhead font-bold text-lvinit-black">
+          The Durango + 215 corridor
+        </h3>
+        <p className="mt-4 text-body-lg text-lvinit-warmgray">
+          The densest, newest, most commercial part of the Southwest, and the
+          only part with anything resembling a center. UnCommons and Durango
+          Casino &amp; Resort sit either side of the freeway, with IKEA, The Bend
+          and a growing stack of apartments around them. Offices, restaurants and
+          a plaza people actually sit in — plus a great deal of ongoing
+          construction.
+        </p>
+
+        <h3 className="mt-10 font-display text-subhead font-bold text-lvinit-black">
+          Mountain&rsquo;s Edge and the far southwest
+        </h3>
+        <p className="mt-4 text-body-lg text-lvinit-warmgray">
+          Master-planned suburban development out at the desert edge, organized
+          around parks and trails. Newer housing, a lot of it, and open ground on
+          two sides. This is the part that feels furthest from the rest of the
+          city, which is either the appeal or the objection depending on who you
+          are.
+        </p>
+
+        <h3 className="mt-10 font-display text-subhead font-bold text-lvinit-black">
+          Rhodes Ranch and the western Southwest
+        </h3>
+        <p className="mt-4 text-body-lg text-lvinit-warmgray">
+          Golf-centerd, guard-gated, and older than most of what surrounds it —
+          which means the landscaping has actually grown in. Strong beltway
+          access, a more finished feel, and a clear boundary between inside the
+          gate and outside it.
+        </p>
+
+        <h3 className="mt-10 font-display text-subhead font-bold text-lvinit-black">
+          Nevada Trails and central Enterprise
+        </h3>
+        <p className="mt-4 text-body-lg text-lvinit-warmgray">
+          The most mixed part of the area, and the best illustration of the whole
+          point of this section. Established early-2000s subdivisions, newer
+          infill squeezed between them, and larger-lot pockets that feel almost
+          semi-rural. The housing character can change completely inside half a
+          mile.
+        </p>
+
+        <h3 className="mt-10 font-display text-subhead font-bold text-lvinit-black">
+          Southern Highlands
+        </h3>
+        <p className="mt-4 text-body-lg text-lvinit-warmgray">
+          A distinct master plan with its own identity at the very bottom of the
+          valley. Its access patterns are shaped by I-15 and the southern edge
+          rather than by the beltway, which is why daily life there points a
+          different direction from the rest of the Southwest — and why some
+          people don&rsquo;t count it as Southwest at all.
+        </p>
+
+        <h3 className="mt-10 font-display text-subhead font-bold text-lvinit-black">
+          And Enterprise across all of it
+        </h3>
+        <p className="mt-4 text-body-lg text-lvinit-warmgray">
+          Worth repeating because it trips everyone up: Enterprise isn&rsquo;t
+          one of these areas, it&rsquo;s the county town most of them sit inside.
+          Sixty-seven square miles of it. When a listing says Enterprise, it
+          isn&rsquo;t describing a neighborhood — it&rsquo;s describing
+          jurisdiction.
         </p>
       </StorySection>
 
@@ -252,116 +482,71 @@ export default function SouthwestLasVegasPage() {
         ]}
       />
 
-      <StorySection heading="The 215 is the whole reason it works">
-        <p className="text-body-lg text-lvinit-warmgray">
-          If you take one practical thing from this guide, take this one. The
-          beltway — officially the Bruce Woodbury Beltway — is the spine the
-          entire southwest hangs off. It curves through the area and connects you
-          north toward Summerlin and east toward Henderson and the airport
-          without putting you on surface streets for forty minutes. A lot of
-          people move here for exactly that and nothing else.
-        </p>
-        <p className="mt-5 text-body-lg text-lvinit-warmgray">
-          A small technicality worth knowing, because people get it wrong: on
-          this side of town it&rsquo;s{" "}
-          <span className="text-lvinit-black">CC-215</span>, a county-maintained
-          route. The Interstate 215 designation only applies east of I-15. Same
-          road in your head, different sign, and it explains why you&rsquo;ll see
-          both written down.
-        </p>
-        <p className="mt-5 text-body-lg text-lvinit-warmgray">
-          Realistically: your drive depends far more on which side of the beltway
-          you land on and where you&rsquo;re going than on any number I could
-          print here. Getting to the airport or the south Strip is genuinely
-          quick from most of the Southwest. Getting across the valley to
-          Henderson&rsquo;s far side, or up to the northwest, is a real drive at
-          rush hour. I&rsquo;m not going to hand you a commute time in minutes —
-          it swings too much by time of day and by exactly which street
-          you&rsquo;re on, and any number I gave you would be a guess dressed up
-          as a fact. Drive it yourself at the hour you&rsquo;d actually be
-          driving it. That&rsquo;s the only test that means anything.
-        </p>
-      </StorySection>
+      {/* ---------------------------------------------------------------- */}
+      {/* WHAT IT FEELS LIKE                                                */}
+      {/* ---------------------------------------------------------------- */}
 
-      <StorySection heading="What the housing actually looks like">
+      <StorySection id="feel" heading="What it actually feels like to drive">
         <p className="text-body-lg text-lvinit-warmgray">
-          Mostly newer single-family homes, and a lot of them behind gates.
-          Master-planned and gated communities are the dominant pattern out here
-          — Mountain&rsquo;s Edge, Rhodes Ranch, and Southern Highlands are the
-          names you&rsquo;ll hear most — mixed in with townhomes, a growing stock
-          of apartments, and pockets that are still actively under construction.
+          Here&rsquo;s what you notice in the first hour, in roughly the order
+          you notice it.
         </p>
         <p className="mt-5 text-body-lg text-lvinit-warmgray">
-          The important nuance:{" "}
           <span className="text-lvinit-black">
-            these are not all the same neighborhood.
+            The neighborhoods change faster than you expect.
           </span>{" "}
-          The Southwest is big, and a gated street off Blue Diamond and a
-          four-story apartment building at Durango and the 215 are not remotely
-          the same product or the same life. People talk about &ldquo;the
-          Southwest&rdquo; as one thing the way they talk about North Las Vegas
-          as one thing, and they&rsquo;re wrong both times. What holds across
-          most of it is the age of the housing and the fact you&rsquo;ll be
-          driving.
+          A polished gated entrance, then an arterial, then a strip center, then
+          a field. Then another gated entrance that looks nothing like the first
+          one. Master-planned stretches read as coherent — matching walls,
+          consistent landscaping, a plan you can feel. The non-master-planned
+          stretches in between read as a series of independent decisions, because
+          that&rsquo;s exactly what they are.
         </p>
         <p className="mt-5 text-body-lg text-lvinit-warmgray">
-          On price, I&rsquo;ll be straight with you about what I can and
-          can&rsquo;t say. There is no published median specific to Southwest Las
-          Vegas that I&rsquo;d be willing to quote — the submarket boundaries
-          don&rsquo;t officially exist, so nobody reports on them cleanly. What
-          does exist is the valley-wide number: Las Vegas REALTORS put the median
-          for existing single-family homes sold through the MLS at{" "}
-          <a
-            href="https://nevadabusiness.com/2026/07/lvr-reports-local-home-prices-hovering-at-record-high/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-lvinit-blue underline underline-offset-4 decoration-transparent hover:decoration-lvinit-blue"
-          >
-            $490,000 in June 2026
-          </a>
-          , holding at the record set the month before. That&rsquo;s Southern
-          Nevada as a whole,{" "}
-          <span className="text-lvinit-black">not this area specifically</span>,
-          and I&rsquo;d rather give you an honest wide number than a precise
-          local one I invented. Real pricing here is a conversation against{" "}
-          <Link
-            href="/search"
-            className="text-lvinit-blue underline underline-offset-4 decoration-transparent hover:decoration-lvinit-blue"
-          >
-            current listings
-          </Link>
-          , not a page like this.
-        </p>
-      </StorySection>
-
-      <StoryGallery
-        images={[
-          {
-            src: "/images/features/southwest-las-vegas-uncommons-vestra-apartments.webp",
-            alt: "The four-story Vestra apartment building at UnCommons in southwest Las Vegas, with balconies, ground-floor retail bays, a leasing entrance, and cars parked along the street on a clear July morning.",
-            caption:
-              "Vestra at UnCommons — apartments over ground-floor retail, which is still a rare shape of building out here.",
-          },
-        ]}
-      />
-
-      <StorySection heading="You're going to drive. All of it, every day.">
-        <p className="text-body-lg text-lvinit-warmgray">
-          I want to be blunt here, because this is where people get surprised.
-          The Southwest is built around the car. Not &ldquo;mostly.&rdquo; Not
-          &ldquo;except for a few errands.&rdquo; The street grid is wide and
-          fast, the blocks are long, the distances between a house and anything
-          useful are measured in miles, and the summer makes walking those
-          distances a genuinely bad idea for months at a stretch.
+          <span className="text-lvinit-black">
+            Old and new sit right next to each other.
+          </span>{" "}
+          A 1990s street with grown trees can be across the road from something
+          finished last year with saplings staked against the wind. Housing age
+          out here isn&rsquo;t a gradient from the middle of town outward — it
+          jumps around, and so does what your money buys.
         </p>
         <p className="mt-5 text-body-lg text-lvinit-warmgray">
-          That&rsquo;s my read from driving it, not a statistic — I&rsquo;m not
-          going to quote you a walkability score I can&rsquo;t stand behind. RTC
-          buses do run the main corridors out here; the Durango, Fort Apache, and
-          Rainbow routes exist and people use them. But the area was planned
-          around driveways, and it shows. If you&rsquo;re coming from a city
-          where you didn&rsquo;t need a car, this will be the adjustment, and
-          it&rsquo;ll be a bigger one than the heat.
+          <span className="text-lvinit-black">
+            The unfinished parcels are everywhere.
+          </span>{" "}
+          Newer retail facing raw desert. A sidewalk that stops. A beautiful
+          street that ends at a wall. None of that is decline — it&rsquo;s an
+          area mid-build — but if half-built horizons would wear on you, you
+          should know that going in.
+        </p>
+        <p className="mt-5 text-body-lg text-lvinit-warmgray">
+          <span className="text-lvinit-black">
+            The apartments cluster, and the big lots hide.
+          </span>{" "}
+          Multifamily concentrates along the arterials, especially around Durango
+          and the beltway. Meanwhile, tucked off the main roads, there are
+          pockets of genuinely large lots — some with room for a horse — that
+          feel almost rural despite being ten minutes from a freeway. Both are
+          normal here. Neither is what the drone footage shows you.
+        </p>
+        <p className="mt-5 text-body-lg text-lvinit-warmgray">
+          <span className="text-lvinit-black">And you will drive. All of it.</span>{" "}
+          The street grid is wide and fast, the blocks are long, and the distance
+          between a house and anything useful is measured in miles. That&rsquo;s
+          my read from driving it, not a statistic — I&rsquo;m not going to quote
+          you a walkability score I can&rsquo;t stand behind. RTC buses do run
+          the main corridors; the Rainbow and Durango routes exist and people use
+          them. But the area was planned around driveways, and it shows. If
+          you&rsquo;re coming from somewhere you didn&rsquo;t need a car, this
+          will be the adjustment, and a bigger one than the heat.
+        </p>
+        <p className="mt-5 text-body-lg text-lvinit-warmgray">
+          The exception is the Durango corridor, where UnCommons and The Bend
+          have built a couple of blocks you genuinely walk around once
+          you&rsquo;ve parked. It works. It&rsquo;s also about the size of a
+          couple of city blocks in an area of tens of square miles, and
+          I&rsquo;d be selling you something if I implied otherwise.
         </p>
       </StorySection>
 
@@ -369,38 +554,6 @@ export default function SouthwestLasVegasPage() {
         The southwest wasn&rsquo;t designed to be walked. It was designed to be
         driven, quickly, and it&rsquo;s honest enough not to pretend otherwise.
       </StoryPullQuote>
-
-      <StorySection heading="UnCommons is the exception, not the rule">
-        <p className="text-body-lg text-lvinit-warmgray">
-          The photos on this page are mostly from UnCommons, so let me be careful
-          about what they do and don&rsquo;t prove. UnCommons is a 40-acre
-          mixed-use campus on Durango just south of the 215, across from the
-          Durango casino, and it&rsquo;s the most concentrated attempt anyone has
-          made to build a &ldquo;center&rdquo; in this part of town. Four office
-          buildings are up and effectively full. There&rsquo;s a real cluster of
-          food and coffee — Blue Bottle, Urth Caff&eacute;, Salt &amp; Straw —
-          plus a coworking space, an event venue, and a central plaza people
-          actually sit in. The Vestra apartments are open and leasing.
-        </p>
-        <p className="mt-5 text-body-lg text-lvinit-warmgray">
-          It is also{" "}
-          <span className="text-lvinit-black">
-            not what the rest of the Southwest looks like
-          </span>
-          , and I&rsquo;d be selling you something if I implied otherwise. It is
-          one campus. Walk ten minutes past its edge and you&rsquo;re back to
-          arterial roads and parking lots. What UnCommons genuinely tells you is
-          the direction of travel: there are now real offices out here, which
-          means some people&rsquo;s commute is five minutes, and that used to not
-          be true at all.
-        </p>
-        <p className="mt-5 text-body-lg text-lvinit-warmgray">
-          Still coming, as of this writing: a second apartment building and a
-          fifth office building, announced in May 2026 with a tenant-ready target
-          of early 2028. Announced is not built — no construction start date has
-          been given, and I&rsquo;d treat any renderings you see accordingly.
-        </p>
-      </StorySection>
 
       <StoryGallery
         images={[
@@ -410,30 +563,162 @@ export default function SouthwestLasVegasPage() {
             caption:
               "The paseo at UnCommons — shade, benches, and somewhere to walk. It works, and it's about the size of a city block.",
           },
+          {
+            src: "/images/features/southwest-las-vegas-uncommons-vestra-apartments.webp",
+            alt: "The four-story Vestra apartment building at UnCommons in southwest Las Vegas, with balconies, ground-floor retail bays, a leasing entrance, and cars parked along the street on a clear July morning.",
+            caption:
+              "Vestra at UnCommons — apartments over ground-floor retail, still a rare shape of building out here.",
+          },
         ]}
       />
 
-      <StorySection heading="The Bend, and the everyday errand map">
+      {/* ---------------------------------------------------------------- */}
+      {/* COMMUNITIES                                                       */}
+      {/* ---------------------------------------------------------------- */}
+
+      <AreaCommunities
+        id="communities"
+        heading="Communities and neighborhoods"
+        intro={
+          <p className="text-body-lg text-lvinit-warmgray">
+            The names you&rsquo;ll hear on repeat, and what actually separates
+            them. This is not a complete list — the Southwest is a patchwork of
+            far more builder tracts than it has famous names — but if someone is
+            describing where they live out here, it&rsquo;s probably one of
+            these.
+          </p>
+        }
+        communities={communities}
+        footnote={
+          <>
+            Each of these will get its own full guide over time. Until a
+            guide&rsquo;s actually written, the name stays plain text rather than
+            a link — no dead ends.
+          </>
+        }
+      />
+
+      {/* ---------------------------------------------------------------- */}
+      {/* DEVELOPMENT WATCH                                                 */}
+      {/* ---------------------------------------------------------------- */}
+
+      <DevelopmentWatch
+        id="development"
+        heading="Southwest Development Watch"
+        updated="Updated August 2026"
+        intro={
+          <p className="text-body-lg text-lvinit-warmgray">
+            The Southwest changes faster than any page can keep up with, and most
+            of what you&rsquo;ll find searching for it is two years stale.
+            Here&rsquo;s where things actually stand, split by what&rsquo;s
+            genuinely open, what&rsquo;s genuinely being built, and what&rsquo;s
+            only been announced. Every status below is sourced, and if I
+            couldn&rsquo;t verify which of the three a project was in, it
+            isn&rsquo;t here.
+          </p>
+        }
+        projects={developmentProjects}
+        footnote={
+          <>
+            Clark County has further roadwork in construction across this side of
+            the valley, including the Warm Springs Road corridor, the CC-215
+            frontage road between Sunset and Decatur, and the South Beltway
+            widening from Decatur to I-15. The county&rsquo;s{" "}
+            <a
+              href="https://www.clarkcountynv.gov/government/departments/public_works_department/projects-in-construction"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={linkClass}
+            >
+              projects-in-construction list
+            </a>{" "}
+            is the live version and is worth a look before you commit to a
+            commute. Statuses here were checked on 20 August 2026 and will move —
+            check with the developer or the county before planning around any of
+            them.
+          </>
+        }
+      />
+
+      {/* ---------------------------------------------------------------- */}
+      {/* HOUSING                                                           */}
+      {/* ---------------------------------------------------------------- */}
+
+      <StorySection id="housing" heading="What the housing is actually like">
         <p className="text-body-lg text-lvinit-warmgray">
-          About a mile and a half down Durango, at Sunset, is The Bend — a
-          dining-and-retail development from Dapper Companies sitting across from
-          the IKEA on roughly ten acres. It&rsquo;s largely open and doing real
-          business: Electric Pickle, Mothership Coffee, Marufuku Ramen, Aces
-          &amp; Ales, St. Felix, Freed&rsquo;s, Butcher &amp; Thief. There&rsquo;s
-          another phase still to come, and at least one tenant the developer
-          still lists as coming soon, so it isn&rsquo;t finished — but
-          it&rsquo;s not a construction site either.
+          The dominant product is a newer single-family home, often behind a
+          gate, in a subdivision built by one builder over a short window. But
+          the range around that is wider than the reputation suggests, and the
+          differences are worth knowing before you start looking.
         </p>
         <p className="mt-5 text-body-lg text-lvinit-warmgray">
-          I&rsquo;m including it for one reason, and it isn&rsquo;t the tenant
-          list. The Bend is a good honest picture of how this area actually
-          works: a well-made cluster of good places that you drive to, park at,
-          walk about two hundred feet inside of, and drive home from. That
-          isn&rsquo;t a criticism — it&rsquo;s genuinely nice, and the food is
-          good. It&rsquo;s just the shape of the place. Between UnCommons, The
-          Bend, and the retail strung along Rainbow, Fort Apache, and Blue
-          Diamond, your daily-errand life out here is well covered. It just
-          happens through a windshield.
+          <span className="text-lvinit-black">Master-planned versus not.</span>{" "}
+          Inside a master plan — Mountain&rsquo;s Edge, Southern Highlands,
+          Rhodes Ranch — you get consistency: coordinated landscaping, planned
+          parks, a general design logic. Outside one, you get whatever each
+          builder did on each parcel, which can mean more variety and sometimes
+          more house for the money, with less of a plan around it.
+        </p>
+        <p className="mt-5 text-body-lg text-lvinit-warmgray">
+          <span className="text-lvinit-black">Resale versus new build.</span>{" "}
+          Both are genuinely available here, which isn&rsquo;t true everywhere in
+          the valley. Resale in the Southwest often means an early-2000s home
+          with a grown yard on a finished street. New build means the current
+          spec, the current warranty, and living beside a construction site for a
+          while. There&rsquo;s no right answer, but they&rsquo;re different
+          purchases.
+        </p>
+        <p className="mt-5 text-body-lg text-lvinit-warmgray">
+          <span className="text-lvinit-black">Gates, golf, and everything else.</span>{" "}
+          Guard-gated and self-gated communities are common, and two golf-centerd
+          master plans — Rhodes Ranch with a public course, Southern Highlands
+          with a private one — anchor their own housing markets. Townhomes and
+          condos exist in meaningful numbers, mostly nearer the arterials.
+          Apartments concentrate along Durango and the beltway. And in scattered
+          pockets there are genuinely large lots, occasionally with horse
+          privileges, that don&rsquo;t look like anything else out here.
+        </p>
+        <p className="mt-5 text-body-lg text-lvinit-warmgray">
+          <span className="text-lvinit-black">
+            HOAs and housing age vary enormously — check both, per address.
+          </span>{" "}
+          There is no such thing as &ldquo;the Southwest HOA situation.&rdquo;
+          Some communities have a master association plus a sub-association; some
+          have essentially nothing. Housing age jumps from the mid-1990s to this
+          year within a few blocks. Those two facts do more to determine what
+          living somewhere out here is like than the area name does.
+        </p>
+
+        <h3 className="mt-10 font-display text-subhead font-bold text-lvinit-black">
+          On prices, and why there isn&rsquo;t a number here
+        </h3>
+        <p className="mt-4 text-body-lg text-lvinit-warmgray">
+          I&rsquo;m not going to publish an &ldquo;average Southwest Las Vegas
+          home price,&rdquo; and I&rsquo;d be careful with anyone who does.
+          You&rsquo;ve just read a thousand words explaining that this area has
+          no agreed boundary — which means any median quoted for it depends
+          entirely on where the person calculating it decided to draw the line.
+          Include Southern Highlands and it moves. Include the Spring Valley
+          overlap and it moves again. Nobody publishes a defensible Southwest
+          submarket median, because there isn&rsquo;t a defensible submarket.
+        </p>
+        <p className="mt-5 text-body-lg text-lvinit-warmgray">
+          What does exist is the valley-wide figure, and I keep that current in
+          the{" "}
+          <Link href="/guides/las-vegas-home-prices-july-2026" className={linkClass}>
+            monthly market read
+          </Link>
+          . For what a specific budget actually gets you — including a real
+          Southwest home — the{" "}
+          <Link href="/guides/what-500k-buys-in-las-vegas" className={linkClass}>
+            $500K walkthrough
+          </Link>{" "}
+          is more useful than any average would be. Real pricing here is a
+          conversation against{" "}
+          <Link href="/search" className={linkClass}>
+            current listings
+          </Link>
+          , not a page like this.
         </p>
       </StorySection>
 
@@ -448,108 +733,122 @@ export default function SouthwestLasVegasPage() {
         ]}
       />
 
-      <StorySection heading="How it's different from Summerlin">
+      {/* ---------------------------------------------------------------- */}
+      {/* COMPARISONS                                                       */}
+      {/* ---------------------------------------------------------------- */}
+
+      <ComparisonBar
+        id="vs-summerlin"
+        heading="Southwest vs Summerlin"
+        sides={["Southwest", "Summerlin"]}
+        intro={
+          <p className="text-body-lg text-lvinit-warmgray">
+            This is the comparison most people are actually making, so let&rsquo;s
+            do it properly. No scores, because there isn&rsquo;t honest data to
+            score these on — just which way each dimension leans and why.
+          </p>
+        }
+        rows={summerlinComparison}
+        footnote={
+          <>
+            The short version: Summerlin is one plan executed over decades and
+            you can feel the plan. The Southwest is many separate developments
+            that filled the same area over the same period, next to each other
+            rather than with each other. You trade cohesion and a center for
+            newer housing, more variety, and frequently more square footage.
+            The{" "}
+            <Link href="/neighborhoods/summerlin" className={linkClass}>
+              Summerlin guide
+            </Link>{" "}
+            is the honest version of the other side.
+          </>
+        }
+      />
+
+      <StorySection id="vs-henderson" heading="Southwest vs Henderson">
         <p className="text-body-lg text-lvinit-warmgray">
-          This is the comparison most people are actually making, so let&rsquo;s
-          do it properly. Summerlin is a master plan. One developer, one long
-          plan, decades of execution — which is why it has a genuine center in
-          Downtown Summerlin, a trail system that connects, mature landscaping,
-          and a consistency to it. You can feel the plan.
+          This one is less a comparison than a category error, and it&rsquo;s
+          worth naming.{" "}
+          <span className="text-lvinit-black">
+            Henderson is an incorporated city.
+          </span>{" "}
+          It has its own government, its own police, its own parks department and
+          its own rules — and it contains an enormous range of very different
+          places, from new master plans to a historic downtown to hillside
+          estates to lake communities. Reducing it to one lifestyle is as wrong
+          as reducing the Southwest to one.
         </p>
         <p className="mt-5 text-body-lg text-lvinit-warmgray">
-          The Southwest isn&rsquo;t that. It&rsquo;s many separate developments
-          that filled in the same general area over the same couple of decades,
-          next to each other rather than with each other. The result is patchier:
-          a polished gated community can sit across an arterial from a strip
-          center and a lot that hasn&rsquo;t been built on yet. What you get in
-          exchange is newer housing, frequently more square footage for the
-          money, and the beltway right there. What you give up is cohesion and a
-          center. If you want the full version of the other side of that trade,
-          the{" "}
-          <Link
-            href="/neighborhoods/summerlin"
-            className="text-lvinit-blue underline underline-offset-4 decoration-transparent hover:decoration-lvinit-blue"
-          >
-            Summerlin guide
+          The Southwest is an informal name for a stretch of unincorporated
+          county. So the real difference isn&rsquo;t vibe, it&rsquo;s structure:
+          in Henderson you&rsquo;re a resident of a city that answers to you; in
+          most of the Southwest you&rsquo;re a resident of Clark County. If
+          separate-municipality matters to you — and for some people it genuinely
+          does — that&rsquo;s a real distinction rather than a marketing one.
+          Geographically they&rsquo;re at opposite ends of the valley&rsquo;s
+          southern edge, so the practical question is usually just which side
+          your work and your people are on.
+        </p>
+        <p className="mt-5 text-body-lg text-lvinit-warmgray">
+          The full{" "}
+          <Link href="/neighborhoods/henderson" className={linkClass}>
+            Henderson guide
           </Link>{" "}
-          is the honest one.
-        </p>
-        <p className="mt-5 text-body-lg text-lvinit-warmgray">
-          Against{" "}
-          <Link
-            href="/neighborhoods/henderson"
-            className="text-lvinit-blue underline underline-offset-4 decoration-transparent hover:decoration-lvinit-blue"
-          >
-            Henderson
-          </Link>
-          , briefly, because it&rsquo;s the other question I get: Henderson is
-          its own city with its own government and its own services, and it has
-          more variety — older established areas, a real downtown, lakes,
-          hillside. The Southwest has none of that history and isn&rsquo;t a city
-          at all. If separate-municipality matters to you, that&rsquo;s a real
-          difference, not a vibe.
+          breaks the city down community by community, which is the only useful
+          way to think about it.
         </p>
       </StorySection>
 
-      <StorySection muted heading="My honest take">
-        <aside className="mx-auto max-w-3xl border-l-2 border-lvinit-blue pl-6 sm:pl-8">
-          <p className="font-display italic text-subhead text-lvinit-blue">
-            The Local&rsquo;s Note
-          </p>
-          <p className="mt-4 text-body-lg text-lvinit-black">
-            The Southwest gives you the two things a lot of buyers say they want:
-            a newer house and a fast way out. Those are real, and I&rsquo;d never
-            talk anyone out of valuing them.
-          </p>
-          <p className="mt-5 text-body-lg text-lvinit-warmgray">
-            What I&rsquo;d want you to walk in knowing is that much of it still
-            feels fragmented and unfinished. Not bad — unfinished. You&rsquo;ll
-            find a beautiful street that ends at a wall, retail that arrived
-            before the sidewalks connected to it, and stretches where the trees
-            need another decade before they do anything for you in August. There
-            isn&rsquo;t a there there yet, in the way Summerlin has one. Places
-            like UnCommons are building one, and it&rsquo;s working, but
-            it&rsquo;s one campus in a very large area.
-          </p>
-          <p className="mt-5 text-body-lg text-lvinit-warmgray">
-            And I want to be fair about the suburban part, because that&rsquo;s
-            not the criticism. Plenty of the valley is suburban and works
-            beautifully. The Southwest&rsquo;s tradeoff isn&rsquo;t that
-            it&rsquo;s suburban — it&rsquo;s that it&rsquo;s suburban{" "}
-            <span className="text-lvinit-black">without the master plan</span>.
-            You&rsquo;re buying into a place that&rsquo;s still assembling
-            itself. If you&rsquo;re the kind of person who finds that exciting —
-            new construction, room to grow, the sense of getting somewhere early
-            — this is a genuinely good bet. If you want to move somewhere that
-            already knows what it is, be honest with yourself now and save
-            yourself two years.
-          </p>
-        </aside>
-      </StorySection>
+      {/* ---------------------------------------------------------------- */}
+      {/* VIDEO                                                             */}
+      {/* ---------------------------------------------------------------- */}
 
-      <StorySection heading="So should you look here?">
+      <AreaVideoSlot
+        id="watch"
+        heading="Not sure which side of the valley fits you?"
+        intro="Summerlin, Henderson and Southwest can all work for someone moving to Las Vegas — but for very different reasons. This comparison breaks down how the three areas actually differ once you get beyond the house itself."
+        video={areaVideo}
+        pendingNote="Filming now — the video lands on this page when it publishes."
+      />
+
+      {/* ---------------------------------------------------------------- */}
+      {/* FAQ                                                               */}
+      {/* ---------------------------------------------------------------- */}
+
+      <AreaFAQ
+        id="faq"
+        heading="Southwest Las Vegas, answered"
+        intro={
+          <p className="text-body-lg text-lvinit-warmgray">
+            The questions people actually type in, answered as precisely as the
+            facts allow — which sometimes means answering &ldquo;it
+            depends,&rdquo; and saying why.
+          </p>
+        }
+        items={faqItems}
+      />
+
+      {/* ---------------------------------------------------------------- */}
+      {/* CLOSE                                                             */}
+      {/* ---------------------------------------------------------------- */}
+
+      <StorySection id="verdict" heading="So should you look here?">
         <p className="text-body-lg text-lvinit-warmgray">
           Look here if a newer home matters to you, if the beltway solves your
           commute, if you&rsquo;re relaxed about driving, and if you&rsquo;d
           rather have more house than more character. That&rsquo;s a completely
-          reasonable set of priorities and the Southwest serves it better than
+          reasonable set of priorities, and the Southwest serves it better than
           almost anywhere else in the valley right now.
         </p>
         <p className="mt-5 text-body-lg text-lvinit-warmgray">
           Look elsewhere if you want to walk places, if you want a neighborhood
           with a history and a center, or if construction noise and half-built
-          horizons would wear on you. The{" "}
-          <Link
-            href="/neighborhoods/downtown-arts-district"
-            className="text-lvinit-blue underline underline-offset-4 decoration-transparent hover:decoration-lvinit-blue"
-          >
+          horizons would grind on you. The{" "}
+          <Link href="/neighborhoods/downtown-arts-district" className={linkClass}>
             Arts District
           </Link>{" "}
           is the opposite instinct entirely, and{" "}
-          <Link
-            href="/neighborhoods/summerlin"
-            className="text-lvinit-blue underline underline-offset-4 decoration-transparent hover:decoration-lvinit-blue"
-          >
+          <Link href="/neighborhoods/summerlin" className={linkClass}>
             Summerlin
           </Link>{" "}
           is the polished version of the same suburban idea.
@@ -557,21 +856,23 @@ export default function SouthwestLasVegasPage() {
         <p className="mt-5 text-body-lg text-lvinit-warmgray">
           My actual advice, and it costs nothing: pick a Tuesday, drive Durango
           from Blue Diamond up to the 215, then cut across Warm Springs, and do
-          it at the hour you&rsquo;d really be commuting. You&rsquo;ll know
-          within twenty minutes whether this is your side of town. It&rsquo;s a
-          place that reveals itself from the driver&rsquo;s seat, which is
-          fitting, because that&rsquo;s where you&rsquo;d be living.
+          it at the hour you&rsquo;d really be commuting. You&rsquo;ll know within
+          twenty minutes whether this is your side of town. It&rsquo;s a place
+          that reveals itself from the driver&rsquo;s seat, which is fitting,
+          because that&rsquo;s where you&rsquo;d be living.
         </p>
       </StorySection>
 
-      <Container className="pb-4">
+      <Container className="pb-6">
         <p className="mx-auto max-w-[680px] text-caption text-lvinit-warmgray">
-          Photographed in southwest Las Vegas on July 16, 2026. Development
-          status — what&rsquo;s open, under construction, or only announced —
-          was accurate as of that date and will change; check with the
-          developers before planning around it.
+          Photographed in southwest Las Vegas on 16 July 2026. Development status
+          — what&rsquo;s open, under construction, or only announced — was
+          checked on 20 August 2026 and will change; check with the developers or
+          Clark County before planning around it.
         </p>
       </Container>
+
+      <AreaSources checked="Checked 20 August 2026" sources={sources} />
     </StoryPage>
   );
 }
