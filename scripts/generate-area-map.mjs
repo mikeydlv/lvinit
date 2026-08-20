@@ -100,9 +100,13 @@ const EW_ARTERIALS = [
   { name: "Tropicana Ave", lat: 36.1, from: -115.34, to: -115.1 },
   { name: "Russell Rd", lat: 36.0855, from: -115.33, to: -115.1 },
   { name: "Sunset Rd", lat: 36.071, from: -115.32, to: -115.1 },
-  { name: "Warm Springs Rd", lat: 36.0565, from: -115.31, to: -115.13 },
-  { name: "Windmill Ln", lat: 36.042, from: -115.3, to: -115.15 },
-  { name: "Silverado Ranch Blvd", lat: 36.0275, from: -115.28, to: -115.15 },
+  // Desert Flow sits exactly at Warm Springs & Fort Apache, so this label is
+  // pushed west of its marker.
+  { name: "Warm Springs Rd", lat: 36.0565, from: -115.31, to: -115.13, labelLon: -115.3065, labelAnchor: "end" },
+  // labelLon/labelAnchor keep these two clear of the Rhodes Ranch and Nevada
+  // Trails markers, which sit almost exactly on these latitudes.
+  { name: "Windmill Ln", lat: 36.042, from: -115.3, to: -115.15, labelLon: -115.2985, labelAnchor: "end" },
+  { name: "Silverado Ranch Blvd", lat: 36.0275, from: -115.28, to: -115.15, labelLon: -115.152, labelAnchor: "end" },
 ];
 
 // Blue Diamond Rd (SR-160) is the one southwest arterial off the grid -- it
@@ -273,7 +277,10 @@ for (const r of NS_ARTERIALS) {
   push(label(r.name, x(r.lon) + 5, y(36.128), { size: 15, rotate: -90 }));
 }
 for (const r of EW_ARTERIALS) {
-  push(label(r.name, x(r.from) + 8, y(r.lat) - 7, { size: 15 }));
+  const lon = r.labelLon ?? r.from;
+  const anchor = r.labelAnchor ?? "start";
+  const px = anchor === "end" ? x(lon) : x(lon) + 8;
+  push(label(r.name, px, y(r.lat) - 7, { size: 15, anchor }));
 }
 
 push(label("Blue Diamond Rd (SR-160)", x(-115.352), y(36.0335) - 9, { size: 15 }));
@@ -286,7 +293,7 @@ for (const t of TOWN_LABELS) {
   push(label(t.name, x(t.lon), y(t.lat), {
     size: 30, fill: C.warm, weight: 700, spacing: 4, anchor: "middle",
   }));
-  push(label("(Clark County town -- boundary not drawn)", x(t.lon), y(t.lat) + 22, {
+  push(label("(Clark County town — boundary not drawn)", x(t.lon), y(t.lat) + 22, {
     size: 13, anchor: "middle",
   }));
 }
@@ -317,14 +324,14 @@ push(label("Southwest, as locals generally use it", LX + 70, LY + 60, { size: 15
 push('<line x1="' + (LX + 18) + '" y1="' + (LY + 84) + '" x2="' + (LX + 58) + '" y2="' + (LY + 84) +
   '" stroke="' + C.blue + '" stroke-opacity="0.4" stroke-width="2" stroke-dasharray="2 8"/>');
 push(label("Sometimes included, sometimes not", LX + 70, LY + 89, { size: 15, fill: C.black }));
-push(label("Both are LVINIT's reading of local usage -- neither", LX + 18, LY + 122, { size: 13 }));
+push(label("Both are LVINIT's reading of local usage — neither", LX + 18, LY + 122, { size: 13 }));
 push(label("is a government boundary. Enterprise and Spring", LX + 18, LY + 141, { size: 13 }));
 push(label("Valley are labeled here, not outlined.", LX + 18, LY + 160, { size: 13 }));
 
 push(label("LVI", W - 78, 34, { size: 19, fill: C.black, weight: 800, spacing: 2 }));
 push(label("NIT", W - 42, 34, { size: 19, fill: C.gold, weight: 800, spacing: 2 }));
 
-const TITLE = "Southwest Las Vegas -- an LVINIT area map";
+const TITLE = "Southwest Las Vegas — an LVINIT area map";
 const DESC =
   "Schematic map of the southwest Las Vegas Valley. A dashed outline marks the area locals generally mean by " +
   "Southwest Las Vegas, with a lighter dotted outline for the edges people disagree about. Mountain's Edge, " +
