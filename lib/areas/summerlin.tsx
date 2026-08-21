@@ -217,11 +217,11 @@ export const mapPlaces: MapPlace[] = [
   },
   {
     name: "Sun City Summerlin, The Trails, The Hills, The Arbors and The Canyons",
-    note: "The established villages east of the beltway, in the part of the community that went up first.",
+    note: "The established villages east of the beltway, in the part of the community that went up first. The Crossing and The Pueblo sit among them and are left off the drawing for room.",
   },
   {
     name: "The Ridges, The Willows and The Cliffs",
-    note: "The southern end. The Cliffs is Summerlin's southernmost village and sits below Russell Road — further south than most people picture Summerlin reaching.",
+    note: "The southern end, with The Gardens, Siena and The Mesa filling the gaps between them. The Cliffs is Summerlin's southernmost village and sits below Russell Road — further south than most people picture Summerlin reaching.",
   },
 ];
 
@@ -233,7 +233,6 @@ export const mapOmitted = [
   "The Gardens",
   "Siena",
   "The Mesa",
-  "The Peaks",
 ];
 
 // --- 3. Villages ------------------------------------------------------------
@@ -352,7 +351,7 @@ export const communities: AreaCommunity[] = [
       "For custom-home buyers, and for anyone who wants to understand what Summerlin's last chapter is going to look like.",
   },
   {
-    name: "The Trails, The Arbors, The Canyons & The Hills",
+    name: "The Trails, The Arbors, The Canyons, The Crossing, The Pueblo & The Hills",
     where: "East of the CC-215, north of Charleston Blvd",
     summary:
       "The established core. The Hills was Summerlin's first village in 1990 at 394 acres; The Arbors runs to 1,206, The Canyons 754 and The Trails 573.",
@@ -376,12 +375,12 @@ export const communities: AreaCommunity[] = [
       "Only relevant if you qualify for age-restricted housing — but worth knowing it exists, because it shapes the northern end of the community.",
   },
   {
-    name: "The Willows, The Gardens & The Cliffs",
+    name: "The Willows, The Gardens, Siena, The Mesa & The Cliffs",
     where: "Southern Summerlin, from Flamingo down past Russell Rd",
     summary:
-      "The southern villages. The Willows covers 731 acres; The Cliffs, at just over 418 acres and nine neighborhoods, is Summerlin's southernmost village.",
+      "The southern villages, running one below the next. The Willows covers 731 acres; The Cliffs, at just over 418 acres and nine neighborhoods, is Summerlin's southernmost village.",
     housing:
-      "The Willows and The Gardens are established resale; The Cliffs is newer, and sits on land Summerlin only acquired in a 2002 exchange with the BLM.",
+      "The Willows, The Gardens and Siena are established resale; The Mesa and The Cliffs are newer, and sit on land Summerlin only acquired in a 2002 exchange with the BLM.",
     distinct:
       "How far south Summerlin actually reaches. The Cliffs is below Russell Road — south of where most people assume the community stops.",
     worthExploring:

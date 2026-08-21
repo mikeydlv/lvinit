@@ -261,10 +261,10 @@ export default function SummerlinPage() {
             >
               Summerlin&rsquo;s own maps and guides
             </a>
-            . A few smaller villages — {mapOmitted.join(", ")} — are named here and
-            in the villages section rather than lettered onto the drawing, because
-            a map you can read beats one that lists everything. Roads and the
-            conservation-area boundary come from{" "}
+            . A few smaller villages — {mapOmitted.join(", ")} — are named in the
+            key below and covered in the villages section rather than lettered
+            onto the drawing, because a map you can read beats one that lists
+            everything. Roads and the conservation-area boundary come from{" "}
             <a
               href="https://www.openstreetmap.org/copyright"
               target="_blank"
