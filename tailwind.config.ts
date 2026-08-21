@@ -3,7 +3,14 @@ import type { Config } from "tailwindcss";
 // Design tokens sourced directly from docs/02-visual-design-system.md.
 // Do not add new colors or type sizes here without updating that document first.
 const config: Config = {
-  content: ["./app/**/*.{ts,tsx}", "./components/**/*.{ts,tsx}"],
+  content: [
+    "./app/**/*.{ts,tsx}",
+    "./components/**/*.{ts,tsx}",
+    // lib/areas/*.tsx carries authored JSX with utility classes on it. Without
+    // this glob those classes are silently dropped unless the same utility
+    // happens to be used somewhere under app/ or components/.
+    "./lib/**/*.{ts,tsx}",
+  ],
   theme: {
     extend: {
       colors: {

@@ -3,8 +3,15 @@ import Container from "@/components/ui/Container";
 export type AreaQuickFact = {
   /** Short uppercase label — e.g. "MAJOR CORRIDORS". */
   label: string;
-  /** One line. Keep it to a phrase; this is orientation, not a dashboard. */
-  value: string;
+  /**
+   * One line. Keep it to a phrase; this is orientation, not a dashboard.
+   *
+   * Normally a plain string. Nodes are permitted for typographic control only —
+   * a column that lists place names needs each name kept whole so lines break
+   * between names rather than through them. Not a way to smuggle extra
+   * structure, links or styling into the strip.
+   */
+  value: React.ReactNode;
 };
 
 export type AreaQuickFactsProps = {

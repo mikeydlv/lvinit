@@ -135,6 +135,7 @@
 //    itself, not a suggestion about who should live where.
 // ---------------------------------------------------------------------------
 
+import { Fragment } from "react";
 import Link from "next/link";
 import type { AreaQuickFact } from "@/components/area/AreaQuickFacts";
 import type { MapPlace } from "@/components/area/LVINITMap";
@@ -149,6 +150,26 @@ const linkClass =
   "text-lvinit-blue underline underline-offset-4 decoration-transparent hover:decoration-lvinit-blue";
 
 // --- 1. Quick orientation ---------------------------------------------------
+
+// The names in the fourth orientation column, authored as the lines they should
+// actually set on rather than left to the browser.
+//
+// WHY PAIRS. The column is 284px at every desktop width (the Container caps at
+// 1440px, so it never gets wider) and the type is 17px. Left as one string these
+// names break wherever the line runs out — through the middle of "Summerlin
+// South" and "Grand Park" — which is the ragged look this replaces. Each pair
+// below measures 282px or less, so it sets on one line here and on a 375px
+// phone alike; the widest, "Summerlin West · Summerlin South", clears by 2px.
+//
+// The separator lives at the START of the second name rather than trailing the
+// first, because a trailing "·" is counted in the line width and pushes every
+// pair over on its own. Same reason there is no separator between lines.
+const nameLines = [
+  ["Summerlin West", "Summerlin South"],
+  ["Downtown Summerlin", "The Ridges"],
+  ["The Paseos", "Stonebridge"],
+  ["Kestrel", "Grand Park"],
+];
 
 export const quickFacts: AreaQuickFact[] = [
   {
@@ -167,8 +188,28 @@ export const quickFacts: AreaQuickFact[] = [
   },
   {
     label: "Names you'll hear",
-    value:
-      "Summerlin West · Summerlin South · Downtown Summerlin · The Ridges · The Paseos · Stonebridge · Kestrel · Grand Park",
+    // Nodes rather than one string, purely so the breaks are authored. Same
+    // names, same wording, same 17px type, same color and spacing as the three
+    // columns beside it — only the line breaks change. Each name is also
+    // individually nowrap, so if the type ever reflows (zoom, a fallback font)
+    // it still breaks between names rather than through one.
+    value: (
+      <span className="block">
+        {nameLines.map((line) => (
+          <span key={line.join()} className="block">
+            {line.map((name, i) => (
+              <Fragment key={name}>
+                {i > 0 ? " " : ""}
+                <span className="whitespace-nowrap">
+                  {i > 0 ? "· " : ""}
+                  {name}
+                </span>
+              </Fragment>
+            ))}
+          </span>
+        ))}
+      </span>
+    ),
   },
 ];
 

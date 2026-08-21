@@ -516,10 +516,10 @@ export default function SummerlinPage() {
       <StoryGallery
         images={[
           {
-            src: "/images/hero/summerlin-drone-overlook-golden-hour.webp",
-            alt: "Aerial view over Summerlin, Las Vegas at golden hour, with low tile rooftops and desert landscaping in the foreground and the ridgelines of the Spring Mountains catching the last light behind.",
+            src: "/images/features/summerlin-mesa-ridge-park-drone.webp",
+            alt: "Aerial view looking east from above Mesa Ridge Park at the southern end of Summerlin, Las Vegas — a green park lawn with a playground, shaded ramadas and tall palms in the foreground, tile-roofed houses running to the horizon, the towers of the Las Vegas Strip small in the haze beyond, and desert mountain ranges on either side.",
             caption:
-              "The western edge at the end of the day. The mountains behind aren't a backdrop — they're the boundary the master plan stops at.",
+              "Looking east from Mesa Ridge Park, down at Summerlin's southern end. The Strip is that low cluster of towers on the horizon — a very different outlook from a street up against Red Rock.",
           },
         ]}
       />
