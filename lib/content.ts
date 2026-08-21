@@ -169,6 +169,15 @@ export const guides: Guide[] = [
     href: "/guides/las-vegas-home-prices-july-2026",
   },
   {
+    slug: "cost-of-living-2026",
+    title: "Why Your Nevada Property Tax Bill Won't Match the Seller's",
+    dek: "Nevada caps property tax increases at 3% a year for owner-occupied homes — but the cap resets when a home sells, and it isn't automatic. The mechanism every resale buyer should know.",
+    byline: "Mikey Del Rosario",
+    date: "August 2026",
+    category: "Cost of Living",
+    href: "/guides/nevada-property-tax-abatement-resale-buyers",
+  },
+  {
     slug: "downtown-arts-district-guide",
     title: "A Local's Guide to the Downtown Arts District",
     dek: "Where to get coffee, who's actually your neighbor, and what changes after 6pm.",
