@@ -41,47 +41,18 @@
 
 import { writeFileSync, mkdirSync } from "node:fs";
 import { dirname } from "node:path";
+import { createProjection, svgDocument, wordmark, label, C } from "./lib/area-map.mjs";
 
 // --- projection ------------------------------------------------------------
+//
+// The projection, palette, label primitive and SVG wrapper are shared with
+// every other area map — see scripts/lib/area-map.mjs. Only the geography and
+// the composition below are Southwest's own.
 
 const BOUNDS = { west: -115.37, east: -115.08, south: 35.955, north: 36.175 };
-const KM_PER_DEG_LAT = 111.0;
-const KM_PER_DEG_LON = 90.1; // 111.32 * cos(36 deg)
 const PX_PER_KM = 40;
 
-function round(n) {
-  return Math.round(n * 10) / 10;
-}
-
-const W = round((BOUNDS.east - BOUNDS.west) * KM_PER_DEG_LON * PX_PER_KM);
-const H = round((BOUNDS.north - BOUNDS.south) * KM_PER_DEG_LAT * PX_PER_KM);
-
-function x(lon) {
-  return round((lon - BOUNDS.west) * KM_PER_DEG_LON * PX_PER_KM);
-}
-function y(lat) {
-  return round((BOUNDS.north - lat) * KM_PER_DEG_LAT * PX_PER_KM);
-}
-/** [lon, lat][] -> "x,y x,y ..." */
-function pts(coords) {
-  return coords.map(([lon, lat]) => x(lon) + "," + y(lat)).join(" ");
-}
-
-// --- palette (docs/02-visual-design-system.md) ------------------------------
-
-const C = {
-  black: "#111111",
-  warm: "#6E6A63",
-  light: "#E8E6E1",
-  blue: "#2B6CB0",
-  gold: "#C8A46A",
-  paper: "#FFFFFF",
-  road: "#DAD7D1",
-};
-
-// Inter cannot load inside an <img>-embedded SVG, so name a real fallback
-// stack rather than pretending the brand face will render.
-const FONT = "Inter, 'Helvetica Neue', Helvetica, Arial, sans-serif";
+const { W, H, x, y, pts } = createProjection(BOUNDS, PX_PER_KM);
 
 // --- base geography: the Las Vegas Valley -----------------------------------
 // Reused by every future area guide. Only the highlight layer changes.
@@ -204,37 +175,11 @@ const TOWN_LABELS = [
   { name: "ENTERPRISE", lon: -115.222, lat: 36.008 },
 ];
 
-// --- svg helpers ------------------------------------------------------------
-
-function esc(s) {
-  return s
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/'/g, "&apos;");
-}
-
-function label(text, px, py, opts) {
-  const o = opts || {};
-  const size = o.size || 16;
-  const fill = o.fill || C.warm;
-  const anchor = o.anchor || "start";
-  const weight = o.weight || 500;
-  const spacing = o.spacing ? ' letter-spacing="' + o.spacing + '"' : "";
-  // `rotate` spins the label about its own anchor point — used for the
-  // north-south arterials, which are one mile (64px) apart and would otherwise
-  // collide: "Fort Apache Rd" alone is ~113px wide horizontally.
-  const transform = o.rotate
-    ? ' transform="rotate(' + o.rotate + " " + px + " " + py + ')"'
-    : "";
-  return (
-    '<text x="' + px + '" y="' + py + '" font-family="' + FONT + '" font-size="' + size +
-    '" font-weight="' + weight + '" fill="' + fill + '" text-anchor="' + anchor + '"' + spacing +
-    transform +
-    ' paint-order="stroke" stroke="' + C.paper + '" stroke-width="3.5" stroke-linejoin="round">' +
-    esc(text) + "</text>"
-  );
-}
+// --- composition ------------------------------------------------------------
+//
+// `label` rotates about its own anchor point, which is what keeps the
+// north-south arterials legible here: they sit one mile (64px) apart and
+// "Fort Apache Rd" alone is ~113px wide set horizontally.
 
 const parts = [];
 const push = (s) => parts.push(s);
@@ -328,8 +273,7 @@ push(label("Both are LVINIT's reading of local usage — neither", LX + 18, LY +
 push(label("is a government boundary. Enterprise and Spring", LX + 18, LY + 141, { size: 13 }));
 push(label("Valley are labeled here, not outlined.", LX + 18, LY + 160, { size: 13 }));
 
-push(label("LVI", W - 78, 34, { size: 19, fill: C.black, weight: 800, spacing: 2 }));
-push(label("NIT", W - 42, 34, { size: 19, fill: C.gold, weight: 800, spacing: 2 }));
+push(wordmark(W));
 
 const TITLE = "Southwest Las Vegas — an LVINIT area map";
 const DESC =
@@ -341,14 +285,7 @@ const DESC =
   "of Henderson. The Clark County towns of Enterprise and Spring Valley are labeled; their legal boundaries are " +
   "not drawn.";
 
-const svg =
-  '<?xml version="1.0" encoding="UTF-8"?>\n' +
-  '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ' + W + " " + H + '" width="' + W +
-  '" height="' + H + '" role="img" aria-labelledby="mapTitle mapDesc">\n' +
-  "<title id=\"mapTitle\">" + esc(TITLE) + "</title>\n" +
-  "<desc id=\"mapDesc\">" + esc(DESC) + "</desc>\n" +
-  parts.join("\n") +
-  "\n</svg>\n";
+const svg = svgDocument({ W, H, title: TITLE, desc: DESC, parts });
 
 const OUT = "public/images/maps/southwest-las-vegas-map-lvinit.svg";
 mkdirSync(dirname(OUT), { recursive: true });
