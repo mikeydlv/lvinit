@@ -102,7 +102,7 @@ const meta: StoryMeta = {
   title: "Why the Seller's Nevada Property Tax Bill May Not Be Yours | LVINIT",
   headline: "Why the Seller's Nevada Property Tax Bill May Not Be Yours",
   description:
-    "Nevada caps property tax increases at 3% a year for an owner-occupied home, but that cap is tied to the owner, not the house — and recording a sale removes the seller's designation. Here's what actually changes at closing, what doesn't, and what to verify before you trust a listing's tax number.",
+    "Nevada caps property tax increases at 3% a year for an owner-occupied home, but eligibility depends on the current owner establishing the home as their primary residence — recording a sale removes the seller's designation, though the statutory calculation still references the property's prior-year taxes. Here's what actually changes at closing, what doesn't, and what to verify before you trust a listing's tax number.",
   path: "/guides/nevada-property-tax-abatement-resale-buyers",
   datePublished: "2026-08-21",
   dateModified: "2026-08-22",
@@ -163,7 +163,7 @@ export default function NevadaPropertyTaxAbatementResaleBuyersPage() {
         category: "Cost of Living",
         headline: "Why the Seller's Nevada Property Tax Bill May Not Be Yours",
         subheadline:
-          "Nevada caps how much an owner-occupied home's property tax bill can rise each year at 3%. That cap is tied to the owner, not the house — so when a home sells, the designation is removed and the new owner has to establish it again. Here's what actually changes, what doesn't, and what to verify before closing.",
+          "Nevada caps how much an owner-occupied home's property tax bill can rise each year at 3%. Eligibility depends on the current owner establishing the home as their primary residence — so when a home sells, the prior owner's designation is removed and the new owner has to establish their own. Here's what actually changes, what doesn't, and what to verify before closing.",
         backLink: { label: "LVINIT", href: "/" },
       }}
       relatedStories={{
@@ -203,13 +203,14 @@ export default function NevadaPropertyTaxAbatementResaleBuyersPage() {
       >
         <p className="mt-6 text-body-lg text-lvinit-warmgray">
           Nevada caps how much an owner-occupied home&rsquo;s property tax
-          bill can rise in a single year. That cap is real, it&rsquo;s written
-          into state law, and it can meaningfully separate a longtime
-          owner&rsquo;s bill from what the same house would cost a brand-new
-          owner. The part worth understanding before you write an offer isn&rsquo;t
-          a prediction about your future bill &mdash; it&rsquo;s the mechanism:
-          what the cap is tied to, what happens to it when a home changes
-          hands, and what you actually need to verify before closing.
+          bill can rise in a single year. That cap is real and it&rsquo;s
+          written into state law — but eligibility for it depends on the
+          current owner establishing the home as their primary residence, not
+          on the house itself. The part worth understanding before you write
+          an offer isn&rsquo;t a prediction about your future bill &mdash;
+          it&rsquo;s the mechanism: what establishes eligibility, what happens
+          to it when a home changes hands, and what you actually need to
+          verify before closing.
         </p>
       </StoryLede>
 
@@ -286,15 +287,19 @@ export default function NevadaPropertyTaxAbatementResaleBuyersPage() {
           jump to match the purchase price.
         </p>
         <p className="mt-5 text-body-lg text-lvinit-warmgray">
-          What does change is designation. The 3% cap isn&rsquo;t attached to
-          the house forever — it&rsquo;s attached to whoever is claiming the
-          property as their primary residence. The Clark County
+          What does change is designation. Eligibility for the owner-occupied
+          3% abatement depends on the new owner establishing the property as
+          their primary residence — it isn&rsquo;t automatic just because the
+          house itself already carried the cap. The Clark County
           Assessor&rsquo;s own tax-abatement page says this plainly:
           &ldquo;Any ownership document recorded will remove your Owner
-          Occupied 3% abatement.&rdquo; Record a sale, and the seller&rsquo;s
-          owner-occupied designation goes with them. What the parcel is taxed
-          under after that turns on whether, and how quickly, the new owner
-          establishes their own claim.
+          Occupied 3% abatement.&rdquo; A recorded ownership change removes
+          the prior owner&rsquo;s owner-occupied designation, but Nevada&rsquo;s
+          statutory abatement calculation still references the property&rsquo;s
+          prior-year taxes — it doesn&rsquo;t start over from zero or reset to
+          the purchase price. What the parcel is taxed under after the sale
+          turns on whether, and how quickly, the new owner establishes their
+          own claim.
         </p>
         <p className="mt-5 text-body-lg text-lvinit-warmgray">
           And that claim doesn&rsquo;t happen automatically. Clark County
@@ -318,7 +323,8 @@ export default function NevadaPropertyTaxAbatementResaleBuyersPage() {
           a resale listing&rsquo;s advertised &ldquo;current taxes&rdquo;
           figure is the seller&rsquo;s bill — a bill that may have been
           quietly capped at 3% growth for years. That number tells you about
-          the seller&rsquo;s history. It doesn&rsquo;t tell you what you&rsquo;ll
+          the seller&rsquo;s current tax bill and abatement designation. It
+          doesn&rsquo;t tell you what you&rsquo;ll
           be taxed as the new owner, because your designation is a separate,
           fresh claim.
         </p>
@@ -363,7 +369,7 @@ export default function NevadaPropertyTaxAbatementResaleBuyersPage() {
             <span>
               Don&rsquo;t treat a resale listing&rsquo;s &ldquo;current
               taxes&rdquo; line as your future bill. It reflects the
-              seller&rsquo;s history and designation, not yours.
+              seller&rsquo;s current tax bill and designation, not yours.
             </span>
           </li>
           <li className="flex gap-3">
@@ -410,7 +416,7 @@ export default function NevadaPropertyTaxAbatementResaleBuyersPage() {
       <StorySection heading="The bottom line for a resale buyer">
         <p className="text-body-lg text-lvinit-warmgray">
           The tax number on a resale listing tells you about the seller&rsquo;s
-          history and designation, not your future bill. Nevada doesn&rsquo;t
+          current tax bill and designation, not your future bill. Nevada doesn&rsquo;t
           reassess the home&rsquo;s value to the sale price, but recording the
           sale does remove the seller&rsquo;s owner-occupied cap — so what you
           end up taxed under comes down to whether, and how, you establish
