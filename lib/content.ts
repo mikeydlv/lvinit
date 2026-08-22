@@ -170,8 +170,8 @@ export const guides: Guide[] = [
   },
   {
     slug: "cost-of-living-2026",
-    title: "Why Your Nevada Property Tax Bill Won't Match the Seller's",
-    dek: "Nevada caps property tax increases at 3% a year for owner-occupied homes — but the cap resets when a home sells, and it isn't automatic. The mechanism every resale buyer should know.",
+    title: "Why the Seller's Nevada Property Tax Bill May Not Be Yours",
+    dek: "Nevada caps property tax increases at 3% a year for an owner-occupied home — but that cap is tied to the owner, not the house. What changes at a sale, what doesn't, and what to verify before closing.",
     byline: "Mikey Del Rosario",
     date: "August 2026",
     category: "Cost of Living",
