@@ -60,6 +60,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.7,
     },
+    {
+      url: `${BASE_URL}/guides/first-summer-in-vegas`,
+      changeFrequency: "yearly",
+      priority: 0.7,
+    },
     { url: `${BASE_URL}/search`, changeFrequency: "monthly", priority: 0.6 },
     { url: `${BASE_URL}/contact`, changeFrequency: "yearly", priority: 0.5 },
   ];
