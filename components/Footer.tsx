@@ -7,7 +7,8 @@ const columns = [
     heading: "Explore",
     links: [
       { label: "Neighborhoods", href: "#neighborhoods" },
-      { label: "Guides", href: "#guides" },
+      // Real route — the complete editorial library. See Navbar.
+      { label: "Guides", href: "/guides" },
       { label: "Compare", href: "#compare" },
       { label: "Videos", href: "#videos" },
       { label: "Moving to Las Vegas", href: "#moving-to-las-vegas" },
