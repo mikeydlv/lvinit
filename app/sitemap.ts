@@ -40,6 +40,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.7,
     },
+    { url: `${BASE_URL}/guides`, changeFrequency: "weekly", priority: 0.8 },
     {
       url: `${BASE_URL}/guides/summerlin-vs-henderson`,
       changeFrequency: "monthly",

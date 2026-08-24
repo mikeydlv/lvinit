@@ -125,6 +125,40 @@ below) rather than fabricating.
   → use the transcript/notes, invent no visuals; unverifiable current fact → omit
   or flag.
 
+## Publishing metadata the agent must supply
+
+Every new editorial page gets **one entry in the `guides` array in
+`lib/content.ts`** — the canonical registry. That entry is the whole
+distribution step: `/guides` lists it, and the homepage **Latest from LVINIT**
+feed picks up the newest three automatically. **No homepage file is edited per
+article.** If a piece isn't showing up, its registry entry is what to check.
+
+| Field | Required | Notes |
+|---|---|---|
+| `slug` | yes | Unique registry key. |
+| `href` | yes | The real, working route. No entry without one — LVINIT ships no dead cards. |
+| `publishedAt` | yes | `YYYY-MM-DD`. **Must match the page's `StoryMeta.datePublished`.** This is the sort key. |
+| `category` | yes | Editorial eyebrow — Moving Here, Cost of Living, Market Watch, Buyer Guide, Comparisons, Neighborhoods, Local Feature… |
+| `title` / `dek` | yes | Card headline and concise excerpt. |
+| `byline` | yes | "Mikey Del Rosario", or "LVINIT Editorial" for house pieces. |
+| `date` | yes | Human-readable display string ("August 2026"). Display only — never sorted on. |
+| `image` + `imageAlt` | only if real | Set **only** when a genuine photograph of this story exists. |
+| `status` | optional | `"draft"` keeps a staged piece in the registry and out of every public feed. Omit once published. |
+
+Two rules worth repeating:
+
+- **Never invent a publication date.** Omit `publishedAt` and the piece simply
+  stays out of the dated feeds until a real date exists.
+- **Never fill an empty `image` slot.** A guide with no authentic photograph is
+  left imageless on purpose — the card renders a designed, non-photographic
+  LVINIT panel and looks finished. A generic stand-in or an unrelated
+  neighborhood photo would present as real editorial photography, which the
+  imagery rules forbid.
+
+Publishing still ends where it always did: build, verify, commit, open a PR.
+**Merging and deploying remain Mikey's call** — the agent does not self-merge or
+self-deploy.
+
 ## Honesty and attribution rules
 
 - **No fabricated** stats, prices, ratings, dates, quotes, testimonials, events,

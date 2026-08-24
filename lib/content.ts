@@ -129,32 +129,96 @@ export type Guide = {
   title: string;
   dek: string;
   byline: string;
+  /** Human-readable display date, e.g. "August 2026". Kept for existing UI. */
   date: string;
+  /**
+   * Machine-readable publication date, `YYYY-MM-DD`. This is what the homepage
+   * feed and `/guides` sort on — `date` alone is too coarse (several pieces
+   * share "August 2026").
+   *
+   * MUST match the `datePublished` in the destination page's `StoryMeta`
+   * (lib/story.ts) so the card, the Article schema, and the sitemap never
+   * disagree. Never invent one: if a piece has no verified publication date,
+   * leave it off and it stays out of the dated feeds.
+   */
+  publishedAt?: string;
   category: string;
+  /**
+   * Editorial status. Defaults to "published" when omitted. Anything marked
+   * "draft" is excluded from `publishedGuides` — and therefore from both the
+   * homepage feed and `/guides` — while still living in the registry.
+   */
+  status?: "published" | "draft";
   pullQuote?: string;
-  /** Real card photograph in /public/images. Falls back to the labeled
-   * stand-in (`/images/guide-{slug}.jpg`) when omitted. */
+  /**
+   * Real, verified photograph for this piece, in /public/images. Omit it when
+   * no legitimate image exists — the card then renders an intentional
+   * non-photographic fallback rather than passing a generic stand-in off as
+   * LVINIT editorial photography. Only set it to a file that actually depicts
+   * this story; never a filename-convention guess.
+   */
   image?: string;
-  /** Root-relative link to the published guide. When set, the card becomes a
-   * real link; when omitted, the card is a display-only placeholder (no dead
-   * links). */
+  /** Alt text for `image`. Required whenever `image` is set. */
+  imageAlt?: string;
+  /**
+   * Root-relative link to the published guide. Entries without one are not
+   * eligible for any feed — LVINIT never ships a card that goes nowhere.
+   */
   href?: string;
 };
 
-// PLACEHOLDER — replace with real published guides before launch.
+/**
+ * The canonical editorial registry. Every published LVINIT guide, feature, and
+ * article gets exactly one entry here — that is what makes it discoverable in
+ * the homepage "Latest from LVINIT" feed and at `/guides`.
+ *
+ * Publishing checklist for a new piece: `href` pointing at the real route,
+ * `publishedAt` matching the page's `StoryMeta.datePublished`, a `category`, a
+ * `dek`, and `image` + `imageAlt` only when a genuine photograph exists. No
+ * homepage file needs editing — the feed picks the newest three on its own.
+ */
 export const guides: Guide[] = [
+  {
+    slug: "first-summer-in-vegas",
+    title: "Surviving Your First Las Vegas Summer",
+    dek: "The practical version, not the panicked version.",
+    byline: "LVINIT Editorial",
+    date: "August 2026",
+    publishedAt: "2026-08-23",
+    category: "Moving Here",
+    // Deliberately imageless — no authentic photography for this one yet, so
+    // the card renders the designed fallback. Add `image` + `imageAlt` when a
+    // real photo lands.
+    href: "/guides/first-summer-in-vegas",
+  },
+  {
+    slug: "cost-of-living-2026",
+    title: "Why the Seller's Nevada Property Tax Bill May Not Be Yours",
+    dek: "Nevada caps property tax increases at 3% a year for an owner-occupied home — but that cap is tied to the owner, not the house. What changes at a sale, what doesn't, and what to verify before closing.",
+    byline: "Mikey Del Rosario",
+    date: "August 2026",
+    publishedAt: "2026-08-21",
+    category: "Cost of Living",
+    // Intentionally imageless. `/images/guide-cost-of-living-2026.jpg` is a
+    // generic stand-in left over from the old cost-of-living placeholder; it
+    // does not depict this story and must not be shown as LVINIT photography.
+    href: "/guides/nevada-property-tax-abatement-resale-buyers",
+  },
   {
     slug: "summerlin-vs-henderson",
     title: "Summerlin vs. Henderson: Where Should You Actually Move?",
     dek: "Two of the city's most-recommended suburbs, compared honestly — schools, commute, and the tradeoffs nobody puts in a brochure.",
     byline: "Mikey Del Rosario",
     date: "August 2026",
+    publishedAt: "2026-08-19",
     category: "Comparisons",
     pullQuote:
       "Both are good answers. They're just good answers to different questions.",
     // Real, already-live Mikey photography (Fox Hill Park / Red Rock drone
     // shot) — same asset used on the article hero and the Summerlin guide.
     image: "/images/hero/summerlin-fox-hill-park-red-rock-aerial-drone.webp",
+    imageAlt:
+      "Aerial drone view over Fox Hill Park in Summerlin, the Red Rock escarpment rising beyond the rooftops.",
     href: "/guides/summerlin-vs-henderson",
   },
   {
@@ -164,18 +228,39 @@ export const guides: Guide[] = [
     dek: "LVR's July 2026 report shows the median single-family price slipped to $480,000, down 2% from the record set in May and June — the honest read on what changed and what didn't.",
     byline: "Mikey Del Rosario",
     date: "August 2026",
+    publishedAt: "2026-08-17",
     category: "Market Watch",
     image: "/images/guide-las-vegas-home-prices-july-2026.webp",
+    imageAlt:
+      "Single-family homes across a Las Vegas valley neighborhood, mountains behind them.",
     href: "/guides/las-vegas-home-prices-july-2026",
   },
   {
-    slug: "cost-of-living-2026",
-    title: "Why the Seller's Nevada Property Tax Bill May Not Be Yours",
-    dek: "Nevada caps property tax increases at 3% a year for an owner-occupied home — but that cap is tied to the owner, not the house. What changes at a sale, what doesn't, and what to verify before closing.",
+    slug: "what-500k-buys-in-las-vegas",
+    title: "What $500K Buys in Las Vegas",
+    dek: "Three real home tours showing how different the options can be at roughly the same budget.",
     byline: "Mikey Del Rosario",
     date: "August 2026",
-    category: "Cost of Living",
-    href: "/guides/nevada-property-tax-abatement-resale-buyers",
+    publishedAt: "2026-08-04",
+    category: "Buyer Guide",
+    // The article's own poster art (also its StoryMeta image) — the video this
+    // companion piece is built around.
+    image: "/images/video-what-500k-gets-you-in-las-vegas.jpg",
+    imageAlt:
+      "Title card for the LVINIT video “What $500K Actually Gets You in Las Vegas.”",
+    href: "/guides/what-500k-buys-in-las-vegas",
+  },
+  {
+    slug: "will-las-vegas-home-prices-drop",
+    title:
+      "Inventory Is Rising in Las Vegas. So Why Aren't Home Prices Falling?",
+    dek: "Inventory and days on market climbed through mid-2026, yet prices held at a record. Here's what's actually holding them up — and what would have to change.",
+    byline: "Mikey Del Rosario",
+    date: "August 2026",
+    publishedAt: "2026-08-04",
+    category: "Market Watch",
+    // Intentionally imageless — no authentic photograph for this explainer.
+    href: "/guides/will-las-vegas-home-prices-drop",
   },
   {
     slug: "downtown-arts-district-guide",
@@ -183,17 +268,71 @@ export const guides: Guide[] = [
     dek: "Where to get coffee, who's actually your neighbor, and what changes after 6pm.",
     byline: "Mikey Del Rosario",
     date: "July 2026",
+    publishedAt: "2026-07-15",
     category: "Neighborhoods",
     image: "/images/guide-arts-district-walkable-sidewalk.webp",
+    imageAlt:
+      "A walkable sidewalk in the Downtown Arts District, storefronts and murals along the street.",
     href: "/neighborhoods/downtown-arts-district",
   },
   {
-    slug: "first-summer-in-vegas",
-    title: "Surviving Your First Las Vegas Summer",
-    dek: "The practical version, not the panicked version.",
-    byline: "LVINIT Editorial",
-    date: "August 2026",
-    category: "Moving Here",
-    href: "/guides/first-summer-in-vegas",
+    slug: "four-seasons-private-residences",
+    title: "Four Seasons Private Residences",
+    dek: "Henderson's MacDonald Highlands is getting a Four Seasons address — what's actually being built, and what's still unconfirmed.",
+    byline: "Mikey Del Rosario",
+    date: "July 2026",
+    publishedAt: "2026-07-08",
+    category: "Local Feature",
+    // TEMPORARY card image: the video-thumbnail art (has baked-in title text);
+    // approved by Mikey as a stand-in. Swap for a clean drone still when one
+    // lands.
+    image: "/images/features/four-seasons-private-residences.webp",
+    imageAlt:
+      "The Four Seasons Private Residences construction site in MacDonald Highlands, Henderson.",
+    href: "/neighborhoods/henderson/four-seasons-private-residences",
+  },
+  {
+    slug: "summerlin-fourth-of-july-parade",
+    title: "Summerlin Fourth of July Parade",
+    dek: "A local look at one of Summerlin's favorite traditions — and what it says about living here.",
+    byline: "Mikey Del Rosario",
+    date: "July 2026",
+    publishedAt: "2026-07-06",
+    category: "Local Feature",
+    image: "/images/features/summerlin-fourth-of-july-parade-banner.webp",
+    imageAlt:
+      "Crowds lining a Summerlin street for the Fourth of July parade, flags and floats passing by.",
+    href: "/neighborhoods/summerlin/fourth-of-july-parade",
   },
 ];
+
+/**
+ * Every guide eligible to appear in a public feed, newest first.
+ *
+ * Eligibility is driven entirely by metadata — there is no slug allow/deny
+ * list, so a new entry in `guides` surfaces automatically:
+ *   1. not a draft,
+ *   2. has a real `href` (LVINIT never ships a card that goes nowhere),
+ *   3. has a verified `publishedAt` to sort on.
+ *
+ * Ties on `publishedAt` fall back to registry order — deterministic, and it
+ * invents no editorial chronology the dates don't actually support.
+ */
+export const publishedGuides: Guide[] = guides
+  .map((guide, index) => ({ guide, index }))
+  .filter(
+    ({ guide }) =>
+      guide.status !== "draft" &&
+      Boolean(guide.href) &&
+      Boolean(guide.publishedAt)
+  )
+  .sort((a, b) => {
+    const byDate = b.guide.publishedAt!.localeCompare(a.guide.publishedAt!);
+    return byDate !== 0 ? byDate : a.index - b.index;
+  })
+  .map(({ guide }) => guide);
+
+/** The newest `count` published guides — what "Latest from LVINIT" renders. */
+export function latestGuides(count = 3): Guide[] {
+  return publishedGuides.slice(0, count);
+}
