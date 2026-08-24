@@ -192,7 +192,8 @@ export const guides: Guide[] = [
     title: "Surviving Your First Las Vegas Summer",
     dek: "The practical version, not the panicked version.",
     byline: "LVINIT Editorial",
-    date: "March 2026",
+    date: "August 2026",
     category: "Moving Here",
+    href: "/guides/first-summer-in-vegas",
   },
 ];
