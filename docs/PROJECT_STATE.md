@@ -70,6 +70,7 @@ app/
   guides/will-las-vegas-home-prices-drop/page.tsx  /guides/will-las-vegas-home-prices-drop — Market Watch, June 2026 LVR data (Story Page system)
   guides/las-vegas-home-prices-july-2026/page.tsx  /guides/las-vegas-home-prices-july-2026 — Market Watch, July 2026 LVR data (Story Page system)
   guides/summerlin-vs-henderson/page.tsx         /guides/summerlin-vs-henderson — honest comparison guide, no invented stats (Story Page system)
+  guides/nevada-property-tax-abatement-resale-buyers/page.tsx  /guides/nevada-property-tax-abatement-resale-buyers — Cost of Living explainer, NRS 361.4723 property tax cap (Story Page system)
 ```
 
 **Path alias:** `@/*` → project root (see `tsconfig.json`).
@@ -90,6 +91,7 @@ app/
 | `/neighborhoods/southwest-las-vegas` | Area guide (pillar) | Live | Story Page system; real Mikey UnCommons/The Bend photography (2026-07-16 shoot) — street hero + 4 inline figures; informal-boundary + unincorporated-Clark-County framing; "My honest take" Local's Note; verified development status (open vs announced); Article + Breadcrumb JSON-LD; hero = OG image |
 | `/guides/what-500k-buys-in-las-vegas` | Buyer guide (video companion) | Live | First `/guides/` route; Story Page system; companion to the "$500K" home-tour video (id `Tzxid_nM2nA`, via `StoryVideo`); photoless editorial hero (OG = existing local video poster `video-what-500k-gets-you-in-las-vegas.jpg`); page-local responsive comparison (mobile cards / desktop table); Article + Breadcrumb + **VideoObject** JSON-LD; breadcrumb is Home → article only (no `/guides` index exists) |
 | `/guides/summerlin-vs-henderson` | Comparison guide | Live | Story Page system; honest, qualitative comparison of the Summerlin and Henderson pillar guides — no stats cited (the `neighborhoods[]` metrics in `lib/content.ts` are explicitly placeholder, not verified, so none are used); hero + card image reuse the real Summerlin Fox Hill Park drone photo (no real Henderson photography exists yet); Article + Breadcrumb JSON-LD; breadcrumb is Home → article only; cross-linked from both the Summerlin and Henderson pillar pages and the homepage `LocalGuides` card |
+| `/guides/nevada-property-tax-abatement-resale-buyers` | Cost of Living guide | Live | Story Page system; explains Nevada's owner-occupied 3% property tax cap (NRS 361.4723), the qualifying-rental carve-out (NRS 361.4724), and the general other-property formula capped at 8% (NRS 361.4722) — **corrected 2026-08-22**: removed an unsupported claim that a sale "resets" or "recalculates" the buyer's bill; Nevada does not reassess taxable value to sale price (mass-appraisal method, Clark County Assessor's real-property page) — what changes at a recorded sale is the owner-occupied *designation* only (Clark County Assessor's tax-abatement page), and current law (AB377, eff. Oct 1 2025, amending NRS 375.060) lets a new owner claim the abatement on the Declaration of Value at closing, with the older assessor-mailed-postcard process as backup; removed the invented "Mikey's take" opinion section (replaced with neutral sourced guidance); headline changed to "Why the Seller's Nevada Property Tax Bill May Not Be Yours"; no dollar figures asserted, one clearly-labeled hypothetical example; photoless hero; FAQPage + Article + Breadcrumb JSON-LD; breadcrumb is Home → article only; fills the homepage `LocalGuides` "Cost of Living" card slot (`guides[]` slug `cost-of-living-2026`) — **card image flagged for Mikey**: falls back to `/images/guide-cost-of-living-2026.jpg`, which is a generic flat gray/beige gradient placeholder, not real photography (confirmed by inspection); needs a real image or an explicit no-image placeholder treatment; cross-links `las-vegas-home-prices-july-2026`, `what-500k-buys-in-las-vegas`, and `summerlin-vs-henderson` |
 | `/search` | IDX search | Live | Matrix IDX embed `idx=3652dd5`; do not modify embed behavior without instruction |
 | `/contact` | Contact | Live | ContactForm → `/api/contact` (Resend) with mailto fallback |
 | `/api/contact` | Route handler | Live | Returns 503 until `RESEND_API_KEY` is set, so no fake service ships |
@@ -433,6 +435,20 @@ links flowing both up (feature → guide → homepage) and down (guide → featu
   system; Article + Breadcrumb JSON-LD; cross-linked from both the Summerlin
   and Henderson pillar pages (new "Comparing X to Y?" blocks) and the homepage
   `LocalGuides` card; sitemap entry.
+- **Nevada property tax abatement / resale-buyer guide** — the article behind
+  the previously-unbuilt homepage "Cost of Living" guide card. Explains NRS
+  361.4723 (the 3% owner-occupied primary-residence cap and the up-to-8%
+  ceiling for everything else), and the mechanism that actually surprises
+  resale buyers: the 3% cap resets when a home's title changes, and reclaiming
+  it is not automatic — sourced to the Clark County Assessor's own
+  tax-abatement page and a real, attributed quote from Assessor Briana Johnson
+  (via Fox5 Vegas). No dollar-figure examples asserted, one clearly-labeled
+  hypothetical. Photoless editorial hero (no real photo exists for this topic);
+  Story Page system; FAQPage + Article + Breadcrumb JSON-LD; cross-links the
+  July 2026 Market Watch piece, the $500K buyer guide, and Summerlin vs.
+  Henderson; wired into `lib/content.ts` `guides[]` (slug `cost-of-living-2026`,
+  reuses the existing `guide-cost-of-living-2026.jpg` placeholder image) so it
+  renders automatically in the homepage `LocalGuides` grid; sitemap entry.
 - Live IDX search page (Matrix / GLVAR).
 - Contact form with Resend handler + mailto fallback + GA4 lead event.
 - GA4 analytics scaffolding (opt-in via env var).
@@ -468,10 +484,14 @@ links flowing both up (feature → guide → homepage) and down (guide → featu
    a standalone comparison guide, not a child of either pillar. Cross-linked
    both directions with the Summerlin and Henderson pillar guides, plus
    `/guides/what-500k-buys-in-las-vegas` as tangential reading.
+7. **Cost of Living cluster:** `/guides/nevada-property-tax-abatement-resale-buyers` —
+   a standalone Cost of Living / homeownership explainer, not tied to a single
+   neighborhood. Cross-linked with `/guides/las-vegas-home-prices-july-2026`,
+   `/guides/what-500k-buys-in-las-vegas`, and `/guides/summerlin-vs-henderson`.
+   Fills the homepage `LocalGuides` "Cost of Living" card slot.
 
-The remaining homepage guide/video cards (Cost of Living, Surviving Your First
-Vegas Summer, and the four video posters) are placeholders that do not yet
-resolve to pages.
+The remaining homepage guide/video card (Surviving Your First Vegas Summer,
+and the four video posters) are placeholders that do not yet resolve to pages.
 
 ---
 
@@ -526,11 +546,11 @@ Run through this every time a new page ships, in order:
 
 - Neighborhood lifestyle features in the parade mold (events, parks, trails,
   local traditions) — one strong cluster child per pillar neighborhood.
-- Two homepage guide cards still need real articles before they should link
-  anywhere: *What It Costs to Live in Las Vegas in 2026* and *Surviving Your
-  First Vegas Summer*. (*Summerlin vs. Henderson* and *A Local's Guide to the
-  Downtown Arts District* are both real, linked pages now — this list was
-  stale.)
+- One homepage guide card still needs a real article before it should link
+  anywhere: *Surviving Your First Vegas Summer*. (*Summerlin vs. Henderson*, *A
+  Local's Guide to the Downtown Arts District*, and the Nevada property tax
+  abatement Cost of Living piece are all real, linked pages now — this list
+  was stale.)
 - Real produced videos to replace the four placeholder posters (topics already
   framed around real doubts: affordability, heat, rent-vs-buy, schools).
 - A **Relocation Hub** ("Moving to Las Vegas") landing destination for the
@@ -582,8 +602,8 @@ Placeholder content that must be replaced before it can be considered "done"
   `LocalGuides.tsx` now renders every `guides[]` entry with a real `href`
   automatically (`guides.filter((g) => g.href)`), so a guide card starts
   appearing on its own the moment its `href` is set — no component change
-  needed when the remaining two guides (Cost of Living, Surviving Your First
-  Vegas Summer) ship.
+  needed. Cost of Living shipped this sprint; the remaining placeholder is
+  Surviving Your First Vegas Summer.
 - **Neutral photo placeholders** in `/public/images/` — replace in place with
   real Mikey photography (keep filenames).
 - **Henderson hero (Option B)** — the page ships with a bright text hero and no
