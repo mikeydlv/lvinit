@@ -44,7 +44,7 @@ export default function Navbar() {
       <Container className="flex h-full items-center justify-between">
         <Link
           href="/"
-          aria-label="LVINIT — home"
+          aria-label="LVINIT home"
           className="font-sans text-subhead font-extrabold tracking-[0.1em]"
         >
           <span className="text-lvinit-black">LVI</span>

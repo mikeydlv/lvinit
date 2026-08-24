@@ -33,7 +33,7 @@ export default function Newsletter() {
 
         {submitted ? (
           <p className="mt-8 text-body text-lvinit-blue">
-            You&rsquo;re in — watch for your first guide.
+            You&rsquo;re in. Watch for your first guide.
           </p>
         ) : (
           <form

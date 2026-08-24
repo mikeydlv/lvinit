@@ -7,9 +7,9 @@ import { ButtonLink } from "@/components/ui/Button";
 
 const SITE_URL = "https://www.lvinit.com";
 const PATH = "/neighborhoods/henderson";
-const TITLE = "Henderson — A Neighborhood Guide | LVINIT";
+const TITLE = "Henderson: A Neighborhood Guide | LVINIT";
 const DESCRIPTION =
-  "The honest local guide to living in Henderson, Nevada — the Las Vegas valley's widest range of communities and lifestyles. What it's actually like, who it fits, and the areas inside it, from Green Valley to Lake Las Vegas.";
+  "The honest local guide to living in Henderson, Nevada, home to the Las Vegas valley's widest range of communities and lifestyles. What it's actually like, who it fits, and the areas inside it, from Green Valley to Lake Las Vegas.";
 
 export const metadata: Metadata = {
   title: TITLE,
@@ -49,32 +49,32 @@ const jsonLd = {
 const beats = [
   {
     heading: "Lifestyle",
-    body: "Henderson's real signature is range. Inside one city you'll find brand-new master-planned communities, established tree-lined neighborhoods, a resort community built around a lake, guard-gated hillside estates, and a historic downtown — each a genuinely different way to live. Most people don't move to “Henderson” so much as to one specific corner of it, and picking the corner matters more here than almost anywhere else in the valley.",
+    body: "Henderson's real signature is range. Inside one city you'll find brand-new master-planned communities, established tree-lined neighborhoods, a resort community built around a lake, guard-gated hillside estates, and a historic downtown. Each is a genuinely different way to live. Most people don't move to “Henderson” so much as to one specific corner of it, and picking the corner matters more here than almost anywhere else in the valley.",
   },
   {
     heading: "Commute",
-    body: "Henderson sits on the southeast side of the valley, which generally puts you closer to the airport and the east side than the west valley is — and farther from Summerlin and the northwest. But real drive times depend entirely on which part of Henderson you're in and where you're headed each day. Map your actual commute before you fall for a specific neighborhood; the city is big enough that the answer changes a lot from one community to the next.",
+    body: "Henderson sits on the southeast side of the valley, which generally puts you closer to the airport and the east side than the west valley is, and farther from Summerlin and the northwest. But real drive times depend entirely on which part of Henderson you're in and where you're headed each day. Map your actual commute before you fall for a specific neighborhood; the city is big enough that the answer changes a lot from one community to the next.",
   },
   {
     heading: "Schools & family",
-    body: "Henderson has long been shorthand for “the family choice” in the valley — a reputation built on parks, newer neighborhoods, and a settled, residential feel. Schools vary school to school, though, and boundaries change, so treat the reputation as a starting point rather than a guarantee and check the specifics for the exact address you're weighing.",
+    body: "Henderson has long been shorthand for “the family choice” in the valley, a reputation built on parks, newer neighborhoods, and a settled, residential feel. Schools vary school to school, though, and boundaries change, so treat the reputation as a starting point rather than a guarantee and check the specifics for the exact address you're weighing.",
   },
   {
     heading: "Outdoor access",
-    body: "You're close to a lot without being on top of it — regional and community parks, trail systems, and the water and open space around Lake Las Vegas and the hillside communities. It reads less like “trailhead out the back door” than the west side and more like a lot of green and open space woven through where people actually live.",
+    body: "You're close to a lot without being on top of it: regional and community parks, trail systems, and the water and open space around Lake Las Vegas and the hillside communities. It reads less like “trailhead out the back door” than the west side and more like a lot of green and open space woven through where people actually live.",
   },
   {
     heading: "Shopping, dining & entertainment",
-    body: "Between The District at Green Valley Ranch, the resort casinos on this side of town, and the newer town centers inside the master plans, Henderson keeps most of everyday life close by. It isn't the nightlife-first part of the valley — it's more “good dinner, easy errands, something to do on the weekend” than “walk out into a scene.”",
+    body: "Between The District at Green Valley Ranch, the resort casinos on this side of town, and the newer town centers inside the master plans, Henderson keeps most of everyday life close by. It isn't the nightlife-first part of the valley. It's more “good dinner, easy errands, something to do on the weekend” than “walk out into a scene.”",
   },
 ];
 
 // Reasons people land here — fit-focused, not a stat sheet.
 const reasons = [
-  "Range at every stage of life — a first place, a growing family's home, a right-size later on, a resort-quiet chapter — often inside the same city.",
-  "Newer construction, if that's what you want — several of the valley's most active master-planned communities are here.",
-  "A settled, residential feel — Henderson generally reads calmer and more family-oriented than the areas pressed up against the Strip.",
-  "Room to match a home to a life, not the other way around — precisely because the communities here are so different from one another.",
+  "Range at every stage of life: a first place, a growing family's home, a right-size later on, a resort-quiet chapter, often inside the same city.",
+  "Newer construction, if that's what you want. Several of the valley's most active master-planned communities are here.",
+  "A settled, residential feel. Henderson generally reads calmer and more family-oriented than the areas pressed up against the Strip.",
+  "Room to match a home to a life, not the other way around, precisely because the communities here are so different from one another.",
 ];
 
 // Community roster. Honest, qualitative descriptions — NO stats, prices, or
@@ -83,31 +83,31 @@ const reasons = [
 const communities: Array<{ name: string; body: string }> = [
   {
     name: "Green Valley",
-    body: "Henderson's original master-planned community, and the one most people picture first. It's the established, settled part of town — mature landscaping, streets that have had time to grow in, and The District at Green Valley Ranch giving it something close to a walkable center for dinner and errands. If you want Henderson with a track record rather than a construction timeline, this is usually where the conversation starts.",
+    body: "Henderson's original master-planned community, and the one most people picture first. It's the established, settled part of town: mature landscaping, streets that have had time to grow in, and The District at Green Valley Ranch giving it something close to a walkable center for dinner and errands. If you want Henderson with a track record rather than a construction timeline, this is usually where the conversation starts.",
   },
   {
     name: "Inspirada",
-    body: "One of the newer master-planned communities on the southwest side, built around parks, trails, and open space. It skews family-first and is still filling in, so you'll find newer construction alongside a community actively growing into itself — a fit for buyers who want something recent and green with room to settle in.",
+    body: "One of the newer master-planned communities on the southwest side, built around parks, trails, and open space. It skews family-first and is still filling in, so you'll find newer construction alongside a community actively growing into itself. It's a fit for buyers who want something recent and green with room to settle in.",
   },
   {
     name: "Cadence",
-    body: "One of the largest of the new-generation master plans, out toward the east. It leans amenity- and event-forward — a big central park and a steady calendar of community happenings — and, like Inspirada, is still expanding. It tends to appeal to buyers who want a newer home with plenty built in close by.",
+    body: "One of the largest of the new-generation master plans, out toward the east. It leans amenity- and event-forward, with a big central park and a steady calendar of community happenings, and like Inspirada it's still expanding. It tends to appeal to buyers who want a newer home with plenty built in close by.",
   },
   {
     name: "Lake Las Vegas",
-    body: "The valley's resort curveball: a community built around a man-made lake, anchored by MonteLago Village and a genuinely unhurried, resort-quiet pace. It sits a little apart from the rest of Henderson, which is exactly the point for the people who choose it. Worth understanding on its own terms — there's a closer look coming below.",
+    body: "The valley's resort curveball: a community built around a man-made lake, anchored by MonteLago Village and a genuinely unhurried, resort-quiet pace. It sits a little apart from the rest of Henderson, which is exactly the point for the people who choose it. Worth understanding on its own terms. There's a closer look coming below.",
   },
   {
     name: "Anthem",
-    body: "A hillside area to the south, known for elevation and views. “Anthem” actually covers several distinct pieces — including an age-restricted section (Sun City Anthem) and guard-gated country-club living (Anthem Country Club) — so the name can mean very different things depending on which part you're looking at. Worth pinning down exactly which Anthem you mean early in the search.",
+    body: "A hillside area to the south, known for elevation and views. “Anthem” actually covers several distinct pieces, including an age-restricted section (Sun City Anthem) and guard-gated country-club living (Anthem Country Club), so the name can mean very different things depending on which part you're looking at. Worth pinning down exactly which Anthem you mean early in the search.",
   },
   {
     name: "MacDonald Highlands",
-    body: "Henderson's high-end, guard-gated hillside address, climbing above the valley with the long views that come with elevation. This is the luxury end of the Henderson map, where the specifics matter a great deal — the kind of area that's worth walking through in person and talking over directly.",
+    body: "Henderson's high-end, guard-gated hillside address, climbing above the valley with the long views that come with elevation. This is the luxury end of the Henderson map, where the specifics matter a great deal. This is the kind of area that's worth walking through in person and talking over directly.",
   },
   {
     name: "Water Street District",
-    body: "Henderson's historic downtown — the original core, now well into a long revitalization. Civic buildings, events, and a walkable main-street stretch give it a different texture from the master-planned communities around it: older bones, a real sense of place, and genuine momentum.",
+    body: "Henderson's historic downtown, the original core, now well into a long revitalization. Civic buildings, events, and a walkable main-street stretch give it a different texture from the master-planned communities around it: older bones, a real sense of place, and genuine momentum.",
   },
 ];
 
@@ -123,7 +123,7 @@ const stories: Array<{ name: string; dek: string; href?: string }> = [
   },
   {
     name: "Lake Las Vegas",
-    dek: "The resort community on the water — MonteLago Village, the pace, and who it's really for.",
+    dek: "The resort community on the water. MonteLago Village, the pace, and who it's really for.",
   },
   {
     name: "Green Valley Ranch",
@@ -159,7 +159,7 @@ export default function HendersonPage() {
               Henderson
             </h1>
             <p className="mt-5 max-w-2xl text-body-lg text-lvinit-warmgray">
-              The valley&rsquo;s widest range of communities — brand-new
+              The valley&rsquo;s widest range of communities: brand-new
               master-plans, a lake, a historic downtown, and hillside estates.
               One city, a dozen different ways to live.
             </p>
@@ -186,7 +186,7 @@ export default function HendersonPage() {
           </p>
           <p className="mt-8 max-w-2xl text-body-lg text-lvinit-warmgray">
             That&rsquo;s the honest headline here. &ldquo;Henderson&rdquo; isn&rsquo;t
-            really one place you move to — it&rsquo;s a dozen, each with its own
+            really one place you move to. It&rsquo;s a dozen, each with its own
             pace, price, and personality. So this guide spends less time selling
             you the city and more time helping you find your corner of it.
           </p>
@@ -219,7 +219,7 @@ export default function HendersonPage() {
                 Families and anyone who wants a settled, residential base. Buyers
                 drawn to newer construction and master-planned amenities. People
                 who&rsquo;d rather choose from many different kinds of community
-                than settle for one — and anyone whose life leans toward the east
+                than settle for one. And anyone whose life leans toward the east
                 side or the airport.
               </p>
             </div>
@@ -230,7 +230,7 @@ export default function HendersonPage() {
               <p className="mt-4 max-w-md text-body-lg text-lvinit-warmgray">
                 If you want to walk out into nightlife, be minutes from a
                 west-side or Strip office, or live in a single dense, walkable
-                urban core, other parts of the valley will fit you better — and
+                urban core, other parts of the valley will fit you better, and
                 I&rsquo;ll happily point you to them.
               </p>
             </div>
@@ -273,7 +273,7 @@ export default function HendersonPage() {
             </h2>
             <p className="mt-5 max-w-2xl text-body-lg text-lvinit-warmgray">
               A quick, honest tour of the areas people mean when they say
-              Henderson — from the established and settled to the brand-new, the
+              Henderson, from the established and settled to the brand-new, the
               resort-quiet, and the historic. Start with the one that sounds like
               your life; we can go deeper on any of them together.
             </p>
@@ -299,7 +299,7 @@ export default function HendersonPage() {
             </h2>
             <p className="mt-4 max-w-2xl text-body text-lvinit-warmgray">
               Closer looks at the corners of Henderson worth their own story.
-              These are in production — check back as they publish.
+              These are in production. Check back as they publish.
             </p>
             <ul className="mt-10 grid grid-cols-1 gap-x-10 gap-y-8 sm:grid-cols-2">
               {stories.map((story) =>
@@ -366,7 +366,7 @@ export default function HendersonPage() {
               Read the Summerlin guide
             </h2>
             <p className="mt-3 max-w-xl text-body text-lvinit-warmgray">
-              Henderson&rsquo;s natural counterpoint across the valley — trails,
+              Henderson&rsquo;s natural counterpoint across the valley: trails,
               Red Rock, and a different kind of master-planned life. Here&rsquo;s
               the honest version.
             </p>
@@ -395,7 +395,7 @@ export default function HendersonPage() {
               Summerlin vs. Henderson: Where Should You Actually Move?
             </h2>
             <p className="mt-3 max-w-xl text-body text-lvinit-warmgray">
-              The honest side-by-side — master-plan culture, commute, and who
+              The honest side-by-side on master-plan culture, commute, and who
               actually fits each one, without a brochure in sight.
             </p>
             <span className="mt-5 inline-flex items-center gap-2 text-body font-medium text-lvinit-blue">
@@ -417,8 +417,8 @@ export default function HendersonPage() {
               Not sure which Henderson is yours?
             </h2>
             <p className="mx-auto mt-4 max-w-lg text-body-lg text-lvinit-warmgray">
-              Tell me what you&rsquo;re weighing — the stage of life, the budget,
-              the commute that has to work — and I&rsquo;ll help you narrow a
+              Tell me what you&rsquo;re weighing (the stage of life, the budget,
+              the commute that has to work) and I&rsquo;ll help you narrow a
               dozen communities down to the two or three actually worth your time.
             </p>
             <div className="mt-8 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">

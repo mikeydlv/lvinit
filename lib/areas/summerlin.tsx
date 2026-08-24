@@ -175,7 +175,7 @@ export const quickFacts: AreaQuickFact[] = [
   {
     label: "What it is",
     value:
-      "One master-planned community on the valley's western edge — 22,500 acres of it, built village by village since 1990.",
+      "One master-planned community on the valley's western edge, 22,500 acres of it, built village by village since 1990.",
   },
   {
     label: "Known for",
@@ -234,7 +234,7 @@ export const mapPlaces: MapPlace[] = [
   },
   {
     name: "Red Rock Canyon National Conservation Area",
-    note: "The gold line is the real BLM boundary. It's why the western villages stop where they do — Summerlin can't grow past it.",
+    note: "The gold line is the real BLM boundary. It's why the western villages stop where they do. Summerlin can't grow past it.",
   },
   {
     name: "Downtown Summerlin",
@@ -254,7 +254,7 @@ export const mapPlaces: MapPlace[] = [
   },
   {
     name: "The Vistas, The Paseos and Stonebridge",
-    note: "Also west of the 215, and also Summerlin West — but built years earlier. Worth seeing on the map, because it's the thing people most often get wrong.",
+    note: "Also west of the 215, and also Summerlin West, but built years earlier. Worth seeing on the map, because it's the thing people most often get wrong.",
   },
   {
     name: "Sun City Summerlin, The Trails, The Hills, The Arbors and The Canyons",
@@ -262,7 +262,7 @@ export const mapPlaces: MapPlace[] = [
   },
   {
     name: "The Ridges, The Willows and The Cliffs",
-    note: "The southern end, with The Gardens, Siena and The Mesa filling the gaps between them. The Cliffs is Summerlin's southernmost village and sits below Russell Road — further south than most people picture Summerlin reaching.",
+    note: "The southern end, with The Gardens, Siena and The Mesa filling the gaps between them. The Cliffs is Summerlin's southernmost village and sits below Russell Road, further south than most people picture Summerlin reaching.",
   },
 ];
 
@@ -289,7 +289,7 @@ export const communities: AreaCommunity[] = [
     summary:
       "The commercial heart of the community and the village wrapped around it. Downtown Summerlin's greater area covers 400 acres inside Summerlin South; the open-air center at the middle of it is 106 acres.",
     housing:
-      "The densest housing in Summerlin — apartments, townhomes and lower-maintenance attached product, plus single-family closer to Charleston. Summerlin Centre is still selling new homes.",
+      "The densest housing in Summerlin: apartments, townhomes and lower-maintenance attached product, plus single-family closer to Charleston. Summerlin Centre is still selling new homes.",
     distinct:
       "The only part of Summerlin where you can park once and spend an evening on foot. Also the only part with a ballpark, an NHL practice rink and a resort casino inside a ten-minute walk.",
     worthExploring:
@@ -335,7 +335,7 @@ export const communities: AreaCommunity[] = [
     name: "Stonebridge",
     where: "The far western edge, south of Charleston Blvd",
     summary:
-      "A newer village on elevated ground hard against the Red Rock Canyon conservation area — about as close to the boundary as the master plan gets.",
+      "A newer village on elevated ground hard against the Red Rock Canyon conservation area, about as close to the boundary as the master plan gets.",
     housing:
       "Newer single-family construction, much of it 2018 onward, on rolling desert-edge terrain.",
     distinct:
@@ -349,11 +349,11 @@ export const communities: AreaCommunity[] = [
     summary:
       "Two adjacent Summerlin West districts. Summerlin describes Redpoint Square as blending contemporary attached and detached homes with walkable streets and open space.",
     housing:
-      "A genuine mix — detached single-family alongside attached and townhome product, at higher density than older Summerlin villages.",
+      "A genuine mix: detached single-family alongside attached and townhome product, at higher density than older Summerlin villages.",
     distinct:
       "Density and street design. This is Summerlin trying something more urban than the 1990s village pattern, on the western side.",
     worthExploring:
-      "Worth seeing if you want new construction and don't need a large lot — and want to compare an attached home against a detached one on the same street.",
+      "Worth seeing if you want new construction and don't need a large lot, and if you want to compare an attached home against a detached one on the same street.",
   },
   {
     name: "Kestrel & Kestrel Commons",
@@ -363,7 +363,7 @@ export const communities: AreaCommunity[] = [
     housing:
       "Kestrel is single-family with view lots; Kestrel Commons runs to contemporary attached and detached homes. Both are actively selling.",
     distinct:
-      "Elevation, and the contrast between the two halves — a useful place to see how differently one Summerlin name can be built out.",
+      "Elevation, and the contrast between the two halves. It's a useful place to see how differently one Summerlin name can be built out.",
     worthExploring:
       "Relevant if you're shopping new construction and want to compare view lots against lower-maintenance product without leaving one area.",
   },
@@ -371,13 +371,13 @@ export const communities: AreaCommunity[] = [
     name: "Grand Park",
     where: "West of the 215 Beltway, north of Far Hills Ave",
     summary:
-      "One of the newest villages, named for the more-than-90-acre park at the middle of it — the largest park in Summerlin, opening in three phases.",
+      "One of the newest villages, named for the more-than-90-acre park at the middle of it, the largest park in Summerlin, opening in three phases.",
     housing:
       "Actively building, with several builders working at once across single-family and attached homes.",
     distinct:
       "The park. Phase one opened in early 2026 with ballfields, courts, a splash pad and a playground; two further phases are still in planning.",
     worthExploring:
-      "Worth a look if a large park at the center of the village matters to you — and if living beside active construction for a few years doesn't.",
+      "Worth a look if a large park at the center of the village matters to you, and if living beside active construction for a few years doesn't.",
   },
   {
     name: "La Madre Peaks",
@@ -413,7 +413,7 @@ export const communities: AreaCommunity[] = [
     distinct:
       "It runs under its own rules. The Summerlin Development Standards carve out separate review for the Del Webb retirement villages.",
     worthExploring:
-      "Only relevant if you qualify for age-restricted housing — but worth knowing it exists, because it shapes the northern end of the community.",
+      "Only relevant if you qualify for age-restricted housing, but worth knowing it exists, because it shapes the northern end of the community.",
   },
   {
     name: "The Willows, The Gardens, Siena, The Mesa & The Cliffs",
@@ -423,7 +423,7 @@ export const communities: AreaCommunity[] = [
     housing:
       "The Willows, The Gardens and Siena are established resale; The Mesa and The Cliffs are newer, and sit on land Summerlin only acquired in a 2002 exchange with the BLM.",
     distinct:
-      "How far south Summerlin actually reaches. The Cliffs is below Russell Road — south of where most people assume the community stops.",
+      "How far south Summerlin actually reaches. The Cliffs is below Russell Road, south of where most people assume the community stops.",
     worthExploring:
       "Worth a look if you want a Summerlin address with a shorter run to the southwest valley and the airport side of town.",
   },
@@ -436,7 +436,7 @@ export const communities: AreaCommunity[] = [
 
 export const developmentProjects: DevelopmentProject[] = [
   {
-    name: "Grand Park — phase one",
+    name: "Grand Park: phase one",
     status: "open",
     where: "1001 Kettle Ridge Dr, off W Sky Vista Dr, Grand Park village",
     what: "The first of three phases of what will be a more-than-90-acre park, Summerlin's largest. Open now with ballfields, pickleball and basketball courts, a playground, a splash pad, shaded picnic areas and a concession building.",
@@ -505,7 +505,7 @@ export const developmentProjects: DevelopmentProject[] = [
     name: "New neighborhoods across Summerlin West",
     status: "under-construction",
     where: "Grand Park, Kestrel, Kestrel Commons and La Madre Peaks",
-    what: "Summerlin closed 2025 with ten new neighborhoods and said it expects eleven more in 2026, almost all of them west of the beltway — including Astra at La Madre Peaks, a custom-homesite enclave of 167 homesites across 171 acres.",
+    what: "Summerlin closed 2025 with ten new neighborhoods and said it expects eleven more in 2026, almost all of them west of the beltway, including Astra at La Madre Peaks, a custom-homesite enclave of 167 homesites across 171 acres.",
     source: {
       label: "Summerlin, 2025 year in review",
       url: "https://summerlin.com/summerlin-closes-out-2025-with-10-new-neighborhoods-marks-36th-year-of-development-in-2026/",
@@ -514,7 +514,7 @@ export const developmentProjects: DevelopmentProject[] = [
       "Individual neighborhood names and openings move constantly. Summerlin's actively-selling list is the only version worth trusting on the day you read it.",
   },
   {
-    name: "Grand Park — phases two and three",
+    name: "Grand Park: phases two and three",
     status: "planned",
     where: "Grand Park village",
     what: "The rest of the 90-acre park. Both remaining phases are in planning, with details still to be released.",
@@ -527,7 +527,7 @@ export const developmentProjects: DevelopmentProject[] = [
     name: "354 apartments off Sahara at the beltway",
     status: "planned",
     where: "Spruce Goose Street, just east of the Downtown Summerlin center",
-    what: "A Howard Hughes proposal for a five-story, 354-unit apartment building with a parking structure and about 6,556 square feet of commercial space on a site of nearly four acres — more density immediately around Downtown Summerlin.",
+    what: "A Howard Hughes proposal for a five-story, 354-unit apartment building with a parking structure and about 6,556 square feet of commercial space on a site of nearly four acres. That's more density immediately around Downtown Summerlin.",
     source: {
       label: "Las Vegas Review-Journal, 14 August 2026",
       url: "https://www.reviewjournal.com/business/housing/more-construction-planned-for-downtown-summerlin-area-3864107/",
@@ -579,7 +579,7 @@ export const southwestComparison: ComparisonRow[] = [
     dimension: "More house for the money",
     leans: "Southwest",
     because:
-      "A broad, general pattern rather than a rule — and one worth testing against live listings rather than taking from a page.",
+      "A broad, general pattern rather than a rule, and one worth testing against live listings rather than taking from a page.",
   },
   {
     dimension: "Freeway access",
@@ -614,7 +614,7 @@ export const southwestComparison: ComparisonRow[] = [
 
 export const areaVideo: AreaVideoConfig = {
   title:
-    "Summerlin vs Henderson vs Southwest Las Vegas — LVINIT with Mikey Del Rosario",
+    "Summerlin vs Henderson vs Southwest Las Vegas, with Mikey Del Rosario",
 };
 
 // --- 7. FAQ -----------------------------------------------------------------
@@ -626,7 +626,7 @@ export const faqItems: AreaFaqItem[] = [
       <>
         A master-planned community on the western edge of the Las Vegas Valley,
         developed by Howard Hughes across{" "}
-        <span className="text-lvinit-black">22,500 acres</span> — roughly 35
+        <span className="text-lvinit-black">22,500 acres</span>, roughly 35
         square miles. Development started in 1990 with a single village and has
         continued village by village ever since; 2026 is its 36th year. It is a
         community, not a municipality.
@@ -651,7 +651,7 @@ export const faqItems: AreaFaqItem[] = [
     question: "Is Summerlin part of Las Vegas?",
     answer: (
       <>
-        Mostly yes, in the legal sense — the land was annexed to the City of Las
+        Mostly yes, in the legal sense. The land was annexed to the City of Las
         Vegas beginning in November 1989, with a further 8,318 acres known as
         Summerlin West annexed under a 1997 development agreement. In everyday
         speech people treat Summerlin as its own place, and that&rsquo;s fine.
@@ -665,7 +665,7 @@ export const faqItems: AreaFaqItem[] = [
       <>
         There is no public boundary line to point at. Summerlin is a private
         master plan, so its extent is defined by the developer&rsquo;s own plan
-        rather than by any government map — Summerlin publishes an official
+        rather than by any government map. Summerlin publishes an official
         border map, and that is the authority. What you can navigate by is the
         geography: Red Rock Canyon conservation land is the hard western limit,
         the community runs roughly from the Lone Mountain area down past Russell
@@ -683,7 +683,7 @@ export const faqItems: AreaFaqItem[] = [
           code.&rdquo;
         </span>{" "}
         The ZIPs most often associated with it are 89134, 89135, 89138 and 89144,
-        and the community also extends into 89148 — but plenty of homes in those
+        and the community also extends into 89148, but plenty of homes in those
         ZIPs are not in Summerlin, and a few Summerlin neighborhoods sit outside
         the usual four. If it matters to you, check the address against
         Summerlin&rsquo;s border map rather than the envelope.
@@ -712,7 +712,7 @@ export const faqItems: AreaFaqItem[] = [
     question: "What is Summerlin West?",
     answer: (
       <>
-        In everyday use, the part of Summerlin west of the CC-215 — a usage the
+        In everyday use, the part of Summerlin west of the CC-215, a usage the
         City of Las Vegas standards echo when they write rules for &ldquo;areas
         west of the 215 Beltway.&rdquo; It also has a formal origin: 8,318 acres
         annexed under a 1997 development agreement and described in the City&rsquo;s
@@ -720,7 +720,7 @@ export const faqItems: AreaFaqItem[] = [
         <span className="text-lvinit-black">
           It is a region, not a subdivision
         </span>
-        , and it is not a synonym for new construction — The Vistas and The Paseos
+        , and it is not a synonym for new construction. The Vistas and The Paseos
         are west of the beltway and were built years ago.
       </>
     ),
@@ -732,7 +732,7 @@ export const faqItems: AreaFaqItem[] = [
         No, and they&rsquo;re about nine miles apart. Downtown Summerlin is a
         400-acre commercial district off Sahara Avenue at the beltway, opened in
         2014, with a 106-acre open-air center at the middle of it. Downtown Las
-        Vegas is the historic city center — Fremont Street, the courts, the{" "}
+        Vegas is the historic city center: Fremont Street, the courts, the{" "}
         <Link href="/neighborhoods/downtown-arts-district" className={linkClass}>
           Arts District
         </Link>
@@ -749,8 +749,8 @@ export const faqItems: AreaFaqItem[] = [
         <span className="text-lvinit-black">
           Summerlin is 22,500 acres, so one drive time can&rsquo;t be true for all
           of it
-        </span>{" "}
-        — a home in the southern villages and a home at La Madre Peaks are not the
+        </span>
+        : a home in the southern villages and a home at La Madre Peaks are not the
         same trip, and neither is the same at 8am as at 8pm. There are also two
         Clark County construction projects running on the CC-215 through
         Summerlin right now. Drive the route you&rsquo;d actually drive, at the
@@ -763,8 +763,8 @@ export const faqItems: AreaFaqItem[] = [
     answer: (
       <>
         Yes, and mostly on its western side. Summerlin listed seven villages as
-        actively selling new homes in August 2026 — Grand Park, Kestrel, Kestrel
-        Commons, La Madre Peaks, Redpoint Square, Summerlin Centre and The Peaks —
+        actively selling new homes in August 2026 (Grand Park, Kestrel, Kestrel
+        Commons, La Madre Peaks, Redpoint Square, Summerlin Centre and The Peaks)
         and closed 2025 with ten new neighborhoods. Howard Hughes says roughly
         5,000 gross acres remain reserved for future growth, a figure that
         includes roads, open space and common areas rather than only future
@@ -792,7 +792,7 @@ export const faqItems: AreaFaqItem[] = [
     question: "Is every home near Red Rock Canyon?",
     answer: (
       <>
-        No — and this is the claim to be most careful with. Red Rock Canyon is
+        No, and this is the claim to be most careful with. Red Rock Canyon is
         Summerlin&rsquo;s western boundary, so the western villages genuinely are
         close to it. From the eastern and southern villages you are still driving,
         and from October through May the scenic drive requires a timed-entry
@@ -807,62 +807,62 @@ export const faqItems: AreaFaqItem[] = [
 
 export const sources: AreaSource[] = [
   {
-    label: "Howard Hughes — Summerlin community overview",
+    label: "Howard Hughes: Summerlin community overview",
     url: "https://communities.howardhughes.com/regions/nevada/",
     used: "Acreage (22,500), current population, remaining acres reserved for growth, and the nine-miles-from-the-Strip figure.",
   },
   {
-    label: "Summerlin — community history",
+    label: "Summerlin: community history",
     url: "https://summerlin.com/about/history/",
     used: "The 1952 Hughes land purchase, the 1988 naming and BLM land exchange, the first village in 1990, the 2002 exchange that extended the southern edge, and Downtown Summerlin's 2014 opening.",
   },
   {
-    label: "Summerlin — defined by boundaries, not ZIP codes",
+    label: "Summerlin: defined by boundaries, not ZIP codes",
     url: "https://summerlin.com/summerlin-defined-by-boundaries-not-zip-codes/",
     used: "Summerlin's own statement on boundaries versus ZIP codes, the ZIPs associated with the community, and that Red Rock Country Club is not part of the master plan.",
   },
   {
-    label: "Summerlin — villages currently selling",
+    label: "Summerlin: villages currently selling",
     url: "https://summerlin.com/actively-selling/",
     used: "Which villages were actively selling new homes when this page was checked, and how Summerlin describes each of them.",
   },
   {
-    label: "Summerlin — 2025 year in review",
+    label: "Summerlin: 2025 year in review",
     url: "https://summerlin.com/summerlin-closes-out-2025-with-10-new-neighborhoods-marks-36th-year-of-development-in-2026/",
     used: "2025 neighborhood, park and office openings, Downtown Summerlin retail additions, and the outlook for 2026.",
   },
   {
-    label: "Summerlin — parks and the trail system",
+    label: "Summerlin: parks and the trail system",
     url: "https://summerlin.com/summerlin-trail-system-continues-to-grow-evolve-with-the-community/",
     used: "Trail mileage now and planned, the six trail types, the Summerlin Parkway trail segment, and the Red Rock Canyon Legacy Trails project.",
   },
   {
-    label: "City of Las Vegas — Summerlin Development Standards (revised October 2025)",
+    label: "City of Las Vegas: Summerlin Development Standards (revised October 2025)",
     url: "https://files.lasvegasnevada.gov/planning/Summerlin/Feb_2026_Summerlin_Development_Standards.pdf",
     used: "Summerlin's PC zoning status, the Husite origin, the 1987 plan and 1989 annexation, the 1997 annexation of 8,318 acres as Summerlin West, the land-use hierarchy, and the village-to-parcel-to-neighborhood planning process.",
   },
   {
-    label: "Clark County Comprehensive Planning — Summerlin South",
+    label: "Clark County Comprehensive Planning: Summerlin South",
     url: "https://www.clarkcountynv.gov/government/departments/comprehensive_planning_department/library/summerlin-south",
     used: "The Summerlin South planning area: 7,099 acres, its stated boundaries, and the 1995 guide updated in 2005.",
   },
   {
-    label: "Clark County — CC-215 / Summerlin Parkway interchange project",
+    label: "Clark County: CC-215 / Summerlin Parkway interchange project",
     url: "https://www.clarkcountynv.gov/news/news-detail-t28-r1131",
     used: "The $130 million interchange rebuild: scope, limits, February 2025 start and three-year schedule.",
   },
   {
-    label: "Clark County — projects in construction",
+    label: "Clark County: projects in construction",
     url: "https://www.clarkcountynv.gov/government/departments/public_works_department/projects-in-construction",
     used: "Confirming the CC-215 Charleston-to-Far Hills widening is in construction rather than only announced.",
   },
   {
-    label: "Bureau of Land Management — Red Rock Canyon National Conservation Area",
+    label: "Bureau of Land Management: Red Rock Canyon National Conservation Area",
     url: "https://www.blm.gov/programs/national-conservation-lands/nevada/red-rock-canyon",
     used: "The 1990 designation, the 13-mile scenic drive, annual visitation, and that it is federal land managed by the BLM.",
   },
   {
-    label: "BLM — Red Rock Canyon scenic drive timed entry",
+    label: "BLM: Red Rock Canyon scenic drive timed entry",
     url: "https://www.blm.gov/visit/red-rock-canyon-national-conservation-area-scenic-drive-timed-entry",
     used: "The timed-entry reservation requirement from 1 October to 31 May.",
   },

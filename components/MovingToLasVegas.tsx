@@ -30,7 +30,7 @@ export default function MovingToLasVegas() {
             feel like home.
           </p>
           <p className="mt-3 text-caption text-lvinit-warmgray">
-            A typical morning drive — yours will shift with where in Summerlin
+            A typical morning drive. Yours will shift with where in Summerlin
             you land.
           </p>
         </div>

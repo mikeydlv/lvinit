@@ -37,8 +37,8 @@ export default function MeetYourGuide() {
             about choosing the right place to build your life.&rdquo;
           </p>
           <p className="mt-6 max-w-lg text-body text-lvinit-white/80">
-            I&rsquo;ve spent years helping people move to — and fall in love
-            with — Las Vegas, not just close on a house in it. Tell me what
+            I&rsquo;ve spent years helping people move to Las Vegas and fall in
+            love with it, not just close on a house here. Tell me what
             you&rsquo;re weighing and I&rsquo;ll give you the honest version,
             neighborhood by neighborhood.
           </p>

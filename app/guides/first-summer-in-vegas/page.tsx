@@ -92,7 +92,7 @@ function ClimateSnapshot() {
           </h2>
           <p className="mt-3 max-w-[680px] text-body text-lvinit-warmgray">
             These are the National Weather Service&rsquo;s official 30-year
-            climate normals (1991&ndash;2020) for Las Vegas &mdash; the
+            climate normals (1991&ndash;2020) for Las Vegas: the
             average high and low for each month, not a worst-case scenario.
           </p>
 
@@ -115,8 +115,8 @@ function ClimateSnapshot() {
 
           <p className="mt-6 max-w-[680px] text-body text-lvinit-warmgray">
             Those are averages, not ceilings. Las Vegas&rsquo; all-time record
-            high &mdash; <span className="text-lvinit-black">120°F</span>,
-            set July 7, 2024 &mdash; is the reminder that a normal July can
+            high (<span className="text-lvinit-black">120°F</span>,
+            set July 7, 2024) is the reminder that a normal July can
             still produce an abnormal week. Plan for the averages; don&rsquo;t
             be surprised by the outliers.
           </p>
@@ -146,7 +146,7 @@ export default function FirstSummerInVegasPage() {
             name: "What $500K Buys in Las Vegas",
             href: "/guides/what-500k-buys-in-las-vegas",
             category: "Buyer guide",
-            dek: "Three real home tours near the same price — a concrete look at the tradeoffs behind the median.",
+            dek: "Three real home tours near the same price. A concrete look at the tradeoffs behind the median.",
           },
           {
             name: "Summerlin",
@@ -158,7 +158,7 @@ export default function FirstSummerInVegasPage() {
             name: "Southwest Las Vegas",
             href: "/neighborhoods/southwest-las-vegas",
             category: "Area guide",
-            dek: "The valley's fastest-growing side — and a good example of what newer construction hasn't grown into yet: shade.",
+            dek: "The valley's fastest-growing side, and a good example of what newer construction hasn't grown into yet: shade.",
           },
         ],
       }}
@@ -170,11 +170,11 @@ export default function FirstSummerInVegasPage() {
     >
       <StoryLede
         kicker="Moving Here"
-        lead="Every longtime Las Vegan remembers their first real summer here — the one where the forecast stops being a number you glance at and starts being a variable you plan a day around. This isn't that story dressed up for drama. It's the practical version: what the heat actually does month to month, what monsoon season means beyond 'it might rain,' and what to actually change about how you live."
+        lead="Every longtime Las Vegan remembers their first real summer here. It's the one where the forecast stops being a number you glance at and starts being a variable you plan a day around. This isn't that story dressed up for drama. It's the practical version: what the heat actually does month to month, what monsoon season means beyond 'it might rain,' and what to actually change about how you live."
       >
         <p className="mt-6 text-body-lg text-lvinit-warmgray">
           None of this is meant to scare anyone off. People live full, active,
-          outdoor lives here every summer — they just adjust the schedule and
+          outdoor lives here every summer. They just adjust the schedule and
           take a few things seriously that newer residents sometimes don&rsquo;t
           know to.
         </p>
@@ -194,19 +194,19 @@ export default function FirstSummerInVegasPage() {
         </p>
         <p className="mt-5 text-body-lg text-lvinit-warmgray">
           What that actually looks like on the ground isn&rsquo;t a gentle
-          afternoon shower. It&rsquo;s a wall of dust &mdash; a haboob &mdash;
+          afternoon shower. It&rsquo;s a wall of dust, a haboob,
           rolling across the valley with almost no warning, cutting visibility
           on the freeway to nearly nothing. It&rsquo;s a wash or an underpass
           that&rsquo;s bone dry all year suddenly running with fast-moving
           water, which is exactly why Clark County&rsquo;s flash-flood
           messaging is so blunt about never driving into water on a road you
-          can&rsquo;t see the bottom of. And it&rsquo;s lightning &mdash; real,
+          can&rsquo;t see the bottom of. And it&rsquo;s lightning: real,
           frequent, valley-wide lightning, which is not something most desert
           newcomers associate with a place this dry.
         </p>
         <p className="mt-5 text-body-lg text-lvinit-warmgray">
           The practical takeaway: when a storm rolls through in July or
-          August, treat it like the genuine hazard it is &mdash; pull over in
+          August, treat it like the genuine hazard it is. Pull over in
           a dust storm rather than trying to outdrive it, and never cross a
           flooded roadway, no matter how familiar the street usually is.
         </p>
@@ -230,7 +230,7 @@ export default function FirstSummerInVegasPage() {
               <span className="text-lvinit-black">Air conditioning is a
               utility, not a luxury.</span> Treat it the way you&rsquo;d treat
               heat in a cold-climate winter. Get it serviced before summer
-              hits its stride, not after it stops keeping up &mdash; a system
+              hits its stride, not after it stops keeping up. A system
               that quietly struggles in June can fail outright by August.
             </span>
           </li>
@@ -259,8 +259,8 @@ export default function FirstSummerInVegasPage() {
             <span>
               <span className="text-lvinit-black">Hydration and sun
               protection stop being optional.</span> Water in the car, water
-              on the trail, and real sun protection &mdash; hat, sunglasses,
-              sunscreen &mdash; even on an overcast-feeling day, because the
+              on the trail, and real sun protection (hat, sunglasses,
+              sunscreen) even on an overcast-feeling day, because the
               UV exposure doesn&rsquo;t take a day off just because it doesn&rsquo;t
               feel like 105°F yet.
             </span>
@@ -271,13 +271,13 @@ export default function FirstSummerInVegasPage() {
               <span className="text-lvinit-black">Check on people, not just
               yourself.</span> Elderly neighbors, anyone new to the desert, and
               anyone whose AC you know is unreliable are worth an actual
-              check-in during a heat spell &mdash; a text or a knock on the
+              check-in during a heat spell. A text or a knock on the
               door is a small thing that matters here.
             </span>
           </li>
         </ul>
         <p className="mt-6 text-body-lg text-lvinit-warmgray">
-          None of this is medical advice &mdash; it&rsquo;s just how people
+          None of this is medical advice. It&rsquo;s just how people
           who&rsquo;ve done a few of these summers actually operate.
         </p>
       </StorySection>
@@ -288,13 +288,13 @@ export default function FirstSummerInVegasPage() {
       >
         <p className="text-body-lg text-lvinit-warmgray">
           Clark County runs an active cooling-station program every summer
-          &mdash; emergency daytime cooling sites at recreation centers,
+          : emergency daytime cooling sites at recreation centers,
           libraries, and community centers across the valley, from Las Vegas
           and North Las Vegas to Henderson, Boulder City, Laughlin, and
           Mesquite, activated whenever the National Weather Service issues an
           extreme-heat warning. The county activated stations most recently
           August 18&ndash;21, 2026, and repeatedly through the summer before
-          that &mdash; including August 6&ndash;11 and July 20&ndash;24. Some
+          that, including August 6&ndash;11 and July 20&ndash;24. Some
           locations are pet-friendly with a leash or carrier. The current
           location list is always posted at{" "}
           <a
@@ -314,11 +314,11 @@ export default function FirstSummerInVegasPage() {
           least 800 heat-related deaths across the county combined over 2024
           and 2025. The same reporting cited a Desert Research Institute
           Nevada Heat Lab survey of 489 people across 37 cooling stations,
-          finding that a real barrier isn&rsquo;t just the heat itself &mdash;
-          it&rsquo;s that many residents don&rsquo;t know where the cooling
+          finding that a real barrier isn&rsquo;t just the heat itself.
+          It&rsquo;s that many residents don&rsquo;t know where the cooling
           stations are or how to use the county&rsquo;s free bus pass to reach
           one. That figure reflects the county&rsquo;s population as a whole,
-          not homeowners specifically &mdash; many of these cases involve
+          not homeowners specifically. Many of these cases involve
           unhoused residents, prolonged outdoor exposure, or homes without
           working air conditioning. But it&rsquo;s the honest reason this
           article is titled &ldquo;surviving,&rdquo; not just &ldquo;enjoying&rdquo;
@@ -347,7 +347,7 @@ export default function FirstSummerInVegasPage() {
           <li className="flex gap-3">
             <span aria-hidden="true" className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-lvinit-blue" />
             <span>
-              <span className="text-lvinit-black">Notice the shade &mdash;
+              <span className="text-lvinit-black">Notice the shade,
               or the lack of it.</span> Established neighborhoods with mature
               trees and covered patios genuinely feel different in July than
               a newer block that hasn&rsquo;t grown into its landscaping yet.
@@ -369,7 +369,7 @@ export default function FirstSummerInVegasPage() {
             <span aria-hidden="true" className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-lvinit-blue" />
             <span>
               <span className="text-lvinit-black">If solar is installed,
-              understand what it actually covers</span> &mdash; system size,
+              understand what it actually covers</span>. System size,
               panel condition, and whether it&rsquo;s owned, financed, or
               leased are all fair questions before assuming it offsets your
               summer cooling load.
@@ -387,7 +387,7 @@ export default function FirstSummerInVegasPage() {
           </Link>{" "}
           is a real asset most of the year, but summer is the season that
           actually tests whether &ldquo;walkable&rdquo; still holds up at
-          2pm in August &mdash; shade and shortcuts between air-conditioned
+          2pm in August. Shade and shortcuts between air-conditioned
           stops start to matter as much as walk score. Newer, fast-growing
           areas like{" "}
           <Link
@@ -397,7 +397,7 @@ export default function FirstSummerInVegasPage() {
             Southwest Las Vegas
           </Link>{" "}
           trade mature tree canopy for newer construction and modern
-          efficiency standards &mdash; a real tradeoff, not a downgrade.
+          efficiency standards, a real tradeoff, not a downgrade.
           Established master-planned communities like{" "}
           <Link
             href="/neighborhoods/summerlin"
@@ -428,7 +428,7 @@ export default function FirstSummerInVegasPage() {
 
       <StorySection heading="The bottom line">
         <p className="text-body-lg text-lvinit-warmgray">
-          Las Vegas summers are genuinely intense &mdash; averaging over 100°F
+          Las Vegas summers are genuinely intense. Averaging over 100°F
           for three straight months isn&rsquo;t marketing copy, it&rsquo;s the
           official record. But it&rsquo;s also a season people here have long
           since figured out how to live well through: mornings outside,
@@ -443,12 +443,12 @@ export default function FirstSummerInVegasPage() {
       <StorySection heading="Sources">
         <ul className="space-y-3 text-body text-lvinit-warmgray">
           <li>
-            <span className="text-lvinit-black">National Weather Service, Las Vegas</span>{" "}
-            &mdash; official 1991&ndash;2020 climate normals (monthly average
+            <span className="text-lvinit-black">National Weather Service, Las Vegas</span>
+            . Official 1991&ndash;2020 climate normals (monthly average
             highs/lows for June&ndash;September) and the all-time record high
             of 120°F on July 7, 2024, from the &ldquo;Temperature
             Overview&rdquo; document and the office&rsquo;s Climate of Las
-            Vegas page &mdash;{" "}
+            Vegas page, at{" "}
             <a
               href="https://www.weather.gov/media/vef/Temperature%20Overview.pdf"
               className="text-lvinit-blue underline underline-offset-4"
@@ -469,16 +469,16 @@ export default function FirstSummerInVegasPage() {
             .
           </li>
           <li>
-            <span className="text-lvinit-black">National Weather Service, Las Vegas (@NWSVegas)</span>{" "}
-            &mdash; the official June 15&ndash;September 30 monsoon window and
+            <span className="text-lvinit-black">National Weather Service, Las Vegas (@NWSVegas)</span>
+            . The official June 15&ndash;September 30 monsoon window and
             Southern Nevada&rsquo;s locally active period and peak
             thunderstorm/flash-flood activity.
           </li>
           <li>
-            <span className="text-lvinit-black">Clark County</span> &mdash;
-            cooling-station activation program, including the August
+            <span className="text-lvinit-black">Clark County</span>.
+            Cooling-station activation program, including the August
             18&ndash;21, 2026, August 6&ndash;11, 2026, and July 20&ndash;24,
-            2026 activations &mdash;{" "}
+            2026 activations, at{" "}
             <a
               href="https://www.clarkcountynv.gov/news/cooling-stations-activated"
               className="text-lvinit-blue underline underline-offset-4"
@@ -490,13 +490,13 @@ export default function FirstSummerInVegasPage() {
             , corroborated by Fox5 Las Vegas and the Las Vegas Review-Journal.
           </li>
           <li>
-            <span className="text-lvinit-black">Las Vegas Review-Journal</span>{" "}
-            &mdash; &ldquo;Las Vegas has hidden defenses against deadly heat.
+            <span className="text-lvinit-black">Las Vegas Review-Journal</span>
+            . &ldquo;Las Vegas has hidden defenses against deadly heat.
             Most people miss them,&rdquo; July 24, 2026, citing Clark County
             coroner&rsquo;s office data (at least 800 heat-related deaths
             combined across 2024&ndash;2025) and a Desert Research Institute
-            Nevada Heat Lab survey of 489 people across 37 cooling stations
-            &mdash;{" "}
+            Nevada Heat Lab survey of 489 people across 37 cooling stations,
+            at{" "}
             <a
               href="https://www.reviewjournal.com/news/environment/las-vegas-has-hidden-defenses-against-deadly-heat-most-people-miss-them-3854739/"
               className="text-lvinit-blue underline underline-offset-4"
@@ -511,8 +511,8 @@ export default function FirstSummerInVegasPage() {
         <p className="mt-6 text-caption text-lvinit-warmgray">
           Weather and public-safety programs can change year to year. This
           article reflects the sources and dates cited above and is general
-          local-living guidance, not medical, safety, or emergency advice —
-          in an emergency, call 911.
+          local-living guidance, not medical, safety, or emergency advice. In
+          an emergency, call 911.
         </p>
       </StorySection>
 

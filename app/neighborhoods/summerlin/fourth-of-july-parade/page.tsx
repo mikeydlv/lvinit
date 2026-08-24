@@ -11,9 +11,9 @@ const PATH = "/neighborhoods/summerlin/fourth-of-july-parade";
 const HERO_IMAGE = "/images/features/summerlin-fourth-of-july-parade-banner.webp";
 const HERO_ALT =
   "Summerlin Fourth of July Parade in Las Vegas featuring the Summerlin community banner.";
-const TITLE = "Summerlin Fourth of July Parade — A Local Feature | LVINIT";
+const TITLE = "Summerlin Fourth of July Parade: A Local Feature | LVINIT";
 const DESCRIPTION =
-  "An editorial local's look at the Summerlin Fourth of July Parade — the atmosphere, the highlights, and why a tradition like this tells you so much about living in Summerlin, Las Vegas.";
+  "An editorial local's look at the Summerlin Fourth of July Parade: the atmosphere, the highlights, and why a tradition like this tells you so much about living in Summerlin, Las Vegas.";
 
 export const metadata: Metadata = {
   title: TITLE,
@@ -93,7 +93,7 @@ export default function ParadeFeaturePage() {
           <Image
             src={HERO_IMAGE}
             alt={HERO_ALT}
-            title="Summerlin Fourth of July Parade — Photo by Mikey Del Rosario"
+            title="Summerlin Fourth of July Parade. Photo by Mikey Del Rosario"
             fill
             priority
             sizes="100vw"
@@ -116,7 +116,7 @@ export default function ParadeFeaturePage() {
             </h1>
             <p className="mt-5 max-w-2xl text-body-lg text-lvinit-white/90">
               One of Las Vegas&rsquo; most beloved Independence Day
-              traditions—and a perfect glimpse into what makes Summerlin such a
+              traditions, and a perfect glimpse into what makes Summerlin such a
               special place to call home.
             </p>
             <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center">
@@ -147,7 +147,7 @@ export default function ParadeFeaturePage() {
                 the streets of Summerlin fill with lawn chairs, coolers, and
                 kids waving small flags they&rsquo;ll still be holding at
                 nightfall. The Summerlin Council Patriotic Parade is one of the
-                longest-running Fourth of July traditions in Las Vegas—and for a
+                longest-running Fourth of July traditions in Las Vegas. For a
                 lot of families out here, it&rsquo;s the unofficial heartbeat of
                 the community&rsquo;s year.
               </p>
@@ -174,13 +174,13 @@ export default function ParadeFeaturePage() {
                 </h2>
                 <p className="mt-3 max-w-[680px] text-body text-lvinit-warmgray">
                   Photos only get you so far. Here&rsquo;s the parade in
-                  motion—the floats, the bands, and a few thousand neighbors who
+                  motion. The floats, the bands, and a few thousand neighbors who
                   all decided to spend their morning in the same place.
                 </p>
                 <div className="relative mt-8 aspect-video w-full overflow-hidden border border-lvinit-lightgray bg-lvinit-black">
                   <iframe
                     src="https://www.youtube-nocookie.com/embed/hTEzzxcYhkg"
-                    title="Summerlin Fourth of July Parade — video by Mikey Del Rosario"
+                    title="Summerlin Fourth of July Parade: video by Mikey Del Rosario"
                     loading="lazy"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                     referrerPolicy="strict-origin-when-cross-origin"
@@ -200,7 +200,7 @@ export default function ParadeFeaturePage() {
               </h2>
               <p className="mt-5 text-body-lg text-lvinit-warmgray">
                 It starts early. By the time the first float rounds the corner,
-                the shaded spots along the route are long gone—claimed at dawn by
+                the shaded spots along the route are long gone, claimed at dawn by
                 families with pop-up tents, wagons, and enough snacks to outlast
                 a heat wave. There&rsquo;s a low, happy hum to it: drumlines
                 warming up, fire-truck sirens, kids sprinting for candy tossed
@@ -209,7 +209,7 @@ export default function ParadeFeaturePage() {
               <p className="mt-5 text-body-lg text-lvinit-warmgray">
                 And yes, it&rsquo;s hot. This is the Mojave in July; the morning
                 is already climbing by nine. But there&rsquo;s a particular kind
-                of joy in a community that shows up anyway—sunscreen, folding
+                of joy in a community that shows up anyway. Sunscreen, folding
                 chairs, flags and all.
               </p>
 
@@ -245,9 +245,9 @@ export default function ParadeFeaturePage() {
               </p>
               <ul className="mt-8 space-y-6">
                 {[
-                  ["The floats", "From the towering patriotic star to a beloved birthday-cake float, local businesses, HOAs, and community groups go all out—hand-built and unmistakably homemade in the best way."],
+                  ["The floats", "From the towering patriotic star to a beloved birthday-cake float, local businesses, HOAs, and community groups go all out, hand-built and unmistakably homemade in the best way."],
                   ["Bands and drumlines", "Local school and community bands set the tempo for the whole morning. You hear them before you see them."],
-                  ["First responders", "Fire trucks and police units draw some of the loudest applause on the route—a small, genuine hometown moment."],
+                  ["First responders", "Fire trucks and police units draw some of the loudest applause on the route. It's a small, genuine hometown moment."],
                   ["The kids' brigade", "Scouts, dance teams, little-league squads, and a rolling wave of decorated bikes and wagons. And, of course, the candy."],
                 ].map(([label, body]) => (
                   <li key={label}>
@@ -274,7 +274,7 @@ export default function ParadeFeaturePage() {
                 </h2>
                 <p className="mt-5 text-body-lg text-lvinit-warmgray">
                   Master-planned communities can read a little sterile from the
-                  outside—perfect lawns, quiet streets, everything in its place.
+                  outside: perfect lawns, quiet streets, everything in its place.
                   The parade is the counterargument. For a few hours, Summerlin
                   stops looking like a real-estate rendering and starts looking
                   like a hometown.
@@ -282,7 +282,7 @@ export default function ParadeFeaturePage() {
                 <p className="mt-5 text-body-lg text-lvinit-warmgray">
                   It&rsquo;s put on by the Summerlin Council and run largely by
                   volunteers, built around the neighborhoods themselves. It
-                  isn&rsquo;t a spectacle imported for tourists—it&rsquo;s a
+                  isn&rsquo;t a spectacle imported for tourists. It&rsquo;s a
                   community showing up for itself, which is a harder thing to
                   build than any amenity.
                 </p>
@@ -299,14 +299,14 @@ export default function ParadeFeaturePage() {
               <p className="mt-5 text-body-lg text-lvinit-warmgray">
                 When people ask me how to pick a neighborhood, I tell them to
                 look past the square footage and the granite. What you&rsquo;re
-                really buying is a set of ordinary Tuesdays—and the occasional
+                really buying is a set of ordinary Tuesdays, and the occasional
                 Fourth of July. A tradition like this is a signal: it tells you a
                 place has a real community, not just an address.
               </p>
               <p className="mt-5 text-body-lg text-lvinit-warmgray">
                 If you&rsquo;re relocating to Las Vegas and weighing Summerlin,
                 come stand on the curb one July morning before you sign anything.
-                You&rsquo;ll learn more in two hours than in ten showings—and
+                You&rsquo;ll learn more in two hours than in ten showings, and
                 you&rsquo;ll know pretty quickly whether it feels like home.
               </p>
             </div>
@@ -325,9 +325,9 @@ export default function ParadeFeaturePage() {
                 </p>
                 <ul className="mt-8 space-y-4">
                   {[
-                    ["Go early.", "The good shade and parking disappear fast — locals stake out spots well before the start."],
+                    ["Go early.", "The good shade and parking disappear fast. Locals stake out spots well before the start."],
                     ["Plan for the heat.", "Water, sunscreen, and a hat, minimum. It's already warm by 9am."],
-                    ["It's free and family-friendly.", "Strollers, wagons, and small flags everywhere — bring the kids."],
+                    ["It's free and family-friendly.", "Strollers, wagons, and small flags everywhere. Bring the kids."],
                     ["Bring your own seating.", "There's not much natural shade or seating along the route."],
                   ].map(([label, body]) => (
                     <li key={label} className="flex gap-3">
@@ -365,7 +365,7 @@ export default function ParadeFeaturePage() {
               </h2>
               <p className="mx-auto mt-4 max-w-lg text-body-lg text-lvinit-warmgray">
                 The parade is one morning. What keeps people here is everything
-                around it—the trails, the schools, the way a master-planned
+                around it: the trails, the schools, the way a master-planned
                 community can still feel like a neighborhood. Here&rsquo;s the
                 honest guide.
               </p>

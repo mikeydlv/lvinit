@@ -19,9 +19,9 @@ const inter = Inter({
 });
 
 const SITE_URL = "https://www.lvinit.com";
-const SITE_TITLE = "LVINIT — Find Where You Belong in Las Vegas";
+const SITE_TITLE = "LVINIT: Find Where You Belong in Las Vegas";
 const SITE_DESCRIPTION =
-  "Neighborhood guides, honest comparisons, and a local you can actually trust — for anyone deciding where in Las Vegas to build a life.";
+  "Neighborhood guides, honest comparisons, and a local you can actually trust. For anyone deciding where in Las Vegas to build a life.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -41,7 +41,7 @@ export const metadata: Metadata = {
         url: `${SITE_URL}/og-image.jpg`,
         width: 1200,
         height: 630,
-        alt: "LVINIT — Find Where You Belong in Las Vegas",
+        alt: "LVINIT: Find Where You Belong in Las Vegas",
       },
     ],
   },

@@ -40,14 +40,14 @@ export default function Footer() {
           <div className="col-span-2 sm:col-span-1">
             <Link
               href="/"
-              aria-label="LVINIT — home"
+              aria-label="LVINIT home"
               className="inline-block font-sans text-subhead font-extrabold tracking-[0.1em]"
             >
               <span className="text-lvinit-black">LVI</span>
               <span className="text-lvinit-gold">NIT</span>
             </Link>
             <p className="mt-3 max-w-[220px] text-caption text-lvinit-warmgray">
-              An honest guide to actually living in Las Vegas — the
+              An honest guide to actually living in Las Vegas: the
               neighborhoods, the tradeoffs, and a local who&rsquo;ll tell you
               the parts a brochure won&rsquo;t.
             </p>
@@ -128,7 +128,7 @@ export default function Footer() {
           </div>
 
           <div className="mt-6 space-y-1 text-caption text-lvinit-warmgray">
-            <p>Mikey Del Rosario, REALTOR® — Nevada License S.0175577</p>
+            <p>Mikey Del Rosario, REALTOR®. Nevada License S.0175577</p>
             <p>Brokered by The Scofield Group.</p>
             <p>
               LVINIT is an independent media and information platform.

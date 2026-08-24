@@ -17,14 +17,14 @@ const PATH = "/neighborhoods/north-las-vegas";
 // formats) at serve time; the source file is left unaltered.
 const HERO_IMAGE = "/images/hero/north-las-vegas-aerial.jpg";
 const HERO_ALT =
-  "Aerial view of North Las Vegas at golden hour — the residential street grid of the northern Las Vegas Valley stretching toward the desert mountains on the horizon.";
+  "Aerial view of North Las Vegas at golden hour, the residential street grid of the northern Las Vegas Valley stretching toward the desert mountains on the horizon.";
 
 const meta: StoryMeta = {
   title:
     "Living in North Las Vegas: Neighborhoods, Homes & Local Guide | LVINIT",
   headline: "Living in North Las Vegas",
   description:
-    "An honest local guide to North Las Vegas — its own city in the Las Vegas Valley. How the neighborhoods, housing, new construction, and growth actually differ from one area to the next.",
+    "An honest local guide to North Las Vegas, its own city in the Las Vegas Valley. How the neighborhoods, housing, new construction, and growth actually differ from one area to the next.",
   path: PATH,
   image: HERO_IMAGE,
   imageWidth: 2500,
@@ -57,7 +57,7 @@ const jsonLd = {
 const glance = [
   {
     heading: "Where it sits",
-    body: "North Las Vegas is a separate, incorporated city at the northern end of the valley — not a district of Las Vegas, despite the name. It runs from older, established central neighborhoods up into brand-new desert subdivisions still under construction.",
+    body: "North Las Vegas is a separate, incorporated city at the northern end of the valley. It's not a district of Las Vegas, despite the name. It runs from older, established central neighborhoods up into brand-new desert subdivisions still under construction.",
   },
   {
     heading: "Housing character",
@@ -73,7 +73,7 @@ const glance = [
   },
   {
     heading: "Nellis Air Force Base",
-    body: "Nellis Air Force Base sits along the northeast side of the Las Vegas Valley, near North Las Vegas — a major local employer and a real factor for military families considering this side of town. Military flight activity can also be part of life in some nearby areas, which is worth experiencing in person before you decide.",
+    body: "Nellis Air Force Base sits along the northeast side of the Las Vegas Valley, near North Las Vegas. The base is a major local employer and a real factor for military families considering this side of town. Military flight activity can also be part of life in some nearby areas, which is worth experiencing in person before you decide.",
   },
   {
     heading: "Room to grow",
@@ -88,7 +88,7 @@ const glance = [
 const areas = [
   {
     name: "Aliante",
-    body: "A large master-planned community in the north, built around a regional park, golf, and its own casino-resort. One of the more established of the city's newer areas — amenity-rich and fairly self-contained.",
+    body: "A large master-planned community in the north, built around a regional park, golf, and its own casino-resort. One of the more established of the city's newer areas, amenity-rich and fairly self-contained.",
   },
   {
     name: "Tule Springs",
@@ -96,15 +96,15 @@ const areas = [
   },
   {
     name: "Valley Vista",
-    body: "A newer master-planned community on the north side — the kind of newer-development area where a lot of recent building has happened. Phases and edges are still evolving as it grows.",
+    body: "A newer master-planned community on the north side, the kind of newer-development area where a lot of recent building has happened. Phases and edges are still evolving as it grows.",
   },
   {
     name: "Craig Ranch area",
-    body: "Centered on Craig Ranch Regional Park, this is more established, central North Las Vegas — older housing stock and mature surroundings rather than new construction.",
+    body: "Centered on Craig Ranch Regional Park, this is more established, central North Las Vegas, with older housing stock and mature surroundings rather than new construction.",
   },
   {
     name: "Northern growth areas",
-    body: "The active edge of the city, where brand-new subdivisions meet open desert. The newest homes, the longest drives to the valley's core, and the part of North Las Vegas changing fastest — what's true today may not be in a year.",
+    body: "The active edge of the city, where brand-new subdivisions meet open desert. The newest homes, the longest drives to the valley's core, and the part of North Las Vegas changing fastest. What's true today may not be in a year.",
   },
 ];
 
@@ -147,7 +147,7 @@ export default function NorthLasVegasPage() {
               North Las Vegas
             </h1>
             <p className="mt-4 max-w-2xl text-body-lg text-lvinit-white/90">
-              Often lumped in with Las Vegas, North Las Vegas is its own city —
+              Often lumped in with Las Vegas, North Las Vegas is its own city,
               with its own neighborhoods, its own growth story, and a housing
               market that changes a lot depending on where you look.
             </p>
@@ -161,7 +161,7 @@ export default function NorthLasVegasPage() {
             Las Vegas Valley · An Area Guide
           </p>
           <p className="mt-8 max-w-3xl font-display text-[28px] leading-[38px] text-lvinit-black sm:text-thesis sm:leading-[64px]">
-            One of the most misunderstood parts of the valley — mostly because
+            One of the most misunderstood parts of the valley, mostly because
             people talk about North Las Vegas like every part of it is the same.
           </p>
         </Container>
@@ -174,8 +174,8 @@ export default function NorthLasVegasPage() {
             </p>
             <p className="mt-4 text-body-lg text-lvinit-black">
               When people tell me they&rsquo;re moving to &ldquo;Las Vegas,&rdquo;
-              their actual home search usually spans three different cities —
-              Las Vegas, Henderson, and North Las Vegas — without them realizing
+              their actual home search usually spans three different cities
+              (Las Vegas, Henderson, and North Las Vegas) without them realizing
               it. North Las Vegas especially gets treated like one single kind of
               place. It isn&rsquo;t. Where you land inside the city can completely
               change your experience of living here.
@@ -208,9 +208,9 @@ export default function NorthLasVegasPage() {
         <div className="pt-12 sm:pt-16">
           <StoryVideo
             youtubeId="HuUUHgq2Sn8"
-            title="Inside a North Las Vegas home — tour by Mikey Del Rosario"
+            title="Inside a North Las Vegas home: tour by Mikey Del Rosario"
             heading="Inside a North Las Vegas Home"
-            intro="Sometimes the easiest way to understand an area's housing is to walk through a home. Here's a look inside a North Las Vegas property with a private pool and a layout representative of the kind of established housing you'll find in parts of the city — not the whole city, and not a luxury benchmark. Just a real, useful reference point."
+            intro="Sometimes the easiest way to understand an area's housing is to walk through a home. Here's a look inside a North Las Vegas property with a private pool and a layout representative of the kind of established housing you'll find in parts of the city. Not the whole city, and not a luxury benchmark. Just a real, useful reference point."
             id="home-tour"
           />
         </div>
@@ -224,13 +224,13 @@ export default function NorthLasVegasPage() {
             <p className="mt-5 text-body-lg text-lvinit-warmgray">
               More than almost anywhere else in the valley, the honest answer to
               &ldquo;what&rsquo;s it like?&rdquo; is: it depends on where. North
-              Las Vegas isn&rsquo;t one neighborhood with one feel — it&rsquo;s a
+              Las Vegas isn&rsquo;t one neighborhood with one feel. This is a
               wide city that reads completely differently from one part to the
               next.
             </p>
             <p className="mt-5 text-body-lg text-lvinit-warmgray">
               The <span className="text-lvinit-black">established areas</span>{" "}
-              near the center are older and lived-in — mature trees, settled
+              near the center are older and lived-in: mature trees, settled
               streets, closer to downtown and to Nellis. The{" "}
               <span className="text-lvinit-black">
                 newer master-planned areas
@@ -238,7 +238,7 @@ export default function NorthLasVegasPage() {
               trade that history for amenities and newer homes: parks, trails,
               and community built in from the start. And the{" "}
               <span className="text-lvinit-black">northern growth areas</span>{" "}
-              are the newest of all — brand-new construction on the edge of open
+              are the newest of all: brand-new construction on the edge of open
               desert, big-sky quiet, and longer drives to the rest of the valley.
             </p>
             <p className="mt-5 text-body-lg text-lvinit-warmgray">
@@ -263,7 +263,7 @@ export default function NorthLasVegasPage() {
             <p className="mt-5 max-w-2xl text-body-lg text-lvinit-warmgray">
               A quick, honest orientation to the areas people researching North
               Las Vegas tend to come across. Where you&rsquo;ll hear these names
-              used, the exact lines between them can vary — treat them as general
+              used, the exact lines between them can vary. Treat them as general
               areas, not precise boundaries.
             </p>
 
@@ -302,7 +302,7 @@ export default function NorthLasVegasPage() {
                 housing across a range of price points, want newer construction
                 without the valley&rsquo;s top-tier pricing, or your life is
                 oriented toward the north end of the valley. There&rsquo;s
-                genuine variety here — and often more house for the money than
+                genuine variety here, and often more house for the money than
                 some higher-cost corners of town.
               </p>
             </div>
@@ -312,7 +312,7 @@ export default function NorthLasVegasPage() {
               </p>
               <p className="mt-4 max-w-md text-body-lg text-lvinit-warmgray">
                 The catch is that &ldquo;North Las Vegas&rdquo; isn&rsquo;t one
-                answer. Location inside the city matters enormously — commute,
+                answer. Location inside the city matters enormously. Commute,
                 amenities, and the feel of a neighborhood swing hard from one
                 area to the next. Drive it at rush hour, walk it in person, and
                 don&rsquo;t judge the whole city by a single street or a single
@@ -330,7 +330,7 @@ export default function NorthLasVegasPage() {
             </h2>
             <p className="mt-4 max-w-2xl text-body text-lvinit-warmgray">
               Usually the real question isn&rsquo;t &ldquo;is North Las Vegas
-              good?&rdquo; — it&rsquo;s how it compares to the other places
+              good?&rdquo; It&rsquo;s how it compares to the other places
               you&rsquo;re weighing. Start with the guides that exist;
               side-by-side comparisons will follow.
             </p>
@@ -403,7 +403,7 @@ export default function NorthLasVegasPage() {
             </h2>
             <p className="mx-auto mt-4 max-w-xl text-body-lg text-lvinit-warmgray">
               Choosing where to land in the valley is about more than finding a
-              house — it&rsquo;s matching an area to how you actually live. Tell
+              house. You&rsquo;re matching an area to how you actually live. Tell
               me what you&rsquo;re weighing and I&rsquo;ll give you the honest
               read, including the parts of North Las Vegas I&rsquo;d point you
               toward, or away from.

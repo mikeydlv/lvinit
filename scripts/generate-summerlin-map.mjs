@@ -327,7 +327,7 @@ push(label("HOW TO READ THIS MAP", LX + 18, LY + 28, { size: 13, fill: C.warm, w
 push('<circle cx="' + (LX + 26) + '" cy="' + (LY + 52) + '" r="6.5" fill="' + C.blue + '"/>');
 push(label("Selling new homes, August 2026", LX + 46, LY + 57, { size: 15, fill: C.black }));
 push('<circle cx="' + (LX + 26) + '" cy="' + (LY + 80) + '" r="6" fill="' + C.paper + '" stroke="' + C.blue + '" stroke-width="2.6"/>');
-push(label("Established village — resale only", LX + 46, LY + 85, { size: 15, fill: C.black }));
+push(label("Established village, resale only", LX + 46, LY + 85, { size: 15, fill: C.black }));
 push(label("No Summerlin boundary is drawn here. It is a private", LX + 18, LY + 118, { size: 13 }));
 push(label("master plan, not a city and not a census place, and its", LX + 18, LY + 135, { size: 13 }));
 push(label("official border map belongs to Summerlin. Villages are", LX + 18, LY + 152, { size: 13 }));
@@ -344,7 +344,7 @@ push(wordmark(W));
 
 // --- write ------------------------------------------------------------------
 
-const TITLE = "Summerlin Las Vegas — an LVINIT area map";
+const TITLE = "Summerlin Las Vegas: an LVINIT area map";
 const DESC =
   "Map of Summerlin, Las Vegas, showing its villages plotted at their real locations along the western edge of " +
   "the valley. West of the CC-215 Beltway, in Summerlin West: Reverence, Kestrel, Kestrel Commons, La Madre " +

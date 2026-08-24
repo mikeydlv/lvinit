@@ -171,7 +171,7 @@ export default function Comparisons() {
         </div>
 
         <p className="mt-8 text-caption text-lvinit-warmgray">
-          Ballpark figures to frame the tradeoffs — ask Mikey for today&rsquo;s
+          Ballpark figures to frame the tradeoffs. Ask Mikey for today&rsquo;s
           numbers.
         </p>
 

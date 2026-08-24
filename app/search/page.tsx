@@ -4,9 +4,9 @@ import Footer from "@/components/Footer";
 import Container from "@/components/ui/Container";
 
 export const metadata: Metadata = {
-  title: "Search Homes — LVINIT",
+  title: "Search Homes | LVINIT",
   description:
-    "Search homes for sale across Las Vegas on the live GLVAR MLS — by neighborhood, price, and what actually matters to you.",
+    "Search homes for sale across Las Vegas on the live GLVAR MLS, by neighborhood, price, and what actually matters to you.",
   alternates: { canonical: "/search" },
 };
 
@@ -26,7 +26,7 @@ export default function SearchPage() {
               Search Homes for Sale
             </h1>
             <p className="mt-4 text-body-lg text-lvinit-warmgray">
-              The full Las Vegas MLS, live — search by neighborhood, price, and
+              The full Las Vegas MLS, live. Search by neighborhood, price, and
               the things that actually matter. When you find something worth a
               closer look, let&rsquo;s talk through what the listing doesn&rsquo;t
               tell you.
@@ -38,7 +38,7 @@ export default function SearchPage() {
           <div className="relative mt-10 h-[calc(100vh-9rem)] min-h-[640px] w-full overflow-hidden border border-lvinit-lightgray bg-lvinit-white sm:mt-12">
             <iframe
               src="https://las.mlsmatrix.com/Matrix/public/IDX.aspx?idx=3652dd5"
-              title="Search Las Vegas homes for sale — GLVAR MLS (Matrix IDX)"
+              title="Search Las Vegas homes for sale on the GLVAR MLS (Matrix IDX)"
               loading="lazy"
               className="absolute inset-0 h-full w-full border-0"
             />

@@ -16,7 +16,7 @@ import { SITE_URL } from "@/lib/story";
 // ---------------------------------------------------------------------------
 
 export const metadata: Metadata = {
-  title: "Guides — Living, Moving, and Buying in Las Vegas | LVINIT",
+  title: "Guides: Living, Moving, and Buying in Las Vegas | LVINIT",
   description:
     "Every LVINIT guide in one place: neighborhood comparisons, cost of living, market updates, and the practical things worth knowing before you move to Las Vegas.",
   alternates: { canonical: `${SITE_URL}/guides` },
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     type: "website",
     url: `${SITE_URL}/guides`,
     siteName: "LVINIT",
-    title: "Guides — Living, Moving, and Buying in Las Vegas",
+    title: "Guides: Living, Moving, and Buying in Las Vegas",
     description:
       "Every LVINIT guide in one place: neighborhood comparisons, cost of living, market updates, and the practical things worth knowing before you move to Las Vegas.",
   },
