@@ -5,11 +5,21 @@ import type { Guide } from "@/lib/content";
  * The editorial card shared by the homepage "Latest from LVINIT" feed and the
  * `/guides` library, so the two never drift apart visually.
  *
- * Image rule (Doc: CLAUDE.md → Imagery): a card shows a photograph only when
- * the guide carries a real, verified `image`. Otherwise it renders a designed
- * editorial panel — deliberately non-photographic, so a generic stand-in is
- * never passed off as LVINIT photography and the card still looks finished.
- * Both states are `aspect-[4/3]`, so an image arriving later shifts nothing.
+ * Image rule (Doc: CLAUDE.md → Imagery). Three states, in order of preference:
+ *
+ *   1. a real photograph (`imageMode` unset or "photo") — rendered with its
+ *      `imageAlt`.
+ *   2. a generated LVINIT editorial cover (`imageMode: "editorial-cover"`) —
+ *      abstract artwork from scripts/generate-guide-cover.mjs. Rendered with an
+ *      empty alt: everything the artwork says is already read out as text right
+ *      beside it, and inventing descriptive alt text would only misrepresent a
+ *      drawing as a scene.
+ *   3. no image at all — the designed fallback panel below. Kept deliberately:
+ *      a piece can always reach a feed before its cover has been generated, and
+ *      the card must still look finished when it does.
+ *
+ * A generic stand-in photo is never any of these. All three states are
+ * `aspect-[4/3]`, so an image arriving later shifts nothing.
  */
 export default function GuideCard({
   guide,
@@ -20,6 +30,7 @@ export default function GuideCard({
   headingLevel?: "h2" | "h3";
 }) {
   const Heading = headingLevel;
+  const isEditorialCover = guide.imageMode === "editorial-cover";
 
   return (
     <article className="flex h-full flex-col">
@@ -29,7 +40,7 @@ export default function GuideCard({
             {/* eslint-disable-next-line @next/next/no-img-element -- matches the site's existing plain-img convention */}
             <img
               src={guide.image}
-              alt={guide.imageAlt ?? ""}
+              alt={isEditorialCover ? "" : guide.imageAlt ?? ""}
               loading="lazy"
               className="h-full w-full object-cover"
             />

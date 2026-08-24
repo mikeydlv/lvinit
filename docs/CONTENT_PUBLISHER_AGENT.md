@@ -119,7 +119,8 @@ below) rather than fabricating.
 - It asks **one focused question only when genuinely blocked** — contradictory
   facts, third-party asset permission, a missing embed URL, an identity/compliance
   issue, a destructive structural change, or a risk of publishing false info.
-- **Honest fallbacks:** no real hero → photoless editorial mode; no verified
+- **Honest fallbacks:** no real hero → photoless editorial mode; no photo for
+  the card → generated editorial cover, never a stand-in photo; no verified
   metric → omit it; no extra photos → strong text-and-video layout; unbuilt
   related story → non-linked "coming soon" only if it belongs; inaccessible video
   → use the transcript/notes, invent no visuals; unverifiable current fact → omit
@@ -142,18 +143,52 @@ article.** If a piece isn't showing up, its registry entry is what to check.
 | `title` / `dek` | yes | Card headline and concise excerpt. |
 | `byline` | yes | "Mikey Del Rosario", or "LVINIT Editorial" for house pieces. |
 | `date` | yes | Human-readable display string ("August 2026"). Display only — never sorted on. |
-| `image` + `imageAlt` | only if real | Set **only** when a genuine photograph of this story exists. |
+| `image` + `imageAlt` | for photos | A genuine photograph of this story. Leave `imageMode` unset. |
+| `image` + `imageMode: "editorial-cover"` | for covers | A generated LVINIT cover (see below). No `imageAlt` — covers render decorative. |
 | `status` | optional | `"draft"` keeps a staged piece in the registry and out of every public feed. Omit once published. |
 
 Two rules worth repeating:
 
 - **Never invent a publication date.** Omit `publishedAt` and the piece simply
   stays out of the dated feeds until a real date exists.
-- **Never fill an empty `image` slot.** A guide with no authentic photograph is
-  left imageless on purpose — the card renders a designed, non-photographic
-  LVINIT panel and looks finished. A generic stand-in or an unrelated
-  neighborhood photo would present as real editorial photography, which the
-  imagery rules forbid.
+- **Never fill an empty `image` slot with a stand-in photo.** A generic or
+  unrelated neighborhood photo would present as real editorial photography,
+  which the imagery rules forbid. When there is no authentic photograph, the
+  answer is a generated cover — or nothing.
+
+### Card images: photography first, then a generated cover
+
+1. **Verified LVINIT photography** that genuinely depicts the story. Always
+   first, with accurate alt text.
+2. **A generated LVINIT editorial cover**, when no such photograph exists:
+
+   ```bash
+   node scripts/generate-guide-cover.mjs --slug <registry-slug> --category "<Category>" --subject "<short subject>"
+   ```
+
+   It writes `public/images/covers/<slug>-editorial-cover.webp` — 1200×900 to
+   match the card's 4:3 media box, usually 15–30 KB. `--out` sets a more
+   descriptive filename, `--help` lists the rest. Output is deterministic
+   (seeded from the slug), so record the exact command beside the registry
+   entry. Commit the WebP; the SVG is only an intermediate.
+
+   Keep `--subject` short — the card prints the headline right below the image,
+   so the cover carries `LAS VEGAS SUMMER`, never the full title. The motif is
+   chosen by `--category`, which is what keeps covers varied but coherent.
+3. **Nothing.** The `GuideCard` fallback panel is still correct and finished.
+
+Never scrape web images, never hotlink, never use third-party photography
+without explicit licensing and approval, and never produce a fake photographic
+representation of a real Las Vegas neighborhood, project, home, development,
+business, or event. Covers must always read as intentional graphic artwork.
+
+The generator draws **no numbers of any kind**, no real geography, no seals or
+forms, and nothing photographic — it has no code path that can invent a figure,
+and none may be added by hand. Real LVINIT maps come from
+`scripts/generate-area-map.mjs`, which is built on verified coordinates.
+
+Generating covers belongs to **draft and PR preparation**, not to deployment.
+Merging stays Mikey's call.
 
 Publishing still ends where it always did: build, verify, commit, open a PR.
 **Merging and deploying remain Mikey's call** — the agent does not self-merge or
