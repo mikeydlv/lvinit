@@ -74,7 +74,6 @@ components/
     VideoPlaceholder.tsx
 lib/
   content.ts             Homepage copy + data (see "Placeholder content" below)
-  useInViewFade.ts       Shared one-time entrance-fade hook
 tailwind.config.ts       Color, type, and spacing tokens — sourced from Doc 02
 ```
 
