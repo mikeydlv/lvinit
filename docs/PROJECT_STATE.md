@@ -5,7 +5,7 @@
 > development sprint. Where this file and the code disagree, trust the code and
 > fix this file.
 >
-> **Last audited:** 2026-07-16 · **Branch:** `main` · **Live:** https://www.lvinit.com
+> **Last audited:** 2026-08-24 · **Branch:** `main` · **Live:** https://www.lvinit.com
 >
 > **Content Publisher agent:** a project-scoped Claude Code subagent,
 > `lvinit-content-publisher`, turns Mikey's real photos/videos/notes into
@@ -66,6 +66,8 @@ app/
   neighborhoods/summerlin/fourth-of-july-parade/page.tsx   Editorial lifestyle feature (Article + Breadcrumb JSON-LD)
   neighborhoods/downtown-arts-district/page.tsx  /neighborhoods/downtown-arts-district — walkable district guide (Story Page system)
   neighborhoods/southwest-las-vegas/page.tsx     /neighborhoods/southwest-las-vegas — fastest-growing side (Story Page system)
+  guides/page.tsx                               /guides — the complete editorial guide library / archive
+  guides/first-summer-in-vegas/page.tsx          /guides/first-summer-in-vegas — Moving Here guide (Story Page system)
   guides/what-500k-buys-in-las-vegas/page.tsx    /guides/what-500k-buys-in-las-vegas — video-first buyer guide (Story Page system; first /guides/ route)
   guides/will-las-vegas-home-prices-drop/page.tsx  /guides/will-las-vegas-home-prices-drop — Market Watch, June 2026 LVR data (Story Page system)
   guides/las-vegas-home-prices-july-2026/page.tsx  /guides/las-vegas-home-prices-july-2026 — Market Watch, July 2026 LVR data (Story Page system)
@@ -89,18 +91,24 @@ app/
 | `/neighborhoods/north-las-vegas` | Area guide (pillar) | Live | Real aerial hero photo (`hero/north-las-vegas-aerial.jpg`, focal `object-[center_40%]`); The Local's Note; at-a-glance; home-tour video (id `HuUUHgq2Sn8` via `StoryVideo`); areas roster; Breadcrumb JSON-LD |
 | `/neighborhoods/downtown-arts-district` | Neighborhood guide (pillar) | Live | First pillar built on the **Story Page system**; real Mikey Arts District photography (Main St hero + 3 inline figures); honest "who it's / isn't for" + practical beats; cross-links the Summerlin/Henderson/NLV guides via `RelatedStories`; Article + Breadcrumb JSON-LD; hero = OG image |
 | `/neighborhoods/southwest-las-vegas` | Area guide (pillar) | Live | Story Page system; real Mikey UnCommons/The Bend photography (2026-07-16 shoot) — street hero + 4 inline figures; informal-boundary + unincorporated-Clark-County framing; "My honest take" Local's Note; verified development status (open vs announced); Article + Breadcrumb JSON-LD; hero = OG image |
-| `/guides/what-500k-buys-in-las-vegas` | Buyer guide (video companion) | Live | First `/guides/` route; Story Page system; companion to the "$500K" home-tour video (id `Tzxid_nM2nA`, via `StoryVideo`); photoless editorial hero (OG = existing local video poster `video-what-500k-gets-you-in-las-vegas.jpg`); page-local responsive comparison (mobile cards / desktop table); Article + Breadcrumb + **VideoObject** JSON-LD; breadcrumb is Home → article only (no `/guides` index exists) |
-| `/guides/summerlin-vs-henderson` | Comparison guide | Live | Story Page system; honest, qualitative comparison of the Summerlin and Henderson pillar guides — no stats cited (the `neighborhoods[]` metrics in `lib/content.ts` are explicitly placeholder, not verified, so none are used); hero + card image reuse the real Summerlin Fox Hill Park drone photo (no real Henderson photography exists yet); Article + Breadcrumb JSON-LD; breadcrumb is Home → article only; cross-linked from both the Summerlin and Henderson pillar pages and the homepage `LocalGuides` card |
-| `/guides/nevada-property-tax-abatement-resale-buyers` | Cost of Living guide | Live | Story Page system; explains Nevada's owner-occupied 3% property tax cap (NRS 361.4723), the qualifying-rental carve-out (NRS 361.4724), and the general other-property formula capped at 8% (NRS 361.4722) — **corrected 2026-08-22**: removed an unsupported claim that a sale "resets" or "recalculates" the buyer's bill; Nevada does not reassess taxable value to sale price (mass-appraisal method, Clark County Assessor's real-property page) — what changes at a recorded sale is the owner-occupied *designation* only (Clark County Assessor's tax-abatement page), and current law (AB377, eff. Oct 1 2025, amending NRS 375.060) lets a new owner claim the abatement on the Declaration of Value at closing, with the older assessor-mailed-postcard process as backup; removed the invented "Mikey's take" opinion section (replaced with neutral sourced guidance); headline changed to "Why the Seller's Nevada Property Tax Bill May Not Be Yours"; no dollar figures asserted, one clearly-labeled hypothetical example; photoless hero; FAQPage + Article + Breadcrumb JSON-LD; breadcrumb is Home → article only; fills the homepage `LocalGuides` "Cost of Living" card slot (`guides[]` slug `cost-of-living-2026`) — **card image flagged for Mikey**: falls back to `/images/guide-cost-of-living-2026.jpg`, which is a generic flat gray/beige gradient placeholder, not real photography (confirmed by inspection); needs a real image or an explicit no-image placeholder treatment; cross-links `las-vegas-home-prices-july-2026`, `what-500k-buys-in-las-vegas`, and `summerlin-vs-henderson` |
+| `/guides` | Guide index / archive | Live | The complete editorial library. Renders every entry in the canonical `publishedGuides` registry (`lib/content.ts`), newest first, through the shared `GuideCard` — the same registry and card the homepage feed uses, so publishing a guide surfaces it in both without either file being edited |
+| `/guides/what-500k-buys-in-las-vegas` | Buyer guide (video companion) | Live | First `/guides/` route; Story Page system; companion to the "$500K" home-tour video (id `Tzxid_nM2nA`, via `StoryVideo`); photoless editorial hero (OG = existing local video poster `video-what-500k-gets-you-in-las-vegas.jpg`); page-local responsive comparison (mobile cards / desktop table); Article + Breadcrumb + **VideoObject** JSON-LD; breadcrumb is Home → article only — unchanged since the `/guides` index shipped |
+| `/guides/summerlin-vs-henderson` | Comparison guide | Live | Story Page system; honest, qualitative comparison of the Summerlin and Henderson pillar guides — no stats cited (the `neighborhoods[]` metrics in `lib/content.ts` are explicitly placeholder, not verified, so none are used); hero + card image reuse the real Summerlin Fox Hill Park drone photo (no real Henderson photography exists yet); Article + Breadcrumb JSON-LD; breadcrumb is Home → article only; cross-linked from both the Summerlin and Henderson pillar pages, and surfaced by the homepage `LatestFromLVINIT` feed and `/guides` |
+| `/guides/nevada-property-tax-abatement-resale-buyers` | Cost of Living guide | Live | Story Page system; explains Nevada's owner-occupied 3% property tax cap (NRS 361.4723), the qualifying-rental carve-out (NRS 361.4724), and the general other-property formula capped at 8% (NRS 361.4722) — **corrected 2026-08-22**: removed an unsupported claim that a sale "resets" or "recalculates" the buyer's bill; Nevada does not reassess taxable value to sale price (mass-appraisal method, Clark County Assessor's real-property page) — what changes at a recorded sale is the owner-occupied *designation* only (Clark County Assessor's tax-abatement page), and current law (AB377, eff. Oct 1 2025, amending NRS 375.060) lets a new owner claim the abatement on the Declaration of Value at closing, with the older assessor-mailed-postcard process as backup; removed the invented "Mikey's take" opinion section (replaced with neutral sourced guidance); headline changed to "Why the Seller's Nevada Property Tax Bill May Not Be Yours"; no dollar figures asserted, one clearly-labeled hypothetical example; photoless hero; FAQPage + Article + Breadcrumb JSON-LD; breadcrumb is Home → article only; registered in `guides[]` as slug `cost-of-living-2026`, so it surfaces through `/guides` and the homepage `LatestFromLVINIT` feed — **card image resolved**: it now carries a generated LVINIT editorial cover (`/images/covers/nevada-property-tax-editorial-cover.webp`, `imageMode: "editorial-cover"`) rather than the generic `/images/guide-cost-of-living-2026.jpg` stand-in; cross-links `las-vegas-home-prices-july-2026`, `what-500k-buys-in-las-vegas`, and `summerlin-vs-henderson` |
 | `/search` | IDX search | Live | Matrix IDX embed `idx=3652dd5`; do not modify embed behavior without instruction |
 | `/contact` | Contact | Live | ContactForm → `/api/contact` (Resend) with mailto fallback |
 | `/api/contact` | Route handler | Live | Returns 503 until `RESEND_API_KEY` is set, so no fake service ships |
 
 **Homepage section order** (from [`app/page.tsx`](../app/page.tsx)):
-Navbar → Hero → ThesisBeat → NeighborhoodDiscovery → Comparisons →
+Navbar → Hero → NeighborhoodDiscovery → Comparisons →
 BreathingPhoto (Arts District) → MovingToLasVegas → Videos →
-BreathingPhoto (Red Rock) → LocalGuides → MeetYourGuide → SearchHomesStrip →
-Newsletter → Footer.
+LatestFromLVINIT → BreathingPhoto (Red Rock) → MeetYourGuide →
+SearchHomesStrip → Newsletter → Footer.
+
+Two changes from the earlier build: **`ThesisBeat` has been removed** (the
+full-screen thesis sentence no longer ships), and **`LocalGuides` has been
+replaced by `LatestFromLVINIT`**, which now sits directly after `Videos` and
+before the Red Rock photo pause.
 
 ---
 
@@ -201,7 +209,7 @@ Two typefaces, non-overlapping jobs (loaded via `next/font/google` in
 | `subhead` | 24 / 32 | subheads |
 | `heading-sm` | 36 / 42 | small headlines |
 | `heading` | 52 / 58 | headlines |
-| `thesis` | 56 / 64 | **Thesis Beat only** |
+| `thesis` | 56 / 64 | Was **Thesis Beat only**; `ThesisBeat` has been removed, so the token is currently unused. Left in `tailwind.config.ts` — do not reassign it to another role |
 | `scoreboard` | 64 / 68 | **Journey / Comparison names, emotional numeral** |
 | `display` | 84 / 88 | **Hero + Mikey's name only** |
 
@@ -218,13 +226,13 @@ All in `components/`. Server components unless marked **client**.
 |---|---|---|
 | `Navbar.tsx` **client** | Fixed header, condenses 88→64px on scroll, full-screen mobile menu | Anchor links to homepage sections + Search Homes |
 | `Hero.tsx` | Full-bleed hero photo + headline + CTAs | Bright cream washes (never dark); real drone photo |
-| `ThesisBeat.tsx` **client** | Full-screen single-sentence typographic moment | One-time in-view fade via `useInViewFade` |
 | `NeighborhoodDiscovery.tsx` | Featured Summerlin link + editorial list of other areas | **Simplified** vs. spec (see Known Notes) |
 | `Comparisons.tsx` **client** | "Compare Any Two Neighborhoods" — animated Comparison Bars | Placeholder metrics; Scofield Blue marks the winner |
 | `BreathingPhoto.tsx` | Full-bleed photo pause + one caption line | Used twice; wraps `ImagePlaceholder` |
 | `MovingToLasVegas.tsx` | Emotional numeral ("27") + quick-facts index | **"27" is a placeholder figure** |
 | `Videos.tsx` **client** | Featured video + selectable thumbnail row | Placeholder posters; click swaps featured only |
-| `LocalGuides.tsx` | Featured feature (parade) + 3 secondary guide cards | Secondary cards are display-only (no pages yet) |
+| `LatestFromLVINIT.tsx` | Homepage editorial feed — the 3 newest published guides + a "View all guides" link to `/guides` | Replaced `LocalGuides.tsx`. Nothing is hard-coded: it renders `latestGuides(3)` off the canonical registry, so publishing rotates the oldest of the three off automatically. Keeps `id="guides"` (the nav item and the Moving to Las Vegas quick-fact links target that anchor) |
+| `GuideCard.tsx` | The editorial card shared by `LatestFromLVINIT` and `/guides` | Image rule, in order: real photograph → generated LVINIT editorial cover (`imageMode: "editorial-cover"`, empty alt) → the designed no-image fallback panel. A generic stand-in photo is never any of these |
 | `MeetYourGuide.tsx` | "Cover Story" — Mikey on dark bg, name at Display scale | Real transparent-cutout portrait |
 | `SearchHomesStrip.tsx` | Quiet utility strip → `/search` | Deliberately not a "moment" |
 | `Newsletter.tsx` **client** | Email capture | **No backend** — updates local UI state only |
@@ -235,9 +243,6 @@ All in `components/`. Server components unless marked **client**.
 | `ui/Container.tsx` | Max-width 1440px + responsive gutters | Site-wide layout wrapper |
 | `ui/ImagePlaceholder.tsx` | Real image (with `src`) or labeled gray box (without) | Swap asset at same path to go live |
 | `ui/VideoPlaceholder.tsx` | Poster + play button or plain black block | |
-
-**Shared hook:** `lib/useInViewFade.ts` — one-time IntersectionObserver fade-in
-for quiet sections.
 
 ### Story Page pattern (`components/story/` + `lib/story.ts`)
 
@@ -365,8 +370,9 @@ video-*, resident-voice-backdrop) is still a neutral placeholder — see
 The goal is discoverable **content clusters** around each neighborhood, with
 links flowing both up (feature → guide → homepage) and down (guide → feature).
 
-- Homepage `NeighborhoodDiscovery` and `LocalGuides` feature and link to the
-  live Summerlin guide and the parade feature.
+- Homepage `NeighborhoodDiscovery` links to the live neighborhood pillars;
+  `LatestFromLVINIT` surfaces the three newest published guides off the
+  canonical registry and links on to `/guides`, the complete archive.
 - The Summerlin guide links **down** to the parade feature (twice: a hero-style
   card and a "Related Summerlin Stories" cluster) and **out** to `/search` and
   `/contact`.
@@ -381,7 +387,9 @@ links flowing both up (feature → guide → homepage) and down (guide → featu
 
 ## Completed Features
 
-- Phase 1 homepage — all 12 assembled sections, responsive, accessible.
+- Phase 1 homepage — assembled, responsive, accessible. `ThesisBeat` has since
+  been removed and `LocalGuides` replaced by `LatestFromLVINIT`; see Homepage
+  section order above for the current sequence.
 - Design system implemented as Tailwind tokens traceable to Doc 02.
 - Summerlin neighborhood guide with real drone photography.
 - Summerlin Fourth of July Parade editorial feature (JSON-LD, embedded video).
@@ -433,8 +441,8 @@ links flowing both up (feature → guide → homepage) and down (guide → featu
   deliberately not cited. Hero and homepage card reuse the real Summerlin Fox
   Hill Park drone photo (no real Henderson photography exists yet). Story Page
   system; Article + Breadcrumb JSON-LD; cross-linked from both the Summerlin
-  and Henderson pillar pages (new "Comparing X to Y?" blocks) and the homepage
-  `LocalGuides` card; sitemap entry.
+  and Henderson pillar pages (new "Comparing X to Y?" blocks), and surfaced by
+  the homepage feed and `/guides`; sitemap entry.
 - **Nevada property tax abatement / resale-buyer guide** — the article behind
   the previously-unbuilt homepage "Cost of Living" guide card. Explains NRS
   361.4723 (the 3% owner-occupied primary-residence cap and the up-to-8%
@@ -446,9 +454,27 @@ links flowing both up (feature → guide → homepage) and down (guide → featu
   hypothetical. Photoless editorial hero (no real photo exists for this topic);
   Story Page system; FAQPage + Article + Breadcrumb JSON-LD; cross-links the
   July 2026 Market Watch piece, the $500K buyer guide, and Summerlin vs.
-  Henderson; wired into `lib/content.ts` `guides[]` (slug `cost-of-living-2026`,
-  reuses the existing `guide-cost-of-living-2026.jpg` placeholder image) so it
-  renders automatically in the homepage `LocalGuides` grid; sitemap entry.
+  Henderson; wired into `lib/content.ts` `guides[]` (slug `cost-of-living-2026`)
+  so it renders automatically in the homepage feed and `/guides`; sitemap entry.
+- **`/guides` — the complete editorial guide library / archive.** Renders every
+  entry in the canonical `publishedGuides` registry (`lib/content.ts`), newest
+  first, through the shared `GuideCard`. Eligibility is metadata-driven, not a
+  slug list: an entry surfaces when it is not a `draft`, has a real `href`, and
+  has a `publishedAt` to sort on. Sitemap entry; linked from the homepage feed.
+- **`LatestFromLVINIT` — the homepage editorial feed** that replaced
+  `LocalGuides`. It automatically renders the **3 newest eligible published
+  guides** from that same registry (`latestGuides(3)`), so publishing rotates
+  the oldest of the three off with no component edit, and links on to `/guides`.
+  It keeps the `id="guides"` anchor the nav and quick-fact links target.
+- **Guide card imagery, resolved end to end.** The Content Publisher uses
+  authentic approved photography whenever a genuine photograph of the story
+  exists; when none does, it generates an LVINIT editorial cover
+  (`scripts/generate-guide-cover.mjs` → `public/images/covers/<slug>-*.webp`,
+  wired as `imageMode: "editorial-cover"` and rendered with empty alt). The
+  designed no-image panel in `GuideCard` remains as **runtime fallback only** —
+  emergency resilience for a piece that reaches a feed before its cover is
+  generated, not a normal publishing state. A generic stand-in photo is never
+  used for any of the three. See [CONTENT_PUBLISHER_AGENT.md](CONTENT_PUBLISHER_AGENT.md).
 - Live IDX search page (Matrix / GLVAR).
 - Contact form with Resend handler + mailto fallback + GA4 lead event.
 - GA4 analytics scaffolding (opt-in via env var).
@@ -488,10 +514,13 @@ links flowing both up (feature → guide → homepage) and down (guide → featu
    a standalone Cost of Living / homeownership explainer, not tied to a single
    neighborhood. Cross-linked with `/guides/las-vegas-home-prices-july-2026`,
    `/guides/what-500k-buys-in-las-vegas`, and `/guides/summerlin-vs-henderson`.
-   Fills the homepage `LocalGuides` "Cost of Living" card slot.
+   Surfaced through `/guides` and, while it is among the three newest, the
+   homepage `LatestFromLVINIT` feed.
 
-The remaining homepage guide/video card (Surviving Your First Vegas Summer,
-and the four video posters) are placeholders that do not yet resolve to pages.
+Every guide in the registry now resolves to a real page — *Surviving Your First
+Las Vegas Summer* published as `/guides/first-summer-in-vegas` (2026-08-23) and
+is currently the newest entry. The four homepage video posters remain
+placeholders that do not yet resolve to pages.
 
 ---
 
@@ -546,11 +575,11 @@ Run through this every time a new page ships, in order:
 
 - Neighborhood lifestyle features in the parade mold (events, parks, trails,
   local traditions) — one strong cluster child per pillar neighborhood.
-- One homepage guide card still needs a real article before it should link
-  anywhere: *Surviving Your First Vegas Summer*. (*Summerlin vs. Henderson*, *A
-  Local's Guide to the Downtown Arts District*, and the Nevada property tax
-  abatement Cost of Living piece are all real, linked pages now — this list
-  was stale.)
+- Every entry in the guide registry now resolves to a real, linked page —
+  *Surviving Your First Las Vegas Summer* was the last placeholder and
+  published as `/guides/first-summer-in-vegas`. New guides are added to
+  `guides[]` in `lib/content.ts` and surface in `/guides` and the homepage feed
+  on their own.
 - Real produced videos to replace the four placeholder posters (topics already
   framed around real doubts: affordability, heat, rent-vs-buy, schools).
 - A **Relocation Hub** ("Moving to Las Vegas") landing destination for the
@@ -597,13 +626,11 @@ Placeholder content that must be replaced before it can be considered "done"
   ratings for all neighborhoods are illustrative, not verified.
 - **The "27" emotional numeral** (`MovingToLasVegas`) — needs a real, checkable
   commute figure.
-- **Placeholder guide + video cards** (`LocalGuides` secondary, `Videos`) — need
-  real articles/videos and real destination pages before they link out. Note:
-  `LocalGuides.tsx` now renders every `guides[]` entry with a real `href`
-  automatically (`guides.filter((g) => g.href)`), so a guide card starts
-  appearing on its own the moment its `href` is set — no component change
-  needed. Cost of Living shipped this sprint; the remaining placeholder is
-  Surviving Your First Vegas Summer.
+- **Placeholder video cards** (`Videos`) — need real videos and real destination
+  pages before they link out. Guide cards are no longer a pending item: both
+  `LatestFromLVINIT` and `/guides` read the canonical `publishedGuides`
+  registry, so a guide surfaces on its own once it is non-draft and has an
+  `href` and a `publishedAt` — no component change needed.
 - **Neutral photo placeholders** in `/public/images/` — replace in place with
   real Mikey photography (keep filenames).
 - **Henderson hero (Option B)** — the page ships with a bright text hero and no
@@ -663,7 +690,8 @@ search as a primary job, property listing cards, agent directory, accounts/login
   these: `NeighborhoodDiscovery` is a simpler editorial list (featured Summerlin +
   text snapshot of the rest), and the Resident Voice sections were intentionally
   omitted rather than ship fabricated quotes (content-integrity guardrail, Doc 03
-  §5). The README's component list is stale as a result. This is a deliberate,
+  §5). The README's component list is stale as a result (it also still lists the
+  removed `ThesisBeat.tsx` and `LocalGuides.tsx`). This is a deliberate,
   honesty-driven simplification, not a bug — but keep it in mind when reconciling
   the spec against the code.
 - **No `next.config` image domains** — all images are local, so none are needed.
