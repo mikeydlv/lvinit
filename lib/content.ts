@@ -151,14 +151,30 @@ export type Guide = {
   status?: "published" | "draft";
   pullQuote?: string;
   /**
-   * Real, verified photograph for this piece, in /public/images. Omit it when
-   * no legitimate image exists — the card then renders an intentional
-   * non-photographic fallback rather than passing a generic stand-in off as
-   * LVINIT editorial photography. Only set it to a file that actually depicts
-   * this story; never a filename-convention guess.
+   * The card image, in /public/images. Either a real photograph of this story
+   * or a generated LVINIT editorial cover — `imageMode` says which, and the two
+   * are never interchangeable. Only ever set this to a file that genuinely
+   * belongs to this piece; never a filename-convention guess, and never a
+   * generic stand-in photo to fill the slot.
+   *
+   * Omitting it is still valid: the card renders its designed non-photographic
+   * fallback and looks finished.
    */
   image?: string;
-  /** Alt text for `image`. Required whenever `image` is set. */
+  /**
+   * What `image` actually is. Defaults to "photo" when omitted, because that
+   * was the only kind of image this registry held before covers existed.
+   *
+   *   "photo"           — a real, verified photograph. Requires `imageAlt`.
+   *   "editorial-cover" — abstract artwork from
+   *                       `scripts/generate-guide-cover.mjs`. Decorative: the
+   *                       card renders it with an empty alt, since everything
+   *                       it "says" (category, subject, wordmark) is already
+   *                       read out as text beside it. Do not write `imageAlt`
+   *                       for one, and never describe it as a photograph.
+   */
+  imageMode?: "photo" | "editorial-cover";
+  /** Alt text for `image`. Required whenever `imageMode` is "photo". */
   imageAlt?: string;
   /**
    * Root-relative link to the published guide. Entries without one are not
@@ -174,8 +190,18 @@ export type Guide = {
  *
  * Publishing checklist for a new piece: `href` pointing at the real route,
  * `publishedAt` matching the page's `StoryMeta.datePublished`, a `category`, a
- * `dek`, and `image` + `imageAlt` only when a genuine photograph exists. No
- * homepage file needs editing — the feed picks the newest three on its own.
+ * `dek`, and a card image. No homepage file needs editing — the feed picks the
+ * newest three on its own.
+ *
+ * The card image, in strict order of preference:
+ *   1. a genuine photograph of this story — `image` + `imageAlt`, no
+ *      `imageMode` needed. Always the first choice when Mikey has one.
+ *   2. otherwise a generated LVINIT editorial cover — `image` +
+ *      `imageMode: "editorial-cover"`, produced by
+ *      `scripts/generate-guide-cover.mjs` (see that file's header).
+ *   3. nothing at all, which is still valid — the card falls back to its
+ *      designed panel.
+ * What is never acceptable is a stand-in photo standing in for a missing one.
  */
 export const guides: Guide[] = [
   {
@@ -186,22 +212,41 @@ export const guides: Guide[] = [
     date: "August 2026",
     publishedAt: "2026-08-23",
     category: "Moving Here",
-    // Deliberately imageless — no authentic photography for this one yet, so
-    // the card renders the designed fallback. Add `image` + `imageAlt` when a
-    // real photo lands.
+    // No authentic photography for this one yet, so it carries a generated
+    // LVINIT editorial cover — a high desert sun breaking into heat bands over
+    // a horizon rule. Drawn artwork, not a photograph of anywhere. Replace with
+    // `imageMode: "photo"` + a real `image`/`imageAlt` when a photo lands.
+    //   node scripts/generate-guide-cover.mjs --slug first-summer-in-vegas \
+    //     --category "Moving Here" --subject "Las Vegas Summer" \
+    //     --out las-vegas-summer-editorial-cover.webp
+    image: "/images/covers/las-vegas-summer-editorial-cover.webp",
+    imageMode: "editorial-cover",
     href: "/guides/first-summer-in-vegas",
   },
   {
     slug: "cost-of-living-2026",
     title: "Why the Seller's Nevada Property Tax Bill May Not Be Yours",
-    dek: "Nevada caps property tax increases at 3% a year for an owner-occupied home — but that cap is tied to the owner, not the house. What changes at a sale, what doesn't, and what to verify before closing.",
+    // Card copy must track the article after its legal review — the earlier
+    // "the cap is tied to the owner, not the house" framing was removed there
+    // and must not survive here. Do not reintroduce it, or any claim that the
+    // tax history resets, that taxable value resets to the purchase price, or
+    // that a new buyer necessarily pays more than the seller.
+    dek: "Nevada's 3% owner-occupied property-tax abatement depends on the current owner establishing the home as their primary residence. Here's what changes at a sale, what doesn't, and what buyers should verify before closing.",
     byline: "Mikey Del Rosario",
     date: "August 2026",
     publishedAt: "2026-08-21",
     category: "Cost of Living",
-    // Intentionally imageless. `/images/guide-cost-of-living-2026.jpg` is a
-    // generic stand-in left over from the old cost-of-living placeholder; it
-    // does not depict this story and must not be shown as LVINIT photography.
+    // Carries a generated LVINIT editorial cover: an abstract parcel/plat
+    // subdivision with one parcel picked out and a dashed line of transfer
+    // through it. No real plat, no assessor record, no figures of any kind.
+    // (`/images/guide-cost-of-living-2026.jpg` is a generic stand-in left over
+    // from the old cost-of-living placeholder — it does not depict this story
+    // and must not be shown as LVINIT photography.)
+    //   node scripts/generate-guide-cover.mjs --slug cost-of-living-2026 \
+    //     --category "Cost of Living" --subject "Property Tax" \
+    //     --out nevada-property-tax-editorial-cover.webp
+    image: "/images/covers/nevada-property-tax-editorial-cover.webp",
+    imageMode: "editorial-cover",
     href: "/guides/nevada-property-tax-abatement-resale-buyers",
   },
   {
@@ -259,7 +304,15 @@ export const guides: Guide[] = [
     date: "August 2026",
     publishedAt: "2026-08-04",
     category: "Market Watch",
-    // Intentionally imageless — no authentic photograph for this explainer.
+    // No authentic photograph for this explainer, so it carries a generated
+    // LVINIT editorial cover: floating strata, no axis and no baseline, because
+    // anything anchored would read as a chart of real inventory. It plots
+    // nothing — the line lengths are seeded noise, not market data.
+    //   node scripts/generate-guide-cover.mjs --slug will-las-vegas-home-prices-drop \
+    //     --category "Market Watch" --subject "Inventory" \
+    //     --out las-vegas-inventory-editorial-cover.webp
+    image: "/images/covers/las-vegas-inventory-editorial-cover.webp",
+    imageMode: "editorial-cover",
     href: "/guides/will-las-vegas-home-prices-drop",
   },
   {

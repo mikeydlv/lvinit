@@ -5,6 +5,10 @@ JPGs — no scenery, no illustration, no artwork) so the homepage looks clean an
 finished until real Las Vegas photography is shot. They are intentionally blank
 so they never pretend to be something they're not.
 
+> **`covers/` is not part of this list.** Those files are generated editorial
+> artwork, not placeholder photography, and they are finished assets — see
+> `covers/README.md`.
+
 **How to replace:** drop your real photo at the same path with the same
 filename (e.g. overwrite `hero-las-vegas-lifestyle.jpg` with your shot). No code
 change needed — the components already point at these paths. Keep images local

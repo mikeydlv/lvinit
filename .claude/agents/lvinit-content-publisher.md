@@ -169,6 +169,56 @@ When Mikey supplies original photos:
    `ImagePlaceholder`/`VideoPlaceholder` components. If no real hero exists, use
    the established **photoless editorial hero** — never a fabricated stand-in.
 
+### Choosing a card image — the order is not negotiable
+
+1. **Verified, approved LVINIT photography**, when it exists and genuinely
+   depicts this story. Always the first choice. Write accurate alt text.
+2. **Otherwise, generate an LVINIT editorial cover** with the approved local
+   generator (see §5a). Store it in the repo, register it, and never present it
+   as photography.
+3. **Otherwise, no image.** The `GuideCard` fallback panel is still correct and
+   still looks finished.
+
+Never scrape or download images from the web. Never hotlink. Never use
+third-party photography without explicit licensing and Mikey's approval. Never
+create a fake photographic representation of a real Las Vegas neighborhood,
+project, home, development, business, or event — including AI-generated
+"photos". And never swap an existing genuine photograph for a generated cover
+to make a row of cards look uniform; real photography always wins.
+
+### 5a. Generating an editorial cover
+
+`scripts/generate-guide-cover.mjs` draws a branded, deliberately graphic cover
+from the piece's own metadata:
+
+```bash
+node scripts/generate-guide-cover.mjs --slug <registry-slug> --category "<Category>" --subject "<short subject>"
+```
+
+It writes `public/images/covers/<slug>-editorial-cover.webp` at 1200×900 (4:3,
+matching the card media box), typically 15–30 KB. Pass `--out <filename>` for a
+more descriptive name than the slug gives — e.g.
+`las-vegas-summer-editorial-cover.webp`. `--help` lists every option.
+
+- **`--subject` stays short** (the script rejects anything over 28 characters).
+  The card prints the real headline directly under the image, so the cover must
+  not repeat it. `LAS VEGAS SUMMER`, not the twelve-word title.
+- **The motif comes from `--category`**, so covers vary by section while staying
+  one system. Known categories: Moving Here, Cost of Living, Market Watch, Buyer
+  Guide, Comparisons, Neighborhoods, Local Feature.
+- **Output is deterministic** — seeded from the slug, so re-running reproduces
+  the same file. Record the exact command in a comment beside the registry entry.
+- **Commit the WebP only.** The SVG is a build intermediate; `--svg <path>` can
+  dump it for inspection but it is not an asset.
+- **The generator cannot fabricate information, and neither may you.** It draws
+  no numbers at all — no prices, temperatures, tax figures, percentages, dates —
+  no real geography, no seals or forms, and nothing photographic. Do not add any.
+  Accurate LVINIT maps come from `scripts/generate-area-map.mjs`, which is built
+  on real coordinates; the cover generator's grid motifs are texture, not maps.
+
+Generating covers is part of **preparing the draft and the PR**, never a
+deploy-time step. Human approval before merge is still required.
+
 **Attribution.** For Mikey-owned photography, the global footer credit covers it
 (no per-image credit unless a page needs a specific caption). For licensed,
 developer, promotional, rendering, archival, or third-party imagery: preserve a
@@ -227,8 +277,9 @@ an identity or compliance issue; a destructive structural change; or a request
 that could publish materially false information.
 
 **Safe fallbacks when inputs are incomplete but the task can still be honest:**
-no real hero → photoless editorial mode; no verified metric → omit it; no extra
-photos → strong text-and-video layout; unbuilt related story → non-linked "coming
+no real hero → photoless editorial mode; no photo for the card → generated
+editorial cover (§5a), never a stand-in photo; no verified metric → omit it; no
+extra photos → strong text-and-video layout; unbuilt related story → non-linked "coming
 soon" only if it genuinely belongs; video inaccessible → use the supplied
 transcript/notes, invent no visuals; unverifiable current fact → omit or flag;
 minor copy choice → make the strongest on-brand call and proceed.
@@ -261,11 +312,17 @@ minor copy choice → make the strongest on-brand call and proceed.
     Watch, Buyer Guide, Comparisons, Neighborhoods, Local Feature, …).
   - `title` + `dek` — the card headline and its concise excerpt.
   - `byline` — "Mikey Del Rosario", or "LVINIT Editorial" for house pieces.
-  - `image` + `imageAlt` — **only** when a genuine photograph of this story
-    exists. Omit both otherwise: the card then renders its designed
-    non-photographic fallback, which is correct and finished. Never point
-    `image` at a generic stand-in or an unrelated neighborhood photo to fill the
-    slot, and never write alt text for a photo that doesn't exist.
+  - `image` + `imageAlt` — for a **genuine photograph** of this story. Leave
+    `imageMode` unset; it defaults to `"photo"`.
+  - `image` + `imageMode: "editorial-cover"` — for a **generated cover** (§5a).
+    Write **no** `imageAlt`: the card renders a cover with an empty alt, because
+    the category, title and dek beside it already say everything the artwork
+    says. Never describe a cover as a photograph.
+  - Omitting the image entirely is still valid — the card renders its designed
+    non-photographic fallback, which is correct and finished. What is never
+    acceptable is pointing `image` at a generic stand-in or an unrelated
+    neighborhood photo to fill the slot, or writing alt text for a photo that
+    doesn't exist.
   - `status: "draft"` — set while a piece is staged but not publishable; it stays
     in the registry and out of every public feed. Omit once published.
 - Run `npm run build` (must pass clean) and verify in the browser preview (dev
