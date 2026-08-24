@@ -226,7 +226,12 @@ export const guides: Guide[] = [
   {
     slug: "cost-of-living-2026",
     title: "Why the Seller's Nevada Property Tax Bill May Not Be Yours",
-    dek: "Nevada caps property tax increases at 3% a year for an owner-occupied home — but that cap is tied to the owner, not the house. What changes at a sale, what doesn't, and what to verify before closing.",
+    // Card copy must track the article after its legal review — the earlier
+    // "the cap is tied to the owner, not the house" framing was removed there
+    // and must not survive here. Do not reintroduce it, or any claim that the
+    // tax history resets, that taxable value resets to the purchase price, or
+    // that a new buyer necessarily pays more than the seller.
+    dek: "Nevada's 3% owner-occupied property-tax abatement depends on the current owner establishing the home as their primary residence. Here's what changes at a sale, what doesn't, and what buyers should verify before closing.",
     byline: "Mikey Del Rosario",
     date: "August 2026",
     publishedAt: "2026-08-21",
@@ -299,11 +304,15 @@ export const guides: Guide[] = [
     date: "August 2026",
     publishedAt: "2026-08-04",
     category: "Market Watch",
-    // Still imageless — no authentic photograph for this explainer, and the
-    // editorial-cover system is being reviewed on the two pieces above before
-    // it is applied more widely. Once the look is approved:
+    // No authentic photograph for this explainer, so it carries a generated
+    // LVINIT editorial cover: floating strata, no axis and no baseline, because
+    // anything anchored would read as a chart of real inventory. It plots
+    // nothing — the line lengths are seeded noise, not market data.
     //   node scripts/generate-guide-cover.mjs --slug will-las-vegas-home-prices-drop \
-    //     --category "Market Watch" --subject "Inventory"
+    //     --category "Market Watch" --subject "Inventory" \
+    //     --out las-vegas-inventory-editorial-cover.webp
+    image: "/images/covers/las-vegas-inventory-editorial-cover.webp",
+    imageMode: "editorial-cover",
     href: "/guides/will-las-vegas-home-prices-drop",
   },
   {

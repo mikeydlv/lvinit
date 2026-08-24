@@ -264,19 +264,28 @@ function motifStrata(rand) {
   const out = [];
   const rows = 9;
   const gap = (BAND.bottom - BAND.top) / rows;
+  const span = W - M * 2;
+
   for (let i = 0; i < rows; i++) {
     const y = BAND.top + gap * i + gap / 2;
-    const len = (0.34 + rand() * 0.62) * (W - M * 2);
+    // Each course floats: it has its own start as well as its own length.
+    // Anchoring every row to a common left edge would draw bars rising off a
+    // baseline, and a row of bars reads as a chart of something even with no
+    // axis, no labels and no numbers on it. Offsetting the starts keeps the
+    // analytical feel while making it plainly a stratum, not a measurement.
     const accent = i === Math.floor(rows / 2);
+    // Long courses, so the field reaches both margins instead of pooling in the
+    // middle and going weak at card size.
+    const len = (accent ? 0.46 : 0.4 + rand() * 0.46) * span;
+    const start = M + rand() * (span - len);
     out.push(
-      line(M, y, M + len, y, {
+      line(start, y, start + len, y, {
         stroke: accent ? C.blue : C.warm,
-        width: accent ? 5 : 3,
-        opacity: accent ? 1 : 0.42,
+        width: accent ? 6 : 3.5,
+        opacity: accent ? 1 : 0.55,
       })
     );
   }
-  out.push(line(M, BAND.top, M, BAND.bottom, { stroke: C.black, width: HAIRLINE, opacity: 0.55 }));
   return out;
 }
 

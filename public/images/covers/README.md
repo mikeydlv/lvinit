@@ -37,3 +37,4 @@ that it draws no numbers, no real geography, and nothing photographic.
 |---|---|---|
 | `las-vegas-summer-editorial-cover.webp` | Surviving Your First Las Vegas Summer | A high desert sun, cropped by the right edge, breaking into horizontal heat bands above a Scofield Blue horizon rule. |
 | `nevada-property-tax-editorial-cover.webp` | Why the Seller's Nevada Property Tax Bill May Not Be Yours | An abstract parcel subdivision with one parcel picked out in Scofield Blue and a dashed line of transfer running through it. Not a plat, not an assessor's record, and it carries no figures. |
+| `las-vegas-inventory-editorial-cover.webp` | Inventory Is Rising in Las Vegas. So Why Aren't Home Prices Falling? | Floating horizontal strata with one course in Scofield Blue. Deliberately given no axis and no baseline — anchored bars would read as a chart of real inventory. It plots nothing; the lengths are seeded noise. |
