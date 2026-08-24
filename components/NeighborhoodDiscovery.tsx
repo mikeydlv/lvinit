@@ -25,7 +25,7 @@ export default function NeighborhoodDiscovery() {
             Las Vegas, one neighborhood at a time
           </h2>
           <p className="mt-4 text-body-lg text-lvinit-warmgray">
-            Not a listings feed — honest, first-person guides to the places
+            Not a listings feed. Honest, first-person guides to the places
             you&rsquo;d actually live. I&rsquo;m writing them one at a time,
             starting with the corner of the valley I know best.
           </p>
@@ -45,7 +45,7 @@ export default function NeighborhoodDiscovery() {
                 Summerlin
               </h3>
               <p className="mt-4 max-w-xl text-body-lg text-lvinit-warmgray">
-                {summerlin.description} The honest version — who it fits, who it
+                {summerlin.description} The honest version: who it fits, who it
                 doesn&rsquo;t, and the parts a listing won&rsquo;t tell you.
               </p>
             </div>
@@ -76,9 +76,9 @@ export default function NeighborhoodDiscovery() {
                   North Las Vegas
                 </h4>
                 <p className="mt-2 text-body text-lvinit-warmgray">
-                  Its own city at the north end of the valley — established
+                  Its own city at the north end of the valley, with established
                   streets, big master-planned communities, and brand-new desert
-                  growth, all under one name.
+                  growth all under one name.
                 </p>
                 <span className="mt-3 inline-flex items-center gap-2 text-body font-medium text-lvinit-blue">
                   Read the North Las Vegas guide
@@ -104,7 +104,7 @@ export default function NeighborhoodDiscovery() {
                   Southwest Las Vegas
                 </h4>
                 <p className="mt-2 text-body text-lvinit-warmgray">
-                  The valley&rsquo;s fastest-growing side — newer housing, the
+                  The valley&rsquo;s fastest-growing side. Newer housing, the
                   215 right there, and a place still assembling itself.
                 </p>
                 <span className="mt-3 inline-flex items-center gap-2 text-body font-medium text-lvinit-blue">

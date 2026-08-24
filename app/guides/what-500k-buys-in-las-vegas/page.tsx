@@ -31,7 +31,7 @@ const meta: StoryMeta = {
   imageWidth: 1280,
   imageHeight: 720,
   imageAlt:
-    "What $500K buys in Las Vegas — three real home tours with Mikey Del Rosario",
+    "What $500K buys in Las Vegas: three real home tours with Mikey Del Rosario",
   datePublished: "2026-08-04",
   author: "Mikey Del Rosario",
   breadcrumbs: [
@@ -44,7 +44,7 @@ const meta: StoryMeta = {
   video: {
     name: "What $500K Buys in Las Vegas | 3 Real Home Tours",
     description:
-      "A walkthrough of three real Las Vegas homes near the $500K mark — a Southwest single-family with a pool, a high-rise condo near the Strip, and an older Spring Valley home with more space — and the tradeoffs between them.",
+      "A walkthrough of three real Las Vegas homes near the $500K mark: a Southwest single-family with a pool, a high-rise condo near the Strip, and an older Spring Valley home with more space, plus the tradeoffs between them.",
     thumbnailUrl: "/images/video-what-500k-gets-you-in-las-vegas.jpg",
     uploadDate: "2026-08-04",
     duration: "PT12M16S",
@@ -120,7 +120,7 @@ const COMPARISON: CompareRow[] = [
     values: [
       "Compact interior for a single-family home",
       "Less private space + a significant monthly HOA",
-      "Oldest of the three — condition matters most here",
+      "Oldest of the three, so condition matters most here",
     ],
   },
 ];
@@ -135,7 +135,7 @@ function ComparisonBlock() {
           </h2>
           <p className="mt-3 max-w-[680px] text-body text-lvinit-warmgray">
             The three homes were listed between approximately $486,000 and
-            $499,000 when this article was prepared — close enough in price to
+            $499,000 when this article was prepared, close enough in price to
             make the differences the whole point.
           </p>
 
@@ -228,7 +228,7 @@ export default function What500KBuysPage() {
         category: "Buyer Guide",
         headline: "What $500K Actually Gets You in Las Vegas",
         subheadline:
-          "Three real homes, three very different lives — all sitting around the same half-million-dollar price. Watch the tours, then compare what you'd actually be trading for.",
+          "Three real homes, three very different lives, all sitting around the same half-million-dollar price. Watch the tours, then compare what you'd actually be trading for.",
         backLink: { label: "LVINIT", href: "/" },
         ctas: [{ label: "▶ Watch the tours", href: "#watch", variant: "primary" }],
       }}
@@ -241,19 +241,19 @@ export default function What500KBuysPage() {
             name: "Southwest Las Vegas",
             href: "/neighborhoods/southwest-las-vegas",
             category: "Area guide",
-            dek: "The valley's fastest-growing side — where the first of these three homes sits, and what living out here actually feels like.",
+            dek: "The valley's fastest-growing side, where the first of these three homes sits, and what living out here actually feels like.",
           },
           {
             name: "Moving to Las Vegas",
             href: "/#moving-to-las-vegas",
             category: "On the homepage",
-            dek: "The quick-facts index for anyone weighing a move — cost of living, getting around, and the rest.",
+            dek: "The quick-facts index for anyone weighing a move: cost of living, getting around, and the rest.",
           },
           {
             name: "More Las Vegas on video",
             href: "/#videos",
             category: "Video",
-            dek: "The rest of the LVINIT video library — home tours and honest takes on living here.",
+            dek: "The rest of the LVINIT video library: home tours and honest takes on living here.",
           },
         ],
       }}
@@ -261,7 +261,7 @@ export default function What500KBuysPage() {
         name: "Southwest Las Vegas",
         href: "/neighborhoods/southwest-las-vegas",
         blurb:
-          "The area guide for the fastest-growing side of the valley — the part of town the first home in this tour calls home.",
+          "The area guide for the fastest-growing side of the valley, the part of town the first home in this tour calls home.",
       }}
       ctas={{
         heading: "What does your budget buy in Las Vegas?",
@@ -271,14 +271,14 @@ export default function What500KBuysPage() {
     >
       <StoryLede
         kicker="Buyer Guide"
-        lead="A $500,000 budget doesn't buy one standard version of Las Vegas. It buys a choice. Move the same money around the valley and it becomes a single-story house with a pool, a high-rise condo with the Strip out the window, or an older home with more room to spread out — and each one asks you to give up something the others keep."
+        lead="A $500,000 budget doesn't buy one standard version of Las Vegas. It buys a choice. Move the same money around the valley and it becomes a single-story house with a pool, a high-rise condo with the Strip out the window, or an older home with more room to spread out. Each one asks you to give up something the others keep."
       >
         <p className="mt-6 text-body-lg text-lvinit-warmgray">
           Location, age, layout, lot, upgrades, and the neighborhood around it do
           most of the work. Two homes a few miles apart, listed within a few
           thousand dollars of each other, can feel like they belong to different
           cities. To make that concrete, I toured three real listings near the
-          $500K mark — one out in{" "}
+          $500K mark: one out in{" "}
           <Link
             href="/neighborhoods/southwest-las-vegas"
             className="text-lvinit-blue underline underline-offset-4 decoration-transparent hover:decoration-lvinit-blue"
@@ -293,10 +293,10 @@ export default function What500KBuysPage() {
 
       <StoryVideo
         youtubeId="Tzxid_nM2nA"
-        title="What $500K Buys in Las Vegas | 3 Real Home Tours — by Mikey Del Rosario"
+        title="What $500K Buys in Las Vegas | 3 Real Home Tours, by Mikey Del Rosario"
         poster="/images/video-what-500k-gets-you-in-las-vegas.jpg"
         heading="Watch the three tours"
-        intro="Twelve minutes, three homes, one budget. Watch how differently the same money lives depending on where you spend it — then use the comparison below to weigh them against each other."
+        intro="Twelve minutes, three homes, one budget. Watch how differently the same money lives depending on where you spend it, then use the comparison below to weigh them against each other."
       />
 
       <StorySection heading="The quick takeaway">
@@ -304,7 +304,7 @@ export default function What500KBuysPage() {
           <li className="flex gap-3">
             <span aria-hidden="true" className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-lvinit-blue" />
             <span>
-              Nearly identical prices can buy very different housing experiences —
+              Nearly identical prices can buy very different housing experiences:
               a yard and a pool, a full-service tower, or extra square footage.
             </span>
           </li>
@@ -318,7 +318,7 @@ export default function What500KBuysPage() {
           <li className="flex gap-3">
             <span aria-hidden="true" className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-lvinit-blue" />
             <span>
-              Condition, age, lot, and layout can matter more than finishes — an
+              Condition, age, lot, and layout can matter more than finishes. An
               older home with good bones can beat a newer one that&rsquo;s tighter.
             </span>
           </li>
@@ -333,7 +333,7 @@ export default function What500KBuysPage() {
         </ul>
       </StorySection>
 
-      <StorySection heading="Home 1 — Southwest, with a pool and no HOA">
+      <StorySection heading="Home 1: Southwest, with a pool and no HOA">
         <p className="text-body-lg text-lvinit-warmgray">
           The first stop is on{" "}
           <a
@@ -353,8 +353,8 @@ export default function What500KBuysPage() {
           </Link>
           . It&rsquo;s a single-story home tucked onto a small cul-de-sac of four
           houses, and its whole personality is out back: a private heated
-          in-ground pool and spa, a covered patio, and — the part buyers keep
-          asking about — an RV gate with room to park one. There&rsquo;s no HOA,
+          in-ground pool and spa, a covered patio, and the part buyers keep
+          asking about most: an RV gate with room to park one. There&rsquo;s no HOA,
           which under $500K is genuinely hard to find.
         </p>
         <p className="mt-5 text-body-lg text-lvinit-warmgray">
@@ -363,7 +363,7 @@ export default function What500KBuysPage() {
           family room. The honest tradeoff: the interior is on the compact side
           for a single-family home. You&rsquo;re prioritizing the backyard,
           the flexibility, and the freedom from monthly dues over maximizing
-          indoor square footage — which is exactly the point for the right buyer.
+          indoor square footage, which is exactly the point for the right buyer.
         </p>
         <dl className="mt-6 grid grid-cols-2 gap-x-6 gap-y-3 border-t border-lvinit-lightgray pt-6 text-body text-lvinit-black sm:grid-cols-3">
           <div><dt className="text-caption uppercase tracking-wide text-lvinit-warmgray">Price</dt><dd className="mt-1">$485,999</dd></div>
@@ -375,7 +375,7 @@ export default function What500KBuysPage() {
         </dl>
       </StorySection>
 
-      <StorySection heading="Home 2 — a high-rise near the Strip">
+      <StorySection heading="Home 2: a high-rise near the Strip">
         <p className="text-body-lg text-lvinit-warmgray">
           The second home trades the yard for elevation. It&rsquo;s a residence on
           the 26th floor of The Martin, the{" "}
@@ -394,8 +394,8 @@ export default function What500KBuysPage() {
         <p className="mt-5 text-body-lg text-lvinit-warmgray">
           What you&rsquo;re really buying here is the building. Concierge,
           24-hour security, a fitness center, an infrared sauna, a pool and spa,
-          and a business center come with the address — the lock-and-leave life
-          where you can be gone a month without arranging a thing. The tradeoff is
+          and a business center come with the address. That&rsquo;s the lock-and-leave
+          life, where you can be gone a month without arranging a thing. The tradeoff is
           twofold: less private indoor and outdoor space than a house, and a
           monthly HOA of $934 that covers the amenities, water, and common-area
           upkeep. A similar half-million here buys lifestyle and services instead
@@ -411,7 +411,7 @@ export default function What500KBuysPage() {
         </dl>
       </StorySection>
 
-      <StorySection heading="Home 3 — more room in Spring Valley">
+      <StorySection heading="Home 3: more room in Spring Valley">
         <p className="text-body-lg text-lvinit-warmgray">
           The third home, on{" "}
           <a
@@ -424,9 +424,9 @@ export default function What500KBuysPage() {
           </a>{" "}
           in the Villa Bonita Oeste pocket of Spring Valley, makes the case for
           space. It&rsquo;s the largest of the
-          three inside and out — the biggest interior footprint and the biggest
-          lot, a corner parcel — and it still has a private in-ground pool. Inside
-          there&rsquo;s an open layout with a kitchen island, a gas fireplace,
+          three inside and out, with the biggest interior footprint and the
+          biggest lot (a corner parcel), and it still has a private in-ground
+          pool. Inside there&rsquo;s an open layout with a kitchen island, a gas fireplace,
           double-pane windows, a downstairs primary bedroom, and a casita or
           bonus room that flexes into a game room, office, or guest space.
         </p>
@@ -437,7 +437,7 @@ export default function What500KBuysPage() {
           you&rsquo;d want a close look at condition, systems, and what&rsquo;s
           been updated versus what you might improve over time. An established
           location like this can hand you more traditional space around the same
-          price — as long as you go in with eyes open.
+          price, as long as you go in with eyes open.
         </p>
         <dl className="mt-6 grid grid-cols-2 gap-x-6 gap-y-3 border-t border-lvinit-lightgray pt-6 text-body text-lvinit-black sm:grid-cols-3">
           <div><dt className="text-caption uppercase tracking-wide text-lvinit-warmgray">Price</dt><dd className="mt-1">$497,000</dd></div>
@@ -460,7 +460,7 @@ export default function What500KBuysPage() {
           <li className="flex gap-3">
             <span aria-hidden="true" className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-lvinit-blue" />
             <span>
-              <span className="text-lvinit-black">Location vs. interior space</span> —
+              <span className="text-lvinit-black">Location vs. interior space</span>:
               the tower&rsquo;s address near the Strip against Cherokee&rsquo;s
               extra square footage in Spring Valley.
             </span>
@@ -468,7 +468,7 @@ export default function What500KBuysPage() {
           <li className="flex gap-3">
             <span aria-hidden="true" className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-lvinit-blue" />
             <span>
-              <span className="text-lvinit-black">Newer condition vs. established surroundings</span> —
+              <span className="text-lvinit-black">Newer condition vs. established surroundings</span>:
               the 2003 and 2007 homes against a settled 1981 neighborhood with
               mature streets.
             </span>
@@ -476,7 +476,7 @@ export default function What500KBuysPage() {
           <li className="flex gap-3">
             <span aria-hidden="true" className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-lvinit-blue" />
             <span>
-              <span className="text-lvinit-black">Finished upgrades vs. future potential</span> —
+              <span className="text-lvinit-black">Finished upgrades vs. future potential</span>:
               move-in-ready features today against an older home you can improve on
               your own timeline.
             </span>
@@ -484,7 +484,7 @@ export default function What500KBuysPage() {
           <li className="flex gap-3">
             <span aria-hidden="true" className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-lvinit-blue" />
             <span>
-              <span className="text-lvinit-black">Larger lot vs. lower maintenance</span> —
+              <span className="text-lvinit-black">Larger lot vs. lower maintenance</span>:
               Cherokee&rsquo;s corner lot and Julesburg&rsquo;s pool against a
               high-rise where the building handles the upkeep.
             </span>
@@ -492,7 +492,7 @@ export default function What500KBuysPage() {
           <li className="flex gap-3">
             <span aria-hidden="true" className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-lvinit-blue" />
             <span>
-              <span className="text-lvinit-black">Layout usefulness vs. raw square footage</span> —
+              <span className="text-lvinit-black">Layout usefulness vs. raw square footage</span>:
               a flexible bonus room or a downstairs primary can beat a bigger
               number on paper.
             </span>
@@ -500,7 +500,7 @@ export default function What500KBuysPage() {
           <li className="flex gap-3">
             <span aria-hidden="true" className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-lvinit-blue" />
             <span>
-              <span className="text-lvinit-black">Immediate appeal vs. long-term fit</span> —
+              <span className="text-lvinit-black">Immediate appeal vs. long-term fit</span>:
               the home that wows you on the tour isn&rsquo;t always the one that
               fits your next ten years.
             </span>
@@ -514,7 +514,7 @@ export default function What500KBuysPage() {
           Group. Listing credits: the Julesburg Drive home is represented by
           Trisha Sivongxay; the residence at The Martin (Dean Martin Drive) by
           Beth Legge; and the West Cherokee Avenue home by Leona Sala and
-          Janezzta Sukaneeyouth — all of The Scofield Group.
+          Janezzta Sukaneeyouth, all of The Scofield Group.
         </p>
       </StorySection>
     </StoryPage>

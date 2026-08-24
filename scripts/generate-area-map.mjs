@@ -238,7 +238,7 @@ for (const t of TOWN_LABELS) {
   push(label(t.name, x(t.lon), y(t.lat), {
     size: 30, fill: C.warm, weight: 700, spacing: 4, anchor: "middle",
   }));
-  push(label("(Clark County town — boundary not drawn)", x(t.lon), y(t.lat) + 22, {
+  push(label("(Clark County town, boundary not drawn)", x(t.lon), y(t.lat) + 22, {
     size: 13, anchor: "middle",
   }));
 }
@@ -269,13 +269,13 @@ push(label("Southwest, as locals generally use it", LX + 70, LY + 60, { size: 15
 push('<line x1="' + (LX + 18) + '" y1="' + (LY + 84) + '" x2="' + (LX + 58) + '" y2="' + (LY + 84) +
   '" stroke="' + C.blue + '" stroke-opacity="0.4" stroke-width="2" stroke-dasharray="2 8"/>');
 push(label("Sometimes included, sometimes not", LX + 70, LY + 89, { size: 15, fill: C.black }));
-push(label("Both are LVINIT's reading of local usage — neither", LX + 18, LY + 122, { size: 13 }));
+push(label("Both are LVINIT's reading of local usage. Neither", LX + 18, LY + 122, { size: 13 }));
 push(label("is a government boundary. Enterprise and Spring", LX + 18, LY + 141, { size: 13 }));
 push(label("Valley are labeled here, not outlined.", LX + 18, LY + 160, { size: 13 }));
 
 push(wordmark(W));
 
-const TITLE = "Southwest Las Vegas — an LVINIT area map";
+const TITLE = "Southwest Las Vegas: an LVINIT area map";
 const DESC =
   "Schematic map of the southwest Las Vegas Valley. A dashed outline marks the area locals generally mean by " +
   "Southwest Las Vegas, with a lighter dotted outline for the edges people disagree about. Mountain's Edge, " +

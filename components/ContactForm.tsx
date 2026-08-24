@@ -35,7 +35,7 @@ export default function ContactForm() {
   const [status, setStatus] = useState<Status>("idle");
 
   function mailtoFallback(payload: Record<string, string>) {
-    const subject = `LVINIT inquiry — ${payload.name || "Website"}`;
+    const subject = `LVINIT inquiry: ${payload.name || "Website"}`;
     const body = [
       `Name: ${payload.name}`,
       `Email: ${payload.email}`,
@@ -170,13 +170,13 @@ export default function ContactForm() {
 
         {status === "sent" && (
           <p className="mt-4 text-body text-lvinit-blue">
-            Thanks — I got it, and I&rsquo;ll get back to you, usually the same
+            Thanks, I got it. I&rsquo;ll get back to you, usually the same
             day.
           </p>
         )}
         {status === "mailto" && (
           <p className="mt-4 text-body text-lvinit-blue">
-            Your email draft is ready — hit send and I&rsquo;ll get back to you,
+            Your email draft is ready. Hit send and I&rsquo;ll get back to you,
             usually the same day.
           </p>
         )}

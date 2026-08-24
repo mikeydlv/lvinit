@@ -91,13 +91,13 @@ import {
 
 const HERO_IMAGE = "/images/hero/summerlin-fox-hill-park-red-rock-aerial-drone.webp";
 const HERO_ALT =
-  "Aerial view over Fox Hill Park in Summerlin, Las Vegas — a wide green lawn with a shaded playground and looping paths, tile-roofed homes running to the horizon on every side, and the ridgeline of the Spring Mountains rising behind the western edge of the community.";
+  "Aerial view over Fox Hill Park in Summerlin, Las Vegas: a wide green lawn with a shaded playground and looping paths, tile-roofed homes running to the horizon on every side, and the ridgeline of the Spring Mountains rising behind the western edge of the community.";
 
 const meta: StoryMeta = {
   title: "Summerlin Las Vegas: Map, Villages & Local Guide | LVINIT",
   headline: "Summerlin",
   description:
-    "Understand Summerlin like a local — a real map, the villages, Summerlin West, Downtown Summerlin, housing, parks and what's actually being built right now.",
+    "Understand Summerlin like a local: a real map, the villages, Summerlin West, Downtown Summerlin, housing, parks and what's actually being built right now.",
   path: "/neighborhoods/summerlin",
   image: HERO_IMAGE,
   imageWidth: 2200,
@@ -128,14 +128,14 @@ export default function SummerlinPage() {
           "Saying you want to live in Summerlin is a start. It narrows things down far less than you think.",
         image: HERO_IMAGE,
         imageAlt: HERO_ALT,
-        imageTitle: "Fox Hill Park, Summerlin — Photo by Mikey Del Rosario",
+        imageTitle: "Fox Hill Park, Summerlin. Photo by Mikey Del Rosario",
         backLink: { label: "Las Vegas neighborhoods", href: "/#neighborhoods" },
         ctas: [{ label: "See the map", href: "#map", variant: "tertiary" }],
       }}
       relatedStories={{
         heading: "Read these next",
         intro:
-          "Summerlin makes most sense next to the things people compare it against — and next to what actually happens here on an ordinary Saturday.",
+          "Summerlin makes most sense next to the things people compare it against, and next to what actually happens here on an ordinary Saturday.",
         columns: 3,
         stories: [
           {
@@ -148,7 +148,7 @@ export default function SummerlinPage() {
             name: "Summerlin vs. Henderson",
             href: "/guides/summerlin-vs-henderson",
             category: "Comparison",
-            dek: "A community against a whole city — the honest side-by-side, without a brochure in sight.",
+            dek: "A community against a whole city. The honest side-by-side, without a brochure in sight.",
           },
           {
             name: "Southwest Las Vegas",
@@ -161,7 +161,7 @@ export default function SummerlinPage() {
       ctas={{
         heading: "Thinking about Summerlin?",
         body:
-          "Tell me what you're looking for and what matters most about where you live. I'll point you toward the parts of Summerlin I'd start with — even if that means telling you to look somewhere else.",
+          "Tell me what you're looking for and what matters most about where you live. I'll point you toward the parts of Summerlin I'd start with, even if that means telling you to look somewhere else.",
         buttons: [
           { label: "Ask Mikey about Summerlin", href: "/contact", variant: "primary" },
           { label: "Help me compare areas", href: "/#compare", variant: "secondary" },
@@ -189,7 +189,7 @@ export default function SummerlinPage() {
         <p className="mt-6 text-body-lg text-lvinit-warmgray">
           Because Summerlin isn&rsquo;t a neighborhood.{" "}
           <span className="text-lvinit-black">
-            It&rsquo;s 22,500 acres — about 35 square miles — of master-planned
+            It&rsquo;s 22,500 acres (about 35 square miles) of master-planned
             community that has been built village by village since 1990
           </span>{" "}
           and still isn&rsquo;t finished. Inside it you&rsquo;ll find streets with
@@ -232,12 +232,12 @@ export default function SummerlinPage() {
               The <span className="text-lvinit-black">CC-215</span> runs straight
               through the middle. Villages west of it are what people mean by
               Summerlin West. The gold line on the left is the Red Rock Canyon
-              conservation-area boundary — federal land, and the reason the
+              conservation-area boundary: federal land, and the reason the
               western villages stop where they do.
             </p>
           </>
         }
-        caption="Summerlin's villages, plotted at their real coordinates. A schematic diagram — accurate in its relationships, not a survey."
+        caption="Summerlin's villages, plotted at their real coordinates. A schematic diagram, accurate in its relationships, not a survey."
         places={mapPlaces}
         disclaimer={
           <>
@@ -249,7 +249,7 @@ export default function SummerlinPage() {
             map, and Summerlin publishes that line itself as the official
             Summerlin Border Map. That artwork is theirs; we&rsquo;re not going to
             copy it, trace it or redraw it. Nor is there a government boundary
-            that stands in — Summerlin is not a city, not a Clark County town, and
+            that stands in. Summerlin is not a city, not a Clark County town, and
             not a census place. Drawing a line and labeling it &ldquo;Summerlin&rdquo;
             would have made a cleaner picture and taught you something false. For
             the official border, go to{" "}
@@ -261,7 +261,7 @@ export default function SummerlinPage() {
             >
               Summerlin&rsquo;s own maps and guides
             </a>
-            . A few smaller villages — {mapOmitted.join(", ")} — are named in the
+            . A few smaller villages ({mapOmitted.join(", ")}) are named in the
             key below and covered in the villages section rather than lettered
             onto the drawing, because a map you can read beats one that lists
             everything. Roads and the conservation-area boundary come from{" "}
@@ -288,7 +288,7 @@ export default function SummerlinPage() {
           roughly the Lone Mountain area in the north down past Russell Road in
           the south, with Red Rock Canyon behind it and the rest of the city in
           front. Howard Hughes describes it as sitting about nine miles west of
-          the Strip. It is one property development, not a district of the city —
+          the Strip. It is one property development, not a district of the city,
           which is the source of most of the confusion that follows.
         </p>
 
@@ -299,7 +299,7 @@ export default function SummerlinPage() {
           There is no Summerlin city hall, no Summerlin mayor, no Summerlin police
           department. Most of the community sits inside the{" "}
           <span className="text-lvinit-black">City of Las Vegas</span>, where it
-          exists as a PC — Planned Community — zoning district with its own
+          exists as a PC (Planned Community) zoning district with its own
           development standards adopted by the City Council. The land was annexed
           to the city starting in November 1989, and a further 8,318 acres came in
           under a 1997 development agreement. The southern end sits under Clark
@@ -332,8 +332,8 @@ export default function SummerlinPage() {
           If a listing says &ldquo;near Summerlin,&rdquo; &ldquo;Summerlin
           area,&rdquo; or &ldquo;Summerlin-adjacent,&rdquo; read it as a statement
           that the home is not inside the master plan. That isn&rsquo;t
-          necessarily bad — some excellent west-side neighborhoods are outside it
-          — but it is a different purchase. Inside Summerlin you get the master
+          necessarily bad, and some excellent west-side neighborhoods are outside
+          it, but it is a different purchase. Inside Summerlin you get the master
           association, the design standards, the trail network and the village
           amenities. Outside, you get whatever that particular community provides.
           Ask which one you&rsquo;re buying, and check the address rather than the
@@ -384,9 +384,9 @@ export default function SummerlinPage() {
         </h3>
         <p className="mt-4 text-body-lg text-lvinit-warmgray">
           Two roads carry almost everything. The{" "}
-          <span className="text-lvinit-black">CC-215</span> — the county-maintained
+          <span className="text-lvinit-black">CC-215</span> (the county-maintained
           Bruce Woodbury Beltway, which only carries the Interstate 215
-          designation east of I-15 — runs north-south through the middle of the
+          designation east of I-15) runs north-south through the middle of the
           community and connects south toward the airport side of the valley.{" "}
           <span className="text-lvinit-black">Summerlin Parkway</span> runs east
           from the beltway out to US-95 and downtown. Charleston, Sahara, Lake
@@ -396,7 +396,7 @@ export default function SummerlinPage() {
         <p className="mt-5 text-body-lg text-lvinit-warmgray">
           Worth knowing before you time anything: Clark County currently has{" "}
           <span className="text-lvinit-black">two projects</span> dug into the
-          CC-215 through Summerlin — a $130 million rebuild of the Summerlin
+          CC-215 through Summerlin: a $130 million rebuild of the Summerlin
           Parkway interchange, and a widening past Downtown Summerlin. Both are
           detailed further down.
         </p>
@@ -433,7 +433,7 @@ export default function SummerlinPage() {
         <p className="mt-5 text-body-lg text-lvinit-warmgray">
           Near Downtown Summerlin you can walk to dinner and hear the ballpark on
           a summer evening. In The Paseos you get grown trees, a finished street
-          and a short run to Red Rock — and you drive to everything else. Out at
+          and a short run to Red Rock, and you drive to everything else. Out at
           Grand Park or La Madre Peaks you get a brand-new house, an unbeatable
           view, construction on three sides and a longer trip to every single
           thing you do. None of those is the wrong answer. They&rsquo;re just not
@@ -469,7 +469,7 @@ export default function SummerlinPage() {
           394 acres of it; The Arbors, The Canyons, The Trails, The Crossing, The
           Pueblo and Sun City Summerlin followed through the 1990s. This is the
           part with{" "}
-          <span className="text-lvinit-black">actual shade</span> — thirty-plus
+          <span className="text-lvinit-black">actual shade</span>. Thirty-plus
           years of irrigation has produced tree canopy you can genuinely walk
           under, which almost nowhere else in this valley can say. Housing here is
           resale, mostly 1990s and early-2000s, ranging from modest to guard-gated
@@ -483,7 +483,7 @@ export default function SummerlinPage() {
           Downtown Summerlin anchors the top of this stretch, with Summerlin
           Center wrapped around it. Below that run The Willows, The Gardens,
           Siena, The Ridges and, at the very bottom, The Cliffs and The Mesa. The
-          range here is the widest in the community — Downtown Summerlin
+          range here is the widest in the community: Downtown Summerlin
           apartments and The Ridges&rsquo; guard-gated custom homesites are in the
           same broad chunk. It&rsquo;s also further south than most people
           picture: The Cliffs sits below Russell Road, on land Summerlin only
@@ -495,7 +495,7 @@ export default function SummerlinPage() {
         </h3>
         <p className="mt-4 text-body-lg text-lvinit-warmgray">
           The whole western half, and the part with the most terminology attached
-          to it. The Vistas, The Paseos and Stonebridge are here — and so are
+          to it. The Vistas, The Paseos and Stonebridge are here, and so are
           Redpoint, Redpoint Square, Kestrel, Kestrel Commons, Grand Park, La
           Madre Peaks and Reverence. The elevation climbs as you go west, the
           streets start bending around arroyos instead of running on a grid, and
@@ -517,9 +517,9 @@ export default function SummerlinPage() {
         images={[
           {
             src: "/images/features/summerlin-mesa-ridge-park-drone.webp",
-            alt: "Aerial view looking east from above Mesa Ridge Park at the southern end of Summerlin, Las Vegas — a green park lawn with a playground, shaded ramadas and tall palms in the foreground, tile-roofed houses running to the horizon, the towers of the Las Vegas Strip small in the haze beyond, and desert mountain ranges on either side.",
+            alt: "Aerial view looking east from above Mesa Ridge Park at the southern end of Summerlin, Las Vegas: a green park lawn with a playground, shaded ramadas and tall palms in the foreground, tile-roofed houses running to the horizon, the towers of the Las Vegas Strip small in the haze beyond, and desert mountain ranges on either side.",
             caption:
-              "Looking east from Mesa Ridge Park, down at Summerlin's southern end. The Strip is that low cluster of towers on the horizon — a very different outlook from a street up against Red Rock.",
+              "Looking east from Mesa Ridge Park, down at Summerlin's southern end. The Strip is that low cluster of towers on the horizon, a very different outlook from a street up against Red Rock.",
           },
         ]}
       />
@@ -528,7 +528,7 @@ export default function SummerlinPage() {
       {/* HIERARCHY                                                         */}
       {/* ---------------------------------------------------------------- */}
 
-      <StorySection id="hierarchy" heading="Villages, districts and neighborhoods — the words matter">
+      <StorySection id="hierarchy" heading="Villages, districts and neighborhoods: the words matter">
         <p className="text-body-lg text-lvinit-warmgray">
           Three words get used interchangeably in Summerlin conversation, and they
           mean genuinely different things. Getting them straight will save you a
@@ -552,9 +552,9 @@ export default function SummerlinPage() {
           the whole master plan.{" "}
           <span className="text-lvinit-black">Grand Park</span> is a village
           inside it.{" "}
-          <span className="text-lvinit-black">A builder neighborhood</span> —
-          twenty to a couple of hundred homes, one builder, one set of floor plans
-          — sits inside Grand Park. When a salesperson says &ldquo;we&rsquo;re in
+          <span className="text-lvinit-black">A builder neighborhood</span> (twenty
+          to a couple of hundred homes, one builder, one set of floor plans)
+          sits inside Grand Park. When a salesperson says &ldquo;we&rsquo;re in
           Summerlin,&rdquo; they mean the outermost of those three. That&rsquo;s
           true and it&rsquo;s nearly useless on its own.
         </p>
@@ -566,12 +566,12 @@ export default function SummerlinPage() {
             your sub-association dues.
           </span>{" "}
           You&rsquo;ll hear &ldquo;district&rdquo; used too, mostly for the newer
-          western areas — treat it as another word for village unless someone
+          western areas. Treat it as another word for village unless someone
           gives you a reason not to.
         </p>
         <p className="mt-5 text-body-lg text-lvinit-warmgray">
           One more layer worth knowing about: the plan zones land into categories
-          beyond housing — Village Center, Town Center, Employment Center,
+          beyond housing: Village Center, Town Center, Employment Center,
           Neighborhood Focus, Community Open Space. That&rsquo;s why a village can
           have a grocery store built into it while the one next door doesn&rsquo;t,
           and why Downtown Summerlin exists where it does. It was zoned Town
@@ -584,9 +584,9 @@ export default function SummerlinPage() {
         heading="The villages, one by one"
         intro={
           <p className="text-body-lg text-lvinit-warmgray">
-            Not every Summerlin village — the community has been adding them for
-            thirty-six years and a few of the smaller ones are grouped here — but
-            these are the names you&rsquo;ll actually hear, and what separates
+            Not every Summerlin village is here, since the community has been
+            adding them for thirty-six years and a few of the smaller ones are
+            grouped together, but these are the names you&rsquo;ll actually hear, and what separates
             them from each other.
           </p>
         }
@@ -595,7 +595,7 @@ export default function SummerlinPage() {
           <>
             Several of these deserve their own full guide, and will get one. Until
             a guide is actually written the name stays plain text rather than a
-            link — no dead ends. Acreages and village descriptions come from
+            link. No dead ends. Acreages and village descriptions come from
             Summerlin&rsquo;s own published materials; the read on what each one is
             like is mine.
           </>
@@ -614,7 +614,7 @@ export default function SummerlinPage() {
         </p>
         <p className="mt-5 text-body-lg text-lvinit-warmgray">
           <span className="text-lvinit-black">The trees disappear.</span> This is
-          the single most reliable tell. The older villages have mature canopy —
+          the single most reliable tell. The older villages have mature canopy:
           real shade over the sidewalk, which in this climate is worth more than
           any amenity a brochure lists. The newest villages have staked saplings
           in gravel. That gap is fifteen to twenty-five years wide, and no amount
@@ -623,15 +623,15 @@ export default function SummerlinPage() {
         <p className="mt-5 text-body-lg text-lvinit-warmgray">
           <span className="text-lvinit-black">The ground starts moving.</span>{" "}
           East of the beltway you&rsquo;re essentially on the valley floor, on a
-          grid. West of it the land climbs — Summerlin puts Kestrel above 3,000
-          feet and The Ridges around 4,000 — and the streets start following
+          grid. West of it the land climbs (Summerlin puts Kestrel above 3,000
+          feet and The Ridges around 4,000) and the streets start following
           arroyos and contours instead of section lines. You feel it in the
           driveways, the retaining walls and the view out of the back window.
         </p>
         <p className="mt-5 text-body-lg text-lvinit-warmgray">
           <span className="text-lvinit-black">The walls change character.</span>{" "}
           Perimeter village walls are a Summerlin signature, and the standards for
-          them are written differently west of the 215 — taller walls and rockery
+          them are written differently west of the 215. Taller walls and rockery
           retaining are permitted out there because of the terrain. It reads as a
           more dramatic, more sculpted streetscape, and also as a more enclosed
           one.
@@ -648,7 +648,7 @@ export default function SummerlinPage() {
           <span className="text-lvinit-black">
             And the further west you go, the further everything gets.
           </span>{" "}
-          The trailhead gets closer and everything else gets further — the grocery
+          The trailhead gets closer and everything else gets further: the grocery
           run, the school run, the airport, the friend who lives in Henderson.
           That trade is the whole decision on the western side, and it&rsquo;s
           worth making it deliberately rather than discovering it in March.
@@ -678,12 +678,12 @@ export default function SummerlinPage() {
           <span className="text-lvinit-black">
             Downtown Summerlin is not downtown Las Vegas.
           </span>{" "}
-          Downtown Las Vegas is the historic city center — Fremont Street, the
+          Downtown Las Vegas is the historic city center: Fremont Street, the
           courthouses, the{" "}
           <Link href="/neighborhoods/downtown-arts-district" className={linkClass}>
             Arts District
-          </Link>{" "}
-          — and it&rsquo;s about nine miles east. Downtown Summerlin is a purpose-built
+          </Link>
+          . It&rsquo;s about nine miles east. Downtown Summerlin is a purpose-built
           commercial district that opened in 2014. Same word, different centuries.
         </p>
         <p className="mt-5 text-body-lg text-lvinit-warmgray">
@@ -696,13 +696,13 @@ export default function SummerlinPage() {
         </p>
         <p className="mt-5 text-body-lg text-lvinit-warmgray">
           Around and inside it: <span className="text-lvinit-black">Red Rock
-          Resort</span>, which actually predates the shops — it opened in April
-          2006; <span className="text-lvinit-black">City National Arena</span>, the
+          Resort</span>, which actually predates the shops (it opened in April
+          2006); <span className="text-lvinit-black">City National Arena</span>, the
           Vegas Golden Knights&rsquo; practice facility and headquarters, open
           since 2017 and also home to UNLV hockey; and{" "}
           <span className="text-lvinit-black">Las Vegas Ballpark</span>, where the
           Triple-A Aviators have played since 2019. Then a stack of offices that
-          has grown steadily — One Summerlin, Two Summerlin, 1700 Pavilion, and
+          has grown steadily: One Summerlin, Two Summerlin, 1700 Pavilion, and
           most recently Meridian, a 147,602-square-foot class-A campus that opened
           in 2025 with Google Fiber among its tenants.
         </p>
@@ -716,7 +716,7 @@ export default function SummerlinPage() {
           <span className="text-lvinit-black">
             having it in your community and being able to walk to it
           </span>
-          . The number of Summerlin homes within a genuine walk is small — the
+          . The number of Summerlin homes within a genuine walk is small: the
           apartments and attached homes in Summerlin Centre, a few streets either
           side. Everyone else drives, parks, and then walks around, which is a
           perfectly good evening and a completely different thing from walkability.
@@ -725,7 +725,7 @@ export default function SummerlinPage() {
           If walking to dinner is genuinely the point for you, that narrows
           Summerlin to a handful of streets, and it&rsquo;s worth saying so out
           loud before you start looking. If driving eight minutes to a good
-          evening is fine — and for most people it is — then having Downtown
+          evening is fine (and for most people it is) then having Downtown
           Summerlin in the community is a real advantage that most of the valley
           doesn&rsquo;t have.
         </p>
@@ -746,7 +746,7 @@ export default function SummerlinPage() {
             First: it&rsquo;s a region, not a subdivision.
           </span>{" "}
           Nobody lives &ldquo;in Summerlin West&rdquo; the way they live in
-          Stonebridge. It covers roughly everything west of the CC-215 — a usage
+          Stonebridge. It covers roughly everything west of the CC-215, a usage
           the City of Las Vegas echoes when its Summerlin standards write separate
           rules for &ldquo;areas west of the 215 Beltway.&rdquo; It also has a
           formal origin: 8,318 acres annexed under a 1997 development agreement
@@ -773,7 +773,7 @@ export default function SummerlinPage() {
           The active frontier runs north and west. Redpoint and Redpoint Square
           brought a denser, more walkable street pattern than the classic
           1990s village layout. Kestrel and Kestrel Commons repeat that
-          contrast at higher elevation — Summerlin puts Kestrel above 3,000 feet.
+          contrast at higher elevation. Summerlin puts Kestrel above 3,000 feet.
           Grand Park, west of the beltway and north of Far Hills, is organized
           around a park of more than 90 acres, the largest in the community. La
           Madre Peaks is the outer edge, including Astra, a custom-homesite
@@ -784,7 +784,7 @@ export default function SummerlinPage() {
           expects eleven more in 2026, nearly all of them out here. Howard Hughes
           puts roughly{" "}
           <span className="text-lvinit-black">5,000 gross acres</span> as still
-          reserved for future growth — its own figure, and one that explicitly
+          reserved for future growth. That&rsquo;s its own figure, and one that explicitly
           includes roads, open space and common areas rather than only future
           rooftops. (Summerlin&rsquo;s history page gives a materially smaller
           number for 2023; the two don&rsquo;t reconcile and I&rsquo;m not going to
@@ -801,7 +801,7 @@ export default function SummerlinPage() {
           </span>
           . Dirt haulers on your street. A park that opens in phases. Retail that
           is promised and not yet built. Roads that change alignment. That&rsquo;s
-          not a warning so much as a description — it&rsquo;s what an unfinished
+          not a warning so much as a description. It&rsquo;s what an unfinished
           village is, and plenty of people happily accept it for the house and the
           view they get.
         </p>
@@ -836,7 +836,7 @@ export default function SummerlinPage() {
         footnote={
           <>
             The two freeway projects are the ones to pay attention to if
-            you&rsquo;re shopping here this year — they overlap on the same
+            you&rsquo;re shopping here this year. They overlap on the same
             stretch of the CC-215, and that&rsquo;s the road most of Summerlin
             uses to leave. Clark County&rsquo;s{" "}
             <a
@@ -880,7 +880,7 @@ export default function SummerlinPage() {
           </span>{" "}
           with an eventual target above 250. What makes that work isn&rsquo;t the
           mileage, it&rsquo;s that the trails were designed into the arroyos
-          between villages rather than added afterwards — so a walk to the park
+          between villages rather than added afterwards, so a walk to the park
           often doesn&rsquo;t involve an arterial road, which is genuinely rare in
           this valley.
         </p>
@@ -898,7 +898,7 @@ export default function SummerlinPage() {
         </h3>
         <p className="mt-4 text-body-lg text-lvinit-warmgray">
           Red Rock Canyon National Conservation Area is federal land managed by
-          the Bureau of Land Management, designated in 1990 — the seventh NCA in
+          the Bureau of Land Management, designated in 1990, the seventh NCA in
           the country and the first in Nevada. It carries a thirteen-mile scenic
           drive and takes more than three million visitors a year. It is also the
           western boundary of Summerlin, and the reason the master plan stops
@@ -911,7 +911,7 @@ export default function SummerlinPage() {
           </span>{" "}
           From Stonebridge or La Madre Peaks the conservation area really is close
           enough to change your weekends. From The Willows or The Hills, Red Rock
-          is a drive — a shorter one than from most of the valley, but a drive.
+          is a drive, a shorter one than from most of the valley, but a drive.
           Summerlin is thirty-five square miles; not every home has Red Rock out
           the back.
         </p>
@@ -943,7 +943,7 @@ export default function SummerlinPage() {
         <p className="text-body-lg text-lvinit-warmgray">
           Summerlin has a reputation as the expensive option, and on average
           that&rsquo;s fair. But &ldquo;luxury&rdquo; as a description of the whole
-          community is wrong, and it costs people money — either by scaring them
+          community is wrong, and it costs people money, either by scaring them
           off before they look, or by getting them shown the wrong quarter of it.
         </p>
         <p className="mt-5 text-body-lg text-lvinit-warmgray">
@@ -969,7 +969,7 @@ export default function SummerlinPage() {
           <span className="text-lvinit-black">
             Gates and golf shape whole villages.
           </span>{" "}
-          Guard-gated is common at the upper end — The Ridges, Willow Creek inside
+          Guard-gated is common at the upper end: The Ridges, Willow Creek inside
           The Willows, and others. Golf courses anchor their own housing markets
           across the community, including TPC Las Vegas in The Canyons and
           Bear&rsquo;s Best in The Ridges. And Sun City Summerlin operates as
@@ -984,7 +984,7 @@ export default function SummerlinPage() {
           amenities, and most neighborhoods add a sub-association on top. Some add
           a gate, a private club or a golf membership structure as well. The total
           varies enormously between villages and between neighborhoods inside one
-          village — ask for the actual figure on the actual address, not a range.
+          village. Ask for the actual figure on the actual address, not a range.
           Design review is real here too: exterior changes go through committee.
           Most people consider that a feature; some find it out the hard way.
         </p>
@@ -996,7 +996,7 @@ export default function SummerlinPage() {
           I&rsquo;m not going to publish an &ldquo;average Summerlin home
           price.&rdquo; You&rsquo;ve just read that this one community contains
           both age-restricted condos and custom homesites at 4,000 feet. A single
-          median across that range describes nothing — it moves depending on
+          median across that range describes nothing. It moves depending on
           whether whoever calculated it included Downtown Summerlin apartments, or
           The Ridges, or the new-build closings out west, and almost nobody says
           which they did.
@@ -1050,7 +1050,7 @@ export default function SummerlinPage() {
             Consistency reads as calm to some people and as sameness to others.
           </span>{" "}
           The coordinated walls, the coordinated palette, the coordinated
-          landscaping — it&rsquo;s genuinely restful, and it&rsquo;s genuinely
+          landscaping. It&rsquo;s genuinely restful, and it&rsquo;s genuinely
           repetitive. Nobody can tell you in advance which way you&rsquo;ll take
           it. Drive three villages and you&rsquo;ll know.
         </p>
@@ -1060,8 +1060,8 @@ export default function SummerlinPage() {
           </span>{" "}
           Every mile toward Red Rock is a mile away from the airport, the Strip,
           the medical district and anyone you know on the other side of town. If
-          your life is anchored east — an office off the Strip, family in Henderson
-          — do that arithmetic honestly before the sunsets do it for you.
+          your life is anchored east, with an office off the Strip or family in
+          Henderson, do that arithmetic honestly before the sunsets do it for you.
         </p>
         <p className="mt-5 text-body-lg text-lvinit-warmgray">
           <span className="text-lvinit-black">
@@ -1094,7 +1094,7 @@ export default function SummerlinPage() {
           <p className="text-body-lg text-lvinit-warmgray">
             The two big new-construction answers on this side of the valley, and
             the comparison people make most often. No scores, because there
-            isn&rsquo;t honest data to score these on — just which way each
+            isn&rsquo;t honest data to score these on. Just which way each
             dimension leans and why.
           </p>
         }
@@ -1104,7 +1104,7 @@ export default function SummerlinPage() {
             The short version: Summerlin is one plan executed over thirty-six
             years, and you can feel the plan from the street. The Southwest is
             many separate developments that filled the same stretch of county over
-            the same decades — next to each other rather than with each other. You
+            the same decades, next to each other rather than with each other. You
             trade cohesion, trails and a real center for more variety, frequently
             more house, and a shorter run to the airport side of town. The{" "}
             <Link href="/neighborhoods/southwest-las-vegas" className={linkClass}>
@@ -1118,7 +1118,7 @@ export default function SummerlinPage() {
       <StorySection id="vs-henderson" heading="Summerlin vs Henderson">
         <p className="text-body-lg text-lvinit-warmgray">
           People put these two head to head constantly, and the comparison is
-          shakier than it looks — because they aren&rsquo;t the same kind of thing.{" "}
+          shakier than it looks, because they aren&rsquo;t the same kind of thing.{" "}
           <span className="text-lvinit-black">
             Summerlin is one master-planned community. Henderson is an
             incorporated city.
@@ -1131,8 +1131,8 @@ export default function SummerlinPage() {
         </p>
         <p className="mt-5 text-body-lg text-lvinit-warmgray">
           The useful comparison is Summerlin against{" "}
-          <span className="text-lvinit-black">a specific Henderson community</span>{" "}
-          — Green Valley, Anthem, Inspirada, Lake Las Vegas, Cadence. Those are
+          <span className="text-lvinit-black">a specific Henderson community</span>
+          : Green Valley, Anthem, Inspirada, Lake Las Vegas, Cadence. Those are
           apples to apples. &ldquo;Summerlin or Henderson&rdquo; usually turns out
           to mean &ldquo;west side or southeast side,&rdquo; which is really a
           question about where your work and your people are.
@@ -1160,9 +1160,9 @@ export default function SummerlinPage() {
       <AreaVideoSlot
         id="watch"
         heading="Summerlin, Henderson or Southwest?"
-        intro="These three come up in almost every relocation conversation, and they're not three versions of the same thing — one is a master-planned community, one is a whole city, and one is an informal name for a stretch of county. This comparison walks through how differently they actually feel to live in."
+        intro="These three come up in almost every relocation conversation, and they're not three versions of the same thing. One is a master-planned community, one is a whole city, and one is an informal name for a stretch of county. This comparison walks through how differently they actually feel to live in."
         video={areaVideo}
-        pendingNote="Filming now — the video lands on this page when it publishes."
+        pendingNote="Filming now. The video lands on this page when it publishes."
       />
 
       {/* ---------------------------------------------------------------- */}
@@ -1175,7 +1175,7 @@ export default function SummerlinPage() {
         intro={
           <p className="text-body-lg text-lvinit-warmgray">
             The questions people actually type in, answered as precisely as the
-            facts allow — which sometimes means answering &ldquo;it
+            facts allow, which sometimes means answering &ldquo;it
             depends,&rdquo; and saying why.
           </p>
         }
@@ -1210,7 +1210,7 @@ export default function SummerlinPage() {
           is the less curated version of the same suburban idea.
         </p>
         <p className="mt-5 text-body-lg text-lvinit-warmgray">
-          And if you are looking here — do the thing this whole page has been
+          And if you are looking here, do the thing this whole page has been
           asking you to do. Pick three villages that sound different from each
           other. Drive all three on the same afternoon, in that order, ending with
           the newest one. You&rsquo;ll feel the thirty-six years in about ninety
@@ -1222,8 +1222,8 @@ export default function SummerlinPage() {
 
       <Container className="pb-6">
         <p className="mx-auto max-w-[680px] text-caption text-lvinit-warmgray">
-          Photographed over Summerlin by Mikey Del Rosario. Development status —
-          what&rsquo;s open, under construction, or only announced — was checked on
+          Photographed over Summerlin by Mikey Del Rosario. Development status
+          (what&rsquo;s open, under construction, or only announced) was checked on
           20 August 2026 and will change; check with Summerlin, the builders or
           Clark County before planning around it.
         </p>

@@ -5,9 +5,9 @@ import Container from "@/components/ui/Container";
 import ContactForm from "@/components/ContactForm";
 
 export const metadata: Metadata = {
-  title: "Contact Mikey — LVINIT",
+  title: "Contact Mikey | LVINIT",
   description:
-    "Tell Mikey Del Rosario what you're weighing about moving to Las Vegas — timeline, neighborhoods, questions — and get the honest local version back.",
+    "Tell Mikey Del Rosario what you're weighing about moving to Las Vegas: timeline, neighborhoods, questions. Get the honest local version back.",
   alternates: { canonical: "/contact" },
 };
 
@@ -30,7 +30,7 @@ export default function ContactPage() {
               </h1>
               <p className="mt-6 max-w-md text-body-lg text-lvinit-warmgray">
                 Tell me where you&rsquo;re moving from, what matters to you, and
-                your timeline. I&rsquo;ll come back with the honest version —
+                your timeline. I&rsquo;ll come back with the honest version:
                 the neighborhoods that fit, the ones that don&rsquo;t, and what
                 the listings won&rsquo;t tell you.
               </p>

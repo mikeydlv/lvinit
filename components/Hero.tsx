@@ -13,7 +13,7 @@ export default function Hero() {
       {/* Full-bleed landscape background photo */}
       <Image
         src={HERO_IMAGE}
-        alt="Aerial view of a Las Vegas hillside neighborhood at golden hour — homes and a green golf course below the desert mountains"
+        alt="Aerial view of a Las Vegas hillside neighborhood at golden hour, with homes and a green golf course below the desert mountains"
         fill
         priority
         sizes="100vw"
@@ -50,7 +50,7 @@ export default function Hero() {
 
           <p className="mt-6 max-w-lg text-body-lg text-lvinit-warmgray">
             Neighborhood guides, honest comparisons, and a local you can
-            actually trust — for anyone deciding where in Las Vegas to build
+            actually trust. For anyone deciding where in Las Vegas to build
             a life.
           </p>
 

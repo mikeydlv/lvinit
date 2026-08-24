@@ -102,7 +102,7 @@ const meta: StoryMeta = {
   title: "Why the Seller's Nevada Property Tax Bill May Not Be Yours | LVINIT",
   headline: "Why the Seller's Nevada Property Tax Bill May Not Be Yours",
   description:
-    "Nevada caps property tax increases at 3% a year for an owner-occupied home, but eligibility depends on the current owner establishing the home as their primary residence — recording a sale removes the seller's designation, though the statutory calculation still references the property's prior-year taxes. Here's what actually changes at closing, what doesn't, and what to verify before you trust a listing's tax number.",
+    "Nevada caps property tax increases at 3% a year for an owner-occupied home, but eligibility depends on the current owner establishing the home as their primary residence. Recording a sale removes the seller's designation, though the statutory calculation still references the property's prior-year taxes. Here's what actually changes at closing, what doesn't, and what to verify before you trust a listing's tax number.",
   path: "/guides/nevada-property-tax-abatement-resale-buyers",
   datePublished: "2026-08-21",
   dateModified: "2026-08-22",
@@ -130,7 +130,7 @@ const faqJsonLd = {
       name: "Is the property tax figure on a Nevada resale listing what I'll actually pay?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Not necessarily. That figure is the seller's bill, produced under whatever abatement status the seller had — very possibly a 3% owner-occupied cap built up over years. Nevada does not reassess a home's taxable value to its sale price at closing, so the underlying assessed value isn't what changes at a sale. What does change is designation: per the Clark County Assessor's own tax-abatement page, recording the new deed removes the previous owner's owner-occupied 3% abatement. Whether the parcel continues under that cap depends on whether the new owner files their own claim.",
+        text: "Not necessarily. That figure is the seller's bill, produced under whatever abatement status the seller had, very possibly a 3% owner-occupied cap built up over years. Nevada does not reassess a home's taxable value to its sale price at closing, so the underlying assessed value isn't what changes at a sale. What does change is designation: per the Clark County Assessor's own tax-abatement page, recording the new deed removes the previous owner's owner-occupied 3% abatement. Whether the parcel continues under that cap depends on whether the new owner files their own claim.",
       },
     },
     {
@@ -138,7 +138,7 @@ const faqJsonLd = {
       name: "Is Nevada's 3% property tax cap automatic when you buy a house?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "No. Clark County Assessor Briana Johnson has said it directly: \"It is not an automatic 3%, they have to apply for that.\" As of October 1, 2025, Nevada law (AB377, amending NRS 375.060) lets a new owner claim the owner-occupied abatement right on the Declaration of Value form filed with the deed at closing — no fee for recording it. The older process, where the Assessor's office mails a postcard after the ownership change for the owner to complete and return, still exists as well. Call the Assessor's Office at (702) 455-3882 if you're unsure whether yours is on file.",
+        text: "No. Clark County Assessor Briana Johnson has said it directly: \"It is not an automatic 3%, they have to apply for that.\" As of October 1, 2025, Nevada law (AB377, amending NRS 375.060) lets a new owner claim the owner-occupied abatement right on the Declaration of Value form filed with the deed at closing, with no fee for recording it. The older process, where the Assessor's office mails a postcard after the ownership change for the owner to complete and return, still exists as well. Call the Assessor's Office at (702) 455-3882 if you're unsure whether yours is on file.",
       },
     },
     {
@@ -146,7 +146,7 @@ const faqJsonLd = {
       name: "What's the difference between Nevada's 3% property tax cap and the cap on other property?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "The 3% cap (NRS 361.4723) applies to a single-family house, townhouse, condo, or manufactured home that is the owner's primary residence, one per owner. A separate statute (NRS 361.4724) extends the same 3% cap to qualifying residential rentals where the rent charged doesn't exceed HUD's published fair market rent for the county. Other property generally falls under Nevada's separate statutory abatement formula (NRS 361.4722), subject to an 8% maximum — that 8% is a ceiling on a formula recalculated annually, not a flat rate everything else automatically pays.",
+        text: "The 3% cap (NRS 361.4723) applies to a single-family house, townhouse, condo, or manufactured home that is the owner's primary residence, one per owner. A separate statute (NRS 361.4724) extends the same 3% cap to qualifying residential rentals where the rent charged doesn't exceed HUD's published fair market rent for the county. Other property generally falls under Nevada's separate statutory abatement formula (NRS 361.4722), subject to an 8% maximum. That 8% is a ceiling on a formula recalculated annually, not a flat rate everything else automatically pays.",
       },
     },
   ],
@@ -163,7 +163,7 @@ export default function NevadaPropertyTaxAbatementResaleBuyersPage() {
         category: "Cost of Living",
         headline: "Why the Seller's Nevada Property Tax Bill May Not Be Yours",
         subheadline:
-          "Nevada caps how much an owner-occupied home's property tax bill can rise each year at 3%. Eligibility depends on the current owner establishing the home as their primary residence — so when a home sells, the prior owner's designation is removed and the new owner has to establish their own. Here's what actually changes, what doesn't, and what to verify before closing.",
+          "Nevada caps how much an owner-occupied home's property tax bill can rise each year at 3%. Eligibility depends on the current owner establishing the home as their primary residence, so when a home sells, the prior owner's designation is removed and the new owner has to establish their own. Here's what actually changes, what doesn't, and what to verify before closing.",
         backLink: { label: "LVINIT", href: "/" },
       }}
       relatedStories={{
@@ -175,13 +175,13 @@ export default function NevadaPropertyTaxAbatementResaleBuyersPage() {
             name: "Las Vegas Home Prices Pulled Back in July 2026",
             href: "/guides/las-vegas-home-prices-july-2026",
             category: "Market Watch",
-            dek: "The broader price picture — where the median actually sits right now, and what moved it.",
+            dek: "The broader price picture: where the median actually sits right now, and what moved it.",
           },
           {
             name: "What $500K Buys in Las Vegas",
             href: "/guides/what-500k-buys-in-las-vegas",
             category: "Buyer guide",
-            dek: "Three real home tours near the same budget — a concrete look at what a purchase actually costs beyond the sticker price.",
+            dek: "Three real home tours near the same budget. A concrete look at what a purchase actually costs beyond the sticker price.",
           },
           {
             name: "Summerlin vs. Henderson",
@@ -194,21 +194,21 @@ export default function NevadaPropertyTaxAbatementResaleBuyersPage() {
       ctas={{
         heading: "Not sure what your actual tax bill will look like?",
         body:
-          "Tell me the address you're considering, and I'll walk you through how the cap works for that specific property before you make an offer — not after you're surprised by the first bill.",
+          "Tell me the address you're considering, and I'll walk you through how the cap works for that specific property before you make an offer, not after you're surprised by the first bill.",
       }}
     >
       <StoryLede
         kicker="Cost of Living"
-        lead="Almost every resale listing in Las Vegas shows a property tax number, and it's tempting to treat that as your future bill. It's actually the seller's number — produced under whatever abatement the seller had — and the mechanics of what changes at a sale are easy to get wrong if you haven't seen them explained clearly."
+        lead="Almost every resale listing in Las Vegas shows a property tax number, and it's tempting to treat that as your future bill. It's actually the seller's number, produced under whatever abatement the seller had, and the mechanics of what changes at a sale are easy to get wrong if you haven't seen them explained clearly."
       >
         <p className="mt-6 text-body-lg text-lvinit-warmgray">
           Nevada caps how much an owner-occupied home&rsquo;s property tax
           bill can rise in a single year. That cap is real and it&rsquo;s
-          written into state law — but eligibility for it depends on the
+          written into state law, but eligibility for it depends on the
           current owner establishing the home as their primary residence, not
           on the house itself. The part worth understanding before you write
-          an offer isn&rsquo;t a prediction about your future bill &mdash;
-          it&rsquo;s the mechanism: what establishes eligibility, what happens
+          an offer isn&rsquo;t a prediction about your future bill. It&rsquo;s
+          the mechanism: what establishes eligibility, what happens
           to it when a home changes hands, and what you actually need to
           verify before closing.
         </p>
@@ -241,8 +241,8 @@ export default function NevadaPropertyTaxAbatementResaleBuyersPage() {
             <span aria-hidden="true" className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-lvinit-blue" />
             <span>
               <span className="text-lvinit-black">Owner-occupied primary residence</span>{" "}
-              — a single-family house, townhouse, condo, or manufactured home
-              on land that you actually live in, one property per owner — is
+              (a single-family house, townhouse, condo, or manufactured home
+              on land that you actually live in, one property per owner) is
               capped at <span className="text-lvinit-black">3% per year</span>.
               This article is written for that case, since that&rsquo;s what
               almost every resale homebuyer is asking about.
@@ -256,8 +256,8 @@ export default function NevadaPropertyTaxAbatementResaleBuyersPage() {
               abatement formula, subject to an{" "}
               <span className="text-lvinit-black">8% maximum</span>. There&rsquo;s
               also a carve-out worth knowing: a qualifying residential rental
-              — one where the rent charged doesn&rsquo;t exceed HUD&rsquo;s
-              published fair market rent for the county — gets the same 3%
+              , one where the rent charged doesn&rsquo;t exceed HUD&rsquo;s
+              published fair market rent for the county, gets the same 3%
               cap as an owner-occupied home, under a separate statute (
               <a
                 href="https://www.leg.state.nv.us/nrs/NRS-361.html#NRS361Sec4724"
@@ -281,22 +281,22 @@ export default function NevadaPropertyTaxAbatementResaleBuyersPage() {
           doesn&rsquo;t reassess a home&rsquo;s taxable value to its sale
           price when it changes hands. Clark County&rsquo;s Assessor
           determines taxable value countywide with a mass-appraisal
-          method — replacement cost of the improvements, less statutory
-          depreciation — not by looking at what an individual buyer just paid.
+          method (replacement cost of the improvements, less statutory
+          depreciation), not by looking at what an individual buyer just paid.
           So the sale itself doesn&rsquo;t make the underlying assessed value
           jump to match the purchase price.
         </p>
         <p className="mt-5 text-body-lg text-lvinit-warmgray">
           What does change is designation. Eligibility for the owner-occupied
           3% abatement depends on the new owner establishing the property as
-          their primary residence — it isn&rsquo;t automatic just because the
+          their primary residence. It isn&rsquo;t automatic just because the
           house itself already carried the cap. The Clark County
           Assessor&rsquo;s own tax-abatement page says this plainly:
           &ldquo;Any ownership document recorded will remove your Owner
           Occupied 3% abatement.&rdquo; A recorded ownership change removes
           the prior owner&rsquo;s owner-occupied designation, but Nevada&rsquo;s
           statutory abatement calculation still references the property&rsquo;s
-          prior-year taxes — it doesn&rsquo;t start over from zero or reset to
+          prior-year taxes. It doesn&rsquo;t start over from zero or reset to
           the purchase price. What the parcel is taxed under after the sale
           turns on whether, and how quickly, the new owner establishes their
           own claim.
@@ -305,7 +305,7 @@ export default function NevadaPropertyTaxAbatementResaleBuyersPage() {
           And that claim doesn&rsquo;t happen automatically. Clark County
           Assessor Briana Johnson has said this directly about the process:
           &ldquo;It is not an automatic 3%, they have to apply for that.&rdquo;
-          The next section covers exactly how a new owner does that — and it&rsquo;s
+          The next section covers exactly how a new owner does that, and it&rsquo;s
           more direct than it used to be.
         </p>
       </StorySection>
@@ -316,12 +316,12 @@ export default function NevadaPropertyTaxAbatementResaleBuyersPage() {
 
       <StorySection muted heading="Why this trips people up specifically on a resale purchase">
         <p className="text-body-lg text-lvinit-warmgray">
-          A new-construction home doesn&rsquo;t hit this the same way — it&rsquo;s
+          A new-construction home doesn&rsquo;t hit this the same way. It&rsquo;s
           taxed at full assessed value in the year it&rsquo;s built, with no
           abatement, and only picks up whichever cap applies starting the
           following fiscal year. Resale is where the confusion lives, because
           a resale listing&rsquo;s advertised &ldquo;current taxes&rdquo;
-          figure is the seller&rsquo;s bill — a bill that may have been
+          figure is the seller&rsquo;s bill, a bill that may have been
           quietly capped at 3% growth for years. That number tells you about
           the seller&rsquo;s current tax bill and abatement designation. It
           doesn&rsquo;t tell you what you&rsquo;ll
@@ -332,11 +332,11 @@ export default function NevadaPropertyTaxAbatementResaleBuyersPage() {
           Put concretely and purely hypothetically: say a longtime owner two
           doors down from a house you&rsquo;re considering has an identical
           floor plan and a noticeably lower tax bill. That&rsquo;s very
-          possibly this exact mechanism at work — years of the 3% cap
+          possibly this exact mechanism at work: years of the 3% cap
           limiting how much their bill was allowed to grow, even on the same
-          countywide assessed valuation everyone else is measured against —
-          not a pricing error, and not a bill you inherit just by buying next
-          door. What you&rsquo;re taxed as the new owner depends on your own
+          countywide assessed valuation everyone else is measured against. It
+          is not a pricing error, and not a bill you inherit just by buying
+          next door. What you&rsquo;re taxed as the new owner depends on your own
           designation, established through your own claim.
         </p>
       </StorySection>
@@ -347,8 +347,8 @@ export default function NevadaPropertyTaxAbatementResaleBuyersPage() {
           <span className="text-lvinit-black">October 1, 2025</span>, there&rsquo;s
           a more direct path than there used to be. Nevada&rsquo;s AB377
           (2025 Legislature) amended NRS 375.060 so the Declaration of
-          Value — the form filed with every deed presented for recording, at
-          every real property transfer — now includes a section where the
+          Value (the form filed with every deed presented for recording, at
+          every real property transfer) now includes a section where the
           owner can claim the owner-occupied (or qualifying-rental) partial
           abatement right there, at the time of transfer. There&rsquo;s no fee
           for recording it. That makes the claim part of closing itself,
@@ -359,8 +359,8 @@ export default function NevadaPropertyTaxAbatementResaleBuyersPage() {
           office mails new owners a postcard after a change in ownership or
           document number, and it has to be completed and returned to claim
           or reclaim the 3% cap. If you didn&rsquo;t make the claim on the
-          Declaration of Value at closing — or you&rsquo;re not sure whether
-          it went through — that postcard, or a direct call to the Assessor,
+          Declaration of Value at closing, or you&rsquo;re not sure whether
+          it went through, that postcard or a direct call to the Assessor
           is how you fix it.
         </p>
         <ul className="mt-5 space-y-3 text-body-lg text-lvinit-warmgray">
@@ -386,7 +386,7 @@ export default function NevadaPropertyTaxAbatementResaleBuyersPage() {
             <span aria-hidden="true" className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-lvinit-blue" />
             <span>
               If a postcard shows up from the Assessor&rsquo;s office after
-              closing, complete and return it — it&rsquo;s the backup
+              closing, complete and return it. It&rsquo;s the backup
               mechanism for exactly this claim.
             </span>
           </li>
@@ -397,7 +397,7 @@ export default function NevadaPropertyTaxAbatementResaleBuyersPage() {
               percentage is correct, call the Clark County Assessor&rsquo;s
               Office directly at{" "}
               <span className="text-lvinit-black">(702) 455-3882</span>. This
-              is their process to confirm — not something a lender or agent
+              is their process to confirm, not something a lender or agent
               can verify for you.
             </span>
           </li>
@@ -405,7 +405,7 @@ export default function NevadaPropertyTaxAbatementResaleBuyersPage() {
             <span aria-hidden="true" className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-lvinit-blue" />
             <span>
               Don&rsquo;t assume either outcome before you&rsquo;ve verified
-              it — that your bill will match the seller&rsquo;s, or that it
+              it: that your bill will match the seller&rsquo;s, or that it
               will spike. Confirm your actual designation and figure with the
               Assessor or your title company before you finalize your budget.
             </span>
@@ -418,7 +418,7 @@ export default function NevadaPropertyTaxAbatementResaleBuyersPage() {
           The tax number on a resale listing tells you about the seller&rsquo;s
           current tax bill and designation, not your future bill. Nevada doesn&rsquo;t
           reassess the home&rsquo;s value to the sale price, but recording the
-          sale does remove the seller&rsquo;s owner-occupied cap — so what you
+          sale does remove the seller&rsquo;s owner-occupied cap, so what you
           end up taxed under comes down to whether, and how, you establish
           your own claim. As of October 2025 that can happen right at closing
           on the Declaration of Value; the older assessor-notice process is
@@ -450,9 +450,9 @@ export default function NevadaPropertyTaxAbatementResaleBuyersPage() {
       <StorySection heading="Sources">
         <ul className="space-y-3 text-body text-lvinit-warmgray">
           <li>
-            <span className="text-lvinit-black">Nevada Revised Statutes</span>{" "}
-            — NRS 361.4723, partial abatement of taxes on an owner-occupied
-            single-family residence (the 3% cap) —{" "}
+            <span className="text-lvinit-black">Nevada Revised Statutes</span>
+            . NRS 361.4723, partial abatement of taxes on an owner-occupied
+            single-family residence (the 3% cap), at{" "}
             <a
               href="https://www.leg.state.nv.us/NRS/NRS-361.html#NRS361Sec4723"
               className={linkCls}
@@ -464,9 +464,9 @@ export default function NevadaPropertyTaxAbatementResaleBuyersPage() {
             .
           </li>
           <li>
-            <span className="text-lvinit-black">Nevada Revised Statutes</span>{" "}
-            — NRS 361.4724, the same 3% cap extended to qualifying
-            residential rentals —{" "}
+            <span className="text-lvinit-black">Nevada Revised Statutes</span>
+            . NRS 361.4724, the same 3% cap extended to qualifying
+            residential rentals, at{" "}
             <a
               href="https://www.leg.state.nv.us/NRS/NRS-361.html#NRS361Sec4724"
               className={linkCls}
@@ -478,9 +478,9 @@ export default function NevadaPropertyTaxAbatementResaleBuyersPage() {
             .
           </li>
           <li>
-            <span className="text-lvinit-black">Nevada Revised Statutes</span>{" "}
-            — NRS 361.4722, the general abatement formula and 8% ceiling for
-            other property —{" "}
+            <span className="text-lvinit-black">Nevada Revised Statutes</span>
+            . NRS 361.4722, the general abatement formula and 8% ceiling for
+            other property, at{" "}
             <a
               href="https://www.leg.state.nv.us/NRS/NRS-361.html#NRS361Sec4722"
               className={linkCls}
@@ -492,10 +492,10 @@ export default function NevadaPropertyTaxAbatementResaleBuyersPage() {
             .
           </li>
           <li>
-            <span className="text-lvinit-black">Nevada Revised Statutes</span>{" "}
-            — NRS 375.060, the Declaration of Value statute, as amended by
+            <span className="text-lvinit-black">Nevada Revised Statutes</span>
+            . NRS 375.060, the Declaration of Value statute, as amended by
             AB377 (2025 Legislature, effective October 1, 2025) to add the
-            at-transfer abatement-claim section —{" "}
+            at-transfer abatement-claim section, at{" "}
             <a
               href="https://www.leg.state.nv.us/nrs/nrs-375.html#NRS375Sec060"
               className={linkCls}
@@ -518,9 +518,9 @@ export default function NevadaPropertyTaxAbatementResaleBuyersPage() {
           <li>
             <span className="text-lvinit-black">
               Clark County Assessor&rsquo;s Office
-            </span>{" "}
-            — official tax-abatement page, source for the ownership-designation
-            rule and the (702) 455-3882 tax-cap contact line —{" "}
+            </span>
+            . Official tax-abatement page, source for the ownership-designation
+            rule and the (702) 455-3882 tax-cap contact line, at{" "}
             <a
               href="https://www.clarkcountynv.gov/government/general_information/tax-abatement"
               className={linkCls}
@@ -534,10 +534,10 @@ export default function NevadaPropertyTaxAbatementResaleBuyersPage() {
           <li>
             <span className="text-lvinit-black">
               Clark County Assessor&rsquo;s Office
-            </span>{" "}
-            — real-property valuation page, source for the countywide
+            </span>
+            . Real-property valuation page, source for the countywide
             mass-appraisal (replacement cost less depreciation) method used
-            instead of reassessing to a sale price —{" "}
+            instead of reassessing to a sale price, at{" "}
             <a
               href="https://www.clarkcountynv.gov/government/assessor/real-property"
               className={linkCls}
@@ -549,11 +549,11 @@ export default function NevadaPropertyTaxAbatementResaleBuyersPage() {
             .
           </li>
           <li>
-            <span className="text-lvinit-black">Fox5 Vegas (KVVU)</span> —
+            <span className="text-lvinit-black">Fox5 Vegas (KVVU)</span>.
             &ldquo;New Clark County homeowners must fill out tax cap notices
             being mailed to prevent increase in property taxes,&rdquo; July
             27, 2023, source for the Assessor&rsquo;s quote and the general
-            new-owner notice process —{" "}
+            new-owner notice process, at{" "}
             <a
               href="https://www.fox5vegas.com/2023/07/27/new-clark-county-homeowners-must-fill-out-tax-cap-notices-being-mailed-prevent-increase-property-taxes/"
               className={linkCls}
@@ -568,7 +568,7 @@ export default function NevadaPropertyTaxAbatementResaleBuyersPage() {
         <p className="mt-6 text-caption text-lvinit-warmgray">
           This article explains a public tax mechanism in general terms. It
           isn&rsquo;t tax, legal, or financial advice, and abatement
-          percentages, deadlines, and county processes can change — confirm
+          percentages, deadlines, and county processes can change. Confirm
           the current process and any property-specific figure with the
           Clark County Assessor&rsquo;s Office before making a decision.
         </p>

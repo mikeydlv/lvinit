@@ -25,7 +25,7 @@ export default function StoryPullQuote({ children, cite }: StoryPullQuoteProps) 
           </p>
           {cite && (
             <cite className="mt-3 block text-caption uppercase not-italic tracking-wide text-lvinit-warmgray">
-              — {cite}
+              {cite}
             </cite>
           )}
         </blockquote>

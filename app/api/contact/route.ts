@@ -49,7 +49,7 @@ export async function POST(req: Request) {
       from,
       to,
       replyTo: email,
-      subject: `LVINIT inquiry — ${name}`,
+      subject: `LVINIT inquiry: ${name}`,
       text,
     });
     if (error) {

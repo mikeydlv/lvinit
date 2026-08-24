@@ -49,7 +49,7 @@ const GROUPS: Array<{ status: ProjectStatus; label: string; blurb: string }> = [
     status: "planned",
     label: "Planned or proposed",
     blurb:
-      "Announced, approved, or designed — not built. Treat renderings accordingly.",
+      "Announced, approved, or designed, but not built. Treat renderings accordingly.",
   },
 ];
 

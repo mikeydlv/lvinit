@@ -120,7 +120,7 @@ export const mapPlaces: MapPlace[] = [
   },
   {
     name: "Enterprise and Spring Valley",
-    note: "The two unincorporated Clark County towns most of this area actually sits in. Labeled here, not outlined — see the note below.",
+    note: "The two unincorporated Clark County towns most of this area actually sits in. Labeled here, not outlined. See the note below.",
   },
   {
     name: "Mountain's Edge",
@@ -132,11 +132,11 @@ export const mapPlaces: MapPlace[] = [
   },
   {
     name: "Southern Highlands",
-    note: "The southern outlier, hard against I-15. Drawn outside the core outline on purpose — plenty of people don't file it under Southwest.",
+    note: "The southern outlier, hard against I-15. Drawn outside the core outline on purpose, since plenty of people don't file it under Southwest.",
   },
   {
     name: "UnCommons and Durango Resort",
-    note: "The Durango corridor at the 215 — the closest thing the Southwest has to a center.",
+    note: "The Durango corridor at the 215, the closest thing the Southwest has to a center.",
   },
   {
     name: "Desert Flow Bike Park",
@@ -161,7 +161,7 @@ export const communities: AreaCommunity[] = [
     name: "Mountain's Edge",
     where: "South of Blue Diamond Rd, west of Rainbow Blvd",
     summary:
-      "The biggest single master plan out here — roughly 2,500 acres inside the town of Enterprise, running right up against the desert at the southwest corner of the valley.",
+      "The biggest single master plan out here, roughly 2,500 acres inside the town of Enterprise, running right up against the desert at the southwest corner of the valley.",
     housing:
       "Overwhelmingly 2000s-and-later single-family, in a long run of separate builder subdivisions. Some gated, most not.",
     distinct:
@@ -189,7 +189,7 @@ export const communities: AreaCommunity[] = [
     housing:
       "Single-family from the early 2000s, a wide range of floor plans, with a gated section and non-gated streets in the same community.",
     distinct:
-      "It's the clearest example of how fast the Southwest changes street to street — it's ringed by Rhodes Ranch, Mountain's Edge and Southern Highlands, and doesn't feel like any of them.",
+      "It's the clearest example of how fast the Southwest changes street to street. It's ringed by Rhodes Ranch, Mountain's Edge and Southern Highlands, and doesn't feel like any of them.",
     worthExploring:
       "Worth driving if you want something twenty-odd years old rather than five, central to the area's arterials, without paying for a master-plan name.",
   },
@@ -199,7 +199,7 @@ export const communities: AreaCommunity[] = [
     summary:
       "A roughly 2,300-acre master plan in Enterprise built around a private golf club, at the very bottom of the valley. Whether it counts as Southwest is genuinely disputed.",
     housing:
-      "The widest range in the area — production single-family through custom and guard-gated estate housing, plus townhomes and condos.",
+      "The widest range in the area: production single-family through custom and guard-gated estate housing, plus townhomes and condos.",
     distinct:
       "Its access is oriented to I-15 and St. Rose rather than the 215, which makes daily life here point south and east while the rest of the Southwest points north and west.",
     worthExploring:
@@ -209,7 +209,7 @@ export const communities: AreaCommunity[] = [
     name: "The Durango corridor",
     where: "Durango Dr at the CC-215, around Sunset and Warm Springs",
     summary:
-      "Not a residential community — a commercial spine. UnCommons, Durango Casino & Resort, IKEA and The Bend all sit within about a mile of each other here, with apartments filling in around them.",
+      "Not a residential community. It's a commercial spine. UnCommons, Durango Casino & Resort, IKEA and The Bend all sit within about a mile of each other here, with apartments filling in around them.",
     housing:
       "Apartments and mid-rise rentals rather than for-sale housing, with established single-family subdivisions immediately behind on the side streets.",
     distinct:
@@ -221,13 +221,13 @@ export const communities: AreaCommunity[] = [
     name: "Enterprise",
     where: "Most of the map, and then some",
     summary:
-      "Not a neighborhood — an unincorporated Clark County town of about 67 square miles that swallows most of what people call Southwest, plus a good deal that nobody would.",
+      "An unincorporated Clark County town of about 67 square miles, not a neighborhood. It swallows most of what people call Southwest, plus a good deal that nobody would.",
     housing:
       "Everything. Master plans, 1990s subdivisions, brand-new infill, larger-lot and semi-rural pockets, apartment corridors and horse property, all under one town name.",
     distinct:
       "It's an administrative unit, not a place with a character. If someone tells you a home is 'in Enterprise' they've told you which town advisory board covers it and almost nothing else.",
     worthExploring:
-      "Useful to know because it's what your address, your permits and your county services actually attach to — but don't shop by it. Shop by the subdivision.",
+      "Useful to know because it's what your address, your permits and your county services actually attach to, but don't shop by it. Shop by the subdivision.",
   },
 ];
 
@@ -241,7 +241,7 @@ export const developmentProjects: DevelopmentProject[] = [
     name: "UnCommons",
     status: "open",
     where: "Durango Dr, just south of the CC-215",
-    what: "A 40-acre mixed-use campus with four office buildings — all of them leased — plus restaurants, coffee, a coworking space, an event venue, a central plaza and the Vestra apartments. It's the most concentrated attempt anyone has made at building the Southwest a center.",
+    what: "A 40-acre mixed-use campus with four office buildings (all of them leased) plus restaurants, coffee, a coworking space, an event venue, a central plaza and the Vestra apartments. It's the most concentrated attempt anyone has made at building the Southwest a center.",
     caveat:
       "The developer's own marketing quotes full build-out targets for office square footage and residential units. Those are targets, not what exists.",
     source: {
@@ -253,7 +253,7 @@ export const developmentProjects: DevelopmentProject[] = [
     name: "The Bend",
     status: "open",
     where: "Sunset Rd between Durango Dr and Riley St, across from IKEA",
-    what: "Dapper Companies' dining and retail development on roughly ten acres. Substantially open and busy — Electric Pickle, Mothership Coffee, Marufuku Ramen, Aces & Ales, St. Felix, Freed's, Butcher & Thief — with further phases still to come.",
+    what: "Dapper Companies' dining and retail development on roughly ten acres. Substantially open and busy, with Electric Pickle, Mothership Coffee, Marufuku Ramen, Aces & Ales, St. Felix, Freed's, Butcher & Thief, and further phases still to come.",
     caveat:
       "Published square footages conflict between sources, so none is stated here.",
     source: {
@@ -265,7 +265,7 @@ export const developmentProjects: DevelopmentProject[] = [
     name: "Rainbow & Blue Diamond industrial parks",
     status: "open",
     where: "S Rainbow Blvd around Richmar Ave, south of Blue Diamond Rd",
-    what: "Two completed logistics developments — Panattoni's 422,000 sq ft Oasis Commerce Center and the four-building, roughly 256,000 sq ft Rainbow @ Blue Diamond park. Worth knowing about if you're looking at homes nearby: this corner of the Southwest is a working industrial corridor now, with the truck traffic that implies.",
+    what: "Two completed logistics developments: Panattoni's 422,000 sq ft Oasis Commerce Center and the four-building, roughly 256,000 sq ft Rainbow @ Blue Diamond park. Worth knowing about if you're looking at homes nearby: this corner of the Southwest is a working industrial corridor now, with the truck traffic that implies.",
     caveat:
       "Oasis Commerce Center's completed status is per CBRE's leasing listing for the property, not the developer.",
     source: {
@@ -274,7 +274,7 @@ export const developmentProjects: DevelopmentProject[] = [
     },
   },
   {
-    name: "Durango Casino & Resort — third expansion phase",
+    name: "Durango Casino & Resort: third expansion phase",
     status: "under-construction",
     where: "Durango Dr at the CC-215, on the north parking lot",
     what: "Station Casinos began a $385 million, roughly 275,000 sq ft expansion in January 2026, adding a 36-lane bowling center, movie theaters, restaurants and food-hall outlets, more gaming and further entertainment space. The resort stays open throughout.",
@@ -318,22 +318,22 @@ export const developmentProjects: DevelopmentProject[] = [
     },
   },
   {
-    name: "Sunset Road — Durango to Decatur, Phase 1",
+    name: "Sunset Road: Durango to Decatur, Phase 1",
     status: "under-construction",
     where: "Sunset Rd, Durango Dr to Decatur Blvd",
     what: "A county roadway project along the Sunset corridor, the main east-west connector across the north edge of the Southwest.",
     source: {
-      label: "Clark County Public Works — projects in construction",
+      label: "Clark County Public Works: projects in construction",
       url: "https://www.clarkcountynv.gov/government/departments/public_works_department/projects-in-construction",
     },
   },
   {
-    name: "Rainbow Boulevard — Blue Diamond to the CC-215",
+    name: "Rainbow Boulevard: Blue Diamond to the CC-215",
     status: "under-construction",
     where: "Rainbow Blvd, Blue Diamond Rd to CC-215",
-    what: "County work along the Rainbow corridor through the middle of the Southwest — the stretch that carries traffic between Mountain's Edge, the industrial parks and the beltway.",
+    what: "County work along the Rainbow corridor through the middle of the Southwest, the stretch that carries traffic between Mountain's Edge, the industrial parks and the beltway.",
     source: {
-      label: "Clark County Public Works — projects in construction",
+      label: "Clark County Public Works: projects in construction",
       url: "https://www.clarkcountynv.gov/government/departments/public_works_department/projects-in-construction",
     },
   },
@@ -341,7 +341,7 @@ export const developmentProjects: DevelopmentProject[] = [
     name: "UnCommons fifth office building",
     status: "planned",
     where: "Western end of the UnCommons campus, Durango Dr",
-    what: "Matter Real Estate Group announced the campus's fifth and final office building in May 2026 — three stories on a 1.4-acre parcel between the DraftKings building and a parking garage, about 39,000 sq ft of office over roughly 20,000 sq ft of ground-floor retail, targeted to be tenant-ready in the first quarter of 2028.",
+    what: "Matter Real Estate Group announced the campus's fifth and final office building in May 2026: three stories on a 1.4-acre parcel between the DraftKings building and a parking garage, about 39,000 sq ft of office over roughly 20,000 sq ft of ground-floor retail, targeted to be tenant-ready in the first quarter of 2028.",
     caveat:
       "Announced, not started. No construction start date has been published, so treat renderings accordingly.",
     source: {
@@ -408,7 +408,7 @@ export const summerlinComparison: ComparisonRow[] = [
 
 export const areaVideo: AreaVideoConfig = {
   title:
-    "Summerlin vs Henderson vs Southwest Las Vegas — LVINIT with Mikey Del Rosario",
+    "Summerlin vs Henderson vs Southwest Las Vegas, with Mikey Del Rosario",
 };
 
 // --- 7. FAQ -----------------------------------------------------------------
@@ -431,7 +431,7 @@ export const faqItems: AreaFaqItem[] = [
     question: "Is Southwest Las Vegas a city?",
     answer: (
       <>
-        No. It isn&rsquo;t a city, a town, or a census place — it&rsquo;s a
+        No. It isn&rsquo;t a city, a town, or a census place. It&rsquo;s a
         colloquial name. Most of it isn&rsquo;t even inside the City of Las
         Vegas: it&rsquo;s unincorporated Clark County, so your mailing address
         says Las Vegas while your permits, code questions and local services go
@@ -444,7 +444,7 @@ export const faqItems: AreaFaqItem[] = [
     answer: (
       <>
         They overlap heavily but they aren&rsquo;t the same thing. Enterprise is
-        a real administrative unit — an unincorporated town of about 67 square
+        a real administrative unit, an unincorporated town of about 67 square
         miles that Clark County administers. It covers most of what people call
         Southwest, and also plenty that nobody would. Southwest is a name people
         use; Enterprise is a line on a county map.
@@ -466,7 +466,7 @@ export const faqItems: AreaFaqItem[] = [
     question: "Is Mountain's Edge in Southwest Las Vegas?",
     answer: (
       <>
-        Yes — it&rsquo;s one of the areas people most reliably mean. Clark County
+        Yes. It&rsquo;s one of the areas people most reliably mean. Clark County
         describes it as a master-planned community of about 2,500 acres inside
         the town of Enterprise, generally south of Blue Diamond Road and west of
         Rainbow Boulevard.
@@ -478,7 +478,7 @@ export const faqItems: AreaFaqItem[] = [
     answer: (
       <>
         Yes. It sits in the middle of the area around Durango and Fort Apache,
-        and it&rsquo;s one of the older communities out here — guard-gated,
+        and it&rsquo;s one of the older communities out here: guard-gated,
         wrapped around a golf course, and built out largely before the
         subdivisions around it.
       </>
@@ -488,7 +488,7 @@ export const faqItems: AreaFaqItem[] = [
     question: "Is Southern Highlands considered Southwest Las Vegas?",
     answer: (
       <>
-        Sometimes. It&rsquo;s in the same county town — Enterprise — but it sits
+        Sometimes. It&rsquo;s in the same county town, Enterprise, but it sits
         at the very bottom of the valley against I-15, and its access points
         south and east rather than to the 215. Plenty of locals treat it as its
         own thing. That disagreement is exactly why this page draws two outlines
@@ -501,8 +501,8 @@ export const faqItems: AreaFaqItem[] = [
     answer: (
       <>
         Close enough that it&rsquo;s not a problem, and too variable to put a
-        number on. The area is big — a home off Blue Diamond and a home at
-        Durango and the 215 aren&rsquo;t the same trip — and the answer swings
+        number on. The area is big. A home off Blue Diamond and a home at
+        Durango and the 215 aren&rsquo;t the same trip, and the answer swings
         with the hour. Getting to the south Strip and Harry Reid International is
         the easy direction from most of the Southwest; crossing the valley
         northeast at rush hour is the hard one. Drive it yourself at the time
@@ -531,7 +531,7 @@ export const faqItems: AreaFaqItem[] = [
       <>
         The names you&rsquo;ll hear most are Mountain&rsquo;s Edge, Rhodes Ranch,
         Nevada Trails, Southern Highlands and the newer development along the
-        Durango corridor — all inside the county towns of Enterprise and, at the
+        Durango corridor, all inside the county towns of Enterprise and, at the
         north end, Spring Valley. There are many more subdivisions than that; the
         area is a patchwork of separate builder tracts rather than a small set of
         named neighborhoods.
@@ -544,48 +544,48 @@ export const faqItems: AreaFaqItem[] = [
 
 export const sources: AreaSource[] = [
   {
-    label: "Clark County Comprehensive Planning — Enterprise",
+    label: "Clark County Comprehensive Planning: Enterprise",
     url: "https://www.clarkcountynv.gov/government/departments/comprehensive_planning_department/divisions/advanced_planning_division/enterprise",
     used: "Enterprise as an unincorporated town administered by Clark County; 42,950 acres / about 67 square miles.",
   },
   {
-    label: "Clark County Comprehensive Planning — Mountain's Edge",
+    label: "Clark County Comprehensive Planning: Mountain's Edge",
     url: "https://www.clarkcountynv.gov/government/departments/comprehensive_planning_department/library/mountains-edge",
     used: "Mountain's Edge acreage, location, land-use split and the roughly 700 acres of public facilities.",
   },
   {
-    label: "Clark County Public Works — projects in construction",
+    label: "Clark County Public Works: projects in construction",
     url: "https://www.clarkcountynv.gov/government/departments/public_works_department/projects-in-construction",
     used: "Which Southwest road projects are actually in construction rather than in design.",
   },
   {
-    label: "Clark County Parks & Recreation — Desert Flow Bike Park",
+    label: "Clark County Parks & Recreation: Desert Flow Bike Park",
     url: "https://www.clarkcountynv.gov/government/departments/parks___recreation/special_use_facility/desert-flow-bike-park",
     used: "Desert Flow's size, location and under-construction status.",
   },
   {
-    label: "Las Vegas Review-Journal — southwest valley growth",
+    label: "Las Vegas Review-Journal: southwest valley growth",
     url: "https://www.reviewjournal.com/business/housing/how-fast-is-the-southwest-las-vegas-valley-growing-3046446/",
     used: "Enterprise growth of almost 60% from 2010 to 2023 against about 20% valley-wide, and 245,243 residents at the end of 2023. The underlying figures are Esri's, not the county's.",
   },
   {
-    label: "NVBEX — UnCommons fifth office building",
+    label: "NVBEX: UnCommons fifth office building",
     url: "https://nevbex.com/2026/06/01/uncommons-fifth-office-building-las-vegas/",
     used: "The fifth office building's size, parcel, Q1 2028 target and announced-not-started status.",
   },
   {
-    label: "CDC Gaming — Durango Casino expansion",
+    label: "CDC Gaming: Durango Casino expansion",
     url: "https://cdcgaming.com/durango-casino-starts-385-million-expansion/",
     used: "The $385 million third-phase expansion, its January 2026 start and what it adds.",
   },
   {
-    label: "Las Vegas Review-Journal — projects to watch in 2026",
+    label: "Las Vegas Review-Journal: projects to watch in 2026",
     url: "https://www.reviewjournal.com/business/housing/las-vegas-real-estate-projects-to-watch-in-2026-3601967/",
-    used: "Life Time at Durango and Sunset — 128,000 sq ft, scheduled to open late 2026.",
+    used: "Life Time at Durango and Sunset: 128,000 sq ft, scheduled to open late 2026.",
   },
   {
-    label: "CBRE — Oasis Commerce Center",
+    label: "CBRE: Oasis Commerce Center",
     url: "https://www.cbre.com/properties/properties-for-lease/industrial/details/US-SMPL-100161/oasis-commerce-center-s-rainbow-blvd-w-richmar-ave-las-vegas-nv-89139",
-    used: "The Panattoni industrial development at Rainbow and Richmar being complete — 422,000 sq ft.",
+    used: "The Panattoni industrial development at Rainbow and Richmar being complete, at 422,000 sq ft.",
   },
 ];

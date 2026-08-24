@@ -49,7 +49,7 @@ export const neighborhoods: Neighborhood[] = [
     headlineStat: { label: "Median Price", value: "$525K" },
     tags: ["top-schools", "quiet-suburban"],
     description:
-      "The valley's widest range of communities — new master-plans, a lake, hillside estates, and a historic downtown, each a different way to live.",
+      "The valley's widest range of communities: new master-plans, a lake, hillside estates, and a historic downtown, each a different way to live.",
     photoDirection:
       "Henderson in early evening — families on a tree-lined park path, water-district green against the desert, unhurried and easy",
     metrics: { medianPrice: 525000, walkScore: 48, commuteToStrip: 24, schoolRating: 8.0 },
@@ -252,7 +252,7 @@ export const guides: Guide[] = [
   {
     slug: "summerlin-vs-henderson",
     title: "Summerlin vs. Henderson: Where Should You Actually Move?",
-    dek: "Two of the city's most-recommended suburbs, compared honestly — schools, commute, and the tradeoffs nobody puts in a brochure.",
+    dek: "Two of the city's most-recommended suburbs, compared honestly on schools, commute, and the tradeoffs nobody puts in a brochure.",
     byline: "Mikey Del Rosario",
     date: "August 2026",
     publishedAt: "2026-08-19",
@@ -270,7 +270,7 @@ export const guides: Guide[] = [
     slug: "las-vegas-home-prices-july-2026",
     title:
       "Las Vegas Home Prices Pulled Back From Their Record High in July 2026",
-    dek: "LVR's July 2026 report shows the median single-family price slipped to $480,000, down 2% from the record set in May and June — the honest read on what changed and what didn't.",
+    dek: "LVR's July 2026 report shows the median single-family price slipped to $480,000, down 2% from the record set in May and June. Here's the honest read on what changed and what didn't.",
     byline: "Mikey Del Rosario",
     date: "August 2026",
     publishedAt: "2026-08-17",
@@ -299,7 +299,7 @@ export const guides: Guide[] = [
     slug: "will-las-vegas-home-prices-drop",
     title:
       "Inventory Is Rising in Las Vegas. So Why Aren't Home Prices Falling?",
-    dek: "Inventory and days on market climbed through mid-2026, yet prices held at a record. Here's what's actually holding them up — and what would have to change.",
+    dek: "Inventory and days on market climbed through mid-2026, yet prices held at a record. Here's what's actually holding them up, and what would have to change.",
     byline: "Mikey Del Rosario",
     date: "August 2026",
     publishedAt: "2026-08-04",
@@ -331,7 +331,7 @@ export const guides: Guide[] = [
   {
     slug: "four-seasons-private-residences",
     title: "Four Seasons Private Residences",
-    dek: "Henderson's MacDonald Highlands is getting a Four Seasons address — what's actually being built, and what's still unconfirmed.",
+    dek: "Henderson's MacDonald Highlands is getting a Four Seasons address. Here's what's actually being built, and what's still unconfirmed.",
     byline: "Mikey Del Rosario",
     date: "July 2026",
     publishedAt: "2026-07-08",
@@ -347,7 +347,7 @@ export const guides: Guide[] = [
   {
     slug: "summerlin-fourth-of-july-parade",
     title: "Summerlin Fourth of July Parade",
-    dek: "A local look at one of Summerlin's favorite traditions — and what it says about living here.",
+    dek: "A local look at one of Summerlin's favorite traditions, and what it says about living here.",
     byline: "Mikey Del Rosario",
     date: "July 2026",
     publishedAt: "2026-07-06",

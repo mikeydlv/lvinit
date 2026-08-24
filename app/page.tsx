@@ -1,6 +1,5 @@
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
-import ThesisBeat from "@/components/ThesisBeat";
 import NeighborhoodDiscovery from "@/components/NeighborhoodDiscovery";
 import Comparisons from "@/components/Comparisons";
 import BreathingPhoto from "@/components/BreathingPhoto";
@@ -19,7 +18,6 @@ export default function HomePage() {
 
       <main id="main-content">
         <Hero />
-        <ThesisBeat />
         <NeighborhoodDiscovery />
 
         <Comparisons />
@@ -31,8 +29,8 @@ export default function HomePage() {
         />
 
         <MovingToLasVegas />
-        <LatestFromLVINIT />
         <Videos />
+        <LatestFromLVINIT />
 
         <BreathingPhoto
           src="/images/breathing-red-rock-canyon-scenic-drive.webp"
