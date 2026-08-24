@@ -6,7 +6,9 @@ import Container from "./ui/Container";
 
 const primaryLinks = [
   { label: "Neighborhoods", href: "#neighborhoods" },
-  { label: "Guides", href: "#guides" },
+  // Real route, not an anchor — /guides is the complete editorial library, and
+  // it works from every page (the anchor only resolved on the homepage).
+  { label: "Guides", href: "/guides" },
   { label: "Compare", href: "#compare" },
   { label: "Videos", href: "#videos" },
   { label: "Moving to Las Vegas", href: "#moving-to-las-vegas" },

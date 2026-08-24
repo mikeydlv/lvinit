@@ -39,9 +39,13 @@ trust your memory over them. On any non-trivial task, orient yourself with:
 - `docs/02-visual-design-system.md` and `docs/03-homepage-spec.md` — approved
   design system and homepage blueprint. **Do not change these approved docs
   unless explicitly instructed.**
-- `lib/content.ts` (homepage copy/data), `lib/story.ts` (`StoryMeta` +
-  `buildStoryMetadata`/`buildStoryJsonLd`), `app/layout.tsx` (global metadata),
-  `app/sitemap.ts` (manual sitemap), `components/story/*` and `components/*`.
+- `lib/content.ts` — homepage copy/data **and the canonical editorial registry**
+  (`guides`). Every published guide/feature gets exactly one entry there; that
+  entry is what makes it appear at `/guides` and in the homepage "Latest from
+  LVINIT" feed. See §8 for the required fields.
+- `lib/story.ts` (`StoryMeta` + `buildStoryMetadata`/`buildStoryJsonLd`),
+  `app/layout.tsx` (global metadata), `app/sitemap.ts` (manual sitemap),
+  `components/story/*` and `components/*`.
 
 Reuse what exists. Do not recreate systems (Story components, metadata/schema
 helpers, Button/Container/Image helpers, analytics, contact route) that are
@@ -242,6 +246,28 @@ minor copy choice → make the strongest on-brand call and proceed.
 - Add each new page's URL to `app/sitemap.ts` (it's manual). Confirm every
   internal link resolves; ship no `href="#"` placeholder as if functional and no
   accidental dead links.
+- **Register every new editorial page in the `guides` array in `lib/content.ts`.**
+  This is the single step that makes it discoverable — `/guides` lists it and the
+  homepage "Latest from LVINIT" feed picks it up automatically if it lands in the
+  newest three. **Never edit a homepage component to feature an article**; the
+  feed sorts itself. Required fields:
+  - `slug` — unique registry key.
+  - `href` — the real, working route. No entry without one.
+  - `publishedAt` — `YYYY-MM-DD`, and it **must match** the page's
+    `StoryMeta.datePublished`. This is the sort key; `date` ("August 2026") is
+    display-only and too coarse to order by. Never invent a date — omit it and
+    the piece stays out of the dated feeds.
+  - `category` — the editorial eyebrow (Moving Here, Cost of Living, Market
+    Watch, Buyer Guide, Comparisons, Neighborhoods, Local Feature, …).
+  - `title` + `dek` — the card headline and its concise excerpt.
+  - `byline` — "Mikey Del Rosario", or "LVINIT Editorial" for house pieces.
+  - `image` + `imageAlt` — **only** when a genuine photograph of this story
+    exists. Omit both otherwise: the card then renders its designed
+    non-photographic fallback, which is correct and finished. Never point
+    `image` at a generic stand-in or an unrelated neighborhood photo to fill the
+    slot, and never write alt text for a photo that doesn't exist.
+  - `status: "draft"` — set while a piece is staged but not publishable; it stays
+    in the registry and out of every public feed. Omit once published.
 - Run `npm run build` (must pass clean) and verify in the browser preview (dev
   server config **`lvinit-dev`**, port 3000) on desktop and mobile; check console
   errors and that CTA routes work. **Never claim verification you didn't

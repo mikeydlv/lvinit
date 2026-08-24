@@ -5,8 +5,8 @@ import NeighborhoodDiscovery from "@/components/NeighborhoodDiscovery";
 import Comparisons from "@/components/Comparisons";
 import BreathingPhoto from "@/components/BreathingPhoto";
 import MovingToLasVegas from "@/components/MovingToLasVegas";
+import LatestFromLVINIT from "@/components/LatestFromLVINIT";
 import Videos from "@/components/Videos";
-import LocalGuides from "@/components/LocalGuides";
 import MeetYourGuide from "@/components/MeetYourGuide";
 import SearchHomesStrip from "@/components/SearchHomesStrip";
 import Newsletter from "@/components/Newsletter";
@@ -31,6 +31,7 @@ export default function HomePage() {
         />
 
         <MovingToLasVegas />
+        <LatestFromLVINIT />
         <Videos />
 
         <BreathingPhoto
@@ -39,7 +40,6 @@ export default function HomePage() {
           caption="Where the city gives way to open desert."
         />
 
-        <LocalGuides />
         <MeetYourGuide />
         <SearchHomesStrip />
         <Newsletter />
