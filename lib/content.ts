@@ -267,6 +267,25 @@ export const guides: Guide[] = [
     href: "/guides/summerlin-vs-henderson",
   },
   {
+    slug: "las-vegas-new-home-sales-july-2026",
+    title:
+      "Las Vegas New-Home Sales Jumped in July 2026 — But Builders Are Still Pulling Back",
+    dek: "Home Builders Research data shows builder sales up 28% month over month in July, still down 7% year over year, with permits down 23% and new-construction pricing running well above the resale median.",
+    byline: "Mikey Del Rosario",
+    date: "August 2026",
+    publishedAt: "2026-08-25",
+    category: "Market Watch",
+    // No authentic photograph for this explainer, so it carries a generated
+    // LVINIT editorial cover (abstract, non-photographic; draws no real
+    // figures, geography, or charts of its own).
+    //   node scripts/generate-guide-cover.mjs --slug las-vegas-new-home-sales-july-2026 \
+    //     --category "Market Watch" --subject "New-Home Sales" \
+    //     --out las-vegas-new-home-sales-editorial-cover.webp
+    image: "/images/covers/las-vegas-new-home-sales-editorial-cover.webp",
+    imageMode: "editorial-cover",
+    href: "/guides/las-vegas-new-home-sales-july-2026",
+  },
+  {
     slug: "las-vegas-home-prices-july-2026",
     title:
       "Las Vegas Home Prices Pulled Back From Their Record High in July 2026",
