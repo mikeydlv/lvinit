@@ -62,6 +62,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.7,
     },
     {
+      url: `${BASE_URL}/guides/las-vegas-new-home-sales-july-2026`,
+      changeFrequency: "monthly",
+      priority: 0.7,
+    },
+    {
       url: `${BASE_URL}/guides/nevada-property-tax-abatement-resale-buyers`,
       changeFrequency: "yearly",
       priority: 0.7,

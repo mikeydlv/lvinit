@@ -181,19 +181,19 @@ export default function LasVegasHomePricesJuly2026Page() {
       relatedStories={{
         heading: "Keep reading",
         intro:
-          "Put these numbers to work. See what a real budget buys, and where in the valley it goes furthest.",
+          "Put these numbers to work. See how new construction looked the same month, what a real budget buys, and where in the valley it goes furthest.",
         stories: [
+          {
+            name: "Las Vegas New-Home Sales Jumped in July 2026",
+            href: "/guides/las-vegas-new-home-sales-july-2026",
+            category: "Market Watch",
+            dek: "The new-construction side of the same July 2026 reporting period — builder sales, permits, and how new-build pricing compares to this resale median.",
+          },
           {
             name: "What $500K Buys in Las Vegas",
             href: "/guides/what-500k-buys-in-las-vegas",
             category: "Buyer guide",
             dek: "Three real home tours near the same price. A concrete look at the tradeoffs behind the median.",
-          },
-          {
-            name: "Southwest Las Vegas",
-            href: "/neighborhoods/southwest-las-vegas",
-            category: "Area guide",
-            dek: "The fastest-growing side of the valley, where much of the new-construction activity lives.",
           },
           {
             name: "Summerlin",
@@ -349,9 +349,17 @@ export default function LasVegasHomePricesJuly2026Page() {
           </Link>{" "}
           carry more new-construction competition, which can pull resale
           pricing in a different direction than the countywide number
-          suggests. And if you&rsquo;re weighing a condo against a house, this
-          report is a reminder that those are genuinely two different markets
-          right now, not one number with two labels.
+          suggests — see our{" "}
+          <Link
+            href="/guides/las-vegas-new-home-sales-july-2026"
+            className="text-lvinit-blue underline underline-offset-4 decoration-transparent hover:decoration-lvinit-blue"
+          >
+            new-construction companion piece
+          </Link>{" "}
+          for how that side of the market moved the same month. And if
+          you&rsquo;re weighing a condo against a house, this report is a
+          reminder that those are genuinely two different markets right now,
+          not one number with two labels.
         </p>
       </StorySection>
 
