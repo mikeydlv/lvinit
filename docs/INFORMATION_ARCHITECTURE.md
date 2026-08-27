@@ -27,7 +27,7 @@
 | `/` | Homepage | 12 assembled sections; the de-facto hub for everything |
 | `/neighborhoods/summerlin` | Neighborhood pillar | First full guide |
 | `/neighborhoods/summerlin/fourth-of-july-parade` | Story (feature) | Place-nested under its neighborhood |
-| `/neighborhoods/henderson` | Neighborhood pillar | Second pillar; 7-community roster, 4 coming-soon stories |
+| `/neighborhoods/henderson` | Neighborhood pillar | Rebuilt 2026-08-27 as a full Area Guide: official City of Henderson boundary map, 11-community roster, five-region editorial framing, Development Watch. Roster entries are plain text until child guides exist; no coming-soon cards |
 | `/search` | Utility | Matrix IDX (GLVAR) embed |
 | `/contact` | Utility | Lead form |
 | `/robots.txt`, `/sitemap.xml` | Machine | `robots.ts`, hand-maintained `sitemap.ts` |
@@ -70,8 +70,9 @@ Six real content/utility pages. The information architecture is currently
    Things To Do, Events, New Construction, Luxury, or Communities as first-class
    sections yet.
 4. **Dead legal links.** Privacy / Terms / Accessibility are `#`.
-5. **One-way cluster link.** Henderson → Summerlin exists; Summerlin → Henderson
-   does not (see §3).
+5. ~~**One-way cluster link.** Henderson → Summerlin exists; Summerlin → Henderson
+   does not.~~ ✅ **Resolved.** Both pillars now link each other directly and via
+   `/guides/summerlin-vs-henderson` (see §3).
 
 None of these are urgent at 6 pages. All of them become blocking at 60+.
 
@@ -125,16 +126,17 @@ Current internal links (real routes only; homepage anchors excluded):
 | Homepage | Summerlin guide, Henderson guide, parade feature, `/search`, `/contact` |
 | Summerlin guide | parade feature (×2), `/search`, `/contact`, `/#neighborhoods` |
 | Parade feature | Summerlin guide (×several), `/search`, `/contact`, `/#neighborhoods` |
-| Henderson guide | Summerlin guide, `/search`, `/contact`, `/#neighborhoods` |
+| Henderson guide | Summerlin guide, Southwest guide, Arts District guide, Four Seasons feature, `/guides/summerlin-vs-henderson`, three market/buyer guides, `/search`, `/contact`, `/#neighborhoods`, `/#compare` |
 
 ### 3.1 Missing / recommended links (NOT yet implemented)
 
 Ordered by value. All are recommendations — do not action from this doc alone.
 
-1. **Summerlin guide → Henderson guide.** The Summerlin page tells readers "other
-   neighborhoods fit you better — and I'll point you to them," but never links
-   Henderson. Make the cluster link bidirectional (mirror Henderson's existing
-   "Weighing the west side?" card).
+1. ~~**Summerlin guide → Henderson guide.**~~ ✅ **Done.** The cluster link is
+   bidirectional: Summerlin links Henderson in its related-stories cluster and in
+   its "Summerlin vs Henderson" section, and Henderson links back in both its
+   cluster and its comparison sections. Both also link
+   `/guides/summerlin-vs-henderson`.
 2. **Real section index routes** for the nav's targets, so nav works off the
    homepage: `/neighborhoods` at minimum, then `/guides`, `/videos` as those fill
    in. Until they exist, subpage nav clicks silently fail.
@@ -276,9 +278,11 @@ The model is **pillar → cluster**, with a hub layer on top:
 
 Each cluster should be **bidirectionally complete**: if the pillar names a child,
 and the child page exists, both directions link. If the child doesn't exist yet,
-it shows as "coming soon" (non-linked) on the pillar and is *not* promised
-elsewhere. This is exactly how Summerlin ↔ parade and Henderson's roster already
-behave — the strategy is to keep that discipline as volume grows.
+the pillar names it in plain text, never as a card or a dead link, and it is
+*not* promised elsewhere. This is how Summerlin ↔ parade and the Henderson
+roster behave. The 2026-08-27 Henderson rebuild tightened the rule: it dropped
+the remaining "coming soon" cards, because a non-linked card still looks like an
+article and sets an expectation the site can't meet. Plain text sets none.
 
 SEO intent: concentrate topical authority on the pillar, funnel it through dense
 internal linking, and let hubs provide the alternate (facet-based) paths a
@@ -426,15 +430,15 @@ Principles at scale:
 
 ## 11. Future expansion recommendations
 
-Sequenced so each step is non-breaking and independently shippable. **None are
-done; each is a separate, approvable task.**
+Sequenced so each step is non-breaking and independently shippable. **Except
+where marked done below, each is a separate, approvable task.**
 
 1. **Fix nav portability** — make the five nav targets cross-page (`/#…`) so they
    work off the homepage. (Small, high value.)
 2. **Ship `/neighborhoods` index**, point "Neighborhoods" at it, add the
    Neighborhoods breadcrumb crumb to pillar pages.
-3. **Close the Summerlin ↔ Henderson loop** (add the missing Summerlin→Henderson
-   link).
+3. ~~**Close the Summerlin ↔ Henderson loop**~~ — ✅ **Done.** Both pillars link
+   each other directly and through `/guides/summerlin-vs-henderson`.
 4. **Stand up content-type indexes** as their libraries fill: `/guides`,
    `/videos`, then `/lifestyle` / `/events` / `/things-to-do`. Build stories on
    the Story Page pattern (`STORY_PAGE_STANDARD.md`).

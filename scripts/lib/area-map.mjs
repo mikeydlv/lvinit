@@ -91,6 +91,67 @@ export function label(text, px, py, opts) {
   );
 }
 
+// --- anchoring labels to real roads ------------------------------------------
+
+/**
+ * Find the point where a named road crosses a given latitude or longitude, so a
+ * road label can be pinned to the road it actually names.
+ *
+ * WHY THIS EXISTS. The obvious way to place a road label — type an approximate
+ * x and y — silently lies. The first draft of the Summerlin map put "Far Hills
+ * Ave" neatly on top of Summerlin Parkway, because the two roads pass close and
+ * the hand-typed latitude happened to land on the wrong one. Here you name the
+ * road and ONE coordinate along it; the other coordinate is read out of the
+ * road's own geometry, so the label cannot end up on a different road.
+ *
+ * The crossing is interpolated along the segment rather than snapped to a
+ * vertex, because the committed paths are simplified to roughly 24 m and
+ * consecutive vertices can be a kilometer apart.
+ *
+ * Throws rather than nudging if the road never reaches the given coordinate: a
+ * label pinned where the road does not run is a silent lie about the geography,
+ * and a build failure is much cheaper than a wrong map.
+ *
+ * @param {Array} roads  the `roads` array from a committed geometry file
+ * @param {string} id    the road's id in that file
+ * @param {"lat"|"lon"} along which coordinate is being specified
+ * @param {number} at    the value of that coordinate
+ * @returns {{lon:number, lat:number}}
+ */
+export function anchorOnRoad(roads, id, along, at) {
+  const road = roads.find((r) => r.id === id);
+  if (!road) throw new Error("no road in geometry: " + id);
+  const i = along === "lat" ? 1 : 0;
+  let best = null;
+  let bestD = Infinity;
+
+  for (const path of road.paths) {
+    for (let k = 1; k < path.length; k++) {
+      const a = path[k - 1];
+      const b = path[k];
+      const lo = Math.min(a[i], b[i]);
+      const hi = Math.max(a[i], b[i]);
+      if (at >= lo && at <= hi) {
+        const span = b[i] - a[i];
+        const t = span === 0 ? 0 : (at - a[i]) / span;
+        return { lon: a[0] + (b[0] - a[0]) * t, lat: a[1] + (b[1] - a[1]) * t };
+      }
+      for (const p of [a, b]) {
+        const d = Math.abs(p[i] - at);
+        if (d < bestD) {
+          bestD = d;
+          best = p;
+        }
+      }
+    }
+  }
+
+  throw new Error(
+    `road ${id} does not cross ${along} ${at} — nearest point is ${bestD.toFixed(4)} deg ` +
+      `away at ${best?.[0]},${best?.[1]}`
+  );
+}
+
 /** The LVI/NIT wordmark, top-right of the frame. */
 export function wordmark(W, opts) {
   const o = opts || {};
