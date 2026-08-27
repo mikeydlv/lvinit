@@ -67,7 +67,14 @@
 
 import { writeFileSync, mkdirSync, readFileSync } from "node:fs";
 import { dirname } from "node:path";
-import { createProjection, svgDocument, wordmark, label, C } from "./lib/area-map.mjs";
+import {
+  createProjection,
+  svgDocument,
+  wordmark,
+  label,
+  anchorOnRoad,
+  C,
+} from "./lib/area-map.mjs";
 
 // --- frame ------------------------------------------------------------------
 // North past Reverence and Sun City, south to The Cliffs (Summerlin's
@@ -158,47 +165,6 @@ const ROAD_LABELS = [
   { road: "rampart", along: "lat", at: 36.162, text: "Rampart Blvd", size: 15, rotate: -90, dx: -6 },
 ];
 
-/**
- * The point on a named road where it crosses the given lon (or lat),
- * interpolated along the segment rather than snapped to a vertex — the paths
- * are simplified to ~24 m, so consecutive vertices can be a kilometer apart.
- */
-function anchorOnRoad(id, along, at) {
-  const road = GEO.roads.find((r) => r.id === id);
-  if (!road) throw new Error("no road in geometry: " + id);
-  const i = along === "lat" ? 1 : 0;
-  let best = null;
-  let bestD = Infinity;
-
-  for (const path of road.paths) {
-    for (let k = 1; k < path.length; k++) {
-      const a = path[k - 1];
-      const b = path[k];
-      const lo = Math.min(a[i], b[i]);
-      const hi = Math.max(a[i], b[i]);
-      if (at >= lo && at <= hi) {
-        const span = b[i] - a[i];
-        const t = span === 0 ? 0 : (at - a[i]) / span;
-        return { lon: a[0] + (b[0] - a[0]) * t, lat: a[1] + (b[1] - a[1]) * t };
-      }
-      for (const p of [a, b]) {
-        const d = Math.abs(p[i] - at);
-        if (d < bestD) {
-          bestD = d;
-          best = p;
-        }
-      }
-    }
-  }
-
-  // A label pinned where the road never runs would be a silent lie about the
-  // geography, so this is a hard failure rather than a nudge.
-  throw new Error(
-    `road ${id} does not cross ${along} ${at} — nearest point is ${bestD.toFixed(4)} deg ` +
-      `away at ${best?.[0]},${best?.[1]}`
-  );
-}
-
 // --- composition ------------------------------------------------------------
 
 const parts = [];
@@ -280,7 +246,7 @@ push(label("US-95, downtown →", W - 14, 214, { size: 15, anchor: "end" }));
 
 // 4. Road labels.
 for (const r of ROAD_LABELS) {
-  const at = anchorOnRoad(r.road, r.along, r.at);
+  const at = anchorOnRoad(GEO.roads, r.road, r.along, r.at);
   push(
     label(r.text, x(at.lon) + (r.dx ?? 0), y(at.lat) + (r.dy ?? 0), {
       size: r.size,
