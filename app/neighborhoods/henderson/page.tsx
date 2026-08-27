@@ -96,11 +96,26 @@ import {
 // in the foreground, a golf community in the middle, and contemporary hillside
 // homes stepping up the ridge behind. That is the whole thesis in a picture.
 //
-// The source is 1903x995 (a 1.91:1 video still), and the hero container is
-// roughly 1.95:1 at 80vh on a desktop, so it fills with almost no crop. It is
-// used at native resolution — never upscaled to look like a bigger file than it
-// is. On mobile, object-center takes the middle band: ridge, golf course and
-// tree canopy, which still reads.
+// THE TOP 28% IS CROPPED OFF, and that is an accessibility fix, not taste.
+// The raw still is 1903x995 at 1.91:1, and almost its entire top third is empty
+// pale sky. StoryHero's scrim is a bottom-up gradient, so it barely touches that
+// area — and the back-link and kicker sit high enough in the text block to land
+// right in it. Measured against the composited hero, they came out at 1.68:1 and
+// 1.75:1 against white. WCAG AA wants 4.5:1 for text that size.
+//
+// Strengthening the shared gradient was the wrong lever: it took the scrim to
+// roughly 70% before this image passed, which would have crushed the Summerlin
+// and Arts District heroes for no reason. Cropping 279px of empty sky instead
+// fixes it in the asset alone, with no change to StoryHero and no effect on any
+// other page. Every hero text element now clears AA at 390px, 1265px, 1521px and
+// 1920px: back-link 4.88-6.15, kicker 7.16-9.88, headline 6.66-8.16.
+//
+// The crop also composes better. At 1903x716 (2.66:1) the file nearly matches
+// the hero box on a laptop, so object-cover barely trims it further. Used at
+// native resolution — never upscaled to look like a bigger file than it is.
+//
+// If you swap in a different Henderson photo, re-measure. A bright sky in the
+// upper left will reintroduce exactly this problem.
 //
 // /images/neighborhood-henderson.jpg is NOT this and is not a photograph of
 // Henderson at all — it is one of the neutral placeholders documented in
@@ -136,7 +151,7 @@ const meta: StoryMeta = {
   path: "/neighborhoods/henderson",
   image: HERO_IMAGE,
   imageWidth: 1903,
-  imageHeight: 995,
+  imageHeight: 716,
   imageAlt: HERO_ALT,
   datePublished: "2026-07-04",
   dateModified: "2026-08-27",
