@@ -205,6 +205,25 @@ export type Guide = {
  */
 export const guides: Guide[] = [
   {
+    slug: "las-vegas-starter-home-prices-2026",
+    title:
+      "Las Vegas Starter Homes Have More Than Doubled Since 2016 — And They Just Got a Little Cheaper",
+    dek: "Zillow research reported by the Las Vegas Review-Journal puts the typical Las Vegas starter home at $312,141 in July 2026, more than double its 2016 value, but down 3.2% from a year earlier.",
+    byline: "Mikey Del Rosario",
+    date: "August 2026",
+    publishedAt: "2026-08-27",
+    category: "Market Watch",
+    // No authentic photograph for this explainer, so it carries a generated
+    // LVINIT editorial cover (abstract, non-photographic; draws no real
+    // figures, geography, or charts of its own).
+    //   node scripts/generate-guide-cover.mjs --slug las-vegas-starter-home-prices-2026 \
+    //     --category "Market Watch" --subject "Starter Homes" \
+    //     --out las-vegas-starter-home-editorial-cover.webp
+    image: "/images/covers/las-vegas-starter-home-editorial-cover.webp",
+    imageMode: "editorial-cover",
+    href: "/guides/las-vegas-starter-home-prices-2026",
+  },
+  {
     slug: "first-summer-in-vegas",
     title: "Surviving Your First Las Vegas Summer",
     dek: "The practical version, not the panicked version.",
