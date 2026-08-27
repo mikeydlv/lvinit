@@ -200,10 +200,10 @@ export default function LasVegasNewHomeSalesJuly2026Page() {
             dek: "Three real home tours near the same price. A concrete look at the tradeoffs behind the median.",
           },
           {
-            name: "Southwest Las Vegas",
-            href: "/neighborhoods/southwest-las-vegas",
-            category: "Area guide",
-            dek: "One of the valley's most active new-construction corridors, and the honest tradeoffs of buying there.",
+            name: "Las Vegas Starter Homes Have More Than Doubled Since 2016",
+            href: "/guides/las-vegas-starter-home-prices-2026",
+            category: "Market Watch",
+            dek: "New construction runs well above the resale median. The entry-level tier is a different market again, and it's moved even further over the last decade.",
           },
         ],
       }}

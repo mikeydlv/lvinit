@@ -196,10 +196,10 @@ export default function LasVegasHomePricesJuly2026Page() {
             dek: "Three real home tours near the same price. A concrete look at the tradeoffs behind the median.",
           },
           {
-            name: "Summerlin",
-            href: "/neighborhoods/summerlin",
-            category: "Area guide",
-            dek: "One of the master-planned communities that keeps drawing buyers even in a slower year.",
+            name: "Las Vegas Starter Homes Have More Than Doubled Since 2016",
+            href: "/guides/las-vegas-starter-home-prices-2026",
+            category: "Market Watch",
+            dek: "The $480,000 median covers every price tier. Here's what's happening specifically at the entry point first-time buyers are shopping in.",
           },
         ],
       }}

@@ -5,7 +5,7 @@
 > development sprint. Where this file and the code disagree, trust the code and
 > fix this file.
 >
-> **Last audited:** 2026-08-25 · **Branch:** `main` · **Live:** https://www.lvinit.com
+> **Last audited:** 2026-08-27 · **Branch:** `main` · **Live:** https://www.lvinit.com
 >
 > **Content Publisher agent:** a project-scoped Claude Code subagent,
 > `lvinit-content-publisher`, turns Mikey's real photos/videos/notes into
@@ -70,6 +70,7 @@ app/
   guides/will-las-vegas-home-prices-drop/page.tsx  /guides/will-las-vegas-home-prices-drop — Market Watch, June 2026 LVR data (Story Page system)
   guides/las-vegas-home-prices-july-2026/page.tsx  /guides/las-vegas-home-prices-july-2026 — Market Watch, July 2026 LVR data (Story Page system)
   guides/las-vegas-new-home-sales-july-2026/page.tsx  /guides/las-vegas-new-home-sales-july-2026 — Market Watch, July 2026 Home Builders Research new-construction data (Story Page system)
+  guides/las-vegas-starter-home-prices-2026/page.tsx  /guides/las-vegas-starter-home-prices-2026 — Market Watch, Zillow starter-home research (Story Page system)
   guides/summerlin-vs-henderson/page.tsx         /guides/summerlin-vs-henderson — honest comparison guide, no invented stats (Story Page system)
   guides/nevada-property-tax-abatement-resale-buyers/page.tsx  /guides/nevada-property-tax-abatement-resale-buyers — Cost of Living explainer, NRS 361.4723 property tax cap (Story Page system)
 ```
@@ -94,6 +95,7 @@ app/
 | `/guides/summerlin-vs-henderson` | Comparison guide | Live | Story Page system; honest, qualitative comparison of the Summerlin and Henderson pillar guides — no stats cited (the `neighborhoods[]` metrics in `lib/content.ts` are explicitly placeholder, not verified, so none are used); hero + card image reuse the real Summerlin Fox Hill Park drone photo (no real Henderson photography exists yet); Article + Breadcrumb JSON-LD; breadcrumb is Home → article only; cross-linked from both the Summerlin and Henderson pillar pages and the homepage `LocalGuides` card |
 | `/guides/nevada-property-tax-abatement-resale-buyers` | Cost of Living guide | Live | Story Page system; explains Nevada's owner-occupied 3% property tax cap (NRS 361.4723), the qualifying-rental carve-out (NRS 361.4724), and the general other-property formula capped at 8% (NRS 361.4722) — **corrected 2026-08-22**: removed an unsupported claim that a sale "resets" or "recalculates" the buyer's bill; Nevada does not reassess taxable value to sale price (mass-appraisal method, Clark County Assessor's real-property page) — what changes at a recorded sale is the owner-occupied *designation* only (Clark County Assessor's tax-abatement page), and current law (AB377, eff. Oct 1 2025, amending NRS 375.060) lets a new owner claim the abatement on the Declaration of Value at closing, with the older assessor-mailed-postcard process as backup; removed the invented "Mikey's take" opinion section (replaced with neutral sourced guidance); headline changed to "Why the Seller's Nevada Property Tax Bill May Not Be Yours"; no dollar figures asserted, one clearly-labeled hypothetical example; photoless hero; FAQPage + Article + Breadcrumb JSON-LD; breadcrumb is Home → article only; fills the homepage `LocalGuides` "Cost of Living" card slot (`guides[]` slug `cost-of-living-2026`) — **card image flagged for Mikey**: falls back to `/images/guide-cost-of-living-2026.jpg`, which is a generic flat gray/beige gradient placeholder, not real photography (confirmed by inspection); needs a real image or an explicit no-image placeholder treatment; cross-links `las-vegas-home-prices-july-2026`, `what-500k-buys-in-las-vegas`, and `summerlin-vs-henderson` |
 | `/guides/las-vegas-new-home-sales-july-2026` | Market Watch guide | Live | Story Page system; new-construction companion to `las-vegas-home-prices-july-2026` — same July 2026 reporting month, different primary source (Home Builders Research via the Las Vegas Review-Journal, Aug 24 2026), not a restatement; net home sales 735 (+28% MoM, -7% YoY), permits 620 (-23% YoY), YTD closed sales/permits both down (-20%/-25%), median new-construction single-family closing price $581,930 (+2.1% YoY) vs. the already-sourced $480,000 resale median (LVR) — a clearly-labeled, non-causal "gap this month" of ~21%; no builders/submarkets/incentive programs named (none in source); no real hero photo, so it carries a generated LVINIT editorial cover (`covers/las-vegas-new-home-sales-editorial-cover.webp`); FAQPage + Article + Breadcrumb JSON-LD; cross-linked both directions with `las-vegas-home-prices-july-2026` (its "Keep reading" block now leads with this piece, plus an inline link), and links out to `what-500k-buys-in-las-vegas`, `/neighborhoods/southwest-las-vegas`, and `/neighborhoods/summerlin`; sitemap entry |
+| `/guides/las-vegas-starter-home-prices-2026` | Market Watch guide | Live | Story Page system; a genuine content gap, not a restatement — the two July 2026 Market Watch pieces cover valley-wide medians ($480,000 resale, $581,930 new-construction) across every price tier; this piece covers Zillow's starter-home research (bottom-third-of-market pricing), the tier a first-time buyer is actually shopping in. Sourced to Zillow via the Las Vegas Review-Journal (Patrick Blennerhassett, Aug 26, 2026): typical Las Vegas starter-home value $312,141 in July 2026, down 3.2% YoY from $322,577 in July 2025, up ~122% from $140,630 in July 2016 ("more than doubled"). Real, attributed quotes from Zillow senior economist Kara Ng and local mortgage advisor Matt Hennessy — neither put in Mikey's mouth. No submarket-specific starter-home claim (none in the source). No real hero photo, so it carries a generated LVINIT editorial cover (`covers/las-vegas-starter-home-editorial-cover.webp`). FAQPage + Article + Breadcrumb JSON-LD; cross-linked both directions with `las-vegas-home-prices-july-2026` and `las-vegas-new-home-sales-july-2026` (their "Keep reading" blocks now point here), plus links out to `what-500k-buys-in-las-vegas` and `nevada-property-tax-abatement-resale-buyers`; sitemap entry; registered in `lib/content.ts` `guides[]` (slug `las-vegas-starter-home-prices-2026`), so it surfaces automatically in the homepage "Latest from LVINIT" feed and at `/guides`. |
 | `/search` | IDX search | Live | Matrix IDX embed `idx=3652dd5`; do not modify embed behavior without instruction |
 | `/contact` | Contact | Live | ContactForm → `/api/contact` (Resend) with mailto fallback |
 | `/api/contact` | Route handler | Live | Returns 503 until `RESEND_API_KEY` is set, so no fake service ships |
@@ -466,6 +468,22 @@ links flowing both up (feature → guide → homepage) and down (guide → featu
   editorial cover. Story Page system; FAQPage + Article + Breadcrumb JSON-LD;
   cross-linked both directions with the resale July 2026 piece, plus links to
   the $500K buyer guide, Southwest Las Vegas, and Summerlin; sitemap entry.
+- **Las Vegas Starter-Home Prices, 2026** Market Watch guide — a genuine
+  content gap: LVINIT's other Market Watch pieces cover valley-wide medians
+  across every price tier; this one covers Zillow's starter-home research
+  (the bottom third of the market), the entry point most first-time buyers
+  actually shop in. Sourced to Zillow via the Las Vegas Review-Journal
+  (Patrick Blennerhassett, Aug 26, 2026): typical Las Vegas starter-home
+  value $312,141 in July 2026, down 3.2% year over year from $322,577 in
+  July 2025, up roughly 122% ("more than doubled") from $140,630 in July
+  2016. Carries two real, attributed quotes — Zillow senior economist Kara
+  Ng and local mortgage advisor Matt Hennessy — neither written as Mikey's
+  own words. No real hero photo exists for this topic, so it carries a
+  generated LVINIT editorial cover. Story Page system; FAQPage + Article +
+  Breadcrumb JSON-LD; cross-linked both directions with the resale and
+  new-construction July 2026 pieces (their "Keep reading" blocks now point
+  here), plus links to the $500K buyer guide and the Nevada property-tax
+  abatement guide; sitemap entry; registered in `lib/content.ts` `guides[]`.
 - Live IDX search page (Matrix / GLVAR).
 - Contact form with Resend handler + mailto fallback + GA4 lead event.
 - GA4 analytics scaffolding (opt-in via env var).
@@ -513,6 +531,14 @@ links flowing both up (feature → guide → homepage) and down (guide → featu
    merged into one piece. The new-construction piece also links out to
    `/guides/what-500k-buys-in-las-vegas`, `/neighborhoods/southwest-las-vegas`,
    and `/neighborhoods/summerlin`.
+9. **Starter-home Market Watch piece:** `/guides/las-vegas-starter-home-prices-2026`
+   (Zillow bottom-third-of-market research, via the Las Vegas Review-Journal) —
+   a standalone entry-level-affordability piece, cross-linked both directions
+   with the July 2026 resale and new-construction pieces (all three now form
+   one Market Watch trio, each covering a different slice of the same broad
+   period: valley-wide resale, new construction, and the starter tier). Also
+   links out to `/guides/what-500k-buys-in-las-vegas` and
+   `/guides/nevada-property-tax-abatement-resale-buyers`.
 
 The remaining homepage guide/video card (Surviving Your First Vegas Summer,
 and the four video posters) are placeholders that do not yet resolve to pages.
