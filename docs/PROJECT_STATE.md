@@ -674,6 +674,19 @@ Placeholder content that must be replaced before it can be considered "done"
   Vista, Craig Ranch, northern growth) are qualitative, no invented boundaries;
   flagged in-file for Mikey's local review. Each is structured to become its own
   linked sub-guide later.
+- **StoryHero mobile image resolution** (affects every photo hero, pre-existing).
+  `StoryHero` renders the hero with `fill` + `object-cover` and `sizes="100vw"`.
+  On a phone the hero box is tall and narrow, so `object-cover` scales the image
+  to match the box HEIGHT and then crops horizontally — it needs far more than
+  `100vw` of source width. On the Henderson hero at 375×812 the browser serves a
+  375px-wide image into a slot that needs about 1,727px, roughly a 4.6× upscale;
+  Summerlin and the others are softer than they should be for the same reason,
+  just less severely (their heroes are less wide). Desktop is unaffected and
+  sharp. The fix is a one-line `sizes` change (e.g.
+  `(max-width: 768px) 200vw, 100vw`), which only changes which srcset candidate
+  is chosen and cannot affect layout — but it raises the mobile LCP payload on
+  all five photo heroes, so it is a deliberate sharpness-vs-weight call rather
+  than an obvious win. Left for Mikey to decide.
 - **Newsletter** — no backend; wire to a real provider or serverless function.
 - **Footer legal links** — Privacy / Terms / Accessibility are `href="#"`.
 
