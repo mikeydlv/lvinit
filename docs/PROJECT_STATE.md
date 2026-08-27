@@ -85,7 +85,7 @@ app/
 | `/` | Homepage | Live | 12 assembled sections; still contains placeholder content (see Pending Work) |
 | `/neighborhoods/summerlin` | Neighborhood guide | Live | Real Mikey photography (Fox Hill Park drone hero); honest editorial "beats" |
 | `/neighborhoods/summerlin/fourth-of-july-parade` | Editorial feature | Live | Full Article + Breadcrumb JSON-LD, embedded YouTube (nocookie), real banner photo |
-| `/neighborhoods/henderson` | Neighborhood guide | Live | Second pillar; community roster (7 areas); Breadcrumb JSON-LD; **hero is Option B** (bright editorial treatment, no photo yet) |
+| `/neighborhoods/henderson` | Area guide (pillar) | Live | **Rebuilt 2026-08-27** as the third full Area Guide (Story Page system + `components/area/*`, content in `lib/areas/henderson.tsx`). Argues Henderson is an *incorporated city* (the city's own figure: nearly 118.5 sq mi; ~17.6 miles wide), not a neighborhood or a master plan. Custom LVINIT map drawn from the **City of Henderson's own GIS city-boundary layer** (1 outer ring + 22 unincorporated county pockets) plus OSM roads / Sloan Canyon NCA / Lake Las Vegas — `maps/henderson-neighborhoods-map-lvinit.svg`, verified by `scripts/check-henderson-map.mjs` (collisions, clipping, road-label anchoring, and point-in-polygon testing every community against the official line). 11-community roster; five-region LVINIT *editorial* framing (explicitly not government districts); sourced Development Watch (open / under construction / planned); Henderson vs Summerlin `ComparisonBar` + Henderson vs Southwest prose; 12-item FAQ; 16-source list; Article + Breadcrumb JSON-LD; **still photoless** — no original Henderson photography exists, so the hero runs in `StoryHero`'s photoless mode and the page has no OG image |
 | `/neighborhoods/henderson/four-seasons-private-residences` | Story (feature) | Live | First page built on the Story Page pattern; drone film embedded (id `ZDp8KSvNK6w`); photoless hero (no real stills yet); Article + Breadcrumb JSON-LD |
 | `/neighborhoods/north-las-vegas` | Area guide (pillar) | Live | Real aerial hero photo (`hero/north-las-vegas-aerial.jpg`, focal `object-[center_40%]`); The Local's Note; at-a-glance; home-tour video (id `HuUUHgq2Sn8` via `StoryVideo`); areas roster; Breadcrumb JSON-LD |
 | `/neighborhoods/downtown-arts-district` | Neighborhood guide (pillar) | Live | First pillar built on the **Story Page system**; real Mikey Arts District photography (Main St hero + 3 inline figures); honest "who it's / isn't for" + practical beats; cross-links the Summerlin/Henderson/NLV guides via `RelatedStories`; Article + Breadcrumb JSON-LD; hero = OG image |
@@ -387,10 +387,17 @@ links flowing both up (feature → guide → homepage) and down (guide → featu
 - Design system implemented as Tailwind tokens traceable to Doc 02.
 - Summerlin neighborhood guide with real drone photography.
 - Summerlin Fourth of July Parade editorial feature (JSON-LD, embedded video).
-- Henderson neighborhood guide — second pillar, positioned around the valley's
-  widest range of communities; honest "beats," a "Why people choose Henderson"
-  section, a 7-community roster, and 4 coming-soon featured stories. Linked from
-  the homepage; Breadcrumb JSON-LD; sitemap entry.
+- Henderson area guide — **rebuilt 2026-08-27** into the third full Area Guide,
+  after Southwest and Summerlin. Central argument: Henderson is an incorporated
+  city about seventeen miles wide, so "which Henderson?" is the question that
+  actually narrows a search. Ships a custom map built from the City of
+  Henderson's own GIS boundary, an 11-community roster, a five-region editorial
+  framing, a sourced Development Watch, two comparisons and a 12-item FAQ.
+  Route, canonical and every inbound link unchanged; Article + Breadcrumb
+  JSON-LD; sitemap entry. (The original second-pillar version shipped July 2026
+  with honest "beats," a "Why people choose Henderson" section, a 7-community
+  roster and 4 coming-soon story cards; all four cards and the fair-housing-risky
+  "Schools & family" beat were removed in the rebuild.)
 - Reusable **Story Page pattern** (`components/story/` + `lib/story.ts`) with the
   authoring standard in `docs/STORY_PAGE_STANDARD.md` — the shared structure all
   future editorial stories will use.
@@ -483,8 +490,12 @@ links flowing both up (feature → guide → homepage) and down (guide → featu
 2. **Henderson cluster:**
    - `/neighborhoods/henderson` — the pillar guide
    - `/neighborhoods/henderson/four-seasons-private-residences` — **live** feature
-   - *Planned featured stories* (marked "coming soon", non-linked): Lake Las
-     Vegas, Green Valley Ranch, Water Street District
+   - *Named but unlinked:* every entry in the guide's community roster (Green
+     Valley, Green Valley Ranch, Anthem, Inspirada, Cadence, Lake Las Vegas,
+     Water Street District and the rest) stays plain text until a child guide
+     exists — adding `href` in `lib/areas/henderson.tsx` is the only change
+     needed. The old "coming soon" story cards were removed in the 2026-08-27
+     rebuild; nothing renders like an article it isn't.
 3. **North Las Vegas cluster:** `/neighborhoods/north-las-vegas` (pillar).
 4. **Downtown Arts District cluster:**
    - `/neighborhoods/downtown-arts-district` — the pillar guide (Story Page
@@ -523,12 +534,14 @@ and the four video posters) are placeholders that do not yet resolve to pages.
 
 Build order follows the current priority and existing `neighborhoods[]` data:
 
-1. ~~Henderson~~ — ✅ **Built** (`/neighborhoods/henderson`). Green Valley and
-   Lake Las Vegas are handled as communities *within* Henderson (see IA note under
-   Existing Neighborhoods).
-2. **Henderson featured stories** — Four Seasons Private Residences, Lake Las
-   Vegas, Green Valley Ranch, Water Street District (currently coming-soon cards
-   on the Henderson page; flip to real links as each publishes).
+1. ~~Henderson~~ — ✅ **Built**, and rebuilt as a full Area Guide 2026-08-27
+   (`/neighborhoods/henderson`). Green Valley and Lake Las Vegas are handled as
+   communities *within* Henderson (see IA note under Existing Neighborhoods).
+2. **Henderson child guides** — Four Seasons Private Residences is live. Lake Las
+   Vegas, Green Valley Ranch and the Water Street District are the strongest
+   remaining candidates; each is already written up in the guide's roster and
+   becomes a link by adding `href` to its entry in `lib/areas/henderson.tsx`. No
+   placeholder cards ship in the meantime.
 3. ~~Downtown Arts District~~ — ✅ **Built** (`/neighborhoods/downtown-arts-district`),
    on the Story Page system.
 4. Additional flagship areas as photography and content land.
@@ -630,13 +643,21 @@ Placeholder content that must be replaced before it can be considered "done"
   Surviving Your First Vegas Summer.
 - **Neutral photo placeholders** in `/public/images/` — replace in place with
   real Mikey photography (keep filenames).
-- **Henderson hero (Option B)** — the page ships with a bright text hero and no
-  photo. Swap in Mikey's real Henderson photography at
-  `/images/hero/henderson-<name>.webp` and restore the full-bleed `<Image>` +
-  dark-gradient treatment (mirror Summerlin) when it lands.
-- **Henderson community copy** — the 7 community descriptions are honest,
-  qualitative scaffolding (no stats) and are flagged in-file for Mikey's local
-  accuracy/tone review; the Anthem entry especially should be confirmed.
+- **Henderson photography** — the guide is still photoless. There is no original
+  Henderson imagery in the repo (`neighborhood-henderson.jpg` is one of the
+  neutral placeholders in `public/images/README.md`, not a photo of Henderson),
+  so the hero runs in `StoryHero`'s photoless mode, the map carries the visuals,
+  and the page has **no OG/social image** — the one real gap against the
+  Summerlin and Southwest guides. Drop real work at
+  `/images/hero/henderson-<name>.webp` and pass `image` to both the hero and
+  `meta` (mirror Summerlin). A ranked capture list is in the PR #14 description;
+  the top three are Green Valley's mature tree canopy, Water Street at ground
+  level, and an aerial from the MacDonald Highlands / Ascaya hillside.
+- **Henderson community copy** — the 11 roster entries in
+  `lib/areas/henderson.tsx` carry sourced dates, developers and acreage (see the
+  fact-check log at the top of that file), but the read on what each area is
+  *like* is editorial and is flagged for Mikey's local accuracy/tone review.
+  Anthem, Ascaya and Whitney Ranch are the ones worth confirming first.
 - **North Las Vegas hero image authorship** — ✅ **Resolved.**
   `hero/north-las-vegas-aerial.jpg` is licensed through **Shutterstock**
   (asset ID **1094171159**, contributor **Little Vignettes Photo**). It is **not**
@@ -655,14 +676,15 @@ Placeholder content that must be replaced before it can be considered "done"
 
 ## Roadmap
 
-**Now (this sprint):** ✅ Henderson neighborhood guide shipped. Immediate
-follow-ups: swap in real Henderson hero photography (Option B placeholder today)
-and have Mikey review the community roster copy for local accuracy.
+**Now (this sprint):** ✅ Henderson rebuilt as a full Area Guide (PR #14).
+Immediate follow-ups: shoot real Henderson photography — the guide is photoless
+today, so it has neither a hero image nor an OG image — and have Mikey review
+the community roster copy for local accuracy.
 
 **Next:**
-- Remaining Henderson featured stories (Lake Las Vegas, Green Valley Ranch,
-  Water Street District) — build on the Story Page pattern and flip the
-  coming-soon cards to real links (Four Seasons is done).
+- Henderson child guides (Lake Las Vegas, Green Valley Ranch, Water Street
+  District) — build on the Story Page pattern and add `href` to their entries in
+  `lib/areas/henderson.tsx` (Four Seasons is done).
 - Real Four Seasons drone stills — add a hero/OG image at
   `/images/hero/henderson-four-seasons-*.webp` and swap the photoless hero (the
   feature ships film-only until then).

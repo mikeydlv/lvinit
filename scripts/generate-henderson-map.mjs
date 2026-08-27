@@ -24,7 +24,9 @@
 // The city's own figures, carried through the geometry file: 78,056.45 acres,
 // 121.96 square miles. The outline is one outer ring plus 22 interior rings,
 // which are unincorporated Clark County pockets the city grew around without
-// annexing. All 22 are drawn (evenodd fill); most are far too small to see.
+// annexing. All 22 punch through the fill, so the area the map encloses is
+// exactly the city's. Only the four large enough to read are also outlined --
+// see HOLE_OUTLINE_MIN_PX below for why.
 //
 // THE SHAPE IS AWKWARD ON PURPOSE. The official boundary runs about 17.6 miles
 // east to west against 16.1 miles north to south, reaches west across I-15 to
@@ -209,7 +211,35 @@ const ringPath = (ring) =>
 
 const cityPath = GEO.city.rings.map(ringPath).join(" ");
 const outerPath = ringPath(GEO.city.rings[0]);
-const holesPath = GEO.city.rings.slice(1).map(ringPath).join(" ");
+
+// WHICH HOLES GET AN OUTLINE.
+//
+// All 22 interior rings are in `cityPath` and therefore all 22 punch through the
+// tinted fill. The geography is complete and untouched. What varies is whether a
+// hole also gets a stroke around it, and that is purely a legibility decision:
+//
+// Measured at this scale, only four of the 22 are more than 10px across. The
+// other eighteen are 3 to 6px — smaller than a community marker — so a 1.1px
+// outline around them renders as a solid blue speck. Eighteen specks scattered
+// across the south-west of the city read as dirt on the drawing, not as
+// unincorporated county pockets, and a reader learns nothing from them.
+//
+// So: outline the holes big enough to read as a shape, and let the rest exist as
+// unfilled gaps in a 5%-opacity tint, which is what a feature below the map's
+// resolution honestly looks like. The legend and the page copy both say that
+// smaller pockets exist and are too small to draw. Nothing is removed from the
+// boundary, and the enclosed area the map represents is unchanged.
+const HOLE_OUTLINE_MIN_PX = 10;
+
+const holeSpanPx = (ring) => {
+  const xs = ring.map(([lon]) => x(lon));
+  const ys = ring.map(([, lat]) => y(lat));
+  return Math.max(Math.max(...xs) - Math.min(...xs), Math.max(...ys) - Math.min(...ys));
+};
+
+const allHoles = GEO.city.rings.slice(1);
+const outlinedHoles = allHoles.filter((r) => holeSpanPx(r) >= HOLE_OUTLINE_MIN_PX);
+const holesPath = outlinedHoles.map(ringPath).join(" ");
 
 push(
   '<path d="' + cityPath + '" fill-rule="evenodd" fill="' + C.blue +
@@ -251,20 +281,18 @@ for (const ring of GEO.lakeLasVegas) {
 }
 
 // 5. The city boundary stroke, drawn last of the geography so nothing crosses
-//    over it. The city limits get the full weight; the unincorporated pockets
-//    inside get a hairline. Stroked at the same 2.6px, the smallest pockets are
-//    barely wider than the stroke itself and render as solid blue chips that
-//    read as stray marks rather than as holes. Thinner is not quieter here, it
-//    is more accurate: these are gaps in the city, and they should look like
-//    gaps.
+//    over it. The city limits get the full weight; the county pockets big enough
+//    to read get a hairline, so they look like gaps rather than like features.
 push(
   '<path d="' + outerPath + '" fill="none" stroke="' + C.blue +
   '" stroke-width="2.6" stroke-linejoin="round"/>'
 );
-push(
-  '<path d="' + holesPath + '" fill="none" stroke="' + C.blue +
-  '" stroke-opacity="0.55" stroke-width="1.1" stroke-linejoin="round"/>'
-);
+if (holesPath) {
+  push(
+    '<path d="' + holesPath + '" fill="none" stroke="' + C.blue +
+    '" stroke-opacity="0.5" stroke-width="1.1" stroke-linejoin="round"/>'
+  );
+}
 
 // 6. Region type. Sloan Canyon sits in the empty south-west, on the ground it
 //    describes. The Lake Mead and Strip notes are directional rather than
@@ -306,6 +334,9 @@ for (const r of ROAD_LABELS) {
       fill: r.fill,
       anchor: r.anchor,
       rotate: r.rotate,
+      // See the note on the community labels below: 3.5 leaves a gap between
+      // words wide enough for the 2.6px boundary stroke to show through.
+      halo: 5,
     })
   );
 }
@@ -333,6 +364,12 @@ for (const c of COMMUNITIES) {
   push(marker(cx, cy, c.kind));
   push(
     label(c.name, cx + c.dx, cy + c.dy, {
+      // Wider halo than the 3.5 default. Several of these labels sit directly on
+      // the city boundary, and at 3.5 the paper stroke hugs the glyphs closely
+      // enough that the 2.6px blue line shows through the space between words —
+      // it reads as a stray dot in the middle of "Green Valley Ranch". 5 closes
+      // the inter-word gap without visibly thickening the type.
+      halo: 5,
       size: 16,
       fill: C.black,
       weight: 600,
@@ -367,9 +404,9 @@ push('<rect x="' + (LX + 18) + '" y="' + (LY + 118) + '" width="14" height="10" 
 push(label("City of Henderson limits", LX + 44, LY + 128, { size: 14, fill: C.black }));
 
 push(label("The blue outline is the official City of Henderson", LX + 18, LY + 154, { size: 12 }));
-push(label("boundary, from the city's own GIS. The polygon drawn", LX + 18, LY + 169, { size: 12 }));
-push(label("here measures " + GEO.city.sqMiles.toFixed(2) + " sq mi. Gaps inside it are", LX + 18, LY + 184, { size: 12 }));
-push(label("unincorporated county pockets. Nothing is smoothed.", LX + 18, LY + 199, { size: 12 }));
+push(label("boundary, from the city's own GIS: " + GEO.city.sqMiles.toFixed(2) + " sq mi.", LX + 18, LY + 169, { size: 12 }));
+push(label("Gaps inside it are unincorporated county pockets:", LX + 18, LY + 184, { size: 12 }));
+push(label("22 in all, most too small to draw. Nothing is smoothed.", LX + 18, LY + 199, { size: 12 }));
 
 push(
   label(

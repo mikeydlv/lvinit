@@ -392,10 +392,10 @@ export default function HendersonPage() {
             22 interior rings cut out of it
           </span>
           : pockets of unincorporated Clark County that the city grew around
-          without ever annexing. Most are tiny, and on the map above they show as
-          hairline gaps rather than anything dramatic. They are drawn anyway,
-          because leaving them out would have made a cleaner picture of a city
-          that doesn&rsquo;t exist.
+          without ever annexing. All 22 are cut out of the shape on the map
+          above, so the area it encloses is exactly the city&rsquo;s, but only
+          the four large enough to see are outlined. The rest are a few hundred
+          feet across and sit below what a map of a whole city can draw.
         </p>
 
         <h3 className="mt-10 font-display text-subhead font-bold text-lvinit-black">
@@ -449,7 +449,11 @@ export default function HendersonPage() {
       {/* HOW TO THINK ABOUT HENDERSON                                      */}
       {/* ---------------------------------------------------------------- */}
 
-      <StorySection id="groups" heading="Five Hendersons, and how to tell them apart">
+      {/* The heading carries the "not official" caveat itself, not just the body
+          copy. Somebody scanning H2s should never come away thinking these five
+          are City of Henderson districts. The body says it again, and the
+          section closes by saying it a third time. */}
+      <StorySection id="groups" heading="Five Hendersons: my shorthand, not the city's">
         <p className="text-body-lg text-lvinit-warmgray">
           Henderson has no official sub-regions. The city doesn&rsquo;t publish a
           list of districts and there is no council-defined taxonomy to hand you.
@@ -781,9 +785,9 @@ export default function HendersonPage() {
           <span className="text-lvinit-black">
             Green Valley and Whitney Ranch
           </span>{" "}
-          are the best-connected parts of the city: I-215 across the top, I-11 on
-          the east, and the shortest run to the airport, the Strip and the
-          eastern side of Las Vegas.{" "}
+          have the most ways out: I-215 across the top, I-11 on the east, and the
+          shortest run of anywhere in Henderson to the airport, the Strip and
+          the eastern side of Las Vegas.{" "}
           <span className="text-lvinit-black">West Henderson and Inspirada</span>{" "}
           hang off St. Rose Parkway and I-15, which points them at the Southwest
           valley and the south Strip rather than at central Las Vegas.

@@ -198,7 +198,7 @@ export const mapPlaces: MapPlace[] = [
   },
   {
     name: "The gaps inside the outline",
-    note: "Unincorporated Clark County pockets the city grew around without annexing. There are 22 of them, and most are far too small to see at this scale.",
+    note: "Unincorporated Clark County pockets the city grew around without annexing. There are 22 of them; all are cut out of the shape, but only the four big enough to read are outlined.",
   },
   {
     name: "Green Valley and Green Valley Ranch",
@@ -465,7 +465,7 @@ export const developmentProjects: DevelopmentProject[] = [
     name: "Haas Automation manufacturing plant",
     status: "under-construction",
     where: "A 234-acre site in West Henderson",
-    what: "A 2.4 million square foot plant for the largest US maker of CNC machine tools, which broke ground in fall 2024. It is the anchor of the city's push to make West Henderson an employment center rather than a bedroom suburb, and it is the single biggest reason that side of the city is changing.",
+    what: "A 2.4 million square foot plant for the largest US maker of CNC machine tools, which broke ground in fall 2024. It is the anchor of the city's push to make West Henderson an employment center rather than a bedroom suburb, and it is the clearest single reason that side of the city is changing.",
     source: {
       label: "Nevada Business Magazine, October 2024",
       url: "https://nevadabusiness.com/2024/10/haas-automation-inc-breaks-ground-on-2-4-million-sq-ft-manufacturing-facility-in-henderson-nevada/",
