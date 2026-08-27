@@ -85,13 +85,13 @@ app/
 | `/` | Homepage | Live | 12 assembled sections; still contains placeholder content (see Pending Work) |
 | `/neighborhoods/summerlin` | Neighborhood guide | Live | Real Mikey photography (Fox Hill Park drone hero); honest editorial "beats" |
 | `/neighborhoods/summerlin/fourth-of-july-parade` | Editorial feature | Live | Full Article + Breadcrumb JSON-LD, embedded YouTube (nocookie), real banner photo |
-| `/neighborhoods/henderson` | Area guide (pillar) | Live | **Rebuilt 2026-08-27** as the third full Area Guide (Story Page system + `components/area/*`, content in `lib/areas/henderson.tsx`). Argues Henderson is an *incorporated city* (the city's own figure: nearly 118.5 sq mi; ~17.6 miles wide), not a neighborhood or a master plan. Custom LVINIT map drawn from the **City of Henderson's own GIS city-boundary layer** (1 outer ring + 22 unincorporated county pockets) plus OSM roads / Sloan Canyon NCA / Lake Las Vegas — `maps/henderson-neighborhoods-map-lvinit.svg`, verified by `scripts/check-henderson-map.mjs` (collisions, clipping, road-label anchoring, and point-in-polygon testing every community against the official line). 11-community roster; five-region LVINIT *editorial* framing (explicitly not government districts); sourced Development Watch (open / under construction / planned); Henderson vs Summerlin `ComparisonBar` + Henderson vs Southwest prose; 12-item FAQ; 16-source list; Article + Breadcrumb JSON-LD; **still photoless** — no original Henderson photography exists, so the hero runs in `StoryHero`'s photoless mode and the page has no OG image |
+| `/neighborhoods/henderson` | Area guide (pillar) | Live | **Rebuilt 2026-08-27** as the third full Area Guide (Story Page system + `components/area/*`, content in `lib/areas/henderson.tsx`). Argues Henderson is an *incorporated city* (the city's own figure: nearly 118.5 sq mi; ~17.6 miles wide), not a neighborhood or a master plan. Custom LVINIT map drawn from the **City of Henderson's own GIS city-boundary layer** (1 outer ring + 22 unincorporated county pockets) plus OSM roads / Sloan Canyon NCA / Lake Las Vegas — `maps/henderson-neighborhoods-map-lvinit.svg`, verified by `scripts/check-henderson-map.mjs` (collisions, clipping, road-label anchoring, and point-in-polygon testing every community against the official line). 11-community roster; five-region LVINIT *editorial* framing (explicitly not government districts); sourced Development Watch (open / under construction / planned); Henderson vs Summerlin `ComparisonBar` + Henderson vs Southwest prose; 12-item FAQ; 16-source list; Article + Breadcrumb JSON-LD; real Mikey drone hero (`hero/henderson-macdonald-highlands-hillside-aerial-drone.webp`, a still from the 26 Aug 2026 MacDonald Highlands flyover, 1903×995, used at native resolution rather than upscaled) which doubles as the OG image |
 | `/neighborhoods/henderson/four-seasons-private-residences` | Story (feature) | Live | First page built on the Story Page pattern; drone film embedded (id `ZDp8KSvNK6w`); photoless hero (no real stills yet); Article + Breadcrumb JSON-LD |
 | `/neighborhoods/north-las-vegas` | Area guide (pillar) | Live | Real aerial hero photo (`hero/north-las-vegas-aerial.jpg`, focal `object-[center_40%]`); The Local's Note; at-a-glance; home-tour video (id `HuUUHgq2Sn8` via `StoryVideo`); areas roster; Breadcrumb JSON-LD |
 | `/neighborhoods/downtown-arts-district` | Neighborhood guide (pillar) | Live | First pillar built on the **Story Page system**; real Mikey Arts District photography (Main St hero + 3 inline figures); honest "who it's / isn't for" + practical beats; cross-links the Summerlin/Henderson/NLV guides via `RelatedStories`; Article + Breadcrumb JSON-LD; hero = OG image |
 | `/neighborhoods/southwest-las-vegas` | Area guide (pillar) | Live | Story Page system; real Mikey UnCommons/The Bend photography (2026-07-16 shoot) — street hero + 4 inline figures; informal-boundary + unincorporated-Clark-County framing; "My honest take" Local's Note; verified development status (open vs announced); Article + Breadcrumb JSON-LD; hero = OG image |
 | `/guides/what-500k-buys-in-las-vegas` | Buyer guide (video companion) | Live | First `/guides/` route; Story Page system; companion to the "$500K" home-tour video (id `Tzxid_nM2nA`, via `StoryVideo`); photoless editorial hero (OG = existing local video poster `video-what-500k-gets-you-in-las-vegas.jpg`); page-local responsive comparison (mobile cards / desktop table); Article + Breadcrumb + **VideoObject** JSON-LD; breadcrumb is Home → article only (no `/guides` index exists) |
-| `/guides/summerlin-vs-henderson` | Comparison guide | Live | Story Page system; honest, qualitative comparison of the Summerlin and Henderson pillar guides — no stats cited (the `neighborhoods[]` metrics in `lib/content.ts` are explicitly placeholder, not verified, so none are used); hero + card image reuse the real Summerlin Fox Hill Park drone photo (no real Henderson photography exists yet); Article + Breadcrumb JSON-LD; breadcrumb is Home → article only; cross-linked from both the Summerlin and Henderson pillar pages and the homepage `LocalGuides` card |
+| `/guides/summerlin-vs-henderson` | Comparison guide | Live | Story Page system; honest, qualitative comparison of the Summerlin and Henderson pillar guides — no stats cited (the `neighborhoods[]` metrics in `lib/content.ts` are explicitly placeholder, not verified, so none are used); hero + card image reuse the real Summerlin Fox Hill Park drone photo (predates the Henderson drone hero; worth revisiting now that real Henderson photography exists); Article + Breadcrumb JSON-LD; breadcrumb is Home → article only; cross-linked from both the Summerlin and Henderson pillar pages and the homepage `LocalGuides` card |
 | `/guides/nevada-property-tax-abatement-resale-buyers` | Cost of Living guide | Live | Story Page system; explains Nevada's owner-occupied 3% property tax cap (NRS 361.4723), the qualifying-rental carve-out (NRS 361.4724), and the general other-property formula capped at 8% (NRS 361.4722) — **corrected 2026-08-22**: removed an unsupported claim that a sale "resets" or "recalculates" the buyer's bill; Nevada does not reassess taxable value to sale price (mass-appraisal method, Clark County Assessor's real-property page) — what changes at a recorded sale is the owner-occupied *designation* only (Clark County Assessor's tax-abatement page), and current law (AB377, eff. Oct 1 2025, amending NRS 375.060) lets a new owner claim the abatement on the Declaration of Value at closing, with the older assessor-mailed-postcard process as backup; removed the invented "Mikey's take" opinion section (replaced with neutral sourced guidance); headline changed to "Why the Seller's Nevada Property Tax Bill May Not Be Yours"; no dollar figures asserted, one clearly-labeled hypothetical example; photoless hero; FAQPage + Article + Breadcrumb JSON-LD; breadcrumb is Home → article only; fills the homepage `LocalGuides` "Cost of Living" card slot (`guides[]` slug `cost-of-living-2026`) — **card image flagged for Mikey**: falls back to `/images/guide-cost-of-living-2026.jpg`, which is a generic flat gray/beige gradient placeholder, not real photography (confirmed by inspection); needs a real image or an explicit no-image placeholder treatment; cross-links `las-vegas-home-prices-july-2026`, `what-500k-buys-in-las-vegas`, and `summerlin-vs-henderson` |
 | `/guides/las-vegas-new-home-sales-july-2026` | Market Watch guide | Live | Story Page system; new-construction companion to `las-vegas-home-prices-july-2026` — same July 2026 reporting month, different primary source (Home Builders Research via the Las Vegas Review-Journal, Aug 24 2026), not a restatement; net home sales 735 (+28% MoM, -7% YoY), permits 620 (-23% YoY), YTD closed sales/permits both down (-20%/-25%), median new-construction single-family closing price $581,930 (+2.1% YoY) vs. the already-sourced $480,000 resale median (LVR) — a clearly-labeled, non-causal "gap this month" of ~21%; no builders/submarkets/incentive programs named (none in source); no real hero photo, so it carries a generated LVINIT editorial cover (`covers/las-vegas-new-home-sales-editorial-cover.webp`); FAQPage + Article + Breadcrumb JSON-LD; cross-linked both directions with `las-vegas-home-prices-july-2026` (its "Keep reading" block now leads with this piece, plus an inline link), and links out to `what-500k-buys-in-las-vegas`, `/neighborhoods/southwest-las-vegas`, and `/neighborhoods/summerlin`; sitemap entry |
 | `/search` | IDX search | Live | Matrix IDX embed `idx=3652dd5`; do not modify embed behavior without instruction |
@@ -643,16 +643,18 @@ Placeholder content that must be replaced before it can be considered "done"
   Surviving Your First Vegas Summer.
 - **Neutral photo placeholders** in `/public/images/` — replace in place with
   real Mikey photography (keep filenames).
-- **Henderson photography** — the guide is still photoless. There is no original
-  Henderson imagery in the repo (`neighborhood-henderson.jpg` is one of the
-  neutral placeholders in `public/images/README.md`, not a photo of Henderson),
-  so the hero runs in `StoryHero`'s photoless mode, the map carries the visuals,
-  and the page has **no OG/social image** — the one real gap against the
-  Summerlin and Southwest guides. Drop real work at
-  `/images/hero/henderson-<name>.webp` and pass `image` to both the hero and
-  `meta` (mirror Summerlin). A ranked capture list is in the PR #14 description;
-  the top three are Green Valley's mature tree canopy, Water Street at ground
-  level, and an aerial from the MacDonald Highlands / Ascaya hillside.
+- **Henderson photography** — ✅ **Hero resolved 2026-08-27.** The guide runs
+  Mikey's own drone still from the 26 Aug 2026 MacDonald Highlands flyover
+  (`hero/henderson-macdonald-highlands-hillside-aerial-drone.webp`), which also
+  serves as the OG image. One caveat worth knowing: it is a **1903×995 video
+  still**, used at native resolution rather than upscaled, so it is lower-res
+  than the Summerlin hero and will soften on a large high-DPI display. A full-res
+  stills pass over the same flight would fix that. Still wanted, in rough
+  priority order: Green Valley's mature tree canopy, Water Street at ground
+  level, the empty desert stretch on Lake Mead Pkwy toward Lake Las Vegas, and an
+  Inspirada or Cadence streetscape with staked saplings as the counterpoint to
+  Green Valley. (`neighborhood-henderson.jpg` remains one of the neutral
+  placeholders in `public/images/README.md` and is not a photo of Henderson.)
 - **Henderson community copy** — the 11 roster entries in
   `lib/areas/henderson.tsx` carry sourced dates, developers and acreage (see the
   fact-check log at the top of that file), but the read on what each area is
@@ -676,10 +678,11 @@ Placeholder content that must be replaced before it can be considered "done"
 
 ## Roadmap
 
-**Now (this sprint):** ✅ Henderson rebuilt as a full Area Guide (PR #14).
-Immediate follow-ups: shoot real Henderson photography — the guide is photoless
-today, so it has neither a hero image nor an OG image — and have Mikey review
-the community roster copy for local accuracy.
+**Now (this sprint):** ✅ Henderson rebuilt as a full Area Guide (PR #14), with
+Mikey's MacDonald Highlands drone still as the hero and OG image. Immediate
+follow-ups: have Mikey review the community roster copy for local accuracy, and
+shoot the remaining Henderson photography (Green Valley canopy, Water Street,
+the Lake Mead Pkwy desert stretch, an Inspirada/Cadence streetscape).
 
 **Next:**
 - Henderson child guides (Lake Las Vegas, Green Valley Ranch, Water Street

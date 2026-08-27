@@ -89,14 +89,22 @@ import {
 //   · "Anthem ... known for elevation and views" left as a single description,
 //     when Anthem is three materially different subdivisions.
 //
-// PHOTOGRAPHY: there is still no original Henderson photography in the repo.
-// /images/neighborhood-henderson.jpg is one of the neutral placeholders
-// documented in public/images/README.md, not a photograph of Henderson. So the
-// hero runs in StoryHero's honest photoless mode, the same way the Four Seasons
-// feature does, and the map carries the visual weight instead. Do not swap in a
-// generic desert stock shot. When Mikey's own Henderson drone work lands, drop
-// it at /images/hero/henderson-<descriptive-name>.webp and pass `image` to the
-// hero and to `meta`, mirroring the Summerlin guide.
+// PHOTOGRAPHY: the hero is Mikey's own drone still, flown over Henderson on
+// 26 August 2026 and exported from the MacDonald Highlands flyover footage.
+// It earns the slot rather than just filling it: one frame carries three of the
+// five regions this guide argues for — valley-floor streets under mature palms
+// in the foreground, a golf community in the middle, and contemporary hillside
+// homes stepping up the ridge behind. That is the whole thesis in a picture.
+//
+// The source is 1903x995 (a 1.91:1 video still), and the hero container is
+// roughly 1.95:1 at 80vh on a desktop, so it fills with almost no crop. It is
+// used at native resolution — never upscaled to look like a bigger file than it
+// is. On mobile, object-center takes the middle band: ridge, golf course and
+// tree canopy, which still reads.
+//
+// /images/neighborhood-henderson.jpg is NOT this and is not a photograph of
+// Henderson at all — it is one of the neutral placeholders documented in
+// public/images/README.md. Don't confuse the two.
 //
 // THE MAP is generated, not drawn: scripts/generate-henderson-map.mjs, from the
 // City of Henderson's own GIS boundary plus OpenStreetMap road geometry,
@@ -115,12 +123,21 @@ import {
 // expressed through housing stock, geography and daily logistics only.
 // ---------------------------------------------------------------------------
 
+const HERO_IMAGE =
+  "/images/hero/henderson-macdonald-highlands-hillside-aerial-drone.webp";
+const HERO_ALT =
+  "Aerial view over Henderson, Nevada looking toward MacDonald Highlands: contemporary flat-roofed homes stepping up a dark rocky ridge in the middle distance, a golf course with a small lake below them, streets of tile-roofed houses under mature palms across the valley floor in the foreground, and the McCullough Range along the horizon.";
+
 const meta: StoryMeta = {
   title: "Henderson, Nevada: Map, Communities & Local Guide | LVINIT",
   headline: "Henderson",
   description:
     "Understand Henderson like a local: a real map of the city limits, how Green Valley, Anthem, Inspirada, Cadence, Lake Las Vegas and West Henderson actually differ, and what's being built right now.",
   path: "/neighborhoods/henderson",
+  image: HERO_IMAGE,
+  imageWidth: 1903,
+  imageHeight: 995,
+  imageAlt: HERO_ALT,
   datePublished: "2026-07-04",
   dateModified: "2026-08-27",
   author: "Mikey Del Rosario",
@@ -144,6 +161,9 @@ export default function HendersonPage() {
         headline: "Henderson",
         subheadline:
           "Saying you want to live in Henderson barely narrows anything down. It's a whole city, and it's about seventeen miles wide.",
+        image: HERO_IMAGE,
+        imageAlt: HERO_ALT,
+        imageTitle: "MacDonald Highlands, Henderson. Photo by Mikey Del Rosario",
         backLink: { label: "Las Vegas neighborhoods", href: "/#neighborhoods" },
         ctas: [
           { label: "See the map", href: "#map", variant: "primary" },
@@ -1163,11 +1183,12 @@ export default function HendersonPage() {
 
       <Container className="pb-6">
         <p className="mx-auto max-w-[680px] text-caption text-lvinit-warmgray">
-          The map on this page was built from the City of Henderson&rsquo;s own
-          GIS boundary and OpenStreetMap road geometry. Development status
-          (what&rsquo;s open, under construction, or only proposed) was checked on
-          27 August 2026 and will change; check with the City of Henderson, the
-          builders or the agency involved before planning around it.
+          Photographed over Henderson by Mikey Del Rosario. The map on this page
+          was built from the City of Henderson&rsquo;s own GIS boundary and
+          OpenStreetMap road geometry. Development status (what&rsquo;s open,
+          under construction, or only proposed) was checked on 27 August 2026 and
+          will change; check with the City of Henderson, the builders or the
+          agency involved before planning around it.
         </p>
       </Container>
 
