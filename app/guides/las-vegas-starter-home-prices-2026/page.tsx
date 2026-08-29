@@ -405,6 +405,20 @@ export default function LasVegasStarterHomePrices2026Page() {
               before you assume your monthly cost matches the seller&rsquo;s.
             </span>
           </li>
+          <li className="flex gap-3">
+            <span aria-hidden="true" className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-lvinit-blue" />
+            <span>
+              If the down payment, not the price itself, is what makes the
+              starter tier feel out of reach,{" "}
+              <Link
+                href="/guides/las-vegas-down-payment-assistance-programs-2026"
+                className="text-lvinit-blue underline underline-offset-4 decoration-transparent hover:decoration-lvinit-blue"
+              >
+                the real minimums and Nevada&rsquo;s assistance programs
+              </Link>{" "}
+              are worth a look before you assume you need 20% saved up.
+            </span>
+          </li>
         </ul>
       </StorySection>
 

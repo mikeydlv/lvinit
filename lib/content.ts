@@ -205,6 +205,24 @@ export type Guide = {
  */
 export const guides: Guide[] = [
   {
+    slug: "las-vegas-down-payment-assistance-programs-2026",
+    title: "You Don't Need 20% Down To Buy a Home in Las Vegas",
+    dek: "FHA starts at 3.5% down, VA loans can be 0%, and Nevada runs real down-payment-assistance programs, including one that launched in December 2025. Here's what the real minimums and programs actually look like.",
+    byline: "Mikey Del Rosario",
+    date: "August 2026",
+    publishedAt: "2026-08-29",
+    category: "Buyer Guide",
+    // No authentic photograph for this explainer, so it carries a generated
+    // LVINIT editorial cover (abstract, non-photographic; draws no real
+    // figures, geography, or charts of its own).
+    //   node scripts/generate-guide-cover.mjs --slug las-vegas-down-payment-assistance-programs-2026 \
+    //     --category "Buyer Guide" --subject "Down Payment" \
+    //     --out las-vegas-down-payment-editorial-cover.webp
+    image: "/images/covers/las-vegas-down-payment-editorial-cover.webp",
+    imageMode: "editorial-cover",
+    href: "/guides/las-vegas-down-payment-assistance-programs-2026",
+  },
+  {
     slug: "las-vegas-starter-home-prices-2026",
     title:
       "Las Vegas Starter Homes Have More Than Doubled Since 2016 — And They Just Got a Little Cheaper",
