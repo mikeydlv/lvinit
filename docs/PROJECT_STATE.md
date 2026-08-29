@@ -5,7 +5,7 @@
 > development sprint. Where this file and the code disagree, trust the code and
 > fix this file.
 >
-> **Last audited:** 2026-08-27 · **Branch:** `main` · **Live:** https://www.lvinit.com
+> **Last audited:** 2026-08-29 · **Branch:** `main` · **Live:** https://www.lvinit.com
 >
 > **Content Publisher agent:** a project-scoped Claude Code subagent,
 > `lvinit-content-publisher`, turns Mikey's real photos/videos/notes into
@@ -73,6 +73,7 @@ app/
   guides/las-vegas-starter-home-prices-2026/page.tsx  /guides/las-vegas-starter-home-prices-2026 — Market Watch, Zillow starter-home research (Story Page system)
   guides/summerlin-vs-henderson/page.tsx         /guides/summerlin-vs-henderson — honest comparison guide, no invented stats (Story Page system)
   guides/nevada-property-tax-abatement-resale-buyers/page.tsx  /guides/nevada-property-tax-abatement-resale-buyers — Cost of Living explainer, NRS 361.4723 property tax cap (Story Page system)
+  guides/las-vegas-down-payment-assistance-programs-2026/page.tsx  /guides/las-vegas-down-payment-assistance-programs-2026 — Buyer Guide, busts the "20% down" myth with real loan-type minimums and Nevada's down-payment-assistance programs (Story Page system)
 ```
 
 **Path alias:** `@/*` → project root (see `tsconfig.json`).
@@ -96,6 +97,7 @@ app/
 | `/guides/nevada-property-tax-abatement-resale-buyers` | Cost of Living guide | Live | Story Page system; explains Nevada's owner-occupied 3% property tax cap (NRS 361.4723), the qualifying-rental carve-out (NRS 361.4724), and the general other-property formula capped at 8% (NRS 361.4722) — **corrected 2026-08-22**: removed an unsupported claim that a sale "resets" or "recalculates" the buyer's bill; Nevada does not reassess taxable value to sale price (mass-appraisal method, Clark County Assessor's real-property page) — what changes at a recorded sale is the owner-occupied *designation* only (Clark County Assessor's tax-abatement page), and current law (AB377, eff. Oct 1 2025, amending NRS 375.060) lets a new owner claim the abatement on the Declaration of Value at closing, with the older assessor-mailed-postcard process as backup; removed the invented "Mikey's take" opinion section (replaced with neutral sourced guidance); headline changed to "Why the Seller's Nevada Property Tax Bill May Not Be Yours"; no dollar figures asserted, one clearly-labeled hypothetical example; photoless hero; FAQPage + Article + Breadcrumb JSON-LD; breadcrumb is Home → article only; fills the homepage `LocalGuides` "Cost of Living" card slot (`guides[]` slug `cost-of-living-2026`) — **card image flagged for Mikey**: falls back to `/images/guide-cost-of-living-2026.jpg`, which is a generic flat gray/beige gradient placeholder, not real photography (confirmed by inspection); needs a real image or an explicit no-image placeholder treatment; cross-links `las-vegas-home-prices-july-2026`, `what-500k-buys-in-las-vegas`, and `summerlin-vs-henderson` |
 | `/guides/las-vegas-new-home-sales-july-2026` | Market Watch guide | Live | Story Page system; new-construction companion to `las-vegas-home-prices-july-2026` — same July 2026 reporting month, different primary source (Home Builders Research via the Las Vegas Review-Journal, Aug 24 2026), not a restatement; net home sales 735 (+28% MoM, -7% YoY), permits 620 (-23% YoY), YTD closed sales/permits both down (-20%/-25%), median new-construction single-family closing price $581,930 (+2.1% YoY) vs. the already-sourced $480,000 resale median (LVR) — a clearly-labeled, non-causal "gap this month" of ~21%; no builders/submarkets/incentive programs named (none in source); no real hero photo, so it carries a generated LVINIT editorial cover (`covers/las-vegas-new-home-sales-editorial-cover.webp`); FAQPage + Article + Breadcrumb JSON-LD; cross-linked both directions with `las-vegas-home-prices-july-2026` (its "Keep reading" block now leads with this piece, plus an inline link), and links out to `what-500k-buys-in-las-vegas`, `/neighborhoods/southwest-las-vegas`, and `/neighborhoods/summerlin`; sitemap entry |
 | `/guides/las-vegas-starter-home-prices-2026` | Market Watch guide | Live | Story Page system; a genuine content gap, not a restatement — the two July 2026 Market Watch pieces cover valley-wide medians ($480,000 resale, $581,930 new-construction) across every price tier; this piece covers Zillow's starter-home research (bottom-third-of-market pricing), the tier a first-time buyer is actually shopping in. Sourced to Zillow via the Las Vegas Review-Journal (Patrick Blennerhassett, Aug 26, 2026): typical Las Vegas starter-home value $312,141 in July 2026, down 3.2% YoY from $322,577 in July 2025, up ~122% from $140,630 in July 2016 ("more than doubled"). Real, attributed quotes from Zillow senior economist Kara Ng and local mortgage advisor Matt Hennessy — neither put in Mikey's mouth. No submarket-specific starter-home claim (none in the source). No real hero photo, so it carries a generated LVINIT editorial cover (`covers/las-vegas-starter-home-editorial-cover.webp`). FAQPage + Article + Breadcrumb JSON-LD; cross-linked both directions with `las-vegas-home-prices-july-2026` and `las-vegas-new-home-sales-july-2026` (their "Keep reading" blocks now point here), plus links out to `what-500k-buys-in-las-vegas` and `nevada-property-tax-abatement-resale-buyers`; sitemap entry; registered in `lib/content.ts` `guides[]` (slug `las-vegas-starter-home-prices-2026`), so it surfaces automatically in the homepage "Latest from LVINIT" feed and at `/guides`. |
+| `/guides/las-vegas-down-payment-assistance-programs-2026` | Buyer Guide | Live | Story Page system; a genuine evergreen content gap — LVINIT had zero coverage of down-payment size or down-payment-assistance programs before this piece. Busts the "you need 20% down" myth with the real minimums (FHA 3.5%/580+, VA 0% for eligible borrowers, conventional as low as 3% for qualifying buyers via income-restricted programs like Freddie Mac Home Possible, 5% typical otherwise; USDA mentioned only in generic terms, no Las Vegas Valley eligibility claimed). Explains Nevada Housing Division's "Home Is Possible" (homeispossiblenv.org) is a completely different program from Freddie Mac's national "Home Possible" loan product despite the near-identical name. Leads with the newest, best-corroborated program — the Worker Advantage Program (launched Dec 10, 2025, $18M/~900 households, $20,000 no-interest/no-payment/non-forgivable 30-year second mortgage for essential workers in healthcare/education/public-safety/construction, Clark County AMI cap $147,300 per the Division's own current eligibility table) — plus Home Is Possible's two tracks (5% general vs. 4% first-time-buyer-restricted) and Home Is Possible for Teachers ($7,500, forgivable after 5 years, available through Dec 31, 2026 per its own page). Flags rather than resolves a real discrepancy: Nevada Housing Division's own program pages disagree with each other on the standard Home Is Possible percentage and forgiveness structure, so the article states what each page says and tells readers to confirm with a lender or the Division. No real photo exists for this topic, so it carries a generated LVINIT editorial cover (`covers/las-vegas-down-payment-editorial-cover.webp`). FAQPage + Article + Breadcrumb JSON-LD; cross-linked both directions with `las-vegas-starter-home-prices-2026` (its "What buyers should know" list now links here), plus links out to `what-500k-buys-in-las-vegas`, `las-vegas-home-prices-july-2026`, and `nevada-property-tax-abatement-resale-buyers`; sitemap entry; registered in `lib/content.ts` `guides[]`. |
 | `/search` | IDX search | Live | Matrix IDX embed `idx=3652dd5`; do not modify embed behavior without instruction |
 | `/contact` | Contact | Live | ContactForm → `/api/contact` (Resend) with mailto fallback |
 | `/api/contact` | Route handler | Live | Returns 503 until `RESEND_API_KEY` is set, so no fake service ships |
@@ -491,6 +493,31 @@ links flowing both up (feature → guide → homepage) and down (guide → featu
   new-construction July 2026 pieces (their "Keep reading" blocks now point
   here), plus links to the $500K buyer guide and the Nevada property-tax
   abatement guide; sitemap entry; registered in `lib/content.ts` `guides[]`.
+- **Las Vegas down-payment-assistance Buyer Guide** — a genuine evergreen
+  content gap (LVINIT had zero coverage of down-payment size or
+  down-payment-assistance programs before this piece), built via the
+  autonomous scheduled editorial-publishing routine (topic selection: no
+  fresh breaking story in the prior 24-72h that wasn't already covered, so
+  the routine identified this evergreen buyer-misconception gap instead of
+  manufacturing news). Busts the "you need 20% down" myth with the real
+  minimums by loan type (FHA 3.5%/580+ credit, VA 0% for eligible borrowers,
+  conventional as low as 3% for qualifying buyers via income-restricted
+  programs like Freddie Mac Home Possible, 5% typical otherwise), then
+  Nevada's actual down-payment-assistance landscape: the Worker Advantage
+  Program (launched Dec 10, 2025, $18M/~900 households, $20,000
+  no-interest/no-payment/non-forgivable 30-year second mortgage for
+  essential workers), the two Home Is Possible tracks (5% general vs. 4%
+  first-time-buyer-restricted — the Division's own pages disagree on the
+  percentage and forgiveness structure, so the article states both rather
+  than picking one), and Home Is Possible for Teachers. Explicitly clarifies
+  that Nevada's "Home Is Possible" and Freddie Mac's national "Home
+  Possible" loan product are unrelated despite the near-identical name. No
+  real hero photo exists for this topic, so it carries a generated LVINIT
+  editorial cover. Story Page system; FAQPage + Article + Breadcrumb
+  JSON-LD; cross-linked both directions with the starter-home Market Watch
+  piece, plus links to the $500K buyer guide, the July 2026 resale piece,
+  and the Nevada property-tax abatement guide; sitemap entry; registered in
+  `lib/content.ts` `guides[]`.
 - Live IDX search page (Matrix / GLVAR).
 - Contact form with Resend handler + mailto fallback + GA4 lead event.
 - GA4 analytics scaffolding (opt-in via env var).
@@ -548,8 +575,19 @@ links flowing both up (feature → guide → homepage) and down (guide → featu
    with the July 2026 resale and new-construction pieces (all three now form
    one Market Watch trio, each covering a different slice of the same broad
    period: valley-wide resale, new construction, and the starter tier). Also
-   links out to `/guides/what-500k-buys-in-las-vegas` and
-   `/guides/nevada-property-tax-abatement-resale-buyers`.
+   links out to `/guides/what-500k-buys-in-las-vegas`,
+   `/guides/nevada-property-tax-abatement-resale-buyers`, and (new) the
+   down-payment-assistance guide below.
+10. **Down payment / buyer-misconception guide:** `/guides/las-vegas-down-payment-assistance-programs-2026` —
+    a standalone Buyer Guide filling a genuine evergreen gap (zero prior
+    coverage of down-payment size or assistance programs). Busts the "20%
+    down" myth with real loan-type minimums, then Nevada's actual
+    down-payment-assistance landscape, led by the new Worker Advantage
+    Program. Cross-linked both directions with
+    `/guides/las-vegas-starter-home-prices-2026`, plus links out to
+    `/guides/what-500k-buys-in-las-vegas`,
+    `/guides/las-vegas-home-prices-july-2026`, and
+    `/guides/nevada-property-tax-abatement-resale-buyers`.
 
 The remaining homepage guide/video card (Surviving Your First Vegas Summer,
 and the four video posters) are placeholders that do not yet resolve to pages.
