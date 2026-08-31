@@ -277,6 +277,13 @@ feature without changing them. Authoring standard:
   posed) → data-made-visual → property (Phase 2).
 - **Explicitly avoid** Strip imagery, casinos, neon-at-night — anything that
   reads "visiting" rather than "living."
+- **`C:\LVINIT\Images` is the approved first-party photography library.**
+  Everything in it is Mikey-captured and Mikey-owned (confirmed permanently —
+  ownership is not re-asked), and it is the **first** place to look for an
+  article image, ahead
+  of a generated editorial cover. Originals are read-only: copy out, optimize
+  the copy with Sharp into `/public/images/`, never edit in place. See
+  [CONTENT_PUBLISHER_AGENT.md](CONTENT_PUBLISHER_AGENT.md).
 - **Files live in `/public/images/`** with descriptive filenames (e.g.
   `hero/summerlin-fox-hill-park-red-rock-aerial-drone.webp`). Never hotlink.
 - Real photos ship as `.webp` via `next/image`; neutral stand-ins are plain

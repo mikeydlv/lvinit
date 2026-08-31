@@ -28,6 +28,10 @@ business second.
 - **Do not** use fake AI-looking real estate imagery, vector landscapes, or
   generic stock vibes unless explicitly approved.
 - **Prefer real, Mikey-owned photography** whenever available.
+- `C:\LVINIT\Images` is an **approved first-party LVINIT photography library**
+  — all Mikey-captured and Mikey-owned, confirmed permanently. Search it first for
+  article imagery; never ask to reconfirm ownership or licensing for files from
+  it; never modify the originals (copy out, optimize the copy).
 - When adding photos, use **local files in `/public/images/`** with descriptive
   filenames (e.g. `hero/summerlin-drone-overlook-golden-hour.webp`).
 - **Never hotlink** random external images.

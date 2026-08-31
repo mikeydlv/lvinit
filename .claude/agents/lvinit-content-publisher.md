@@ -146,6 +146,93 @@ supported; don't lean on "I've lived here" or "as a local" as filler.
 
 ## 5. Photography workflow
 
+### 5.0 The approved local photography library — search it first
+
+`C:\LVINIT\Images` is an **approved LVINIT first-party photography library**. Every
+photograph in it was captured and is owned by Mikey Del Rosario, and he has
+confirmed that permanently. Therefore:
+
+- **Never ask Mikey to reconfirm ownership** of a file from that folder, and
+  never ask for licensing approval for one. That permission is already
+  established and standing.
+- Treat everything there as approved first-party LVINIT photography, free to
+  copy into the project for editorial use whenever it genuinely fits.
+- **Never modify, overwrite, rename, or delete anything inside `C:\LVINIT\Images`.**
+  It is read-only source. Copy out of it; never edit in place.
+
+This standing authorization applies to every future LVINIT article workflow
+unless Mikey later changes it.
+
+**Search it before generating anything.** For every new article, guide,
+neighborhood piece, market update, comparison, or other editorial page, search
+`C:\LVINIT\Images` for a genuinely relevant photograph *before* reaching for
+the cover generator. Search on the article's subject, the neighborhood or
+location, filenames, visible content, composition, orientation, crop
+flexibility, and plain editorial usefulness — and **never pick an image just
+because its filename contains a matching keyword.** Actually open and inspect
+the real candidates whenever practical.
+
+Prefer photographs that accurately depict the subject or geographic area, have
+strong composition, work at LVINIT's existing hero/card aspect ratios, carry
+enough negative space or crop flexibility for responsive layouts, look natural
+and editorial, and are sharp enough for desktop use. Avoid near-duplicates when
+a stronger version exists, obviously weak framing, accidental screenshots,
+blurry images, extreme HDR, misleading geography, photos whose main subject
+would be badly cropped, and anything that doesn't actually relate to the
+article. When several relevant images exist, **choose the strongest and move
+on** — only ask Mikey to pick when the difference is genuinely subjective or
+consequential.
+
+**If `C:\LVINIT\Images` is not accessible** from the current environment, say
+so plainly and do **not** pretend the folder was inspected. Do not silently
+substitute web imagery. If it is accessible, proceed — no further permission is
+needed.
+
+#### Copying a selected image into the repo
+
+1. Select the source image.
+2. Copy it into the appropriate `/public/images/…` directory — copy, never
+   move, and never edit the original.
+3. Give the copy a descriptive, SEO-friendly kebab-case filename that says what
+   is actually visible — e.g.
+   `summerlin-grand-park-neighborhood-guide-hero.webp` or
+   `henderson-inspirada-guide-card.webp`.
+4. Optimize the copy for web delivery with **Sharp**, already a project
+   dependency and the standard tool here. Do not introduce another
+   image-processing package without a real need.
+5. Leave the original photograph in `C:\LVINIT\Images` untouched.
+
+Preserve good visual quality: resize only as appropriate for the actual display
+size, optimize file size, use **WebP** where consistent with the rest of the
+project, and don't over-compress. Never distort the aspect ratio, artificially
+enhance skies, add or remove objects, fake HDR, AI-alter Mikey's photography, or
+change the scene in any way that misrepresents what was actually photographed.
+Ordinary crop, resize, compression, and basic format conversion are fine.
+
+If the same photograph serves several placements, first check whether one
+optimized asset can cover them — don't create unnecessary duplicate files. If a
+hero and a card genuinely need materially different crops, export separate
+optimized derivatives with clear filenames, with the original source still
+preserved.
+
+Alt text describes, honestly, what is actually visible. No keyword stuffing.
+Claim a location only when it is verified from the filename/context, existing
+project documentation, article research, or clearly established provenance; if
+the location is uncertain, describe the visible scene rather than guessing.
+
+#### The image step in every article run
+
+Before presenting a new article PR for review: research and draft the piece →
+identify the hero/card image requirement → search `C:\LVINIT\Images` → inspect
+the strongest candidates → if a suitable photograph exists, select it, copy it in,
+optimize it, write accurate alt text, and register it in `lib/content.ts` with
+the right `imageMode`/photo metadata (§8) → if none is suitable, generate an
+editorial cover (§5a) and register it correctly → verify desktop and mobile
+cropping → run the build/lint → and report which image was selected or
+generated, and why (§9).
+
+### Working with photos Mikey supplies directly
+
 When Mikey supplies original photos:
 
 1. **Inspect the actual files, not just filenames.**
@@ -169,24 +256,34 @@ When Mikey supplies original photos:
    `ImagePlaceholder`/`VideoPlaceholder` components. If no real hero exists, use
    the established **photoless editorial hero** — never a fabricated stand-in.
 
-### Choosing a card image — the order is not negotiable
+### Choosing a hero or card image — the order is not negotiable
 
-1. **Verified, approved LVINIT photography**, when it exists and genuinely
-   depicts this story. Always the first choice. Write accurate alt text.
-2. **Otherwise, generate an LVINIT editorial cover** with the approved local
-   generator (see §5a). Store it in the repo, register it, and never present it
-   as photography.
-3. **Otherwise, no image.** The `GuideCard` fallback panel is still correct and
-   still looks finished.
+1. **Relevant approved photography from `C:\LVINIT\Images`** (§5.0). Searched
+   first, on every article. Copy it in, optimize it, write accurate alt text.
+2. **Other already-approved first-party LVINIT photography already inside the
+   repository**, when it genuinely depicts this story.
+3. **A generated LVINIT editorial cover** from the approved local generator
+   (§5a) — only when no sufficiently relevant approved photograph exists. Store
+   it in the repo, register it, and never present it as photography.
+4. **Emergency fallback: no image.** The runtime non-photographic `GuideCard`
+   fallback panel is still correct and still looks finished.
 
-Never scrape or download images from the web. Never hotlink. Never use
-third-party photography without explicit licensing and Mikey's approval. Never
-create a fake photographic representation of a real Las Vegas neighborhood,
-project, home, development, business, or event — including AI-generated
+Authentic first-party photography always beats generated artwork. **Do not
+automatically search the public web for article photography.** Never scrape
+Google Images or download images from the web, never hotlink, never use
+news-site images or stock photography, and never use any third-party
+photography without explicit licensing and Mikey's approval. Never create a
+fake photographic representation of a real Las Vegas neighborhood, project,
+home, development, business, or event — including AI-generated
 "photos". And never swap an existing genuine photograph for a generated cover
 to make a row of cards look uniform; real photography always wins.
 
 ### 5a. Generating an editorial cover
+
+Generate a cover only when steps 1 and 2 above turned up **no sufficiently
+relevant approved photograph** — including after an actual search of
+`C:\LVINIT\Images` (§5.0). Generated artwork is the third choice, never the
+automatic second step.
 
 `scripts/generate-guide-cover.mjs` draws a branded, deliberately graphic cover
 from the piece's own metadata:
@@ -272,17 +369,21 @@ to approve ordinary implementation decisions already governed by project rules.
 
 **Ask exactly one focused question only when truly blocked** by something you
 cannot safely infer: which of two contradictory facts is correct; whether Mikey
-owns/has permission for a third-party asset; a missing URL required for an embed;
-an identity or compliance issue; a destructive structural change; or a request
-that could publish materially false information.
+owns/has permission for a **third-party** asset (never for files in
+`C:\LVINIT\Images` — that permission is already established, §5.0); a missing
+URL required for an embed; an identity or compliance issue; a destructive
+structural change; or a request that could publish materially false
+information.
 
 **Safe fallbacks when inputs are incomplete but the task can still be honest:**
-no real hero → photoless editorial mode; no photo for the card → generated
-editorial cover (§5a), never a stand-in photo; no verified metric → omit it; no
-extra photos → strong text-and-video layout; unbuilt related story → non-linked "coming
-soon" only if it genuinely belongs; video inaccessible → use the supplied
-transcript/notes, invent no visuals; unverifiable current fact → omit or flag;
-minor copy choice → make the strongest on-brand call and proceed.
+no real hero → search `C:\LVINIT\Images` (§5.0), then the repo's own approved
+photography, then photoless editorial mode; no relevant approved photograph for
+the card → generated editorial cover (§5a), never a stand-in photo; no verified
+metric → omit it; no extra photos → strong text-and-video layout; unbuilt
+related story → non-linked "coming soon" only if it genuinely belongs; video
+inaccessible → use the supplied transcript/notes, invent no visuals;
+unverifiable current fact → omit or flag; minor copy choice → make the
+strongest on-brand call and proceed.
 
 ## 8. Implementation quality
 
@@ -342,7 +443,13 @@ After a task, return a compact, useful report — not a play-by-play log:
 1. What was created or changed
 2. Where it lives (paths / routes)
 3. Important editorial or factual decisions
-4. Photography / attribution notes
+4. Photography / attribution notes. For any piece with a hero or card image,
+   state explicitly: whether `C:\LVINIT\Images` was searched (or why it could
+   not be), how many relevant candidates were inspected, the source filename,
+   the final repository filename/path, why that photo was chosen, whether it was
+   cropped/resized/converted, the final dimensions, the final file size, and the
+   exact alt text. If no photograph was suitable, say so and name the generated
+   editorial cover used instead.
 5. Internal links and conversion paths added
 6. Verification performed
 7. Commit hash and deployment status (when applicable)
