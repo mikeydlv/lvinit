@@ -204,6 +204,12 @@ export default function HendersonPage() {
             dek: "A community against a whole city. The honest side-by-side, without a brochure in sight.",
           },
           {
+            name: "Henderson vs. Southwest Las Vegas",
+            href: "/guides/henderson-vs-southwest-las-vegas",
+            category: "Comparison",
+            dek: "A closer comparison than it looks: an incorporated city against an informal name for a stretch of county.",
+          },
+          {
             name: "Summerlin",
             href: "/neighborhoods/summerlin",
             category: "Area guide",
@@ -1163,7 +1169,11 @@ export default function HendersonPage() {
           and, in West Henderson, an employment corridor the Southwest
           doesn&rsquo;t have an equivalent of. The two overlap geographically at
           St. Rose Parkway, which is why buyers so often end up looking at both
-          without realizing they&rsquo;ve crossed a city line.
+          without realizing they&rsquo;ve crossed a city line. The full{" "}
+          <Link href="/guides/henderson-vs-southwest-las-vegas" className={linkClass}>
+            Henderson vs. Southwest Las Vegas comparison
+          </Link>{" "}
+          goes through it properly.
         </p>
       </StorySection>
 

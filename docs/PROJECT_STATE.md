@@ -72,6 +72,7 @@ app/
   guides/las-vegas-new-home-sales-july-2026/page.tsx  /guides/las-vegas-new-home-sales-july-2026 — Market Watch, July 2026 Home Builders Research new-construction data (Story Page system)
   guides/las-vegas-starter-home-prices-2026/page.tsx  /guides/las-vegas-starter-home-prices-2026 — Market Watch, Zillow starter-home research (Story Page system)
   guides/summerlin-vs-henderson/page.tsx         /guides/summerlin-vs-henderson — honest comparison guide, no invented stats (Story Page system)
+  guides/henderson-vs-southwest-las-vegas/page.tsx  /guides/henderson-vs-southwest-las-vegas — honest comparison guide, no invented stats (Story Page system)
   guides/nevada-property-tax-abatement-resale-buyers/page.tsx  /guides/nevada-property-tax-abatement-resale-buyers — Cost of Living explainer, NRS 361.4723 property tax cap (Story Page system)
   guides/las-vegas-down-payment-assistance-programs-2026/page.tsx  /guides/las-vegas-down-payment-assistance-programs-2026 — Buyer Guide, busts the "20% down" myth with real loan-type minimums and Nevada's down-payment-assistance programs (Story Page system)
 ```
@@ -98,6 +99,7 @@ app/
 | `/guides/las-vegas-new-home-sales-july-2026` | Market Watch guide | Live | Story Page system; new-construction companion to `las-vegas-home-prices-july-2026` — same July 2026 reporting month, different primary source (Home Builders Research via the Las Vegas Review-Journal, Aug 24 2026), not a restatement; net home sales 735 (+28% MoM, -7% YoY), permits 620 (-23% YoY), YTD closed sales/permits both down (-20%/-25%), median new-construction single-family closing price $581,930 (+2.1% YoY) vs. the already-sourced $480,000 resale median (LVR) — a clearly-labeled, non-causal "gap this month" of ~21%; no builders/submarkets/incentive programs named (none in source); no real hero photo, so it carries a generated LVINIT editorial cover (`covers/las-vegas-new-home-sales-editorial-cover.webp`); FAQPage + Article + Breadcrumb JSON-LD; cross-linked both directions with `las-vegas-home-prices-july-2026` (its "Keep reading" block now leads with this piece, plus an inline link), and links out to `what-500k-buys-in-las-vegas`, `/neighborhoods/southwest-las-vegas`, and `/neighborhoods/summerlin`; sitemap entry |
 | `/guides/las-vegas-starter-home-prices-2026` | Market Watch guide | Live | Story Page system; a genuine content gap, not a restatement — the two July 2026 Market Watch pieces cover valley-wide medians ($480,000 resale, $581,930 new-construction) across every price tier; this piece covers Zillow's starter-home research (bottom-third-of-market pricing), the tier a first-time buyer is actually shopping in. Sourced to Zillow via the Las Vegas Review-Journal (Patrick Blennerhassett, Aug 26, 2026): typical Las Vegas starter-home value $312,141 in July 2026, down 3.2% YoY from $322,577 in July 2025, up ~122% from $140,630 in July 2016 ("more than doubled"). Real, attributed quotes from Zillow senior economist Kara Ng and local mortgage advisor Matt Hennessy — neither put in Mikey's mouth. No submarket-specific starter-home claim (none in the source). No real hero photo, so it carries a generated LVINIT editorial cover (`covers/las-vegas-starter-home-editorial-cover.webp`). FAQPage + Article + Breadcrumb JSON-LD; cross-linked both directions with `las-vegas-home-prices-july-2026` and `las-vegas-new-home-sales-july-2026` (their "Keep reading" blocks now point here), plus links out to `what-500k-buys-in-las-vegas` and `nevada-property-tax-abatement-resale-buyers`; sitemap entry; registered in `lib/content.ts` `guides[]` (slug `las-vegas-starter-home-prices-2026`), so it surfaces automatically in the homepage "Latest from LVINIT" feed and at `/guides`. |
 | `/guides/las-vegas-down-payment-assistance-programs-2026` | Buyer Guide | Live | Story Page system; a genuine evergreen content gap — LVINIT had zero coverage of down-payment size or down-payment-assistance programs before this piece. Busts the "you need 20% down" myth with the real minimums (FHA 3.5%/580+, VA 0% for eligible borrowers, conventional as low as 3% for qualifying buyers via income-restricted programs like Freddie Mac Home Possible, 5% typical otherwise; USDA mentioned only in generic terms, no Las Vegas Valley eligibility claimed). Explains Nevada Housing Division's "Home Is Possible" (homeispossiblenv.org) is a completely different program from Freddie Mac's national "Home Possible" loan product despite the near-identical name. Leads with the newest, best-corroborated program — the Worker Advantage Program (launched Dec 10, 2025, $18M/~900 households, $20,000 no-interest/no-payment/non-forgivable 30-year second mortgage for essential workers in healthcare/education/public-safety/construction, Clark County AMI cap $147,300 per the Division's own current eligibility table) — plus Home Is Possible's two tracks (5% general vs. 4% first-time-buyer-restricted) and Home Is Possible for Teachers ($7,500, forgivable after 5 years, available through Dec 31, 2026 per its own page). Flags rather than resolves a real discrepancy: Nevada Housing Division's own program pages disagree with each other on the standard Home Is Possible percentage and forgiveness structure, so the article states what each page says and tells readers to confirm with a lender or the Division. No real photo exists for this topic, so it carries a generated LVINIT editorial cover (`covers/las-vegas-down-payment-editorial-cover.webp`). FAQPage + Article + Breadcrumb JSON-LD; cross-linked both directions with `las-vegas-starter-home-prices-2026` (its "What buyers should know" list now links here), plus links out to `what-500k-buys-in-las-vegas`, `las-vegas-home-prices-july-2026`, and `nevada-property-tax-abatement-resale-buyers`; sitemap entry; registered in `lib/content.ts` `guides[]`. |
+| `/guides/henderson-vs-southwest-las-vegas` | Comparison guide | Live | Story Page system; pure-synthesis comparison built entirely from the two live pillar guides (`/neighborhoods/henderson` and `/neighborhoods/southwest-las-vegas`), which already carried their own "Henderson vs Southwest" / "Southwest vs Henderson" prose sections — no new fact, date, or number introduced anywhere in the piece; neither pillar guide asserts a commute-minutes figure or a defensible submarket median, and this piece doesn't invent one either. Central argument: an incorporated city with its own government and a huge range of communities vs. an informal name for a mostly-unincorporated growth corridor with no legal boundary. Built via the autonomous scheduled editorial-publishing routine (topic selection: no fresh, corroborated breaking story cleared the 24-72h sourcing bar this run — an inventory figure found only on an uncorroborated personal Substack was explicitly rejected — so the routine filled a genuine content-cluster gap instead). No genuine photo shows "both areas together," and unlike when Summerlin vs. Henderson shipped, both pillar guides now carry their own real photography, so reusing one side's photo would misleadingly imply it speaks for the other; carries a generated LVINIT editorial cover (`covers/henderson-vs-southwest-las-vegas-editorial-cover.webp`) and a photoless hero instead, matching every other cover-based LVINIT guide. Article + Breadcrumb JSON-LD; breadcrumb is Home → article only; cross-linked both directions with the Henderson and Southwest pillar guides (new `relatedStories` entries plus an inline link inside each page's existing "vs" section) and to `/guides/summerlin-vs-henderson` as related reading; sitemap entry; registered in `lib/content.ts` `guides[]`. |
 | `/search` | IDX search | Live | Matrix IDX embed `idx=3652dd5`; do not modify embed behavior without instruction |
 | `/contact` | Contact | Live | ContactForm → `/api/contact` (Resend) with mailto fallback |
 | `/api/contact` | Route handler | Live | Returns 503 until `RESEND_API_KEY` is set, so no fake service ships |
@@ -518,6 +520,28 @@ links flowing both up (feature → guide → homepage) and down (guide → featu
   piece, plus links to the $500K buyer guide, the July 2026 resale piece,
   and the Nevada property-tax abatement guide; sitemap entry; registered in
   `lib/content.ts` `guides[]`.
+- **Henderson vs. Southwest Las Vegas** comparison guide — built via the
+  autonomous scheduled editorial-publishing routine (topic selection: no
+  fresh breaking story in the prior 24-72h that wasn't already covered or
+  couldn't be corroborated — an inventory figure surfaced only on an
+  uncorroborated personal Substack and was rejected on sourcing grounds — so
+  the routine identified this content-cluster gap instead: LVINIT had a
+  Summerlin vs. Henderson comparison but had never paired its other two live
+  pillar guides). A pure synthesis of the two pillar guides, restating only
+  claims each already made and had already sourced: Henderson is an
+  incorporated city with its own government and a wide range of established
+  communities; Southwest Las Vegas is an informal name for a mostly
+  unincorporated, still-forming growth corridor with no legal boundary.
+  Asserts no commute-minutes figure and no submarket median for either area,
+  matching both pillar guides' own discipline on those points. No genuine
+  photo depicts both areas together, and unlike the Summerlin vs. Henderson
+  piece (built when Henderson had no real photography), both pillar guides
+  now carry their own real photography, so reusing one would misleadingly
+  imply it spoke for the other; carries a generated LVINIT editorial cover
+  and a photoless hero instead. Story Page system; Article + Breadcrumb
+  JSON-LD; cross-linked both directions with the Henderson and Southwest
+  pillar guides, plus links to `/guides/summerlin-vs-henderson`, `/search`,
+  and `/contact`; sitemap entry; registered in `lib/content.ts` `guides[]`.
 - Live IDX search page (Matrix / GLVAR).
 - Contact form with Resend handler + mailto fallback + GA4 lead event.
 - GA4 analytics scaffolding (opt-in via env var).
@@ -556,7 +580,8 @@ links flowing both up (feature → guide → homepage) and down (guide → featu
 6. **Summerlin vs. Henderson comparison:** `/guides/summerlin-vs-henderson` —
    a standalone comparison guide, not a child of either pillar. Cross-linked
    both directions with the Summerlin and Henderson pillar guides, plus
-   `/guides/what-500k-buys-in-las-vegas` as tangential reading.
+   `/guides/what-500k-buys-in-las-vegas` as tangential reading. See also
+   cluster 11 below, the same pattern applied to the other two pillars.
 7. **Cost of Living cluster:** `/guides/nevada-property-tax-abatement-resale-buyers` —
    a standalone Cost of Living / homeownership explainer, not tied to a single
    neighborhood. Cross-linked with `/guides/las-vegas-home-prices-july-2026`,
@@ -588,6 +613,17 @@ links flowing both up (feature → guide → homepage) and down (guide → featu
     `/guides/what-500k-buys-in-las-vegas`,
     `/guides/las-vegas-home-prices-july-2026`, and
     `/guides/nevada-property-tax-abatement-resale-buyers`.
+11. **Henderson vs. Southwest Las Vegas comparison:** `/guides/henderson-vs-southwest-las-vegas` —
+    the same pattern as cluster 6 (Summerlin vs. Henderson), applied to
+    LVINIT's other two live pillar guides. A standalone comparison guide, not
+    a child of either pillar; a pure synthesis of claims both pillar guides
+    already made and sourced, with no new stat introduced. Built via the
+    autonomous scheduled editorial-publishing routine on a run when no fresh
+    breaking story cleared the sourcing bar. Cross-linked both directions
+    with the Henderson and Southwest pillar guides (each page's existing "vs"
+    section now links here, plus a new `relatedStories` entry), plus
+    `/guides/summerlin-vs-henderson` as related reading, forming a complete
+    three-way comparison cluster across all four live neighborhood pillars.
 
 The remaining homepage guide/video card (Surviving Your First Vegas Summer,
 and the four video posters) are placeholders that do not yet resolve to pages.
