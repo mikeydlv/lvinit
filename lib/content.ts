@@ -345,14 +345,14 @@ export const guides: Guide[] = [
     date: "August 2026",
     publishedAt: "2026-08-25",
     category: "Market Watch",
-    // No authentic photograph for this explainer, so it carries a generated
-    // LVINIT editorial cover (abstract, non-photographic; draws no real
-    // figures, geography, or charts of its own).
-    //   node scripts/generate-guide-cover.mjs --slug las-vegas-new-home-sales-july-2026 \
-    //     --category "Market Watch" --subject "New-Home Sales" \
-    //     --out las-vegas-new-home-sales-editorial-cover.webp
-    image: "/images/covers/las-vegas-new-home-sales-editorial-cover.webp",
-    imageMode: "editorial-cover",
+    // Real photo: a Lennar new-construction street at Mockingbird in
+    // Summerlin (framing mid-build, finished homes under scaffolding,
+    // work trucks at the curb). Authorship/credit pending confirmation —
+    // see the fact-discipline header in the article file before treating
+    // this as settled.
+    image: "/images/hero/lennar-mockingbird-summerlin-new-construction-drone.webp",
+    imageAlt:
+      "Elevated view of a Lennar new-construction street at Mockingbird in Summerlin, Las Vegas: finished stucco homes under scaffolding on the left, open timber framing mid-build on the right, work trucks and dumpsters along the curb, and the valley and mountains visible in the haze behind.",
     href: "/guides/las-vegas-new-home-sales-july-2026",
   },
   {
