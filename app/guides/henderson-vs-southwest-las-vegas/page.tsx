@@ -34,18 +34,19 @@ import {
 //   pull quote that's original synthesis language (not a fact) rather than a
 //   fabricated claim.
 //
-// IMAGE — updated 2026-08-31 at Mikey's explicit direction. He supplied
-// hero/las-vegas-valley-lake-neighborhood-strip-skyline-aerial-drone.webp
-// directly in chat. FLAGGED, not blocked: the source filename he was working
-// from ("stripview-the-lakes-flyover") suggests this drone still is actually
-// The Lakes, a west-valley lake/canal community unrelated to Henderson or
-// Southwest Las Vegas — not a shot of either place this article compares.
-// Per CLAUDE.md ("never use mismatched photography to represent a different
-// place"), the alt text below is written to describe only what's verifiably
-// in the frame (a lake-neighborhood aerial with the Strip on the horizon) and
-// does NOT claim it depicts Henderson or Southwest. If this isn't the shot
-// Mikey meant, swap it — the generated editorial cover this replaced is still
-// at public/images/covers/henderson-vs-southwest-las-vegas-editorial-cover.webp.
+// IMAGE — swapped again 2026-08-31, same day, at Mikey's direction. The first
+// swap used a drone still whose source filename ("stripview-the-lakes-
+// flyover") suggested it was actually The Lakes, unrelated to either area —
+// flagged in chat, and Mikey corrected it. This replacement,
+// hero/southwest-las-vegas-mountains-edge-park-aerial-drone.webp, is a real
+// match: its source filename ("lvinit-mountains-edge-park") is a park in
+// Mountain's Edge, one of the master-planned communities the Southwest Las
+// Vegas pillar guide itself names (see that page's community roster, and this
+// page's own "Housing stock" section above, which lists "Mountain's Edge,
+// Southern Highlands, Rhodes Ranch" as Southwest master plans). No further
+// caveat needed — this photo genuinely depicts a place inside this article's
+// scope. The generated editorial cover this originally replaced is still at
+// public/images/covers/henderson-vs-southwest-las-vegas-editorial-cover.webp.
 //
 // VIDEO — added 2026-08-31 at Mikey's request: a "Which area fits you best?"
 // section right after the lede, embedding youtube.com/watch?v=ZAU9hPQ_1Hk via
@@ -66,11 +67,11 @@ const meta: StoryMeta = {
   description:
     "An honest comparison of Henderson and Southwest Las Vegas: an incorporated city with a huge range of communities against an informal, still-forming growth corridor with no legal boundary.",
   path: "/guides/henderson-vs-southwest-las-vegas",
-  image: "/images/hero/las-vegas-valley-lake-neighborhood-strip-skyline-aerial-drone.webp",
-  imageWidth: 1892,
-  imageHeight: 1027,
+  image: "/images/hero/southwest-las-vegas-mountains-edge-park-aerial-drone.webp",
+  imageWidth: 1895,
+  imageHeight: 1063,
   imageAlt:
-    "Aerial drone view over a Las Vegas valley lake-and-canal neighborhood at dusk, the Strip skyline visible on the horizon.",
+    "Aerial drone view of a park in Mountain's Edge, a master-planned Southwest Las Vegas community, with the valley and mountains beyond.",
   datePublished: "2026-08-31",
   author: "Mikey Del Rosario",
   breadcrumbs: [
@@ -97,9 +98,9 @@ export default function HendersonVsSouthwestLasVegasPage() {
         subheadline:
           "Both get recommended to people relocating here, and for almost opposite reasons. Here's the honest side-by-side of an incorporated city against an informal, still-forming growth corridor.",
         image:
-          "/images/hero/las-vegas-valley-lake-neighborhood-strip-skyline-aerial-drone.webp",
+          "/images/hero/southwest-las-vegas-mountains-edge-park-aerial-drone.webp",
         imageAlt:
-          "Aerial drone view over a Las Vegas valley lake-and-canal neighborhood at dusk, the Strip skyline visible on the horizon.",
+          "Aerial drone view of a park in Mountain's Edge, a master-planned Southwest Las Vegas community, with the valley and mountains beyond.",
         backLink: { label: "LVINIT", href: "/" },
       }}
       relatedStories={{
