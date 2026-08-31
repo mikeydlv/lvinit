@@ -246,7 +246,7 @@ export const guides: Guide[] = [
     // LVINIT editorial cover (abstract, non-photographic; draws no real
     // figures, geography, or charts of its own).
     //   node scripts/generate-guide-cover.mjs --slug las-vegas-down-payment-assistance-programs-2026 \
-    //     --category "Buyer Guide" --subject "Down Payment" \
+    //     --category "Buyer Guide" --subject "Down Payment Myth" \
     //     --out las-vegas-down-payment-editorial-cover.webp
     image: "/images/covers/las-vegas-down-payment-editorial-cover.webp",
     imageMode: "editorial-cover",
