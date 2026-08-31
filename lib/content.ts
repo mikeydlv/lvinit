@@ -218,22 +218,20 @@ export const guides: Guide[] = [
     // two live pillar guides, Henderson and Southwest Las Vegas, had never
     // been compared against each other).
     //
-    // Card image updated 2026-08-31 at Mikey's direction: he supplied a real
-    // drone still directly in chat to use as the article hero, so the card
-    // now reuses that same photo instead of the generated cover below.
-    // FLAGGED (see the fact-check note atop the page file): the source
-    // filename Mikey was working from suggests this still is actually The
-    // Lakes, not Henderson or Southwest — the alt text intentionally makes no
-    // place claim beyond what's verifiable in frame. The original generated
-    // cover this replaced is still on disk if this needs to be reverted:
+    // Card image updated twice 2026-08-31 at Mikey's direction. The first
+    // swap reused a drone still whose source filename suggested it was
+    // actually The Lakes, not Henderson or Southwest — flagged, and Mikey
+    // corrected it. This is the corrected photo: a park in Mountain's Edge, a
+    // Southwest Las Vegas master-planned community the article's own
+    // "Housing stock" section already names. Genuinely in scope, no caveat
+    // needed. The original generated cover is still on disk if ever reverted:
     //   node scripts/generate-guide-cover.mjs --slug henderson-vs-southwest-las-vegas \
     //     --category "Comparisons" --subject "HENDERSON VS SOUTHWEST" \
     //     --out henderson-vs-southwest-las-vegas-editorial-cover.webp
     //   -> public/images/covers/henderson-vs-southwest-las-vegas-editorial-cover.webp
-    image:
-      "/images/hero/las-vegas-valley-lake-neighborhood-strip-skyline-aerial-drone.webp",
+    image: "/images/hero/southwest-las-vegas-mountains-edge-park-aerial-drone.webp",
     imageAlt:
-      "Aerial drone view over a Las Vegas valley lake-and-canal neighborhood at dusk, the Strip skyline visible on the horizon.",
+      "Aerial drone view of a park in Mountain's Edge, a master-planned Southwest Las Vegas community, with the valley and mountains beyond.",
     href: "/guides/henderson-vs-southwest-las-vegas",
   },
   {
