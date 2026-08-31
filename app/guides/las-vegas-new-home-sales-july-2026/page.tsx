@@ -48,7 +48,17 @@ import {
 //   sizes, ages, locations, and incentives).
 // - This article and the resale July 2026 piece are cross-linked both
 //   directions — do not remove either link.
+//
+// HERO PHOTO — a real photo of a Lennar new-construction street at
+// Mockingbird in Summerlin, shot by Mikey Del Rosario (confirmed 2026-08-31),
+// showing framing mid-build, finished homes under scaffolding, and work
+// trucks at the curb. Mikey-owned, so the global footer credit covers it —
+// no per-image credit line needed (not developer/licensed imagery).
 // ---------------------------------------------------------------------------
+
+const HERO_IMAGE = "/images/hero/lennar-mockingbird-summerlin-new-construction-drone.webp";
+const HERO_ALT =
+  "Elevated view of a Lennar new-construction street at Mockingbird in Summerlin, Las Vegas: finished stucco homes under scaffolding on the left, open timber framing mid-build on the right, work trucks and dumpsters along the curb, and the valley and mountains visible in the haze behind.";
 
 const meta: StoryMeta = {
   title:
@@ -58,7 +68,12 @@ const meta: StoryMeta = {
   description:
     "Home Builders Research data reported by the Las Vegas Review-Journal shows builder sales up 28% from June to July 2026, still down 7% year over year, with new-construction permits down 23% and pricing well above the resale median.",
   path: "/guides/las-vegas-new-home-sales-july-2026",
+  image: HERO_IMAGE,
+  imageWidth: 2400,
+  imageHeight: 1350,
+  imageAlt: HERO_ALT,
   datePublished: "2026-08-25",
+  dateModified: "2026-08-31",
   author: "Mikey Del Rosario",
   breadcrumbs: [
     { name: "Home", path: "/" },
@@ -179,6 +194,8 @@ export default function LasVegasNewHomeSalesJuly2026Page() {
           "Las Vegas New-Home Sales Jumped in July 2026 — But Builders Are Still Pulling Back",
         subheadline:
           "Home Builders Research data shows builder sales up 28% month over month, but still down from a year ago — and new-home permits keep shrinking, which says something different about what's coming next.",
+        image: HERO_IMAGE,
+        imageAlt: HERO_ALT,
         backLink: { label: "LVINIT", href: "/" },
         ctas: [{ label: "See the numbers", href: "#by-the-numbers", variant: "primary" }],
       }}
