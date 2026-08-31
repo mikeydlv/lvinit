@@ -79,6 +79,11 @@ const meta: StoryMeta = {
   description:
     "Zillow research reported by the Las Vegas Review-Journal puts the typical Las Vegas starter home at $312,141 in July 2026, more than double its $140,630 value in July 2016, but down 3.2% from a year earlier. Here's what that means for a first-time buyer.",
   path: "/guides/las-vegas-starter-home-prices-2026",
+  image: "/images/hero/las-vegas-starter-home-new-construction.webp",
+  imageWidth: 1724,
+  imageHeight: 970,
+  imageAlt:
+    "Two adjacent two-story stucco homes in a new Las Vegas subdivision, with tile roofs, rooftop solar on one home, desert rock landscaping, and small builder yard signs, under a clear blue sky.",
   datePublished: "2026-08-27",
   author: "Mikey Del Rosario",
   breadcrumbs: [
@@ -200,6 +205,9 @@ export default function LasVegasStarterHomePrices2026Page() {
           "Las Vegas Starter Homes Have More Than Doubled Since 2016 — And They Just Got a Little Cheaper",
         subheadline:
           "Zillow research puts the typical Las Vegas starter home at $312,141 in July 2026 — more than double what it cost a decade ago, but down 3.2% from a year earlier. Here's what the entry point to homeownership actually looks like right now.",
+        image: "/images/hero/las-vegas-starter-home-new-construction.webp",
+        imageAlt:
+          "Two adjacent two-story stucco homes in a new Las Vegas subdivision, with tile roofs, rooftop solar on one home, desert rock landscaping, and small builder yard signs, under a clear blue sky.",
         backLink: { label: "LVINIT", href: "/" },
         ctas: [{ label: "See the numbers", href: "#by-the-numbers", variant: "primary" }],
       }}

@@ -261,14 +261,16 @@ export const guides: Guide[] = [
     date: "August 2026",
     publishedAt: "2026-08-27",
     category: "Market Watch",
-    // No authentic photograph for this explainer, so it carries a generated
-    // LVINIT editorial cover (abstract, non-photographic; draws no real
-    // figures, geography, or charts of its own).
-    //   node scripts/generate-guide-cover.mjs --slug las-vegas-starter-home-prices-2026 \
-    //     --category "Market Watch" --subject "Starter Homes" \
-    //     --out las-vegas-starter-home-editorial-cover.webp
-    image: "/images/covers/las-vegas-starter-home-editorial-cover.webp",
-    imageMode: "editorial-cover",
+    // Real Mikey-owned photography: two adjacent new-construction homes in a
+    // Las Vegas subdivision (desert xeriscape, tile roofs, rooftop solar on
+    // one home). Valley-wide new-construction imagery, not a photo of any
+    // specific neighborhood named in this piece — the article's data is
+    // valley-wide, not submarket-specific, so the alt text makes no such
+    // claim either. Same file is wired as the page's hero in
+    // app/guides/las-vegas-starter-home-prices-2026/page.tsx.
+    image: "/images/hero/las-vegas-starter-home-new-construction.webp",
+    imageAlt:
+      "Two adjacent two-story stucco homes in a new Las Vegas subdivision, with tile roofs, rooftop solar on one home, desert rock landscaping, and small builder yard signs, under a clear blue sky.",
     href: "/guides/las-vegas-starter-home-prices-2026",
   },
   {
