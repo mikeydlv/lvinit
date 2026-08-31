@@ -47,6 +47,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.7,
     },
     {
+      url: `${BASE_URL}/guides/henderson-vs-southwest-las-vegas`,
+      changeFrequency: "monthly",
+      priority: 0.7,
+    },
+    {
       url: `${BASE_URL}/guides/what-500k-buys-in-las-vegas`,
       changeFrequency: "monthly",
       priority: 0.7,

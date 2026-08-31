@@ -136,6 +136,12 @@ export default function SouthwestLasVegasPage() {
             category: "Buyer guide",
             dek: "Three real homes at the same price, including a Southwest single-family with a pool, and the tradeoffs between them.",
           },
+          {
+            name: "Henderson vs. Southwest Las Vegas",
+            href: "/guides/henderson-vs-southwest-las-vegas",
+            category: "Comparison",
+            dek: "A closer comparison than it looks: an incorporated city against an informal name for a stretch of county.",
+          },
         ],
       }}
       ctas={{
@@ -795,7 +801,11 @@ export default function SouthwestLasVegasPage() {
             Henderson guide
           </Link>{" "}
           breaks the city down community by community, which is the only useful
-          way to think about it.
+          way to think about it, and the full{" "}
+          <Link href="/guides/henderson-vs-southwest-las-vegas" className={linkClass}>
+            Henderson vs. Southwest Las Vegas comparison
+          </Link>{" "}
+          goes through this pairing properly.
         </p>
       </StorySection>
 

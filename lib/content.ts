@@ -205,6 +205,33 @@ export type Guide = {
  */
 export const guides: Guide[] = [
   {
+    slug: "henderson-vs-southwest-las-vegas",
+    title: "Henderson vs. Southwest Las Vegas: Where Should You Actually Move?",
+    dek: "An incorporated city with a huge range of communities against an informal, still-forming growth corridor with no legal boundary. The honest side-by-side, without a brochure in sight.",
+    byline: "Mikey Del Rosario",
+    date: "August 2026",
+    publishedAt: "2026-08-31",
+    category: "Comparisons",
+    // Built via the autonomous scheduled editorial-publishing routine: no
+    // fresh, corroborated breaking story cleared the sourcing bar this run,
+    // so the routine filled a genuine content-cluster gap instead (the other
+    // two live pillar guides, Henderson and Southwest Las Vegas, had never
+    // been compared against each other).
+    //
+    // No genuine photograph shows "both areas together," and unlike when
+    // Summerlin vs. Henderson shipped, both pillar guides now carry their own
+    // real photography — reusing one side's photo here would visibly imply
+    // it speaks for the other area too. So this carries a generated LVINIT
+    // editorial cover (abstract "Comparisons" motif; draws no real figures,
+    // geography, or charts of its own):
+    //   node scripts/generate-guide-cover.mjs --slug henderson-vs-southwest-las-vegas \
+    //     --category "Comparisons" --subject "HENDERSON VS SOUTHWEST" \
+    //     --out henderson-vs-southwest-las-vegas-editorial-cover.webp
+    image: "/images/covers/henderson-vs-southwest-las-vegas-editorial-cover.webp",
+    imageMode: "editorial-cover",
+    href: "/guides/henderson-vs-southwest-las-vegas",
+  },
+  {
     slug: "las-vegas-down-payment-assistance-programs-2026",
     title: "You Don't Need 20% Down To Buy a Home in Las Vegas",
     dek: "FHA starts at 3.5% down, VA loans can be 0%, and Nevada runs real down-payment-assistance programs, including one that launched in December 2025. Here's what the real minimums and programs actually look like.",
