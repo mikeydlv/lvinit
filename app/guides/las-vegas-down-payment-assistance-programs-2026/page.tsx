@@ -140,6 +140,11 @@ const meta: StoryMeta = {
   description:
     "FHA starts at 3.5% down, VA loans can be 0%, and Nevada runs real down-payment-assistance programs, including one that launched in December 2025. Here's what buying with less than 20% down actually looks like.",
   path: "/guides/las-vegas-down-payment-assistance-programs-2026",
+  image: "/images/hero/las-vegas-residential-neighborhood-aerial-drone.webp",
+  imageWidth: 1908,
+  imageHeight: 1070,
+  imageAlt:
+    "Aerial drone view of a Las Vegas residential neighborhood, with rows of tile-roofed tract homes, rooftop solar panels, and desert mountains under a blue sky in the background.",
   datePublished: "2026-08-29",
   author: "Mikey Del Rosario",
   breadcrumbs: [
@@ -265,6 +270,9 @@ export default function LasVegasDownPaymentAssistanceProgramsPage() {
         headline: "You Don't Need 20% Down To Buy a Home in Las Vegas",
         subheadline:
           "It's the most common reason buyers think they're years away from owning here. FHA starts at 3.5% down, VA can be 0%, and Nevada runs real down-payment-assistance programs on top of any of them, including one most Las Vegas buyers haven't heard of yet.",
+        image: "/images/hero/las-vegas-residential-neighborhood-aerial-drone.webp",
+        imageAlt:
+          "Aerial drone view of a Las Vegas residential neighborhood, with rows of tile-roofed tract homes, rooftop solar panels, and desert mountains under a blue sky in the background.",
         backLink: { label: "LVINIT", href: "/" },
         ctas: [{ label: "See the minimums", href: "#the-minimums", variant: "primary" }],
       }}
