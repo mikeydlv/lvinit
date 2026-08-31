@@ -345,11 +345,10 @@ export const guides: Guide[] = [
     date: "August 2026",
     publishedAt: "2026-08-25",
     category: "Market Watch",
-    // Real photo: a Lennar new-construction street at Mockingbird in
-    // Summerlin (framing mid-build, finished homes under scaffolding,
-    // work trucks at the curb). Authorship/credit pending confirmation —
-    // see the fact-discipline header in the article file before treating
-    // this as settled.
+    // Real Mikey-owned photography: a Lennar new-construction street at
+    // Mockingbird in Summerlin (framing mid-build, finished homes under
+    // scaffolding, work trucks at the curb). Same file is wired as the
+    // page's hero in app/guides/las-vegas-new-home-sales-july-2026/page.tsx.
     image: "/images/hero/lennar-mockingbird-summerlin-new-construction-drone.webp",
     imageAlt:
       "Elevated view of a Lennar new-construction street at Mockingbird in Summerlin, Las Vegas: finished stucco homes under scaffolding on the left, open timber framing mid-build on the right, work trucks and dumpsters along the curb, and the valley and mountains visible in the haze behind.",
