@@ -242,14 +242,15 @@ export const guides: Guide[] = [
     date: "August 2026",
     publishedAt: "2026-08-29",
     category: "Buyer Guide",
-    // No authentic photograph for this explainer, so it carries a generated
-    // LVINIT editorial cover (abstract, non-photographic; draws no real
-    // figures, geography, or charts of its own).
-    //   node scripts/generate-guide-cover.mjs --slug las-vegas-down-payment-assistance-programs-2026 \
-    //     --category "Buyer Guide" --subject "Down Payment Myth" \
-    //     --out las-vegas-down-payment-editorial-cover.webp
-    image: "/images/covers/las-vegas-down-payment-editorial-cover.webp",
-    imageMode: "editorial-cover",
+    // Real Mikey-owned drone photography: a Las Vegas residential
+    // neighborhood aerial (tile-roofed tract homes, rooftop solar, desert
+    // mountains). This piece is valley-wide, not tied to one community, so
+    // the alt text makes no specific-neighborhood claim either. Same file is
+    // wired as the page's hero in
+    // app/guides/las-vegas-down-payment-assistance-programs-2026/page.tsx.
+    image: "/images/hero/las-vegas-residential-neighborhood-aerial-drone.webp",
+    imageAlt:
+      "Aerial drone view of a Las Vegas residential neighborhood, with rows of tile-roofed tract homes, rooftop solar panels, and desert mountains under a blue sky in the background.",
     href: "/guides/las-vegas-down-payment-assistance-programs-2026",
   },
   {
