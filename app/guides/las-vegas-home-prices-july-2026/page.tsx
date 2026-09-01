@@ -201,6 +201,12 @@ export default function LasVegasHomePricesJuly2026Page() {
             category: "Market Watch",
             dek: "The $480,000 median covers every price tier. Here's what's happening specifically at the entry point first-time buyers are shopping in.",
           },
+          {
+            name: "A Las Vegas Household Needs $116,563 a Year To Afford the Median Home",
+            href: "/guides/las-vegas-income-needed-to-buy-a-home-2026",
+            category: "Market Watch",
+            dek: "This median price, translated into the income it actually takes to qualify for it — and how that compares to what a typical local household earns.",
+          },
         ],
       }}
       relatedNeighborhood={{

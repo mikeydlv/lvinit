@@ -5,7 +5,7 @@
 > development sprint. Where this file and the code disagree, trust the code and
 > fix this file.
 >
-> **Last audited:** 2026-08-29 · **Branch:** `main` · **Live:** https://www.lvinit.com
+> **Last audited:** 2026-09-01 · **Branch:** `main` · **Live:** https://www.lvinit.com
 >
 > **Content Publisher agent:** a project-scoped Claude Code subagent,
 > `lvinit-content-publisher`, turns Mikey's real photos/videos/notes into
@@ -75,6 +75,7 @@ app/
   guides/henderson-vs-southwest-las-vegas/page.tsx  /guides/henderson-vs-southwest-las-vegas — honest comparison guide, no invented stats (Story Page system)
   guides/nevada-property-tax-abatement-resale-buyers/page.tsx  /guides/nevada-property-tax-abatement-resale-buyers — Cost of Living explainer, NRS 361.4723 property tax cap (Story Page system)
   guides/las-vegas-down-payment-assistance-programs-2026/page.tsx  /guides/las-vegas-down-payment-assistance-programs-2026 — Buyer Guide, busts the "20% down" myth with real loan-type minimums and Nevada's down-payment-assistance programs (Story Page system)
+  guides/las-vegas-income-needed-to-buy-a-home-2026/page.tsx  /guides/las-vegas-income-needed-to-buy-a-home-2026 — Market Watch, Redfin's June 2026 income-needed-to-afford research via the Las Vegas Review-Journal, Aug 31 2026 (Story Page system)
 ```
 
 **Path alias:** `@/*` → project root (see `tsconfig.json`).
@@ -100,6 +101,7 @@ app/
 | `/guides/las-vegas-starter-home-prices-2026` | Market Watch guide | Live | Story Page system; a genuine content gap, not a restatement — the two July 2026 Market Watch pieces cover valley-wide medians ($480,000 resale, $581,930 new-construction) across every price tier; this piece covers Zillow's starter-home research (bottom-third-of-market pricing), the tier a first-time buyer is actually shopping in. Sourced to Zillow via the Las Vegas Review-Journal (Patrick Blennerhassett, Aug 26, 2026): typical Las Vegas starter-home value $312,141 in July 2026, down 3.2% YoY from $322,577 in July 2025, up ~122% from $140,630 in July 2016 ("more than doubled"). Real, attributed quotes from Zillow senior economist Kara Ng and local mortgage advisor Matt Hennessy — neither put in Mikey's mouth. No submarket-specific starter-home claim (none in the source). Real hero photo: `hero/las-vegas-starter-home-new-construction.webp`, Mikey's own daylight street photography of two adjacent new-construction homes in a Las Vegas subdivision (desert xeriscape, tile roofs, rooftop solar on one home) — valley-wide new-construction imagery, not a photo of any specific neighborhood, matching the article's valley-wide (not submarket-specific) data; alt text makes no neighborhood or stat claim. Replaces the piece's earlier generated editorial cover, which is no longer referenced here (the cover-generation system itself is untouched and still used elsewhere). FAQPage + Article + Breadcrumb JSON-LD; cross-linked both directions with `las-vegas-home-prices-july-2026` and `las-vegas-new-home-sales-july-2026` (their "Keep reading" blocks now point here), plus links out to `what-500k-buys-in-las-vegas` and `nevada-property-tax-abatement-resale-buyers`; sitemap entry; registered in `lib/content.ts` `guides[]` (slug `las-vegas-starter-home-prices-2026`), so it surfaces automatically in the homepage "Latest from LVINIT" feed and at `/guides`. |
 | `/guides/las-vegas-down-payment-assistance-programs-2026` | Buyer Guide | Live | Story Page system; a genuine evergreen content gap — LVINIT had zero coverage of down-payment size or down-payment-assistance programs before this piece. Busts the "you need 20% down" myth with the real minimums (FHA 3.5%/580+, VA 0% for eligible borrowers, conventional as low as 3% for qualifying buyers via income-restricted programs like Freddie Mac Home Possible, 5% typical otherwise; USDA mentioned only in generic terms, no Las Vegas Valley eligibility claimed). Explains Nevada Housing Division's "Home Is Possible" (homeispossiblenv.org) is a completely different program from Freddie Mac's national "Home Possible" loan product despite the near-identical name. Leads with the newest, best-corroborated program — the Worker Advantage Program (launched Dec 10, 2025, $18M/~900 households, $20,000 no-interest/no-payment/non-forgivable 30-year second mortgage for essential workers in healthcare/education/public-safety/construction, Clark County AMI cap $147,300 per the Division's own current eligibility table) — plus Home Is Possible's two tracks (5% general vs. 4% first-time-buyer-restricted) and Home Is Possible for Teachers ($7,500, forgivable after 5 years, available through Dec 31, 2026 per its own page). Flags rather than resolves a real discrepancy: Nevada Housing Division's own program pages disagree with each other on the standard Home Is Possible percentage and forgiveness structure, so the article states what each page says and tells readers to confirm with a lender or the Division. No real photo exists for this topic, so it carries a generated LVINIT editorial cover (`covers/las-vegas-down-payment-editorial-cover.webp`). FAQPage + Article + Breadcrumb JSON-LD; cross-linked both directions with `las-vegas-starter-home-prices-2026` (its "What buyers should know" list now links here), plus links out to `what-500k-buys-in-las-vegas`, `las-vegas-home-prices-july-2026`, and `nevada-property-tax-abatement-resale-buyers`; sitemap entry; registered in `lib/content.ts` `guides[]`. |
 | `/guides/henderson-vs-southwest-las-vegas` | Comparison guide | Live | Story Page system; pure-synthesis comparison built entirely from the two live pillar guides (`/neighborhoods/henderson` and `/neighborhoods/southwest-las-vegas`), which already carried their own "Henderson vs Southwest" / "Southwest vs Henderson" prose sections — no new fact, date, or number introduced anywhere in the piece; neither pillar guide asserts a commute-minutes figure or a defensible submarket median, and this piece doesn't invent one either. Central argument: an incorporated city with its own government and a huge range of communities vs. an informal name for a mostly-unincorporated growth corridor with no legal boundary. Built via the autonomous scheduled editorial-publishing routine (topic selection: no fresh, corroborated breaking story cleared the 24-72h sourcing bar this run — an inventory figure found only on an uncorroborated personal Substack was explicitly rejected — so the routine filled a genuine content-cluster gap instead). **Updated 2026-08-31, at Mikey's direction, in a live follow-up (hero swapped twice same day):** he first supplied a real drone still to use as the hero/OG image, replacing the generated cover the piece originally shipped with. That still's source filename ("stripview-the-lakes-flyover") suggested it was actually The Lakes, a west-valley community unrelated to either Henderson or Southwest — flagged rather than blocked, and Mikey corrected it a few minutes later with a second photo. **Current hero** (`hero/southwest-las-vegas-mountains-edge-park-aerial-drone.webp`): a park in Mountain's Edge, one of the Southwest Las Vegas master-planned communities this very article's "Housing stock" section already names alongside Southern Highlands and Rhodes Ranch — genuinely in scope, no caveat needed. The mismatched first photo was deleted (no remaining references); the original generated cover is still on disk at `covers/henderson-vs-southwest-las-vegas-editorial-cover.webp` if ever needed. Also added, same follow-up: a "Which area fits you best?" `StoryVideo` section right after the lede, embedding `youtube.com/watch?v=ZAU9hPQ_1Hk` (Mikey's own three-way Summerlin/Henderson/Southwest comparison video) via the existing click-to-play facade — poster until clicked, then autoplay from 0:00, no page-load autoplay. Poster is Mikey's own thumbnail, supplied in chat, saved as `video-summerlin-henderson-southwest-where-would-you-live.webp`. No VideoObject JSON-LD was added: this session couldn't independently verify the video's real upload date (YouTube's page wasn't fetchable, oEmbed was blocked), and `StoryVideoMeta.uploadDate` must be real, never guessed. Article + Breadcrumb JSON-LD; breadcrumb is Home → article only; cross-linked both directions with the Henderson and Southwest pillar guides (new `relatedStories` entries plus an inline link inside each page's existing "vs" section) and to `/guides/summerlin-vs-henderson` as related reading; sitemap entry; registered in `lib/content.ts` `guides[]` (card image updated to match the new hero). |
+| `/guides/las-vegas-income-needed-to-buy-a-home-2026` | Market Watch guide | Live | Story Page system; built via the autonomous scheduled editorial-publishing routine — a genuine content gap (LVINIT's existing Market Watch pieces report what homes cost; none reported what income a household needs to qualify for one). Sourced to Redfin's national affordability report (published Aug 5, 2026, data as of June 2026, independently fetched) and the Las Vegas Review-Journal's local coverage (reporter Patrick Blennerhassett, Aug 31, 2026, independently fetched and cross-checked against Redfin directly — figures matched exactly). Las Vegas metro, June 2026: $116,563 income needed to afford the typical home (-2.0% YoY), Redfin's own $82,975 estimated median household income, 42.1% of income required (vs. Redfin's 30% affordability threshold), 18.5% of listings affordable to the median household — run against the national $109,796/$87,599/37.6%/34.2% figures for comparison. Methodology is explicitly disclosed as a 15%-down, 30%-of-income Redfin model, not a lending rule, and is explicitly distinguished from the real loan-type minimums (0%-5%) in the down-payment-assistance guide. Two real, attributed Redfin quotes (senior economist Yingqi Xu). Freddie Mac PMMS cited directly (independently fetched) for current-rate context only (30-year 6.66% as of Aug 27, 2026), not as the rate used in Redfin's calculation. No formal metro-affordability ranking is asserted — only the two sourced comparison figures. No real photo exists for this topic, so it carries a generated LVINIT editorial cover (card image only, per the established Market Watch pattern — the hero itself stays photoless, matching `will-las-vegas-home-prices-drop`). FAQPage + Article + Breadcrumb JSON-LD; cross-linked both directions with `las-vegas-home-prices-july-2026`, `las-vegas-down-payment-assistance-programs-2026`, and `las-vegas-starter-home-prices-2026` (each piece's "Keep reading" block now includes this one); sitemap entry; registered in `lib/content.ts` `guides[]`. |
 | `/search` | IDX search | Live | Matrix IDX embed `idx=3652dd5`; do not modify embed behavior without instruction |
 | `/contact` | Contact | Live | ContactForm → `/api/contact` (Resend) with mailto fallback |
 | `/api/contact` | Route handler | Live | Returns 503 until `RESEND_API_KEY` is set, so no fake service ships |
@@ -568,6 +570,28 @@ links flowing both up (feature → guide → homepage) and down (guide → featu
   JSON-LD; cross-linked both directions with the Henderson and Southwest
   pillar guides, plus links to `/guides/summerlin-vs-henderson`, `/search`,
   and `/contact`; sitemap entry; registered in `lib/content.ts` `guides[]`.
+- **Las Vegas income-needed-to-buy Market Watch guide** — built via the
+  autonomous scheduled editorial-publishing routine on a run that found a
+  genuinely fresh, well-sourced story: LVINIT's existing Market Watch pieces
+  all report what Las Vegas homes cost; none reported what income a household
+  actually needs to qualify for one. Sourced to Redfin's national
+  affordability report (Aug 5, 2026, June 2026 data) and the Las Vegas
+  Review-Journal's local coverage of it (Aug 31, 2026) — both independently
+  fetched and cross-checked against each other, matching exactly. Leads with
+  the real number: $116,563 in annual income needed to afford the typical Las
+  Vegas home, against Redfin's own $82,975 estimated median household income
+  for the metro (a ~$33,600 gap), run against the same national figures for
+  comparison. Explicitly discloses Redfin's methodology (15% down payment,
+  30%-of-income threshold) as a research model, not a lending rule, and links
+  it directly to the real, lower loan-type minimums already covered in the
+  down-payment-assistance guide. No real photo exists for this data-driven
+  topic, so it carries a generated LVINIT editorial cover as its card image
+  only — the hero itself stays photoless, matching the established
+  `will-las-vegas-home-prices-drop` pattern. FAQPage + Article + Breadcrumb
+  JSON-LD; cross-linked both directions with `las-vegas-home-prices-july-2026`,
+  `las-vegas-down-payment-assistance-programs-2026`, and
+  `las-vegas-starter-home-prices-2026`; sitemap entry; registered in
+  `lib/content.ts` `guides[]`.
 - Live IDX search page (Matrix / GLVAR).
 - Contact form with Resend handler + mailto fallback + GA4 lead event.
 - GA4 analytics scaffolding (opt-in via env var).
@@ -650,6 +674,18 @@ links flowing both up (feature → guide → homepage) and down (guide → featu
     section now links here, plus a new `relatedStories` entry), plus
     `/guides/summerlin-vs-henderson` as related reading, forming a complete
     three-way comparison cluster across all four live neighborhood pillars.
+12. **Income-needed-to-buy Market Watch piece:** `/guides/las-vegas-income-needed-to-buy-a-home-2026` —
+    built via the autonomous scheduled editorial-publishing routine, which
+    identified a genuine gap this run: LVINIT's Market Watch pieces (cluster
+    8 and 9) all report home prices; none reported the income a household
+    needs to qualify for one. Sourced to Redfin's national affordability
+    report and the Las Vegas Review-Journal's Aug 31, 2026 local coverage of
+    it, independently cross-checked. Extends the Market Watch trio with the
+    affordability side of the same question. Cross-linked both directions
+    with `/guides/las-vegas-home-prices-july-2026`,
+    `/guides/las-vegas-down-payment-assistance-programs-2026` (explicitly
+    reconciling Redfin's 15%-down research model with that guide's real,
+    lower loan-type minimums), and `/guides/las-vegas-starter-home-prices-2026`.
 
 The remaining homepage guide/video card (Surviving Your First Vegas Summer,
 and the four video posters) are placeholders that do not yet resolve to pages.

@@ -205,6 +205,25 @@ export type Guide = {
  */
 export const guides: Guide[] = [
   {
+    slug: "las-vegas-income-needed-to-buy-a-home-2026",
+    title: "A Las Vegas Household Needs $116,563 a Year To Afford the Median Home",
+    dek: "Redfin's latest affordability research, reported by the Las Vegas Review-Journal on August 31, 2026, puts the income needed to afford a typical Las Vegas home well above the metro's estimated median household income. Here's what the gap actually means.",
+    byline: "Mikey Del Rosario",
+    date: "September 2026",
+    publishedAt: "2026-09-01",
+    category: "Market Watch",
+    // Built via the autonomous scheduled editorial-publishing routine. No
+    // real photo depicts this data-driven, valley-wide affordability topic,
+    // so this carries a generated LVINIT editorial cover (§5a) rather than a
+    // fabricated or mismatched stand-in.
+    //   node scripts/generate-guide-cover.mjs --slug las-vegas-income-needed-to-buy-a-home-2026 \
+    //     --category "Market Watch" --subject "INCOME TO BUY" \
+    //     --out las-vegas-income-needed-editorial-cover.webp
+    image: "/images/covers/las-vegas-income-needed-editorial-cover.webp",
+    imageMode: "editorial-cover",
+    href: "/guides/las-vegas-income-needed-to-buy-a-home-2026",
+  },
+  {
     slug: "henderson-vs-southwest-las-vegas",
     title: "Henderson vs. Southwest Las Vegas: Where Should You Actually Move?",
     dek: "An incorporated city with a huge range of communities against an informal, still-forming growth corridor with no legal boundary. The honest side-by-side, without a brochure in sight.",
