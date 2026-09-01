@@ -42,6 +42,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     { url: `${BASE_URL}/guides`, changeFrequency: "weekly", priority: 0.8 },
     {
+      url: `${BASE_URL}/guides/las-vegas-income-needed-to-buy-a-home-2026`,
+      changeFrequency: "monthly",
+      priority: 0.7,
+    },
+    {
       url: `${BASE_URL}/guides/summerlin-vs-henderson`,
       changeFrequency: "monthly",
       priority: 0.7,

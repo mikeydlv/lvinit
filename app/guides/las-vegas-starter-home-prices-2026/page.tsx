@@ -234,6 +234,12 @@ export default function LasVegasStarterHomePrices2026Page() {
             category: "Cost of living",
             dek: "The property-tax mechanics every buyer should check before closing, starter home or not.",
           },
+          {
+            name: "A Las Vegas Household Needs $116,563 a Year To Afford the Median Home",
+            href: "/guides/las-vegas-income-needed-to-buy-a-home-2026",
+            category: "Market Watch",
+            dek: "Even at the starter tier, here's the income research says it actually takes to qualify for a typical Las Vegas home.",
+          },
         ],
       }}
       ctas={{

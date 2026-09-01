@@ -299,6 +299,12 @@ export default function LasVegasDownPaymentAssistanceProgramsPage() {
             category: "Cost of living",
             dek: "The other number on a resale listing that isn't automatically yours. Worth understanding before you finalize a budget.",
           },
+          {
+            name: "A Las Vegas Household Needs $116,563 a Year To Afford the Median Home",
+            href: "/guides/las-vegas-income-needed-to-buy-a-home-2026",
+            category: "Market Watch",
+            dek: "That research figure assumes 15% down. A smaller down payment through one of the programs above changes the income math, usually upward.",
+          },
         ],
       }}
       ctas={{
