@@ -27,7 +27,7 @@ export default function Videos() {
             isPlaying ? (
               <div className="relative aspect-video w-full overflow-hidden bg-lvinit-black">
                 <iframe
-                  src={`https://www.youtube-nocookie.com/embed/${featured.youtubeId}?autoplay=1`}
+                  src={`https://www.youtube-nocookie.com/embed/${featured.youtubeId}?autoplay=1&start=0`}
                   title={featured.title}
                   loading="lazy"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"

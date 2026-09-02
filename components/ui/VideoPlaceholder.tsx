@@ -1,7 +1,7 @@
 type VideoPlaceholderProps = {
   label: string;
   /**
-   * Local poster asset in /public/images (e.g. "/images/video-affordability.jpg").
+   * Local poster asset in /public/images (e.g. "/images/video-what-500k-gets-you-in-las-vegas.jpg").
    * Swap the file — or this path — for a real thumbnail/player when ready.
    */
   src?: string;
