@@ -66,7 +66,11 @@ export default function Videos() {
             <button
               key={video.id}
               type="button"
-              onClick={() => setFeaturedId(video.id)}
+              onClick={() => {
+                setFeaturedId(video.id);
+                setPlayingId(video.id);
+              }}
+              aria-label={`Play video: ${video.title}`}
               className="text-left group"
             >
               <VideoPlaceholder
