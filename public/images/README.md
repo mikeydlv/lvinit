@@ -31,7 +31,6 @@ change needed — the components already point at these paths. Keep images local
 | `guide-downtown-arts-district-guide.jpg` | `components/LocalGuides.tsx` | Guide image |
 | `guide-first-summer-in-vegas.jpg` | `components/LocalGuides.tsx` | Guide image |
 | `video-affordability.jpg` | `components/Videos.tsx` | Video poster/thumbnail |
-| `video-heat.jpg` | `components/Videos.tsx` | Video poster/thumbnail |
 | `video-rent-vs-buy.jpg` | `components/Videos.tsx` | Video poster/thumbnail |
 | `video-schools.jpg` | `components/Videos.tsx` | Video poster/thumbnail |
 

@@ -98,10 +98,7 @@ export type VideoItem = {
   youtubeId?: string;
 };
 
-// The featured slot and two of the secondary entries are real, published
-// videos. The remaining smaller entry ("heat") is still a PLACEHOLDER — its
-// title illustrates the "answer a real doubt" direction from Doc 03 §3.9;
-// replace with real produced content before launch.
+// All four entries are real, published LVINIT videos.
 export const videos: VideoItem[] = [
   {
     id: "moving-to-las-vegas-2026-choose-the-area",
@@ -115,7 +112,13 @@ export const videos: VideoItem[] = [
     title: "What $500K Actually Gets You in Las Vegas",
     duration: "12:16",
   },
-  { id: "heat", title: "What nobody tells you about the heat", duration: "4:47" },
+  {
+    id: "summerlin-vs-henderson-vs-southwest",
+    youtubeId: "ZAU9hPQ_1Hk",
+    title:
+      "Summerlin vs Henderson vs Southwest Las Vegas: Which Area Fits You Best?",
+    duration: "14:33",
+  },
   {
     id: "rent-first-or-buy-first-las-vegas",
     youtubeId: "2rboWkJ9j48",
