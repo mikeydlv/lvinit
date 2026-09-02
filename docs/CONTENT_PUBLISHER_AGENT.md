@@ -19,9 +19,10 @@
   finished LVINIT content — no re-briefing required.
 - Builds and updates **neighborhood guides**, **stories/features** (on the Story
   Page pattern), and **video companion pages**.
-- **Ranks and places photography**, exports properly sized WebP derivatives with
-  descriptive filenames and accurate alt text, and verifies crops on desktop and
-  mobile.
+- **Searches the approved photography library** at `C:\LVINIT\Images` before
+  anything else, **ranks and places photography**, exports properly sized WebP
+  derivatives with descriptive filenames and accurate alt text, and verifies
+  crops on desktop and mobile.
 - Writes **SEO metadata** (title, description, canonical, Open Graph, Twitter)
   and valid **structured data** (Article / Breadcrumb) via the existing
   `lib/story.ts` helpers, and updates the manual `app/sitemap.ts`.
@@ -33,6 +34,48 @@
   with hooks, clip concepts, and a distribution plan.
 - Runs the production build, verifies the browser preview, then commits and (for
   build tasks) pushes through the GitHub → Vercel workflow.
+
+## Approved photography library — `C:\LVINIT\Images`
+
+`C:\LVINIT\Images` is an **approved LVINIT first-party photography library**.
+Every photograph in it was captured and is owned by Mikey, confirmed
+permanently, so the agent:
+
+- **never asks you to reconfirm ownership** of a file from that folder, and
+  never asks for licensing approval for one;
+- treats everything there as approved first-party LVINIT photography it may copy
+  into the project for editorial use;
+- **never modifies, overwrites, renames, or deletes the originals** — the folder
+  is read-only source, and only copies are optimized.
+
+This authorization is standing and applies to every future article workflow
+until you change it.
+
+**It is searched first on every article.** For any new article, guide,
+neighborhood piece, market update, or comparison, the agent searches
+`C:\LVINIT\Images` for a genuinely relevant photograph *before* generating a
+cover — matching on subject, neighborhood/location, filenames, visible content,
+composition, orientation, crop flexibility, and editorial usefulness. It
+inspects real candidates rather than trusting a keyword in a filename, and it
+picks the strongest of several relevant options on its own, asking you only when
+the choice is genuinely subjective or consequential.
+
+Selected images are **copied** into `/public/images/…` under a descriptive,
+SEO-friendly filename, optimized with **Sharp** (the project's existing tool) to
+WebP at the size actually displayed, with the original left untouched. Editing
+stays photographic — crop, resize, compress, convert. No sky enhancement, no
+fake HDR, no added or removed objects, no AI alteration of your photography, no
+aspect-ratio distortion. One asset serves multiple placements where it can;
+separate derivatives are only exported when a hero and card genuinely need
+different crops.
+
+Alt text describes what is actually visible, without keyword stuffing, and only
+claims a location it can verify from filename/context, project docs, article
+research, or clear provenance.
+
+**If the folder isn't reachable** from the agent's environment, it says so
+plainly instead of pretending it looked — and it does not quietly fall back to
+web imagery.
 
 ## What it does NOT do
 
@@ -119,10 +162,12 @@ below) rather than fabricating.
 - It asks **one focused question only when genuinely blocked** — contradictory
   facts, third-party asset permission, a missing embed URL, an identity/compliance
   issue, a destructive structural change, or a risk of publishing false info.
-- **Honest fallbacks:** no real hero → photoless editorial mode; no photo for
-  the card → generated editorial cover, never a stand-in photo; no verified
-  metric → omit it; no extra photos → strong text-and-video layout; unbuilt
-  related story → non-linked "coming soon" only if it belongs; inaccessible video
+- **Honest fallbacks:** no real hero → search `C:\LVINIT\Images`, then the
+  repo's own approved photography, then photoless editorial mode; no relevant
+  approved photograph for the card → generated editorial cover, never a stand-in
+  photo; no verified metric → omit it; no extra photos → strong text-and-video
+  layout; unbuilt related story → non-linked "coming soon" only if it belongs;
+  inaccessible video
   → use the transcript/notes, invent no visuals; unverifiable current fact → omit
   or flag.
 
@@ -156,11 +201,14 @@ Two rules worth repeating:
   which the imagery rules forbid. When there is no authentic photograph, the
   answer is a generated cover — or nothing.
 
-### Card images: photography first, then a generated cover
+### Image hierarchy: approved photography first, a generated cover last
 
-1. **Verified LVINIT photography** that genuinely depicts the story. Always
-   first, with accurate alt text.
-2. **A generated LVINIT editorial cover**, when no such photograph exists:
+1. **Relevant approved photography from `C:\LVINIT\Images`** — searched first
+   on every article, copied in, optimized, with accurate alt text.
+2. **Other already-approved first-party LVINIT photography already in the
+   repository**, when it genuinely depicts the story.
+3. **A generated LVINIT editorial cover**, only when no sufficiently relevant
+   approved photograph exists:
 
    ```bash
    node scripts/generate-guide-cover.mjs --slug <registry-slug> --category "<Category>" --subject "<short subject>"
@@ -175,9 +223,12 @@ Two rules worth repeating:
    Keep `--subject` short — the card prints the headline right below the image,
    so the cover carries `LAS VEGAS SUMMER`, never the full title. The motif is
    chosen by `--category`, which is what keeps covers varied but coherent.
-3. **Nothing.** The `GuideCard` fallback panel is still correct and finished.
+4. **Emergency fallback: nothing.** The runtime non-photographic `GuideCard`
+   fallback panel is still correct and finished.
 
-Never scrape web images, never hotlink, never use third-party photography
+Authentic first-party photography always beats generated artwork. The agent does
+**not** automatically search the public web for article photography. Never
+scrape web images, never hotlink, never use news-site or stock photography
 without explicit licensing and approval, and never produce a fake photographic
 representation of a real Las Vegas neighborhood, project, home, development,
 business, or event. Covers must always read as intentional graphic artwork.
@@ -198,8 +249,15 @@ self-deploy.
 
 - **No fabricated** stats, prices, ratings, dates, quotes, testimonials, events,
   or video scenes. Changeable facts get verified against official sources first.
-- **Mikey-owned photography** is covered by the global footer credit (no per-image
-  credit unless a page needs a specific caption).
+- **Mikey-owned photography** — including everything in `C:\LVINIT\Images` — is
+  covered by the global footer credit (no per-image credit unless a page needs a
+  specific caption), and its ownership is never re-litigated.
+- **Every article report names its image decision:** whether `C:\LVINIT\Images` was
+  searched (or why it couldn't be), how many relevant candidates were inspected,
+  the source filename, the final repo path, why that photo was chosen, whether
+  it was cropped/resized/converted, final dimensions, final file size, and the
+  exact alt text — or, if nothing was suitable, the generated cover used
+  instead.
 - **Licensed / developer / promotional / rendering / third-party imagery** keeps a
   clear source record, gets an appropriate visible credit where required (like the
   North Las Vegas hero's "Photo: … / Shutterstock" line), is **never** presented
