@@ -266,7 +266,7 @@ This section now has two acts, replacing the single grid from the prior draft.
 
 **Layout, typography, photography, component behavior, mobile behavior**: Unchanged structurally from the prior draft — featured video + row of secondary thumbnails, custom player per Doc 02 §9, real on-location frames as thumbnails.
 
-**Content direction (new)**: video topics and titles should skew toward real uncertainty — *"Is Las Vegas actually affordable right now?"*, *"What nobody tells you about the heat"*, *"Renting first vs. buying first — what I tell my clients"* — rather than purely descriptive neighborhood tours. This is a content-strategy note more than a visual one, but it belongs here because it's what makes this section do the confidence-building work the new thesis asks of every section, not just present footage.
+**Content direction (new)**: video topics and titles should skew toward real uncertainty — *"Is Las Vegas actually affordable right now?"*, *"Summerlin vs Henderson vs Southwest Las Vegas: Which Area Fits You Best?"*, *"Renting first vs. buying first — what I tell my clients"* — rather than purely descriptive neighborhood tours. This is a content-strategy note more than a visual one, but it belongs here because it's what makes this section do the confidence-building work the new thesis asks of every section, not just present footage.
 
 **Calls to action**: **"Visit the Video Library"** tertiary link, unchanged.
 

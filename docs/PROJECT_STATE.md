@@ -714,8 +714,6 @@ Run through this every time a new page ships, in order:
   Local's Guide to the Downtown Arts District*, and the Nevada property tax
   abatement Cost of Living piece are all real, linked pages now — this list
   was stale.)
-- Real produced videos to replace the four placeholder posters (topics already
-  framed around real doubts: affordability, heat, rent-vs-buy, schools).
 - A **Relocation Hub** ("Moving to Las Vegas") landing destination for the
   quick-facts index (Cost of Living, Getting Around, Schools & Family, Climate).
 
