@@ -280,7 +280,20 @@ export default function NorthLasVegasPage() {
               ))}
             </div>
 
-            <p className="mt-10 max-w-2xl text-caption text-lvinit-warmgray">
+            <p className="mt-10 max-w-2xl text-body text-lvinit-warmgray">
+              Just south of Tule Springs, a large new community called{" "}
+              <Link
+                href="/guides/monument-hills-northwest-las-vegas"
+                className="text-lvinit-blue underline underline-offset-4 decoration-transparent hover:decoration-lvinit-blue"
+              >
+                Monument Hills
+              </Link>{" "}
+              is now in the works on land developers bought in August 2026 —
+              worth knowing about, but worth getting right: it sits on City of
+              Las Vegas land, not North Las Vegas.
+            </p>
+
+            <p className="mt-6 max-w-2xl text-caption text-lvinit-warmgray">
               Each of these is worth its own guide. As we publish them, this is
               where they&rsquo;ll link from.
             </p>
