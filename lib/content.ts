@@ -208,6 +208,28 @@ export type Guide = {
  */
 export const guides: Guide[] = [
   {
+    slug: "monument-hills-northwest-las-vegas",
+    title:
+      "Monument Hills: What a New 6,000-Home Community Means for Northwest Las Vegas",
+    dek: "Developers just closed on 940 acres for $94 million in the far northwest valley. It's City of Las Vegas land, not North Las Vegas, and nothing is buyable until spring 2028 at the earliest.",
+    byline: "LVINIT Editorial",
+    date: "September 2026",
+    publishedAt: "2026-09-03",
+    category: "Local Feature",
+    // Built via the autonomous scheduled editorial-publishing routine, on a
+    // genuine breaking story: Las Vegas Review-Journal, Eli Segall, Sept 2,
+    // 2026, corroborated same-week by 8 News Now, News 3 LV, and KTNV. No
+    // repo photography depicts this specific, still-vacant site, and
+    // C:\LVINIT\Images wasn't reachable from this cloud session — carries a
+    // generated LVINIT editorial cover.
+    //   node scripts/generate-guide-cover.mjs --slug monument-hills-northwest-las-vegas \
+    //     --category "Local Feature" --subject "Monument Hills" \
+    //     --out monument-hills-editorial-cover.webp
+    image: "/images/covers/monument-hills-editorial-cover.webp",
+    imageMode: "editorial-cover",
+    href: "/guides/monument-hills-northwest-las-vegas",
+  },
+  {
     slug: "henderson-vs-southwest-las-vegas",
     title: "Henderson vs. Southwest Las Vegas: Where Should You Actually Move?",
     dek: "An incorporated city with a huge range of communities against an informal, still-forming growth corridor with no legal boundary. The honest side-by-side, without a brochure in sight.",
