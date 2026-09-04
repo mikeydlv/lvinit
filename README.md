@@ -26,6 +26,11 @@ npm run dev
 Then open http://localhost:3000. Other scripts: `npm run build`,
 `npm run start`, `npm run lint`.
 
+Search-analysis tooling (read-only — it never changes the site):
+`npm run gsc:report:fixtures` to try it with synthetic data, `npm run gsc:report`
+for a live run, `npm run gsc:test` for its tests. See
+`docs/GSC_OPPORTUNITY_AGENT.md`.
+
 ## Routes
 
 ```
@@ -135,6 +140,8 @@ All optional — the site runs without them (see `.env.example`).
 | `CONTACT_FROM_EMAIL` | Verified Resend sender | Defaults to `LVINIT <hello@lvinit.com>` |
 | `CONTACT_TO_EMAIL` | Where leads land | Defaults to `hello@lvinit.com` |
 | `NEXT_PUBLIC_GA_ID` | GA4 Measurement ID | Analytics doesn't load |
+| `GSC_SITE_URL` | Search Console property for the opportunity agent | `npm run gsc:report` exits with setup instructions |
+| `GSC_SERVICE_ACCOUNT_JSON` | Read-only Google service-account key for that agent | Same — use `npm run gsc:report:fixtures` meanwhile |
 
 ## Design system compliance
 

@@ -1,0 +1,118 @@
+# ---------------------------------------------------------------------------
+# LVINIT GSC Opportunity Agent — weekly run
+#
+# What this job is allowed to do:
+#   * authenticate to Google Search Console with a read-only service account
+#   * fetch Search Console data
+#   * run the opportunity analysis
+#   * upload the report as a workflow artifact
+#   * print a short summary on the run page
+#
+# What it is NOT allowed to do, by construction:
+#   * modify any site file, article, or page
+#   * publish content or deploy anything
+#   * commit or push (contents: read — the token cannot write to the repo)
+#   * open pull requests or issues
+#   * send email or touch a CRM
+#
+# The permissions block below is the enforcement, not just documentation: with
+# `contents: read` the GITHUB_TOKEN physically cannot push to this repository.
+# ---------------------------------------------------------------------------
+
+name: GSC Opportunity Agent
+
+on:
+  schedule:
+    # 13:00 UTC every Monday — about 06:00 Las Vegas time (PDT), so a fresh
+    # report is waiting at the start of the week. Cron is always UTC.
+    - cron: "0 13 * * 1"
+  workflow_dispatch:
+    inputs:
+      period_days:
+        description: "Length of the current window, in complete days"
+        required: false
+        default: "28"
+      lag_days:
+        description: "Search Console reporting-lag buffer, in days"
+        required: false
+        default: "3"
+      min_score:
+        description: "Minimum opportunity score to report (0-100)"
+        required: false
+        default: "40"
+      fixtures:
+        description: "Run against synthetic fixture data instead of live Search Console"
+        required: false
+        type: boolean
+        default: false
+
+# Read-only. This is what stops the job from ever writing to the repository.
+permissions:
+  contents: read
+
+concurrency:
+  group: gsc-opportunity-agent
+  cancel-in-progress: false
+
+jobs:
+  report:
+    name: Analyze Search Console and publish a report artifact
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Check out the repository (read-only)
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      # No install step: the agent has zero runtime dependencies. It uses only
+      # Node built-ins (node:crypto, fetch) plus files in this repository.
+
+      - name: Run the agent's own test suite
+        run: npm run gsc:test
+
+      - name: Generate the opportunity report
+        env:
+          GSC_SITE_URL: ${{ secrets.GSC_SITE_URL }}
+          GSC_SERVICE_ACCOUNT_JSON: ${{ secrets.GSC_SERVICE_ACCOUNT_JSON }}
+          PERIOD_DAYS: ${{ inputs.period_days || '28' }}
+          LAG_DAYS: ${{ inputs.lag_days || '3' }}
+          MIN_SCORE: ${{ inputs.min_score || '40' }}
+          USE_FIXTURES: ${{ inputs.fixtures }}
+        run: |
+          set -euo pipefail
+          ARGS="--period-days=$PERIOD_DAYS --lag-days=$LAG_DAYS --min-score=$MIN_SCORE"
+          if [ "${USE_FIXTURES:-false}" = "true" ]; then
+            echo "Running against FIXTURE data — output is synthetic."
+            ARGS="$ARGS --fixtures"
+          fi
+          node scripts/gsc/run.mjs $ARGS | tee run-output.txt
+
+      - name: Write the summary onto the run page
+        if: always()
+        run: |
+          {
+            echo "## LVINIT GSC Opportunity Agent"
+            echo
+            echo '```'
+            cat run-output.txt 2>/dev/null || echo "The run produced no output."
+            echo '```'
+            echo
+            echo "The full Markdown and JSON reports are attached to this run as an artifact."
+            echo "Nothing was committed, published, or deployed."
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload the report as an artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: gsc-opportunities
+          path: reports/gsc/
+          if-no-files-found: warn
+          retention-days: 90
