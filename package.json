@@ -10,7 +10,11 @@
     "gsc:report": "node scripts/gsc/run.mjs",
     "gsc:report:env": "node --env-file=.env scripts/gsc/run.mjs",
     "gsc:report:fixtures": "node scripts/gsc/run.mjs --fixtures",
-    "gsc:test": "node --test \"scripts/gsc/test/*.test.mjs\""
+    "gsc:test": "node --test \"scripts/gsc/test/*.test.mjs\"",
+    "fact:report": "node scripts/fact-decay/run.mjs",
+    "fact:report:verify": "node scripts/fact-decay/run.mjs --verify",
+    "fact:report:fixtures": "node scripts/fact-decay/run.mjs --fixtures",
+    "fact:test": "node --test \"scripts/fact-decay/test/*.test.mjs\""
   },
   "dependencies": {
     "next": "^14.2.5",

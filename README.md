@@ -143,6 +143,12 @@ All optional — the site runs without them (see `.env.example`).
 | `GSC_SITE_URL` | Search Console property for the opportunity agent | `npm run gsc:report` exits with setup instructions |
 | `GSC_SERVICE_ACCOUNT_JSON` | Read-only Google service-account key for that agent | Same — use `npm run gsc:report:fixtures` meanwhile |
 
+The **Content Refresh + Fact-Decay Agent** needs no environment variables at
+all — it reads this repository, and with `--verify` re-fetches public sources
+the pages already cite. `npm run fact:report:fixtures` runs it against synthetic
+pages with no network access. See
+[docs/FACT_DECAY_AGENT.md](docs/FACT_DECAY_AGENT.md).
+
 ## Design system compliance
 
 Every color, type size, and spacing value traces back to a token in

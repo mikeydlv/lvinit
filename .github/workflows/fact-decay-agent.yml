@@ -1,0 +1,201 @@
+# ---------------------------------------------------------------------------
+# LVINIT Content Refresh + Fact-Decay Agent — weekly run
+#
+# What this job is allowed to do:
+#   * read the repository's published editorial content
+#   * re-fetch public sources those pages already cite (read-only GETs)
+#   * classify potentially stale facts and score them
+#   * generate the Markdown and JSON reports
+#   * upload them as a workflow artifact
+#   * print a short summary on the run page
+#
+# What it is NOT allowed to do, by construction:
+#   * rewrite or edit any article, page, or metadata
+#   * change internal links or publish corrections
+#   * commit or push (contents: read — the token cannot write to the repo)
+#   * open pull requests or issues
+#   * deploy anything
+#   * send email or touch a CRM
+#   * hand work to the Content Publisher
+#
+# The permissions block below is the enforcement, not just documentation: with
+# `contents: read` the GITHUB_TOKEN physically cannot push to this repository.
+# The agent itself has no code path that writes outside reports/fact-decay/,
+# and that directory is gitignored.
+#
+# No secrets are used. This agent has no credentials of any kind.
+# ---------------------------------------------------------------------------
+
+name: Fact-Decay Agent
+
+on:
+  schedule:
+    # 13:00 UTC every Thursday — about 06:00 Las Vegas time (PDT).
+    #
+    # Thursday, deliberately not Monday: the GSC Opportunity Agent runs on
+    # Monday, and this agent reads that report to weight its priorities. Three
+    # days later there is always a fresh one on disk, and the two reports do not
+    # land on the same morning competing for attention.
+    - cron: "0 13 * * 4"
+  workflow_dispatch:
+    inputs:
+      verify:
+        description: "Re-check the sources pages already cite, over the network"
+        required: false
+        type: boolean
+        default: true
+      min_priority:
+        description: "Minimum priority to report (0-100)"
+        required: false
+        default: "35"
+      max_findings:
+        description: "Maximum findings to report"
+        required: false
+        default: "40"
+      today:
+        description: "Pretend today is this date (YYYY-MM-DD). Leave blank for the real date."
+        required: false
+        default: ""
+      fixtures:
+        description: "Run against synthetic fixture pages instead of the real content"
+        required: false
+        type: boolean
+        default: false
+
+# Read-only. This is what stops the job from ever writing to the repository.
+# `actions: read` is only so the run can download the GSC agent's report
+# artifact; it grants no write access to anything.
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: fact-decay-agent
+  cancel-in-progress: false
+
+jobs:
+  report:
+    name: Scan published content and publish a report artifact
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Check out the repository (read-only)
+        uses: actions/checkout@v4
+        with:
+          # The agent reads git history to work out when a page was last
+          # touched, as a fallback when a page carries no date of its own.
+          # Without this it still runs — that signal just goes missing.
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      # No install step: the agent has zero runtime dependencies. It uses only
+      # Node built-ins (node:crypto, node:fs, fetch) plus files in this repo.
+
+      - name: Run the agent's own test suite
+        run: npm run fact:test
+
+      - name: Fetch the newest GSC report, if there is one
+        # Optional traffic signal. The Fact-Decay Agent reads the GSC agent's
+        # newest report to rank a stale fact on a busy page above the same fact
+        # on a page nobody has found yet.
+        #
+        # Uses the GitHub CLI, which is preinstalled on the runner, rather than
+        # a third-party action — this job should not pull code from outside
+        # GitHub's own tooling just to copy a file. The token is read-only.
+        #
+        # `continue-on-error` because this is genuinely optional: if there is no
+        # recent GSC run, the agent runs with no traffic weighting and the
+        # report says so on its face.
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # Explicit, rather than relying on gh inferring the repo from a git
+          # remote — the checkout runs with persist-credentials: false.
+          GH_REPO: ${{ github.repository }}
+        run: |
+          set -uo pipefail
+          mkdir -p reports/gsc
+
+          # The newest successful run is not always the one to use: artifacts
+          # expire after 90 days, and a run can succeed while producing no
+          # artifact at all (the GSC upload step is `if-no-files-found: warn`).
+          # So walk back through the last few successful runs until one yields
+          # a report, rather than giving up on the first miss.
+          RUN_IDS="$(gh run list --workflow gsc-opportunity-agent.yml --status success \
+            --limit 5 --json databaseId --jq '.[].databaseId' 2>/dev/null || true)"
+
+          if [ -z "${RUN_IDS:-}" ]; then
+            echo "No successful GSC Opportunity Agent run found."
+            echo "Continuing with no traffic weighting — the report will say so."
+            exit 0
+          fi
+
+          for RUN_ID in $RUN_IDS; do
+            echo "Trying GSC run $RUN_ID..."
+            if gh run download "$RUN_ID" --name gsc-opportunities --dir reports/gsc 2>/dev/null; then
+              echo "Downloaded the gsc-opportunities artifact from run $RUN_ID."
+              break
+            fi
+            echo "  run $RUN_ID has no usable gsc-opportunities artifact (expired, or none produced)."
+          done
+
+          # Say plainly what actually landed, so the run log answers "did the
+          # traffic weighting apply?" without anyone having to guess.
+          FOUND="$(find reports/gsc -maxdepth 2 -name 'gsc-opportunities-*.json' | sort | tail -n 1)"
+          if [ -n "$FOUND" ]; then
+            echo "GSC report available for prioritization: $FOUND"
+          else
+            echo "No GSC report was downloaded. Continuing with no traffic weighting."
+          fi
+
+      - name: Generate the content refresh report
+        env:
+          VERIFY: ${{ inputs.verify == null && 'true' || inputs.verify }}
+          MIN_PRIORITY: ${{ inputs.min_priority || '35' }}
+          MAX_FINDINGS: ${{ inputs.max_findings || '40' }}
+          TODAY: ${{ inputs.today }}
+          USE_FIXTURES: ${{ inputs.fixtures }}
+        run: |
+          set -euo pipefail
+          ARGS="--min-priority=$MIN_PRIORITY --max=$MAX_FINDINGS"
+          if [ "${VERIFY:-true}" = "true" ]; then
+            ARGS="$ARGS --verify"
+          fi
+          if [ -n "${TODAY:-}" ]; then
+            ARGS="$ARGS --today=$TODAY"
+          fi
+          if [ "${USE_FIXTURES:-false}" = "true" ]; then
+            echo "Running against FIXTURE pages — output is synthetic."
+            ARGS="$ARGS --fixtures"
+          fi
+          node scripts/fact-decay/run.mjs $ARGS | tee run-output.txt
+
+      - name: Write the summary onto the run page
+        if: always()
+        run: |
+          {
+            echo "## LVINIT Content Refresh + Fact-Decay Agent"
+            echo
+            echo '```'
+            cat run-output.txt 2>/dev/null || echo "The run produced no output."
+            echo '```'
+            echo
+            echo "The full Markdown and JSON reports are attached to this run as an artifact."
+            echo "Nothing was rewritten, committed, published, or deployed, and nothing was"
+            echo "handed to the Content Publisher."
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload the report as an artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: fact-decay-report
+          path: reports/fact-decay/
+          if-no-files-found: warn
+          retention-days: 90
