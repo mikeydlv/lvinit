@@ -5,7 +5,7 @@
 > development sprint. Where this file and the code disagree, trust the code and
 > fix this file.
 >
-> **Last audited:** 2026-08-29 · **Branch:** `main` · **Live:** https://www.lvinit.com
+> **Last audited:** 2026-09-05 · **Branch:** `main` · **Live:** https://www.lvinit.com
 >
 > **Content Publisher agent:** a project-scoped Claude Code subagent,
 > `lvinit-content-publisher`, turns Mikey's real photos/videos/notes into
@@ -76,6 +76,7 @@ app/
   guides/nevada-property-tax-abatement-resale-buyers/page.tsx  /guides/nevada-property-tax-abatement-resale-buyers — Cost of Living explainer, NRS 361.4723 property tax cap (Story Page system)
   guides/las-vegas-down-payment-assistance-programs-2026/page.tsx  /guides/las-vegas-down-payment-assistance-programs-2026 — Buyer Guide, busts the "20% down" myth with real loan-type minimums and Nevada's down-payment-assistance programs (Story Page system)
   guides/monument-hills-northwest-las-vegas/page.tsx  /guides/monument-hills-northwest-las-vegas — Local Feature, a new ~6,000-home master-planned community forming in the far northwest valley (Story Page system)
+  guides/one-civic-center-north-las-vegas-redevelopment/page.tsx  /guides/one-civic-center-north-las-vegas-redevelopment — Local Feature, North Las Vegas's downtown government-campus redevelopment (Story Page system)
 ```
 
 **Path alias:** `@/*` → project root (see `tsconfig.json`).
@@ -102,6 +103,7 @@ app/
 | `/guides/las-vegas-down-payment-assistance-programs-2026` | Buyer Guide | Live | Story Page system; a genuine evergreen content gap — LVINIT had zero coverage of down-payment size or down-payment-assistance programs before this piece. Busts the "you need 20% down" myth with the real minimums (FHA 3.5%/580+, VA 0% for eligible borrowers, conventional as low as 3% for qualifying buyers via income-restricted programs like Freddie Mac Home Possible, 5% typical otherwise; USDA mentioned only in generic terms, no Las Vegas Valley eligibility claimed). Explains Nevada Housing Division's "Home Is Possible" (homeispossiblenv.org) is a completely different program from Freddie Mac's national "Home Possible" loan product despite the near-identical name. Leads with the newest, best-corroborated program — the Worker Advantage Program (launched Dec 10, 2025, $18M/~900 households, $20,000 no-interest/no-payment/non-forgivable 30-year second mortgage for essential workers in healthcare/education/public-safety/construction, Clark County AMI cap $147,300 per the Division's own current eligibility table) — plus Home Is Possible's two tracks (5% general vs. 4% first-time-buyer-restricted) and Home Is Possible for Teachers ($7,500, forgivable after 5 years, available through Dec 31, 2026 per its own page). Flags rather than resolves a real discrepancy: Nevada Housing Division's own program pages disagree with each other on the standard Home Is Possible percentage and forgiveness structure, so the article states what each page says and tells readers to confirm with a lender or the Division. No real photo exists for this topic, so it carries a generated LVINIT editorial cover (`covers/las-vegas-down-payment-editorial-cover.webp`). FAQPage + Article + Breadcrumb JSON-LD; cross-linked both directions with `las-vegas-starter-home-prices-2026` (its "What buyers should know" list now links here), plus links out to `what-500k-buys-in-las-vegas`, `las-vegas-home-prices-july-2026`, and `nevada-property-tax-abatement-resale-buyers`; sitemap entry; registered in `lib/content.ts` `guides[]`. |
 | `/guides/henderson-vs-southwest-las-vegas` | Comparison guide | Live | Story Page system; pure-synthesis comparison built entirely from the two live pillar guides (`/neighborhoods/henderson` and `/neighborhoods/southwest-las-vegas`), which already carried their own "Henderson vs Southwest" / "Southwest vs Henderson" prose sections — no new fact, date, or number introduced anywhere in the piece; neither pillar guide asserts a commute-minutes figure or a defensible submarket median, and this piece doesn't invent one either. Central argument: an incorporated city with its own government and a huge range of communities vs. an informal name for a mostly-unincorporated growth corridor with no legal boundary. Built via the autonomous scheduled editorial-publishing routine (topic selection: no fresh, corroborated breaking story cleared the 24-72h sourcing bar this run — an inventory figure found only on an uncorroborated personal Substack was explicitly rejected — so the routine filled a genuine content-cluster gap instead). **Updated 2026-08-31, at Mikey's direction, in a live follow-up (hero swapped twice same day):** he first supplied a real drone still to use as the hero/OG image, replacing the generated cover the piece originally shipped with. That still's source filename ("stripview-the-lakes-flyover") suggested it was actually The Lakes, a west-valley community unrelated to either Henderson or Southwest — flagged rather than blocked, and Mikey corrected it a few minutes later with a second photo. **Current hero** (`hero/southwest-las-vegas-mountains-edge-park-aerial-drone.webp`): a park in Mountain's Edge, one of the Southwest Las Vegas master-planned communities this very article's "Housing stock" section already names alongside Southern Highlands and Rhodes Ranch — genuinely in scope, no caveat needed. The mismatched first photo was deleted (no remaining references); the original generated cover is still on disk at `covers/henderson-vs-southwest-las-vegas-editorial-cover.webp` if ever needed. Also added, same follow-up: a "Which area fits you best?" `StoryVideo` section right after the lede, embedding `youtube.com/watch?v=ZAU9hPQ_1Hk` (Mikey's own three-way Summerlin/Henderson/Southwest comparison video) via the existing click-to-play facade — poster until clicked, then autoplay from 0:00, no page-load autoplay. Poster is Mikey's own thumbnail, supplied in chat, saved as `video-summerlin-henderson-southwest-where-would-you-live.webp`. No VideoObject JSON-LD was added: this session couldn't independently verify the video's real upload date (YouTube's page wasn't fetchable, oEmbed was blocked), and `StoryVideoMeta.uploadDate` must be real, never guessed. Article + Breadcrumb JSON-LD; breadcrumb is Home → article only; cross-linked both directions with the Henderson and Southwest pillar guides (new `relatedStories` entries plus an inline link inside each page's existing "vs" section) and to `/guides/summerlin-vs-henderson` as related reading; sitemap entry; registered in `lib/content.ts` `guides[]` (card image updated to match the new hero). |
 | `/guides/monument-hills-northwest-las-vegas` | Local Feature guide | Live | Story Page system; built via the autonomous scheduled editorial-publishing routine on genuine breaking news — Las Vegas Review-Journal (Eli Segall), Sept 2, 2026, corroborated same-week by 8 News Now, News 3 LV, and KTNV: Olympia Companies and Bruin Capital Partners (as Monument Hills Partners LLC) closed on ~940 acres for $94M in the far northwest valley, up to 6,000 homes planned, first homes spring 2028, 290 military + 300 workforce housing units for Nellis/Creech AFB personnel, ~90 acres parks/trails, two future school sites. Central hook: a three-party BLM → City of Las Vegas → developer sale, so this is **City of Las Vegas** jurisdiction, not the separate incorporated city of North Las Vegas, despite bordering the areas the North Las Vegas guide already calls "Tule Springs" and "Northern growth areas" — the piece explicitly clears up that confusion rather than blurring it. Real, attributed quotes (Mayor Shelley Berkley, Olympia EVP Chris Armstrong); background-only approval-timeline fact (Aug 2025 City Council approval) sourced separately from a smaller local outlet and clearly labeled as background; no Paiute Tribe appeal claim included (uncorroborated by current reporting, omitted rather than risk a stale claim). No repo photography of this still-vacant site exists, and `C:\LVINIT\Images` was not reachable from this cloud session, so it carries a generated LVINIT editorial cover (`covers/monument-hills-editorial-cover.webp`) and a photoless `StoryHero`. Article + Breadcrumb JSON-LD; cross-linked both directions with `/neighborhoods/north-las-vegas` (new inline link in its "Areas to know" section + `RelatedNeighborhood` card back), plus links to `/neighborhoods/southwest-las-vegas` and `/guides/las-vegas-new-home-sales-july-2026`; sitemap entry; registered in `lib/content.ts` `guides[]` (byline "LVINIT Editorial," category "Local Feature"). |
+| `/guides/one-civic-center-north-las-vegas-redevelopment` | Local Feature guide | Live | Story Page system; built via the autonomous scheduled editorial-publishing routine on North Las Vegas's downtown redevelopment — the City of North Las Vegas sold ~19 acres of its old, vacant City Hall site (2200 Civic Center Dr., vacated 2011, demolition began Jan 2026) to Agora Realty & Management for a combined $1,938.80 (main parcel closed July 2026), in exchange for contractual obligations: a minimum 15,000 sq ft commercial building, a 100+ unit apartment complex, and a new 30,000+ sq ft civic building. Primary source Las Vegas Review-Journal (Sept 3, 2026), independently re-verified via WebFetch/WebSearch and corroborated by Fox5 Vegas/News3LV/KTNV (Jan 2026 demolition) and Hoodline/NVBEX (Sept 2026 land sale). Real, attributed quotes (Agora's Aaron Lefton, city spokesman Greg Bortolin, Mayor Pamela Goynes-Brown); explains the below-market-appraisal ($6.8M–$13.5M appraised vs. nominal sale price) as a conditioned land conveyance, not editorialized as either a giveaway or a scandal; honest timeline framing (construction targeted late 2026/early 2027, 60-month phased build, final 3.9-acre police-building parcel not closing until Sept 2028 — nothing buyable soon). No repo photography of this site exists and `C:\LVINIT\Images` wasn't reachable this run, so it carries a generated LVINIT editorial cover (`covers/one-civic-center-editorial-cover.webp`) and a photoless `StoryHero`. Article + Breadcrumb JSON-LD; cross-linked both directions with `/neighborhoods/north-las-vegas` (new inline paragraph + `RelatedNeighborhood` card back), plus links to `/guides/monument-hills-northwest-las-vegas` and `/guides/las-vegas-new-home-sales-july-2026`; sitemap entry; registered in `lib/content.ts` `guides[]`. |
 | `/search` | IDX search | Live | Matrix IDX embed `idx=3652dd5`; do not modify embed behavior without instruction |
 | `/contact` | Contact | Live | ContactForm → `/api/contact` (Resend) with mailto fallback |
 | `/api/contact` | Route handler | Live | Returns 503 until `RESEND_API_KEY` is set, so no fake service ships |
@@ -594,6 +596,34 @@ links flowing both up (feature → guide → homepage) and down (guide → featu
   links to `/neighborhoods/southwest-las-vegas` and the July 2026
   new-home-sales Market Watch piece; sitemap entry; registered in
   `lib/content.ts` `guides[]`.
+- **One Civic Center** Local Feature guide — built via the autonomous
+  scheduled editorial-publishing routine on North Las Vegas's downtown
+  government-campus redevelopment. Primary source: Las Vegas Review-Journal,
+  Sept 3, 2026, independently re-verified this run via WebFetch/WebSearch
+  and corroborated by Fox5 Vegas, News3LV, and KTNV (the Jan 2026 demolition
+  kickoff) plus Hoodline and NVBEX (the Sept 2026 land-sale story). Covers
+  the City of North Las Vegas selling ~19 acres of its old, long-vacant City
+  Hall block (2200 Civic Center Dr., vacated 2011) to Agora Realty &
+  Management for a combined $1,938.80, conditioned on the developer building
+  a minimum 15,000-sq-ft commercial building, a 100+ unit apartment complex,
+  and a 30,000+ sq ft civic building, with city staff projecting ~$20.5M/year
+  in economic output once complete — the first market-rate housing planned
+  for downtown North Las Vegas in roughly two decades. Explains the
+  below-market appraisal gap ($6.8M–$13.5M appraised vs. the nominal sale
+  price) plainly, as a conditioned land conveyance tied to construction
+  obligations, without editorializing it as either a giveaway or a scandal.
+  Real, attributed quotes (Agora's Aaron Lefton, city spokesman Greg
+  Bortolin, Mayor Pamela Goynes-Brown). Sets honest expectations — nothing
+  is buyable soon; construction is targeted for late 2026/early 2027 over a
+  60-month phased build, and the final 3.9-acre parcel (current police
+  buildings) doesn't close until September 2028. No real photography exists
+  for this still-under-demolition site and `C:\LVINIT\Images` wasn't
+  reachable this run, so it carries a generated LVINIT editorial cover and a
+  photoless hero. Story Page system; Article + Breadcrumb JSON-LD;
+  cross-linked both directions with `/neighborhoods/north-las-vegas`, plus
+  links to `/guides/monument-hills-northwest-las-vegas` and the July 2026
+  new-home-sales Market Watch piece; sitemap entry; registered in
+  `lib/content.ts` `guides[]`.
 - Live IDX search page (Matrix / GLVAR).
 - Contact form with Resend handler + mailto fallback + GA4 lead event.
 - GA4 analytics scaffolding (opt-in via env var).
@@ -688,6 +718,16 @@ links flowing both up (feature → guide → homepage) and down (guide → featu
     `/guides/las-vegas-new-home-sales-july-2026` for market context. A
     natural future child once the community is closer to opening: a
     Monument Hills-specific guide once builders and pricing are announced.
+13. **One Civic Center:** `/guides/one-civic-center-north-las-vegas-redevelopment` —
+    a standalone Local Feature, and the first LVINIT piece to cover North Las
+    Vegas's actual downtown/civic core rather than its northern growth edge.
+    Cross-linked both directions with `/neighborhoods/north-las-vegas` (new
+    inline paragraph in "Areas to know" + `RelatedNeighborhood` card back),
+    plus links to `/guides/monument-hills-northwest-las-vegas` (contrasting
+    growth story, different jurisdiction) and
+    `/guides/las-vegas-new-home-sales-july-2026` for market context. A
+    natural future child once construction is underway or pricing/tenants
+    are announced: a follow-up piece on One Civic Center's progress.
 
 The remaining homepage guide/video card (Surviving Your First Vegas Summer,
 and the four video posters) are placeholders that do not yet resolve to pages.
