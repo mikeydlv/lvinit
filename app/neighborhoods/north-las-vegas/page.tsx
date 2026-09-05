@@ -293,6 +293,21 @@ export default function NorthLasVegasPage() {
               Las Vegas land, not North Las Vegas.
             </p>
 
+            <p className="mt-6 max-w-2xl text-body text-lvinit-warmgray">
+              Downtown, at the city&rsquo;s actual civic core, the old,
+              long-vacant City Hall block is being redeveloped into{" "}
+              <Link
+                href="/guides/one-civic-center-north-las-vegas-redevelopment"
+                className="text-lvinit-blue underline underline-offset-4 decoration-transparent hover:decoration-lvinit-blue"
+              >
+                One Civic Center
+              </Link>
+              , a mixed-use civic, housing, and commercial project the city
+              sold to a private developer this year — the first market-rate
+              housing planned for downtown North Las Vegas in about two
+              decades, though nothing there is buyable yet.
+            </p>
+
             <p className="mt-6 max-w-2xl text-caption text-lvinit-warmgray">
               Each of these is worth its own guide. As we publish them, this is
               where they&rsquo;ll link from.

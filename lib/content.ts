@@ -208,6 +208,30 @@ export type Guide = {
  */
 export const guides: Guide[] = [
   {
+    slug: "one-civic-center-north-las-vegas-redevelopment",
+    title:
+      "One Civic Center: What's Actually Happening at North Las Vegas's Old City Hall Site",
+    dek: "North Las Vegas sold its vacant old City Hall block for about $1,939, in exchange for a contractually required civic building, apartments, and commercial space. What's confirmed, and when any of it might exist.",
+    byline: "LVINIT Editorial",
+    date: "September 2026",
+    publishedAt: "2026-09-05",
+    category: "Local Feature",
+    // Built via the autonomous scheduled editorial-publishing routine, on a
+    // genuine story: Las Vegas Review-Journal, Sept 3, 2026, independently
+    // re-verified this run via WebFetch/WebSearch and corroborated by Fox5
+    // Vegas, News3LV, and KTNV (Jan 2026 demolition kickoff) plus Hoodline
+    // and NVBEX (Sept 2026 land-sale story). No repo photography depicts
+    // this specific downtown government block, and C:\LVINIT\Images wasn't
+    // reachable from this cloud session — carries a generated LVINIT
+    // editorial cover.
+    //   node scripts/generate-guide-cover.mjs --slug one-civic-center-north-las-vegas-redevelopment \
+    //     --category "Local Feature" --subject "One Civic Center" \
+    //     --out one-civic-center-editorial-cover.webp
+    image: "/images/covers/one-civic-center-editorial-cover.webp",
+    imageMode: "editorial-cover",
+    href: "/guides/one-civic-center-north-las-vegas-redevelopment",
+  },
+  {
     slug: "monument-hills-northwest-las-vegas",
     title:
       "Monument Hills: What a New 6,000-Home Community Means for Northwest Las Vegas",
