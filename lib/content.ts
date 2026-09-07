@@ -208,6 +208,35 @@ export type Guide = {
  */
 export const guides: Guide[] = [
   {
+    slug: "las-vegas-mortgage-rates-september-2026",
+    title:
+      "Mortgage Rates Just Hit a 13-Month High — What It Means for Las Vegas Buyers",
+    dek: "Freddie Mac's 30-year average climbed to 6.71% the week of September 3, 2026, its highest print in over a year. Here's the real math on a Las Vegas payment, and why it's happening in a market with more room to negotiate than it's had in years.",
+    byline: "Mikey Del Rosario",
+    date: "September 2026",
+    publishedAt: "2026-09-07",
+    category: "Market Watch",
+    // Built via the autonomous scheduled editorial-publishing routine, on
+    // genuine fresh news independently re-verified this run: Freddie Mac's
+    // own PMMS release (freddiemac.com/pmms, week of Sept 3, 2026) for the
+    // 30-year (6.71%, up from 6.66%) and 15-year (6.04%, up from 5.98%)
+    // rates, cross-checked against the official GlobeNewswire release; the
+    // "13-month high" framing corroborated independently by AP wire coverage
+    // carried on Yahoo Finance, WTOP, and KSAT. Local price/inventory context
+    // reused from the already-sourced las-vegas-home-prices-july-2026 piece
+    // (LVR, July 2026) — an LVR August 2026 report was checked for and
+    // confirmed not yet published, so no August figure is used anywhere.
+    // Financing-cost topic, not a place — a generated cover is the right
+    // call on the merits, and C:\LVINIT\Images wasn't reachable from this
+    // cloud session in any case.
+    //   node scripts/generate-guide-cover.mjs --slug las-vegas-mortgage-rates-september-2026 \
+    //     --category "Market Watch" --subject "MORTGAGE RATES" \
+    //     --out las-vegas-mortgage-rates-editorial-cover.webp
+    image: "/images/covers/las-vegas-mortgage-rates-editorial-cover.webp",
+    imageMode: "editorial-cover",
+    href: "/guides/las-vegas-mortgage-rates-september-2026",
+  },
+  {
     slug: "one-civic-center-north-las-vegas-redevelopment",
     title:
       "One Civic Center: What's Actually Happening at North Las Vegas's Old City Hall Site",

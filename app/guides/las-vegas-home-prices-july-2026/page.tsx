@@ -201,6 +201,12 @@ export default function LasVegasHomePricesJuly2026Page() {
             category: "Market Watch",
             dek: "The $480,000 median covers every price tier. Here's what's happening specifically at the entry point first-time buyers are shopping in.",
           },
+          {
+            name: "Mortgage Rates Just Hit a 13-Month High",
+            href: "/guides/las-vegas-mortgage-rates-september-2026",
+            category: "Market Watch",
+            dek: "The financing-cost side of this same market: what a 6.71% average rate does to a payment on this month's median, in dollars.",
+          },
         ],
       }}
       relatedNeighborhood={{

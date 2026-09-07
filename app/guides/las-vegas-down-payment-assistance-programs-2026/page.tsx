@@ -527,11 +527,16 @@ export default function LasVegasDownPaymentAssistanceProgramsPage() {
             starter tier of the market
           </Link>{" "}
           eased slightly too, even after more than doubling over the past
-          decade. Neither of those is a dramatic correction. But if the thing
-          actually holding you back was a belief that you needed six figures
-          saved up before you could even apply, that belief was never
-          accurate, and it&rsquo;s worth separating from the real question of
-          whether current prices and rates work for your budget.
+          decade. Meanwhile{" "}
+          <Link href="/guides/las-vegas-mortgage-rates-september-2026" className={linkCls}>
+            mortgage rates just moved the other way
+          </Link>
+          , to a 13-month high. None of that is a dramatic swing on its own.
+          But if the thing actually holding you back was a belief that you
+          needed six figures saved up before you could even apply, that
+          belief was never accurate, and it&rsquo;s worth separating from the
+          real question of whether current prices and rates work for your
+          budget.
         </p>
         <p className="mt-5 text-body-lg text-lvinit-warmgray">
           A concrete example helps here more than a rule of thumb does. Our{" "}

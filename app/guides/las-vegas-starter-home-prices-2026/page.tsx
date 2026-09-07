@@ -234,6 +234,12 @@ export default function LasVegasStarterHomePrices2026Page() {
             category: "Cost of living",
             dek: "The property-tax mechanics every buyer should check before closing, starter home or not.",
           },
+          {
+            name: "Mortgage Rates Just Hit a 13-Month High",
+            href: "/guides/las-vegas-mortgage-rates-september-2026",
+            category: "Market Watch",
+            dek: "Hennessy's affordability-squeeze point, quantified: what a 6.71% average rate actually does to a monthly payment.",
+          },
         ],
       }}
       ctas={{
@@ -440,7 +446,15 @@ export default function LasVegasStarterHomePrices2026Page() {
           mortgage rates too: Hennessy&rsquo;s framing ties the affordability
           squeeze directly to borrowing costs, so a meaningful rate move in
           either direction would likely show up in this tier before it shows
-          up in the valley-wide median.
+          up in the valley-wide median. That move already happened once,
+          shortly after this piece published —{" "}
+          <Link
+            href="/guides/las-vegas-mortgage-rates-september-2026"
+            className="text-lvinit-blue underline underline-offset-4 decoration-transparent hover:decoration-lvinit-blue"
+          >
+            see what a 13-month-high average rate does to a payment
+          </Link>
+          .
         </p>
       </StorySection>
 
