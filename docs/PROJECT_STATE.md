@@ -5,7 +5,7 @@
 > development sprint. Where this file and the code disagree, trust the code and
 > fix this file.
 >
-> **Last audited:** 2026-09-05 · **Branch:** `main` · **Live:** https://www.lvinit.com
+> **Last audited:** 2026-09-07 · **Branch:** `main` · **Live:** https://www.lvinit.com
 >
 > **Content Publisher agent:** a project-scoped Claude Code subagent,
 > `lvinit-content-publisher`, turns Mikey's real photos/videos/notes into
@@ -77,6 +77,7 @@ app/
   guides/las-vegas-down-payment-assistance-programs-2026/page.tsx  /guides/las-vegas-down-payment-assistance-programs-2026 — Buyer Guide, busts the "20% down" myth with real loan-type minimums and Nevada's down-payment-assistance programs (Story Page system)
   guides/monument-hills-northwest-las-vegas/page.tsx  /guides/monument-hills-northwest-las-vegas — Local Feature, a new ~6,000-home master-planned community forming in the far northwest valley (Story Page system)
   guides/one-civic-center-north-las-vegas-redevelopment/page.tsx  /guides/one-civic-center-north-las-vegas-redevelopment — Local Feature, North Las Vegas's downtown government-campus redevelopment (Story Page system)
+  guides/las-vegas-mortgage-rates-september-2026/page.tsx  /guides/las-vegas-mortgage-rates-september-2026 — Market Watch, Freddie Mac's 13-month-high 30-year rate (6.71%) and what it means for a Las Vegas buyer's payment (Story Page system)
 ```
 
 **Path alias:** `@/*` → project root (see `tsconfig.json`).
@@ -104,6 +105,7 @@ app/
 | `/guides/henderson-vs-southwest-las-vegas` | Comparison guide | Live | Story Page system; pure-synthesis comparison built entirely from the two live pillar guides (`/neighborhoods/henderson` and `/neighborhoods/southwest-las-vegas`), which already carried their own "Henderson vs Southwest" / "Southwest vs Henderson" prose sections — no new fact, date, or number introduced anywhere in the piece; neither pillar guide asserts a commute-minutes figure or a defensible submarket median, and this piece doesn't invent one either. Central argument: an incorporated city with its own government and a huge range of communities vs. an informal name for a mostly-unincorporated growth corridor with no legal boundary. Built via the autonomous scheduled editorial-publishing routine (topic selection: no fresh, corroborated breaking story cleared the 24-72h sourcing bar this run — an inventory figure found only on an uncorroborated personal Substack was explicitly rejected — so the routine filled a genuine content-cluster gap instead). **Updated 2026-08-31, at Mikey's direction, in a live follow-up (hero swapped twice same day):** he first supplied a real drone still to use as the hero/OG image, replacing the generated cover the piece originally shipped with. That still's source filename ("stripview-the-lakes-flyover") suggested it was actually The Lakes, a west-valley community unrelated to either Henderson or Southwest — flagged rather than blocked, and Mikey corrected it a few minutes later with a second photo. **Current hero** (`hero/southwest-las-vegas-mountains-edge-park-aerial-drone.webp`): a park in Mountain's Edge, one of the Southwest Las Vegas master-planned communities this very article's "Housing stock" section already names alongside Southern Highlands and Rhodes Ranch — genuinely in scope, no caveat needed. The mismatched first photo was deleted (no remaining references); the original generated cover is still on disk at `covers/henderson-vs-southwest-las-vegas-editorial-cover.webp` if ever needed. Also added, same follow-up: a "Which area fits you best?" `StoryVideo` section right after the lede, embedding `youtube.com/watch?v=ZAU9hPQ_1Hk` (Mikey's own three-way Summerlin/Henderson/Southwest comparison video) via the existing click-to-play facade — poster until clicked, then autoplay from 0:00, no page-load autoplay. Poster is Mikey's own thumbnail, supplied in chat, saved as `video-summerlin-henderson-southwest-where-would-you-live.webp`. No VideoObject JSON-LD was added: this session couldn't independently verify the video's real upload date (YouTube's page wasn't fetchable, oEmbed was blocked), and `StoryVideoMeta.uploadDate` must be real, never guessed. Article + Breadcrumb JSON-LD; breadcrumb is Home → article only; cross-linked both directions with the Henderson and Southwest pillar guides (new `relatedStories` entries plus an inline link inside each page's existing "vs" section) and to `/guides/summerlin-vs-henderson` as related reading; sitemap entry; registered in `lib/content.ts` `guides[]` (card image updated to match the new hero). |
 | `/guides/monument-hills-northwest-las-vegas` | Local Feature guide | Live | Story Page system; built via the autonomous scheduled editorial-publishing routine on genuine breaking news — Las Vegas Review-Journal (Eli Segall), Sept 2, 2026, corroborated same-week by 8 News Now, News 3 LV, and KTNV: Olympia Companies and Bruin Capital Partners (as Monument Hills Partners LLC) closed on ~940 acres for $94M in the far northwest valley, up to 6,000 homes planned, first homes spring 2028, 290 military + 300 workforce housing units for Nellis/Creech AFB personnel, ~90 acres parks/trails, two future school sites. Central hook: a three-party BLM → City of Las Vegas → developer sale, so this is **City of Las Vegas** jurisdiction, not the separate incorporated city of North Las Vegas, despite bordering the areas the North Las Vegas guide already calls "Tule Springs" and "Northern growth areas" — the piece explicitly clears up that confusion rather than blurring it. Real, attributed quotes (Mayor Shelley Berkley, Olympia EVP Chris Armstrong); background-only approval-timeline fact (Aug 2025 City Council approval) sourced separately from a smaller local outlet and clearly labeled as background; no Paiute Tribe appeal claim included (uncorroborated by current reporting, omitted rather than risk a stale claim). No repo photography of this still-vacant site exists, and `C:\LVINIT\Images` was not reachable from this cloud session, so it carries a generated LVINIT editorial cover (`covers/monument-hills-editorial-cover.webp`) and a photoless `StoryHero`. Article + Breadcrumb JSON-LD; cross-linked both directions with `/neighborhoods/north-las-vegas` (new inline link in its "Areas to know" section + `RelatedNeighborhood` card back), plus links to `/neighborhoods/southwest-las-vegas` and `/guides/las-vegas-new-home-sales-july-2026`; sitemap entry; registered in `lib/content.ts` `guides[]` (byline "LVINIT Editorial," category "Local Feature"). |
 | `/guides/one-civic-center-north-las-vegas-redevelopment` | Local Feature guide | Live | Story Page system; built via the autonomous scheduled editorial-publishing routine on North Las Vegas's downtown redevelopment — the City of North Las Vegas sold ~19 acres of its old, vacant City Hall site (2200 Civic Center Dr., vacated 2011, demolition began Jan 2026) to Agora Realty & Management for a combined $1,938.80 (main parcel closed July 2026), in exchange for contractual obligations: a minimum 15,000 sq ft commercial building, a 100+ unit apartment complex, and a new 30,000+ sq ft civic building. Primary source Las Vegas Review-Journal (Sept 3, 2026), independently re-verified via WebFetch/WebSearch and corroborated by Fox5 Vegas/News3LV/KTNV (Jan 2026 demolition) and Hoodline/NVBEX (Sept 2026 land sale). Real, attributed quotes (Agora's Aaron Lefton, city spokesman Greg Bortolin, Mayor Pamela Goynes-Brown); explains the below-market-appraisal ($6.8M–$13.5M appraised vs. nominal sale price) as a conditioned land conveyance, not editorialized as either a giveaway or a scandal; honest timeline framing (construction targeted late 2026/early 2027, 60-month phased build, final 3.9-acre police-building parcel not closing until Sept 2028 — nothing buyable soon). No repo photography of this site exists and `C:\LVINIT\Images` wasn't reachable this run, so it carries a generated LVINIT editorial cover (`covers/one-civic-center-editorial-cover.webp`) and a photoless `StoryHero`. Article + Breadcrumb JSON-LD; cross-linked both directions with `/neighborhoods/north-las-vegas` (new inline paragraph + `RelatedNeighborhood` card back), plus links to `/guides/monument-hills-northwest-las-vegas` and `/guides/las-vegas-new-home-sales-july-2026`; sitemap entry; registered in `lib/content.ts` `guides[]`. |
+| `/guides/las-vegas-mortgage-rates-september-2026` | Market Watch guide | Live | Story Page system; built via the autonomous scheduled editorial-publishing routine on fresh news, independently re-verified this run: Freddie Mac's PMMS (freddiemac.com/pmms, week of Sept 3, 2026) put the 30-year fixed average at 6.71% (up from 6.66%) and the 15-year at 6.04% (up from 5.98%) — Freddie Mac's own release doesn't frame this as a milestone, but the "13-month high" claim is independently corroborated by AP wire coverage carried on Yahoo Finance, WTOP, and KSAT, which trace the 30-year average's last higher print to July 31, 2025 (6.72%). Local price context reuses the already-sourced `las-vegas-home-prices-july-2026` LVR figures ($480,000 median, July 2026) rather than re-deriving them; an LVR August 2026 report was checked for and confirmed not yet published (only uncorroborated blog estimates existed), so no August figure appears anywhere. Central payment-math example ($480,000 loan at 6.50% vs. 6.71%, ≈$67/month difference) is independently computed and clearly labeled hypothetical — not a quote or a specific transaction. No rate forecast is included (Freddie Mac's own release contains none). No repo photography fits a financing-cost, non-place topic, and `C:\LVINIT\Images` wasn't reachable from this cloud session in any case, so it carries a generated LVINIT editorial cover (`covers/las-vegas-mortgage-rates-editorial-cover.webp`) and a photoless `StoryHero`. FAQPage + Article + Breadcrumb JSON-LD; cross-linked both directions with `las-vegas-home-prices-july-2026` and `las-vegas-starter-home-prices-2026` (new `relatedStories` entries on both, plus an inline link from the starter-home piece's "What to watch next" section), plus an inline link from `las-vegas-down-payment-assistance-programs-2026`'s "What this means for your timeline" section, and links out to `what-500k-buys-in-las-vegas` and `/search`; sitemap entry; registered in `lib/content.ts` `guides[]`. |
 | `/search` | IDX search | Live | Matrix IDX embed `idx=3652dd5`; do not modify embed behavior without instruction |
 | `/contact` | Contact | Live | ContactForm → `/api/contact` (Resend) with mailto fallback |
 | `/api/contact` | Route handler | Live | Returns 503 until `RESEND_API_KEY` is set, so no fake service ships |
@@ -596,6 +598,31 @@ links flowing both up (feature → guide → homepage) and down (guide → featu
   links to `/neighborhoods/southwest-las-vegas` and the July 2026
   new-home-sales Market Watch piece; sitemap entry; registered in
   `lib/content.ts` `guides[]`.
+- **Las Vegas Mortgage Rates, September 2026** Market Watch guide — built via
+  the autonomous scheduled editorial-publishing routine on fresh, genuine
+  news: Freddie Mac's Primary Mortgage Market Survey put the 30-year fixed
+  average at 6.71% for the week of September 3, 2026 (up from 6.66%), its
+  highest print in 13 months, independently corroborated by AP wire coverage
+  across three outlets. Fills a genuine gap — LVINIT had no piece dedicated
+  to mortgage rates specifically, only passing mentions inside four other
+  guides. Distinct angle from the existing Market Watch pieces (which cover
+  sale prices): this one is financing cost. Reuses the already-sourced LVR
+  July 2026 local price/inventory figures ($480,000 median) rather than
+  re-deriving them, and explicitly confirms no LVR August 2026 report existed
+  yet at publication (rejecting uncorroborated blog estimates). Central,
+  independently-computed, clearly-labeled hypothetical payment example
+  ($480,000 loan, 6.50% vs. 6.71%, ≈$67/month difference) rather than a real
+  transaction. Honest, non-alarmist framing: rates rose, but in a market LVR
+  itself already describes as more balanced than it's been in years, so the
+  net effect on a given buyer depends on their own number, not the headline
+  rate alone. No rate forecast anywhere in the piece. No real photography
+  fits a financing-cost topic and `C:\LVINIT\Images` wasn't reachable this
+  run in any case, so it carries a generated LVINIT editorial cover and a
+  photoless hero. Story Page system; FAQPage + Article + Breadcrumb JSON-LD;
+  cross-linked both directions with `las-vegas-home-prices-july-2026` and
+  `las-vegas-starter-home-prices-2026`, plus an inline link from
+  `las-vegas-down-payment-assistance-programs-2026`; sitemap entry;
+  registered in `lib/content.ts` `guides[]`.
 - **One Civic Center** Local Feature guide — built via the autonomous
   scheduled editorial-publishing routine on North Las Vegas's downtown
   government-campus redevelopment. Primary source: Las Vegas Review-Journal,
@@ -728,6 +755,19 @@ links flowing both up (feature → guide → homepage) and down (guide → featu
     `/guides/las-vegas-new-home-sales-july-2026` for market context. A
     natural future child once construction is underway or pricing/tenants
     are announced: a follow-up piece on One Civic Center's progress.
+14. **Las Vegas Mortgage Rates, September 2026:** `/guides/las-vegas-mortgage-rates-september-2026` —
+    a standalone Market Watch piece, the financing-cost companion to the
+    existing sale-price-focused Market Watch cluster. Cross-linked both
+    directions with `las-vegas-home-prices-july-2026` and
+    `las-vegas-starter-home-prices-2026` (new `relatedStories` entries on
+    both, plus an inline link from the starter-home piece's "What to watch
+    next" section, which already flagged mortgage rates as a thing to
+    watch), plus an inline link from
+    `las-vegas-down-payment-assistance-programs-2026`'s "What this means for
+    your timeline" section, and links out to `what-500k-buys-in-las-vegas`
+    and `/search`. A natural future child or refresh: the next PMMS print
+    that moves meaningfully, or the first LVR report (August 2026 or later)
+    that lands after this one.
 
 The remaining homepage guide/video card (Surviving Your First Vegas Summer,
 and the four video posters) are placeholders that do not yet resolve to pages.
