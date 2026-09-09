@@ -208,6 +208,36 @@ export type Guide = {
  */
 export const guides: Guide[] = [
   {
+    slug: "las-vegas-home-prices-august-2026",
+    title:
+      "Las Vegas Home Prices Dipped Again in August 2026 — And Fewer Homes Are Selling",
+    dek: "LVR's August 2026 report puts the median single-family price at $475,000, a second straight monthly decline. This time single-family homes are taking longer to sell too, not just condos.",
+    byline: "Mikey Del Rosario",
+    date: "September 2026",
+    publishedAt: "2026-09-09",
+    category: "Market Watch",
+    // Built via the autonomous scheduled editorial-publishing routine, on
+    // fresh news independently verified this run: Las Vegas Realtors'
+    // August 2026 housing report, carried in full text by Nevada Business
+    // Magazine (published Sept 8, 2026, fetched independently twice with
+    // identical figures). LVR's own site (lasvegasrealtor.com) returned
+    // HTTP 429 on every attempt this run and could not be reached directly;
+    // no second full-text 2026 carrier (RJ/Fox5/Sun) turned up in search —
+    // see the fact-discipline comment atop the page file for how the
+    // reported YoY percentages were independently cross-checked against
+    // separately reported August 2025 baseline dollar figures. Real Mikey-
+    // owned photography exists for this valley-wide topic (no unique photo
+    // could exist for a monthly statistics release), so this reuses the
+    // already-approved Las Vegas residential aerial drone photo already
+    // live on the down-payment-assistance guide, rather than a generated
+    // cover or the July piece's own card photo (kept distinct so the two
+    // cards don't look identical on /guides).
+    image: "/images/hero/las-vegas-residential-neighborhood-aerial-drone.webp",
+    imageAlt:
+      "Aerial drone view of a Las Vegas residential neighborhood, with rows of tile-roofed tract homes, rooftop solar panels, and desert mountains under a blue sky in the background.",
+    href: "/guides/las-vegas-home-prices-august-2026",
+  },
+  {
     slug: "las-vegas-mortgage-rates-september-2026",
     title:
       "Mortgage Rates Just Hit a 13-Month High — What It Means for Las Vegas Buyers",

@@ -225,10 +225,16 @@ export default function LasVegasMortgageRatesSeptember2026Page() {
           "The rate is one half of what a home actually costs a buyer. Here's the other half, and what it looks like to actually get into the market at today's numbers.",
         stories: [
           {
+            name: "Las Vegas Home Prices Dipped Again in August 2026",
+            href: "/guides/las-vegas-home-prices-august-2026",
+            category: "Market Watch",
+            dek: "LVR's most recent verified valley-wide median and inventory numbers — and LVR's own president pointing at rising rates as a reason sales slowed.",
+          },
+          {
             name: "Las Vegas Home Prices Pulled Back From Their Record High in July 2026",
             href: "/guides/las-vegas-home-prices-july-2026",
             category: "Market Watch",
-            dek: "LVR's most recent verified valley-wide median and inventory numbers — the price side of this same math.",
+            dek: "The prior month's report — the price side of this same math, one reporting period earlier.",
           },
           {
             name: "Las Vegas Starter Homes Have More Than Doubled Since 2016",
