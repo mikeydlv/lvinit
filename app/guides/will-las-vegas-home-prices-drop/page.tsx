@@ -174,6 +174,12 @@ export default function WillLasVegasHomePricesDropPage() {
           "Put these numbers to work. See what a real budget buys, and where in the valley it goes furthest.",
         stories: [
           {
+            name: "Las Vegas Home Prices Dipped Again in August 2026",
+            href: "/guides/las-vegas-home-prices-august-2026",
+            category: "Market Watch",
+            dek: "The latest chapter in this same question: a second straight monthly decline, and single-family homes start to slow down too.",
+          },
+          {
             name: "What $500K Buys in Las Vegas",
             href: "/guides/what-500k-buys-in-las-vegas",
             category: "Buyer guide",
@@ -432,6 +438,18 @@ export default function WillLasVegasHomePricesDropPage() {
             what the July numbers actually show
           </Link>{" "}
           for the updated data.
+        </p>
+        <p className="mt-5 text-body-lg text-lvinit-warmgray">
+          Second update: the August 2026 report confirms the pullback wasn&rsquo;t
+          a one-month event. See{" "}
+          <Link
+            href="/guides/las-vegas-home-prices-august-2026"
+            className="text-lvinit-blue underline underline-offset-4 decoration-transparent hover:decoration-lvinit-blue"
+          >
+            what changed in August
+          </Link>
+          , including single-family homes slowing down for the first time in
+          this stretch.
         </p>
       </StorySection>
 

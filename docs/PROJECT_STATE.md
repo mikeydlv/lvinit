@@ -5,7 +5,7 @@
 > development sprint. Where this file and the code disagree, trust the code and
 > fix this file.
 >
-> **Last audited:** 2026-09-07 · **Branch:** `main` · **Live:** https://www.lvinit.com
+> **Last audited:** 2026-09-09 · **Branch:** `main` · **Live:** https://www.lvinit.com
 >
 > **Content Publisher agent:** a project-scoped Claude Code subagent,
 > `lvinit-content-publisher`, turns Mikey's real photos/videos/notes into
@@ -78,6 +78,7 @@ app/
   guides/monument-hills-northwest-las-vegas/page.tsx  /guides/monument-hills-northwest-las-vegas — Local Feature, a new ~6,000-home master-planned community forming in the far northwest valley (Story Page system)
   guides/one-civic-center-north-las-vegas-redevelopment/page.tsx  /guides/one-civic-center-north-las-vegas-redevelopment — Local Feature, North Las Vegas's downtown government-campus redevelopment (Story Page system)
   guides/las-vegas-mortgage-rates-september-2026/page.tsx  /guides/las-vegas-mortgage-rates-september-2026 — Market Watch, Freddie Mac's 13-month-high 30-year rate (6.71%) and what it means for a Las Vegas buyer's payment (Story Page system)
+  guides/las-vegas-home-prices-august-2026/page.tsx  /guides/las-vegas-home-prices-august-2026 — Market Watch, LVR's August 2026 report: a second straight monthly decline, and single-family homes slow down alongside condos for the first time this stretch (Story Page system)
 ```
 
 **Path alias:** `@/*` → project root (see `tsconfig.json`).
@@ -106,6 +107,7 @@ app/
 | `/guides/monument-hills-northwest-las-vegas` | Local Feature guide | Live | Story Page system; built via the autonomous scheduled editorial-publishing routine on genuine breaking news — Las Vegas Review-Journal (Eli Segall), Sept 2, 2026, corroborated same-week by 8 News Now, News 3 LV, and KTNV: Olympia Companies and Bruin Capital Partners (as Monument Hills Partners LLC) closed on ~940 acres for $94M in the far northwest valley, up to 6,000 homes planned, first homes spring 2028, 290 military + 300 workforce housing units for Nellis/Creech AFB personnel, ~90 acres parks/trails, two future school sites. Central hook: a three-party BLM → City of Las Vegas → developer sale, so this is **City of Las Vegas** jurisdiction, not the separate incorporated city of North Las Vegas, despite bordering the areas the North Las Vegas guide already calls "Tule Springs" and "Northern growth areas" — the piece explicitly clears up that confusion rather than blurring it. Real, attributed quotes (Mayor Shelley Berkley, Olympia EVP Chris Armstrong); background-only approval-timeline fact (Aug 2025 City Council approval) sourced separately from a smaller local outlet and clearly labeled as background; no Paiute Tribe appeal claim included (uncorroborated by current reporting, omitted rather than risk a stale claim). No repo photography of this still-vacant site exists, and `C:\LVINIT\Images` was not reachable from this cloud session, so it carries a generated LVINIT editorial cover (`covers/monument-hills-editorial-cover.webp`) and a photoless `StoryHero`. Article + Breadcrumb JSON-LD; cross-linked both directions with `/neighborhoods/north-las-vegas` (new inline link in its "Areas to know" section + `RelatedNeighborhood` card back), plus links to `/neighborhoods/southwest-las-vegas` and `/guides/las-vegas-new-home-sales-july-2026`; sitemap entry; registered in `lib/content.ts` `guides[]` (byline "LVINIT Editorial," category "Local Feature"). |
 | `/guides/one-civic-center-north-las-vegas-redevelopment` | Local Feature guide | Live | Story Page system; built via the autonomous scheduled editorial-publishing routine on North Las Vegas's downtown redevelopment — the City of North Las Vegas sold ~19 acres of its old, vacant City Hall site (2200 Civic Center Dr., vacated 2011, demolition began Jan 2026) to Agora Realty & Management for a combined $1,938.80 (main parcel closed July 2026), in exchange for contractual obligations: a minimum 15,000 sq ft commercial building, a 100+ unit apartment complex, and a new 30,000+ sq ft civic building. Primary source Las Vegas Review-Journal (Sept 3, 2026), independently re-verified via WebFetch/WebSearch and corroborated by Fox5 Vegas/News3LV/KTNV (Jan 2026 demolition) and Hoodline/NVBEX (Sept 2026 land sale). Real, attributed quotes (Agora's Aaron Lefton, city spokesman Greg Bortolin, Mayor Pamela Goynes-Brown); explains the below-market-appraisal ($6.8M–$13.5M appraised vs. nominal sale price) as a conditioned land conveyance, not editorialized as either a giveaway or a scandal; honest timeline framing (construction targeted late 2026/early 2027, 60-month phased build, final 3.9-acre police-building parcel not closing until Sept 2028 — nothing buyable soon). No repo photography of this site exists and `C:\LVINIT\Images` wasn't reachable this run, so it carries a generated LVINIT editorial cover (`covers/one-civic-center-editorial-cover.webp`) and a photoless `StoryHero`. Article + Breadcrumb JSON-LD; cross-linked both directions with `/neighborhoods/north-las-vegas` (new inline paragraph + `RelatedNeighborhood` card back), plus links to `/guides/monument-hills-northwest-las-vegas` and `/guides/las-vegas-new-home-sales-july-2026`; sitemap entry; registered in `lib/content.ts` `guides[]`. |
 | `/guides/las-vegas-mortgage-rates-september-2026` | Market Watch guide | Live | Story Page system; built via the autonomous scheduled editorial-publishing routine on fresh news, independently re-verified this run: Freddie Mac's PMMS (freddiemac.com/pmms, week of Sept 3, 2026) put the 30-year fixed average at 6.71% (up from 6.66%) and the 15-year at 6.04% (up from 5.98%) — Freddie Mac's own release doesn't frame this as a milestone, but the "13-month high" claim is independently corroborated by AP wire coverage carried on Yahoo Finance, WTOP, and KSAT, which trace the 30-year average's last higher print to July 31, 2025 (6.72%). Local price context reuses the already-sourced `las-vegas-home-prices-july-2026` LVR figures ($480,000 median, July 2026) rather than re-deriving them; an LVR August 2026 report was checked for and confirmed not yet published (only uncorroborated blog estimates existed), so no August figure appears anywhere. Central payment-math example ($480,000 loan at 6.50% vs. 6.71%, ≈$67/month difference) is independently computed and clearly labeled hypothetical — not a quote or a specific transaction. No rate forecast is included (Freddie Mac's own release contains none). No repo photography fits a financing-cost, non-place topic, and `C:\LVINIT\Images` wasn't reachable from this cloud session in any case, so it carries a generated LVINIT editorial cover (`covers/las-vegas-mortgage-rates-editorial-cover.webp`) and a photoless `StoryHero`. FAQPage + Article + Breadcrumb JSON-LD; cross-linked both directions with `las-vegas-home-prices-july-2026` and `las-vegas-starter-home-prices-2026` (new `relatedStories` entries on both, plus an inline link from the starter-home piece's "What to watch next" section), plus an inline link from `las-vegas-down-payment-assistance-programs-2026`'s "What this means for your timeline" section, and links out to `what-500k-buys-in-las-vegas` and `/search`; sitemap entry; registered in `lib/content.ts` `guides[]`. |
+| `/guides/las-vegas-home-prices-august-2026` | Market Watch guide | Live | Story Page system; built via the autonomous scheduled editorial-publishing routine on fresh news: Las Vegas Realtors' August 2026 housing report (median single-family $475,000, &minus;1.0% YoY, &minus;3.1% off the May/June record; condo/townhome $299,900, +0.6% YoY; 2,252 total sales; 7,590 SFH + 2,714 condo/TH listed without offers; supply just over 4.5 months; 74.8% of SFH and 68.9% of condo/TH sold within 60 days) — verified against the full text of Nevada Business Magazine (published Sept 8, 2026, fetched independently twice with identical figures); LVR's own site returned HTTP 429 on every attempt this run and no second full-text 2026 carrier turned up in search, so the YoY percentages were independently cross-checked arithmetically against separately reported August 2025 baseline dollar figures instead. Central finding: single-family days-on-market reversed from July (faster YoY in July, slower YoY in August) — the slowdown that was condo-only in July has spread to single-family homes. Reuses the already-approved, already-in-repo Las Vegas residential aerial drone photo (`hero/las-vegas-residential-neighborhood-aerial-drone.webp`, already live on the down-payment-assistance guide) as hero + card rather than a generated cover or the July piece's own card photo, since a real valley-wide aerial fits and keeps the two cards visually distinct; `C:\LVINIT\Images` was not reachable from this cloud session. FAQPage + Article + Breadcrumb JSON-LD; cross-linked both directions with `las-vegas-home-prices-july-2026`, `las-vegas-mortgage-rates-september-2026`, and `will-las-vegas-home-prices-drop` (each gained a forward-pointing update note and/or `relatedStories` entry), plus links to `what-500k-buys-in-las-vegas`, `las-vegas-starter-home-prices-2026`, `/neighborhoods/summerlin`, and `/search`; sitemap entry; registered in `lib/content.ts` `guides[]`. |
 | `/search` | IDX search | Live | Matrix IDX embed `idx=3652dd5`; do not modify embed behavior without instruction |
 | `/contact` | Contact | Live | ContactForm → `/api/contact` (Resend) with mailto fallback |
 | `/api/contact` | Route handler | Live | Returns 503 until `RESEND_API_KEY` is set, so no fake service ships |
@@ -651,6 +653,41 @@ links flowing both up (feature → guide → homepage) and down (guide → featu
   links to `/guides/monument-hills-northwest-las-vegas` and the July 2026
   new-home-sales Market Watch piece; sitemap entry; registered in
   `lib/content.ts` `guides[]`.
+- **Las Vegas Home Prices, August 2026** Market Watch guide — built via the
+  autonomous scheduled editorial-publishing routine on fresh news: Las
+  Vegas Realtors' August 2026 housing report (median single-family
+  $475,000, down 1.0% year over year and about 3.1% off the $490,000
+  record set in May and June; median condo/townhome $299,900, up 0.6%
+  year over year; 2,252 total sales; 7,590 single-family and 2,714
+  condo/townhome properties listed without offers; supply just over 4.5
+  months; 74.8% of single-family homes and 68.9% of condos/townhomes
+  selling within 60 days). Verified against the full text of Nevada
+  Business Magazine's coverage (published Sept 8, 2026, fetched
+  independently twice with identical figures); LVR's own site returned
+  HTTP 429 on every attempt this run and no second full-text 2026 carrier
+  turned up in search, so the YoY percentages were independently
+  cross-checked arithmetically against separately reported August 2025
+  baseline dollar figures instead of resting on a single narrative source.
+  The direct monthly sequel to `las-vegas-home-prices-july-2026`, and the
+  third entry (after `will-las-vegas-home-prices-drop` and that July
+  piece) in an ongoing Market Watch thread — this report confirms the
+  July pullback continued into a second straight month and, genuinely new
+  this time, single-family days-on-market reversed from faster-than-a-
+  year-ago in July to slower-than-a-year-ago in August, meaning the
+  slowdown that was condo-only in July has spread to single-family homes.
+  No new photography exists for a monthly statistics release, and
+  `C:\LVINIT\Images` wasn't reachable from this cloud session, so it
+  reuses the already-approved, already-in-repo Las Vegas residential
+  aerial drone photo (already live on the down-payment-assistance guide)
+  as hero + card, deliberately not the July piece's own card photo, so the
+  two don't look identical side by side on `/guides`. FAQPage + Article +
+  Breadcrumb JSON-LD; cross-linked both directions with
+  `las-vegas-home-prices-july-2026`, `las-vegas-mortgage-rates-september-2026`,
+  and `will-las-vegas-home-prices-drop` (each gained a forward-pointing
+  update note and/or a `relatedStories` entry), plus links to
+  `what-500k-buys-in-las-vegas`, `las-vegas-starter-home-prices-2026`, and
+  `/neighborhoods/summerlin`; sitemap entry; registered in
+  `lib/content.ts` `guides[]`.
 - Live IDX search page (Matrix / GLVAR).
 - Contact form with Resend handler + mailto fallback + GA4 lead event.
 - GA4 analytics scaffolding (opt-in via env var).
@@ -768,6 +805,24 @@ links flowing both up (feature → guide → homepage) and down (guide → featu
     and `/search`. A natural future child or refresh: the next PMMS print
     that moves meaningfully, or the first LVR report (August 2026 or later)
     that lands after this one.
+
+15. **Las Vegas Home Prices, August 2026:** `/guides/las-vegas-home-prices-august-2026` —
+    the direct monthly sequel to `las-vegas-home-prices-july-2026` and the
+    third entry in the "why aren't/are prices dropping" thread that started
+    with `will-las-vegas-home-prices-drop` (June 2026). LVR's August report
+    confirms the July pullback wasn't a one-month blip (a second straight
+    monthly decline, ~3.1% off the May/June record over three months) and
+    adds a genuine new development: single-family days-on-market reversed
+    from faster-than-a-year-ago in July to slower-than-a-year-ago in
+    August, meaning the slowdown that was condo-only in July has spread to
+    single-family homes. Cross-linked both directions with
+    `las-vegas-home-prices-july-2026`, `las-vegas-mortgage-rates-september-2026`,
+    and `will-las-vegas-home-prices-drop` (each of those three pages now
+    carries a forward-pointing update note and/or a `relatedStories` entry
+    to this piece), plus links to `what-500k-buys-in-las-vegas`,
+    `las-vegas-starter-home-prices-2026`, and `/neighborhoods/summerlin`.
+    A natural future child or refresh: the September 2026 LVR report,
+    whenever it lands.
 
 The remaining homepage guide/video card (Surviving Your First Vegas Summer,
 and the four video posters) are placeholders that do not yet resolve to pages.

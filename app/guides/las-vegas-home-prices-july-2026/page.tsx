@@ -184,6 +184,12 @@ export default function LasVegasHomePricesJuly2026Page() {
           "Put these numbers to work. See how new construction looked the same month, what a real budget buys, and where in the valley it goes furthest.",
         stories: [
           {
+            name: "Las Vegas Home Prices Dipped Again in August 2026",
+            href: "/guides/las-vegas-home-prices-august-2026",
+            category: "Market Watch",
+            dek: "The next month's report: a second straight monthly decline, and the slowdown reaches single-family homes for the first time this stretch.",
+          },
+          {
             name: "Las Vegas New-Home Sales Jumped in July 2026",
             href: "/guides/las-vegas-new-home-sales-july-2026",
             category: "Market Watch",
@@ -446,6 +452,18 @@ export default function LasVegasHomePricesJuly2026Page() {
           between the two most recent Freddie Mac readings, so a sustained
           move in either direction would be the more likely trigger for a
           bigger shift than anything in July&rsquo;s report on its own.
+        </p>
+        <p className="mt-5 text-body-lg text-lvinit-warmgray">
+          Update: the August 2026 report is in, and the pullback continued.
+          Read{" "}
+          <Link
+            href="/guides/las-vegas-home-prices-august-2026"
+            className="text-lvinit-blue underline underline-offset-4 decoration-transparent hover:decoration-lvinit-blue"
+          >
+            what the August numbers show
+          </Link>{" "}
+          &mdash; including the first sign this month that single-family
+          homes, not just condos, are starting to slow down too.
         </p>
       </StorySection>
 
