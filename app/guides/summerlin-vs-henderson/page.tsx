@@ -101,6 +101,18 @@ export default function SummerlinVsHendersonPage() {
         heading: "Trying to choose between Summerlin and Henderson?",
         body:
           "Tell me what you're weighing (schools, commute, budget, the kind of street you want to come home to) and I'll give you the unfiltered version for your specific situation, not a sales pitch for either one.",
+        footnote: (
+          <>
+            Southwest Las Vegas also in the running? The{" "}
+            <Link
+              href="/guides/summerlin-vs-henderson-vs-southwest-las-vegas"
+              className="text-lvinit-blue underline underline-offset-4"
+            >
+              three-way comparison
+            </Link>{" "}
+            puts all three side by side.
+          </>
+        ),
       }}
     >
       <StoryLede

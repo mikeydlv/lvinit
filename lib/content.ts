@@ -208,6 +208,30 @@ export type Guide = {
  */
 export const guides: Guide[] = [
   {
+    slug: "summerlin-vs-henderson-vs-southwest-las-vegas",
+    title: "Summerlin vs Henderson vs Southwest Las Vegas",
+    dek: "A master-planned community, an entire incorporated city, and a name locals use for a stretch of county with no boundary. Compared honestly on money, location, new construction, parks and what each one actually costs to own.",
+    byline: "Mikey Del Rosario",
+    date: "September 2026",
+    publishedAt: "2026-09-10",
+    category: "Comparisons",
+    // The companion piece to Mikey's three-way comparison video, and the third
+    // corner of the comparison cluster (the Summerlin/Henderson and
+    // Henderson/Southwest pairings were already live).
+    //
+    // Card image is Mikey's own video title card, deliberately: this article's
+    // hero is the photoless editorial treatment, because every strong frame in
+    // the photo library belongs to one of the three areas and leading with any
+    // one of them made an equal three-way comparison look like a piece about
+    // that area. The title card is itself a three-area visual, so the card and
+    // the social preview stay balanced. Same file the page uses as its
+    // StoryVideo poster and its StoryMeta image.
+    image: "/images/video-summerlin-henderson-southwest-where-would-you-live.webp",
+    imageAlt:
+      "Title card for the LVINIT video comparing Summerlin, Henderson and Southwest Las Vegas, with one photo from each of the three areas.",
+    href: "/guides/summerlin-vs-henderson-vs-southwest-las-vegas",
+  },
+  {
     slug: "las-vegas-home-prices-august-2026",
     title:
       "Las Vegas Home Prices Dipped Again in August 2026 — And Fewer Homes Are Selling",

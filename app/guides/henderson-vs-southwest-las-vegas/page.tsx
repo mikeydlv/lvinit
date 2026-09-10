@@ -138,7 +138,14 @@ export default function HendersonVsSouthwestLasVegasPage() {
             <Link href="/guides/summerlin-vs-henderson" className="text-lvinit-blue underline underline-offset-4">
               Summerlin vs. Henderson guide
             </Link>{" "}
-            covers that pairing.
+            covers that pairing, and the{" "}
+            <Link
+              href="/guides/summerlin-vs-henderson-vs-southwest-las-vegas"
+              className="text-lvinit-blue underline underline-offset-4"
+            >
+              three-way comparison
+            </Link>{" "}
+            puts all three side by side.
           </>
         ),
       }}
