@@ -285,13 +285,19 @@ export const guides: Guide[] = [
     // reused from the already-sourced las-vegas-home-prices-july-2026 piece
     // (LVR, July 2026) — an LVR August 2026 report was checked for and
     // confirmed not yet published, so no August figure is used anywhere.
-    // Financing-cost topic, not a place — a generated cover is the right
-    // call on the merits, and C:\LVINIT\Images wasn't reachable from this
-    // cloud session in any case.
-    //   node scripts/generate-guide-cover.mjs --slug las-vegas-mortgage-rates-september-2026 \
-    //     --category "Market Watch" --subject "MORTGAGE RATES" \
-    //     --out las-vegas-mortgage-rates-editorial-cover.webp
-    image: "/images/covers/las-vegas-mortgage-rates-editorial-cover.webp",
+    // Financing-cost topic, not a place, and C:\LVINIT\Images wasn't
+    // reachable from this cloud session — originally a generated cover
+    // (script command above superseded). On 2026-09-10, Mikey supplied an
+    // AI-generated hero graphic directly (a stylized home/skyline scene with
+    // a "Mortgage Rates 6.71% · September 2026" data callout) and explicitly
+    // approved bypassing CLAUDE.md's no-AI-imagery default for this one
+    // piece. It is not real photography and carries no photo credit by his
+    // request. `imageMode: "editorial-cover"` is kept (renders empty alt on
+    // this card) because the honest framing is "graphic," not "photograph of
+    // an actual place" — same reasoning as a script-generated cover, even
+    // though this asset didn't come from the script. The full hero on the
+    // story page itself carries its own honest, non-empty alt text.
+    image: "/images/hero/las-vegas-mortgage-rates-september-2026-hero.webp",
     imageMode: "editorial-cover",
     href: "/guides/las-vegas-mortgage-rates-september-2026",
   },
