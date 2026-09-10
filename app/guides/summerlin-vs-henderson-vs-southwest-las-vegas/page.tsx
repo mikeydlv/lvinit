@@ -120,10 +120,10 @@ const meta: StoryMeta = {
     thumbnailUrl:
       "/images/video-summerlin-henderson-southwest-where-would-you-live.webp",
     uploadDate: "2026-09-02T18:45:00-07:00",
-    // 14:34 is what YouTube's own player reports for this video. The videos[]
-    // registry in lib/content.ts still says "14:33"; that display string was
-    // not changed here, but the two disagree by a second and one of them is
-    // wrong. Schema follows YouTube, since that is the observable source.
+    // 14:34 is what YouTube's own player reports for this video, and the live
+    // runtime is the source of truth. The videos[] registry in lib/content.ts
+    // read "14:33" when this page shipped; it was corrected to match on
+    // 2026-09-10. Keep the two in step.
     duration: "PT14M34S",
     embedUrl: "https://www.youtube.com/embed/ZAU9hPQ_1Hk",
     contentUrl: "https://www.youtube.com/watch?v=ZAU9hPQ_1Hk",

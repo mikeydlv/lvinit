@@ -117,7 +117,12 @@ export const videos: VideoItem[] = [
     youtubeId: "ZAU9hPQ_1Hk",
     title:
       "Summerlin vs Henderson vs Southwest Las Vegas: Which Area Fits You Best?",
-    duration: "14:33",
+    // 14:34 is what YouTube's own player reports. This read "14:33" until
+    // 2026-09-10; corrected at Mikey's direction, with the live YouTube
+    // runtime treated as the source of truth. It now matches the VideoObject
+    // JSON-LD on /guides/summerlin-vs-henderson-vs-southwest-las-vegas
+    // (PT14M34S). Keep the two in step if either ever changes.
+    duration: "14:34",
   },
   {
     id: "rent-first-or-buy-first-las-vegas",
