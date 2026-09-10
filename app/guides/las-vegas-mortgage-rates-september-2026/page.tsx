@@ -68,16 +68,17 @@ import {
 // - No prediction about where rates go next is included anywhere in this
 //   piece — Freddie Mac's own release contains none, so none is added.
 //
-// IMAGERY — C:\LVINIT\Images was not reachable from this cloud session (see
-// PROJECT_STATE.md note on this run). This is also, on the merits, not a
-// place-based topic — it's financing-cost news, not a neighborhood or
-// development — so a generated LVINIT editorial cover is the right call
-// even setting the access issue aside. Photoless StoryHero; the cover is
-// registered in lib/content.ts as the card image only.
+// IMAGERY — originally published photoless (C:\LVINIT\Images unreachable
+// from this cloud session; a generated LVINIT editorial cover registered in
+// lib/content.ts as the card image only — command preserved for history:
 //   node scripts/generate-guide-cover.mjs --slug las-vegas-mortgage-rates-september-2026 \
 //     --category "Market Watch" --subject "MORTGAGE RATES" \
-//     --out las-vegas-mortgage-rates-editorial-cover.webp
-//   -> public/images/covers/las-vegas-mortgage-rates-editorial-cover.webp
+//     --out las-vegas-mortgage-rates-editorial-cover.webp).
+// On 2026-09-10, Mikey supplied an AI-generated hero graphic directly and
+// explicitly approved bypassing CLAUDE.md's no-AI-imagery default for this
+// one piece. It is not real photography, carries no photo credit (his
+// request), and is used for both the story hero and the /guides card —
+// public/images/hero/las-vegas-mortgage-rates-september-2026-hero.webp.
 // ---------------------------------------------------------------------------
 
 const PATH = "/guides/las-vegas-mortgage-rates-september-2026";
@@ -214,6 +215,12 @@ export default function LasVegasMortgageRatesSeptember2026Page() {
           "Mortgage Rates Just Hit a 13-Month High. Here's What It Actually Means for Las Vegas Buyers.",
         subheadline:
           "Freddie Mac's average 30-year rate climbed to 6.71% the week of September 3, 2026 — its highest print in over a year. Here's the actual math on what that does to a monthly payment, in a Las Vegas market that already has more room to negotiate than it's had in a long time.",
+        // Mikey-supplied AI-generated graphic, added 2026-09-10 with his
+        // explicit approval to bypass CLAUDE.md's no-AI-imagery default for
+        // this one piece — not a real photograph, no credit per his request.
+        image: "/images/hero/las-vegas-mortgage-rates-september-2026-hero.webp",
+        imageAlt:
+          "Editorial graphic of a Las Vegas home with mountain and skyline backdrop, with a stat callout reading Mortgage Rates 6.71%, September 2026",
         backLink: { label: "LVINIT", href: "/" },
         ctas: [
           { label: "See the numbers", href: "#by-the-numbers", variant: "primary" },
