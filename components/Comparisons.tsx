@@ -84,43 +84,42 @@ export default function Comparisons() {
           Compare Any Two Neighborhoods, Honestly
         </h2>
 
-        <div className="mt-12 grid grid-cols-[1fr_auto_1fr] items-center gap-4 sm:gap-8">
-          {([0, 1] as const).map((side) => {
-            const neighborhood = side === 0 ? a : b;
-            return (
-              <div key={side} className="relative text-center sm:text-left">
-                <button
-                  type="button"
-                  onClick={() =>
-                    setOpenSelector((prev) => (prev === side ? null : side))
-                  }
-                  aria-expanded={openSelector === side}
-                  className="font-display text-[32px] leading-[36px] sm:text-scoreboard font-black text-lvinit-black hover:text-lvinit-blue transition-colors duration-200 ease-calm text-left"
-                >
-                  {neighborhood.name}
-                </button>
+        {/*
+          The scoreboard row: name · "vs." · name.
 
-                {openSelector === side && (
-                  <div className="absolute z-20 mt-2 w-64 border border-lvinit-lightgray bg-lvinit-white shadow-sm">
-                    {neighborhoods.map((n, i) => (
-                      <button
-                        key={n.slug}
-                        type="button"
-                        onClick={() => selectNeighborhood(side, i)}
-                        className="block w-full px-4 py-3 text-left text-body hover:bg-lvinit-lightgray/60"
-                      >
-                        {n.name}
-                      </button>
-                    ))}
-                  </div>
-                )}
-              </div>
-            );
-          })}
+          ORDER MATTERS. The three-column template is `1fr auto 1fr` — a
+          flexible track for each name with the "vs." sized to its content in
+          between — so the <p> has to sit BETWEEN the two sides in the DOM, not
+          after them. It used to be rendered last, which put it in the trailing
+          1fr track and read "Summerlin Henderson vs."
+
+          BREAKPOINT. The three-across row only turns on at `lg`. Each track
+          carries an auto minimum, and a single-word name at text-scoreboard
+          (64px Playfair Black) cannot wrap or shrink, so the row has a hard
+          floor of roughly 780px — wider than the container below 1024px. Going
+          three-across any earlier pushed the whole page into horizontal
+          overflow. Below `lg` the three items stack, which every name fits at
+          either type size. Don't move this back to `sm` without also solving
+          the 64px names.
+        */}
+        <div className="mt-12 grid grid-cols-1 items-center gap-4 lg:grid-cols-[1fr_auto_1fr] lg:gap-8">
+          <NeighborhoodPicker
+            neighborhood={a}
+            open={openSelector === 0}
+            onToggle={() => setOpenSelector((prev) => (prev === 0 ? null : 0))}
+            onSelect={(i) => selectNeighborhood(0, i)}
+          />
 
           <p className="font-display italic text-heading-sm text-lvinit-warmgray text-center">
             vs.
           </p>
+
+          <NeighborhoodPicker
+            neighborhood={b}
+            open={openSelector === 1}
+            onToggle={() => setOpenSelector((prev) => (prev === 1 ? null : 1))}
+            onSelect={(i) => selectNeighborhood(1, i)}
+          />
         </div>
 
         <div className="mt-12 space-y-8">
@@ -182,6 +181,59 @@ export default function Comparisons() {
         </div>
       </Container>
     </section>
+  );
+}
+
+/**
+ * One side of the scoreboard row: the neighborhood name as a button that opens
+ * the picker. Extracted from an inline map so the "vs." can be rendered between
+ * the two sides in DOM order (see the note on the grid above).
+ *
+ * Text alignment tracks the grid: centered while the row is stacked, left
+ * aligned once it goes three-across at `lg`.
+ */
+function NeighborhoodPicker({
+  neighborhood,
+  open,
+  onToggle,
+  onSelect,
+}: {
+  neighborhood: (typeof neighborhoods)[number];
+  open: boolean;
+  onToggle: () => void;
+  onSelect: (index: number) => void;
+}) {
+  return (
+    <div className="relative text-center lg:text-left">
+      <button
+        type="button"
+        onClick={onToggle}
+        aria-expanded={open}
+        // No text-align of its own: it inherits the wrapper's, so a name that
+        // wraps (e.g. "Downtown Arts District") aligns the same way as one that
+        // fits on a line. With an explicit text-left here, a short name centred
+        // while a long one filled the column and read left, in the same row.
+        // At `lg` the wrapper is text-left, so this is unchanged on desktop.
+        className="font-display text-[32px] leading-[36px] sm:text-scoreboard font-black text-lvinit-black hover:text-lvinit-blue transition-colors duration-200 ease-calm"
+      >
+        {neighborhood.name}
+      </button>
+
+      {open && (
+        <div className="absolute z-20 mt-2 w-64 border border-lvinit-lightgray bg-lvinit-white shadow-sm">
+          {neighborhoods.map((n, i) => (
+            <button
+              key={n.slug}
+              type="button"
+              onClick={() => onSelect(i)}
+              className="block w-full px-4 py-3 text-left text-body hover:bg-lvinit-lightgray/60"
+            >
+              {n.name}
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
   );
 }
 
