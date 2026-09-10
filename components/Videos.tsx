@@ -5,11 +5,25 @@ import Container from "./ui/Container";
 import VideoPlaceholder from "./ui/VideoPlaceholder";
 import { videos } from "@/lib/content";
 
+/**
+ * How many videos the supporting row shows beneath the featured player.
+ *
+ * Four is a layout constant, not an arbitrary cap: the row is
+ * grid-cols-1 / sm:grid-cols-2 / lg:grid-cols-4, and four divides evenly into
+ * all three, so no card is ever left orphaned on a line of its own. The
+ * registry in lib/content.ts is sized to match (five entries: one featured
+ * plus four). If a sixth is ever added there it will not appear here — the
+ * homepage set is curated, so retire one instead of appending.
+ */
+const SUPPORTING_COUNT = 4;
+
 export default function Videos() {
   const [featuredId, setFeaturedId] = useState(videos[0].id);
   const [playingId, setPlayingId] = useState<string | null>(null);
   const featured = videos.find((v) => v.id === featuredId) ?? videos[0];
-  const secondary = videos.filter((v) => v.id !== featuredId);
+  const secondary = videos
+    .filter((v) => v.id !== featuredId)
+    .slice(0, SUPPORTING_COUNT);
   const isPlaying = playingId === featured.id;
 
   return (
@@ -61,7 +75,9 @@ export default function Videos() {
           <p className="text-caption text-lvinit-warmgray">{featured.duration}</p>
         </div>
 
-        <div className="mt-10 grid grid-cols-1 sm:grid-cols-3 gap-6">
+        {/* Supporting row. 1 / 2 / 4 across, mirroring the 1 / 2 / 3 ladder the
+            guides feed uses, so SUPPORTING_COUNT items always fill whole rows. */}
+        <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {secondary.map((video) => (
             <button
               key={video.id}

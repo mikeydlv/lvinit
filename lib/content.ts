@@ -98,13 +98,38 @@ export type VideoItem = {
   youtubeId?: string;
 };
 
-// All four entries are real, published LVINIT videos.
+// Every entry is a real, published LVINIT video.
+//
+// ORDER IS EDITORIAL, and it drives the homepage section (components/Videos.tsx):
+// index 0 is the video sitting in the large featured player on load, and the
+// rest fill the supporting row left to right. The relocation opener holds
+// position 0 deliberately — it is the top-of-funnel piece — with the core
+// buyer-decision videos behind it.
+//
+// KEEP THIS LIST AT FIVE. The homepage renders one featured video plus a
+// four-card row (grid-cols-1 / sm:grid-cols-2 / lg:grid-cols-4), which divides
+// evenly at every breakpoint. Videos.tsx caps the supporting row at four so a
+// sixth entry can never orphan a card on its own line, but that means a sixth
+// entry would silently drop off the homepage. When a new video earns a place
+// here, retire one rather than appending — the section is curated, not a feed.
+//
+// Each entry needs a 1280x720 poster at /public/images/video-<id>.jpg, which
+// is the path Videos.tsx builds from the id.
 export const videos: VideoItem[] = [
   {
     id: "moving-to-las-vegas-2026-choose-the-area",
     youtubeId: "nyK0cchUt14",
     title: "Moving to Las Vegas in 2026? Choose the Area Before the House",
     duration: "5:45",
+  },
+  {
+    id: "new-build-vs-resale-las-vegas",
+    youtubeId: "2w-zkNv5Ta4",
+    title: "New Build vs Resale in Las Vegas: Which Should You Buy?",
+    // 5:09 is what YouTube's own player reports (lengthSeconds 309, read from
+    // the player data on 2026-09-10). Matches the PT5M9S in the VideoObject
+    // JSON-LD on /guides/new-build-vs-resale-las-vegas. Keep the two in step.
+    duration: "5:09",
   },
   {
     id: "what-500k-gets-you-in-las-vegas",
