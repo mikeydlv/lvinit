@@ -213,6 +213,34 @@ export type Guide = {
  */
 export const guides: Guide[] = [
   {
+    slug: "new-build-vs-resale-las-vegas",
+    title: "New Build vs Resale in Las Vegas: Which Should You Buy?",
+    dek: "Two Las Vegas homes can carry the same price and still be very different deals. What a builder's price does and doesn't include, how incentives change the monthly number, what a resale already paid for, and how to compare the two honestly.",
+    byline: "Mikey Del Rosario",
+    date: "September 2026",
+    publishedAt: "2026-09-10",
+    category: "Buyer Guide",
+    // The companion piece to Mikey's video of the same name
+    // (youtube.com/watch?v=2w-zkNv5Ta4, published 2026-09-09). Not a
+    // transcript: the page adds the Las Vegas ownership mechanics the
+    // five-minute video has no room for, and cites LVINIT's own already-
+    // verified local price data rather than re-deriving it.
+    //
+    // Card image is a real, Mikey-owned drone frame, and the same file the
+    // page uses as its hero and its StoryMeta image. Every photo on this
+    // article was chosen from C:\LVINIT\Images specifically because it was
+    // not already published anywhere else on LVINIT, so the piece has its own
+    // visual identity. The video's own title card lives at
+    // /images/video-new-build-vs-resale-las-vegas.webp and is used ONLY as
+    // the click-to-play poster on the page — it is a title card, not
+    // photography, and is deliberately not used as the card image here.
+    image:
+      "/images/hero/summerlin-established-neighborhood-red-rock-aerial-drone.webp",
+    imageAlt:
+      "Aerial drone view over an established Las Vegas neighborhood of tile-roofed homes with grown-in trees and a green golf corridor, the 215 Beltway running across the foreground and the Red Rock escarpment and La Madre range on the horizon.",
+    href: "/guides/new-build-vs-resale-las-vegas",
+  },
+  {
     slug: "summerlin-vs-henderson-vs-southwest-las-vegas",
     title: "Summerlin vs Henderson vs Southwest Las Vegas",
     dek: "A master-planned community, an entire incorporated city, and a name locals use for a stretch of county with no boundary. Compared honestly on money, location, new construction, parks and what each one actually costs to own.",
