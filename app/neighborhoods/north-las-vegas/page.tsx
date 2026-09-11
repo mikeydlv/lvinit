@@ -294,6 +294,20 @@ export default function NorthLasVegasPage() {
             </p>
 
             <p className="mt-6 max-w-2xl text-body text-lvinit-warmgray">
+              Right in Tule Springs itself, KB Home opened first-phase sales
+              in September 2026 on{" "}
+              <Link
+                href="/guides/sandstone-tule-springs-north-las-vegas"
+                className="text-lvinit-blue underline underline-offset-4 decoration-transparent hover:decoration-lvinit-blue"
+              >
+                Sandstone
+              </Link>
+              , a nearly 300-acre, 1,500-home master plan with homes for sale
+              today starting in the high $300,000s — unlike Monument Hills,
+              this one is actually buyable right now.
+            </p>
+
+            <p className="mt-6 max-w-2xl text-body text-lvinit-warmgray">
               Downtown, at the city&rsquo;s actual civic core, the old,
               long-vacant City Hall block is being redeveloped into{" "}
               <Link

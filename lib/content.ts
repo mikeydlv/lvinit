@@ -238,6 +238,41 @@ export type Guide = {
  */
 export const guides: Guide[] = [
   {
+    slug: "sandstone-tule-springs-north-las-vegas",
+    title:
+      "Sandstone at Tule Springs: KB Home Opens a 1,500-Home North Las Vegas Community",
+    dek: "KB Home just opened first-phase sales on a nearly 300-acre master plan in North Las Vegas's Tule Springs area, with homes from the high $300,000s \u2014 well under the valley's $475,000 resale median. What's built, what's still coming, and what to weigh before you buy.",
+    byline: "LVINIT Editorial",
+    date: "September 2026",
+    publishedAt: "2026-09-11",
+    category: "Local Feature",
+    // Built via the autonomous scheduled editorial-publishing routine, on
+    // fresh news independently verified this run: KB Home's own press
+    // release (PR Newswire, Sept 4, 2026) for the community/sub-community
+    // structure, acreage, home count, amenities, and attributed quote;
+    // independently corroborated by the Las Vegas Review-Journal (Eli
+    // Segall, Sept 8, 2026), which also supplied the late-2024 land-purchase
+    // figures from property records; per-sub-community pricing/size details
+    // confirmed directly on KB Home's own community pages
+    // (landings-at-sandstone-at-tule-springs,
+    // reserves-at-sandstone-at-tule-springs). A stray "$535,000 median new
+    // home price" figure surfaced in one fetch of the RJ piece's market
+    // context but didn't reconcile with LVINIT's already-published
+    // $581,930 July 2026 new-construction median, so it was deliberately
+    // left out rather than publishing two conflicting numbers for the same
+    // metric; this piece compares Sandstone's pricing only to the
+    // already-verified $475,000 valley-wide resale median instead. No repo
+    // photography depicts this specific, still-under-construction site, and
+    // C:\LVINIT\Images wasn't reachable from this cloud session, so it
+    // carries a generated LVINIT editorial cover.
+    //   node scripts/generate-guide-cover.mjs --slug sandstone-tule-springs-north-las-vegas \
+    //     --category "Local Feature" --subject "Sandstone, Tule Springs" \
+    //     --out sandstone-tule-springs-editorial-cover.webp
+    image: "/images/covers/sandstone-tule-springs-editorial-cover.webp",
+    imageMode: "editorial-cover",
+    href: "/guides/sandstone-tule-springs-north-las-vegas",
+  },
+  {
     slug: "new-build-vs-resale-las-vegas",
     title: "New Build vs Resale in Las Vegas: Which Should You Buy?",
     dek: "Two Las Vegas homes can carry the same price and still be very different deals. What a builder's price does and doesn't include, how incentives change the monthly number, what a resale already paid for, and how to compare the two honestly.",

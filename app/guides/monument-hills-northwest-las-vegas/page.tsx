@@ -213,6 +213,12 @@ export default function MonumentHillsPage() {
             category: "Market Watch",
             dek: "What builders were actually selling and permitting valley-wide the month before this deal closed.",
           },
+          {
+            name: "Sandstone at Tule Springs: KB Home Opens a 1,500-Home North Las Vegas Community",
+            href: "/guides/sandstone-tule-springs-north-las-vegas",
+            category: "Local Feature",
+            dek: "A smaller, much closer-to-market project just north of here — homes are for sale today, unlike Monument Hills.",
+          },
         ],
       }}
       relatedNeighborhood={{

@@ -5,7 +5,7 @@
 > development sprint. Where this file and the code disagree, trust the code and
 > fix this file.
 >
-> **Last audited:** 2026-09-09 · **Branch:** `main` · **Live:** https://www.lvinit.com
+> **Last audited:** 2026-09-11 · **Branch:** `main` · **Live:** https://www.lvinit.com
 >
 > **Content Publisher agent:** a project-scoped Claude Code subagent,
 > `lvinit-content-publisher`, turns Mikey's real photos/videos/notes into
@@ -79,6 +79,7 @@ app/
   guides/one-civic-center-north-las-vegas-redevelopment/page.tsx  /guides/one-civic-center-north-las-vegas-redevelopment — Local Feature, North Las Vegas's downtown government-campus redevelopment (Story Page system)
   guides/las-vegas-mortgage-rates-september-2026/page.tsx  /guides/las-vegas-mortgage-rates-september-2026 — Market Watch, Freddie Mac's 13-month-high 30-year rate (6.71%) and what it means for a Las Vegas buyer's payment (Story Page system)
   guides/las-vegas-home-prices-august-2026/page.tsx  /guides/las-vegas-home-prices-august-2026 — Market Watch, LVR's August 2026 report: a second straight monthly decline, and single-family homes slow down alongside condos for the first time this stretch (Story Page system)
+  guides/sandstone-tule-springs-north-las-vegas/page.tsx  /guides/sandstone-tule-springs-north-las-vegas — Local Feature, KB Home's newly opened 1,500-home Sandstone community in North Las Vegas's Tule Springs area (Story Page system)
 ```
 
 **Path alias:** `@/*` → project root (see `tsconfig.json`).
@@ -108,6 +109,7 @@ app/
 | `/guides/one-civic-center-north-las-vegas-redevelopment` | Local Feature guide | Live | Story Page system; built via the autonomous scheduled editorial-publishing routine on North Las Vegas's downtown redevelopment — the City of North Las Vegas sold ~19 acres of its old, vacant City Hall site (2200 Civic Center Dr., vacated 2011, demolition began Jan 2026) to Agora Realty & Management for a combined $1,938.80 (main parcel closed July 2026), in exchange for contractual obligations: a minimum 15,000 sq ft commercial building, a 100+ unit apartment complex, and a new 30,000+ sq ft civic building. Primary source Las Vegas Review-Journal (Sept 3, 2026), independently re-verified via WebFetch/WebSearch and corroborated by Fox5 Vegas/News3LV/KTNV (Jan 2026 demolition) and Hoodline/NVBEX (Sept 2026 land sale). Real, attributed quotes (Agora's Aaron Lefton, city spokesman Greg Bortolin, Mayor Pamela Goynes-Brown); explains the below-market-appraisal ($6.8M–$13.5M appraised vs. nominal sale price) as a conditioned land conveyance, not editorialized as either a giveaway or a scandal; honest timeline framing (construction targeted late 2026/early 2027, 60-month phased build, final 3.9-acre police-building parcel not closing until Sept 2028 — nothing buyable soon). No repo photography of this site exists and `C:\LVINIT\Images` wasn't reachable this run, so it carries a generated LVINIT editorial cover (`covers/one-civic-center-editorial-cover.webp`) and a photoless `StoryHero`. Article + Breadcrumb JSON-LD; cross-linked both directions with `/neighborhoods/north-las-vegas` (new inline paragraph + `RelatedNeighborhood` card back), plus links to `/guides/monument-hills-northwest-las-vegas` and `/guides/las-vegas-new-home-sales-july-2026`; sitemap entry; registered in `lib/content.ts` `guides[]`. |
 | `/guides/las-vegas-mortgage-rates-september-2026` | Market Watch guide | Live | Story Page system; built via the autonomous scheduled editorial-publishing routine on fresh news, independently re-verified this run: Freddie Mac's PMMS (freddiemac.com/pmms, week of Sept 3, 2026) put the 30-year fixed average at 6.71% (up from 6.66%) and the 15-year at 6.04% (up from 5.98%) — Freddie Mac's own release doesn't frame this as a milestone, but the "13-month high" claim is independently corroborated by AP wire coverage carried on Yahoo Finance, WTOP, and KSAT, which trace the 30-year average's last higher print to July 31, 2025 (6.72%). Local price context reuses the already-sourced `las-vegas-home-prices-july-2026` LVR figures ($480,000 median, July 2026) rather than re-deriving them; an LVR August 2026 report was checked for and confirmed not yet published (only uncorroborated blog estimates existed), so no August figure appears anywhere. Central payment-math example ($480,000 loan at 6.50% vs. 6.71%, ≈$67/month difference) is independently computed and clearly labeled hypothetical — not a quote or a specific transaction. No rate forecast is included (Freddie Mac's own release contains none). No repo photography fits a financing-cost, non-place topic, and `C:\LVINIT\Images` wasn't reachable from this cloud session in any case, so it originally carried a generated LVINIT editorial cover and a photoless `StoryHero`. **Updated 2026-09-10:** Mikey supplied an AI-generated hero graphic directly (a stylized home/skyline scene with a "Mortgage Rates 6.71% · September 2026" callout) and explicitly approved bypassing CLAUDE.md's no-AI-imagery default for this one piece; it now runs as both the story hero and the `/guides` card image (`hero/las-vegas-mortgage-rates-september-2026-hero.webp`), with no photo credit per his request and `imageMode: "editorial-cover"` kept so the card still renders it as a graphic, not a claimed photograph. FAQPage + Article + Breadcrumb JSON-LD; cross-linked both directions with `las-vegas-home-prices-july-2026` and `las-vegas-starter-home-prices-2026` (new `relatedStories` entries on both, plus an inline link from the starter-home piece's "What to watch next" section), plus an inline link from `las-vegas-down-payment-assistance-programs-2026`'s "What this means for your timeline" section, and links out to `what-500k-buys-in-las-vegas` and `/search`; sitemap entry; registered in `lib/content.ts` `guides[]`. |
 | `/guides/las-vegas-home-prices-august-2026` | Market Watch guide | Live | Story Page system; built via the autonomous scheduled editorial-publishing routine on fresh news: Las Vegas Realtors' August 2026 housing report (median single-family $475,000, &minus;1.0% YoY, &minus;3.1% off the May/June record; condo/townhome $299,900, +0.6% YoY; 2,252 total sales; 7,590 SFH + 2,714 condo/TH listed without offers; supply just over 4.5 months; 74.8% of SFH and 68.9% of condo/TH sold within 60 days) — verified against the full text of Nevada Business Magazine (published Sept 8, 2026, fetched independently twice with identical figures); LVR's own site returned HTTP 429 on every attempt this run and no second full-text 2026 carrier turned up in search, so the YoY percentages were independently cross-checked arithmetically against separately reported August 2025 baseline dollar figures instead. Central finding: single-family days-on-market reversed from July (faster YoY in July, slower YoY in August) — the slowdown that was condo-only in July has spread to single-family homes. Reuses the already-approved, already-in-repo Las Vegas residential aerial drone photo (`hero/las-vegas-residential-neighborhood-aerial-drone.webp`, already live on the down-payment-assistance guide) as hero + card rather than a generated cover or the July piece's own card photo, since a real valley-wide aerial fits and keeps the two cards visually distinct; `C:\LVINIT\Images` was not reachable from this cloud session. FAQPage + Article + Breadcrumb JSON-LD; cross-linked both directions with `las-vegas-home-prices-july-2026`, `las-vegas-mortgage-rates-september-2026`, and `will-las-vegas-home-prices-drop` (each gained a forward-pointing update note and/or `relatedStories` entry), plus links to `what-500k-buys-in-las-vegas`, `las-vegas-starter-home-prices-2026`, `/neighborhoods/summerlin`, and `/search`; sitemap entry; registered in `lib/content.ts` `guides[]`. |
+| `/guides/sandstone-tule-springs-north-las-vegas` | Local Feature guide | Live | Story Page system; built via the autonomous scheduled editorial-publishing routine on fresh, well-corroborated news: KB Home's own press release (Sept 4, 2026) announcing first-phase sales at Sandstone, a nearly 300-acre, 1,500-home master-planned community in North Las Vegas's Tule Springs area, independently corroborated by the Las Vegas Review-Journal (Eli Segall, Sept 8, 2026) and confirmed against KB Home's own community pages (Landings from the high $300,000s, Reserves from the mid $400,000s). Unlike Monument Hills (nothing buyable until spring 2028), this is an actionable, buy-now story — genuinely new ground for LVINIT, not a duplicate of any recent Market Watch or Local Feature piece. Compares Sandstone's pricing only to the already-verified $475,000 valley-wide resale median (LVR, August 2026); deliberately did not use a "$535,000 median new-home price" figure that surfaced in one fetch because it didn't reconcile with LVINIT's already-published $581,930 July 2026 new-construction median. No repo photography depicts this still-under-construction site and `C:\LVINIT\Images` wasn't reachable from this cloud session, so it carries a generated LVINIT editorial cover (`covers/sandstone-tule-springs-editorial-cover.webp`) and a photoless `StoryHero`. Article + Breadcrumb JSON-LD; cross-linked both directions with `/neighborhoods/north-las-vegas` (new inline paragraph + `RelatedNeighborhood` card back) and `/guides/monument-hills-northwest-las-vegas` (new `relatedStories` entry on both sides), plus links to `/guides/las-vegas-new-home-sales-july-2026` and `/guides/las-vegas-home-prices-august-2026`; sitemap entry; registered in `lib/content.ts` `guides[]`. |
 | `/search` | IDX search | Live | Matrix IDX embed `idx=3652dd5`; do not modify embed behavior without instruction |
 | `/contact` | Contact | Live | ContactForm → `/api/contact` (Resend) with mailto fallback |
 | `/api/contact` | Route handler | Live | Returns 503 until `RESEND_API_KEY` is set, so no fake service ships |
@@ -688,6 +690,23 @@ links flowing both up (feature → guide → homepage) and down (guide → featu
   `what-500k-buys-in-las-vegas`, `las-vegas-starter-home-prices-2026`, and
   `/neighborhoods/summerlin`; sitemap entry; registered in
   `lib/content.ts` `guides[]`.
+- **Sandstone at Tule Springs** Local Feature guide — built via the
+  autonomous scheduled editorial-publishing routine on fresh, well-
+  corroborated news: KB Home's own press release (Sept 4, 2026) plus
+  independent Review-Journal reporting (Sept 8, 2026) on the opening of
+  first-phase sales at a nearly 300-acre, 1,500-home master-planned
+  community in North Las Vegas's Tule Springs area — homes from the high
+  $300,000s, well under the valley's $475,000 resale median. A genuinely new
+  topic (not a duplicate of the recent mortgage-rate or home-price Market
+  Watch pieces, and a useful contrast to Monument Hills' not-buyable-until-
+  2028 timeline). No real photography exists for this still-under-
+  construction site and `C:\LVINIT\Images` wasn't reachable this run, so it
+  carries a generated LVINIT editorial cover and a photoless hero. Story
+  Page system; Article + Breadcrumb JSON-LD; cross-linked both directions
+  with `/neighborhoods/north-las-vegas` and
+  `/guides/monument-hills-northwest-las-vegas`, plus links to the July 2026
+  new-home-sales and August 2026 home-price Market Watch pieces; sitemap
+  entry; registered in `lib/content.ts` `guides[]`.
 - Live IDX search page (Matrix / GLVAR).
 - Contact form with Resend handler + mailto fallback + GA4 lead event.
 - GA4 analytics scaffolding (opt-in via env var).
@@ -711,7 +730,13 @@ links flowing both up (feature → guide → homepage) and down (guide → featu
      exists — adding `href` in `lib/areas/henderson.tsx` is the only change
      needed. The old "coming soon" story cards were removed in the 2026-08-27
      rebuild; nothing renders like an article it isn't.
-3. **North Las Vegas cluster:** `/neighborhoods/north-las-vegas` (pillar).
+3. **North Las Vegas cluster:** `/neighborhoods/north-las-vegas` (pillar),
+   `/guides/monument-hills-northwest-las-vegas` and
+   `/guides/one-civic-center-north-las-vegas-redevelopment` (Local Feature
+   children, cross-linked both directions), and
+   `/guides/sandstone-tule-springs-north-las-vegas` (Local Feature child in
+   the Tule Springs area, cross-linked both directions with the pillar and
+   with Monument Hills).
 4. **Downtown Arts District cluster:**
    - `/neighborhoods/downtown-arts-district` — the pillar guide (Story Page
      system). No child stories yet; it cross-links the other pillars as
