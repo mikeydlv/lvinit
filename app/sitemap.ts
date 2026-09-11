@@ -42,6 +42,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     { url: `${BASE_URL}/guides`, changeFrequency: "weekly", priority: 0.8 },
     {
+      url: `${BASE_URL}/guides/sandstone-tule-springs-north-las-vegas`,
+      changeFrequency: "monthly",
+      priority: 0.7,
+    },
+    {
       url: `${BASE_URL}/guides/las-vegas-home-prices-august-2026`,
       changeFrequency: "monthly",
       priority: 0.7,
