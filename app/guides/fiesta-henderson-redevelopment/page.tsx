@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { buildStoryMetadata, type StoryMeta } from "@/lib/story";
 import Container from "@/components/ui/Container";
@@ -39,14 +40,20 @@ import {
 //   began Sept 12, 2022) — used only for uncontroversial historical color
 //   that doesn't conflict with the RJ/Sun reporting, not for anything about
 //   the current deal.
+// - News 3 Las Vegas (KSNV), "City of Henderson passes motion to purchase
+//   site of Fiesta Henderson Casino" (Dec. 2022) — fetched this run (2026-09-
+//   13) solely to pin the exact date of the city's $32M purchase vote
+//   (unanimous, Tuesday, Dec. 13, 2022) for the new timeline graphic and the
+//   "December 2022" references below; corroborated against a Fox5 Vegas
+//   article from the same week. Not used for anything about the current deal.
 // - The deal: City of Henderson has an agreement in principle to sell the
 //   35-acre former Fiesta Henderson site (Lake Mead Parkway at the 215
 //   Beltway/I-11 interchange, just west of downtown Henderson) to Agora
 //   Realty & Management Inc. (California-based) for $30 million. Agora would
 //   fund construction, retain ownership, and manage/operate the finished
-//   project. The city itself paid $32 million for the same site in late 2022
-//   (approved by Henderson City Council), buying it from Station Casinos
-//   after the casino was demolished.
+//   project. The city itself paid $32 million for the same site on Dec. 13,
+//   2022 (unanimous Henderson City Council vote), buying it from Station
+//   Casinos after the casino was demolished.
 // - The plan: a 150,000-square-foot indoor fieldhouse (10 basketball courts,
 //   20 volleyball courts, 10,000 sq ft of batting cages) anchoring a
 //   youth/tournament sports complex, plus outdoor sports fields, a hotel,
@@ -105,6 +112,25 @@ import {
 //     --category "Local Feature" --subject "Fiesta Henderson Site" \
 //     --out fiesta-henderson-editorial-cover.webp
 //   -> public/images/covers/fiesta-henderson-editorial-cover.webp
+//
+// On 2026-09-13, Mikey supplied three AI-generated graphics directly and
+// explicitly approved bypassing CLAUDE.md's no-AI-imagery default for this
+// one piece, on the condition the AI-rendered concept illustration carries an
+// explicit disclosure caption (his call, after the disclosure requirement was
+// flagged back to him). None of the three are real photography, none are the
+// city's/Agora's actual copyrighted renderings, and none carry a photo credit
+// (his request). Every factual detail baked into the timeline graphic (the
+// March 2020 closure, the Sept. 2022 demolition, the Dec. 2022 $32M purchase,
+// the summer 2024 Woodbury Corp. selection, and the Sept. 8, 2026 Agora
+// announcement) was independently re-verified this run against the same
+// primary sources above plus the City of Henderson's own Dec. 2022 purchase
+// announcement and contemporaneous local coverage — see Sources. Filenames:
+//   public/images/features/fiesta-henderson-site-location-map.webp
+//   public/images/features/fiesta-henderson-redevelopment-timeline-graphic.webp
+//   public/images/features/fiesta-henderson-ai-concept-illustration.webp
+// The illustration's on-image signage ("Henderson Commons" etc.) is the AI
+// generator's invention, not an announced project name — the article body
+// and its caption both say so explicitly (see "What to watch next").
 // ---------------------------------------------------------------------------
 
 const PATH = "/guides/fiesta-henderson-redevelopment";
@@ -127,6 +153,47 @@ const meta: StoryMeta = {
 
 export const metadata: Metadata = buildStoryMetadata(meta);
 
+function Figure({
+  src,
+  width,
+  height,
+  alt,
+  label,
+  caption,
+}: {
+  src: string;
+  width: number;
+  height: number;
+  alt: string;
+  label?: string;
+  caption: string;
+}) {
+  return (
+    <figure className="my-8">
+      <div className="overflow-hidden rounded-lg border border-lvinit-lightgray bg-lvinit-lightgray">
+        <Image
+          src={src}
+          alt={alt}
+          width={width}
+          height={height}
+          sizes="(max-width: 768px) 100vw, 680px"
+          className="h-auto w-full"
+        />
+      </div>
+      <figcaption className="mt-3">
+        {label && (
+          <span className="block text-caption uppercase tracking-wide text-lvinit-blue">
+            {label}
+          </span>
+        )}
+        <span className={`block text-caption text-lvinit-warmgray ${label ? "mt-1" : ""}`}>
+          {caption}
+        </span>
+      </figcaption>
+    </figure>
+  );
+}
+
 type Stat = { value: string; label: string; note: string };
 
 const SNAPSHOT: Stat[] = [
@@ -138,7 +205,7 @@ const SNAPSHOT: Stat[] = [
   {
     value: "$30M",
     label: "What Agora would pay the city",
-    note: "The city itself paid $32M for the same land in late 2022",
+    note: "The city itself paid $32M for the same land in December 2022",
   },
   {
     value: "150,000 sq ft",
@@ -289,13 +356,21 @@ export default function FiestaHendersonRedevelopmentPage() {
           That $30 million is actually a modest discount from what the city
           itself paid. The Henderson City Council approved a{" "}
           <span className="text-lvinit-black">$32 million</span> purchase of
-          the same land from Station Casinos in late 2022, after the
+          the same land from Station Casinos in December 2022, after the
           locals-focused casino chain demolished the shuttered hotel-casino.
           Station had closed Fiesta Henderson permanently in March 2020, at
           the start of the pandemic casino shutdowns, and razed the hotel
           tower in 2022 — though the parking garage is still standing on the
           site today.
         </p>
+        <Figure
+          src="/images/features/fiesta-henderson-site-location-map.webp"
+          width={1600}
+          height={686}
+          alt="Map showing the former Fiesta Henderson site at Lake Mead Parkway and the 215 Beltway/I-11 interchange in Henderson, Nevada"
+          label="LVINIT editorial map"
+          caption="The 35-acre site sits at Lake Mead Parkway and the 215 Beltway/I-11 interchange, at the edge of downtown Henderson."
+        />
       </StorySection>
 
       <SnapshotPanel />
@@ -332,6 +407,14 @@ export default function FiestaHendersonRedevelopmentPage() {
           about this plan before it&rsquo;s built, the sports-anchor concept
           itself reflects what Henderson actually asked for.
         </p>
+        <Figure
+          src="/images/features/fiesta-henderson-ai-concept-illustration.webp"
+          width={1600}
+          height={971}
+          alt="AI-generated illustration imagining a mixed-use sports, hotel, and retail development on the former Fiesta Henderson site"
+          label="AI-generated illustration — not an official rendering"
+          caption="This is an LVINIT-commissioned AI illustration imagining what a sports-anchored, mixed-use project could look like — not a rendering released by Agora or the City of Henderson. Any building layout, signage, or project name shown (including &ldquo;Henderson Commons&rdquo;) is invented for this illustration; as the reporting above notes, no formal project name, design, or site plan has actually been announced."
+        />
       </StorySection>
 
       <StoryPullQuote cite="Cary Lefton, founder and CEO, Agora Realty & Management">
@@ -383,6 +466,14 @@ export default function FiestaHendersonRedevelopmentPage() {
           last time Henderson stood up a developer for this exact lot, it
           didn&rsquo;t stick.
         </p>
+        <Figure
+          src="/images/features/fiesta-henderson-redevelopment-timeline-graphic.webp"
+          width={1122}
+          height={1402}
+          alt="Timeline graphic of the former Fiesta Henderson site: closure in March 2020, demolition in September 2022, the city's $32 million purchase in December 2022, Woodbury Corp. named developer in summer 2024, those talks falling apart in 2025-2026, and Agora Realty's September 8, 2026 concept announcement"
+          label="LVINIT editorial timeline"
+          caption="Every date and figure above is independently sourced — see the Sources section at the end of this article. Concept announced; not yet approved."
+        />
       </StorySection>
 
       <StoryPullQuote cite="Mayor Michelle Romero, City of Henderson">
@@ -547,6 +638,21 @@ export default function FiestaHendersonRedevelopmentPage() {
               rel="noopener noreferrer"
             >
               en.wikipedia.org
+            </a>
+          </li>
+          <li>
+            <span className="text-lvinit-black">News 3 Las Vegas (KSNV)</span>,
+            &ldquo;City of Henderson passes motion to purchase site of Fiesta
+            Henderson Casino,&rdquo; December 2022 — consulted to confirm the
+            exact date of the city&rsquo;s $32 million purchase vote (Tuesday,
+            December 13, 2022), cited above and in the timeline graphic.{" "}
+            <a
+              href="https://news3lv.com/news/local/city-of-henderson-passes-motion-to-purchase-site-of-fiesta-henderson-casino"
+              className="text-lvinit-blue underline underline-offset-4"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              news3lv.com
             </a>
           </li>
         </ul>
