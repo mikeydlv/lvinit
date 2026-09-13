@@ -140,9 +140,17 @@ import {
 // approach: use it as the hero AND keep a visible (not just alt-text)
 // disclosure notice immediately below the hero, before the lede. The
 // formerly-duplicate inline copy of this image inside "What's actually
-// planned" was removed since the hero now carries it. The card image in
-// lib/content.ts is intentionally UNCHANGED (still the generated editorial
-// cover) — only the hero was requested.
+// planned" was removed since the hero now carries it.
+//
+// Then Mikey asked for the same illustration on the homepage/`/guides` card
+// preview too (the abstract generated cover looked "blank" there as well).
+// Done in lib/content.ts: `image` now points at the same
+// fiesta-henderson-ai-concept-illustration.webp, `imageMode` stays
+// "editorial-cover" (the same convention already used for the mortgage-
+// rates guide's AI hero graphic) so GuideCard renders it with an empty alt
+// rather than a claimed photograph. The now-unreferenced generated cover
+// (public/images/covers/fiesta-henderson-editorial-cover.webp, produced by
+// the command above) was deleted — nothing points to it anymore.
 // ---------------------------------------------------------------------------
 
 const PATH = "/guides/fiesta-henderson-redevelopment";

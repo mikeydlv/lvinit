@@ -261,12 +261,20 @@ export const guides: Guide[] = [
     // being worked out, and wasn't in either primary source. No repo
     // photography depicts this specific, still-vacant site (an empty lot
     // with a standing parking garage), and C:\LVINIT\Images wasn't reachable
-    // from this cloud session, so it carries a generated LVINIT editorial
-    // cover.
+    // from this cloud session, so it originally carried a generated LVINIT
+    // editorial cover.
     //   node scripts/generate-guide-cover.mjs --slug fiesta-henderson-redevelopment \
     //     --category "Local Feature" --subject "Fiesta Henderson Site" \
     //     --out fiesta-henderson-editorial-cover.webp
-    image: "/images/covers/fiesta-henderson-editorial-cover.webp",
+    // On 2026-09-13, per Mikey's explicit request, the card was switched to
+    // match the story's own hero: the AI-generated concept illustration he
+    // supplied (see the page's IMAGERY comment for the disclosure this
+    // required on the article itself). `imageMode` stays "editorial-cover"
+    // — same convention already used for the mortgage-rates guide's AI hero
+    // graphic — so the card renders it honestly as a graphic (empty alt)
+    // rather than a claimed photograph. The superseded generated-cover file
+    // is removed since nothing references it anymore.
+    image: "/images/features/fiesta-henderson-ai-concept-illustration.webp",
     imageMode: "editorial-cover",
     href: "/guides/fiesta-henderson-redevelopment",
   },
