@@ -131,6 +131,18 @@ import {
 // The illustration's on-image signage ("Henderson Commons" etc.) is the AI
 // generator's invention, not an announced project name — the article body
 // and its caption both say so explicitly (see "What to watch next").
+//
+// Later the same day, Mikey asked for the concept illustration to be used as
+// the StoryHero image too (it had only been an inline figure), because the
+// photoless hero felt "blank." Flagged back to him that the hero has no
+// caption slot, so a full-bleed illustration under a headline about "what's
+// real" risked reading as documentary proof of a specific design — agreed
+// approach: use it as the hero AND keep a visible (not just alt-text)
+// disclosure notice immediately below the hero, before the lede. The
+// formerly-duplicate inline copy of this image inside "What's actually
+// planned" was removed since the hero now carries it. The card image in
+// lib/content.ts is intentionally UNCHANGED (still the generated editorial
+// cover) — only the hero was requested.
 // ---------------------------------------------------------------------------
 
 const PATH = "/guides/fiesta-henderson-redevelopment";
@@ -273,6 +285,14 @@ export default function FiestaHendersonRedevelopmentPage() {
           "The Fiesta Henderson Site Finally Has a Plan. Here's What's Real, and What Isn't Yet",
         subheadline:
           "Henderson and a California developer unveiled plans for a youth sports complex, hotel, and retail on the empty 35-acre lot at the gateway to downtown. It's the site's second named developer in two years, and by the developer's own admission, still a concept rather than an approved project.",
+        // Mikey-supplied AI-generated illustration, added 2026-09-13 with his
+        // explicit approval to bypass CLAUDE.md's no-AI-imagery default for
+        // this one piece — not a real photograph, not Agora's or Henderson's
+        // actual rendering, no photo credit per his request. See the visible
+        // disclosure notice rendered immediately below the hero.
+        image: "/images/features/fiesta-henderson-ai-concept-illustration.webp",
+        imageAlt:
+          "AI-generated illustration imagining a mixed-use sports, hotel, and retail development on the former Fiesta Henderson site — not an official rendering",
         backLink: { label: "LVINIT", href: "/" },
         ctas: [
           { label: "See the numbers", href: "#by-the-numbers", variant: "primary" },
@@ -317,6 +337,22 @@ export default function FiestaHendersonRedevelopmentPage() {
           "Nothing at the Fiesta Henderson site is buyable, leasable, or even approved yet, but a city investing in one of its most visible empty lots is worth knowing about if you're looking anywhere near downtown Henderson. Tell me what you're weighing and I'll give you the honest read on where this fits.",
       }}
     >
+      <div className="border-b border-lvinit-lightgray bg-lvinit-lightgray/40">
+        <Container className="py-4">
+          <p className="mx-auto max-w-[680px] text-caption text-lvinit-warmgray">
+            <span className="font-bold uppercase tracking-wide text-lvinit-blue">
+              AI-generated illustration —{" "}
+            </span>
+            the image above is an LVINIT-commissioned illustration imagining
+            what a sports-anchored, mixed-use project could look like. It is
+            not a rendering released by Agora Realty &amp; Management or the
+            City of Henderson. No building layout, signage, or project name
+            has actually been announced — see &ldquo;What&rsquo;s actually
+            planned&rdquo; below for what&rsquo;s confirmed.
+          </p>
+        </Container>
+      </div>
+
       <StoryLede
         kicker="Local Feature"
         lead="For most of the last six years, the 35 acres where Fiesta Henderson used to sit have been the kind of empty lot you stop noticing — a demolished casino, a lonely parking garage, and a chain-link fence at one of the busiest interchanges in the city. On September 8, 2026, Henderson officials and a California real estate firm stood on that lot and announced a plan to change that: a youth sports complex, a hotel, and retail, anchored by a 150,000-square-foot fieldhouse."
@@ -407,14 +443,6 @@ export default function FiestaHendersonRedevelopmentPage() {
           about this plan before it&rsquo;s built, the sports-anchor concept
           itself reflects what Henderson actually asked for.
         </p>
-        <Figure
-          src="/images/features/fiesta-henderson-ai-concept-illustration.webp"
-          width={1600}
-          height={971}
-          alt="AI-generated illustration imagining a mixed-use sports, hotel, and retail development on the former Fiesta Henderson site"
-          label="AI-generated illustration — not an official rendering"
-          caption="This is an LVINIT-commissioned AI illustration imagining what a sports-anchored, mixed-use project could look like — not a rendering released by Agora or the City of Henderson. Any building layout, signage, or project name shown (including &ldquo;Henderson Commons&rdquo;) is invented for this illustration; as the reporting above notes, no formal project name, design, or site plan has actually been announced."
-        />
       </StorySection>
 
       <StoryPullQuote cite="Cary Lefton, founder and CEO, Agora Realty & Management">
