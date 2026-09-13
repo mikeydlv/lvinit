@@ -525,13 +525,13 @@ export const developmentProjects: DevelopmentProject[] = [
     name: "The former Fiesta Henderson site",
     status: "planned",
     where: "Lake Mead Pkwy at the freeway interchange, the gateway to downtown Henderson",
-    what: "The city's Redevelopment Agency bought the closed casino site, including its parking garage, and has run a public outreach and vision process for it. The agency calls it a priority development opportunity. It is one of the most visible pieces of land in Henderson and it is currently empty.",
+    what: "On 8 September 2026 the city and California developer Agora Realty & Management announced a conceptual plan for the 35-acre site: a 150,000 sq ft indoor fieldhouse (10 basketball courts, 20 volleyball courts, batting cages), outdoor sports fields, a hotel, 75,000 sq ft of retail and dining, and 30,000 sq ft of office space. Agora would buy the land from the city for $30 million, roughly what the city itself paid for it in 2022.",
     source: {
-      label: "City of Henderson, Fiesta Henderson site",
-      url: "https://www.cityofhenderson.com/our-city/initiatives/fiesta-henderson-site",
+      label: "Las Vegas Review-Journal, 8 September 2026",
+      url: "https://www.reviewjournal.com/local/henderson/former-casino-site-in-henderson-penciled-for-big-redevelopment-project-3883686/",
     },
     caveat:
-      "An earlier developer agreement lapsed. The city says it is in negotiations with a developer that came through its selection process and anticipates an announcement in fall 2026. There is no approved project, no design and no construction timeline.",
+      "Agora's own leasing president called this a conceptual plan, not an approved one: costs and a timeline are still being worked out, and the purchase and development agreements still need a city council hearing. This is the site's second named developer after an earlier deal with Utah-based Woodbury Corp. fell apart in 2024–25, so treat the announcement as a real step, not a finish line. LVINIT covers the full announcement in a companion piece, linked further down this page.",
   },
 ];
 

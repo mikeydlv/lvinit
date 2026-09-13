@@ -198,6 +198,12 @@ export default function HendersonPage() {
             dek: "A closer look at the branded towers going up in MacDonald Highlands, and the honest read on what they are.",
           },
           {
+            name: "The Fiesta Henderson Site Finally Has a Plan",
+            href: "/guides/fiesta-henderson-redevelopment",
+            category: "Local feature",
+            dek: "A youth sports complex, hotel, and retail were just announced for the empty lot at Lake Mead Parkway — what's actually confirmed, and what isn't.",
+          },
+          {
             name: "Summerlin vs. Henderson",
             href: "/guides/summerlin-vs-henderson",
             category: "Comparison",
@@ -516,7 +522,16 @@ export default function HendersonPage() {
           pre-master-plan bones in the city: a real main street, civic buildings,
           older and smaller housing stock, and a walkable core that grew rather
           than being designed. The city&rsquo;s redevelopment agency has been
-          working on it since 1995 and it is visibly still changing.
+          working on it since 1995 and it is visibly still changing — most
+          recently with a{" "}
+          <Link
+            href="/guides/fiesta-henderson-redevelopment"
+            className={linkClass}
+          >
+            newly announced plan
+          </Link>{" "}
+          for the long-empty former Fiesta Henderson casino site at its
+          western edge.
         </p>
 
         <h3 className="mt-10 font-display text-subhead font-bold text-lvinit-black">
@@ -941,7 +956,7 @@ export default function HendersonPage() {
       <DevelopmentWatch
         id="development"
         heading="Henderson Development Watch"
-        updated="Updated August 2026"
+        updated="Updated September 2026"
         intro={
           <p className="text-body-lg text-lvinit-warmgray">
             Henderson changes faster than most pages about it can keep up with,
@@ -969,8 +984,15 @@ export default function HendersonPage() {
             </a>{" "}
             is the live version. Nothing in the planned section is a promise:
             entitlements are not construction, and the Fiesta site in particular
-            has already had one developer agreement lapse. Statuses here were
-            checked on 27 August 2026 and will move.
+            has already had one developer agreement lapse before this one. Our{" "}
+            <Link
+              href="/guides/fiesta-henderson-redevelopment"
+              className={linkClass}
+            >
+              full write-up on the September 2026 announcement
+            </Link>{" "}
+            has the honest read on what&rsquo;s actually confirmed. Statuses
+            here were checked on 13 September 2026 and will move.
           </>
         }
       />

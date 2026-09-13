@@ -238,6 +238,39 @@ export type Guide = {
  */
 export const guides: Guide[] = [
   {
+    slug: "fiesta-henderson-redevelopment",
+    title:
+      "The Fiesta Henderson Site Finally Has a Plan. Here's What's Real, and What Isn't Yet",
+    dek: "Henderson and a California developer unveiled plans for a youth sports complex, hotel, and retail on the 35-acre former Fiesta Henderson casino site. Here's what's actually confirmed, and what's still just a concept.",
+    byline: "LVINIT Editorial",
+    date: "September 2026",
+    publishedAt: "2026-09-13",
+    category: "Local Feature",
+    // Built via the autonomous scheduled editorial-publishing routine, on a
+    // genuine story independently verified this run via direct fetch of the
+    // primary reporting: the Las Vegas Review-Journal (Eli Segall) and Las
+    // Vegas Sun (Hillary Davis) both filed from the same Sept 8, 2026 news
+    // conference where Henderson and Agora Realty & Management unveiled a
+    // conceptual plan for a youth sports complex, hotel, and retail on the
+    // 35-acre former Fiesta Henderson site. Follows through on LVINIT's own
+    // Henderson pillar guide, whose Development Watch section already
+    // flagged this site as "planned" and anticipated an announcement "in
+    // fall 2026." A $108M total-cost figure circulating in some radio-
+    // aggregator headlines was deliberately not used — it directly
+    // contradicts Agora's own on-the-record statement that costs are still
+    // being worked out, and wasn't in either primary source. No repo
+    // photography depicts this specific, still-vacant site (an empty lot
+    // with a standing parking garage), and C:\LVINIT\Images wasn't reachable
+    // from this cloud session, so it carries a generated LVINIT editorial
+    // cover.
+    //   node scripts/generate-guide-cover.mjs --slug fiesta-henderson-redevelopment \
+    //     --category "Local Feature" --subject "Fiesta Henderson Site" \
+    //     --out fiesta-henderson-editorial-cover.webp
+    image: "/images/covers/fiesta-henderson-editorial-cover.webp",
+    imageMode: "editorial-cover",
+    href: "/guides/fiesta-henderson-redevelopment",
+  },
+  {
     slug: "sandstone-tule-springs-north-las-vegas",
     title:
       "Sandstone at Tule Springs: KB Home Opens a 1,500-Home North Las Vegas Community",
