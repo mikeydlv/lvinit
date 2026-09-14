@@ -7,6 +7,7 @@ import {
   StoryLede,
   StorySection,
   StoryPullQuote,
+  StoryGallery,
 } from "@/components/story";
 
 // ---------------------------------------------------------------------------
@@ -81,20 +82,52 @@ import {
 //   /guides/las-vegas-home-prices-august-2026).
 // - HOA fees: KB Home's own pages note association fees apply but do not
 //   disclose an amount — not asserted here.
+// - Added 2026-09-14 (fetched KB Home's landings-at-sandstone-at-tule-springs
+//   page directly, plus corroborating search results from KB Home's other
+//   Sandstone community pages): KB Home's own "community highlights" section
+//   markets the location's proximity to Shadow Creek Golf Course and Aliante
+//   Golf Club, hiking/biking/skiing/snowboarding at Mount Charleston and Lee
+//   Canyon, and the Tule Springs Fossil Beds National Monument trailhead — on
+//   top of the on-site pickleball/basketball courts, dog park, and
+//   playgrounds already sourced above. These are KB Home's own marketing
+//   claims about the surrounding area, presented here as attributed builder
+//   marketing (see "What's nearby, per KB Home" below), not independently
+//   verified by LVINIT — no drive times or distances are asserted.
 //
-// IMAGERY — C:\LVINIT\Images was checked for and is not reachable from this
-// cloud session (it lives on Mikey's local Windows machine). No existing
-// repo photography depicts this specific, still-under-construction site —
-// the closest candidates (the North Las Vegas pillar's licensed Shutterstock
-// aerial, and the Summerlin/starter-home new-construction photos from other
-// guides) are genuinely different places and would misrepresent this one.
-// Per the standard fallback order, this piece carries a generated LVINIT
-// editorial cover (registered in lib/content.ts as the card image only,
-// imageMode "editorial-cover") and a photoless StoryHero.
-//   node scripts/generate-guide-cover.mjs --slug sandstone-tule-springs-north-las-vegas \
-//     --category "Local Feature" --subject "Sandstone, Tule Springs" \
-//     --out sandstone-tule-springs-editorial-cover.webp
-//   -> public/images/covers/sandstone-tule-springs-editorial-cover.webp
+// IMAGERY — originally, C:\LVINIT\Images wasn't reachable from that cloud
+// session and no repo photography depicted this specific, still-under-
+// construction site, so this piece carried a generated LVINIT editorial
+// cover and a photoless StoryHero.
+//
+// On 2026-09-14, Mikey uploaded five real images directly to the repo (via
+// GitHub web upload), pulled from KB Home's own site, and asked that they be
+// worked into the article: the community's own model-home photo/rendering as
+// both hero and card, and four of KB Home's "nearby lifestyle" marketing
+// images placed inline. None of these are Mikey's own photography and none
+// are AI-generated — they're KB Home's imagery, so every placement carries a
+// visible "Photo: KB Home" credit (not just alt text), overriding the
+// footer's default "photography by Mikey unless otherwise noted" for this
+// page. The four lifestyle images (pickleball, golf, hiking, Mount
+// Charleston) are generic representative marketing photos, not documentary
+// photos of this specific community's actual courts/trails or of the named
+// golf course/mountain — the pictured golf course, for one, is visibly a
+// pine-forested course, not a Las Vegas desert course, so captions describe
+// what's actually visible rather than asserting it depicts Shadow Creek or
+// Aliante. Filenames, all optimized with Sharp from the originals Mikey
+// uploaded, same 1200x800 crop preserved (no distortion):
+//   public/images/hero/sandstone-tule-springs-model-homes-hero.webp
+//     (from "Sandstone at Tule Springs.webp")
+//   public/images/features/sandstone-tule-springs-pickleball-courts.webp
+//     (from "Planned Community Pickleball Courts.webp")
+//   public/images/features/sandstone-tule-springs-golf-course.webp
+//     (from "Near Shadow Creek Golf Course.webp")
+//   public/images/features/sandstone-tule-springs-hiking-trail.webp
+//     (from "Near Hiking Trails.webp")
+//   public/images/features/sandstone-tule-springs-mount-charleston.webp
+//     (from "Short Drive to Mt Charleston.webp")
+// The now-unreferenced generated cover
+// (public/images/covers/sandstone-tule-springs-editorial-cover.webp) was
+// deleted since nothing points to it anymore.
 // ---------------------------------------------------------------------------
 
 const PATH = "/guides/sandstone-tule-springs-north-las-vegas";
@@ -190,6 +223,13 @@ export default function SandstoneTuleSpringsPage() {
           "Sandstone at Tule Springs: KB Home Opens a 1,500-Home North Las Vegas Community",
         subheadline:
           "First-phase homes are open for sale now in a nearly 300-acre master plan on North Las Vegas's northern edge, starting in the high $300,000s. Here's what's actually built, what's still coming, and how it fits the area we already cover as Tule Springs.",
+        // KB Home's own photo/rendering of the actual model homes at this
+        // community — not Mikey's photography, not AI-generated. See the
+        // visible "Photo: KB Home" credit banner rendered immediately below
+        // the hero, before the lede.
+        image: "/images/hero/sandstone-tule-springs-model-homes-hero.webp",
+        imageAlt:
+          "Three KB Home model home elevations along the street at Sandstone at Tule Springs in North Las Vegas",
         backLink: { label: "LVINIT", href: "/" },
         ctas: [
           { label: "See the numbers", href: "#by-the-numbers", variant: "primary" },
@@ -234,6 +274,19 @@ export default function SandstoneTuleSpringsPage() {
           "A community this new comes with real tradeoffs \u2014 distance from the valley's core, an HOA and homesite premiums that change the final price, phases still under construction nearby. Tell me what you're weighing and I'll give you the honest read.",
       }}
     >
+      <div className="border-b border-lvinit-lightgray bg-lvinit-lightgray/40">
+        <Container className="py-4">
+          <p className="mx-auto max-w-[680px] text-caption text-lvinit-warmgray">
+            <span className="font-bold uppercase tracking-wide text-lvinit-blue">
+              Photo: KB Home \u2014{" "}
+            </span>
+            the model-home image above was supplied by KB Home, not captured
+            by Mikey Del Rosario. The inline photos further down this page are
+            also KB Home&rsquo;s own marketing images, credited the same way.
+          </p>
+        </Container>
+      </div>
+
       <StoryLede
         kicker="Local Feature"
         lead="KB Home just opened the first phase of Sandstone, a nearly 300-acre, 1,500-home master-planned community on North Las Vegas's northern edge \u2014 the company's largest new Southern Nevada community in a decade. Unlike some of the valley's other big announcements, this one isn't a future promise: homes are for sale right now, starting in the high $300,000s."
@@ -304,6 +357,61 @@ export default function SandstoneTuleSpringsPage() {
           and the region&rsquo;s employment centers, including Nellis and
           Creech Air Force Bases.
         </p>
+      </StorySection>
+
+      <StorySection muted heading="What's nearby, per KB Home">
+        <p className="text-body-lg text-lvinit-warmgray">
+          Beyond the trailhead and beltway access above, KB Home&rsquo;s own
+          community pages market Sandstone&rsquo;s location for its proximity
+          to outdoor recreation: Shadow Creek Golf Course and Aliante Golf
+          Club, hiking, biking, skiing, and snowboarding at Mount Charleston
+          and Lee Canyon, plus the on-site pickleball and basketball courts,
+          dog park, and playgrounds already noted above. These are the
+          builder&rsquo;s own marketing claims about the surrounding area,
+          not distances or drive times LVINIT has independently verified, so
+          take them as a starting point for your own research rather than a
+          confirmed commute.
+        </p>
+        <p className="mt-5 text-body-lg text-lvinit-warmgray">
+          The four images below are KB Home&rsquo;s own representative
+          marketing photos for those selling points &mdash; not documentary
+          photos of Sandstone&rsquo;s actual courts or trails, and not
+          confirmed to be pictures of Shadow Creek, Aliante, or Mount
+          Charleston specifically.
+        </p>
+        <StoryGallery
+          columns={2}
+          images={[
+            {
+              src: "/images/features/sandstone-tule-springs-pickleball-courts.webp",
+              alt: "A pickleball paddle and ball resting on a court, with houses visible in the background",
+              label: "Photo: KB Home",
+              caption:
+                "Sandstone's plan includes on-site pickleball and basketball courts, per KB Home. This is KB Home's own representative image, not a photo of the actual courts.",
+            },
+            {
+              src: "/images/features/sandstone-tule-springs-golf-course.webp",
+              alt: "A tree-lined golf course fairway",
+              label: "Photo: KB Home",
+              caption:
+                "KB Home markets Sandstone's location near Shadow Creek Golf Course and Aliante Golf Club. This representative image is not a photo of either course.",
+            },
+            {
+              src: "/images/features/sandstone-tule-springs-hiking-trail.webp",
+              alt: "Two hikers with backpacks and trekking poles walking away from the camera on a wooded trail",
+              label: "Photo: KB Home",
+              caption:
+                "KB Home also cites nearby hiking, including a trailhead into the Tule Springs Fossil Beds National Monument. This representative image is not a photo of that specific trail.",
+            },
+            {
+              src: "/images/features/sandstone-tule-springs-mount-charleston.webp",
+              alt: "A mountain ridgeline silhouetted at sunset",
+              label: "Photo: KB Home",
+              caption:
+                "KB Home's marketing calls out a short drive to Mount Charleston and Lee Canyon. This representative image isn't confirmed to depict Mount Charleston itself.",
+            },
+          ]}
+        />
       </StorySection>
 
       <StoryPullQuote cite="Jim McDade, KB Home Las Vegas division president">
@@ -468,8 +576,11 @@ export default function SandstoneTuleSpringsPage() {
           <li>
             <span className="text-lvinit-black">KB Home</span> community
             pages for Landings at Sandstone at Tule Springs and Reserves at
-            Sandstone at Tule Springs, fetched directly this run for the
-            per-sub-community pricing, square footage, and bedroom counts.{" "}
+            Sandstone at Tule Springs, fetched directly for the
+            per-sub-community pricing, square footage, and bedroom counts,
+            and again on September 14, 2026 for the &ldquo;community
+            highlights&rdquo; marketing claims about nearby golf, hiking, and
+            Mount Charleston access cited above.{" "}
             <a
               href="https://www.kbhome.com/new-homes-las-vegas/landings-at-sandstone-at-tule-springs"
               className="text-lvinit-blue underline underline-offset-4"

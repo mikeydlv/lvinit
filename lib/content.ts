@@ -302,15 +302,25 @@ export const guides: Guide[] = [
     // $581,930 July 2026 new-construction median, so it was deliberately
     // left out rather than publishing two conflicting numbers for the same
     // metric; this piece compares Sandstone's pricing only to the
-    // already-verified $475,000 valley-wide resale median instead. No repo
-    // photography depicts this specific, still-under-construction site, and
-    // C:\LVINIT\Images wasn't reachable from this cloud session, so it
-    // carries a generated LVINIT editorial cover.
-    //   node scripts/generate-guide-cover.mjs --slug sandstone-tule-springs-north-las-vegas \
-    //     --category "Local Feature" --subject "Sandstone, Tule Springs" \
-    //     --out sandstone-tule-springs-editorial-cover.webp
-    image: "/images/covers/sandstone-tule-springs-editorial-cover.webp",
-    imageMode: "editorial-cover",
+    // already-verified $475,000 valley-wide resale median instead.
+    //
+    // IMAGERY — originally carried a generated LVINIT editorial cover because
+    // C:\LVINIT\Images wasn't reachable from that cloud session and no repo
+    // photography depicted this specific site. On 2026-09-14, Mikey uploaded
+    // five real images pulled directly from KB Home's own site (via GitHub
+    // web upload) and asked that the community photo be used as both hero
+    // and card, with the rest placed inline in the article. This one is KB
+    // Home's own model-home elevations photo/rendering for this exact
+    // community — genuine imagery, not Mikey's own photography and not
+    // AI-generated, so `imageMode` is left unset ("photo"). The hero and
+    // every inline placement on the page carry a visible "Photo: KB Home"
+    // credit so nothing implies Mikey captured it, per his explicit
+    // instruction. The superseded generated cover
+    // (public/images/covers/sandstone-tule-springs-editorial-cover.webp) is
+    // deleted since nothing references it anymore.
+    image: "/images/hero/sandstone-tule-springs-model-homes-hero.webp",
+    imageAlt:
+      "Three KB Home model home elevations along the street at Sandstone at Tule Springs in North Las Vegas",
     href: "/guides/sandstone-tule-springs-north-las-vegas",
   },
   {
