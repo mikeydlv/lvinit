@@ -400,7 +400,16 @@ export default function LasVegasHomePricesAugust2026Page() {
             starter-home data
           </Link>{" "}
           directly rather than the all-tier median, which can move
-          differently than the bottom of the market.
+          differently than the bottom of the market. And if you&rsquo;re
+          weighing a new build, keep in mind these LVR figures track resale
+          homes. Builder activity is measured separately, so read{" "}
+          <Link
+            href="/guides/las-vegas-new-home-sales-july-2026"
+            className="text-lvinit-blue underline underline-offset-4 decoration-transparent hover:decoration-lvinit-blue"
+          >
+            how Las Vegas new-home sales and permits moved in July 2026
+          </Link>{" "}
+          for that side of the market.
         </p>
       </StorySection>
 
