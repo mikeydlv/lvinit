@@ -359,6 +359,7 @@ export const communities: AreaCommunity[] = [
   },
   {
     name: "Water Street District",
+    href: "/guides/water-street-district-henderson",
     where: "Central-east Henderson, along Water Street south of Lake Mead Pkwy",
     summary:
       "Henderson's original downtown, and the reason there is a Henderson at all. The town grew up around the Basic Magnesium plant during the Second World War, and this was its main street. It sits inside the city's Downtown Redevelopment Area, and new apartment and mixed-use projects have been arriving on it.",
