@@ -42,6 +42,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     { url: `${BASE_URL}/guides`, changeFrequency: "weekly", priority: 0.8 },
     {
+      url: `${BASE_URL}/guides/water-street-district-henderson`,
+      changeFrequency: "monthly",
+      priority: 0.7,
+    },
+    {
       url: `${BASE_URL}/guides/fiesta-henderson-redevelopment`,
       changeFrequency: "monthly",
       priority: 0.7,

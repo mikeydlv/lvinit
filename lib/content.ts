@@ -238,6 +238,42 @@ export type Guide = {
  */
 export const guides: Guide[] = [
   {
+    slug: "water-street-district-henderson",
+    title:
+      "Henderson's Water Street District Just Survived a Bankruptcy. Here's What's Actually There Now",
+    dek: "The Watermark, downtown Henderson's biggest new building, went bankrupt, got rescued, opened, and then went into foreclosure anyway. It's open again under new ownership. Here's the honest state of Water Street.",
+    byline: "LVINIT Editorial",
+    date: "September 2026",
+    publishedAt: "2026-09-15",
+    category: "Local Feature",
+    // Built via the autonomous scheduled editorial-publishing routine. No
+    // fresh, corroborated breaking story cleared the 24-72h sourcing bar this
+    // run, so the routine filled a genuine, explicitly flagged content gap
+    // instead: docs/PROJECT_STATE.md's "Future Neighborhood Pages" section
+    // names the Water Street District as one of three strongest remaining
+    // Henderson child-guide candidates, already written up (unlinked) in the
+    // Henderson pillar's own community roster. See the page file's own
+    // header comment for the full source list — the central hook (The
+    // Watermark's 2021 loan -> 2024 bankruptcy -> Feb. 2025 rescue -> 2026
+    // foreclosure -> new ownership) is cross-checked across ACRES Capital's
+    // own transaction page, KTNV, Fox5 Vegas, The Real Deal, and multiple
+    // independent search passes on a Las Vegas Review-Journal piece that
+    // returned HTTP 403 on every direct WebFetch attempt this run.
+    //
+    // No repo photography depicts Water Street specifically (confirmed
+    // against this file's own Henderson photography pending-work note,
+    // which lists "Water Street at ground level" as still-unshot), and
+    // C:\LVINIT\Images wasn't reachable from this cloud session — carries a
+    // generated LVINIT editorial cover.
+    //   node scripts/generate-guide-cover.mjs --slug water-street-district-henderson \
+    //     --category "Local Feature" --subject "WATER STREET DISTRICT" \
+    //     --out water-street-district-henderson-editorial-cover.webp
+    image:
+      "/images/covers/water-street-district-henderson-editorial-cover.webp",
+    imageMode: "editorial-cover",
+    href: "/guides/water-street-district-henderson",
+  },
+  {
     slug: "fiesta-henderson-redevelopment",
     title:
       "The Fiesta Henderson Site Finally Has a Plan. Here's What's Real, and What Isn't Yet",

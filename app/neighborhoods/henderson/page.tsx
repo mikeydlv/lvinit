@@ -531,7 +531,14 @@ export default function HendersonPage() {
             newly announced plan
           </Link>{" "}
           for the long-empty former Fiesta Henderson casino site at its
-          western edge.
+          western edge, and with the district&rsquo;s own{" "}
+          <Link
+            href="/guides/water-street-district-henderson"
+            className={linkClass}
+          >
+            bankruptcy-to-foreclosure saga
+          </Link>{" "}
+          at its newest apartment building.
         </p>
 
         <h3 className="mt-10 font-display text-subhead font-bold text-lvinit-black">
