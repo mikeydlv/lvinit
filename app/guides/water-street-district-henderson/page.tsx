@@ -104,19 +104,26 @@ import {
 // IMAGERY — Mikey supplied two of his own Water Street District photos
 // directly (uploaded to public/images/), superseding this run's original
 // generated-cover fallback (deleted; nothing references it anymore):
-//   - "water street district.png" -> optimized to color WebP, used as the
+//   - "water street district.png" -> cropped ~34% off the right edge (the
+//     source's original framing put the gateway sign dead-center, directly
+//     behind the hero headline's widest wrapped line) so the sign sits
+//     clear of the text column, then optimized to color WebP. Used as the
 //     StoryHero and the /guides + homepage card image:
 //     public/images/hero/water-street-district-henderson-gateway-sign-hero.webp
 //     The district's own illuminated gateway arch over South Water Street,
 //     at the covered walkway connecting Henderson's City Hall complex to
 //     its parking lot (confirmed via cityofhenderson.com's own walking-tour
 //     page, which places this exact arch there).
-//   - "water st district.png" -> optimized to color WebP, placed inline in
-//     "What else is actually open on Water Street" via StoryGallery:
+//   - "water st district.png" -> optimized to color WebP, uncropped, placed
+//     inline in "What else is actually open on Water Street" via
+//     StoryGallery:
 //     public/images/features/water-street-district-henderson-mackenzies-river-streetscape.webp
 //     Looking down the street at MacKenzie's River Pub and the newer
 //     apartments/retail alongside it.
-//   Both processed with Sharp (existing project dependency): webp({ quality: 82 }).
+//   Both processed with Sharp (existing project dependency): webp({ quality: 82 }),
+//   the hero via an ordinary rectangular extract() first. Verified visually
+//   with a real Playwright/Chromium screenshot at 1728px, not by inspecting
+//   markup alone — the sign is fully clear of the headline at that width.
 // ---------------------------------------------------------------------------
 
 const PATH = "/guides/water-street-district-henderson";
