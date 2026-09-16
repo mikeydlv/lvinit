@@ -7,6 +7,7 @@ import {
   StoryLede,
   StorySection,
   StoryPullQuote,
+  StoryGallery,
 } from "@/components/story";
 
 // ---------------------------------------------------------------------------
@@ -100,19 +101,23 @@ import {
 //   young professionals"-style steering. Fit is expressed through what's
 //   physically there and its redevelopment history only.
 //
-// IMAGERY — C:\LVINIT\Images is a path on Mikey's local Windows machine and
-// was checked for and confirmed not reachable from this Linux cloud session.
-// No existing LVINIT repo photography depicts Water Street specifically —
-// confirmed against docs/PROJECT_STATE.md's own "Henderson photography"
-// pending-work note, which lists "Water Street at ground level" as still-
-// wanted, unshot photography. Per the standard fallback order, this piece
-// carries a generated LVINIT editorial cover (registered in lib/content.ts as
-// the card image only, imageMode "editorial-cover") and a photoless
-// StoryHero — never a stand-in photo of a different part of Henderson.
-//   node scripts/generate-guide-cover.mjs --slug water-street-district-henderson \
-//     --category "Local Feature" --subject "WATER STREET DISTRICT" \
-//     --out water-street-district-henderson-editorial-cover.webp
-//   -> public/images/covers/water-street-district-henderson-editorial-cover.webp
+// IMAGERY — Mikey supplied two of his own Water Street District photos
+// directly (uploaded to public/images/), superseding this run's original
+// generated-cover fallback (deleted; nothing references it anymore):
+//   - "water street district.png" -> converted to greyscale WebP, used as
+//     the StoryHero and the /guides + homepage card image:
+//     public/images/hero/water-street-district-henderson-gateway-sign-hero.webp
+//     The district's own illuminated gateway arch over South Water Street,
+//     at the covered walkway connecting Henderson's City Hall complex to
+//     its parking lot (confirmed via cityofhenderson.com's own walking-tour
+//     page, which places this exact arch there).
+//   - "water st district.png" -> optimized to color WebP, placed inline in
+//     "What else is actually open on Water Street" via StoryGallery:
+//     public/images/features/water-street-district-henderson-mackenzies-river-streetscape.webp
+//     Looking down the street at MacKenzie's River Pub and the newer
+//     apartments/retail alongside it.
+//   Both processed with Sharp (existing project dependency): greyscale()
+//   for the hero, straight webp({ quality: 82 }) for the inline figure.
 // ---------------------------------------------------------------------------
 
 const PATH = "/guides/water-street-district-henderson";
@@ -210,6 +215,12 @@ export default function WaterStreetDistrictHendersonPage() {
           "Henderson's Water Street District Just Survived a Bankruptcy. Here's What's Actually There Now",
         subheadline:
           "Downtown Henderson's biggest new building went bankrupt, got an emergency loan, opened to residents — and then went into foreclosure anyway. It's open again under new ownership. That messy, honest arc is the most useful way to understand where the district actually stands.",
+        // Mikey's own photo of the district's illuminated gateway arch, at
+        // the walkway between Henderson City Hall and its parking lot.
+        image:
+          "/images/hero/water-street-district-henderson-gateway-sign-hero.webp",
+        imageAlt:
+          "The Water Street District gateway arch spanning South Water Street in downtown Henderson, with palm trees and the City Hall complex alongside it, shown in black and white",
         backLink: { label: "Living in Henderson", href: "/neighborhoods/henderson" },
         ctas: [
           { label: "See the numbers", href: "#by-the-numbers", variant: "primary" },
@@ -400,6 +411,17 @@ export default function WaterStreetDistrictHendersonPage() {
           apartment tower share a single walkable block.
         </p>
       </StorySection>
+
+      <StoryGallery
+        images={[
+          {
+            src: "/images/features/water-street-district-henderson-mackenzies-river-streetscape.webp",
+            alt: "South Water Street looking down the block toward MacKenzie's River Pub, with newer apartments and street-level retail alongside parked cars",
+            caption:
+              "MacKenzie's River Pub and the newer apartments and retail alongside it, on South Water Street.",
+          },
+        ]}
+      />
 
       <StorySection heading="What's still stalled, honestly">
         <p className="text-body-lg text-lvinit-warmgray">
