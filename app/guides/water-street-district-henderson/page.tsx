@@ -104,8 +104,8 @@ import {
 // IMAGERY — Mikey supplied two of his own Water Street District photos
 // directly (uploaded to public/images/), superseding this run's original
 // generated-cover fallback (deleted; nothing references it anymore):
-//   - "water street district.png" -> converted to greyscale WebP, used as
-//     the StoryHero and the /guides + homepage card image:
+//   - "water street district.png" -> optimized to color WebP, used as the
+//     StoryHero and the /guides + homepage card image:
 //     public/images/hero/water-street-district-henderson-gateway-sign-hero.webp
 //     The district's own illuminated gateway arch over South Water Street,
 //     at the covered walkway connecting Henderson's City Hall complex to
@@ -116,8 +116,7 @@ import {
 //     public/images/features/water-street-district-henderson-mackenzies-river-streetscape.webp
 //     Looking down the street at MacKenzie's River Pub and the newer
 //     apartments/retail alongside it.
-//   Both processed with Sharp (existing project dependency): greyscale()
-//   for the hero, straight webp({ quality: 82 }) for the inline figure.
+//   Both processed with Sharp (existing project dependency): webp({ quality: 82 }).
 // ---------------------------------------------------------------------------
 
 const PATH = "/guides/water-street-district-henderson";
@@ -220,7 +219,7 @@ export default function WaterStreetDistrictHendersonPage() {
         image:
           "/images/hero/water-street-district-henderson-gateway-sign-hero.webp",
         imageAlt:
-          "The Water Street District gateway arch spanning South Water Street in downtown Henderson, with palm trees and the City Hall complex alongside it, shown in black and white",
+          "The Water Street District gateway arch spanning South Water Street in downtown Henderson, with palm trees and the City Hall complex alongside it",
         backLink: { label: "Living in Henderson", href: "/neighborhoods/henderson" },
         ctas: [
           { label: "See the numbers", href: "#by-the-numbers", variant: "primary" },

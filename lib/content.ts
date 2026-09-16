@@ -263,11 +263,12 @@ export const guides: Guide[] = [
     // Mikey supplied his own Water Street District photos directly
     // afterward, superseding the run's original generated-cover fallback
     // (deleted; nothing references it anymore). Card image reuses the same
-    // greyscale gateway-arch photo as the page's StoryHero — see that
-    // file's IMAGERY note for the Sharp processing and provenance.
+    // gateway-arch photo as the page's StoryHero — see that file's IMAGERY
+    // note for the Sharp processing and provenance. Also surfaces this guide
+    // on the homepage "Latest from LVINIT" feed (newest three entries).
     image: "/images/hero/water-street-district-henderson-gateway-sign-hero.webp",
     imageAlt:
-      "The Water Street District gateway arch spanning South Water Street in downtown Henderson, shown in black and white",
+      "The Water Street District gateway arch spanning South Water Street in downtown Henderson",
     href: "/guides/water-street-district-henderson",
   },
   {
