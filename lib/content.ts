@@ -260,17 +260,14 @@ export const guides: Guide[] = [
     // independent search passes on a Las Vegas Review-Journal piece that
     // returned HTTP 403 on every direct WebFetch attempt this run.
     //
-    // No repo photography depicts Water Street specifically (confirmed
-    // against this file's own Henderson photography pending-work note,
-    // which lists "Water Street at ground level" as still-unshot), and
-    // C:\LVINIT\Images wasn't reachable from this cloud session — carries a
-    // generated LVINIT editorial cover.
-    //   node scripts/generate-guide-cover.mjs --slug water-street-district-henderson \
-    //     --category "Local Feature" --subject "WATER STREET DISTRICT" \
-    //     --out water-street-district-henderson-editorial-cover.webp
-    image:
-      "/images/covers/water-street-district-henderson-editorial-cover.webp",
-    imageMode: "editorial-cover",
+    // Mikey supplied his own Water Street District photos directly
+    // afterward, superseding the run's original generated-cover fallback
+    // (deleted; nothing references it anymore). Card image reuses the same
+    // greyscale gateway-arch photo as the page's StoryHero — see that
+    // file's IMAGERY note for the Sharp processing and provenance.
+    image: "/images/hero/water-street-district-henderson-gateway-sign-hero.webp",
+    imageAlt:
+      "The Water Street District gateway arch spanning South Water Street in downtown Henderson, shown in black and white",
     href: "/guides/water-street-district-henderson",
   },
   {
