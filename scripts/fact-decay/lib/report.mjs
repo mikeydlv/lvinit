@@ -47,6 +47,7 @@ const RESULT_LABELS = {
   contradicts: "Source contradicts",
   "partially-confirms": "Source partially confirms",
   "value-not-found": "Value not found on the source",
+  "historical-period-not-verified": "HISTORICAL_PERIOD_NOT_VERIFIED",
   "cannot-verify": "Cannot verify",
   "source-unreachable": "Source unreachable",
   "manual-check-required": "MANUAL_SOURCE_CHECK_REQUIRED",
@@ -112,6 +113,11 @@ export function buildJsonReport({ analysis, config, meta }) {
       note:
         "Claims an external source confirmed on this run. They are not refreshes — they are the work the agent did that found nothing wrong — so they are listed separately rather than competing for space with claims that need attention.",
       items: analysis.confirmed ?? [],
+    },
+    datedRecordsNotContradicted: {
+      note:
+        "Figures tied to an explicit past period (a date, week, month or quarter) with no present-tense framing, which nothing contradicted for that same period. A later value on the source is a new fact, not a correction, so these are not refreshes.",
+      items: analysis.datedRecords ?? [],
     },
     pages: analysis.pages,
     pagesWithNoDetectedIssues: analysis.cleanPages.map((p) => ({
@@ -184,6 +190,9 @@ export function buildMarkdownReport({ analysis, config, meta }) {
   lines.push(`| Pages with no detected issues | ${fmtInt(t.pagesWithNoDetectedIssues)} |`);
   if (t.confirmedStillStanding) {
     lines.push(`| Claims checked and still standing | ${fmtInt(t.confirmedStillStanding)} |`);
+  }
+  if (t.datedRecordsNotContradicted) {
+    lines.push(`| Dated historical figures, not contradicted | ${fmtInt(t.datedRecordsNotContradicted)} |`);
   }
   lines.push("");
   lines.push(
@@ -285,6 +294,33 @@ export function buildMarkdownReport({ analysis, config, meta }) {
       "*A presence check, not a reading of the source: it establishes that the figures still appear there, not that " +
         "the source still means what it did.*"
     );
+    lines.push("");
+  }
+
+  // --- Dated historical figures -------------------------------------------
+  const datedRecords = analysis.datedRecords ?? [];
+  if (datedRecords.length) {
+    lines.push("---");
+    lines.push("");
+    lines.push("## Dated historical figures, not contradicted");
+    lines.push("");
+    lines.push(
+      `${datedRecords.length} figure${datedRecords.length === 1 ? " is" : "s are"} tied to an explicit past period — ` +
+        "a date, a week, a month or a quarter — with nothing in the sentence speaking about the present. " +
+        "**A newer value on the source is a new fact, not a correction**, so these are not refreshes and are not " +
+        "held to the review cadence of the figure they contain. They would move to the list above only if a source " +
+        "stated a different value for the *same* period."
+    );
+    lines.push("");
+    lines.push("| ID | Page | Claim | Period | Checked against source |");
+    lines.push("|---|---|---|---|---|");
+    for (const f of datedRecords) {
+      const periods = [...new Set((f.period?.figures ?? []).map((x) => x.period?.text).filter(Boolean))].join(", ");
+      lines.push(
+        `| ${f.id} | \`${escapeCell(f.route)}\` | ${escapeCell(truncate(f.claim, 60))} | ${escapeCell(periods || "—")} | ` +
+          `${escapeCell(RESULT_LABELS[f.verification.result])} |`
+      );
+    }
     lines.push("");
   }
 

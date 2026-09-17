@@ -232,10 +232,101 @@ test("a GSC report weights busy pages above quiet ones, within bounds", () => {
     const quiet = signal.multiplierFor("/guides/quiet");
     const absent = signal.multiplierFor("/guides/unknown");
     assert.equal(busy.impressions, 900, "repeated rows for one page take the max, not the sum");
-    assert.ok(busy.value > quiet.value && quiet.value > absent.value);
-    assert.ok(busy.value <= cfg.gsc.maxMultiplier && absent.value >= cfg.gsc.minMultiplier);
+    assert.ok(busy.value > quiet.value && quiet.value >= absent.value);
+    assert.ok(busy.value <= cfg.gsc.maxMultiplier);
+    assert.equal(absent.value, 1, "absence from the report is never a penalty");
   } finally {
     rmSync(dir, { recursive: true, force: true });
+  }
+});
+
+// --- Absence from the GSC report is missing data, never a penalty ----------
+//
+// The GSC report lists only pages that produced an OPPORTUNITY. A page can have
+// real Google visibility and never appear in it, so the three cases below must
+// all land on exactly 1.0.
+
+test("GSC WEIGHTING 1: a page with a positive GSC signal gets a boost", () => {
+  const dir = mkdtempSync(join(tmpdir(), "fact-decay-gsc-"));
+  try {
+    writeFileSync(
+      join(dir, `gsc-opportunities-${TEST_TODAY}.json`),
+      JSON.stringify({
+        reportDate: TEST_TODAY,
+        opportunities: [
+          // internal-link is a PAGE-level type: these are the page's own metrics.
+          { type: "internal-link", landingPage: "/guides/seen", metrics: { impressions: 400, clicks: 12 } },
+          // quick-win is query-level: a lower bound on the page's visibility.
+          { type: "quick-win", landingPage: "/guides/one-query", metrics: { impressions: 60, clicks: 2 } },
+        ],
+      })
+    );
+    const cfg = testConfig({ gsc: { dir: "." } });
+    const signal = loadGscSignal({ repoRoot: dir, config: cfg, today: TEST_TODAY });
+
+    const seen = signal.multiplierFor("/guides/seen");
+    assert.ok(seen.value > 1, "a page people are finding is raised");
+    assert.ok(seen.value <= cfg.gsc.maxMultiplier);
+    assert.equal(seen.scope, "page", "page-level findings carry real page metrics");
+    assert.match(seen.basis, /400 impressions and 12 clicks for this page/);
+
+    const oneQuery = signal.multiplierFor("/guides/one-query");
+    assert.ok(oneQuery.value > 1);
+    assert.equal(oneQuery.scope, "query-lower-bound");
+    assert.match(oneQuery.basis, /at least 60 impressions/, "a query metric is reported as a lower bound, not a page total");
+  } finally {
+    rmSync(dir, { recursive: true, force: true });
+  }
+});
+
+test("GSC WEIGHTING 2: a page absent from the opportunity report is exactly 1.0", () => {
+  const dir = mkdtempSync(join(tmpdir(), "fact-decay-gsc-"));
+  try {
+    writeFileSync(
+      join(dir, `gsc-opportunities-${TEST_TODAY}.json`),
+      JSON.stringify({
+        reportDate: TEST_TODAY,
+        // 13 pages had Search Console data; only this one produced an opportunity.
+        totals: { uniquePages: 13 },
+        opportunities: [{ type: "internal-link", landingPage: "/guides/seen", metrics: { impressions: 400, clicks: 12 } }],
+      })
+    );
+    const signal = loadGscSignal({ repoRoot: dir, config: testConfig({ gsc: { dir: "." } }), today: TEST_TODAY });
+    const absent = signal.multiplierFor("/guides/never-mentioned");
+    assert.equal(absent.value, 1, "absence is missing data, not evidence of low traffic");
+    assert.equal(absent.scope, "no-signal");
+    assert.equal(absent.impressions, null, "no traffic figure is invented for it");
+    assert.match(absent.basis, /says nothing about the page's traffic/);
+    assert.ok(absent.value >= 1, "never below neutral");
+  } finally {
+    rmSync(dir, { recursive: true, force: true });
+  }
+});
+
+test("GSC WEIGHTING 3: a missing, corrupt or stale report leaves every page at exactly 1.0", () => {
+  const cases = {
+    missing: () => {},
+    corrupt: (dir) => writeFileSync(join(dir, `gsc-opportunities-${TEST_TODAY}.json`), "{ not json"),
+    stale: (dir) => writeFileSync(join(dir, "gsc-opportunities-2026-01-01.json"), JSON.stringify({ opportunities: [] })),
+    disabled: (dir) =>
+      writeFileSync(
+        join(dir, `gsc-opportunities-${TEST_TODAY}.json`),
+        JSON.stringify({ opportunities: [{ type: "internal-link", landingPage: "/guides/seen", metrics: { impressions: 400 } }] })
+      ),
+  };
+  for (const [name, seed] of Object.entries(cases)) {
+    const dir = mkdtempSync(join(tmpdir(), "fact-decay-gsc-"));
+    try {
+      seed(dir);
+      const cfg = testConfig({ gsc: { dir: ".", ...(name === "disabled" ? { enabled: false } : {}) } });
+      const signal = loadGscSignal({ repoRoot: dir, config: cfg, today: TEST_TODAY });
+      assert.equal(signal.available, false, name);
+      for (const route of ["/guides/seen", "/guides/anything-else"]) {
+        assert.equal(signal.multiplierFor(route).value, 1, `${name}: ${route}`);
+      }
+    } finally {
+      rmSync(dir, { recursive: true, force: true });
+    }
   }
 });
 
@@ -272,6 +363,37 @@ test("the newest GSC report is the one used", () => {
     assert.equal(findLatestGscReport(join(dir, "nope")), null);
   } finally {
     rmSync(dir, { recursive: true, force: true });
+  }
+});
+
+test("REGRESSION: with several run artifacts downloaded, the newest REPORT wins — not the first run listed", () => {
+  // Real case, 2026-09-17: run 34879487855 (a scheduled run created 09-14,
+  // re-run on 09-17) held the newest report, but `gh run list` put the 09-15
+  // manual run 34933528928 first. The workflow now downloads every recent
+  // artifact into run-<id>/ folders and relies on this selection.
+  const root = mkdtempSync(join(tmpdir(), "fact-decay-runs-"));
+  try {
+    const write = (runId, date, impressions) => {
+      const dir = join(root, "reports", "gsc", `run-${runId}`);
+      mkdirSync(dir, { recursive: true });
+      writeFileSync(
+        join(dir, `gsc-opportunities-${date}.json`),
+        JSON.stringify({ reportDate: date, opportunities: [{ landingPage: "/guides/busy", metrics: { impressions, clicks: 1 } }] })
+      );
+    };
+    write("34933528928", "2026-09-15", 50); // listed first
+    write("34879487855", "2026-09-17", 400); // re-run, newest report
+    write("34149729894", "2026-09-07", 10);
+
+    const latest = findLatestGscReport(join(root, "reports", "gsc"));
+    assert.equal(latest.reportDate, "2026-09-17");
+    assert.match(latest.path, /run-34879487855/);
+
+    const signal = loadGscSignal({ repoRoot: root, config: testConfig({ gsc: { dir: "reports/gsc" } }), today: "2026-09-17" });
+    assert.equal(signal.reportDate, "2026-09-17");
+    assert.equal(signal.multiplierFor("/guides/busy").impressions, 400, "the traffic comes from the newest report");
+  } finally {
+    rmSync(root, { recursive: true, force: true });
   }
 });
 

@@ -24,6 +24,8 @@
 import { readdirSync, readFileSync, existsSync } from "node:fs";
 import { join } from "node:path";
 
+import { PAGE_LEVEL_TYPES } from "../../gsc/lib/report.mjs";
+
 import { daysBetween } from "./dates.mjs";
 
 const REPORT_FILE = /^gsc-opportunities-(\d{4}-\d{2}-\d{2})\.json$/;
@@ -123,23 +125,44 @@ export function loadGscSignal({ repoRoot, config, today }) {
     );
   }
 
-  // One row per route. Findings repeat the same page metrics across types, so
-  // take the maximum rather than summing — summing would inflate a page purely
-  // for having been detected several ways.
+  // One row per route. Findings repeat the same metrics across types, so take
+  // the maximum rather than summing — summing would inflate a page purely for
+  // having been detected several ways.
+  //
+  // The metrics mean different things depending on the finding's type, and the
+  // report says which:
+  //
+  //   page-level types (page gaining/losing momentum, internal-link) carry the
+  //     PAGE's own impressions and clicks — a real page-traffic measurement.
+  //   query-level types carry the metrics of ONE query on that page, which is
+  //     a lower bound on the page's visibility, not its total.
+  //
+  // Either way the signal is positive and is only ever used to boost, so a
+  // lower bound is safe. Page-level metrics win when both exist.
   const routes = new Map();
   for (const opp of report.opportunities ?? []) {
     const route = opp.landingPage;
     if (!route) continue;
     const impressions = Number(opp.metrics?.impressions) || 0;
     const clicks = Number(opp.metrics?.clicks) || 0;
+    const scope = PAGE_LEVEL_TYPES.has(opp.type) ? "page" : "query-lower-bound";
     const existing = routes.get(route);
-    routes.set(route, {
-      impressions: Math.max(existing?.impressions ?? 0, impressions),
-      clicks: Math.max(existing?.clicks ?? 0, clicks),
-    });
+    if (!existing) {
+      routes.set(route, { impressions, clicks, scope });
+      continue;
+    }
+    // A page-level measurement replaces a query lower bound outright.
+    if (scope === "page" && existing.scope !== "page") {
+      routes.set(route, { impressions, clicks, scope });
+      continue;
+    }
+    if (scope === existing.scope) {
+      existing.impressions = Math.max(existing.impressions, impressions);
+      existing.clicks = Math.max(existing.clicks, clicks);
+    }
   }
 
-  const { minMultiplier, maxMultiplier, impressionReference } = config.gsc;
+  const { neutralMultiplier, maxMultiplier, impressionReference } = config.gsc;
   const fixtureData = Boolean(report.fixtureData);
 
   return {
@@ -155,20 +178,31 @@ export function loadGscSignal({ repoRoot, config, today }) {
     multiplierFor(route) {
       const row = routes.get(route);
       if (!row) {
+        // NEVER a penalty. The GSC report lists only pages that produced an
+        // opportunity, so a page can have real Google visibility and still not
+        // appear here. Absence is missing data, not evidence of low traffic.
         return {
-          value: minMultiplier,
-          basis: "this page has no rows in the newest GSC report, so it is ranked slightly below pages that do",
-          impressions: 0,
-          clicks: 0,
+          value: neutralMultiplier,
+          basis:
+            "this page produced no opportunity in the newest GSC report. That report only covers pages that did, so " +
+            "this says nothing about the page's traffic — it is weighted neutrally rather than penalised",
+          impressions: null,
+          clicks: null,
+          scope: "no-signal",
         };
       }
       const demand = demandCurve(row.impressions, impressionReference);
-      const value = minMultiplier + (maxMultiplier - minMultiplier) * demand;
+      const value = neutralMultiplier + (maxMultiplier - neutralMultiplier) * demand;
+      const measured =
+        row.scope === "page"
+          ? `${row.impressions} impressions and ${row.clicks} clicks for this page`
+          : `at least ${row.impressions} impressions and ${row.clicks} clicks from one query on this page`;
       return {
         value: Number(value.toFixed(3)),
-        basis: `${row.impressions} impressions and ${row.clicks} clicks in the newest GSC report — more people are seeing this page, so a stale fact on it is more urgent`,
+        basis: `${measured} in the newest GSC report — people are finding this page, so a stale fact on it is more urgent`,
         impressions: row.impressions,
         clicks: row.clicks,
+        scope: row.scope,
       };
     },
   };

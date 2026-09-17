@@ -105,15 +105,28 @@ export function sourceDateFromLabel(label) {
  * @param {string} opts.today      YYYY-MM-DD
  */
 export function scoreFreshness({ claim, page, config, today }) {
-  const cadenceDays = config.cadence[claim.category.dynamism] ?? config.cadence.moderate;
+  // A DATED RECORD — "6.66% for the week of July 30, 2026", with nothing in
+  // the sentence speaking about the present — does not decay on the cadence of
+  // the kind of figure it contains. It was true of that week and it stays true.
+  // A newer weekly rate is a new fact, not evidence that this one went stale,
+  // so a dated record is reviewed on the stable cadence instead, and neither
+  // its date ("as of") nor its year counts as a staleness signal.
+  //
+  // A sentence that also interprets the present ("…rates have mostly hovered in
+  // the mid-to-high 6% range this year") is NOT a dated record, and keeps its
+  // category's cadence: that framing is exactly what goes stale.
+  const datedRecord = Boolean(claim.periodInfo?.datedRecord);
+  const dynamism = datedRecord ? "stable" : claim.category.dynamism;
+  const cadenceDays = config.cadence[dynamism] ?? config.cadence.moderate;
   const daysSince = page.daysSinceReviewed;
 
   const sourceDate = sourceDateFromLabel(claim.structured?.source?.label);
+  const skipYearDrift = datedRecord || Boolean(claim.category.ignoreYearDrift);
 
   const rawComponents = {
     overdue: overdueComponent(daysSince, cadenceDays, config.freshness.overdueSaturationMultiple),
-    timeMarkers: timeMarkerComponent(claim.signals?.timeMarkers),
-    yearDrift: yearDriftComponent(claim.figures?.years, today, config.freshness.yearDriftSaturation),
+    timeMarkers: datedRecord ? null : timeMarkerComponent(claim.signals?.timeMarkers),
+    yearDrift: skipYearDrift ? null : yearDriftComponent(claim.figures?.years, today, config.freshness.yearDriftSaturation),
     sourceAge: sourceAgeComponent(sourceDate, today, config.freshness.sourceAgeSaturationDays),
   };
 
@@ -169,7 +182,8 @@ export function scoreFreshness({ claim, page, config, today }) {
   return {
     score: Number(unit(score).toFixed(3)),
     cadenceDays,
-    dynamism: claim.category.dynamism,
+    dynamism,
+    datedRecord,
     daysSinceReviewed: daysSince,
     lastReviewed: page.lastReviewed?.date ?? null,
     lastReviewedBasis: page.lastReviewed?.basis ?? null,
@@ -178,17 +192,23 @@ export function scoreFreshness({ claim, page, config, today }) {
     sourceDate,
     components,
     overrides,
-    explanation: buildExplanation({ claim, cadenceDays, daysSince, overrides, rawComponents }),
+    explanation: buildExplanation({ claim, cadenceDays, dynamism, datedRecord, daysSince, overrides, rawComponents }),
   };
 }
 
-function buildExplanation({ claim, cadenceDays, daysSince, overrides, rawComponents }) {
+function buildExplanation({ claim, cadenceDays, dynamism, datedRecord, daysSince, overrides, rawComponents }) {
   if (overrides.length) return overrides[0].explanation;
 
   const parts = [];
+  if (datedRecord) {
+    parts.push(
+      "Every figure in this sentence is tied to an explicit past period and nothing in it speaks about the present, " +
+        "so it is treated as a dated record: a newer value is a new fact, not evidence that this one went stale."
+    );
+  }
   if (Number.isFinite(daysSince)) {
     parts.push(
-      `${claim.category.label} is treated as a ${claim.category.dynamism.replace("-", " ")} fact, ` +
+      `${datedRecord ? "As a dated record, it" : claim.category.label} is treated as a ${dynamism.replace("-", " ")} fact, ` +
         `so it is reviewed every ${cadenceDays} days. This page's facts were last checked ${daysSince} days ago` +
         (daysSince > cadenceDays ? `, which is ${daysSince - cadenceDays} days past that.` : ", which is inside that window.")
     );

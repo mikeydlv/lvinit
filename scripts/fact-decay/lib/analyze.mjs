@@ -132,6 +132,22 @@ export function decideAction({ claim, risk, freshness, verification, supporting 
 
   const found = sentenceCase(verification.reason);
 
+  // A dated record that was not checked (or could not be matched) has nothing
+  // against it: its figure describes a past period, and a later value is not a
+  // correction. Asking a person to review it would contradict filing it as
+  // history.
+  if (
+    claim.periodInfo?.datedRecord &&
+    (verification.result === "not-attempted" || verification.result === "cannot-verify")
+  ) {
+    return {
+      action: "monitor-only",
+      because:
+        "Every figure here is tied to an explicit past period and nothing in the sentence speaks about the present, " +
+        "so it is a dated record. It would only need attention if a source stated a different value for that same period.",
+    };
+  }
+
   switch (verification.result) {
     case "contradicts":
       // "Update the claim" requires a source that is ATTACHED to this claim —
@@ -179,6 +195,24 @@ export function decideAction({ claim, risk, freshness, verification, supporting 
       return {
         action: "update-source-citation",
         because: `The claim may still be right, but the page can no longer point a reader at anything. ${found}`,
+      };
+    case "historical-period-not-verified":
+      // The dated figure is not in question. If the sentence also speaks about
+      // the present and has aged past its cadence, THAT framing is what needs
+      // attention — not the historical number.
+      if (!claim.periodInfo?.datedRecord && freshness.isOverdue) {
+        return {
+          action: "clarify-uncertainty",
+          because:
+            `${found} The dated figure itself is fine. What has aged is the present-tense framing around it ` +
+            "(\"this week\", \"currently\", \"this year\" and similar), which is past its review cadence — anchoring that " +
+            "framing to its date is more honest than leaving it reading as if it were written today.",
+        };
+      }
+      return {
+        action: "monitor-only",
+        because:
+          `${found} Nothing here suggests the page is wrong, so nothing should change on the strength of a newer value.`,
       };
     case "manual-check-required":
       return { action: "manual-review-required", because: found };
@@ -241,6 +275,16 @@ export function confidenceFor({ risk, freshness, verification }) {
       );
     }
     return { level: "medium", caveats, because: "An external source was fetched and compared against the page." };
+  }
+  if (verification.result === "historical-period-not-verified") {
+    caveats.push(
+      "the source was fetched, but it no longer states a value for the period this claim is about — a later value is not evidence against a dated one"
+    );
+    return {
+      level: "low",
+      caveats,
+      because: "The claim could not be checked for its own period, and nothing found suggests it is wrong.",
+    };
   }
   if (verification.result === "not-attempted" && freshness.isOverdue && freshness.score >= 0.7) {
     caveats.push("no external source was checked on this run — this rests on the review cadence alone");
@@ -529,6 +573,18 @@ export async function analyze({ inventory, config, reportDate, gscSignal, verifi
       secondaryCategories: claim.secondaryCategories,
       jurisdiction: claim.jurisdiction,
       structured: claim.structured,
+      // Which period each figure is about. A period-bound figure can only be
+      // contradicted by a value for the same period; a dated record is not
+      // reviewed on the cadence of the figure it contains.
+      period: {
+        periodBound: Boolean(claim.periodInfo?.periodBound),
+        datedRecord: Boolean(claim.periodInfo?.datedRecord),
+        presentFraming: Boolean(claim.signals?.presentFraming),
+        figures: (claim.periodInfo?.figurePeriods ?? []).map((fp) => ({
+          figure: fp.figure,
+          period: fp.period ? { type: fp.period.type, key: fp.period.key, text: fp.period.text } : null,
+        })),
+      },
       risk,
       freshness,
       supportingSource: supporting
@@ -589,7 +645,27 @@ export async function analyze({ inventory, config, reportDate, gscSignal, verifi
   // work done, and it belongs in its own section rather than competing for
   // space with the claims that actually need attention.
   const confirmed = findings.filter((f) => f.verification.result === "confirms");
-  const needingAttention = findings.filter((f) => f.verification.result !== "confirms");
+
+  // A DATED RECORD that nothing contradicted is not a refresh either. "6.66%
+  // for the week of July 30, 2026" is true of that week whatever the rate is
+  // now, so it is listed on its own rather than competing for attention. If a
+  // source ever states a different value for that same week, the result is
+  // `contradicts` and the claim stays in the refresh list; if the citation
+  // itself is broken, it stays too, because that is a real problem.
+  const DATED_RECORD_QUIET = new Set(["not-attempted", "historical-period-not-verified", "cannot-verify"]);
+  const datedRecords = findings.filter(
+    (f) =>
+      f.period.datedRecord &&
+      DATED_RECORD_QUIET.has(f.verification.result) &&
+      // Date arithmetic always wins: a passed deadline or hearing date is never
+      // filed away as history.
+      f.freshness.overrides.length === 0
+  );
+  const datedRecordPrints = new Set(datedRecords.map((f) => f.fingerprint));
+
+  const needingAttention = findings.filter(
+    (f) => f.verification.result !== "confirms" && !datedRecordPrints.has(f.fingerprint)
+  );
 
   const belowThreshold = needingAttention.filter((f) => f.priority < config.output.minPriority).length;
   const reported = needingAttention
@@ -597,7 +673,7 @@ export async function analyze({ inventory, config, reportDate, gscSignal, verifi
     .slice(0, config.output.maxFindings);
 
   const nextId = makeIdFactory(reportDate);
-  for (const finding of [...reported, ...confirmed]) {
+  for (const finding of [...reported, ...confirmed, ...datedRecords]) {
     finding.id = nextId();
     finding.handoff = handoffFor(
       finding.id,
@@ -646,6 +722,7 @@ export async function analyze({ inventory, config, reportDate, gscSignal, verifi
       findingsReported: reported.length,
       findingsBelowThreshold: belowThreshold,
       confirmedStillStanding: confirmed.length,
+      datedRecordsNotContradicted: datedRecords.length,
       high: reported.filter((f) => f.risk.level === "high").length,
       medium: reported.filter((f) => f.risk.level === "medium").length,
       low: reported.filter((f) => f.risk.level === "low").length,
@@ -656,6 +733,7 @@ export async function analyze({ inventory, config, reportDate, gscSignal, verifi
     },
     findings: reported,
     confirmed,
+    datedRecords,
     pages: pageSummaries,
     cleanPages,
     skipped: inventory.skipped,

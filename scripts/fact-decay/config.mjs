@@ -284,6 +284,10 @@ export const DEFAULT_CONFIG = {
       // Deliberately BELOW partially-confirms: it is the weakest kind of
       // "something might be off", and it must never outrank real evidence.
       "value-not-found": 0.6,
+      // A dated figure the source no longer shows for its period — usually
+      // because the source has moved on to a later one. That says nothing
+      // against the page, so it carries almost no weight on its own.
+      "historical-period-not-verified": 0.15,
       "source-unreachable": 0.55,
       "cannot-verify": 0.5,
       "manual-check-required": 0.5,
@@ -330,9 +334,19 @@ export const DEFAULT_CONFIG = {
     maxReportAgeDays: envInt("FACT_DECAY_GSC_MAX_AGE", 45),
     /** Impressions on a route that earn the full multiplier. */
     impressionReference: envInt("FACT_DECAY_GSC_IMPRESSION_REF", 300),
-    /** The multiplier range. 1.0 is "no adjustment". */
+    /**
+     * The multiplier range: from neutral up to a boost. There is deliberately
+     * no penalty below 1.0.
+     *
+     * The GSC report lists only pages that produced an OPPORTUNITY, not every
+     * page with search data — in the 2026-09-17 report, 13 pages had Search
+     * Console data and 1 produced an opportunity. So a page's absence from it
+     * says nothing at all about that page's traffic, and treating absence as
+     * "quiet" invented a penalty out of missing data. Absent pages are weighted
+     * neutrally, and only a page with a real positive signal is boosted.
+     */
     maxMultiplier: envFloat("FACT_DECAY_GSC_MAX_MULTIPLIER", 1.3),
-    minMultiplier: envFloat("FACT_DECAY_GSC_MIN_MULTIPLIER", 0.9),
+    neutralMultiplier: envFloat("FACT_DECAY_GSC_NEUTRAL_MULTIPLIER", 1),
   },
 
   // -------------------------------------------------------------------------

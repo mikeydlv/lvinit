@@ -256,12 +256,14 @@ test("a confirmed claim is ordered as freshly checked, and below a contradicted 
   );
 });
 
-test("traffic can only reorder, and is bounded", () => {
+test("traffic can only reorder upward, and is bounded", () => {
   const base = { riskScore: 0.8, stalenessScore: 0.8, verificationResult: "not-attempted", config };
-  const quiet = computePriority({ ...base, trafficMultiplier: config.gsc.minMultiplier });
+  const unweighted = computePriority({ ...base, trafficMultiplier: config.gsc.neutralMultiplier });
   const busy = computePriority({ ...base, trafficMultiplier: config.gsc.maxMultiplier });
-  assert.ok(busy > quiet);
-  assert.ok(quiet > 0, "a zero-traffic page is still reported");
+  const noSignalAtAll = computePriority({ ...base, trafficMultiplier: 1 });
+  assert.equal(config.gsc.neutralMultiplier, 1, "there is no penalty multiplier to apply");
+  assert.equal(unweighted, noSignalAtAll, "a page with no GSC signal scores exactly as it would with no GSC report");
+  assert.ok(busy > unweighted);
   assert.ok(busy <= 100);
 });
 

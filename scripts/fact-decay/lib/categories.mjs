@@ -42,6 +42,7 @@ export const GROUPS = {
   GOVERNMENT: "government",
   TRANSPORTATION: "transportation",
   CONSUMER: "consumer",
+  DURABLE: "durable",
 };
 
 export const GROUP_LABELS = {
@@ -50,7 +51,45 @@ export const GROUP_LABELS = {
   government: "Government, law and regulation",
   transportation: "Transportation and infrastructure",
   consumer: "Time-sensitive consumer information",
+  durable: "Seasonal and climate context",
 };
+
+/**
+ * Weather and climate language: recurring seasons, climate normals, record
+ * temperatures, recurring annual weather patterns.
+ *
+ * "The monsoon window runs June 15 through September 30" contains two dates and
+ * the word "through", which is exactly what a program deadline looks like to a
+ * pattern. It is not one. It is the edge of a season that recurs every year,
+ * and nobody has to act before it closes.
+ */
+export const CLIMATOLOGY_PATTERN =
+  /\b(monsoon|national weather service|nws|weather service|climatolog\w*|climate normals?|normal (?:high|low)s?|average (?:high|low)s?|(?:high|low) temperatures?|temperatures?|rainfall|precipitation|humidity|heat (?:wave|warning|advisory)|excessive heat|dust storms?|thunderstorms?|flash floods?|hottest|coolest|wettest|driest|triple[- ]digits?|record (?:high|low) temperature|\d+\s?°\s?F)\b/i;
+
+/**
+ * Language that turns a dated window into something a reader must ACT on:
+ * applying, enrolling, filing, a rebate, a program, a permit, a tax. A weather
+ * sentence carrying any of these stays eligible for the deadline category —
+ * "apply for the summer bill-assistance program by September 30" is a real
+ * deadline, heat or no heat.
+ */
+export const CONSUMER_ACTION_PATTERN =
+  /\b(apply|applications?|deadlines?|eligib\w*|enroll\w*|register|registration|filing|file (?:by|before)|permits?|licen[cs]es?|programs?|programmes?|rebates?|tax(?:es)?|due (?:by|on)|submit|sign[- ]?up|incentives?|bill (?:credit|assistance))\b/i;
+
+/** Weather or climate language, with nothing a reader has to act on. */
+export function isClimatologyWithoutAction(text) {
+  const value = String(text ?? "");
+  return CLIMATOLOGY_PATTERN.test(value) && !CONSUMER_ACTION_PATTERN.test(value);
+}
+
+/**
+ * Categories a weather sentence can only have matched by accident: the
+ * deadline pattern sees a season's end date, and the home-price pattern sees
+ * "record high". Price categories are only dropped when the sentence carries
+ * no dollar amount, so a real cost figure in a weather sentence is still caught.
+ */
+const CLIMATE_INCIDENTAL_ALWAYS = new Set(["deadline-or-application-period"]);
+const CLIMATE_INCIDENTAL_WITHOUT_DOLLARS = new Set(["home-prices", "price-figure", "fee-or-rate-figure"]);
 
 /**
  * The category table.
@@ -438,6 +477,21 @@ export const FACT_CATEGORIES = [
     pattern: /\b(open (?:daily|weekdays|year-?round)|hours are|closed (?:mondays|tuesdays|on)|operates|no longer (?:open|operating)|still (?:open|running))\b/i,
     why: "Hours and operating status change quietly, and a reader can drive somewhere on the strength of the claim.",
   },
+
+  // --- Seasonal and climate context -----------------------------------------
+  {
+    key: "seasonal-climatology",
+    label: "Seasonal and climate patterns",
+    group: GROUPS.DURABLE,
+    dynamism: DYNAMISM.STABLE,
+    baseRisk: RISK.LOW,
+    needsFigure: true,
+    // The year in "the record of 120°F, set July 7, 2024" is when the record
+    // was set. That is history, not staleness.
+    ignoreYearDrift: true,
+    pattern: CLIMATOLOGY_PATTERN,
+    why: "Recurring weather seasons, climate normals and temperature records repeat or hold year after year. The dates in them mark the edges of a season, not a deadline anyone has to meet, and NOAA revises its climate normals roughly once a decade, so these are reviewed annually.",
+  },
 ];
 
 /** Fast lookup by key. */
@@ -478,11 +532,22 @@ export function detectJurisdiction(text) {
  */
 export function categorize(text, { hasFigure = false } = {}) {
   const value = String(text ?? "");
-  const matches = [];
+  let matches = [];
   for (const category of FACT_CATEGORIES) {
     if (!category.pattern.test(value)) continue;
     if (category.needsFigure && !hasFigure) continue;
     matches.push(category);
+  }
+
+  // A weather or climate sentence with nothing to act on is never a deadline,
+  // and never a home price just because it mentions a "record high".
+  if (isClimatologyWithoutAction(value)) {
+    const hasDollars = /\$\s?\d/.test(value);
+    matches = matches.filter(
+      (c) =>
+        !CLIMATE_INCIDENTAL_ALWAYS.has(c.key) &&
+        !(CLIMATE_INCIDENTAL_WITHOUT_DOLLARS.has(c.key) && !hasDollars)
+    );
   }
   // Specific categories beat generic ones; then highest consequence, then
   // fastest-decaying — so the primary category is the one that both describes

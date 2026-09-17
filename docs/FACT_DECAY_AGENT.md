@@ -78,6 +78,7 @@ scripts/fact-decay/
     risk.mjs                    the risk model
     freshness.mjs               the staleness model
     sources.mjs                 the source hierarchy and source records
+    periods.mjs                 which reporting period each figure is about
     verify.mjs                  external verification, and its honest limits
     gsc-signal.mjs              the optional traffic weighting
     analyze.mjs                 the pipeline
@@ -225,6 +226,32 @@ version could do. They are grouped exactly as you specified:
 | **Government, law and regulation** | laws and regulations · rental and short-term-rental rules · licensing requirements · tax rules · government programs |
 | **Transportation and infrastructure** | road closures and restrictions · RTC and transit service · travel and access claims |
 | **Time-sensitive consumer information** | deadlines and application periods · fees and rates · prices and cost figures · eligibility rules · operating status and hours |
+| **Seasonal and climate context** | seasonal and climate patterns (low risk, reviewed annually) |
+
+### Seasons and climate are not deadlines
+
+"The National Weather Service frames Southern Nevada's monsoon window as
+running June 15 through September 30" contains two dates and the word
+"through" — which is exactly what a program deadline looks like to a pattern.
+The first real report filed it under *deadlines and application periods*. It is
+not one: it is the edge of a season that recurs every year, and nobody has to
+act before it closes. The same report filed "the all-time record high (120°F,
+set July 7, 2024)" under *home prices*, because of the words "record high".
+
+Weather and climate language — monsoon, National Weather Service, climate
+normals, average and record temperatures, °F, rainfall, humidity, heat
+warnings, dust storms, hottest and wettest months — now gets its own
+**seasonal and climate patterns** category: low risk, reviewed on the stable
+(annual) cadence, and its year is not treated as staleness (the year a record
+was set is history). When a sentence is weather-only, it can never be a
+deadline, and it can never be a price unless it contains a dollar amount. Its
+start and end dates never trigger the passed-deadline override, even after the
+season ends.
+
+**The exception is a real consumer action.** A weather sentence that also talks
+about applying, enrolling, filing, a program, a rebate, a permit or a tax —
+"apply for the summer bill-assistance program before the deadline of September
+30" — is still a deadline, heat or no heat.
 
 **Jurisdiction is tagged separately, not as a category.** "Clark County rules",
 "City of Las Vegas rules", "Henderson rules", "North Las Vegas rules" and
@@ -420,6 +447,7 @@ page. Results say which they are, and confidence is capped accordingly.
 | `contradicts` | **The source explicitly states something different** — a different value for the same measure, anchored to the same subject, or a project at a different stage. |
 | `partially-confirms` | Some figures still appear; at least one could not be found, and the source states no different value. |
 | `value-not-found` | The figure could not be found on a source that is still about the same subject, **and the source states no different figure.** An absence, not a disagreement. |
+| `historical-period-not-verified` | The claim is tied to a specific past period, and the source no longer states a value for **that** period — usually because it now shows a later one. Carries the `HISTORICAL_PERIOD_NOT_VERIFIED` marker. Says nothing against the page. |
 | `cannot-verify` | The source is reachable but nothing in it could be matched at all. |
 | `source-unreachable` | The source returned an error, or has been removed (404/410). |
 | `manual-check-required` | Blocked, JavaScript-only, unsourced, or an unacceptable source. Carries the `MANUAL_SOURCE_CHECK_REQUIRED` marker. |
@@ -477,6 +505,64 @@ The threshold is tunable at `verification.conflictMinSharedTerms` (default 2),
 `verification.conflictLabelWordsAfter` (4). Raising the first, or narrowing the
 other two, makes contradictions rarer and more certain.
 
+### Dated figures: same measure is not enough — it must be the same period
+
+The first real scheduled report (10 September 2026) called four mortgage-rate
+figures contradicted because Freddie Mac's landing page showed **6.76%**. But
+the page said **6.66% for the week of July 30, 2026**. Those are two different
+weeks. A later value is a new fact, not a correction, and a correctly dated
+figure does not become false because the rate moved.
+
+So verification is **period-aware**:
+
+1. **Every dollar figure and percentage is attached to the period it is
+   about**, if the sentence states one — a date, a "week of", a month and year,
+   a quarter, an "as of". The period that *follows* a figure wins ("6.69% for
+   the week of August 6, 2026 and 6.67% for the week of August 13" attaches each
+   rate to its own week), and nothing may sit between a figure and its period —
+   no other figure, no clause break. A figure introduced as a baseline ("up from
+   6.66%") belongs to an earlier, unstated period.
+2. **A dated figure can only be contradicted by a value for the same period.**
+   The source value's period is the nearest date stated beside it. A different
+   period, or no period at all, is not a contradiction.
+3. **Relative periods can never be contradicted.** "The prior week", "a year
+   earlier" and "this week" cannot be pinned to a calendar date from the
+   sentence, so nothing on a source can be shown to be about the same period.
+4. **If the source no longer shows the period being claimed**, the result is
+   `historical-period-not-verified` — not `contradicts`, not `value-not-found`.
+   The report states what the source *does* show ("It currently shows 6.76% for
+   September 10, 2026, which is a different period, not a correction").
+
+| Page says | Source says | Verdict |
+|---|---|---|
+| 6.66% for the week of July 30, 2026 | 6.76% for the week of September 10, 2026 | **not** a contradiction — `HISTORICAL_PERIOD_NOT_VERIFIED` |
+| 6.67% for the week of August 13, 2026 | 6.76% for the week of September 10, 2026 | **not** a contradiction — `HISTORICAL_PERIOD_NOT_VERIFIED` |
+| 6.66% for the week of July 30, 2026 | 6.70% for the week of July 30, 2026 | **contradiction** — same week, different value |
+| 6.66% for the week of July 30, 2026 | 6.66% for the week of July 30, 2026 | confirms |
+
+**Dated records are not held to the cadence of the figure they contain.** A
+sentence whose figures are all tied to an explicit past period, with nothing in
+it speaking about the present, is a *dated record*: it is reviewed on the stable
+(annual) cadence, and neither its "as of" nor its year counts as staleness.
+Dated records that nothing contradicted are listed in their own report section,
+**Dated historical figures, not contradicted**, rather than as refreshes. One
+would move into the refresh list only if a source stated a different value for
+that same period, or if its citation broke.
+
+**Present-tense interpretation is still reviewed.** "6.66% for the week of July
+30, 2026, and rates have mostly hovered in the mid-to-high 6% range this year"
+contains a dated figure *and* a statement about now. The dated figure is
+protected from being called wrong, but the sentence keeps the rate cadence,
+because "rates have mostly hovered… this year" is exactly what goes stale. When
+that framing is overdue the recommendation is `clarify-uncertainty` — anchor the
+framing to its date — not an edit to the historical number. The framing words
+the agent looks for include *currently, today, still, this week/month/year, have
+hovered/sat/stayed/remained*.
+
+A sentence that states a **deadline** or a **scheduled date** is never treated
+as a dated record, whatever its figures are next to. Those dates are what the
+passed-date overrides exist to catch.
+
 ### When sources conflict
 
 If two sources disagree, that is not resolved into one confident number. It is
@@ -515,15 +601,34 @@ factual freshness. **They stay separate systems.**
 But a stale figure on a page people are actually landing on matters more than
 the same figure on a page nobody has found yet. So this agent reads the GSC
 agent's newest report **off disk** and turns it into one number per route: a
-priority multiplier between 0.9 and 1.3.
+priority multiplier from **1.0 (neutral) up to 1.3 (boost)**.
+
+**It is a boost, never a penalty.** The GSC report lists only the pages that
+produced an *opportunity*, not every page with search data — in the 17 September
+2026 report, 13 pages had Search Console data and exactly one produced an
+opportunity. A page can therefore have real Google visibility and still be
+absent. An earlier version treated absence as "quiet" and applied a 0.9
+multiplier, which invented a traffic penalty out of missing data. Absent pages
+are now weighted at exactly **1.0**.
+
+What the metrics on a boost actually mean depends on the finding they came from,
+and the report says which:
+
+* a **page-level** finding (page gaining or losing momentum, internal-link)
+  carries that page's own impressions and clicks — a real page measurement
+* a **query-level** finding carries the metrics of one query on the page, which
+  is a *lower bound* on its visibility, reported as "at least N impressions"
+
+Either way the signal only ever raises a page, so a lower bound is safe. A
+page-level measurement replaces a query lower bound when both exist.
 
 The boundaries are hard:
 
 * it only **reads** `reports/gsc/*.json`. It never calls Search Console, never
   re-scores a GSC finding, and never writes anything into `reports/gsc/`
-* traffic can **only reorder**. It can never create a finding, suppress one, or
-  change a risk level. A stale claim on a zero-traffic page is still reported —
-  lower down, with the reason stated
+* traffic can **only reorder**, and only upward. It can never create a finding,
+  suppress one, or change a risk level. A claim on a page with no GSC signal is
+  reported exactly as it would be with no GSC report at all
 * if no GSC report exists, is unreadable, or is more than 45 days old, every
   multiplier is exactly 1.0 and the report says so
 
@@ -538,13 +643,18 @@ the scan:
 
 1. `gh run list --workflow gsc-opportunity-agent.yml --status success --limit 5`
    gets the five most recent successful GSC runs.
-2. It walks them newest-first, calling
-   `gh run download <id> --name gsc-opportunities --dir reports/gsc`, and stops
-   at the first one that yields the artifact. Walking back matters: artifacts
-   expire after 90 days, and a run can succeed while producing no artifact at
-   all, so giving up on the first miss would silently lose the signal.
-3. It then prints which file actually landed, so the run log answers "did the
-   traffic weighting apply?" without anyone having to guess.
+2. It downloads the artifact of **every one of those runs**, each into its own
+   folder (`reports/gsc/run-<id>/`), and the agent then uses the report with the
+   **newest report date**. Taking the first run the list returns is not the same
+   thing: the list is ordered by when a run was *created*, so a scheduled run
+   that was re-run later produces the newest report while sorting behind an
+   older manual run. That happened on 17 September 2026, when a re-run produced
+   `gsc-opportunities-2026-09-17.json` but the first run in the list held the
+   15 September report. Downloading several runs also covers expired artifacts
+   (90 days) and runs that succeeded without producing one.
+3. It then prints which report will be used, so the run log answers "did the
+   traffic weighting apply, and from which week?" without anyone having to
+   guess.
 
 `gh` is preinstalled on GitHub-hosted runners, so this uses GitHub's own tooling
 rather than a third-party action. The job adds `actions: read` to its
@@ -650,13 +760,16 @@ The Markdown report is ordered:
 2. **Highest-priority refreshes** — the full detail blocks, capped at two per
    page so the top covers several pages rather than one bad guide
 3. **All findings** — the complete table, then detail on the rest
-4. **Pages with no detected issues** — listed, not silently omitted
-5. **Pages with a year in the title or URL**
-6. **Fair Housing compliance queue**
-7. **How this report decides things** — risk, freshness, priority, confidence
-8. **Which sources count** — the hierarchy, and what the agent cannot check
-9. **Notes and limitations from this run**
-10. **What this agent did not do** — the prohibition list
+4. **Checked, and still standing** — claims a source confirmed on this run
+5. **Dated historical figures, not contradicted** — figures tied to an explicit
+   past period that nothing contradicted for that same period
+6. **Pages with no detected issues** — listed, not silently omitted
+7. **Pages with a year in the title or URL**
+8. **Fair Housing compliance queue**
+9. **How this report decides things** — risk, freshness, priority, confidence
+10. **Which sources count** — the hierarchy, and what the agent cannot check
+11. **Notes and limitations from this run**
+12. **What this agent did not do** — the prohibition list
 
 Every value is labelled as one of five things: **detected** (what the page
 says), **calculated** (risk, staleness, priority), **external evidence** (what a

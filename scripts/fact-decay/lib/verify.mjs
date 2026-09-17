@@ -41,9 +41,11 @@ import { readFileSync, writeFileSync, mkdirSync, existsSync } from "node:fs";
 import { dirname } from "node:path";
 
 import { classifySource, hostOf, buildSourceRecord } from "./sources.mjs";
-import { daysBetween } from "./dates.mjs";
+import { daysBetween, yearOf } from "./dates.mjs";
+import { locateFigure, sourcePeriodNear, samePeriod, describePeriod } from "./periods.mjs";
 
 export const MANUAL_MARKER = "MANUAL_SOURCE_CHECK_REQUIRED";
+export const HISTORICAL_PERIOD_MARKER = "HISTORICAL_PERIOD_NOT_VERIFIED";
 
 /**
  * Every verification outcome the agent can produce. Nothing else is valid.
@@ -71,6 +73,10 @@ export const VERIFICATION_RESULTS = [
   "contradicts",
   "partially-confirms",
   "value-not-found",
+  // The claim is tied to a specific past period and the source no longer
+  // states a value for that period — typically because it now shows a later
+  // one. A later value is not evidence the dated figure was wrong.
+  "historical-period-not-verified",
   "cannot-verify",
   "source-unreachable",
   "manual-check-required",
@@ -246,17 +252,35 @@ export function findConflictingValues({
   wordsBefore = 6,
   wordsAfter = 4,
   quoteChars = 160,
+  figurePeriods = [],
+  defaultYear = null,
+  periodRadius = 160,
 }) {
   const haystack = String(sourceText ?? "");
   const claim = String(claimText ?? "");
   const window = { wordsBefore, wordsAfter };
   const conflicts = [];
+  // Values that matched the MEASURE but not the PERIOD. Not contradictions —
+  // kept only so the report can say what the source is actually showing.
+  const otherPeriodValues = [];
 
   for (const figure of missing) {
+    // PERIOD FIRST. A figure tied to a period can only be contradicted by a
+    // value for that same period. "6.66% for the week of July 30" is not
+    // contradicted by a source now showing 6.76% for the week of September 10:
+    // that is a different week, and a later value is a new fact, not a
+    // correction.
+    const period = figurePeriods.find((fp) => fp.figure === figure)?.period ?? null;
+    // A relative period ("the prior week", "a year earlier") cannot be pinned
+    // to a calendar date, so nothing on a source can be shown to be about the
+    // same period. Such a figure is never contradicted.
+    if (period && period.type === "relative") continue;
+
     // The figure has to be locatable in the claim, or there is no label to
     // compare against — and without a label there is no basis for calling
-    // anything a contradiction.
-    const at = claim.indexOf(figure);
+    // anything a contradiction. Located on boundaries, so "6%" is not found
+    // inside "6.66%".
+    const at = locateFigure(claim, figure);
     if (at < 0) continue;
     const claimLabel = localLabel(claim, at, figure.length, window);
     // Both sides are required, so a figure at the very start or end of a
@@ -285,15 +309,35 @@ export function findConflictingValues({
 
       const start = Math.max(0, m.index - quoteChars);
       const end = Math.min(haystack.length, m.index + candidate.length + quoteChars);
+      const quote = haystack.slice(start, end).replace(/\s+/g, " ").trim();
+
+      // Same measure. Now the same PERIOD? The source value's period is the
+      // nearest explicit date stated beside it. If there is none, or it is a
+      // different period, this is not a contradiction.
+      let sourcePeriod = null;
+      if (period) {
+        sourcePeriod = sourcePeriodNear(haystack, m.index, candidate.length, { radius: periodRadius, defaultYear });
+        if (!samePeriod(period, sourcePeriod)) {
+          if (!otherPeriodValues.some((v) => v.sourceValue === candidate && v.pageValue === figure)) {
+            otherPeriodValues.push({ pageValue: figure, pagePeriod: period, sourceValue: candidate, sourcePeriod, quote });
+          }
+          continue;
+        }
+      }
+
       conflicts.push({
         pageValue: figure,
         sourceValue: candidate,
         sharedTerms: shared.slice(0, 6),
-        quote: haystack.slice(start, end).replace(/\s+/g, " ").trim(),
+        quote,
+        ...(period ? { period: period.key, samePeriodOnSource: sourcePeriod?.text ?? null } : {}),
       });
       break; // one conflicting value per figure is enough to make the point
     }
   }
+  // Non-enumerable, so callers comparing the result to [] still see an empty
+  // list when nothing conflicted.
+  Object.defineProperty(conflicts, "otherPeriodValues", { value: otherPeriodValues, enumerable: false });
   return conflicts;
 }
 
@@ -636,6 +680,7 @@ export function createVerifier({ config, today, fetchImpl = globalThis.fetch, ca
     // Something is missing. Before anything else, look for EXPLICIT conflicting
     // information: a different value for the same measure, anchored to the same
     // subject. That — and only that — is a contradiction.
+    const periodInfo = claim.periodInfo ?? { figurePeriods: [], periodBound: false };
     const conflicts = findConflictingValues({
       missing,
       sourceText,
@@ -643,10 +688,16 @@ export function createVerifier({ config, today, fetchImpl = globalThis.fetch, ca
       minSharedTerms: config.verification.conflictMinSharedTerms,
       wordsBefore: config.verification.conflictLabelWordsBefore,
       wordsAfter: config.verification.conflictLabelWordsAfter,
+      figurePeriods: periodInfo.figurePeriods,
+      defaultYear: yearOf(today),
     });
 
     if (conflicts.length > 0) {
-      const pairs = conflicts.map((c) => `the page says ${c.pageValue}, the source says ${c.sourceValue}`);
+      const pairs = conflicts.map(
+        (c) =>
+          `the page says ${c.pageValue}, the source says ${c.sourceValue}` +
+          (c.period ? ` for the same period (${c.samePeriodOnSource})` : "")
+      );
       return finish({
         result: "contradicts",
         // A conflicting value on a primary or official source, cited directly
@@ -655,6 +706,39 @@ export function createVerifier({ config, today, fetchImpl = globalThis.fetch, ca
         reason: `the cited source states a different figure for the same thing — ${pairs.join("; ")}.`,
         evidence: conflicts.map((c) => `source states ${c.sourceValue} where the page states ${c.pageValue}: “${c.quote}”`),
         conflicts,
+      });
+    }
+
+    // A PERIOD-BOUND claim with figures missing and no same-period conflict.
+    // The usual reason is simple: the source is a "latest value" page and has
+    // moved on to a later period. That is not evidence the dated figure was
+    // wrong, and it is not an absence of the kind value-not-found describes
+    // either — the source simply no longer shows the period being claimed.
+    if (periodInfo.periodBound) {
+      const described = periodInfo.figurePeriods
+        .filter((fp) => missing.includes(fp.figure))
+        .map((fp) => `${fp.figure} (${describePeriod(fp.period)})`);
+      const others = (conflicts.otherPeriodValues ?? []).map(
+        (v) =>
+          `${v.sourceValue}` +
+          (v.sourcePeriod ? ` for ${describePeriod(v.sourcePeriod)}` : " with no period stated beside it")
+      );
+      return finish({
+        result: "historical-period-not-verified",
+        marker: HISTORICAL_PERIOD_MARKER,
+        confidence: "low",
+        reason:
+          `this claim is tied to a specific period — ${described.join("; ")} — and the cited source no longer states ` +
+          "a value for that period." +
+          (others.length
+            ? ` It currently shows ${[...new Set(others)].join(", ")}, which is a different period, not a correction. `
+            : " ") +
+          "A later value is not evidence that a correctly dated figure was wrong, so nothing here says the page is " +
+          "wrong. Confirming the historical value needs the source's archive, not its current page.",
+        evidence: [
+          ...found.map((f) => `${f} still appears`),
+          ...missing.map((f) => `${f} is not shown for its stated period`),
+        ],
       });
     }
 
@@ -697,10 +781,10 @@ export function createVerifier({ config, today, fetchImpl = globalThis.fetch, ca
       evidence: [],
     });
 
-    function finish({ result, confidence, reason, evidence, conflicts = [] }) {
+    function finish({ result, confidence, reason, evidence, conflicts = [], marker = null }) {
       return {
         result,
-        marker: null,
+        marker,
         confidence,
         reason,
         evidence,
