@@ -75,15 +75,25 @@ import {
 // IMAGERY — a financing-cost topic, not a place, so no repo photography
 // fits, and C:\LVINIT\Images (a Windows path) is not reachable from this
 // Linux cloud session — confirmed this run (no /mnt/c mount exists).
-// Carries a generated LVINIT editorial cover as the /guides card image only
-// (see lib/content.ts); the StoryHero itself ships photoless, matching the
-// majority pattern already used for this site's other financing/market
-// pieces with no real photo (e.g. the prior mortgage-rates piece before
-// Mikey supplied his own graphic, One Civic Center, Monument Hills).
-//   node scripts/generate-guide-cover.mjs \
-//     --slug las-vegas-mortgage-rates-approach-7-percent \
-//     --category "Market Watch" --subject "RATES NEAR 7%" \
-//     --out las-vegas-mortgage-rates-7-percent-editorial-cover.webp
+// Originally carried a generated LVINIT editorial cover as the /guides card
+// image only, with a photoless StoryHero (see git history for that version).
+//
+// Updated 2026-09-17: Mikey supplied an AI-generated image directly (an
+// aerial-style view of a generic Las Vegas hillside residential street with
+// the Strip skyline in the distance) with his explicit approval to bypass
+// CLAUDE.md's no-AI-imagery default for this one piece — confirmed by him
+// to be AI-generated, not a real photograph of any actual Las Vegas
+// neighborhood, and not his own photography, so no Mikey photo credit runs.
+// It now serves as both the StoryHero image and the /guides card image
+// (public/images/hero/las-vegas-mortgage-rates-valley-homes.webp, optimized
+// from his 1672x941 PNG upload). `imageMode` stays "editorial-cover" in
+// lib/content.ts — same convention already used for this site's other
+// Mikey-supplied AI imagery (the prior mortgage-rates piece's hero graphic,
+// the Fiesta Henderson concept illustration) — so the card renders it
+// honestly as a graphic, not a claimed photograph, and a visible disclosure
+// banner runs immediately below the hero on this page for the same reason.
+// The superseded generated cover (las-vegas-mortgage-rates-7-percent-
+// editorial-cover.webp) is no longer referenced and was removed.
 // ---------------------------------------------------------------------------
 
 const PATH = "/guides/las-vegas-mortgage-rates-approach-7-percent";
@@ -94,6 +104,7 @@ const meta: StoryMeta = {
     "Mortgage Rates Kept Climbing. Daily Trackers Already Show 7%.",
   description:
     "Freddie Mac's official weekly average climbed to 6.76% the week of September 10, 2026 — its highest since June 2025 — and faster-moving daily trackers already had the 30-year fixed at 7% by September 16. Here's what changed since our last update, and the real math on a Las Vegas payment.",
+  image: "/images/hero/las-vegas-mortgage-rates-valley-homes.webp",
   path: PATH,
   datePublished: "2026-09-17",
   author: "Mikey Del Rosario",
@@ -217,6 +228,12 @@ export default function LasVegasMortgageRatesApproach7PercentPage() {
         headline: "Mortgage Rates Kept Climbing. Daily Trackers Already Show 7%.",
         subheadline:
           "Ten days ago Freddie Mac's average hit a 13-month high. It didn't stop there — the 30-year fixed climbed to 6.76% the week of September 10, its highest since June 2025, and faster-moving daily trackers already had it sitting right at 7% by September 16.",
+        // Mikey-supplied AI-generated image — not a real photograph, not a
+        // depiction of any actual Las Vegas neighborhood. See the visible
+        // disclosure notice rendered immediately below the hero.
+        image: "/images/hero/las-vegas-mortgage-rates-valley-homes.webp",
+        imageAlt:
+          "AI-generated illustration of a Las Vegas-style hillside residential neighborhood with the Strip skyline visible in the distance — not a photograph of a real location",
         backLink: { label: "LVINIT", href: "/" },
         ctas: [
           { label: "See the numbers", href: "#by-the-numbers", variant: "primary" },
@@ -259,6 +276,20 @@ export default function LasVegasMortgageRatesApproach7PercentPage() {
           "A national average, daily or weekly, is a starting point, not your quote. Your actual rate depends on your credit, your down payment, and your lender. Tell me your target budget and I'll walk you through what it realistically looks like right now, rate included. No sales pitch.",
       }}
     >
+      <div className="border-b border-lvinit-lightgray bg-lvinit-lightgray/40">
+        <Container className="py-4">
+          <p className="mx-auto max-w-[680px] text-caption text-lvinit-warmgray">
+            <span className="font-bold uppercase tracking-wide text-lvinit-blue">
+              AI-generated illustration —{" "}
+            </span>
+            the image above is an AI-generated illustration of a generic
+            Las Vegas-style hillside neighborhood. It is not a photograph,
+            and it does not depict any specific real address, subdivision,
+            or view.
+          </p>
+        </Container>
+      </div>
+
       <StoryLede
         kicker="Market Watch"
         lead="Ten days ago, we wrote about mortgage rates hitting a 13-month high. They kept climbing. Freddie Mac's official weekly survey — the slower, more stable number the industry treats as the benchmark — put the 30-year fixed average at 6.76% for the week of September 10, 2026, a third straight weekly increase and the highest that average has been since June 2025."

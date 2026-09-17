@@ -268,13 +268,15 @@ export const guides: Guide[] = [
     // C:\LVINIT\Images (a Windows path) is not reachable from this Linux
     // cloud session — confirmed this run (no /mnt/c mount exists). Carries a
     // generated LVINIT editorial cover as the card image only; the story's
-    // own StoryHero ships photoless, matching this site's usual pattern for
-    // financing/market pieces with no real photo.
-    //   node scripts/generate-guide-cover.mjs \
-    //     --slug las-vegas-mortgage-rates-approach-7-percent \
-    //     --category "Market Watch" --subject "RATES NEAR 7%" \
-    //     --out las-vegas-mortgage-rates-7-percent-editorial-cover.webp
-    image: "/images/covers/las-vegas-mortgage-rates-7-percent-editorial-cover.webp",
+    // own StoryHero originally shipped photoless (see git history). Updated
+    // 2026-09-17: Mikey supplied an AI-generated image directly (confirmed
+    // AI-generated, not a real photo of any actual Las Vegas neighborhood),
+    // now used as both the StoryHero and this card image, with a visible
+    // on-page disclosure banner and no Mikey photo credit. imageMode stays
+    // "editorial-cover" so the card renders it honestly as a graphic, not a
+    // claimed photograph — same convention as the prior mortgage-rates
+    // piece's AI hero graphic and the Fiesta Henderson concept illustration.
+    image: "/images/hero/las-vegas-mortgage-rates-valley-homes.webp",
     imageMode: "editorial-cover",
     href: "/guides/las-vegas-mortgage-rates-approach-7-percent",
   },
