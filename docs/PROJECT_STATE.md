@@ -5,7 +5,7 @@
 > development sprint. Where this file and the code disagree, trust the code and
 > fix this file.
 >
-> **Last audited:** 2026-09-15 · **Branch:** `main` · **Live:** https://www.lvinit.com
+> **Last audited:** 2026-09-17 · **Branch:** `main` · **Live:** https://www.lvinit.com
 >
 > **Content Publisher agent:** a project-scoped Claude Code subagent,
 > `lvinit-content-publisher`, turns Mikey's real photos/videos/notes into
@@ -82,6 +82,7 @@ app/
   guides/sandstone-tule-springs-north-las-vegas/page.tsx  /guides/sandstone-tule-springs-north-las-vegas — Local Feature, KB Home's newly opened 1,500-home Sandstone community in North Las Vegas's Tule Springs area (Story Page system)
   guides/fiesta-henderson-redevelopment/page.tsx  /guides/fiesta-henderson-redevelopment — Local Feature, Henderson's conceptual plan (announced Sept 8, 2026) for a youth sports complex, hotel, and retail on the 35-acre former Fiesta Henderson casino site (Story Page system)
   guides/water-street-district-henderson/page.tsx  /guides/water-street-district-henderson — Local Feature, Henderson's original downtown corridor and the bankruptcy-to-foreclosure history of its marquee new building, The Watermark (Story Page system)
+  guides/las-vegas-mortgage-rates-approach-7-percent/page.tsx  /guides/las-vegas-mortgage-rates-approach-7-percent — Market Watch, the sequel to the Sept 3 mortgage-rates piece: Freddie Mac's weekly average climbed to 6.76% (highest since June 2025) and daily trackers already showed the 30-year at 7% (Story Page system)
 ```
 
 **Path alias:** `@/*` → project root (see `tsconfig.json`).
@@ -114,6 +115,7 @@ app/
 | `/guides/sandstone-tule-springs-north-las-vegas` | Local Feature guide | Live | Story Page system; built via the autonomous scheduled editorial-publishing routine on fresh, well-corroborated news: KB Home's own press release (Sept 4, 2026) announcing first-phase sales at Sandstone, a nearly 300-acre, 1,500-home master-planned community in North Las Vegas's Tule Springs area, independently corroborated by the Las Vegas Review-Journal (Eli Segall, Sept 8, 2026) and confirmed against KB Home's own community pages (Landings from the high $300,000s, Reserves from the mid $400,000s). Unlike Monument Hills (nothing buyable until spring 2028), this is an actionable, buy-now story — genuinely new ground for LVINIT, not a duplicate of any recent Market Watch or Local Feature piece. Compares Sandstone's pricing only to the already-verified $475,000 valley-wide resale median (LVR, August 2026); deliberately did not use a "$535,000 median new-home price" figure that surfaced in one fetch because it didn't reconcile with LVINIT's already-published $581,930 July 2026 new-construction median. Originally carried a generated LVINIT editorial cover and a photoless `StoryHero` (no repo photography depicted this still-under-construction site and `C:\LVINIT\Images` wasn't reachable that run). **Updated 2026-09-14, at Mikey's live request:** he uploaded five real images pulled directly from KB Home's own site. The community's own model-home photo/rendering now runs as both `StoryHero` and `/guides` card image (`hero/sandstone-tule-springs-model-homes-hero.webp`, `imageMode` "photo"), and the other four — KB Home's own "nearby lifestyle" marketing photos for pickleball, golf, hiking, and Mount Charleston — are placed inline via `StoryGallery` in a new "What's nearby, per KB Home" section (added alongside further-verified KB Home community-page claims about proximity to Shadow Creek Golf Course, Aliante Golf Club, and Mount Charleston/Lee Canyon). None of these are Mikey's photography, so a visible "Photo: KB Home" credit banner runs below the hero and every inline caption repeats the credit — overriding the footer's default photography attribution for this page — and captions describe only what's visibly in each representative image rather than claiming it depicts a specific named course, trail, or Mount Charleston itself. The superseded generated cover was deleted. Article + Breadcrumb JSON-LD; cross-linked both directions with `/neighborhoods/north-las-vegas` (new inline paragraph + `RelatedNeighborhood` card back) and `/guides/monument-hills-northwest-las-vegas` (new `relatedStories` entry on both sides), plus links to `/guides/las-vegas-new-home-sales-july-2026` and `/guides/las-vegas-home-prices-august-2026`; sitemap entry; registered in `lib/content.ts` `guides[]`. |
 | `/guides/fiesta-henderson-redevelopment` | Local Feature guide | Live | Story Page system; built via the autonomous scheduled editorial-publishing routine, following through on the Henderson pillar guide's own Development Watch prediction that a Fiesta Henderson site announcement was coming "in fall 2026." On Sept 8, 2026 the city and California developer Agora Realty & Management (independently verified via direct fetch of both the Las Vegas Review-Journal and Las Vegas Sun, who each filed from the same news conference) unveiled a conceptual plan: a 150,000 sq ft indoor fieldhouse (10 basketball courts, 20 volleyball courts, batting cages), outdoor sports fields, a hotel, 75,000 sq ft retail/dining, and 30,000 sq ft office space, with Agora to buy the 35-acre site from the city for $30M (the city itself paid $32M for it in 2022). Central honesty hook: Agora's own president of acquisitions and leasing told the RJ this is "a conceptual plan," not an approved one — no council hearing scheduled, costs/timeline undetermined — and this is the site's *second* named developer after a 2024 deal with Woodbury Corp. fell through, which the piece states plainly. A $108M total-cost figure circulating in secondary radio-aggregator headlines was deliberately excluded: it contradicts the developer's own on-the-record statement and appears in neither primary source. A dedicated section explicitly distinguishes this project from the separate, already-under-construction West Henderson Fieldhouse (different site, different funding, different developer) to prevent a real and likely reader mix-up between two similarly-named Henderson sports facilities. No repo photography depicts this still-vacant lot, and `C:\LVINIT\Images` wasn't reachable from this cloud session, so it originally carried a generated LVINIT editorial cover and a photoless `StoryHero`; per Mikey's explicit, live request it now uses an AI-generated concept illustration he supplied directly (bypassing CLAUDE.md's no-AI-imagery default for this one piece, no photo credit) as the `StoryHero` image and the `/guides` card image alike, with a visible on-page disclosure notice below the hero clarifying it's not an official Agora/Henderson rendering (`features/fiesta-henderson-ai-concept-illustration.webp`; the superseded generated cover was deleted). Article + Breadcrumb JSON-LD; cross-linked both directions with `/neighborhoods/henderson` (updated Development Watch entry + inline "Historic Henderson" paragraph link + new `RelatedStories` card back), plus links to `/guides/one-civic-center-north-las-vegas-redevelopment` (same developer, different city) and `/guides/henderson-vs-southwest-las-vegas`; sitemap entry; registered in `lib/content.ts` `guides[]`. |
 | `/guides/water-street-district-henderson` | Local Feature guide | Live | Story Page system; built via the autonomous scheduled editorial-publishing routine. No fresh, corroborated breaking story cleared the 24-72h sourcing bar this run, so the routine filled a genuine, explicitly flagged gap instead: docs/PROJECT_STATE.md's own "Future Neighborhood Pages" section named the Water Street District as one of the three strongest remaining Henderson child-guide candidates, already written up (unlinked) in the Henderson pillar's community roster. Central hook, cross-checked across multiple sources: The Watermark, a 151-unit mixed-use building at 215 S. Water Street, took a $37.5M construction loan from ACRES Capital in 2021 (confirmed via ACRES's own transaction page), stalled and went bankrupt in 2024 amid 20%+ cost overruns, was rescued by a $27.9M loan in Feb. 2025 (independently reported by KTNV, Fox5 Vegas, and The Real Deal, plus a real, attributed Mayor Michelle Romero quote), opened to residents, and then went into foreclosure this spring (2026) over $41.5M+ in unpaid debt before being bought by Next Wave Investors (San Clemente, CA) — reported by the Las Vegas Review-Journal, whose article returned HTTP 403 on every direct WebFetch attempt this run, so those specific figures were cross-checked across multiple independent search passes returning identical numbers, plus direct confirmation of Next Wave's own identity via the firm's site/LinkedIn. Also covers Atwell Suites (90 rooms, opened Nov. 21, 2024, PR Newswire) and the America First Center's June 2023 rename from Lifeguard Arena (NHL.com). Deliberately does NOT assert a current status for "The Waterfalls," a second stalled tower on the same street — flagged as genuinely unclear rather than guessed. **Updated 2026-09-16:** Mikey supplied two of his own Water Street District photos directly; a color gateway-arch shot (`hero/water-street-district-henderson-gateway-sign-hero.webp`) now serves as the `StoryHero` and the `/guides`/homepage card image, replacing the run's original generated editorial cover (deleted), and a second color streetscape figure (`features/water-street-district-henderson-mackenzies-river-streetscape.webp`) runs inline via `StoryGallery`. Article + Breadcrumb JSON-LD; cross-linked both directions with `/neighborhoods/henderson` (new `href` on the Water Street District roster entry, turning it from unlinked text into a real link, plus a new inline clause in the "Historic Henderson and Water Street" paragraph, plus a `RelatedNeighborhood` card back) and `/guides/fiesta-henderson-redevelopment`, plus a link to `/guides/henderson-vs-southwest-las-vegas`; sitemap entry; registered in `lib/content.ts` `guides[]`. |
+| `/guides/las-vegas-mortgage-rates-approach-7-percent` | Market Watch guide | Live | Story Page system; built via the autonomous scheduled editorial-publishing routine as the direct sequel to `/guides/las-vegas-mortgage-rates-september-2026` (published 2026-09-07, week-of-Sept-3 print at 6.71%). Fresh news independently re-verified this run: Freddie Mac's own PMMS (`freddiemac.com/pmms` + `/archive`) shows three straight weekly increases since an Aug 20, 2026 low (6.65% → 6.66% → 6.71% → 6.76%), the 6.76% print for the week of Sept 10, 2026 corroborated as "highest since June 2025" (Bloomberg) / "over 14 months" (WTOP). Faster daily trackers (Zillow data cited by NerdWallet and Norada Real Estate) put the 30-year effectively at 7% by Sept 16, 2026 — deliberately not mixed with Mortgage News Daily's own, more volatile daily figure, to avoid implying three different methodologies disagree on one number; the piece instead explains the PMMS-lagging-average vs. daily-tracker distinction plainly. Also covers the Fed's Sept 16, 2026 quarter-point hike to 3.75%–4% (first in 3+ years, per CNBC) as backdrop/context only, explicitly not framed as the cause of a climb that predates the meeting by three weeks. Local price context reuses the already-sourced $475,000 August 2026 LVR median. No rate forecast anywhere in the piece. Financing-cost topic, not a place — no repo photography fits, and `C:\LVINIT\Images` was confirmed unreachable from this Linux cloud session (no `/mnt/c` mount) — so it carries a generated LVINIT editorial cover (`covers/las-vegas-mortgage-rates-7-percent-editorial-cover.webp`) as the card image and a photoless `StoryHero`. FAQPage + Article + Breadcrumb JSON-LD; cross-linked both directions with `las-vegas-mortgage-rates-september-2026` (new inline "Update:" paragraph + `relatedStories` entry on that page, pointing here), plus links to `las-vegas-home-prices-august-2026`, `las-vegas-starter-home-prices-2026`, `las-vegas-down-payment-assistance-programs-2026`, `what-500k-buys-in-las-vegas`, and `/search`; sitemap entry; registered in `lib/content.ts` `guides[]`. |
 | `/search` | IDX search | Live | Matrix IDX embed `idx=3652dd5`; do not modify embed behavior without instruction |
 | `/contact` | Contact | Live | ContactForm → `/api/contact` (Resend) with mailto fallback |
 | `/api/contact` | Route handler | Live | Returns 503 until `RESEND_API_KEY` is set, so no fake service ships |
@@ -722,6 +724,28 @@ links flowing both up (feature → guide → homepage) and down (guide → featu
   `/guides/monument-hills-northwest-las-vegas`, plus links to the July 2026
   new-home-sales and August 2026 home-price Market Watch pieces; sitemap
   entry; registered in `lib/content.ts` `guides[]`.
+- **Las Vegas Mortgage Rates, Approaching 7%** Market Watch guide — built via
+  the autonomous scheduled editorial-publishing routine as the direct sequel
+  to `las-vegas-mortgage-rates-september-2026`. Freddie Mac's own PMMS shows
+  three straight weekly increases since an Aug 20, 2026 low, reaching 6.76%
+  the week of Sept 10, 2026 — independently corroborated as "highest since
+  June 2025" (Bloomberg) / "over 14 months" (WTOP). Faster daily trackers
+  (Zillow data via NerdWallet and Norada Real Estate) already had the
+  30-year effectively at 7% by Sept 16, 2026, the same day the Fed delivered
+  its first quarter-point hike in over three years, citing elevated
+  inflation (CNBC) — cited as backdrop, explicitly not as the cause of a
+  climb that predates the meeting by three weeks. Reuses the already-sourced
+  $475,000 August 2026 LVR median for the payment-math example rather than
+  re-deriving it. No real photography fits a financing-cost topic and
+  `C:\LVINIT\Images` was confirmed unreachable from this Linux session (no
+  `/mnt/c` mount), so it carries a generated LVINIT editorial cover and a
+  photoless hero. Story Page system; FAQPage + Article + Breadcrumb JSON-LD;
+  cross-linked both directions with `las-vegas-mortgage-rates-september-2026`,
+  plus links to `las-vegas-home-prices-august-2026`,
+  `las-vegas-starter-home-prices-2026`,
+  `las-vegas-down-payment-assistance-programs-2026`, and
+  `what-500k-buys-in-las-vegas`; sitemap entry; registered in
+  `lib/content.ts` `guides[]`.
 - Live IDX search page (Matrix / GLVAR).
 - Contact form with Resend handler + mailto fallback + GA4 lead event.
 - GA4 analytics scaffolding (opt-in via env var).
@@ -844,7 +868,11 @@ links flowing both up (feature → guide → homepage) and down (guide → featu
     your timeline" section, and links out to `what-500k-buys-in-las-vegas`
     and `/search`. A natural future child or refresh: the next PMMS print
     that moves meaningfully, or the first LVR report (August 2026 or later)
-    that lands after this one.
+    that lands after this one. **Update:** the next meaningful move arrived
+    two weeks later — see cluster 16 below,
+    `/guides/las-vegas-mortgage-rates-approach-7-percent`, cross-linked both
+    directions with this piece (new inline "Update:" paragraph +
+    `relatedStories` entry here, pointing forward).
 
 15. **Las Vegas Home Prices, August 2026:** `/guides/las-vegas-home-prices-august-2026` —
     the direct monthly sequel to `las-vegas-home-prices-july-2026` and the
@@ -863,6 +891,20 @@ links flowing both up (feature → guide → homepage) and down (guide → featu
     `las-vegas-starter-home-prices-2026`, and `/neighborhoods/summerlin`.
     A natural future child or refresh: the September 2026 LVR report,
     whenever it lands.
+
+16. **Mortgage Rates Near 7% (Sept 17, 2026):** `/guides/las-vegas-mortgage-rates-approach-7-percent` —
+    the direct sequel to cluster 14 (`las-vegas-mortgage-rates-september-2026`),
+    filling in the two weeks between that piece and this one rather than
+    restating it: Freddie Mac's weekly average rose three straight weeks to
+    a level not seen since June 2025, and faster daily trackers already had
+    the 30-year fixed effectively at 7% by Sept 16, 2026 — the same day the
+    Fed delivered its first rate hike in over three years. Cross-linked both
+    directions with `las-vegas-mortgage-rates-september-2026`, plus links to
+    `las-vegas-home-prices-august-2026`, `las-vegas-starter-home-prices-2026`,
+    `las-vegas-down-payment-assistance-programs-2026`, and
+    `what-500k-buys-in-las-vegas`. A natural future child or refresh: the
+    next PMMS print, or whichever tracker confirms (or walks back) the 7%
+    line.
 
 The remaining homepage guide/video card (Surviving Your First Vegas Summer,
 and the four video posters) are placeholders that do not yet resolve to pages.
