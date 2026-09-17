@@ -238,6 +238,47 @@ export type Guide = {
  */
 export const guides: Guide[] = [
   {
+    slug: "las-vegas-mortgage-rates-approach-7-percent",
+    title: "Mortgage Rates Kept Climbing. Daily Trackers Already Show 7%.",
+    dek: "Freddie Mac's official weekly average climbed to 6.76% the week of September 10, 2026 — its highest since June 2025 — and faster daily trackers already had the 30-year fixed at 7% by September 16. Here's what changed since our last update.",
+    byline: "Mikey Del Rosario",
+    date: "September 2026",
+    publishedAt: "2026-09-17",
+    category: "Market Watch",
+    // Built via the autonomous scheduled editorial-publishing routine, the
+    // direct sequel to las-vegas-mortgage-rates-september-2026 (published
+    // 2026-09-07, week-of-Sept-3 print at 6.71%). Fresh, well-corroborated
+    // news, independently re-verified this run: Freddie Mac's own PMMS
+    // (freddiemac.com/pmms + /archive) shows three straight weekly increases
+    // since an Aug 20 low (6.65% -> 6.66% -> 6.71% -> 6.76%), the 6.76% print
+    // for the week of Sept 10, 2026 independently corroborated as "highest
+    // since June 2025" (Bloomberg) / "over 14 months" (WTOP). Faster daily
+    // trackers (Zillow data cited by NerdWallet and Norada Real Estate) had
+    // the 30-year effectively at the 7% line by Sept 16, 2026 — deliberately
+    // NOT mixed with Mortgage News Daily's own, more volatile daily figure,
+    // to avoid implying three different methodologies disagree on one
+    // number. Also covers the Fed's Sept 16, 2026 quarter-point hike to
+    // 3.75%-4% (first in 3+ years, per CNBC) as backdrop context only —
+    // explicitly NOT framed as the cause of a climb that predates the
+    // meeting by three weeks. Local price context reuses the already-sourced
+    // $475,000 August 2026 LVR median rather than re-deriving it. No rate
+    // forecast anywhere in the piece.
+    //
+    // A financing-cost topic, not a place, so no repo photography fits, and
+    // C:\LVINIT\Images (a Windows path) is not reachable from this Linux
+    // cloud session — confirmed this run (no /mnt/c mount exists). Carries a
+    // generated LVINIT editorial cover as the card image only; the story's
+    // own StoryHero ships photoless, matching this site's usual pattern for
+    // financing/market pieces with no real photo.
+    //   node scripts/generate-guide-cover.mjs \
+    //     --slug las-vegas-mortgage-rates-approach-7-percent \
+    //     --category "Market Watch" --subject "RATES NEAR 7%" \
+    //     --out las-vegas-mortgage-rates-7-percent-editorial-cover.webp
+    image: "/images/covers/las-vegas-mortgage-rates-7-percent-editorial-cover.webp",
+    imageMode: "editorial-cover",
+    href: "/guides/las-vegas-mortgage-rates-approach-7-percent",
+  },
+  {
     slug: "water-street-district-henderson",
     title:
       "Henderson's Water Street District Just Survived a Bankruptcy. Here's What's Actually There Now",

@@ -232,6 +232,12 @@ export default function LasVegasMortgageRatesSeptember2026Page() {
           "The rate is one half of what a home actually costs a buyer. Here's the other half, and what it looks like to actually get into the market at today's numbers.",
         stories: [
           {
+            name: "Mortgage Rates Kept Climbing. Daily Trackers Already Show 7%.",
+            href: "/guides/las-vegas-mortgage-rates-approach-7-percent",
+            category: "Market Watch",
+            dek: "Our follow-up, two weeks later: rates kept rising, and faster daily trackers already had the 30-year fixed right at 7%.",
+          },
+          {
             name: "Las Vegas Home Prices Dipped Again in August 2026",
             href: "/guides/las-vegas-home-prices-august-2026",
             category: "Market Watch",
@@ -432,6 +438,17 @@ export default function LasVegasMortgageRatesSeptember2026Page() {
             </span>
           </li>
         </ul>
+        <p className="mt-6 text-body-lg text-lvinit-warmgray">
+          Update: the climb didn&rsquo;t stop here. Read{" "}
+          <Link
+            href="/guides/las-vegas-mortgage-rates-approach-7-percent"
+            className="text-lvinit-blue underline underline-offset-4 decoration-transparent hover:decoration-lvinit-blue"
+          >
+            what happened to rates over the following two weeks
+          </Link>{" "}
+          — including the day faster-moving daily trackers put the 30-year
+          fixed right at 7%.
+        </p>
       </StorySection>
 
       <StorySection heading="Mikey's local take">
