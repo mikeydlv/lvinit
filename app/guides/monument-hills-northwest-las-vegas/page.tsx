@@ -7,6 +7,8 @@ import {
   StoryLede,
   StorySection,
   StoryPullQuote,
+  StoryGallery,
+  StoryVideo,
 } from "@/components/story";
 
 // ---------------------------------------------------------------------------
@@ -69,18 +71,48 @@ import {
 //   corroborated by the current reporting — omitted rather than risk a
 //   stale or unverified claim.
 //
-// IMAGERY — C:\LVINIT\Images was checked for this run and is not reachable
-// from this cloud session (it lives on Mikey's local Windows machine; this
-// is a remote environment). No existing repo photography depicts this
-// specific site (a still-vacant 940-acre parcel with no construction yet).
-// Per the standard fallback order, this piece carries a generated LVINIT
-// editorial cover (registered in lib/content.ts as the card image only,
-// imageMode "editorial-cover") and a photoless StoryHero — never a
-// fabricated stand-in "photo" of a community that doesn't exist yet.
-//   node scripts/generate-guide-cover.mjs --slug monument-hills-northwest-las-vegas \
-//     --category "Local Feature" --subject "Monument Hills" \
-//     --out monument-hills-editorial-cover.webp
-//   -> public/images/covers/monument-hills-editorial-cover.webp
+// IMAGERY — originally, C:\LVINIT\Images wasn't reachable from that cloud
+// session and no repo photography depicted this specific, still-vacant site,
+// so this piece carried a generated LVINIT editorial cover and a photoless
+// StoryHero.
+//
+// On 2026-09-17, Mikey uploaded real images directly to the repo (via GitHub
+// web upload) and asked that they be worked in: his own drone/ground
+// photography of the actual site as hero + card + one inline figure, plus a
+// conceptual exhibit page from the Monument Hills specific-plan document
+// (submitted to the City of Las Vegas) for the "What's actually planned"
+// section. Two different credit lines apply on this page:
+//   - Hero + the desert/fenceline inline photo: Mikey's own photography,
+//     confirmed by him directly. `imageMode` is left unset ("photo"); the
+//     footer's default "photography by Mikey" credit covers both, no
+//     per-image override needed.
+//   - The Neighborhood Park B exhibit: NOT Mikey's photography and not
+//     AI-generated — a page from the master plan's own concept-park
+//     exhibits (Exhibit 7.6.4B), i.e. planning material, not built reality.
+//     Captioned and labeled "Site plan: Monument Hills specific plan," never
+//     presented as a photo of an existing park, and its own "conceptual,
+//     subject to change" disclaimer is preserved in the image itself.
+// Filenames, optimized with Sharp from the originals Mikey uploaded:
+//   public/images/hero/monument-hills-sunstone-site-aerial-drone.webp
+//     (from "Sunstone with monument hills site.png" — Mikey's own drone
+//     photo, existing Sunstone rooftops in the foreground with the vacant
+//     Monument Hills parcel stretching to the mountains beyond)
+//   public/images/features/monument-hills-site-desert-fenceline.webp
+//     (from "Monument Hills site.png" — Mikey's own ground-level photo,
+//     standing at the site looking toward the Spring Mountains)
+//   public/images/features/monument-hills-neighborhood-park-concept-exhibit.webp
+//     (from "Neighborhood Park.png" — Exhibit 7.6.4B of the specific plan;
+//     cropped to the gallery's 3:2 frame with Sharp, no content removed)
+// The video poster (see the StoryVideo section below) is Mikey's own
+// thumbnail design, also uploaded 2026-09-17:
+//   public/images/video-monument-hills-6000-homes-coming-soon.webp
+//     (from "monument-hills-las-vegas-6000-homes-thumbnail.png")
+// The now-unreferenced generated cover
+// (public/images/covers/monument-hills-editorial-cover.webp) was deleted
+// since nothing points to it anymore. Several other images Mikey uploaded in
+// the same batch (house-style and park-concept exhibits, LVINIT chapter-card
+// concepts, a labeled site-boundary map) weren't used in this piece and were
+// deliberately left in place in public/images/ for future use, not deleted.
 // ---------------------------------------------------------------------------
 
 const PATH = "/guides/monument-hills-northwest-las-vegas";
@@ -185,6 +217,9 @@ export default function MonumentHillsPage() {
           "Monument Hills: What a New 6,000-Home Community Means for Northwest Las Vegas",
         subheadline:
           "Developers just closed on 940 acres for what's being called Las Vegas' biggest new community in years. Here's what's actually confirmed, why the land sits inside the City of Las Vegas and not North Las Vegas, and why nobody can buy in yet.",
+        image: "/images/hero/monument-hills-sunstone-site-aerial-drone.webp",
+        imageAlt:
+          "Aerial drone photo of the existing Sunstone neighborhood's rooftops in the foreground, with the vacant Monument Hills parcel stretching toward the Spring Mountains in the distance",
         backLink: { label: "LVINIT", href: "/" },
         ctas: [
           { label: "See the numbers", href: "#by-the-numbers", variant: "primary" },
@@ -254,6 +289,14 @@ export default function MonumentHillsPage() {
         </p>
       </StoryLede>
 
+      <StoryVideo
+        youtubeId="GQbCsZ_X3lc"
+        title="Monument Hills: 6,000 Homes Coming to Northwest Las Vegas? (LVINIT)"
+        heading="See the site for yourself"
+        intro="Mikey walks the actual land and breaks down what's confirmed, what's still just a plan, and why the jurisdiction question matters."
+        poster="/images/video-monument-hills-6000-homes-coming-soon.webp"
+      />
+
       <StorySection heading="The deal: 940 acres, $94 million, three parties">
         <p className="text-body-lg text-lvinit-warmgray">
           The Las Vegas Review-Journal reported on September 2, 2026 that
@@ -289,6 +332,18 @@ export default function MonumentHillsPage() {
           developers.
         </p>
       </StorySection>
+
+      <StoryGallery
+        columns={1}
+        images={[
+          {
+            src: "/images/features/monument-hills-site-desert-fenceline.webp",
+            alt: "Ground-level view of the vacant Monument Hills desert site, looking toward the Spring Mountains, with a fence line and gravel road in the foreground",
+            caption:
+              "The site today — open desert, a fence line, and the Spring Mountains on the horizon. No grading, no construction yet.",
+          },
+        ]}
+      />
 
       <SnapshotPanel />
 
@@ -352,7 +407,21 @@ export default function MonumentHillsPage() {
           trails</span>, two future school sites, and commercial space. No
           specific builders, retailers, or school names have been announced.
         </p>
-        <p className="mt-5 text-body-lg text-lvinit-warmgray">
+
+        <StoryGallery
+          columns={1}
+          images={[
+            {
+              src: "/images/features/monument-hills-neighborhood-park-concept-exhibit.webp",
+              alt: "Conceptual site plan for Neighborhood Park B within the Monument Hills master plan, showing a turf area, plaza, ramada, exercise equipment, and an adventure trail, with inspiration photos and a plant legend",
+              label: "Site plan: Monument Hills specific plan",
+              caption:
+                "“Conceptual Neighborhood Park B,” Exhibit 7.6.4B from the Monument Hills specific plan submitted to the City of Las Vegas. This is planning material, not a built park — the plan's own note says locations and configurations are still subject to change.",
+            },
+          ]}
+        />
+
+        <p className="text-body-lg text-lvinit-warmgray">
           &ldquo;It&rsquo;s definitely the largest in a while,&rdquo; Chris
           Armstrong, an Olympia Companies executive vice president, told the
           Review-Journal. Garry Goett, Olympia&rsquo;s founder, and Larry

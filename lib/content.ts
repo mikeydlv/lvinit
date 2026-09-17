@@ -550,15 +550,20 @@ export const guides: Guide[] = [
     category: "Local Feature",
     // Built via the autonomous scheduled editorial-publishing routine, on a
     // genuine breaking story: Las Vegas Review-Journal, Eli Segall, Sept 2,
-    // 2026, corroborated same-week by 8 News Now, News 3 LV, and KTNV. No
-    // repo photography depicts this specific, still-vacant site, and
-    // C:\LVINIT\Images wasn't reachable from this cloud session — carries a
-    // generated LVINIT editorial cover.
-    //   node scripts/generate-guide-cover.mjs --slug monument-hills-northwest-las-vegas \
-    //     --category "Local Feature" --subject "Monument Hills" \
-    //     --out monument-hills-editorial-cover.webp
-    image: "/images/covers/monument-hills-editorial-cover.webp",
-    imageMode: "editorial-cover",
+    // 2026, corroborated same-week by 8 News Now, News 3 LV, and KTNV.
+    //
+    // IMAGERY — originally carried a generated LVINIT editorial cover because
+    // C:\LVINIT\Images wasn't reachable from that cloud session and no repo
+    // photography depicted this specific, still-vacant site. On 2026-09-17,
+    // Mikey uploaded his own drone/ground photography of the actual site
+    // (via GitHub web upload) and asked that it be used as hero and card.
+    // Genuine Mikey-owned photography, so `imageMode` is left unset
+    // ("photo"). The superseded generated cover
+    // (public/images/covers/monument-hills-editorial-cover.webp) is deleted
+    // since nothing references it anymore.
+    image: "/images/hero/monument-hills-sunstone-site-aerial-drone.webp",
+    imageAlt:
+      "Aerial drone photo of the existing Sunstone neighborhood's rooftops in the foreground, with the vacant Monument Hills parcel stretching toward the Spring Mountains in the distance",
     href: "/guides/monument-hills-northwest-las-vegas",
   },
   {
