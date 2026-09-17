@@ -125,6 +125,11 @@ const meta: StoryMeta = {
   description:
     "Olympia Companies and Bruin Capital closed a $94 million, 940-acre land deal for Monument Hills, a planned 6,000-home community in the far northwest valley. What's confirmed, why it's City of Las Vegas land, and when homes might actually exist.",
   path: PATH,
+  image: "/images/hero/monument-hills-sunstone-site-aerial-drone.webp",
+  imageWidth: 1912,
+  imageHeight: 1072,
+  imageAlt:
+    "Aerial drone photo of the existing Sunstone neighborhood's rooftops in the foreground, with the vacant Monument Hills parcel stretching toward the Spring Mountains in the distance",
   datePublished: "2026-09-03",
   author: "LVINIT Editorial",
   breadcrumbs: [
