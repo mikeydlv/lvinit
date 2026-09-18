@@ -1,0 +1,144 @@
+# ---------------------------------------------------------------------------
+# LVINIT agent state — shared read/write for the lvinit-agent-state branch
+#
+# Every LVINIT agent that keeps state between runs uses this action, so there
+# is one audited way to touch that branch instead of one per agent.
+#
+#   mode: checkout   clone lvinit-agent-state into `path` (default
+#                    .agent-state). If the branch does not exist yet, start
+#                    an empty orphan branch there instead. The token is used
+#                    for the clone and then REMOVED from the clone's config,
+#                    so the agent step that runs next has no credentials on
+#                    disk.
+#
+#   mode: commit     stage ONLY the declared `paths` (plus the README and
+#                    vercel.json copied from .github/agent-state/ on main),
+#                    refuse if anything else is staged, commit, and push to
+#                    lvinit-agent-state, rebasing and retrying if another
+#                    agent pushed first.
+#
+# Hard guarantees, enforced here rather than trusted to each agent:
+#   * it only ever pushes to refs/heads/lvinit-agent-state
+#   * it refuses a branch name equal to the repository's default branch
+#   * each declared path must be reports/<namespace> or data/<namespace>
+#   * vercel.json (git.deploymentEnabled: false) is in every commit, so a
+#     push here never produces a Vercel deployment
+# ---------------------------------------------------------------------------
+
+name: LVINIT agent state
+description: Check out, or commit to, the shared lvinit-agent-state branch.
+
+inputs:
+  mode:
+    description: "checkout | commit"
+    required: true
+  token:
+    description: "Token with contents:write (normally secrets.GITHUB_TOKEN)."
+    required: true
+  path:
+    description: "Where the state branch is checked out."
+    required: false
+    default: ".agent-state"
+  paths:
+    description: "commit mode: space-separated namespace paths this agent owns, e.g. 'reports/social-trends data/social-trends'."
+    required: false
+    default: ""
+  message:
+    description: "commit mode: the commit message."
+    required: false
+    default: "agent state update"
+
+runs:
+  using: composite
+  steps:
+    - name: Agent state — ${{ inputs.mode }}
+      shell: bash
+      env:
+        MODE: ${{ inputs.mode }}
+        TOKEN: ${{ inputs.token }}
+        DIR: ${{ inputs.path }}
+        PATHS: ${{ inputs.paths }}
+        MESSAGE: ${{ inputs.message }}
+        DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
+        BOOTSTRAP: ${{ github.workspace }}/.github/agent-state
+      run: |
+        set -euo pipefail
+        BRANCH="lvinit-agent-state"
+        if [ "$BRANCH" = "${DEFAULT_BRANCH:-main}" ] || [ "$BRANCH" = "main" ]; then
+          echo "::error::Refusing to use the default branch as agent state."
+          exit 1
+        fi
+        REMOTE="https://x-access-token:${TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+
+        if [ "$MODE" = "checkout" ]; then
+          rm -rf "$DIR"
+          if git ls-remote --exit-code --heads "$REMOTE" "$BRANCH" >/dev/null 2>&1; then
+            git clone --quiet --depth 50 --single-branch --branch "$BRANCH" "$REMOTE" "$DIR"
+            echo "Checked out $BRANCH into $DIR ($(git -C "$DIR" rev-parse --short HEAD))."
+          else
+            echo "$BRANCH does not exist yet — starting it as an orphan branch in $DIR."
+            mkdir -p "$DIR"
+            git -C "$DIR" init --quiet
+            git -C "$DIR" checkout --quiet --orphan "$BRANCH"
+          fi
+          # No credentials left behind for the steps that follow.
+          git -C "$DIR" remote remove origin 2>/dev/null || true
+          exit 0
+        fi
+
+        if [ "$MODE" != "commit" ]; then
+          echo "::error::mode must be checkout or commit (got '$MODE')."
+          exit 1
+        fi
+        if [ -z "$PATHS" ]; then
+          echo "::error::commit mode needs the agent's namespace paths."
+          exit 1
+        fi
+        for p in $PATHS; do
+          if ! [[ "$p" =~ ^(reports|data)/[a-z0-9][a-z0-9-]*/?$ ]]; then
+            echo "::error::'$p' is not a namespace path (reports/<name> or data/<name>)."
+            exit 1
+          fi
+        done
+
+        cd "$DIR"
+        git config user.name "github-actions[bot]"
+        git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+        # The branch's README and deploy switch always mirror main.
+        cp -f "$BOOTSTRAP/README.md" README.md
+        cp -f "$BOOTSTRAP/vercel.json" vercel.json
+
+        # shellcheck disable=SC2086
+        git add -A -- README.md vercel.json $PATHS
+
+        # Anything staged outside the declared namespaces is a bug — stop.
+        ALLOWED="^(README\.md|vercel\.json"
+        for p in $PATHS; do ALLOWED="$ALLOWED|${p%/}/"; done
+        ALLOWED="$ALLOWED)"
+        STRAY="$(git diff --cached --name-only | grep -Ev "$ALLOWED" || true)"
+        if [ -n "$STRAY" ]; then
+          echo "::error::Refusing to commit paths outside this agent's namespace:"
+          echo "$STRAY"
+          exit 1
+        fi
+
+        if git diff --cached --quiet; then
+          echo "No state changes to commit."
+          exit 0
+        fi
+        git commit --quiet -m "$MESSAGE"
+
+        for attempt in 1 2 3 4 5; do
+          if git push --quiet "$REMOTE" "HEAD:refs/heads/$BRANCH"; then
+            echo "Pushed $(git rev-parse --short HEAD) to $BRANCH."
+            exit 0
+          fi
+          echo "Push rejected (attempt $attempt) — another agent probably pushed first. Rebasing."
+          git fetch --quiet --depth 50 "$REMOTE" "$BRANCH"
+          # Agents never share a namespace, so this rebase cannot conflict.
+          git rebase --quiet FETCH_HEAD
+          sleep $((attempt * 3))
+        done
+        echo "::error::Could not push to $BRANCH after 5 attempts."
+        exit 1

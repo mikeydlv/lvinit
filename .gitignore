@@ -42,3 +42,10 @@ next-env.d.ts
 # generated Internal Linking Agent reports (the agent commits link edits,
 # never its own report output)
 /reports/internal-links/
+
+# Local Trend Agent output. In CI it lives on the lvinit-agent-state branch
+# (never main); locally these are scratch copies. .agent-state/ is the CI
+# checkout of that branch.
+/reports/social-trends/
+/data/social-trends/
+/.agent-state/

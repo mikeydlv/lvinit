@@ -1,0 +1,196 @@
+# ---------------------------------------------------------------------------
+# LVINIT Local Trend Agent — daily 6:30 AM Pacific, weekly summary on Monday
+#
+# What this job is allowed to do:
+#   * read public RSS/Atom feeds and Google News searches (read-only GETs)
+#   * read the repository to see what LVINIT has already published
+#   * send the short list to Claude for judgment (only if ANTHROPIC_API_KEY
+#     is set as a repository secret — otherwise it runs rules-only)
+#   * write the trend report, the watchlist and the reviewed-story memory
+#   * commit those files to the lvinit-agent-state branch — never to main
+#   * upload the report as a workflow artifact and summarize it on the run page
+#
+# What it is NOT allowed to do, by construction:
+#   * publish, post to social media, or edit any page, article or metadata
+#   * commit to main — the only push is in the shared agent-state action,
+#     which hardcodes lvinit-agent-state and refuses the default branch
+#   * contact builders, leads or anyone else; send email; touch a CRM
+#   * deploy — the state branch carries vercel.json with deploymentEnabled:
+#     false, and it is never merged into main
+#
+# Why `contents: write`: the job has to push its state to lvinit-agent-state.
+# GitHub cannot scope a token to one branch, so the restriction lives in the
+# action (.github/actions/agent-state) and the token is handed ONLY to that
+# action's steps — the agent step itself runs with no GitHub credentials.
+# Protecting main with a branch-protection rule is the recommended second lock.
+#
+# Secrets: ANTHROPIC_API_KEY (optional). Nothing else.
+# ---------------------------------------------------------------------------
+
+name: Local Trend Agent
+
+on:
+  schedule:
+    # GitHub cron is UTC only. 6:30 AM Pacific is 13:30 UTC in daylight time
+    # and 14:30 UTC in standard time, so both are registered and the gate
+    # step below keeps only the one that is 6:30 in Las Vegas today.
+    #
+    # Other agents run at 13:00 UTC on their own days (GSC Mon, Briefs Tue,
+    # Linking Wed, Fact-Decay Thu). This one runs daily at :30 so it never
+    # starts in the same minute as them.
+    - cron: "30 13 * * *"
+    - cron: "30 14 * * *"
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "daily, weekly, or both"
+        required: false
+        type: choice
+        options: [daily, weekly, both]
+        default: daily
+      no_llm:
+        description: "Rules-only judgment even if ANTHROPIC_API_KEY is set"
+        required: false
+        type: boolean
+        default: false
+      fixtures:
+        description: "Synthetic stories, no network, nothing committed"
+        required: false
+        type: boolean
+        default: false
+      today:
+        description: "Pretend today is this date (YYYY-MM-DD). Leave blank for the real date."
+        required: false
+        default: ""
+
+permissions:
+  contents: write
+
+concurrency:
+  group: local-trend-agent
+  cancel-in-progress: false
+
+jobs:
+  trends:
+    name: Find what Mikey should make next
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Is this the 6:30 AM Pacific run?
+        id: gate
+        env:
+          EVENT: ${{ github.event_name }}
+          SCHEDULE: ${{ github.event.schedule }}
+          INPUT_MODE: ${{ inputs.mode }}
+        run: |
+          set -euo pipefail
+          if [ "$EVENT" = "schedule" ]; then
+            # -0700 in daylight time, -0800 in standard time.
+            if [ "$(TZ=America/Los_Angeles date +%z)" = "-0700" ]; then WANT="30 13 * * *"; else WANT="30 14 * * *"; fi
+            if [ "$SCHEDULE" != "$WANT" ]; then
+              echo "This trigger ($SCHEDULE) is not 6:30 AM Pacific today — the other one is. Skipping."
+              echo "run=false" >> "$GITHUB_OUTPUT"
+              exit 0
+            fi
+            # Monday morning also rebuilds the weekly summary.
+            if [ "$(TZ=America/Los_Angeles date +%u)" = "1" ]; then MODE=both; else MODE=daily; fi
+          else
+            MODE="${INPUT_MODE:-daily}"
+          fi
+          echo "run=true" >> "$GITHUB_OUTPUT"
+          echo "mode=$MODE" >> "$GITHUB_OUTPUT"
+          echo "Mode: $MODE"
+
+      - name: Check out main (read-only credentials)
+        if: steps.gate.outputs.run == 'true'
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Set up Node
+        if: steps.gate.outputs.run == 'true'
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+
+      # The only runtime dependency is @anthropic-ai/sdk. --ignore-scripts:
+      # nothing this job needs runs an install script, so none are allowed to.
+      - name: Install dependencies
+        if: steps.gate.outputs.run == 'true'
+        run: npm ci --ignore-scripts --no-audit --no-fund
+
+      - name: Run the agent's own test suite
+        if: steps.gate.outputs.run == 'true'
+        run: npm run trends:test
+
+      - name: Check out lvinit-agent-state
+        if: steps.gate.outputs.run == 'true'
+        uses: ./.github/actions/agent-state
+        with:
+          mode: checkout
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Generate the trend report
+        if: steps.gate.outputs.run == 'true'
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          MODE: ${{ steps.gate.outputs.mode }}
+          NO_LLM: ${{ inputs.no_llm }}
+          USE_FIXTURES: ${{ inputs.fixtures }}
+          TODAY: ${{ inputs.today }}
+        run: |
+          set -euo pipefail
+          ARGS="--mode=$MODE --state-dir=.agent-state"
+          if [ "${NO_LLM:-false}" = "true" ]; then ARGS="$ARGS --no-llm"; fi
+          if [ "${USE_FIXTURES:-false}" = "true" ]; then
+            echo "FIXTURE run — synthetic stories; nothing will be committed."
+            ARGS="$ARGS --fixtures"
+          fi
+          if [ -n "${TODAY:-}" ]; then ARGS="$ARGS --today=$TODAY"; fi
+          node scripts/local-trends/run.mjs $ARGS | tee run-output.txt
+
+      - name: Commit the report and watchlist to lvinit-agent-state
+        if: steps.gate.outputs.run == 'true' && inputs.fixtures != true
+        uses: ./.github/actions/agent-state
+        with:
+          mode: commit
+          token: ${{ secrets.GITHUB_TOKEN }}
+          paths: reports/social-trends data/social-trends
+          message: "local-trends: ${{ steps.gate.outputs.mode }} report (run ${{ github.run_number }})"
+
+      - name: Write the report onto the run page
+        if: always() && steps.gate.outputs.run == 'true'
+        env:
+          REPO: ${{ github.repository }}
+        run: |
+          {
+            echo "## LVINIT Local Trend Agent"
+            echo
+            echo '```'
+            cat run-output.txt 2>/dev/null || echo "The run produced no output."
+            echo '```'
+            echo
+            REPORT="$(ls -1 .agent-state/reports/social-trends/*-local-trends.md 2>/dev/null | sort | tail -n 1 || true)"
+            if [ -n "$REPORT" ]; then
+              echo "Full report and watchlist: https://github.com/$REPO/tree/lvinit-agent-state/reports/social-trends"
+              echo
+              echo "---"
+              echo
+              cat "$REPORT"
+            fi
+            echo
+            echo "Discovery only: nothing was published, posted, deployed, or sent to anyone."
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload the report as an artifact
+        if: always() && steps.gate.outputs.run == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: local-trends
+          path: |
+            .agent-state/reports/social-trends/
+            .agent-state/data/social-trends/
+          if-no-files-found: warn
+          retention-days: 30
