@@ -14,7 +14,11 @@
     "fact:report": "node scripts/fact-decay/run.mjs",
     "fact:report:verify": "node scripts/fact-decay/run.mjs --verify",
     "fact:report:fixtures": "node scripts/fact-decay/run.mjs --fixtures",
-    "fact:test": "node --test \"scripts/fact-decay/test/*.test.mjs\""
+    "fact:test": "node --test \"scripts/fact-decay/test/*.test.mjs\"",
+    "links:report": "node scripts/internal-links/run.mjs",
+    "links:apply": "node scripts/internal-links/run.mjs --apply",
+    "links:report:fixtures": "node scripts/internal-links/run.mjs --fixtures",
+    "links:test": "node --test \"scripts/internal-links/test/*.test.mjs\""
   },
   "dependencies": {
     "next": "^14.2.5",
