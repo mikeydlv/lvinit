@@ -52,13 +52,20 @@ const AREAS = {
   "Media/SouthWest/Lennar Marcia": { area: "southwest", label: "Lennar community" },
   "Media/SouthWest/The Bend": { area: "southwest", label: "The Bend" },
   "Media/SouthWest/UnCommons": { area: "southwest", label: "UnCommons" },
-  // "SoHi" is read as Southern Highlands. Correct it here if that's wrong.
+  // "SoHi" = Southern Highlands (confirmed by Mikey 2026-09-18).
   "Media/SoHi": { area: "southwest", label: "Southern Highlands (SoHi)" },
   "Media/North Las Vegas": { area: "north-las-vegas", label: "North Las Vegas" },
   "Media/Skye Canyon": { area: "northwest", label: "Skye Canyon" },
   "Media/Centennial": { area: "northwest", label: "Centennial Hills" },
   "Media/Monument Hills": { area: "northwest", label: "Monument Hills" },
-  "Media/KB Homes": { area: null, label: "KB Home community" },
+  // A single KB Home new-build walkthrough (interiors, one exterior, Mikey on
+  // camera). No sign, street or landmark places it confidently, so no area is
+  // invented. `caution` travels with the folder so the Producer passes it on.
+  "Media/KB Homes": {
+    area: null,
+    label: "UNKNOWN / NEEDS CLASSIFICATION",
+    caution: "Exterior shot shows a house number. Blur it before posting.",
+  },
   "Media/Arts District": { area: "downtown", label: "Arts District" },
   "Media/Monorail from Sahara": { area: "strip", label: "Monorail from Sahara" },
   "Media/The Strip": { area: "strip", label: "The Strip" },

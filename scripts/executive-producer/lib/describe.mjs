@@ -141,6 +141,7 @@ export function describe(file, probe, privacyResult, config) {
     timeOfDay: when.source === "camera" ? timeOfDay(p.creationTime) : null,
     area: project?.area ?? place?.area ?? null,
     place: place?.label ?? null,
+    caution: place?.caution ?? null,
     project: project ? { folder: project.prefix, youtubeId: project.youtubeId } : null,
     subject: subjectOf(name),
     sizeMB: Math.round((file.size / 1_048_576) * 10) / 10,

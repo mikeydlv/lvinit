@@ -14,7 +14,7 @@ import { AGENT, SCHEMA_VERSION } from "../config.mjs";
 
 const FIELDS = [
   "id", "path", "folder", "type", "role", "camera", "orientation", "width", "height", "fps",
-  "durationSec", "captureDate", "timeOfDay", "area", "place", "project", "subject", "duplicateOf",
+  "durationSec", "captureDate", "timeOfDay", "area", "place", "project", "subject", "caution", "duplicateOf",
 ];
 
 function pick(e, publicIds) {
@@ -46,6 +46,7 @@ export function summarizeFolders(entries) {
         folder,
         area: list.find((e) => e.area)?.area ?? null,
         place: list.find((e) => e.place)?.place ?? null,
+        caution: list.find((e) => e.caution)?.caution ?? null,
         project: list.find((e) => e.project)?.project ?? null,
         videos: vids.length,
         photos: list.filter((e) => e.type === "image" && (e.role === "photo" || e.role === "library-photo")).length,
