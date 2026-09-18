@@ -34,6 +34,7 @@ with `main`. It is never merged, never deployed, and never read by the site.
 | Agent | Workflow | Writes | Notes |
 |---|---|---|---|
 | Local Trend Agent | `.github/workflows/local-trend-agent.yml` | `reports/social-trends/`, `data/social-trends/` | Daily 6:30 AM Pacific; weekly on Monday. See `docs/LOCAL_TREND_AGENT.md` on `main`. |
+| Executive Producer | local `npm run producer:catalog:push` (footage catalog); Monday workflow in a later phase | `reports/executive-producer/`, `data/executive-producer/` | Sanitized metadata only; private rules stay on Mikey's PC. See `docs/EXECUTIVE_PRODUCER.md` on `main`. |
 
 When you add an agent, add a row here (on `main`) and give the agent its own
 namespace.

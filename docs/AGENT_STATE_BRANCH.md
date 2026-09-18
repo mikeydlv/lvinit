@@ -27,6 +27,7 @@ data/<namespace>/              machine state (JSON, with schema_version + agent)
 | Agent | Namespace paths |
 |---|---|
 | Local Trend Agent | `reports/social-trends/`, `data/social-trends/` |
+| Executive Producer | `reports/executive-producer/`, `data/executive-producer/` |
 
 ## How agents use it
 

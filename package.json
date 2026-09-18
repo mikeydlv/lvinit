@@ -22,7 +22,10 @@
     "trends:report": "node scripts/local-trends/run.mjs",
     "trends:weekly": "node scripts/local-trends/run.mjs --mode=weekly",
     "trends:report:fixtures": "node scripts/local-trends/run.mjs --fixtures --mode=both",
-    "trends:test": "node --test \"scripts/local-trends/test/*.test.mjs\""
+    "trends:test": "node --test \"scripts/local-trends/test/*.test.mjs\"",
+    "producer:catalog": "node scripts/executive-producer/catalog.mjs",
+    "producer:catalog:push": "node scripts/executive-producer/catalog.mjs --push",
+    "producer:test": "node --test \"scripts/executive-producer/test/*.test.mjs\""
   },
   "dependencies": {
     "next": "^14.2.5",
