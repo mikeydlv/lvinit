@@ -348,7 +348,7 @@ export default function LasVegasNewHomeSalesJuly2026Page() {
           locations, lot sizes, and built-in incentives (rate buydowns,
           upgrade credits) that don&rsquo;t show up in a headline median. This
           is the gap between the two medians <em>this month</em>, not a claim
-          that a new build and a comparable resale home are $101,930 apart, or
+          that a <Link href="/guides/new-build-vs-resale-las-vegas" className="text-lvinit-blue underline underline-offset-4 decoration-transparent hover:decoration-lvinit-blue">new build</Link> and a comparable resale home are $101,930 apart, or
           that one market is priced &ldquo;correctly&rdquo; and the other
           isn&rsquo;t.
         </p>

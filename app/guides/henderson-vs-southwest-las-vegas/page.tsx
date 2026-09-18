@@ -301,7 +301,7 @@ export default function HendersonVsSouthwestLasVegasPage() {
         </p>
         <p className="mt-5 text-body-lg text-lvinit-warmgray">
           Neither is the fit if you want a genuinely walkable, historic
-          center: Henderson has one small pocket of that at Water Street and
+          center: Henderson has one small pocket of that at <Link href="/guides/water-street-district-henderson" className={linkCls}>Water Street</Link> and
           The District at Green Valley Ranch; the Southwest has one at
           UnCommons and The Bend, and both are described on their own guides
           as pockets, not properties of the whole place.

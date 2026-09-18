@@ -152,7 +152,7 @@ export default function SummerlinVsHendersonPage() {
           and a historic downtown that predates all of it. Most people
           don&rsquo;t really move to &ldquo;Henderson&rdquo; so much as to one
           specific corner of it (Green Valley, Inspirada, Cadence, Lake Las
-          Vegas, Anthem, MacDonald Highlands, or the Water Street District),
+          Vegas, Anthem, MacDonald Highlands, or the <Link href="/guides/water-street-district-henderson" className={linkCls}>Water Street District</Link>),
           and those corners can feel almost nothing alike. That means the HOA
           culture, the architectural style, and even the age of the streets
           around you depend entirely on which Henderson you pick. Summerlin
