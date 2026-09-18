@@ -16,7 +16,7 @@ films, edits the site, or contacts anyone but Mikey.
 | | |
 |---|---|
 | Footage Cataloger | `scripts/executive-producer/catalog.mjs`, **runs on Mikey's PC** |
-| Producer | *phase 2*, GitHub Actions, Monday morning |
+| Producer | `scripts/executive-producer/run.mjs` (GitHub Actions on Mondays from phase 3) |
 | Shared state | `lvinit-agent-state` → `data/executive-producer/`, `reports/executive-producer/` |
 | Private state | `~/.lvinit/executive-producer/` on Mikey's PC, **never pushed** |
 
@@ -24,12 +24,74 @@ films, edits the site, or contacts anyone but Mikey.
 
 | Phase | What | Status |
 |---|---|---|
-| 1 | Footage Cataloger + complete video inventory | **built** |
-| 2 | Producer core (candidates, judgment, validation, brief) on fixtures / dry run | next |
-| 3 | Monday workflow + email via Resend | |
+| 1 | Footage Cataloger + complete video inventory | **built**, catalog on the state branch |
+| 2 | Producer core: candidates, spouse test, scoring, footage matching, brief | **built** (sample + fixtures) |
+| 3 | Monday workflow + email via Resend | next |
 | 4 | Performance log + weekly learning loop | |
 | 5 | Instagram analytics | |
 | 6 | YouTube analytics | |
+
+---
+
+## Phase 2: the Producer
+
+```bash
+npm run producer:brief         # this week's brief (Claude if ANTHROPIC_API_KEY is set, rules-only otherwise)
+npm run producer:sample        # real pages + real footage, judged by the in-repo sample judgment
+npm run producer:fixtures      # synthetic everything
+node scripts/executive-producer/run.mjs --shortlist   # what it's choosing between, with offered clips
+```
+
+### How it decides
+
+1. **Candidates**, deliberately not news-first:
+   - every published LVINIT page, as a 45-second take on something Mikey already researched
+   - published videos with no companion page
+   - real search questions from Search Console that LVINIT doesn't answer head-on
+   - Local Trend Agent topics, as background research, capped at one pick a week
+2. **Pre-score (free rules).** Headline language that matches the Summerlin vs Henderson
+   pattern scores up: debates, myths, "nobody tells you", hidden costs, relocation
+   and new-build decisions. Comparisons, buyer guides and cost-of-living pieces
+   score up. Generic market updates score down. Anything recommended in the last
+   four weeks is held back. The top 14 go to judgment.
+3. **Footage matching.** Each idea gets the best existing B-roll from the catalog.
+   Comparisons get a clip from every side. Topic words find the right library
+   vocabulary (rent → apartment clips; new build → builder communities). Already-cut
+   Shorts and graphics from the related video project come along too.
+4. **Judgment (one Claude call a week).** For each idea: the **spouse test** (a fail
+   drops it), hook, a 45–60 second beat-by-beat script with B-roll per beat, talking
+   points tied to a source page, packaging (thumbnail, carousel, Story, YouTube,
+   DM-keyword lead gen, comment prompt), and 1–5 scores for scroll-stop, comment,
+   share, save, follow, DM/lead and trust.
+5. **Validation in code.** Clips it wasn't offered are removed. A talking point
+   citing a page it wasn't given is downgraded to opinion. **Every number is
+   checked against the LVINIT page text**, and one that isn't there is flagged
+   "confirm before recording".
+6. **Scoring and picks.** Ease and reuse are computed. The total weights Mikey's
+   order: comments and scroll-stop, then follows, shares, saves, DMs, trust, ease,
+   reuse. **New filming is YES only if the idea scores 85+ and the library can't
+   cover it.** Four picks are chosen with no two versions of the same debate, at
+   most two of one format, at most one news item, and never two from one page.
+
+### What Mikey gets
+
+- **Email (short):** per priority: title, hook, why it should work, existing
+  B-roll, new filming YES/NO, recording time. Then total A-roll minutes and a link
+  to the sheets.
+- **Production sheets (full):** the script table (timing, what to say, which clip),
+  talking points with sources, spouse test, emotional angle, audience, why people
+  will comment/share/save, footage paths, ready-made Shorts, packaging, scorecard,
+  anything to check.
+
+### Without an API key
+
+Rules-only mode still picks four ideas and matches footage. The hooks are the
+published headlines and the beats are the page's own sections, so the email says
+at the top that the angles need Mikey. It never writes a template hook.
+
+To enable the full judgment, add an `ANTHROPIC_API_KEY` repository secret. The
+Local Trend Agent uses the same secret. Cost is one Opus call a week, roughly
+$1–2.
 
 ---
 

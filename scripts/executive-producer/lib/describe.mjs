@@ -35,8 +35,9 @@ export function detectCamera({ name, encoder, relPath }) {
   if (/osmo ?pocket|osmopocket|osmo ?action|osmoaction/i.test(enc)) return "handheld";
   if (/^\d{8}_\d{6}/.test(name)) return "phone";
   if (/^DJI_\d{4}\./i.test(name)) return "drone"; // legacy DJI drone naming
-  if (norm(relPath).split("/").some((s) => /^drone$/i.test(s)) || /\bdrone\b|flyover|aerial/i.test(name)) return "drone";
+  // An edited export ("…Drone Tour of…mp4") is a finished cut, whatever its name says.
   if (/lavf|davinci|blackmagic|premiere|capcut|opus/i.test(enc)) return "edited";
+  if (norm(relPath).split("/").some((s) => /^drone$/i.test(s)) || /\bdrone\b|flyover|aerial/i.test(name)) return "drone";
   return "unknown";
 }
 
@@ -105,7 +106,10 @@ function roleOf({ top, type, name, camera, durationSec, orientation, relPath, pr
   // video
   if (/a-?roll|selfie|home-office|^intro\.|^outro\./.test(lower) || inFolder(/a&b roll|a-roll/i)) return "a-roll";
   if (top === "Videos" && (camera === "edited" || camera === "unknown")) {
-    if (/short|clip/.test(lower) || inFolder(/shorts|opusclip/i) || (orientation === "vertical" && (durationSec ?? 999) <= 180)) return "short";
+    // A Short is vertical. A landscape export sitting in a Shorts folder is a cut.
+    const shortish = /short|clip/.test(lower) || inFolder(/shorts|opusclip/i);
+    if (orientation === "horizontal" && shortish) return "cut";
+    if (shortish || (orientation === "vertical" && (durationSec ?? 999) <= 180)) return "short";
     if ((durationSec ?? 0) >= 150) return "long-form";
     return "cut";
   }

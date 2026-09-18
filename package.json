@@ -25,7 +25,10 @@
     "trends:test": "node --test \"scripts/local-trends/test/*.test.mjs\"",
     "producer:catalog": "node scripts/executive-producer/catalog.mjs",
     "producer:catalog:push": "node scripts/executive-producer/catalog.mjs --push",
-    "producer:test": "node --test \"scripts/executive-producer/test/*.test.mjs\""
+    "producer:test": "node --test \"scripts/executive-producer/test/*.test.mjs\"",
+    "producer:brief": "node scripts/executive-producer/run.mjs",
+    "producer:sample": "node scripts/executive-producer/run.mjs --sample",
+    "producer:fixtures": "node scripts/executive-producer/run.mjs --fixtures"
   },
   "dependencies": {
     "next": "^14.2.5",

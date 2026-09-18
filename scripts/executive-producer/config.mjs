@@ -145,6 +145,89 @@ const APPROVED_SEED = [
   "Videos/What you can buy for $500k in Las Vegas",
 ];
 
+function envInt(name, fallback) {
+  const raw = process.env[name];
+  if (raw === undefined || raw === null || String(raw).trim() === "") return fallback;
+  const n = Number.parseInt(String(raw), 10);
+  return Number.isFinite(n) ? n : fallback;
+}
+
+function envBool(name, fallback) {
+  const raw = process.env[name];
+  if (raw === undefined || raw === null || String(raw).trim() === "") return fallback;
+  return /^(1|true|yes|on)$/i.test(String(raw).trim());
+}
+
+/**
+ * How the Producer thinks. Mikey's priorities, in order: engagement, followers,
+ * shares, saves, DMs/leads, trust, ease of production, B-roll reuse. The
+ * weights below encode exactly that order. The model scores the first seven
+ * (1–5); ease and reuse are computed in code from the footage match.
+ */
+const PRODUCER = {
+  weights: {
+    comment: 1.6, // engagement: people argue, answer, tag someone
+    scroll_stop: 1.4, // engagement: the first second earns the watch
+    follow: 1.4, // "I need more of this guy"
+    share: 1.3, // sent to a spouse / partner / group chat
+    save: 1.2, // "I'll need this when we move"
+    dm_lead: 1.1, // opens a DM or relocation conversation
+    trust: 1.0, // honest, local, specific
+    ease: 0.7, // computed: office A-roll only = 5
+    reuse: 0.6, // computed: how well existing B-roll covers it
+  },
+  // The Summerlin vs Henderson carousel is the benchmark: people already had
+  // opinions, locals debated it, relocators wanted it, it got shared and saved,
+  // and it started DMs.
+  benchmark: {
+    title: "Summerlin vs Henderson (Instagram carousel)",
+    why: [
+      "people already had opinions before they saw it",
+      "locals wanted to debate it in the comments",
+      "relocators genuinely needed the information",
+      "it got shared to partners and saved for later",
+      "it started DMs and real relocation conversations",
+    ],
+  },
+  formats: ["neighborhood debate", "tradeoff", "myth vs reality", "nobody tells you", "hidden cost", "relocation decision", "new-build decision", "lifestyle difference", "insider knowledge"],
+  avoid: ["generic market update", "generic Realtor tip", "listing content", "news for the sake of news", "no emotional or practical relevance"],
+  // Topic language → words that find the right B-roll in the catalog. Only
+  // folder/file vocabulary that really exists in the library belongs here.
+  conceptFootage: [
+    { re: /new.?build|new construction|builder|incentive|master.?plan/i, words: ["lennar", "kb", "pulte", "toll", "brothers", "homes", "monument", "hills", "sandstone", "tule", "construction", "villages"] },
+    { re: /resale|established|older home|mature/i, words: ["green", "valley", "lakes", "tivoli", "boca"] },
+    { re: /\brent|renting|apartment|lease/i, words: ["apartment", "apartments", "apt", "leasing", "resident", "empire", "fairways", "shade"] },
+    { re: /summer|heat|pool|shade|utilit/i, words: ["shade", "utilities", "park", "pool"] },
+    { re: /commute|freeway|beltway|drive time|traffic|airport/i, words: ["215", "exit", "eastbound", "ramp", "driving", "fork"] },
+    { re: /strip|tourist|casino/i, words: ["strip", "monorail", "casino", "durango"] },
+    { re: /park|trail|outdoor|red rock|family/i, words: ["park", "red", "rock", "aventura", "mesa", "ridge", "trails"] },
+    { re: /\$\d|price|afford|500k|starter|down payment|\d+% down|buy a home|mortgage|\brates?\b/i, words: ["homes", "villages", "kb", "lennar", "pulte", "toll", "drive"] },
+    { re: /henderson/i, words: ["henderson", "welcome", "district", "green", "valley"] },
+    { re: /summerlin/i, words: ["summerlin", "downtown", "red", "rock", "grandpark"] },
+  ],
+  picks: 4,
+  shortlist: envInt("PRODUCER_SHORTLIST", 14),
+  maxPerFormat: 2,
+  maxNewsPicks: 1,
+  // A pick may only require NEW field filming if it is this strong AND the
+  // library can't cover it. Office A-roll is never "new filming".
+  exceptionalScore: 85,
+  minClipsForCoverage: 3,
+  // Recording budget (minutes of A-roll across the week).
+  budget: { min: 45, max: 60 },
+  // Don't re-pitch the same source within this many weeks.
+  repeatWindowWeeks: 4,
+  llm: {
+    enabled: envBool("PRODUCER_LLM", true),
+    model: envStr("PRODUCER_MODEL", "claude-opus-5"),
+    effort: envStr("PRODUCER_EFFORT", "high"),
+    maxTokens: envInt("PRODUCER_MAX_TOKENS", 64000),
+    maxInputTokensEstimate: envInt("PRODUCER_MAX_INPUT_TOKENS", 120000),
+  },
+  // Full production sheets live on the state branch; the email links here.
+  sheetsUrlBase: envStr("PRODUCER_SHEETS_URL", "https://github.com/mikeydlv/lvinit/blob/lvinit-agent-state/reports/executive-producer"),
+};
+
 export function loadConfig(overrides = {}) {
   const home = envStr("LVINIT_PRODUCER_HOME", join(homedir(), ".lvinit", AGENT));
   const base = {
@@ -203,6 +286,7 @@ export function loadConfig(overrides = {}) {
       // Resolve real YouTube titles via the public oEmbed endpoint (no key).
       oembed: true,
     },
+    producer: PRODUCER,
   };
   return mergeDeep(base, overrides);
 }
