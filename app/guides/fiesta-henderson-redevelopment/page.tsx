@@ -329,6 +329,12 @@ export default function FiestaHendersonRedevelopmentPage() {
             category: "Comparisons",
             dek: "Zoom back out to how Henderson compares as a whole to the valley's other big growth corridor.",
           },
+          {
+            name: "Henderson Sport & Social Opens October 16",
+            href: "/guides/henderson-sport-social-grand-opening",
+            category: "Local Feature",
+            dek: "The other Henderson sports-facility story — a finished, opening building on the opposite side of the city, not to be confused with this one.",
+          },
         ],
       }}
       relatedNeighborhood={{
@@ -525,15 +531,22 @@ export default function FiestaHendersonRedevelopmentPage() {
           confused — there are genuinely two separate indoor sports projects
           moving through Henderson at the same time, on opposite sides of the
           city. The{" "}
-          <span className="text-lvinit-black">West Henderson Fieldhouse</span>{" "}
-          is a 180,000-square-foot venue near St. Rose Parkway and Maryland
+          <Link
+            href="/guides/henderson-sport-social-grand-opening"
+            className="text-lvinit-blue underline underline-offset-4 decoration-transparent hover:decoration-lvinit-blue"
+          >
+            Henderson Sport &amp; Social
+          </Link>{" "}
+          (originally announced as the West Henderson Fieldhouse) is a
+          180,000-square-foot venue near St. Rose Parkway and Maryland
           Parkway, built as a roughly $70 million public-private partnership
           between the city and KemperSports, which broke ground in May 2025
-          and is targeting a fall 2026 opening. It has nothing to do with the
-          Fiesta Henderson site, doesn&rsquo;t share a developer, and isn&rsquo;t
-          part of this deal. This piece is about the other one — the one that
-          doesn&rsquo;t have a name yet, sits at Lake Mead Parkway and the
-          215/I-11 interchange, and exists only as a concept so far.
+          and has a confirmed grand-opening date of October 16, 2026. It has
+          nothing to do with the Fiesta Henderson site, doesn&rsquo;t share a
+          developer, and isn&rsquo;t part of this deal. This piece is about
+          the other one — the one that doesn&rsquo;t have a name yet, sits at
+          Lake Mead Parkway and the 215/I-11 interchange, and exists only as
+          a concept so far.
         </p>
       </StorySection>
 
