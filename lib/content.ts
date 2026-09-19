@@ -238,6 +238,23 @@ export type Guide = {
  */
 export const guides: Guide[] = [
   {
+    slug: "henderson-sport-social-grand-opening",
+    title: "Henderson Sport & Social Opens October 16. Here's What West Henderson Is Getting",
+    dek: "The $70 million, 180,000-square-foot sports and entertainment complex at St. Rose and Maryland Parkways has a confirmed grand-opening date. What's actually inside, what it costs, and how it's different from the Fiesta Henderson site.",
+    byline: "LVINIT Editorial",
+    date: "September 2026",
+    publishedAt: "2026-09-19",
+    category: "Local Feature",
+    // No repo photography of this specific, not-yet-open building exists, and
+    // C:\LVINIT\Images was confirmed unreachable from this Linux cloud
+    // session. Generated LVINIT editorial cover per the standard fallback
+    // order — see the command logged in the article's own header comment.
+    image:
+      "/images/covers/henderson-sport-social-grand-opening-editorial-cover.webp",
+    imageMode: "editorial-cover",
+    href: "/guides/henderson-sport-social-grand-opening",
+  },
+  {
     slug: "las-vegas-mortgage-rates-approach-7-percent",
     title: "Mortgage Rates Kept Climbing. Daily Trackers Already Show 7%.",
     dek: "Freddie Mac's official weekly average climbed to 6.76% the week of September 10, 2026 — its highest since June 2025 — and faster daily trackers already had the 30-year fixed at 7% by September 16. Here's what changed since our last update.",
