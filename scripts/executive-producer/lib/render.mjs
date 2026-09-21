@@ -125,6 +125,11 @@ export function overlaySvg({ W, H, headline = "", body = "", position = "bottom"
   );
 }
 
+/** The cropped image before any text: what near-duplicate checks compare. */
+export async function baseCrop(src, focus, { W = 1080, H = 1350 } = {}) {
+  return (await coverCrop(loadSource(src), W, H, focus)).jpeg({ quality: 80 }).toBuffer();
+}
+
 /** One finished carousel slide (1080x1350 JPEG). */
 export async function renderSlide(slide, outPath, { W = 1080, H = 1350, counter = null } = {}) {
   const base = await coverCrop(loadSource(slide.src), W, H, slide.focus);

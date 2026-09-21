@@ -33,6 +33,61 @@ films, edits the site, or contacts anyone but Mikey.
 
 ---
 
+## Monday production (current direction)
+
+Every Monday the Producer delivers **seven finished draft posts** (Mon–Sun) to
+`OneDrive\Documents\LVINIT\Weekly Posts\Week of <date>\`: ordered slides or a
+short silent reel, `caption.txt`, `notes.md` (sources with authority and check
+date, other creators' reference posts with observed metrics, file provenance),
+one `preview.html`, and a ZIP. Nothing is ever published.
+
+```bash
+node scripts/executive-producer/weekly.mjs              # this week (Pacific)
+node scripts/executive-producer/weekly.mjs --plan=FILE  # with a prepared plan
+node scripts/executive-producer/weekly.mjs --force      # rebuild a finished week
+```
+
+Steps: ledger → research (Apify) → plan (Claude) → frames → **editorial gate** →
+produce. `run.json` records each step's time, the real Apify and Anthropic cost,
+anything that needed a manual substitute, and every exception.
+
+### The editorial gate (`lib/gate.mjs`)
+
+Runs before Mikey sees anything. A failing post is replaced by a backup; what
+can't be resolved is listed at the top of the preview under "Needs your decision".
+
+| Check | Rule |
+|---|---|
+| Duplicate | Primary topic matches something Mikey posted or scheduled, or a previous batch, in the last 21 days |
+| Superlative | "best", "closest", "-est" words, "#1", "any official…", "nobody": needs an official or news source sentence; LVINIT's own article doesn't count |
+| Financial / legal | Money, rates, taxes, programs, laws need an official or news source checked within 30 days; figures older than 6 months and implied program availability are blocked |
+| Generic | Images must carry Las Vegas-specific detail; stock Realtor phrasing is blocked |
+| Images | Same file and moment reused this week or in the last 4 weeks; visually near-identical crops (perceptual hash) |
+
+### Missed starts and duplicate batches
+
+`schedule/register-monday-task.ps1` (not registered until Mikey confirms the
+time) runs it Mondays in Pacific time with WakeToRun and StartWhenAvailable,
+retries twice, and never runs two at once. A `DONE.json` marker makes any
+re-run of a finished week exit immediately. A failure leaves `RUN-FAILED.md`
+in the week folder (synced to Mikey's phone) and a log in
+`~/.lvinit/executive-producer/weekly.log`.
+
+### What leaves the PC
+
+| Where | What | When |
+|---|---|---|
+| Apify | Search keywords and Mikey's public handles. No media. | Research and own-post ledger, once configured |
+| Anthropic API, planning | Text only: research results, ledger, LVINIT page excerpts, footage-catalog metadata (folder names, durations) | Every Monday, once configured |
+| Anthropic API, visual frame review | **Low-resolution contact sheets of candidate frames from approved clips.** These are images from the library. | Only with `LVINIT_VISION=on`. Off by default. |
+| GitHub (public state branch) | Sanitized footage catalog metadata. No media, no GPS, no held or excluded items. | When the catalog is pushed |
+| OneDrive | The finished posts, preview and ZIP (the output folder syncs to Microsoft's cloud) | Every Monday |
+
+Raw footage, held and excluded files, and the local privacy rules never leave
+the PC. Credentials live only in `~/.lvinit/executive-producer/.env`.
+
+---
+
 ## Phase 2: the Producer
 
 ```bash

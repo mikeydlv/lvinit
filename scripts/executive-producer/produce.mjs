@@ -61,7 +61,8 @@ function notesMd(p, week) {
   L.push(`**CTA:** ${p.cta}`, "");
   if (p.ctaNote) L.push(`> ${p.ctaNote}`, "");
   L.push("## Sources for every factual claim", "");
-  for (const s of p.sources) L.push(`- ${s.claim} (${s.url})`);
+  for (const s of p.sources) L.push(`- ${s.claim} (${s.url}${s.authority ? `; ${s.authority}` : ""}${s.checked ? `, checked ${s.checked}` : ""})${s.quote ? `
+  > "${s.quote}"` : ""}`);
   L.push("", "## Reference posts from other creators", "");
   L.push(`Metrics are exactly what the platform displayed on ${week.researchChecked}. "Why it works" is my judgment, not a measurement.`, "");
   for (const r of p.references ?? []) {
@@ -119,7 +120,7 @@ async function previewHtml(week, posts) {
 main{max-width:1100px;margin:0 auto;padding:24px 16px 64px}
 h1{font:700 30px/1.2 "Playfair Display",Georgia,serif;margin:0 0 4px}.sub{color:var(--muted);margin:0 0 24px}
 .post{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px;margin:0 0 16px}
-.post.lead{border-color:var(--gold)}
+.post.lead{border-color:var(--gold)}.post.exceptions{border-color:#B45309}
 header{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.day{font-weight:700}
 .badge{font-size:12px;border:1px solid var(--line);border-radius:99px;padding:2px 8px;color:var(--muted)}.badge.gold{border-color:var(--gold);color:var(--gold)}
 h2{font-size:18px;margin:8px 0 4px}.take{margin:0 0 10px;color:var(--muted)}
@@ -130,6 +131,7 @@ details{margin-top:8px}summary{cursor:pointer;color:var(--blue)}pre{white-space:
 </style></head><body><main>
 <h1>LVINIT · Week of ${esc(week.weekOf)}</h1>
 <p class="sub">${posts.length} finished posts, Monday–Sunday. Drafts only; nothing has been published. ${esc(week.note ?? "")}</p>
+${(week.exceptions ?? []).length ? `<section class="post exceptions"><h2>Needs your decision</h2>${week.exceptions.map((x) => `<p><b>${esc(DAY_NAMES[x.day] ?? x.day)}: ${esc(x.title ?? "")}</b><br>${x.issues.map((i) => esc(i.message)).join("<br>")}<br><i>${esc(x.resolution)}</i></p>`).join("")}</section>` : ""}
 ${body.join("\n")}
 </main></body></html>`;
 }
