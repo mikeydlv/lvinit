@@ -245,10 +245,16 @@ export default function LasVegasMortgageRatesApproach7PercentPage() {
           "The rate is one half of what a home actually costs a buyer. Here's the other half, and what it looks like to actually get into the market at today's numbers.",
         stories: [
           {
+            name: "Mortgage Rates Jumped to 6.95% in a Week",
+            href: "/guides/las-vegas-mortgage-rates-hit-20-month-high",
+            category: "Market Watch",
+            dek: "Our follow-up: the following week's move was the biggest yet, a 20-month high with daily trackers now holding above 7%.",
+          },
+          {
             name: "Mortgage Rates Just Hit a 13-Month High",
             href: "/guides/las-vegas-mortgage-rates-september-2026",
             category: "Market Watch",
-            dek: "Our last update, from ten days earlier — the same climb, one reporting period back.",
+            dek: "Our first update in this series, ten days before this piece — the same climb, one reporting period back.",
           },
           {
             name: "Las Vegas Home Prices Dipped Again in August 2026",
@@ -572,6 +578,17 @@ export default function LasVegasMortgageRatesApproach7PercentPage() {
             look at what&rsquo;s actually on the market
           </Link>{" "}
           at that number.
+        </p>
+        <p className="mt-5 text-body-lg text-lvinit-warmgray">
+          Update: the following week&rsquo;s move was the biggest yet. Read{" "}
+          <Link
+            href="/guides/las-vegas-mortgage-rates-hit-20-month-high"
+            className="text-lvinit-blue underline underline-offset-4 decoration-transparent hover:decoration-lvinit-blue"
+          >
+            what happened when Freddie Mac&rsquo;s average jumped to 6.95%
+          </Link>{" "}
+          — a 20-month high, with daily trackers now holding above 7% for
+          days at a time.
         </p>
       </StorySection>
 

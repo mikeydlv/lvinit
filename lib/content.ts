@@ -238,6 +238,53 @@ export type Guide = {
  */
 export const guides: Guide[] = [
   {
+    slug: "las-vegas-mortgage-rates-hit-20-month-high",
+    title:
+      "Mortgage Rates Jumped to 6.95% in a Week. Daily Trackers Now Sit Above 7%.",
+    dek: "Freddie Mac's weekly average jumped 19 basis points to 6.95% the week of September 17, 2026 — its highest level since January 2025 — and daily trackers have held above 7% for days since. Here's the real math on a Las Vegas payment.",
+    byline: "Mikey Del Rosario",
+    date: "September 2026",
+    publishedAt: "2026-09-21",
+    category: "Market Watch",
+    // Built via the autonomous scheduled editorial-publishing routine, the
+    // third piece in the mortgage-rate sequel series (following
+    // las-vegas-mortgage-rates-september-2026, published 2026-09-07, and
+    // las-vegas-mortgage-rates-approach-7-percent, published 2026-09-17 in
+    // the registry's own dating). Genuinely fresh news: Freddie Mac's own
+    // PMMS (freddiemac.com/pmms + /archive, both directly fetched this run)
+    // shows the 30-year fixed jumped from 6.76% to 6.95% for the week of
+    // Sept 17, 2026 — a 19-basis-point move, roughly four times the size of
+    // any single week's change in the five weeks before it. Independently
+    // corroborated as a "highest since January 2025" / 20-month-high move by
+    // a Reuters wire story (directly fetched via its Investing.com
+    // syndication, cross-checked against the same wire copy on U.S. News),
+    // which itself carries no economist quote or stated cause — so this
+    // piece doesn't invent one either. Daily-tracker context (Zillow data
+    // via Yahoo Finance, Sept 19, 2026: 30-year at 7.04%) shows the daily
+    // numbers have now held above 7% for several days, not just touched it
+    // for one, which is the distinct new fact this piece adds over the prior
+    // entry in the series. Local price context reuses the already-sourced
+    // $475,000 August 2026 LVR median rather than re-deriving it; confirmed
+    // no LVR September 2026 report exists yet as of this run.
+    //
+    // A financing-cost topic, not a place, so no repo photography fits, and
+    // C:\LVINIT\Images was confirmed unreachable from this Linux cloud
+    // session this run (no /mnt/c mount). The prior two pieces in this
+    // series later received AI-generated hero images Mikey supplied and
+    // explicitly approved for those specific pieces — that approval is
+    // piece-specific and doesn't extend here, so this one uses the safe
+    // default: a photoless StoryHero and a generated LVINIT editorial cover
+    // as the /guides card image only.
+    //   node scripts/generate-guide-cover.mjs \
+    //     --slug las-vegas-mortgage-rates-hit-20-month-high \
+    //     --category "Market Watch" --subject "MORTGAGE RATES 6.95%" \
+    //     --out las-vegas-mortgage-rates-20-month-high-editorial-cover.webp
+    image:
+      "/images/covers/las-vegas-mortgage-rates-20-month-high-editorial-cover.webp",
+    imageMode: "editorial-cover",
+    href: "/guides/las-vegas-mortgage-rates-hit-20-month-high",
+  },
+  {
     slug: "las-vegas-mortgage-rates-approach-7-percent",
     title: "Mortgage Rates Kept Climbing. Daily Trackers Already Show 7%.",
     dek: "Freddie Mac's official weekly average climbed to 6.76% the week of September 10, 2026 — its highest since June 2025 — and faster daily trackers already had the 30-year fixed at 7% by September 16. Here's what changed since our last update.",
