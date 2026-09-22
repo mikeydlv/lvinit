@@ -155,8 +155,11 @@ export async function renderSlide(slide, outPath, { W = 1080, H = 1350, counter 
   let buf = await base.toBuffer();
   // Bright desert sky or concrete where the text sits: pull the whole photo's
   // exposure down a little, like an edit. Never a panel behind the text.
+  // slide.darken (0–2) is set by the visual review when text still reads poorly.
   const mean = await textBandMean(buf, slide.position ?? "bottom");
-  if (mean > 165) buf = await sharp(buf).modulate({ brightness: Math.max(0.8, 1 - (mean - 165) / 350) }).toBuffer();
+  const auto = mean > 150 ? Math.max(0.74, 1 - (mean - 150) / 260) : 1;
+  const brightness = Math.min(auto, [1, 0.82, 0.72][slide.darken ?? 0]);
+  if (brightness < 1) buf = await sharp(buf).modulate({ brightness }).toBuffer();
   const svg = overlaySvg({ W, H, headline: slide.headline, body: slide.body, position: slide.position ?? "bottom", size: slide.size ?? 64, counter });
   mkdirSync(dirname(outPath), { recursive: true });
   await sharp(buf).composite([{ input: svg }]).jpeg({ quality: 90, mozjpeg: true }).toFile(outPath);

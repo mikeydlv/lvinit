@@ -207,9 +207,16 @@ export async function runWeek(argv = process.argv.slice(2), { log = console.log,
         return Object.assign([], { note: "not run: no APIFY_TOKEN" });
       }
       const queries = (env.LVINIT_RESEARCH_QUERIES ?? "moving to las vegas,las vegas neighborhoods,summerlin,henderson nevada,las vegas homes,relocation tips,first time home buyer tips,hoa fees").split(",").map((s) => s.trim());
+      // A rerun within three days reuses this week's research instead of paying Apify again.
+      const researchFile = join(weekDir, "research.json");
+      if (!args["refresh-research"] && existsSync(researchFile) && Date.now() - statSync(researchFile).mtimeMs < 3 * 86_400_000) {
+        const saved = JSON.parse(readFileSync(researchFile, "utf8"));
+        return Object.assign(saved.posts, { note: `${saved.posts.length} posts (saved research from ${saved.savedAt.slice(0, 10)})` });
+      }
       let r;
       try {
         r = await apify.research({ queries, token: env.APIFY_TOKEN, fetchImpl });
+        writeFileSync(researchFile, JSON.stringify({ savedAt: new Date().toISOString(), queries, posts: r.posts }, null, 2));
       } catch (e) {
         // Out of Apify credit or a scraper outage: still deliver the week, on evergreen topics, and say so.
         report.gaps.unshift(`Creator research didn't run this week (${String(e.message).slice(0, 120)}). Posts are evergreen; no "recent example" references.`);
@@ -238,7 +245,8 @@ export async function runWeek(argv = process.argv.slice(2), { log = console.log,
       writeFileSync(planFile, JSON.stringify({ savedAt: new Date().toISOString(), posts: r.plan.posts ?? [], backups: r.plan.backups ?? [], costs: { anthropicUsd: r.usd } }, null, 2));
       return Object.assign({ posts: r.plan.posts ?? [], backups: r.plan.backups ?? [] }, { note: `${(r.plan.posts ?? []).length} posts + ${(r.plan.backups ?? []).length} backups` });
     });
-    plan.posts = (plan.posts ?? []).map((p, i) => ({ ...p, day: p.day ?? DAYS[i] }));
+    // Days are always Mon..Sun by position (the plan sometimes writes "Monday 2026-09-28").
+    plan.posts = (plan.posts ?? []).slice(0, 7).map((p, i) => ({ ...p, day: DAYS[i] }));
     const backups = [...(plan.backups ?? [])];
 
     // 4. verify --------------------------------------------------------------------
@@ -271,33 +279,52 @@ export async function runWeek(argv = process.argv.slice(2), { log = console.log,
         return issues;
       };
       let posts = plan.posts;
+      report.replaced = [];
       let issues = await verifyWeek(posts);
-      const failing = () => posts.filter((p) => issues.get(p.day)?.length);
-      if (failing().length && hasClaude) {
-        const r = await P.revisePosts({ failures: failing().map((p) => ({ post: p, problems: issues.get(p.day) })), pages: packs.map((x) => ({ route: x.route, excerpt: x.excerpt })) }, ai);
-        addCost("anthropic", "revise", r.usd, r.usage);
-        const fixed = new Map((r.posts ?? []).map((p) => [p.day, p]));
-        posts = posts.map((p) => fixed.get(p.day) ?? p);
+      const failingNow = () => posts.filter((p) => issues.get(p.day)?.length);
+      const failCount = new Map();
+      // Repair rounds. A failing post gets two rewrites; after a third failure it is
+      // swapped for a backup, and the backup goes through the same full claim check.
+      for (let round = 0; round < 4 && failingNow().length && hasClaude; round++) {
+        const toRevise = [];
+        posts = posts.map((p) => {
+          if (!issues.get(p.day)?.length) return p;
+          const n = (failCount.get(p.day) ?? 0) + 1;
+          failCount.set(p.day, n);
+          if (n > 2 && backups.length) {
+            const b = { ...backups.shift(), day: p.day };
+            report.replaced.push({ day: p.day, dropped: p.title, why: issues.get(p.day).map((i) => i.message), with: b.title });
+            failCount.set(p.day, 0);
+            return b;
+          }
+          toRevise.push(p);
+          return p;
+        });
+        if (toRevise.length) {
+          const r = await P.revisePosts({ failures: toRevise.map((p) => ({ post: p, problems: issues.get(p.day) })), pages: packs.map((x) => ({ route: x.route, excerpt: x.excerpt })) }, ai);
+          addCost("anthropic", "revise", r.usd, r.usage);
+          const fixed = new Map((r.posts ?? []).map((p) => [p.day, p]));
+          posts = posts.map((p) => (toRevise.includes(p) && fixed.get(p.day) ? { ...fixed.get(p.day), day: p.day } : p));
+        }
         issues = await verifyWeek(posts);
       }
       const out = [];
-      report.replaced = [];
       for (const p of posts) {
         if (!issues.get(p.day)?.length) {
           out.push(p);
           continue;
         }
+        // Without Claude (rehearsal): a backup that passes the local gate.
         let placed = false;
-        while (backups.length && !placed) {
+        while (!hasClaude && backups.length && !placed) {
           const b = { ...backups.shift(), day: p.day };
-          const bi = localIssues(b);
-          if (!bi.length) {
+          if (!localIssues(b).length) {
             out.push(b);
             placed = true;
             report.replaced.push({ day: p.day, dropped: p.title, why: issues.get(p.day).map((i) => i.message), with: b.title });
           }
         }
-        if (!placed) report.exceptions.push({ day: p.day, title: p.title, issues: issues.get(p.day), resolution: "No verified backup was left. Skip this day or rewrite the listed claims." });
+        if (!placed) report.exceptions.push({ day: p.day, title: p.title, issues: issues.get(p.day), resolution: "Two rewrites and every backup failed the claim check. Skip this day, or rewrite the listed claims." });
       }
       writeFileSync(checkpointFile, JSON.stringify({ savedAt: new Date().toISOString(), accepted: out, backups, replaced: report.replaced, exceptions: report.exceptions, costs: report.costs }, null, 2));
       return Object.assign(out, { note: `${out.length} verified; ${report.replaced.length} replaced by backups` });
@@ -426,7 +453,7 @@ export async function runWeek(argv = process.argv.slice(2), { log = console.log,
             if (problems.length) report.exceptions.push({ day: p.day, title: p.title, issues: problems, resolution: "Swap the named slide's image before posting." });
             continue;
           }
-          const ROUNDS = 3;
+          const ROUNDS = 4;
           for (let attempt = 0; attempt < ROUNDS; attempt++) {
             const strip = await V.reviewStrip(sharp, rendered[i].files, join(tmp, `${p.day}-${attempt}.jpg`));
             // One retry on a failed review call; a post that still can't be reviewed is flagged, not shipped silently.
@@ -448,7 +475,8 @@ export async function runWeek(argv = process.argv.slice(2), { log = console.log,
             if (attempt === ROUNDS - 1 && p.format !== "montage") {
               // Last resort for a middle slide nothing could fix: drop it, keeping 4+ slides.
               const n = p.slides.length;
-              const drop = bad.filter((s) => s.n > 1 && s.n < n).slice(0, Math.max(0, n - 4));
+              // Only slides whose image is wrong (irrelevant, private, repeated); readability is never a reason to lose content.
+              const drop = bad.filter((s) => s.n > 1 && s.n < n && !s.fix?.startsWith("move_text")).slice(0, Math.max(0, n - 4));
               if (drop.length) {
                 const gone = new Set(drop.map((s) => p.slides[s.n - 1]));
                 report.slidesDropped = [...(report.slidesDropped ?? []), ...drop.map((s) => ({ day: p.day, title: p.title, slide: p.slides[s.n - 1]?.headline, why: s.issues.join("; ") }))];
@@ -471,8 +499,10 @@ export async function runWeek(argv = process.argv.slice(2), { log = console.log,
               const slide = p.slides[s.n - 1];
               if (!slide) continue;
               const target = s.fix?.startsWith("move_text") ? (s.fix.endsWith("top") ? "top" : "bottom") : null;
-              // Moving text only helps once; if it's already there, the image has to change.
+              // Readability: move the text once, then pull the photo's exposure down (two steps),
+              // and only then change the image.
               if (target && slide.position !== target) slide.position = target;
+              else if (target && (slide.darken ?? 0) < 2) slide.darken = (slide.darken ?? 0) + 1;
               else {
                 // Never the rejected image again; widen from the plan's source to the whole approved library,
                 // and tell the picker why the last one failed.
@@ -513,7 +543,7 @@ export async function runWeek(argv = process.argv.slice(2), { log = console.log,
       // A re-run (--force) must not leave an earlier attempt's post folders behind.
       const current = new Set(rendered.map((r) => r.folder));
       for (const d of readdirSync(weekDir, { withFileTypes: true })) {
-        if (d.isDirectory() && /^\d-(Mon|Tue|Wed|Thu|Fri|Sat|Sun)-/.test(d.name) && !current.has(d.name)) rmSync(join(weekDir, d.name), { recursive: true, force: true });
+        if (d.isDirectory() && /^\d-/.test(d.name) && !current.has(d.name)) rmSync(join(weekDir, d.name), { recursive: true, force: true });
       }
       writeFileSync(join(weekDir, "week.json"), JSON.stringify(week, null, 2));
       if (!existsSync(join(weekDir, "status.json"))) writeFileSync(join(weekDir, "status.json"), JSON.stringify(L.initialStatus(week), null, 2));
