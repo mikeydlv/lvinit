@@ -90,15 +90,19 @@ async function ask(api, { system, content, maxTokens = 32000, thinking = true })
 
 const POST_SHAPE = `Post shape: { day, slug, title, category, topics[], format: "carousel"|"montage", takeaway, cta, caption, hashtags[], slides: [{ source: {clip|still|folder}, want, headline, body?, position: "top"|"bottom" }] | segments: [{ clip, want, dur, headline, body? }], sources: [{ claim, url, authority: "official"|"news"|"lvinit", checked, quote? }], references: [...], formatNote? }`;
 
-export async function planWeek({ weekOf, research, ledger, pages, catalogSummary }, { anthropic } = {}) {
+export async function planWeek({ weekOf, research, ledger, pages, catalogSummary, fill }, { anthropic } = {}) {
   const api = anthropic ?? (await client());
+  // fill: { days, final } — write only the missing days around posts that already passed every check.
+  const ask7 = fill
+    ? `Write posts ONLY for these days: ${fill.days.join(", ")}, plus ONE backup. These posts are already final; don't repeat their lessons, and keep the week's category limits:\n${JSON.stringify(fill.final)}\nThese ideas already failed verification; don't retry them:\n${JSON.stringify(fill.failed ?? [])}\nWrite only what the cited evidence states (no rankings or comparisons). Return JSON { "posts": [one per listed day, with "day"], "backups": [1] }.`
+    : `Return JSON { "posts": [7], "backups": [3] }.`;
   const content = [
     `Week of ${weekOf} (posts go out Monday ${weekOf} through the following Sunday).`,
     `LEDGER (published / scheduled / approved / earlier drafts):\n${JSON.stringify(ledger.slice(0, 100))}`,
     `RESEARCH DIGEST (other creators; metrics observed ${weekOf}):\n${JSON.stringify(research.slice(0, 120))}`,
     `LVINIT PAGES (route, title, excerpt):\n${JSON.stringify(pages.map((p) => ({ route: p.route, title: p.title, excerpt: p.excerpt })))}`,
     `APPROVED FOOTAGE CATALOG (metadata only):\n${JSON.stringify(catalogSummary)}`,
-    `Return JSON { "posts": [7], "backups": [3] }. ${POST_SHAPE}`,
+    `${ask7} ${POST_SHAPE}`,
   ].join("\n\n");
   const r = await ask(api, { system: EDITORIAL_STANDARD, content, maxTokens: 128000 });
   return { plan: r.json, usage: r.usage, usd: r.usd };
@@ -146,7 +150,7 @@ export async function pickFrame({ sheetPath, want, headline, avoid, candidates }
     maxTokens: 2000,
     content: [
       imagePart(sheetPath),
-      { type: "text", text: `Tiles are numbered 0–${candidates.length - 1}. Pick the tile that best shows: "${want}".${headline ? ` The slide's words: "${headline}". The image must visibly fit them (a freeway doesn't illustrate a price; empty sky illustrates nothing).` : ""}${avoid ? ` A previous pick was rejected for: ${avoid}. Don't repeat that problem.` : ""} Reject tiles with house numbers, license plates, builder or leasing signs, phone numbers, printed text or graphics, identifiable faces, motion blur, or a mostly empty or very bright area where white text would sit. Answer only JSON {"pick": n, "reason": "under 15 words"}; pick -1 if none work.` },
+      { type: "text", text: `Tiles are numbered 0–${candidates.length - 1}. Pick the tile that best shows: "${want}".${headline ? ` The slide's words: "${headline}". The image must visibly fit them (a freeway doesn't illustrate a price; empty sky illustrates nothing).` : ""}${avoid ? ` A previous pick was rejected for: ${avoid}. Don't repeat that problem.` : ""} Reject tiles with readable house numbers, license plates, builder/leasing/sales signs, phone numbers, rate cards, maps or charts, identifiable faces, motion blur, or a mostly empty or very bright area where white text would sit. Murals, public art and ordinary storefront names are fine when they're the subject. Answer only JSON {"pick": n, "reason": "under 15 words"}; pick -1 if none work.` },
     ],
   });
   return { pick: r.json.pick, reason: r.json.reason, usage: r.usage, usd: r.usd };
