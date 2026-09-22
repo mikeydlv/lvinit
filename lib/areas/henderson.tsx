@@ -477,14 +477,14 @@ export const developmentProjects: DevelopmentProject[] = [
   {
     name: "Henderson Sport & Social",
     status: "under-construction",
-    where: "Near St. Rose Pkwy and Maryland Pkwy",
-    what: "A 180,000 square foot, two-level indoor sports and events venue, built as a public-private partnership between the city and KemperSports at a total cost of about $70 million. It broke ground on 21 May 2025 as the West Henderson Fieldhouse and was renamed in June 2026.",
+    where: "3375 St. Rose Pkwy, at St. Rose and Maryland Pkwy in West Henderson",
+    what: "A 180,000 square foot, two-level indoor sports and entertainment venue, built as a public-private partnership between the city and KemperSports at a total cost of about $70 million (the city funded $60 million, KemperSports $10 million). It broke ground on 21 May 2025 as the West Henderson Fieldhouse and was renamed Henderson Sport & Social in June 2026. Courts, turf fields, a fitness center, 20 bowling lanes, laser tag, mini golf and a restaurant are open to the public with no membership required.",
     source: {
-      label: "FOX5 Vegas, 2 June 2026",
-      url: "https://www.fox5vegas.com/2026/06/02/city-henderson-announces-new-name-west-henderson-fieldhouse-project/",
+      label: "Nevada Business Magazine, September 2026",
+      url: "https://nevadabusiness.com/2026/09/henderson-sport-social-announces-grand-opening-in-west-henderson-oct-16/",
     },
     caveat:
-      "Opening was set for fall 2026, with early October reported. Use the new name: 'West Henderson Fieldhouse' is what most pages still say.",
+      "A soft opening is set for 5 October 2026, with the grand opening confirmed for Friday, 16 October 2026. Still counted as under construction here until that date actually arrives. Full LVINIT coverage: the Henderson Sport & Social opening guide.",
   },
   {
     name: "Four Seasons Private Residences",
