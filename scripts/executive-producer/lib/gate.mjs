@@ -38,7 +38,7 @@ export const TOPIC_TAGS = [
   ["summerlin", /summerlin|red rock/i],
   ["southwest", /southwest|enterprise|spring valley|mountain.?s edge|southern highlands|rhodes ranch/i],
   ["north-las-vegas", /north las vegas|aliante|tule springs/i],
-  ["summer-heat", /summer|monsoon|heat|air condition|\bac\b/i],
+  ["summer-heat", /\bsummers?\b|monsoon|\bheat\b|air condition|\bac\b/i], // not "Summerlin"
   ["rent-vs-buy", /rent first|buy first|rent or buy/i],
 ];
 
@@ -73,6 +73,8 @@ export function checkDuplicate(p, ledger, today, windowDays = 21) {
   const issues = [];
   for (const e of ledger) {
     if (!e.date || (Date.parse(today) - Date.parse(e.date)) / DAY_MS > windowDays) continue;
+    // Drafts a batch generated are not history; only approved/scheduled/published count.
+    if (e.status === "draft") continue;
     const theirs = e.tags ?? tagsFor(e.text);
     const shared = mine.filter((t) => theirs.includes(t));
     const substantive = shared.filter((t) => !AREA_TAGS.has(t));
@@ -109,7 +111,7 @@ export function checkSuperlatives(p, sourceTexts) {
     const w = m[0].toLowerCase();
     if (NOT_SUPERLATIVE.has(w)) continue;
     // Names and fixed phrases, not claims: "First Friday", "first-time buyer", "your first summer".
-    if (/^(firsts+(friday|summer|time|year|month|week|las vegas summer)|first-time)/i.test(text.slice(m.index, m.index + 30))) continue;
+    if (/^(first\s+(friday|summer|time|year|month|week|las vegas summer)|first-time)/i.test(text.slice(m.index, m.index + 30))) continue;
     const clause = text.slice(Math.max(0, m.index - 60), m.index + m[0].length + 60).split(/[.!?\n]/).find((c) => c.toLowerCase().includes(w)) ?? "";
     if (seen.has(clause)) continue;
     seen.add(clause);
@@ -223,7 +225,55 @@ export async function checkNearDuplicateRenders(sharp, posts, threshold = 8) {
   return issues;
 }
 
-/** Run every text-level check for one post. Image checks run week-wide. */
+// --- 6. comparisons ---------------------------------------------------------------
+
+// Rewording "closest" to "nearer" doesn't make a comparison supported. These
+// need the same official/news evidence as superlatives (Claude then checks
+// the meaning claim by claim in verifyClaims).
+const COMPARATIVE = /\b(nearer|closer|farther|further from|better|worse)\b|\b[a-z]+er than\b|\b(more|less|fewer) [a-z]+ than\b/gi;
+
+export function checkComparatives(p, officialTexts) {
+  const text = postText(p);
+  const evidence = officialTexts.join("\n").toLowerCase();
+  const issues = [];
+  for (const m of text.matchAll(COMPARATIVE)) {
+    const w = m[0].toLowerCase();
+    if (!evidence.includes(w.split(" ")[0])) {
+      const clause = text.slice(Math.max(0, m.index - 50), m.index + m[0].length + 50).split(/[.!?\n]/).find((c) => c.toLowerCase().includes(w)) ?? w;
+      issues.push({ check: "comparison", message: `"${clause.trim().slice(0, 80)}": "${w}" is a comparison with no official or news source stating it.` });
+    }
+  }
+  return issues;
+}
+
+// --- 7. distinct takeaways (week-wide) -----------------------------------------------
+
+const LESSON = /\broutines?\b|different days|pick the \w+|drive it at the hour|which part|same (?:city|address|label)|isn.t one place/i;
+
+/** Two posts in one week that teach the same lesson. Flags the later post. */
+export function checkDistinctTakeaways(posts) {
+  const issues = new Map();
+  const GENERIC = new Set(["las", "vegas", "nevada", "home", "homes", "area", "areas", "lvinit"]);
+  const words = (s) => new Set([...contentWords(s)].filter((w) => !GENERIC.has(w)));
+  for (let i = 0; i < posts.length; i++) {
+    for (let j = 0; j < i; j++) {
+      const a = posts[j];
+      const b = posts[i];
+      const wa = words(a.takeaway);
+      const wb = words(b.takeaway);
+      const inter = [...wa].filter((w) => wb.has(w)).length;
+      const jac = inter / Math.max(1, new Set([...wa, ...wb]).size);
+      const la = String(a.takeaway).match(LESSON)?.[0];
+      const lb = String(b.takeaway).match(LESSON)?.[0];
+      if ((jac >= 0.3 && inter >= 3) || (la && lb)) {
+        (issues.get(b.day) ?? issues.set(b.day, []).get(b.day)).push({ check: "takeaway", message: `Same lesson as ${a.day} ("${a.takeaway.slice(0, 60)}…").` });
+      }
+    }
+  }
+  return issues;
+}
+
+/** Run every text-level check for one post. Image and takeaway checks run week-wide. */
 export function gatePost(p, { ledger, today, sourceTexts }) {
-  return [...checkDuplicate(p, ledger, today), ...checkSuperlatives(p, sourceTexts), ...checkFinancial(p, today), ...checkGeneric(p)];
+  return [...checkDuplicate(p, ledger, today), ...checkSuperlatives(p, sourceTexts), ...checkComparatives(p, sourceTexts), ...checkFinancial(p, today), ...checkGeneric(p)];
 }

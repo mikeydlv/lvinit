@@ -62,9 +62,11 @@ export function wrap(text, fontSize, maxWidth, factor = 0.54) {
 }
 
 /** Load the source: a still, or one frame of a video at `t` seconds. Returns a Buffer. */
-export function loadSource({ path, t }) {
+export function loadSource({ path, t }, { fast = false } = {}) {
   if (t === undefined || t === null) return path;
-  return execFileSync("ffmpeg", ["-loglevel", "error", "-ss", String(t), "-i", path, "-frames:v", "1", "-f", "image2pipe", "-vcodec", "png", "-"], { maxBuffer: 256 * 1024 * 1024 });
+  // fast: a 720px-wide JPEG for scoring and checks; full PNG for the final render.
+  const out = fast ? ["-vf", "scale=720:-2", "-f", "image2pipe", "-vcodec", "mjpeg", "-q:v", "4", "-"] : ["-f", "image2pipe", "-vcodec", "png", "-"];
+  return execFileSync("ffmpeg", ["-loglevel", "error", "-ss", String(t), "-i", path, "-frames:v", "1", ...out], { maxBuffer: 256 * 1024 * 1024 });
 }
 
 /** Crop to WxH around a focal point (fx, fy in 0–1) without distorting. */
@@ -126,8 +128,9 @@ export function overlaySvg({ W, H, headline = "", body = "", position = "bottom"
 }
 
 /** The cropped image before any text: what near-duplicate checks compare. */
-export async function baseCrop(src, focus, { W = 1080, H = 1350 } = {}) {
-  return (await coverCrop(loadSource(src), W, H, focus)).jpeg({ quality: 80 }).toBuffer();
+export async function baseCrop(src, focus, { W = 1080, H = 1350, fast = false } = {}) {
+  if (fast) [W, H] = [432, 540];
+  return (await coverCrop(loadSource(src, { fast }), W, H, focus)).jpeg({ quality: 80 }).toBuffer();
 }
 
 /** One finished carousel slide (1080x1350 JPEG). */

@@ -1,29 +1,28 @@
 // ---------------------------------------------------------------------------
-// PLANNER — the editorial decisions, made by Claude, checked by code
+// PLANNER — every Claude call the Monday run makes, and what each one sends
 //
-// Two calls, both through the Anthropic API:
+//   planWeek      TEXT: research digest, ledger, LVINIT page excerpts, catalog
+//                 metadata → 7 posts + 3 backups (copy, sources, and a source
+//                 request per slide: clip/still/folder + what it should show)
+//   verifyClaims  TEXT: each post's copy + the evidence it cites → every factual
+//                 claim judged supported / not; week-level check that no two
+//                 takeaways teach the same lesson
+//   revisePosts   TEXT: posts that failed verification + the reasons → fixed
+//                 posts (one pass; anything still failing is swapped for a backup)
+//   pickFrame     IMAGE: one low-res contact sheet of candidate frames from
+//                 APPROVED clips → the best candidate (only if vision is on)
+//   reviewSlides  IMAGE: one low-res sheet of a post's FINISHED slides →
+//                 readability, crop, relevance, repeats, excluded content
 //
-//   1. plan (text only). Sends: the week's research digest (other creators'
-//      posts: URLs, captions, metrics), the duplicate ledger, LVINIT page
-//      excerpts, and footage-catalog METADATA (folder, place, duration, file
-//      name). Returns 7 posts + 3 backups: topic, copy, slide text, sources,
-//      references, and which clips/stills each slide should come from.
-//
-//   2. frames (vision, OPTIONAL: config.production.visionFrameReview). For each
-//      slide, a small contact sheet of candidate frames from the named clip is
-//      rendered locally and SENT to the API as a low-resolution JPEG so Claude
-//      can pick the moment. This is the only step where images from the
-//      library leave the PC. With it off, frames are chosen locally from
-//      metadata (evenly spaced, sharpness-ranked), which is weaker.
-//
-// STATUS: implemented, NOT yet run live (no ANTHROPIC_API_KEY on this PC).
+// Every call returns { …, usage, usd } so run.json shows the real cost.
 // ---------------------------------------------------------------------------
 
 import { readFileSync } from "node:fs";
 
-// Opus-class pricing used for the cost report (USD per million tokens).
-// Keep in step with Anthropic's published pricing.
+// USD per million tokens for the configured model. Keep in step with
+// Anthropic's published pricing; run.json also stores raw token counts.
 export const PRICE = { input: 5, output: 25, cacheRead: 0.5, cacheWrite: 6.25 };
+export const MODEL = process.env.LVINIT_MODEL ?? "claude-opus-5";
 
 export function costOf(usage) {
   if (!usage) return 0;
@@ -38,71 +37,131 @@ export function costOf(usage) {
 
 export const EDITORIAL_STANDARD = `LVINIT weekly production standard (Mikey Del Rosario, Las Vegas relocation / real estate).
 
-Produce SEVEN posts (Monday–Sunday) plus THREE backups. Mix across: neighborhood tradeoffs, relocation mistakes, lifestyle differences, local knowledge, practical buying decisions. Never seven versions of one topic.
+Produce SEVEN posts for the week (Monday–Sunday) plus THREE backups. Mix across: neighborhood tradeoffs, relocation mistakes, lifestyle differences, local knowledge, practical buying decisions. Never several versions of one topic.
 
-Every post must be something a person moving to Las Vegas would send to their partner. Give one clear takeaway and a concrete Las Vegas angle: named places, real daily-life consequences, specific tradeoffs.
+DISTINCT TAKEAWAYS: every post teaches a different lesson. Area posts (Henderson, Summerlin, Southwest, etc.) must not all land on "different areas, different routines". Give each a lesson that only that post teaches (e.g. a specific tradeoff, a cost, a rule, a daily-life fact).
 
-HARD RULES (a code gate enforces them; failing posts are replaced):
-- No topic Mikey published, scheduled, or received in a batch within 21 days (see ledger).
-- No superlatives or absolutes ("best", "only", "closest", "any official map") unless a cited source sentence says exactly that. Prefer specific, checkable claims.
-- Money, rates, programs, taxes, laws: cite an OFFICIAL source (government/statute) checked this week, plus LVINIT's article if relevant. Never imply a program is currently available. No figures older than 6 months.
-- No generic Realtor advice ("get pre-approved", "work with an agent"). Every post needs Las Vegas-specific detail on the images.
-- Never invent statistics, quotes, or testimonials. Quotes only if you have the original source.
-- CTAs may only point to things that exist (LVINIT guides, a manual DM). Never promise automated delivery.
-- Carousels by default (5–7 slides, one idea per slide, short white text). Use a montage only when the footage is clearly stronger as motion.
-- Images: only the approved catalog. Distinct images within a post and across the week. Don't show house numbers, builder signage, license plates, or people's faces up close.
+SEASON AND DATE: the posts go out the week given. Frame seasonal topics for someone planning a move from that date (e.g. at the end of September: what to check while touring this fall/winter before a first summer), never as if the season were starting now.
 
-REFERENCES: for each post give 1–3 reference posts from OTHER creators (from the research digest only, with their exact observed metrics and date), labeled "recent example" / "older example" unless the digest gives a creator baseline. Separate topic evidence from format evidence. Your "why it works" is judgment; say so. If nothing relevant exists, say the post is an editorial call on a verified evergreen topic.
+Every post must be something a person moving to Las Vegas would send to their partner. One clear takeaway, a concrete Las Vegas angle: named places, real daily consequences.
 
-VOICE: Mikey's — direct, local, honest, a little opinionated. Not hype, not corporate.`;
+CLAIMS (verified after you write them; unsupported posts are rewritten or dropped):
+- Every factual sentence must be directly supported by an evidence sentence you cite (LVINIT page text or an official source quote). Paraphrase must keep the meaning exactly; do not strengthen, generalize or add a comparison.
+- No superlatives or comparisons ("best", "closest", "nearer", "cheaper", "newer", "longer", "more X than") unless an OFFICIAL or NEWS source states that comparison. Swapping "closest" for "nearer" does not fix an unsupported comparison; state the underlying fact instead.
+- Money, rates, taxes, programs, laws: cite an official source checked this week. Never imply a program is currently available. No figures older than 6 months.
+- No generic Realtor advice. Never invent statistics, quotes or testimonials.
+- CTAs only point to things that exist (LVINIT guides, a manual DM). Never promise automated delivery.
 
-export function buildPlanPrompt({ weekOf, research, ledger, pages, catalogSummary }) {
-  return [
-    `Week of ${weekOf}.`,
-    `DUPLICATE LEDGER (recent posts, scheduled items, earlier batches):\n${JSON.stringify(ledger.slice(0, 80))}`,
-    `RESEARCH DIGEST (other creators, observed ${weekOf}):\n${JSON.stringify(research.slice(0, 120))}`,
-    `LVINIT PAGES (route, title, excerpt):\n${JSON.stringify(pages.map((p) => ({ route: p.route, title: p.title, excerpt: p.excerpt })))}`,
-    `FOOTAGE CATALOG (approved, metadata only):\n${JSON.stringify(catalogSummary)}`,
-    `Return JSON: { "posts": [7 post objects], "backups": [3 post objects] }. Each post: day, slug, title, category, topics[], format ("carousel"|"montage"), takeaway, cta, caption, hashtags[], slides[{ clip: catalog path, stillOrClip: "still"|"clip", want: what the frame should show, headline, body?, position: "top"|"bottom" }] or segments[{ clip, want, dur, headline, body? }], sources[{ claim, url, authority: "official"|"news"|"lvinit", quote }], references[{ evidence: "Topic"|"Format", label, platform, creator, url, date, format, metrics, why }].`,
-  ].join("\n\n");
-}
+DUPLICATES: nothing Mikey published, scheduled or approved in the last 21 days (see ledger). Earlier unapproved drafts don't count as published.
+
+MEDIA: carousels by default (5–7 slides, one idea each, short white text). A montage only when the footage is clearly stronger in motion. For each slide request a source from the approved catalog: { "clip": path } for a specific video, { "still": path }, or { "folder": path } to let the system pick, plus "want": what the frame must show. Distinct images across the week. No house numbers, license plates, builder sales signage, or close-up faces.
+
+REFERENCES: 1–3 posts from OTHER creators per post, from the research digest only, with exact observed metrics and dates, labeled "recent example"/"older example" unless the digest gives a creator baseline. Separate topic evidence from format evidence. "Why it works" is your judgment; say so. If none fit, say it's an editorial call on an evergreen topic.
+
+VOICE: Mikey's: direct, local, honest, a little opinionated. Not hype.`;
 
 async function client() {
   const { default: Anthropic } = await import("@anthropic-ai/sdk");
   return new Anthropic();
 }
 
-export async function planWeek(input, { model = "claude-opus-5", anthropic } = {}) {
-  const api = anthropic ?? (await client());
-  const msg = await api.messages.create({
-    model,
-    max_tokens: 32000,
-    thinking: { type: "adaptive" },
-    system: [{ type: "text", text: EDITORIAL_STANDARD, cache_control: { type: "ephemeral" } }],
-    messages: [{ role: "user", content: buildPlanPrompt(input) }],
-  });
-  const text = msg.content.filter((b) => b.type === "text").map((b) => b.text).join("");
-  const json = JSON.parse(text.slice(text.indexOf("{"), text.lastIndexOf("}") + 1));
-  return { plan: json, usage: msg.usage, usd: costOf(msg.usage) };
+function parseJson(text) {
+  return JSON.parse(text.slice(text.indexOf("{"), text.lastIndexOf("}") + 1));
 }
 
-/** Vision frame pick: sends ONE low-res contact sheet per slide. Returns the chosen candidate index. */
-export async function pickFrame({ sheetPath, want, candidates }, { model = "claude-opus-5", anthropic } = {}) {
-  const api = anthropic ?? (await client());
+async function ask(api, { system, content, maxTokens = 32000, thinking = true }) {
   const msg = await api.messages.create({
-    model,
-    max_tokens: 400,
-    messages: [
+    model: MODEL,
+    max_tokens: maxTokens,
+    ...(thinking ? { thinking: { type: "adaptive" } } : {}),
+    ...(system ? { system: [{ type: "text", text: system, cache_control: { type: "ephemeral" } }] } : {}),
+    messages: [{ role: "user", content }],
+  });
+  if (msg.stop_reason === "refusal") throw new Error("Claude declined the request.");
+  if (msg.stop_reason === "max_tokens") throw new Error("Claude's answer was cut off (max_tokens).");
+  const text = msg.content.filter((b) => b.type === "text").map((b) => b.text).join("");
+  return { json: parseJson(text), usage: msg.usage, usd: costOf(msg.usage) };
+}
+
+const POST_SHAPE = `Post shape: { day, slug, title, category, topics[], format: "carousel"|"montage", takeaway, cta, caption, hashtags[], slides: [{ source: {clip|still|folder}, want, headline, body?, position: "top"|"bottom" }] | segments: [{ clip, want, dur, headline, body? }], sources: [{ claim, url, authority: "official"|"news"|"lvinit", checked, quote? }], references: [...], formatNote? }`;
+
+export async function planWeek({ weekOf, research, ledger, pages, catalogSummary }, { anthropic } = {}) {
+  const api = anthropic ?? (await client());
+  const content = [
+    `Week of ${weekOf} (posts go out Monday ${weekOf} through the following Sunday).`,
+    `LEDGER (published / scheduled / approved / earlier drafts):\n${JSON.stringify(ledger.slice(0, 100))}`,
+    `RESEARCH DIGEST (other creators; metrics observed ${weekOf}):\n${JSON.stringify(research.slice(0, 120))}`,
+    `LVINIT PAGES (route, title, excerpt):\n${JSON.stringify(pages.map((p) => ({ route: p.route, title: p.title, excerpt: p.excerpt })))}`,
+    `APPROVED FOOTAGE CATALOG (metadata only):\n${JSON.stringify(catalogSummary)}`,
+    `Return JSON { "posts": [7], "backups": [3] }. ${POST_SHAPE}`,
+  ].join("\n\n");
+  const r = await ask(api, { system: EDITORIAL_STANDARD, content });
+  return { plan: r.json, usage: r.usage, usd: r.usd };
+}
+
+/**
+ * posts: [{ day, title, takeaway, text: all on-image + caption text, evidence: [{authority, text}] }]
+ * Returns { posts: [{ day, ok, problems: [..] }], sameLesson: [[dayA, dayB, why]] }.
+ */
+export async function verifyClaims(posts, { anthropic } = {}) {
+  const api = anthropic ?? (await client());
+  const content = [
+    "Verify every factual claim in each post against ONLY the evidence given for that post.",
+    "A claim is supported only if an evidence sentence states the same thing with the same meaning. Comparisons and superlatives (including 'nearer', 'newer', 'longer', 'closest', 'more than') need an OFFICIAL or NEWS evidence sentence stating that comparison; LVINIT text alone is not enough for them. Opinions and CTAs are not claims.",
+    "Then check the week: flag any two posts whose takeaways teach essentially the same lesson.",
+    'Return JSON { "posts": [{ "day": "Mon", "ok": true|false, "problems": [{ "claim": "...", "why": "..." }] }], "sameLesson": [["Wed","Sat","both say ..."]] }.',
+    JSON.stringify(posts),
+  ].join("\n\n");
+  const r = await ask(api, { content, maxTokens: 16000 });
+  return { ...r.json, usage: r.usage, usd: r.usd };
+}
+
+export async function revisePosts({ failures, pages }, { anthropic } = {}) {
+  const api = anthropic ?? (await client());
+  const content = [
+    "Fix these posts. Keep the topic, media requests and structure; rewrite only what the problems name. Remove or restate unsupported claims so each is exactly supported by the cited evidence. If two posts share a lesson, give the named one a different, specific takeaway.",
+    `Relevant LVINIT pages:\n${JSON.stringify(pages)}`,
+    `Posts and problems:\n${JSON.stringify(failures)}`,
+    `Return JSON { "posts": [fixed posts, same days] }. ${POST_SHAPE}`,
+  ].join("\n\n");
+  const r = await ask(api, { system: EDITORIAL_STANDARD, content });
+  return { posts: r.json.posts ?? [], usage: r.usage, usd: r.usd };
+}
+
+const imagePart = (path) => ({ type: "image", source: { type: "base64", media_type: "image/jpeg", data: readFileSync(path).toString("base64") } });
+
+export async function pickFrame({ sheetPath, want, candidates }, { anthropic } = {}) {
+  const api = anthropic ?? (await client());
+  const r = await ask(api, {
+    thinking: false,
+    maxTokens: 400,
+    content: [
+      imagePart(sheetPath),
+      { type: "text", text: `Tiles are numbered 0–${candidates.length - 1}. Pick the tile that best shows: "${want}". Reject tiles with house numbers, license plates, builder sales signs, close-up faces, motion blur, or a busy/bright top third where white text would be unreadable. Answer JSON {"pick": n, "reason": "..."}; pick -1 if none work.` },
+    ],
+  });
+  return { pick: r.json.pick, reason: r.json.reason, usage: r.usage, usd: r.usd };
+}
+
+/**
+ * Review a post's finished slides. `sheetPath` is one low-res strip of the
+ * rendered slides (numbered). Returns { slides: [{ n, ok, issues[], fix }] }.
+ * fix ∈ none | move_text_top | move_text_bottom | new_frame.
+ */
+export async function reviewSlides({ sheetPath, post }, { anthropic } = {}) {
+  const api = anthropic ?? (await client());
+  const r = await ask(api, {
+    thinking: false,
+    maxTokens: 2000,
+    content: [
+      imagePart(sheetPath),
       {
-        role: "user",
-        content: [
-          { type: "image", source: { type: "base64", media_type: "image/jpeg", data: readFileSync(sheetPath).toString("base64") } },
-          { type: "text", text: `Tiles are numbered 0–${candidates.length - 1}. Pick the tile that best shows: "${want}". Reject tiles with house numbers, builder signs, license plates, close-up faces, or motion blur, and tiles where white text would be unreadable at the top. Answer JSON {"pick": n, "reason": "..."}; pick -1 if none work.` },
-        ],
+        type: "text",
+        text: `These are the finished slides of an Instagram carousel for LVINIT, numbered 1–${post.slides?.length ?? post.segments?.length}, left to right. Post topic: "${post.title}". Slide texts: ${JSON.stringify((post.slides ?? post.segments).map((s) => [s.headline, s.body].filter(Boolean).join(" / ")))}.
+Check each slide for: (1) text readable at phone size against its background, (2) crop keeps the subject (nothing important cut off, text not covering the key subject), (3) image relevant to that slide's words, (4) same or near-identical image as another slide, (5) excluded content: readable house numbers, license plates, builder sales signage, close-up identifiable faces, anything private.
+Return JSON {"slides":[{"n":1,"ok":true,"issues":[],"fix":"none"}]} with fix one of none|move_text_top|move_text_bottom|new_frame.`,
       },
     ],
   });
-  const text = msg.content.filter((b) => b.type === "text").map((b) => b.text).join("");
-  const j = JSON.parse(text.slice(text.indexOf("{"), text.lastIndexOf("}") + 1));
-  return { pick: j.pick, reason: j.reason, usage: msg.usage, usd: costOf(msg.usage) };
+  return { slides: r.json.slides ?? [], usage: r.usage, usd: r.usd };
 }

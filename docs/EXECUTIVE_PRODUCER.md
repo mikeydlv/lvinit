@@ -36,55 +36,74 @@ films, edits the site, or contacts anyone but Mikey.
 ## Monday production (current direction)
 
 Every Monday the Producer delivers **seven finished draft posts** (Mon–Sun) to
-`OneDrive\Documents\LVINIT\Weekly Posts\Week of <date>\`: ordered slides or a
-short silent reel, `caption.txt`, `notes.md` (sources with authority and check
-date, other creators' reference posts with observed metrics, file provenance),
-one `preview.html`, and a ZIP. Nothing is ever published.
+`OneDrive\Documents\LVINIT\Weekly Posts\Week of <date>\`, with one `preview.html`,
+a ZIP, and an email saying it's ready or that it failed and why. Nothing is ever
+published.
 
 ```bash
-node scripts/executive-producer/weekly.mjs              # this week (Pacific)
-node scripts/executive-producer/weekly.mjs --plan=FILE  # with a prepared plan
-node scripts/executive-producer/weekly.mjs --force      # rebuild a finished week
+node scripts/executive-producer/weekly.mjs                    # this week (Pacific)
+node scripts/executive-producer/rehearsal/run-rehearsal.mjs   # full chain, paid services simulated
 ```
 
-Steps: ledger → research (Apify) → plan (Claude) → frames → **editorial gate** →
-produce. `run.json` records each step's time, the real Apify and Anthropic cost,
-anything that needed a manual substitute, and every exception.
+### The unattended chain
 
-### The editorial gate (`lib/gate.mjs`)
+| Step | What happens | Service |
+|---|---|---|
+| ledger | Refresh Mikey's recent posts (Instagram/TikTok via Apify, YouTube from his public channel); mark drafts that were actually posted as published | Apify, YouTube |
+| research | Other creators on Instagram and TikTok | Apify |
+| plan | 7 posts + 3 backups | Claude (text) |
+| verify | Local gate + claim-by-claim meaning check against the cited evidence; one automatic revision; still failing → backup | Claude (text) |
+| frames | Candidates from approved footage; local variety rules (no repeats, no burst twins, clip moments far apart); Claude picks from a low-res sheet | Claude (images) |
+| render | Slides / reel | local |
+| review | Local readability and repeat checks, then Claude reviews every finished post (readability, crop, relevance, repeats, excluded content); fixes are applied and re-checked once; what remains becomes an exception with a recommended resolution | Claude (images) |
+| package | `week.json`, `status.json`, preview, ZIP | local |
+| notify | Email (Resend) + Windows notification, success or failure | Resend |
 
-Runs before Mikey sees anything. A failing post is replaced by a backup; what
-can't be resolved is listed at the top of the preview under "Needs your decision".
+`run.json` records each step's time, **costs per service and per step**, token
+counts, **manual interventions** (separately from steps skipped for missing
+credentials), gate replacements, and exceptions. Setup: copy
+`scripts/executive-producer/env.example` to `~/.lvinit/executive-producer/.env`.
+
+### Post states
+
+`draft` (every generated post) → `approved` / `scheduled` (optional, in the week's
+`status.json`) → `published` (detected automatically from Mikey's own posts).
+Only approved, scheduled and published count as history for duplicate checks.
+**Gap:** posts scheduled inside Instagram/Meta Business Suite or TikTok are not
+visible to the system; every run and email says so.
+
+### The editorial gate (`lib/gate.mjs`) and claim check
 
 | Check | Rule |
 |---|---|
-| Duplicate | Primary topic matches something Mikey posted or scheduled, or a previous batch, in the last 21 days |
-| Superlative | "best", "closest", "-est" words, "#1", "any official…", "nobody": needs an official or news source sentence; LVINIT's own article doesn't count |
-| Financial / legal | Money, rates, taxes, programs, laws need an official or news source checked within 30 days; figures older than 6 months and implied program availability are blocked |
-| Generic | Images must carry Las Vegas-specific detail; stock Realtor phrasing is blocked |
-| Images | Same file and moment reused this week or in the last 4 weeks; visually near-identical crops (perceptual hash) |
+| Duplicate | Primary topic matches something approved, scheduled or published in the last 21 days |
+| Superlative / comparison | "best", "closest", "-est", "nearer", "X-er than", "more X than": needs an official or news source; rewording a comparison doesn't make it supported |
+| Claim meaning | Every factual sentence must be stated by the cited evidence with the same meaning (Claude, per claim) |
+| Distinct takeaways | No two posts in a week teach the same lesson |
+| Financial / legal | Official or news source checked within 30 days; no figures older than 6 months; never implies a program is available |
+| Generic | Las Vegas-specific detail on the images; no stock Realtor phrasing |
+| Images | No repeated file/moment this week or the last 4; no near-identical crops |
 
-### Missed starts and duplicate batches
+### Missed starts, duplicates, failures
 
-`schedule/register-monday-task.ps1` (not registered until Mikey confirms the
-time) runs it Mondays in Pacific time with WakeToRun and StartWhenAvailable,
-retries twice, and never runs two at once. A `DONE.json` marker makes any
-re-run of a finished week exit immediately. A failure leaves `RUN-FAILED.md`
-in the week folder (synced to Mikey's phone) and a log in
-`~/.lvinit/executive-producer/weekly.log`.
+`schedule/register-monday-task.ps1` (registered only after Mikey confirms the
+time) runs weekly in Pacific time with WakeToRun and StartWhenAvailable, retries
+twice, never overlaps. `DONE.json` makes re-runs of a finished week exit. Any
+failure writes `RUN-FAILED.md` and sends a failure email naming the step and
+reason. **Gap:** if the PC stays off all week, nothing runs and nothing is sent.
 
 ### What leaves the PC
 
-| Where | What | When |
-|---|---|---|
-| Apify | Search keywords and Mikey's public handles. No media. | Research and own-post ledger, once configured |
-| Anthropic API, planning | Text only: research results, ledger, LVINIT page excerpts, footage-catalog metadata (folder names, durations) | Every Monday, once configured |
-| Anthropic API, visual frame review | **Low-resolution contact sheets of candidate frames from approved clips.** These are images from the library. | Only with `LVINIT_VISION=on`. Off by default. |
-| GitHub (public state branch) | Sanitized footage catalog metadata. No media, no GPS, no held or excluded items. | When the catalog is pushed |
-| OneDrive | The finished posts, preview and ZIP (the output folder syncs to Microsoft's cloud) | Every Monday |
+| Where | What |
+|---|---|
+| Apify | Search keywords and Mikey's public handles. No media. |
+| Anthropic (text) | Research results, ledger, LVINIT page text, catalog metadata, the week's copy |
+| Anthropic (images) | **Low-res sheets of candidate frames from approved clips** (frame picking; `LVINIT_VISION_FRAMES=off` disables it) and **low-res strips of the finished slides** (visual review) |
+| Resend | The notification email to Mikey |
+| GitHub (public state branch) | Sanitized footage catalog metadata only |
+| OneDrive | The finished posts, preview and ZIP (synced to Microsoft's cloud) |
 
-Raw footage, held and excluded files, and the local privacy rules never leave
-the PC. Credentials live only in `~/.lvinit/executive-producer/.env`.
+Raw footage, held/excluded files and the privacy rules never leave the PC.
 
 ---
 
