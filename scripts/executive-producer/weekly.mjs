@@ -301,12 +301,37 @@ export async function runWeek(argv = process.argv.slice(2), { log = console.log,
           return p;
         });
         if (toRevise.length) {
-          const r = await P.revisePosts({ failures: toRevise.map((p) => ({ post: p, problems: issues.get(p.day) })), pages: packs.map((x) => ({ route: x.route, excerpt: x.excerpt })) }, ai);
+          const week = posts.filter((p) => !toRevise.includes(p)).map((p) => ({ day: p.day, takeaway: p.takeaway }));
+          const r = await P.revisePosts({ failures: toRevise.map((p) => ({ post: p, problems: issues.get(p.day) })), pages: packs.map((x) => ({ route: x.route, excerpt: x.excerpt })), week }, ai);
           addCost("anthropic", "revise", r.usd, r.usage);
           const fixed = new Map((r.posts ?? []).map((p) => [p.day, p]));
           posts = posts.map((p) => (toRevise.includes(p) && fixed.get(p.day) ? { ...fixed.get(p.day), day: p.day } : p));
         }
         issues = await verifyWeek(posts);
+      }
+      // Last deterministic repair: delete (never rewrite) the exact unsupported sentences when
+      // they sit in the caption or a slide's subline. Deleting can't add a new claim.
+      const stripUnsupported = (p, list) => {
+        const quoted = list.map((i) => (String(i.message).match(/^"([^"]{12,})"/) ?? [])[1]);
+        if (quoted.some((q) => !q)) return null; // a non-sentence problem (same lesson, generic)
+        const norm = (s) => String(s ?? "").replace(/\s+/g, " ").trim();
+        const inFixed = (q) => [p.title, p.takeaway, ...(p.slides ?? []).map((s) => s.headline)].some((t) => norm(t).includes(norm(q)));
+        if (quoted.some(inFixed)) return null;
+        const cut = (text) => norm(text).split(/(?<=[.!?])\s+/).filter((s) => !quoted.some((q) => s.includes(norm(q)) || norm(q).includes(s))).join(" ");
+        const q = { ...p, caption: String(p.caption ?? "").split(/\n/).map(cut).join("\n"), slides: p.slides?.map((s) => (s.body ? { ...s, body: cut(s.body) } : s)) };
+        return localIssues(q).length ? null : q;
+      };
+      report.trimmed = [];
+      if (hasClaude) {
+        posts = posts.map((p) => {
+          const list = issues.get(p.day) ?? [];
+          if (!list.length) return p;
+          const q = stripUnsupported(p, list);
+          if (!q) return p;
+          issues.set(p.day, []);
+          report.trimmed.push({ day: p.day, title: p.title, removed: list.map((i) => i.message) });
+          return q;
+        });
       }
       const out = [];
       for (const p of posts) {

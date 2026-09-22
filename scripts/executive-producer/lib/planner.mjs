@@ -37,7 +37,7 @@ export function costOf(usage) {
 
 export const EDITORIAL_STANDARD = `LVINIT weekly production standard (Mikey Del Rosario, Las Vegas relocation / real estate).
 
-Produce SEVEN posts for the week (Monday–Sunday) plus THREE backups. Mix across: neighborhood tradeoffs, relocation mistakes, lifestyle differences, local knowledge, practical buying decisions. Never several versions of one topic.
+Produce SEVEN posts for the week (Monday–Sunday) plus THREE backups. Categories (set "category" to one of these): neighborhood tradeoff, relocation mistake, lifestyle difference, local knowledge, buying decision. The seven posts use every category at least once and no category more than twice. Never several versions of one idea: at most ONE post about city/county lines, jurisdictions or what an area name means. Each backup is a different category and a different idea from every post and from each other, so it can replace any post without repeating a lesson.
 
 DISTINCT TAKEAWAYS: every post teaches a different lesson. Area posts (Henderson, Summerlin, Southwest, etc.) must not all land on "different areas, different routines". Give each a lesson that only that post teaches (e.g. a specific tradeoff, a cost, a rule, a daily-life fact).
 
@@ -121,10 +121,14 @@ export async function verifyClaims(posts, { anthropic } = {}) {
   return { ...r.json, usage: r.usage, usd: r.usd };
 }
 
-export async function revisePosts({ failures, pages }, { anthropic } = {}) {
+export async function revisePosts({ failures, pages, week = [] }, { anthropic } = {}) {
   const api = anthropic ?? (await client());
   const content = [
-    "Fix these posts. Keep the topic, media requests and structure; rewrite only what the problems name. Remove or restate unsupported claims so each is exactly supported by the cited evidence. If two posts share a lesson, give the named one a different, specific takeaway.",
+    "Fix these posts. Keep the topic, media requests and structure; change only what the problems name.",
+    "UNSUPPORTED CLAIMS: DELETE the sentence, or replace it with a sentence copied in meaning from the cited evidence. Never reword it into a new ranking, comparison or generalization (\"most common\", \"harder\", \"one of the\", \"longer than\", \"more than\"); that fails the same check. A shorter post that is fully supported is the goal.",
+    "SAME LESSON: change the named post's takeaway to a different, concrete lesson (a cost, a rule, a daily-life fact) that none of the week's other takeaways below teaches.",
+    "GENERIC: add a named Las Vegas place, rule or number from the evidence to the slides.",
+    `The week's other takeaways (don't repeat these lessons):\n${JSON.stringify(week)}`,
     `Relevant LVINIT pages:\n${JSON.stringify(pages)}`,
     `Posts and problems:\n${JSON.stringify(failures)}`,
     `Return JSON { "posts": [fixed posts, same days] }. ${POST_SHAPE}`,
