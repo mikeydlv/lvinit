@@ -299,6 +299,8 @@ export async function runWeek(argv = process.argv.slice(2), { log = console.log,
     // On by default: Claude sees low-res candidate frames (approved clips only) to pick the one that
 // actually shows the subject. LVINIT_VISION_FRAMES=off keeps frame choice fully local.
     const vision = hasClaude && (env.LVINIT_VISION_FRAMES ?? "on") !== "off" ? (x) => P.pickFrame(x, ai) : null;
+    // Last tier for a slide: footage from the folders the post's other slides use (same place, same shoot).
+    const siblingFolders = (p) => [...new Set((p.slides ?? []).map((x) => x.source?.folder || String(x.source?.still ?? x.source?.clip ?? x.src?.path ?? "").split("/").slice(0, -1).join("/")).filter(Boolean))];
     await step("frames", async () => {
       // Reserve photos the plan named on purpose first, so folder picks never land on their burst twins.
       for (const p of accepted) for (const s of p.slides ?? []) if (!s.src && s.source?.still) usedSources.push({ path: s.source.still, reserved: true });
@@ -314,7 +316,7 @@ export async function runWeek(argv = process.argv.slice(2), { log = console.log,
           // 1) the source the plan asked for, 2) the closest approved footage
           // anywhere in the library for what the slide must show.
           const headline = [s.headline, s.body].filter(Boolean).join(" / ");
-          const tries = [{ ...s.source, want: s.want, headline }, { folder: "", want: `${s.want} ${s.headline ?? ""}`, headline }];
+          const tries = [{ ...s.source, want: s.want, headline }, { folder: "", want: `${s.want} ${s.headline ?? ""}`, headline }, { folder: "", folders: siblingFolders(p), want: s.want, headline }];
           let r;
           for (const want of tries) {
             try {
@@ -466,7 +468,7 @@ export async function runWeek(argv = process.argv.slice(2), { log = console.log,
                 slide.rejected = [...(slide.rejected ?? []), slide.src?.path].filter(Boolean);
                 const headline = [slide.headline, slide.body].filter(Boolean).join(" / ");
                 const common = { want: slide.want, headline, avoid: s.issues.join("; "), exclude: slide.rejected };
-                for (const want of [{ ...slide.source, ...common }, { folder: "", ...common, want: `${slide.want} ${slide.headline ?? ""}` }]) {
+                for (const want of [{ ...slide.source, ...common }, { folder: "", ...common, want: `${slide.want} ${slide.headline ?? ""}` }, { folder: "", folders: siblingFolders(p), ...common }]) {
                   let nf;
                   try {
                     nf = await chooseFrame({ want, catalog, mediaRoot, sharp, loadCrop, usedHashes, usedSources, pick: vision, textBand: slide.position });

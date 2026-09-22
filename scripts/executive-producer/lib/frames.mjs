@@ -51,18 +51,32 @@ export function candidatesFor(want, catalog, mediaRoot, n = 8) {
     else out.push({ path: c.path, t: Math.round(((c.durationSec ?? 10) / 2) * 10) / 10 });
   }
   if (out.length) return out; // the whole folder; chooseFrame filters first, then samples
+  // Several folders (e.g. the ones the post's other slides come from).
+  if (want.folders?.length) {
+    const inAny = items.filter((c) => want.folders.some((f) => norm(c.folder) === norm(f)) && usable(c));
+    if (inAny.length) return inAny.map((c) => (c.type === "image" ? { path: c.path } : { path: c.path, t: Math.round(((c.durationSec ?? 10) / 2) * 10) / 10 }));
+  }
   // The plan named something that isn't a real path (e.g. a subject line as a
   // file name). Resolve it to the closest approved item instead of failing.
-  const near = closestItems(want, items);
+  const near = closestItems(want, items, 8, 2).length ? closestItems(want, items, 8, 2) : closestItems(want, items, 8, 1);
   if (!near.length) throw new Error(`No approved footage matches "${want.clip ?? want.still ?? want.folder}".`);
   return near.flatMap((c) => (c.type === "video" ? [0.25, 0.5, 0.75].map((f) => ({ path: c.path, t: Math.round((c.durationSec ?? 10) * f * 10) / 10 })) : [{ path: c.path }]));
 }
 
 const STOP = new Set("the and for with from into las vegas lvinit livinit images image photo jpg jpeg png webp mov mp4 folder clip still shot view".split(" "));
-const wordsOf = (s) => new Set(String(s ?? "").toLowerCase().replace(/[^a-z0-9]+/g, " ").split(" ").filter((w) => w.length > 2 && !STOP.has(w)));
+// Lowercase words, plurals folded ("homes" matches "home").
+const wordsOf = (s) =>
+  new Set(
+    String(s ?? "")
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, " ")
+      .split(" ")
+      .filter((w) => w.length > 2 && !STOP.has(w))
+      .map((w) => (w.length > 4 && w.endsWith("s") && !w.endsWith("ss") ? w.slice(0, -1) : w)),
+  );
 
 /** Approved items whose path/subject best match the requested path and "want" (at least two shared words). */
-export function closestItems(want, items, n = 6) {
+export function closestItems(want, items, n = 6, minScore = 2) {
   const target = wordsOf(`${want.clip ?? want.still ?? want.folder ?? ""} ${want.want ?? ""}`);
   const named = wordsOf(want.clip ?? want.still ?? want.folder ?? "");
   return items
@@ -73,7 +87,7 @@ export function closestItems(want, items, n = 6) {
       const score = [...target].filter((x) => w.has(x)).length + [...named].filter((x) => w.has(x)).length;
       return { c, score };
     })
-    .filter((x) => x.score >= 2)
+    .filter((x) => x.score >= minScore)
     .sort((a, b) => b.score - a.score)
     .slice(0, n)
     .map((x) => x.c);

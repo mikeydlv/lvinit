@@ -92,7 +92,7 @@ async function coverCrop(input, W, H, focus) {
 export function overlaySvg({ W, H, headline = "", body = "", position = "bottom", size = 64, brand = true, margin = 84, counter = null }) {
   const maxW = W - margin * 2;
   const hLines = headline ? wrap(headline, size, maxW) : [];
-  const bSize = Math.round(size * 0.58);
+  const bSize = Math.round(size * 0.66);
   const bLines = body ? wrap(body, bSize, maxW, 0.5) : [];
   const hLead = Math.round(size * 1.16);
   const bLead = Math.round(bSize * 1.4);
@@ -123,7 +123,12 @@ export function overlaySvg({ W, H, headline = "", body = "", position = "bottom"
     if (counter) parts.push(`<text x="${W - margin}" y="${by}" text-anchor="end" font-family="${SANS}" font-weight="600" font-size="26" fill="#FFFFFF" opacity="0.9" filter="url(#s)">${esc(counter)}</text>`);
   }
   return Buffer.from(
-    `<svg width="${W}" height="${H}" xmlns="http://www.w3.org/2000/svg"><defs><filter id="s" x="-10%" y="-40%" width="120%" height="180%"><feDropShadow dx="0" dy="2" stdDeviation="6" flood-color="#000" flood-opacity="0.72"/></filter></defs>${parts.join("")}</svg>`,
+    // Two shadow layers, both shaped like the letters (never a panel): a tight one for crisp
+    // edges and a wide soft one that holds white type on bright Las Vegas sky and concrete.
+    `<svg width="${W}" height="${H}" xmlns="http://www.w3.org/2000/svg"><defs><filter id="s" x="-20%" y="-80%" width="140%" height="260%">` +
+      `<feGaussianBlur in="SourceAlpha" stdDeviation="20" result="wide"/><feFlood flood-color="#000" flood-opacity="0.6"/><feComposite in2="wide" operator="in" result="wideS"/>` +
+      `<feGaussianBlur in="SourceAlpha" stdDeviation="3" result="tight"/><feOffset in="tight" dy="2" result="tightO"/><feFlood flood-color="#000" flood-opacity="0.7"/><feComposite in2="tightO" operator="in" result="tightS"/>` +
+      `<feMerge><feMergeNode in="wideS"/><feMergeNode in="wideS"/><feMergeNode in="tightS"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>${parts.join("")}</svg>`,
   );
 }
 
@@ -133,10 +138,25 @@ export async function baseCrop(src, focus, { W = 1080, H = 1350, fast = false } 
   return (await coverCrop(loadSource(src, { fast }), W, H, focus)).jpeg({ quality: 80 }).toBuffer();
 }
 
+/** Mean luminance (0–255) of the band the text block covers. */
+async function textBandMean(buf, position) {
+  const w = 108;
+  const h = 135;
+  const px = await sharp(buf).resize(w, h, { fit: "fill" }).grayscale().raw().toBuffer();
+  const [y0, y1] = position === "top" ? [Math.floor(h * 0.04), Math.floor(h * 0.36)] : position === "center" ? [Math.floor(h * 0.35), Math.floor(h * 0.65)] : [Math.floor(h * 0.6), Math.floor(h * 0.9)];
+  let sum = 0;
+  for (let i = y0 * w; i < y1 * w; i++) sum += px[i];
+  return sum / ((y1 - y0) * w);
+}
+
 /** One finished carousel slide (1080x1350 JPEG). */
 export async function renderSlide(slide, outPath, { W = 1080, H = 1350, counter = null } = {}) {
   const base = await coverCrop(loadSource(slide.src), W, H, slide.focus);
-  const buf = await base.toBuffer();
+  let buf = await base.toBuffer();
+  // Bright desert sky or concrete where the text sits: pull the whole photo's
+  // exposure down a little, like an edit. Never a panel behind the text.
+  const mean = await textBandMean(buf, slide.position ?? "bottom");
+  if (mean > 165) buf = await sharp(buf).modulate({ brightness: Math.max(0.8, 1 - (mean - 165) / 350) }).toBuffer();
   const svg = overlaySvg({ W, H, headline: slide.headline, body: slide.body, position: slide.position ?? "bottom", size: slide.size ?? 64, counter });
   mkdirSync(dirname(outPath), { recursive: true });
   await sharp(buf).composite([{ input: svg }]).jpeg({ quality: 90, mozjpeg: true }).toFile(outPath);
