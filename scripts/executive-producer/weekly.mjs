@@ -4,6 +4,7 @@
 //
 //   node scripts/executive-producer/weekly.mjs              this week (Mon–Sun, Pacific)
 //   node scripts/executive-producer/weekly.mjs --force      rebuild a week that already finished
+//   ... --force --reframe   keep the verified copy; redo images, render and review
 //   node scripts/executive-producer/weekly.mjs --plan=FILE  REHEARSAL ONLY: use a prepared plan
 //
 // Unattended chain, each step timed and costed in run.json:
@@ -182,7 +183,13 @@ export async function runWeek(argv = process.argv.slice(2), { log = console.log,
     // A retry after a later-step failure resumes from the verified posts instead
     // of paying for research, planning and claim checks again (--replan to redo).
     const checkpointFile = join(weekDir, "checkpoint.json");
-    const checkpoint = !args.replan && !args.plan && existsSync(checkpointFile) ? JSON.parse(readFileSync(checkpointFile, "utf8")) : null;
+    let checkpoint = !args.replan && !args.plan && existsSync(checkpointFile) ? JSON.parse(readFileSync(checkpointFile, "utf8")) : null;
+    // --reframe: keep a finished week's verified copy, redo images, render and review.
+    if (args.reframe && !checkpoint && existsSync(join(weekDir, "week.json"))) {
+      const prior = JSON.parse(readFileSync(join(weekDir, "week.json"), "utf8"));
+      const fresh = (p) => ({ ...p, slides: p.slides?.map(({ src, focus, note, rejected, ...s }) => s), segments: p.segments?.map(({ path, start, ...s }) => s) });
+      checkpoint = { savedAt: prior.verifiedAt ?? prior.researchChecked, accepted: prior.posts.map(fresh), backups: (prior.backups ?? []).map(fresh), replaced: [], exceptions: [], costs: {} };
+    }
     // Same for a failure after planning: the plan itself is kept.
     const planFile = join(weekDir, "checkpoint-plan.json");
     const savedPlan = !checkpoint && !args.replan && !args.plan && existsSync(planFile) ? JSON.parse(readFileSync(planFile, "utf8")) : null;
@@ -297,19 +304,43 @@ export async function runWeek(argv = process.argv.slice(2), { log = console.log,
       for (const p of accepted) for (const s of p.slides ?? []) if (!s.src && s.source?.still) usedSources.push({ path: s.source.still, reserved: true });
       let picked = 0;
       const framePost = async (p) => {
+        const dropped = [];
         for (const s of p.slides ?? []) {
           if (s.src) {
             usedHashes.push(await G.dhash(sharp, await loadCrop({ ...s.src, path: join(mediaRoot, s.src.path) }, s.focus)));
             usedSources.push(s.src);
             continue;
           }
-          const r = await chooseFrame({ want: { ...s.source, want: s.want }, catalog, mediaRoot, sharp, loadCrop, usedHashes, usedSources, pick: vision, textBand: s.position ?? "top" });
-          addCost("anthropic", "frames", r.usd);
-          if (r.error) throw new Error(`${p.day} "${p.title}": ${r.error}`);
+          // 1) the source the plan asked for, 2) the closest approved footage
+          // anywhere in the library for what the slide must show.
+          const headline = [s.headline, s.body].filter(Boolean).join(" / ");
+          const tries = [{ ...s.source, want: s.want, headline }, { folder: "", want: `${s.want} ${s.headline ?? ""}`, headline }];
+          let r;
+          for (const want of tries) {
+            try {
+              r = await chooseFrame({ want, catalog, mediaRoot, sharp, loadCrop, usedHashes, usedSources, pick: vision, textBand: s.position ?? "top" });
+            } catch (e) {
+              r = { error: String(e.message) };
+            }
+            addCost("anthropic", "frames", r.usd);
+            if (!r.error) break;
+          }
+          if (r.error) {
+            dropped.push({ s, why: r.error });
+            continue;
+          }
           s.src = r.src;
           s.focus = r.focus;
           s.note = `${s.want ?? ""} (${r.reason})`.trim();
           picked++;
+        }
+        // 3) drop a middle slide nothing can illustrate, if the carousel keeps 4+ slides.
+        if (dropped.length) {
+          // Never the hook (first) or the CTA (last) slide.
+          const edge = dropped.some((d) => d.s === p.slides[0] || d.s === p.slides[p.slides.length - 1]);
+          if (edge || (p.slides.length - dropped.length) < 4) throw new Error(`${p.day} "${p.title}": ${dropped[0].why}`);
+          p.slides = p.slides.filter((s) => !dropped.some((d) => d.s === s));
+          report.slidesDropped = [...(report.slidesDropped ?? []), ...dropped.map((d) => ({ day: p.day, title: p.title, slide: d.s.headline, why: d.why }))];
         }
         for (const seg of p.segments ?? []) {
           if (seg.path) continue;
@@ -357,7 +388,7 @@ export async function runWeek(argv = process.argv.slice(2), { log = console.log,
     });
 
     // 6. render --------------------------------------------------------------------
-    const week = { weekOf, folderName, researchChecked: weekOf, posts: accepted, exceptions: report.exceptions, gaps: report.gaps, note: "Drafts only. Captions are copy-ready; notes.md in each folder has sources, references and file provenance." };
+    const week = { weekOf, folderName, researchChecked: weekOf, verifiedAt: checkpoint?.savedAt ?? new Date().toISOString(), posts: accepted, backups, exceptions: report.exceptions, gaps: report.gaps, note: "Drafts only. Captions are copy-ready; notes.md in each folder has sources, references and file provenance." };
     const rendered = await step("render", async () => {
       const out = [];
       for (const [i, p] of accepted.entries()) out.push(await renderPost(p, i, { weekDir, week, mediaRoot }));
@@ -382,26 +413,74 @@ export async function runWeek(argv = process.argv.slice(2), { log = console.log,
             if (problems.length) report.exceptions.push({ day: p.day, title: p.title, issues: problems, resolution: "Swap the named slide's image before posting." });
             continue;
           }
-          for (let attempt = 0; attempt < 2; attempt++) {
+          const ROUNDS = 3;
+          for (let attempt = 0; attempt < ROUNDS; attempt++) {
             const strip = await V.reviewStrip(sharp, rendered[i].files, join(tmp, `${p.day}-${attempt}.jpg`));
-            const rv = await P.reviewSlides({ sheetPath: strip, post: p }, ai);
+            // One retry on a failed review call; a post that still can't be reviewed is flagged, not shipped silently.
+            let rv;
+            for (let t = 0; t < 2 && !rv; t++) {
+              try {
+                rv = await P.reviewSlides({ sheetPath: strip, post: p }, ai);
+              } catch (e) {
+                if (e.usd) addCost("anthropic", "review", e.usd, e.usage);
+                if (t === 1) rv = { slides: [{ n: 0, ok: false, issues: [`automatic visual review didn't complete (${String(e.message).slice(0, 80)})`], fix: "none" }], usd: 0 };
+              }
+            }
             addCost("anthropic", "review", rv.usd, rv.usage);
             const bad = (rv.slides ?? []).filter((s) => !s.ok);
             if (!bad.length) {
               problems.length = 0;
               break;
             }
-            if (attempt === 1 || p.format === "montage") {
+            if (attempt === ROUNDS - 1 && p.format !== "montage") {
+              // Last resort for a middle slide nothing could fix: drop it, keeping 4+ slides.
+              const n = p.slides.length;
+              const drop = bad.filter((s) => s.n > 1 && s.n < n).slice(0, Math.max(0, n - 4));
+              if (drop.length) {
+                const gone = new Set(drop.map((s) => p.slides[s.n - 1]));
+                report.slidesDropped = [...(report.slidesDropped ?? []), ...drop.map((s) => ({ day: p.day, title: p.title, slide: p.slides[s.n - 1]?.headline, why: s.issues.join("; ") }))];
+                p.slides = p.slides.filter((s) => !gone.has(s));
+                rendered[i] = await renderPost(p, i, { weekDir, week, mediaRoot });
+                fixes += drop.length;
+                const left = bad.filter((s) => !drop.includes(s));
+                if (!left.length) {
+                  problems.length = 0;
+                  break;
+                }
+                bad.splice(0, bad.length, ...left);
+              }
+            }
+            if (attempt === ROUNDS - 1 || p.format === "montage") {
               report.exceptions.push({ day: p.day, title: p.title, issues: bad.map((s) => ({ check: "visual", message: `Slide ${s.n}: ${s.issues.join("; ")}` })), resolution: bad.map((s) => (s.fix === "new_frame" ? `Replace slide ${s.n}'s image` : s.fix?.startsWith("move_text") ? `Move slide ${s.n}'s text ${s.fix.split("_").pop()}` : `Check slide ${s.n}`)).join("; ") + "." });
               break;
             }
             for (const s of bad) {
               const slide = p.slides[s.n - 1];
               if (!slide) continue;
-              if (s.fix === "move_text_top" || s.fix === "move_text_bottom") slide.position = s.fix.endsWith("top") ? "top" : "bottom";
-              else if (s.fix === "new_frame" && slide.source) {
-                const nf = await chooseFrame({ want: { ...slide.source, want: slide.want }, catalog, mediaRoot, sharp, loadCrop, usedHashes, usedSources, pick: vision, textBand: slide.position });
-                if (!nf.error) Object.assign(slide, { src: nf.src, focus: nf.focus });
+              const target = s.fix?.startsWith("move_text") ? (s.fix.endsWith("top") ? "top" : "bottom") : null;
+              // Moving text only helps once; if it's already there, the image has to change.
+              if (target && slide.position !== target) slide.position = target;
+              else {
+                // Never the rejected image again; widen from the plan's source to the whole approved library,
+                // and tell the picker why the last one failed.
+                slide.rejected = [...(slide.rejected ?? []), slide.src?.path].filter(Boolean);
+                const headline = [slide.headline, slide.body].filter(Boolean).join(" / ");
+                const common = { want: slide.want, headline, avoid: s.issues.join("; "), exclude: slide.rejected };
+                for (const want of [{ ...slide.source, ...common }, { folder: "", ...common, want: `${slide.want} ${slide.headline ?? ""}` }]) {
+                  let nf;
+                  try {
+                    nf = await chooseFrame({ want, catalog, mediaRoot, sharp, loadCrop, usedHashes, usedSources, pick: vision, textBand: slide.position });
+                  } catch (e) {
+                    nf = { error: String(e.message) };
+                  }
+                  addCost("anthropic", "review", nf.usd);
+                  if (!nf.error) {
+                    Object.assign(slide, { src: nf.src, focus: nf.focus, note: `${slide.want} (replaced after review: ${s.issues.join("; ")})` });
+                    const bp = await V.bestPosition(sharp, await loadCrop({ ...slide.src, path: join(mediaRoot, slide.src.path) }, slide.focus), slide.position ?? "top");
+                    slide.position = bp.position;
+                    break;
+                  }
+                }
               }
               fixes++;
             }

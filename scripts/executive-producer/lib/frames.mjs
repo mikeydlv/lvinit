@@ -24,6 +24,10 @@ import { tmpdir } from "node:os";
 import { dhash, hamming } from "./gate.mjs";
 
 const IMG = /\.(jpe?g|png|webp)$/i;
+// Graphics with their own printed text (maps, rate cards, charts, chapter cards)
+// fight the white slide text and can contradict it. Never slide backgrounds.
+export const TEXT_GRAPHIC = /(^|[^a-z])(map|maps|chart|rates?|card|infographic|graphic|logo|thumbnail|plate|exhibit|hero)([^a-z]|$)/i;
+const usable = (c) => (c.type === "image" ? IMG.test(c.path) && c.role !== "graphic" && c.role !== "thumbnail" && !TEXT_GRAPHIC.test(c.path) : c.role === "b-roll");
 
 export function durationOf(abs) {
   return Number(execFileSync("ffprobe", ["-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", abs]).toString().trim());
@@ -31,7 +35,7 @@ export function durationOf(abs) {
 
 /** Candidate sources for one slide request. `catalog` is the PUBLIC catalog (only approved items). */
 export function candidatesFor(want, catalog, mediaRoot, n = 8) {
-  const items = catalog.items.filter((c) => !c.duplicateOf);
+  const items = catalog.items.filter((c) => !c.duplicateOf && !(want.exclude ?? []).includes(c.path));
   const norm = (p) => String(p).replace(/\\/g, "/").toLowerCase();
   const target = norm(want.clip ?? want.still ?? want.folder ?? "");
   const exact = items.find((c) => norm(c.path) === target);
@@ -39,8 +43,8 @@ export function candidatesFor(want, catalog, mediaRoot, n = 8) {
     const dur = exact.durationSec ?? durationOf(join(mediaRoot, exact.path));
     return Array.from({ length: n }, (_, i) => ({ path: exact.path, t: Math.round(((dur * (i + 0.5)) / n) * 10) / 10 }));
   }
-  if (exact) return [{ path: exact.path }];
-  const inFolder = items.filter((c) => norm(c.folder) === target && (c.type === "image" ? IMG.test(c.path) && c.role !== "graphic" && c.role !== "thumbnail" : c.role === "b-roll"));
+  if (exact && usable(exact)) return [{ path: exact.path }];
+  const inFolder = items.filter((c) => norm(c.folder) === target && usable(c));
   const out = [];
   for (const c of inFolder) {
     if (c.type === "image") out.push({ path: c.path });
@@ -62,7 +66,7 @@ export function closestItems(want, items, n = 6) {
   const target = wordsOf(`${want.clip ?? want.still ?? want.folder ?? ""} ${want.want ?? ""}`);
   const named = wordsOf(want.clip ?? want.still ?? want.folder ?? "");
   return items
-    .filter((c) => (c.type === "image" ? IMG.test(c.path) && c.role !== "graphic" && c.role !== "thumbnail" : c.role === "b-roll"))
+    .filter(usable)
     .map((c) => {
       const w = wordsOf(`${c.path} ${c.subject ?? ""} ${c.place ?? ""}`);
       // Words from the named path count double: they're the plan's explicit intent.
@@ -162,7 +166,8 @@ export async function chooseFrame({ want, catalog, mediaRoot, sharp, loadCrop, u
   let chosen = top[0];
   let reason = `local: sharpness ${chosen.sharpness}, text band mean ${chosen.bandMean}/std ${chosen.bandStd}`;
   let usd = 0;
-  if (pick && top.length > 1) {
+  // Even a single named photo is checked: relevance and excluded content matter more than the plan's choice.
+  if (pick && top.length >= 1) {
     const dir = mkdtempSync(join(tmpdir(), "lvinit-pick-"));
     try {
       const tileW = 270;
@@ -175,9 +180,11 @@ export async function chooseFrame({ want, catalog, mediaRoot, sharp, loadCrop, u
         .composite(labelled.map((t, i) => ({ input: t, left: i * tileW, top: 0 })))
         .jpeg({ quality: 72 })
         .toFile(sheet);
-      const r = await pick({ sheetPath: sheet, want: want.want, candidates: top });
+      // A vision hiccup never stops the run: keep the best local candidate.
+      const r = await pick({ sheetPath: sheet, want: want.want, headline: want.headline, avoid: want.avoid, candidates: top }).catch((e) => ({ pick: null, usd: e.usd ?? 0, reason: String(e.message).slice(0, 120) }));
       usd += r.usd ?? 0;
-      if (r.pick >= 0 && r.pick < top.length) {
+      if (r.pick === null) reason += ` (vision unavailable: ${r.reason})`;
+      else if (r.pick >= 0 && r.pick < top.length) {
         chosen = top[r.pick];
         reason = `vision: ${r.reason}`;
       } else if (r.pick === -1) {

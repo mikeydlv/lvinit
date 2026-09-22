@@ -135,14 +135,14 @@ export async function revisePosts({ failures, pages }, { anthropic } = {}) {
 
 const imagePart = (path) => ({ type: "image", source: { type: "base64", media_type: "image/jpeg", data: readFileSync(path).toString("base64") } });
 
-export async function pickFrame({ sheetPath, want, candidates }, { anthropic } = {}) {
+export async function pickFrame({ sheetPath, want, headline, avoid, candidates }, { anthropic } = {}) {
   const api = anthropic ?? (await client());
   const r = await ask(api, {
     thinking: false,
-    maxTokens: 400,
+    maxTokens: 2000,
     content: [
       imagePart(sheetPath),
-      { type: "text", text: `Tiles are numbered 0–${candidates.length - 1}. Pick the tile that best shows: "${want}". Reject tiles with house numbers, license plates, builder sales signs, close-up faces, motion blur, or a busy/bright top third where white text would be unreadable. Answer JSON {"pick": n, "reason": "..."}; pick -1 if none work.` },
+      { type: "text", text: `Tiles are numbered 0–${candidates.length - 1}. Pick the tile that best shows: "${want}".${headline ? ` The slide's words: "${headline}". The image must visibly fit them (a freeway doesn't illustrate a price; empty sky illustrates nothing).` : ""}${avoid ? ` A previous pick was rejected for: ${avoid}. Don't repeat that problem.` : ""} Reject tiles with house numbers, license plates, builder or leasing signs, phone numbers, printed text or graphics, identifiable faces, motion blur, or a mostly empty or very bright area where white text would sit. Answer only JSON {"pick": n, "reason": "under 15 words"}; pick -1 if none work.` },
     ],
   });
   return { pick: r.json.pick, reason: r.json.reason, usage: r.usage, usd: r.usd };
@@ -157,14 +157,14 @@ export async function reviewSlides({ sheetPath, post }, { anthropic } = {}) {
   const api = anthropic ?? (await client());
   const r = await ask(api, {
     thinking: false,
-    maxTokens: 2000,
+    maxTokens: 8000,
     content: [
       imagePart(sheetPath),
       {
         type: "text",
         text: `These are the finished slides of an Instagram carousel for LVINIT, numbered 1–${post.slides?.length ?? post.segments?.length}, left to right. Post topic: "${post.title}". Slide texts: ${JSON.stringify((post.slides ?? post.segments).map((s) => [s.headline, s.body].filter(Boolean).join(" / ")))}.
 Check each slide for: (1) text readable at phone size against its background, (2) crop keeps the subject (nothing important cut off, text not covering the key subject), (3) image relevant to that slide's words, (4) same or near-identical image as another slide, (5) excluded content: readable house numbers, license plates, builder sales signage, close-up identifiable faces, anything private.
-Return JSON {"slides":[{"n":1,"ok":true,"issues":[],"fix":"none"}]} with fix one of none|move_text_top|move_text_bottom|new_frame.`,
+Return only JSON {"slides":[{"n":1,"ok":true,"issues":[],"fix":"none"}]} (each issue under 15 words) with fix one of none|move_text_top|move_text_bottom|new_frame.`,
       },
     ],
   });
