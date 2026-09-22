@@ -46,8 +46,33 @@ export function candidatesFor(want, catalog, mediaRoot, n = 8) {
     if (c.type === "image") out.push({ path: c.path });
     else out.push({ path: c.path, t: Math.round(((c.durationSec ?? 10) / 2) * 10) / 10 });
   }
-  if (!out.length) throw new Error(`No approved footage matches "${want.clip ?? want.still ?? want.folder}".`);
-  return out; // the whole folder; chooseFrame filters first, then samples
+  if (out.length) return out; // the whole folder; chooseFrame filters first, then samples
+  // The plan named something that isn't a real path (e.g. a subject line as a
+  // file name). Resolve it to the closest approved item instead of failing.
+  const near = closestItems(want, items);
+  if (!near.length) throw new Error(`No approved footage matches "${want.clip ?? want.still ?? want.folder}".`);
+  return near.flatMap((c) => (c.type === "video" ? [0.25, 0.5, 0.75].map((f) => ({ path: c.path, t: Math.round((c.durationSec ?? 10) * f * 10) / 10 })) : [{ path: c.path }]));
+}
+
+const STOP = new Set("the and for with from into las vegas lvinit livinit images image photo jpg jpeg png webp mov mp4 folder clip still shot view".split(" "));
+const wordsOf = (s) => new Set(String(s ?? "").toLowerCase().replace(/[^a-z0-9]+/g, " ").split(" ").filter((w) => w.length > 2 && !STOP.has(w)));
+
+/** Approved items whose path/subject best match the requested path and "want" (at least two shared words). */
+export function closestItems(want, items, n = 6) {
+  const target = wordsOf(`${want.clip ?? want.still ?? want.folder ?? ""} ${want.want ?? ""}`);
+  const named = wordsOf(want.clip ?? want.still ?? want.folder ?? "");
+  return items
+    .filter((c) => (c.type === "image" ? IMG.test(c.path) && c.role !== "graphic" && c.role !== "thumbnail" : c.role === "b-roll"))
+    .map((c) => {
+      const w = wordsOf(`${c.path} ${c.subject ?? ""} ${c.place ?? ""}`);
+      // Words from the named path count double: they're the plan's explicit intent.
+      const score = [...target].filter((x) => w.has(x)).length + [...named].filter((x) => w.has(x)).length;
+      return { c, score };
+    })
+    .filter((x) => x.score >= 2)
+    .sort((a, b) => b.score - a.score)
+    .slice(0, n)
+    .map((x) => x.c);
 }
 
 /** Local score: sharp, calm where text goes, and not like anything already used. */

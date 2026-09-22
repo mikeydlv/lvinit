@@ -71,15 +71,19 @@ function parseJson(text) {
 }
 
 async function ask(api, { system, content, maxTokens = 32000, thinking = true }) {
-  const msg = await api.messages.create({
+  const params = {
     model: MODEL,
     max_tokens: maxTokens,
     ...(thinking ? { thinking: { type: "adaptive" } } : {}),
     ...(system ? { system: [{ type: "text", text: system, cache_control: { type: "ephemeral" } }] } : {}),
     messages: [{ role: "user", content }],
-  });
-  if (msg.stop_reason === "refusal") throw new Error("Claude declined the request.");
-  if (msg.stop_reason === "max_tokens") throw new Error("Claude's answer was cut off (max_tokens).");
+  };
+  // Large answers must stream (the SDK refuses long non-streaming requests).
+  const msg = api.messages.stream ? await api.messages.stream(params).finalMessage() : await api.messages.create(params);
+  // A failed answer was still billed; carry its cost so run.json reports it.
+  const fail = (m) => Object.assign(new Error(m), { usage: msg.usage, usd: costOf(msg.usage) });
+  if (msg.stop_reason === "refusal") throw fail("Claude declined the request.");
+  if (msg.stop_reason === "max_tokens") throw fail(`Claude's answer was cut off (max_tokens ${maxTokens}).`);
   const text = msg.content.filter((b) => b.type === "text").map((b) => b.text).join("");
   return { json: parseJson(text), usage: msg.usage, usd: costOf(msg.usage) };
 }
@@ -96,7 +100,7 @@ export async function planWeek({ weekOf, research, ledger, pages, catalogSummary
     `APPROVED FOOTAGE CATALOG (metadata only):\n${JSON.stringify(catalogSummary)}`,
     `Return JSON { "posts": [7], "backups": [3] }. ${POST_SHAPE}`,
   ].join("\n\n");
-  const r = await ask(api, { system: EDITORIAL_STANDARD, content });
+  const r = await ask(api, { system: EDITORIAL_STANDARD, content, maxTokens: 128000 });
   return { plan: r.json, usage: r.usage, usd: r.usd };
 }
 
@@ -113,7 +117,7 @@ export async function verifyClaims(posts, { anthropic } = {}) {
     'Return JSON { "posts": [{ "day": "Mon", "ok": true|false, "problems": [{ "claim": "...", "why": "..." }] }], "sameLesson": [["Wed","Sat","both say ..."]] }.',
     JSON.stringify(posts),
   ].join("\n\n");
-  const r = await ask(api, { content, maxTokens: 16000 });
+  const r = await ask(api, { content, maxTokens: 48000 });
   return { ...r.json, usage: r.usage, usd: r.usd };
 }
 
@@ -125,7 +129,7 @@ export async function revisePosts({ failures, pages }, { anthropic } = {}) {
     `Posts and problems:\n${JSON.stringify(failures)}`,
     `Return JSON { "posts": [fixed posts, same days] }. ${POST_SHAPE}`,
   ].join("\n\n");
-  const r = await ask(api, { system: EDITORIAL_STANDARD, content });
+  const r = await ask(api, { system: EDITORIAL_STANDARD, content, maxTokens: 96000 });
   return { posts: r.json.posts ?? [], usage: r.usage, usd: r.usd };
 }
 

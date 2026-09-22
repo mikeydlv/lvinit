@@ -132,6 +132,7 @@ export async function runWeek(argv = process.argv.slice(2), { log = console.log,
       report.steps.push({ name, ok: true, secs: Math.round((Date.now() - t0) / 100) / 10, note: r?.note ?? null });
       return r;
     } catch (e) {
+      if (e?.usd) addCost("anthropic", name, e.usd, e.usage);
       report.steps.push({ name, ok: false, secs: Math.round((Date.now() - t0) / 100) / 10, error: String(e?.message ?? e) });
       throw Object.assign(e, { step: name });
     }
@@ -178,7 +179,18 @@ export async function runWeek(argv = process.argv.slice(2), { log = console.log,
     });
 
     // 2. research ------------------------------------------------------------------
+    // A retry after a later-step failure resumes from the verified posts instead
+    // of paying for research, planning and claim checks again (--replan to redo).
+    const checkpointFile = join(weekDir, "checkpoint.json");
+    const checkpoint = !args.replan && !args.plan && existsSync(checkpointFile) ? JSON.parse(readFileSync(checkpointFile, "utf8")) : null;
+    // Same for a failure after planning: the plan itself is kept.
+    const planFile = join(weekDir, "checkpoint-plan.json");
+    const savedPlan = !checkpoint && !args.replan && !args.plan && existsSync(planFile) ? JSON.parse(readFileSync(planFile, "utf8")) : null;
+    if (checkpoint) report.resumed = { from: checkpoint.savedAt, stage: "verified posts", earlierAttemptCosts: checkpoint.costs };
+    else if (savedPlan) report.resumed = { from: savedPlan.savedAt, stage: "plan", earlierAttemptCosts: savedPlan.costs };
+
     const research = await step("research", async () => {
+      if (checkpoint || savedPlan) return Object.assign([], { note: `skipped: resumed from ${report.resumed.stage}` });
       if (!hasApify) {
         report.notConfigured.push("Research: Apify not configured. Posts are evergreen, labeled as such.");
         return Object.assign([], { note: "not run: no APIFY_TOKEN" });
@@ -192,13 +204,20 @@ export async function runWeek(argv = process.argv.slice(2), { log = console.log,
 
     // 3. plan ----------------------------------------------------------------------
     const plan = await step("plan", async () => {
+      if (checkpoint) return { posts: checkpoint.accepted, backups: checkpoint.backups, note: "skipped: resumed from verified posts" };
+      if (savedPlan) return { posts: savedPlan.posts, backups: savedPlan.backups, note: `plan from earlier attempt (${savedPlan.savedAt})` };
       if (args.plan) {
         report.manual.push(`Plan supplied from a file (${args.plan.split(/[\\/]/).pop()}) instead of being generated.`);
         return Object.assign(JSON.parse(readFileSync(args.plan, "utf8")), { note: "from file (rehearsal)" });
       }
       if (!hasClaude) throw new Error("No ANTHROPIC_API_KEY in ~/.lvinit/executive-producer/.env, so nothing can be planned.");
-      const r = await P.planWeek({ weekOf, research, ledger, pages: packs, catalogSummary: catalog.folders }, ai);
+      // Exact file paths, so every source request names something real.
+      const files = catalog.items
+        .filter((c) => !c.duplicateOf && (c.type === "image" ? c.role !== "graphic" && c.role !== "thumbnail" : c.role === "b-roll"))
+        .map((c) => (c.type === "video" ? [c.path, c.subject, c.durationSec] : [c.path, c.subject]));
+      const r = await P.planWeek({ weekOf, research, ledger, pages: packs, catalogSummary: { folders: catalog.folders.map(({ subjects, ...f }) => f), files, note: "files: [exact path, subject, seconds if video]. Use exact paths/folder names from here only." } }, ai);
       addCost("anthropic", "plan", r.usd, r.usage);
+      writeFileSync(planFile, JSON.stringify({ savedAt: new Date().toISOString(), posts: r.plan.posts ?? [], backups: r.plan.backups ?? [], costs: { anthropicUsd: r.usd } }, null, 2));
       return Object.assign({ posts: r.plan.posts ?? [], backups: r.plan.backups ?? [] }, { note: `${(r.plan.posts ?? []).length} posts + ${(r.plan.backups ?? []).length} backups` });
     });
     plan.posts = (plan.posts ?? []).map((p, i) => ({ ...p, day: p.day ?? DAYS[i] }));
@@ -215,6 +234,11 @@ export async function runWeek(argv = process.argv.slice(2), { log = console.log,
     const textOf = (p) => [p.title, p.takeaway, p.caption, ...(p.slides ?? p.segments ?? []).flatMap((s) => [s.headline, s.body])].filter(Boolean).join("\n");
 
     const accepted = await step("verify", async () => {
+      if (checkpoint) {
+        report.replaced = checkpoint.replaced ?? [];
+        report.exceptions.push(...(checkpoint.exceptions ?? []));
+        return Object.assign([...checkpoint.accepted], { note: `${checkpoint.accepted.length} verified earlier (${checkpoint.savedAt})` });
+      }
       const verifyWeek = async (posts) => {
         const issues = new Map(posts.map((p) => [p.day, localIssues(p)]));
         for (const [day, xs] of G.checkDistinctTakeaways(posts)) issues.get(day)?.push(...xs);
@@ -257,6 +281,7 @@ export async function runWeek(argv = process.argv.slice(2), { log = console.log,
         }
         if (!placed) report.exceptions.push({ day: p.day, title: p.title, issues: issues.get(p.day), resolution: "No verified backup was left. Skip this day or rewrite the listed claims." });
       }
+      writeFileSync(checkpointFile, JSON.stringify({ savedAt: new Date().toISOString(), accepted: out, backups, replaced: report.replaced, exceptions: report.exceptions, costs: report.costs }, null, 2));
       return Object.assign(out, { note: `${out.length} verified; ${report.replaced.length} replaced by backups` });
     });
 
@@ -271,7 +296,7 @@ export async function runWeek(argv = process.argv.slice(2), { log = console.log,
       // Reserve photos the plan named on purpose first, so folder picks never land on their burst twins.
       for (const p of accepted) for (const s of p.slides ?? []) if (!s.src && s.source?.still) usedSources.push({ path: s.source.still, reserved: true });
       let picked = 0;
-      for (const p of accepted) {
+      const framePost = async (p) => {
         for (const s of p.slides ?? []) {
           if (s.src) {
             usedHashes.push(await G.dhash(sharp, await loadCrop({ ...s.src, path: join(mediaRoot, s.src.path) }, s.focus)));
@@ -300,6 +325,32 @@ export async function runWeek(argv = process.argv.slice(2), { log = console.log,
         for (const s of p.slides ?? []) {
           const bp = await V.bestPosition(sharp, await loadCrop({ ...s.src, path: join(mediaRoot, s.src.path) }, s.focus), s.position ?? "top");
           s.position = bp.position;
+        }
+      };
+      for (let i = 0; i < accepted.length; i++) {
+        const p = accepted[i];
+        const mark = { hashes: usedHashes.length, sources: usedSources.length };
+        try {
+          await framePost(p);
+        } catch (e) {
+          // Undo this post's picks, then try backups until one can be illustrated.
+          usedHashes.length = mark.hashes;
+          usedSources.length = mark.sources;
+          let placed = false;
+          while (backups.length && !placed) {
+            const b = { ...backups.shift(), day: p.day };
+            if (localIssues(b).length) continue;
+            try {
+              await framePost(b);
+              accepted[i] = b;
+              report.replaced.push({ day: p.day, dropped: p.title, why: [String(e.message)], with: b.title });
+              placed = true;
+            } catch {
+              usedHashes.length = mark.hashes;
+              usedSources.length = mark.sources;
+            }
+          }
+          if (!placed) throw e;
         }
       }
       return { note: `${picked} frames chosen automatically${vision ? " (with Claude)" : " (locally)"}` };
@@ -382,6 +433,8 @@ export async function runWeek(argv = process.argv.slice(2), { log = console.log,
     report.finishedAt = new Date().toISOString();
     report.posts = accepted.length;
     writeFileSync(join(weekDir, "run.json"), JSON.stringify(report, null, 2));
+    rmSync(checkpointFile, { force: true });
+    rmSync(planFile, { force: true });
     writeFileSync(done, JSON.stringify({ weekOf, finishedAt: report.finishedAt, posts: accepted.length }, null, 2));
     const n = await (services.notify ?? notify)({ ok: true, weekOf, posts: accepted.length, exceptions: report.exceptions, costs: report.costs, previewPath: join(weekDir, "preview.html"), manual: [...report.manual, ...report.notConfigured], gaps: report.gaps.slice(0, 1) }, { fetchImpl, env });
     report.notification = n;
@@ -406,5 +459,5 @@ export async function runWeek(argv = process.argv.slice(2), { log = console.log,
 }
 
 if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
-  runWeek().then((r) => process.exit(r.exitCode));
+  runWeek().then((r) => { process.exitCode = r.exitCode; });
 }

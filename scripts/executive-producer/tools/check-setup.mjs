@@ -81,7 +81,7 @@ async function main() {
   }
 
   for (const r of results) console.log(`${r.ok ? "OK  " : "FIX "} ${r.name}: ${r.detail}`);
-  process.exit(results.every((r) => r.ok) ? 0 : 1);
+  process.exitCode = results.every((r) => r.ok) ? 0 : 1;
 }
 
 main().catch((e) => {
