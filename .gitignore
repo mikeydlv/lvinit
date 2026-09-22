@@ -43,6 +43,11 @@ next-env.d.ts
 # never its own report output)
 /reports/internal-links/
 
+# generated Content Brief Generator reports, briefs and handoff queue, plus the
+# earlier runs its workflow downloads for history (the agent never commits)
+/reports/content-briefs/
+/reports/content-briefs-history/
+
 # Local Trend Agent output. In CI it lives on the lvinit-agent-state branch
 # (never main); locally these are scratch copies. .agent-state/ is the CI
 # checkout of that branch.

@@ -355,6 +355,49 @@ Both formats label every number as one of four things: a **raw** Search Console
 metric, a **calculated** value, the **agent's interpretation**, or a
 **recommended action**.
 
+### The JSON report's `searchDemand` block (schema 1.1.0)
+
+The JSON report carries `schemaVersion` — **`1.1.0`** since 22 September 2026,
+when `searchDemand` was added. The change is **purely additive**: every 1.0.0
+key is unchanged, no detector, threshold or score moved, and the Markdown report
+is identical.
+
+`searchDemand` is the **raw rows behind the findings**, for both windows:
+
+```jsonc
+"searchDemand": {
+  "note": "RAW Search Console rows, unscored and uninterpreted…",
+  "maxRowsPerList": 1000,
+  "current":  { "queries": { "rows": [...], "total": 32, "truncated": false },
+                "pages":   { "rows": [...] },
+                "pairs":   { "rows": [...] } },
+  "previous": { ... }
+}
+```
+
+* **Raw only.** Clicks, impressions, CTR and position exactly as Search Console
+  returned them. Nothing here is scored or interpreted.
+* **The three dimension sets are kept apart**, because Google aggregates them
+  differently: query totals, page totals and query+page totals do not sum to
+  each other, and anonymized queries are absent from the query dimensions but
+  not from page totals. A consumer must never add or compare them as one number.
+* **Fair Housing rows are flagged, not hidden.** Each query row carries
+  `fairHousingBlocked`, so a consumer can report the exclusion rather than
+  silently losing the row. A flagged row may never become a recommendation.
+* **Capped** at `output.maxDemandRows` (default 1000 per list per window,
+  `GSC_MAX_DEMAND_ROWS`), largest first, with `truncated` saying so.
+
+**Why it exists.** The report previously carried only *findings*. On
+17 September 2026 that was one finding out of 32 queries, and the
+[Content Brief Generator](CONTENT_BRIEF_GENERATOR.md) cannot group queries into
+search intents it cannot see. It reads this block off disk, read-only, and never
+writes to `reports/gsc/` or re-scores a finding. The Fact-Decay and Internal
+Linking agents ignore the new key and are unaffected.
+
+A report produced without raw rows (an older run, or `buildJsonReport` called
+without them) carries `"searchDemand": null` rather than an invented block, and
+downstream agents degrade to findings-only rather than guessing.
+
 ---
 
 ## Fair Housing

@@ -209,7 +209,7 @@ export async function run(argv = process.argv.slice(2), { log = console.log, err
 
   const meta = { reportDate, dataSource, property };
   const markdown = buildMarkdownReport({ analysis, config, meta });
-  const json = buildJsonReport({ analysis, config, meta });
+  const json = buildJsonReport({ analysis, config, meta, data });
 
   // --- Output --------------------------------------------------------------
   const outDir = join(REPO_ROOT, config.output.dir);

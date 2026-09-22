@@ -23,7 +23,7 @@ function build(dataset, { dataSource = "fixture", overrides = {} } = {}) {
     analysis,
     config,
     markdown: buildMarkdownReport({ analysis, config, meta }),
-    json: buildJsonReport({ analysis, config, meta }),
+    json: buildJsonReport({ analysis, config, meta, data: normalizeDataset(dataset) }),
   };
 }
 
@@ -41,7 +41,7 @@ test("the JSON report round-trips through JSON.stringify without loss or cycles"
 
 test("the JSON report carries the machine contract the Content Publisher needs", () => {
   const { json } = build(FIXTURE_DATASET);
-  assert.equal(json.schemaVersion, "1.0.0");
+  assert.equal(json.schemaVersion, "1.1.0");
   assert.equal(json.reportDate, TEST_TODAY);
   assert.equal(json.site.origin, "https://www.lvinit.com");
   assert.ok(json.windows.current.start && json.windows.current.end);
@@ -50,6 +50,41 @@ test("the JSON report carries the machine contract the Content Publisher needs",
   assert.ok(json.configuration.scoringWeights);
   assert.equal(json.configuration.dataState, "final");
   assert.deepEqual(json.prohibited, PROHIBITED_ACTIONS);
+});
+
+test("the JSON exports raw search demand, with the three dimension sets kept apart", () => {
+  const { json } = build(FIXTURE_DATASET);
+  const demand = json.searchDemand;
+  assert.ok(demand, "searchDemand is present when the run had data");
+  assert.match(demand.note, /do not sum to each other/);
+  for (const key of ["queries", "pages", "pairs"]) {
+    assert.ok(Array.isArray(demand.current[key].rows));
+    assert.ok(Array.isArray(demand.previous[key].rows));
+  }
+  const row = demand.current.queries.rows.find((r) => r.query === "summerlin vs henderson");
+  assert.deepEqual(
+    { clicks: row.clicks, impressions: row.impressions, position: row.position },
+    { clicks: 14, impressions: 180, position: 8.2 },
+    "raw metrics are carried through unchanged"
+  );
+  assert.ok(demand.current.pages.rows.every((r) => r.route === null || r.route.startsWith("/")));
+  const blocked = demand.current.queries.rows.filter((r) => r.fairHousingBlocked).map((r) => r.query);
+  assert.ok(blocked.includes("safest neighborhoods in henderson nv"), "Fair Housing rows are flagged, not hidden");
+});
+
+test("the raw demand export is capped and says when it was truncated", () => {
+  const { json } = build(FIXTURE_DATASET, { overrides: { output: { maxDemandRows: 3 } } });
+  assert.equal(json.searchDemand.current.queries.rows.length, 3);
+  assert.equal(json.searchDemand.current.queries.truncated, true);
+  const sorted = json.searchDemand.current.queries.rows.map((r) => r.impressions);
+  assert.deepEqual(sorted, [...sorted].sort((a, b) => b - a), "largest rows are kept");
+});
+
+test("a report built without raw rows carries searchDemand: null rather than inventing any", () => {
+  const config = testConfig();
+  const analysis = analyze({ data: normalizeDataset(FIXTURE_DATASET), inventory, config, reportDate: TEST_TODAY, windows: testWindows(config) });
+  const json = buildJsonReport({ analysis, config, meta: { reportDate: TEST_TODAY, dataSource: "fixture" } });
+  assert.equal(json.searchDemand, null);
 });
 
 test("a fixture run is flagged as fixture data in the JSON", () => {

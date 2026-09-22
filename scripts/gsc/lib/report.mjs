@@ -18,8 +18,12 @@
 
 import { escapeCell, truncate } from "./text.mjs";
 import { describeWindows } from "./windows.mjs";
+import { routeFromUrl } from "./site-inventory.mjs";
+import { checkFairHousing } from "./fair-housing.mjs";
 
-const REPORT_SCHEMA_VERSION = "1.0.0";
+// 1.1.0 added `searchDemand`: the raw rows, for the Content Brief Generator.
+// Purely additive — every 1.0.0 key is unchanged.
+const REPORT_SCHEMA_VERSION = "1.1.0";
 
 const TYPE_LABELS = {
   "quick-win": "Quick win",
@@ -66,7 +70,64 @@ const fmtPosDelta = (n) => {
 // JSON
 // ---------------------------------------------------------------------------
 
-export function buildJsonReport({ analysis, config, meta }) {
+/**
+ * The raw Search Console rows behind the findings, for downstream agents that
+ * need query-level demand (the Content Brief Generator groups queries into
+ * search intents, which it cannot do from findings alone).
+ *
+ * RAW metrics only — nothing here is scored or interpreted. The three dimension
+ * sets are kept apart because Google aggregates them differently: query totals,
+ * page totals and query+page totals do not sum to each other, and anonymized
+ * queries are dropped from the query dimensions but not from page totals.
+ *
+ * Fair Housing: rows are exported with a `fairHousingBlocked` flag rather than
+ * silently dropped, so a consumer can report the exclusion. No consumer may turn
+ * a flagged row into a recommendation.
+ */
+export function buildSearchDemand(data, config) {
+  if (!data?.current) return null;
+  const origin = config.site.origin;
+  const cap = config.output.maxDemandRows;
+  const metrics = (r) => ({ clicks: r.clicks, impressions: r.impressions, ctr: r.ctr, position: r.position });
+  const byImpressions = (a, b) => b.impressions - a.impressions;
+  const capped = (rows) => ({ rows: rows.slice(0, cap), total: rows.length, truncated: rows.length > cap });
+
+  const windowRows = (w) => {
+    if (!w) return null;
+    return {
+      queries: capped(
+        [...(w.queries ?? [])].sort(byImpressions).map((r) => ({
+          query: r.query,
+          ...metrics(r),
+          fairHousingBlocked: checkFairHousing(r.query).blocked,
+        }))
+      ),
+      pages: capped(
+        [...(w.pages ?? [])].sort(byImpressions).map((r) => ({ route: routeFromUrl(r.page, origin), page: r.page, ...metrics(r) }))
+      ),
+      pairs: capped(
+        [...(w.pairs ?? [])].sort(byImpressions).map((r) => ({
+          query: r.query,
+          route: routeFromUrl(r.page, origin),
+          ...metrics(r),
+          fairHousingBlocked: checkFairHousing(r.query).blocked,
+        }))
+      ),
+    };
+  };
+
+  return {
+    note:
+      "RAW Search Console rows, unscored and uninterpreted. Query, page and query+page rows are aggregated " +
+      "differently by Google and do not sum to each other; anonymized queries are absent from the query " +
+      "dimensions. Rows flagged fairHousingBlocked must never become a recommendation.",
+    maxRowsPerList: cap,
+    current: windowRows(data.current),
+    previous: windowRows(data.previous),
+  };
+}
+
+export function buildJsonReport({ analysis, config, meta, data = null }) {
   return {
     schemaVersion: REPORT_SCHEMA_VERSION,
     generatedAt: new Date().toISOString(),
@@ -108,6 +169,7 @@ export function buildJsonReport({ analysis, config, meta }) {
     },
     byType: analysis.byType,
     opportunities: analysis.opportunities,
+    searchDemand: buildSearchDemand(data, config),
     prohibited: PROHIBITED_ACTIONS,
   };
 }

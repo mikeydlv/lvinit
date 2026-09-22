@@ -263,6 +263,12 @@ export const DEFAULT_CONFIG = {
     lowVolumeTotalImpressions: envInt("GSC_LOW_VOLUME_IMPRESSIONS", 200),
     /** Cap on the Fair Housing exclusions appendix. */
     maxExcludedListed: envInt("GSC_MAX_EXCLUDED_LISTED", 15),
+    /**
+     * Cap on each raw-row list in the JSON `searchDemand` export (queries,
+     * pages, query+page pairs, per window). Consumed by the Content Brief
+     * Generator; generous because LVINIT's row counts are small.
+     */
+    maxDemandRows: envInt("GSC_MAX_DEMAND_ROWS", 1000),
   },
 };
 

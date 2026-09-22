@@ -1,0 +1,196 @@
+# ---------------------------------------------------------------------------
+# LVINIT Content Brief Generator — weekly run
+#
+# What this job is allowed to do:
+#   * read the repository (published content, the editorial registry, git log)
+#   * read (never write) the GSC, Fact-Decay and Internal Linking agents'
+#     report artifacts, and this agent's own earlier artifacts
+#   * group search demand into intents, check every intent against existing
+#     pages, classify, score, and write briefs
+#   * write a handoff queue file INTO ITS OWN ARTIFACT
+#   * upload the reports as a workflow artifact
+#   * print a short summary on the run page
+#
+# What it is NOT allowed to do, by construction:
+#   * edit any page, write any article, change metadata, links or the registry
+#   * commit or push (contents: read — the token cannot write to the repo)
+#   * dispatch, trigger or call the Content Publisher
+#   * open pull requests or issues
+#   * deploy anything
+#
+# The handoff queue is a DRY RUN until BRIEFS_HANDOFF_ENABLED is set to "true"
+# as a repository variable — and even then this job only writes a file into
+# its own artifact. Nothing here can make the Publisher act. See
+# docs/CONTENT_BRIEF_GENERATOR.md, "Handoff architecture".
+#
+# No secrets are used. This agent has no credentials of any kind.
+# ---------------------------------------------------------------------------
+
+name: Content Brief Generator
+
+on:
+  schedule:
+    # 13:00 UTC every Tuesday — about 06:00 Las Vegas time (PDT).
+    #
+    #   Monday     GSC Opportunity Agent      (search performance)
+    #   Tuesday    Content Brief Generator    (this job — reads Monday's GSC report)
+    #   Wednesday  Internal Linking Agent     (reads Monday's GSC report)
+    #   Thursday   Fact-Decay Agent           (factual freshness)
+    #
+    # Tuesday gives this job a one-day-old GSC report, and the newest
+    # Fact-Decay (previous Thursday) and Internal Linking (previous Wednesday)
+    # reports. Nothing else runs on Tuesday, so no report competes with it.
+    - cron: "0 13 * * 2"
+  workflow_dispatch:
+    inputs:
+      today:
+        description: "Pretend today is this date (YYYY-MM-DD). Leave blank for the real date."
+        required: false
+        default: ""
+      fixtures:
+        description: "Run against synthetic search demand instead of the real GSC report"
+        required: false
+        type: boolean
+        default: false
+
+# Read-only. `contents: read` is what stops the job ever writing to the
+# repository. `actions: read` exists solely to download the other agents'
+# report artifacts and this agent's own earlier ones.
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: content-brief-generator
+  cancel-in-progress: false
+
+jobs:
+  briefs:
+    name: Turn search demand into briefs and publish a report artifact
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Check out the repository (read-only)
+        uses: actions/checkout@v4
+        with:
+          # Full history: the agent reads Publisher commit trailers
+          # (LVINIT-Brief-Fingerprint) to know which briefs were PUBLISHED, and
+          # git dates as a fallback for page freshness. Without it, handoff is
+          # blocked and the report says so.
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      # No install step: zero runtime dependencies, Node built-ins only.
+
+      - name: Run the agent's own test suite
+        run: npm run briefs:test
+
+      - name: Fetch the newest GSC report
+        # Required for any brief. Same approach as the other agents: download
+        # every recent successful run's artifact and let the agent pick the
+        # newest REPORT DATE, because `gh run list` orders by creation, not by
+        # which run produced the newest report. If nothing is found the agent
+        # still runs and reports "No high-confidence content briefs this week."
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          set -uo pipefail
+          mkdir -p reports/gsc
+          RUN_IDS="$(gh run list --workflow gsc-opportunity-agent.yml --status success \
+            --limit 5 --json databaseId --jq '.[].databaseId' 2>/dev/null || true)"
+          for RUN_ID in $RUN_IDS; do
+            gh run download "$RUN_ID" --name gsc-opportunities --dir "reports/gsc/run-$RUN_ID" 2>/dev/null \
+              && echo "Downloaded gsc-opportunities from run $RUN_ID."
+          done
+          FOUND="$(find reports/gsc -maxdepth 2 -name 'gsc-opportunities-*.json' -printf '%f\t%p\n' | sort | tail -n 1 | cut -f2)"
+          echo "GSC report for this run: ${FOUND:-none}"
+
+      - name: Fetch the newest Fact-Decay and Internal Linking reports, if any
+        # Optional enrichment. Their absence only removes context from briefs.
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          set -uo pipefail
+          fetch() {
+            local workflow="$1" artifact="$2" dir="$3"
+            mkdir -p "$dir"
+            local ids
+            ids="$(gh run list --workflow "$workflow" --status success --limit 5 \
+              --json databaseId --jq '.[].databaseId' 2>/dev/null || true)"
+            for RUN_ID in $ids; do
+              gh run download "$RUN_ID" --name "$artifact" --dir "$dir/run-$RUN_ID" 2>/dev/null \
+                && echo "Downloaded $artifact from run $RUN_ID."
+            done
+          }
+          fetch fact-decay-agent.yml fact-decay-report reports/fact-decay
+          fetch internal-linking-agent.yml internal-links-report reports/internal-links
+
+      - name: Fetch this agent's earlier reports (week-to-week identity)
+        # Downloaded into reports/content-briefs-history/, NEVER into the
+        # output directory — otherwise every artifact would contain every
+        # earlier one. History is what stops the same brief appearing weekly
+        # and what counts handoff attempts toward the retry ceiling.
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          set -uo pipefail
+          mkdir -p reports/content-briefs-history
+          RUN_IDS="$(gh run list --workflow content-brief-generator.yml --status success \
+            --limit 12 --json databaseId --jq '.[].databaseId' 2>/dev/null || true)"
+          for RUN_ID in $RUN_IDS; do
+            gh run download "$RUN_ID" --name content-briefs --dir "reports/content-briefs-history/run-$RUN_ID" 2>/dev/null \
+              && echo "Downloaded earlier content-briefs from run $RUN_ID."
+          done
+
+      - name: Generate briefs
+        env:
+          TODAY: ${{ inputs.today }}
+          USE_FIXTURES: ${{ inputs.fixtures }}
+          # The handoff switch. Unset (the default) = dry run. Set the repository
+          # variable BRIEFS_HANDOFF_ENABLED to "true" only after approving the
+          # Publisher side of the handoff (docs/CONTENT_BRIEF_GENERATOR.md).
+          BRIEFS_HANDOFF_ENABLED: ${{ vars.BRIEFS_HANDOFF_ENABLED || 'false' }}
+        run: |
+          set -euo pipefail
+          ARGS=""
+          if [ -n "${TODAY:-}" ]; then ARGS="$ARGS --today=$TODAY"; fi
+          if [ "${USE_FIXTURES:-false}" = "true" ]; then
+            echo "Running against FIXTURE search demand — output is synthetic and can never be handed off."
+            ARGS="$ARGS --fixtures"
+          fi
+          node scripts/content-briefs/run.mjs $ARGS | tee run-output.txt
+
+      - name: Write the summary onto the run page
+        if: always()
+        run: |
+          {
+            echo "## LVINIT Content Brief Generator"
+            echo
+            echo '```'
+            cat run-output.txt 2>/dev/null || echo "The run produced no output."
+            echo '```'
+            echo
+            echo "The report, the brief files and the handoff queue are attached as the content-briefs artifact."
+            echo "Nothing was written to the site, committed, published, or dispatched to the Content Publisher."
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload the report as an artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: content-briefs
+          path: reports/content-briefs/
+          if-no-files-found: warn
+          retention-days: 90
