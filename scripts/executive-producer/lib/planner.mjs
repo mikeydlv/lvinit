@@ -54,6 +54,8 @@ CLAIMS (verified after you write them; unsupported posts are rewritten or droppe
 
 DUPLICATES: nothing Mikey published, scheduled, approved or has ready to post (status "ready") in the last 21 days (see ledger). Earlier unapproved drafts don't count.
 
+SLIDE COPY (large type standard): a headline of at most 8 words that fits three lines, and an optional supporting line of at most 20 words. The first slide states the hook and what the carousel delivers; the last slide gives the save/send reason and the CTA. Never state a home's orientation (e.g. west-facing) or anything else about a pictured house that the source doesn't verify.
+
 MEDIA: carousels by default (5–7 slides, one idea each, short white text). A montage only when the footage is clearly stronger in motion. For each slide request a source from the approved catalog: { "clip": path } for a specific video, { "still": path }, or { "folder": path } to let the system pick, plus "want": what the frame must show. Distinct images across the week. No house numbers, license plates, builder sales signage, or close-up faces.
 
 REFERENCES: 1–3 posts from OTHER creators per post, from the research digest only, with exact observed metrics and dates, labeled "recent example"/"older example" unless the digest gives a creator baseline. Separate topic evidence from format evidence. "Why it works" is your judgment; say so. If none fit, say it's an editorial call on an evergreen topic.
@@ -161,16 +163,17 @@ export async function pickFrame({ sheetPath, want, headline, avoid, candidates }
  * rendered slides (numbered). Returns { slides: [{ n, ok, issues[], fix }] }.
  * fix ∈ none | move_text_top | move_text_bottom | new_frame.
  */
-export async function reviewSlides({ sheetPath, post }, { anthropic } = {}) {
+export async function reviewSlides({ sheetPath, slidePaths, post }, { anthropic } = {}) {
   const api = anthropic ?? (await client());
   const r = await ask(api, {
     thinking: false,
     maxTokens: 8000,
+    // One image per slide (~800px) so small details like house numbers are visible; a strip is the fallback.
     content: [
-      imagePart(sheetPath),
+      ...(slidePaths?.length ? slidePaths.flatMap((p, i) => [{ type: "text", text: `Slide ${i + 1}:` }, imagePart(p)]) : [imagePart(sheetPath)]),
       {
         type: "text",
-        text: `These are the finished slides of an Instagram carousel for LVINIT, numbered 1–${post.slides?.length ?? post.segments?.length}, left to right. Post topic: "${post.title}". Slide texts: ${JSON.stringify((post.slides ?? post.segments).map((s) => [s.headline, s.body].filter(Boolean).join(" / ")))}.
+        text: `These are the finished slides of an Instagram carousel for LVINIT, numbered 1–${post.slides?.length ?? post.segments?.length}. Post topic: "${post.title}". Slide texts: ${JSON.stringify((post.slides ?? post.segments).map((s) => [s.headline, s.body].filter(Boolean).join(" / ")))}.
 Check each slide for: (1) text readable at phone size against its background, (2) crop keeps the subject (nothing important cut off, text not covering the key subject), (3) image relevant to that slide's words, (4) same or near-identical image as another slide, (5) excluded content: readable house numbers, license plates, builder sales signage, close-up identifiable faces, anything private.
 Return only JSON {"slides":[{"n":1,"ok":true,"issues":[],"fix":"none"}]} (each issue under 15 words) with fix one of none|move_text_top|move_text_bottom|new_frame.`,
       },

@@ -145,7 +145,7 @@ export async function runWeek(argv = process.argv.slice(2), { log = console.log,
     const L = await import("./lib/ledger.mjs");
     const G = await import("./lib/gate.mjs");
     const { buildSourcePacks } = await import("./lib/sources.mjs");
-    const { baseCrop } = await import("./lib/render.mjs");
+    const { baseCrop, fitText } = await import("./lib/render.mjs");
     const { renderPost, packageWeek } = await import("./produce.mjs");
     const { chooseFrame } = await import("./lib/frames.mjs");
     const V = await import("./lib/visual.mjs");
@@ -264,7 +264,14 @@ export async function runWeek(argv = process.argv.slice(2), { log = console.log,
         const route = (String(s.url).match(/lvinit\.com(\/[^?#\s]*)/) ?? [])[1];
         return { authority: s.authority, url: s.url, text: s.quote ?? (route ? String(packByRoute[route] ?? "").slice(0, 20000) : "") };
       });
-    const localIssues = (p) => G.gatePost(p, { ledger, today: weekOf, sourceTexts: officialQuotes(p) });
+    // Slide copy must fit the large type standard (headline ≤ 3 lines, supporting text ≤ 4);
+    // anything longer goes back for a shorter rewrite instead of shrinking the type.
+    const fitIssues = (p) =>
+      (p.slides ?? [])
+        .map((s, k) => ({ k, f: fitText(s.headline, s.body, 920) }))
+        .filter(({ f }) => !f.fits)
+        .map(({ k }) => ({ check: "fit", message: `Slide ${k + 1}: copy is too long for the slide at the standard type size; shorten it without changing the meaning.` }));
+    const localIssues = (p) => [...G.gatePost(p, { ledger, today: weekOf, sourceTexts: officialQuotes(p) }), ...fitIssues(p)];
     const textOf = (p) => [p.title, p.takeaway, p.caption, ...(p.slides ?? p.segments ?? []).flatMap((s) => [s.headline, s.body])].filter(Boolean).join("\n");
 
     const accepted = await step("verify", async () => {
@@ -531,7 +538,8 @@ export async function runWeek(argv = process.argv.slice(2), { log = console.log,
             let rv;
             for (let t = 0; t < 2 && !rv; t++) {
               try {
-                rv = await P.reviewSlides({ sheetPath: strip, post: p }, ai);
+                const slidePaths = await V.reviewImages(sharp, rendered[i].files, tmp);
+                rv = await P.reviewSlides({ sheetPath: strip, slidePaths, post: p }, ai);
               } catch (e) {
                 if (e.usd) addCost("anthropic", "review", e.usd, e.usage);
                 if (t === 1) rv = { slides: [{ n: 0, ok: false, issues: [`automatic visual review didn't complete (${String(e.message).slice(0, 80)})`], fix: "none" }], usd: 0 };

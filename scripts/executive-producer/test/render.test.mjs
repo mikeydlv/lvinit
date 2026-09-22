@@ -1,12 +1,21 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 
-import { wrap, overlaySvg } from "../lib/render.mjs";
+import { wrap, overlaySvg, textWidth, fitText, TYPE } from "../lib/render.mjs";
 
 test("text wraps inside the safe margins", () => {
-  const lines = wrap("The closest thing Vegas has to a walk-everywhere neighborhood.", 64, 912);
+  const lines = wrap("The closest thing Vegas has to a walk-everywhere neighborhood.", 92, 920);
   assert.ok(lines.length >= 2 && lines.length <= 4);
-  assert.ok(lines.every((l) => l.length <= Math.floor(912 / (64 * 0.54))));
+  assert.ok(lines.every((l) => textWidth(l, 92) <= 920));
+});
+
+test("the type standard: large headline, phone-readable body, shrinks only to fit", () => {
+  const short = fitText("Which rooms get afternoon sun?", "Notice the windows, shade, and rooms you'll use most.", 920);
+  assert.equal(short.size, TYPE.headline);
+  assert.equal(short.bSize, TYPE.body);
+  assert.ok(short.fits);
+  const long = fitText("A very long headline that keeps going well past what three lines at the full size can hold on one slide", "", 920);
+  assert.ok(long.size < TYPE.headline && long.size >= TYPE.headlineMin);
 });
 
 test("the approved style: white text, soft shadow, small wordmark, and no panels or backgrounds", () => {

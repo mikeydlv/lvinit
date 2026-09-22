@@ -64,6 +64,18 @@ counts, **manual interventions** (separately from steps skipped for missing
 credentials), gate replacements, and exceptions. Setup: copy
 `scripts/executive-producer/env.example` to `~/.lvinit/executive-producer/.env`.
 
+### Slide type standard (default for every batch)
+
+Set by Mikey on 2026-09-22 and built into the shared template (`lib/render.mjs`, `TYPE`):
+
+- Real photos, white Inter text, letter-shaped shadow, small LVI/NIT wordmark. No panels or boxes.
+- Headline 92px on a 1080×1350 slide, reduced only as far as 76px to stay within three lines. Supporting text 46px, 42px at the smallest, up to four lines.
+- Line breaks are balanced (no single stranded word), and place names and short dates ("Las Vegas", "Sept. 8") never split.
+- Planner copy limits: headline 8 words or fewer, supporting line 20 words or fewer. Copy that still doesn't fit is sent back to be shortened with the same meaning; the type is never shrunk further.
+- Slide 1 states the hook and what the carousel delivers. The last slide gives the save/send reason and the CTA.
+- Never state a pictured home's orientation (for example, west-facing) or anything else the source doesn't verify.
+- The visual review looks at each slide at about 800px, so house numbers, plates and signage are caught, not just layout.
+
 ### Post states
 
 `draft` (every generated post) → `approved` / `scheduled` (optional, in the week's

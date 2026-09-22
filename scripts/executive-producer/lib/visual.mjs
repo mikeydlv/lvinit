@@ -37,6 +37,17 @@ export async function bestPosition(sharp, buf, preferred = "top") {
   return { position: pick, stats, readable: badness(stats) < 1.5 };
 }
 
+/** Each finished slide at review size (~800px wide), for close checks like house numbers. */
+export async function reviewImages(sharp, files, outDir, width = 800) {
+  const out = [];
+  for (const [i, f] of files.entries()) {
+    const p = `${outDir}/review-${i + 1}.jpg`;
+    await sharp(f).resize(width).jpeg({ quality: 80 }).toFile(p);
+    out.push(p);
+  }
+  return out;
+}
+
 export async function reviewStrip(sharp, files, out, tileW = 300) {
   const tiles = [];
   for (const [i, f] of files.entries()) {

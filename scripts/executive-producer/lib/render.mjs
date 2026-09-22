@@ -16,7 +16,7 @@
 // ---------------------------------------------------------------------------
 
 import { execFileSync } from "node:child_process";
-import { mkdirSync, writeFileSync, mkdtempSync, rmSync } from "node:fs";
+import { mkdirSync, writeFileSync, mkdtempSync, rmSync, readFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { tmpdir } from "node:os";
@@ -42,15 +42,51 @@ const SANS = "Inter";
 
 const esc = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 
-/** Greedy wrap by estimated glyph width (Inter ≈ 0.54em average at bold). */
-export function wrap(text, fontSize, maxWidth, factor = 0.54) {
-  const maxChars = Math.max(8, Math.floor(maxWidth / (fontSize * factor)));
+// Inter advance widths (em) measured from the vendored fonts, per weight.
+const GLYPHS = JSON.parse(readFileSync(join(dirname(fileURLToPath(import.meta.url)), "glyph-widths.json"), "utf8"));
+
+/** Rendered width in px of `text` in Inter at `fontSize` (3% safety for kerning/hinting). */
+export function textWidth(text, fontSize, weight = 700) {
+  const table = GLYPHS[weight >= 650 ? 700 : 600];
+  let em = 0;
+  for (const ch of String(text)) em += table[ch] ?? 0.62;
+  return em * fontSize * 1.03;
+}
+
+/**
+ * Balanced wrap: the fewest lines that fit, with the lines as even as possible,
+ * so the larger type never strands one word ("Announced is not / built").
+ */
+export function wrap(text, fontSize, maxWidth, weight = 700) {
+  const greedy = wrapGreedy(text, fontSize, maxWidth, weight);
+  if (greedy.length < 2) return greedy;
+  let lo = maxWidth * 0.45;
+  let hi = maxWidth;
+  let best = greedy;
+  for (let i = 0; i < 18; i++) {
+    const mid = (lo + hi) / 2;
+    const t = wrapGreedy(text, fontSize, mid, weight);
+    if (t.length <= greedy.length && t.every((l) => textWidth(l, fontSize, weight) <= maxWidth)) {
+      best = t;
+      hi = mid;
+    } else lo = mid;
+  }
+  return best;
+}
+
+/** Greedy wrap by measured glyph widths. */
+// Phrases that never break across lines: place names and short dates.
+const KEEP = /\b(North Las Vegas|Las Vegas|Clark County|(?:Jan|Feb|Mar|Apr|Jun|Jul|Aug|Sept?|Oct|Nov|Dec)\.? \d{1,2})\b/g;
+const GLUE = "";
+
+function wrapGreedy(text, fontSize, maxWidth, weight = 700) {
   const lines = [];
   for (const para of String(text).split("\n")) {
     let line = "";
-    for (const word of para.split(/\s+/).filter(Boolean)) {
+    const words = para.replace(KEEP, (m) => m.replace(/ /g, GLUE)).split(/\s+/).filter(Boolean).map((w) => w.split(GLUE).join(" "));
+    for (const word of words) {
       if (!line) line = word;
-      else if ((line + " " + word).length <= maxChars) line += " " + word;
+      else if (textWidth(line + " " + word, fontSize, weight) <= maxWidth) line += " " + word;
       else {
         lines.push(line);
         line = word;
@@ -59,6 +95,28 @@ export function wrap(text, fontSize, maxWidth, factor = 0.54) {
     lines.push(line);
   }
   return lines;
+}
+
+// LVINIT carousel type standard (Mikey, 2026-09-22): large headlines, supporting text
+// comfortably readable on a phone. Headline 92px on a 1080-wide slide, down to 76px
+// only to keep it within three lines; supporting text 46px (42px to keep four lines).
+export const TYPE = { headline: 92, headlineMin: 76, headlineLines: 3, body: 46, bodyMin: 42, bodyLines: 4 };
+
+/** Headline/body sizes and lines that fit the standard. */
+export function fitText(headline, body, maxW, base = TYPE.headline) {
+  let size = base;
+  let hLines = headline ? wrap(headline, size, maxW, 700) : [];
+  while (hLines.length > TYPE.headlineLines && size > TYPE.headlineMin) {
+    size -= 4;
+    hLines = wrap(headline, size, maxW, 700);
+  }
+  let bSize = TYPE.body;
+  let bLines = body ? wrap(body, bSize, maxW, 600) : [];
+  while (bLines.length > TYPE.bodyLines && bSize > TYPE.bodyMin) {
+    bSize -= 2;
+    bLines = wrap(body, bSize, maxW, 600);
+  }
+  return { size, hLines, bSize, bLines, fits: hLines.length <= TYPE.headlineLines && bLines.length <= TYPE.bodyLines && hLines.every((l) => textWidth(l, size) <= maxW) };
 }
 
 /** Load the source: a still, or one frame of a video at `t` seconds. Returns a Buffer. */
@@ -90,14 +148,14 @@ async function coverCrop(input, W, H, focus) {
  * Text overlay SVG. `position`: top | center | bottom. `size`: headline px.
  * The shadow is deliberately soft (a legibility aid, not a look).
  */
-export function overlaySvg({ W, H, headline = "", body = "", position = "bottom", size = 64, brand = true, margin = 84, counter = null }) {
+export function overlaySvg({ W, H, headline = "", body = "", position = "bottom", size = TYPE.headline, brand = true, margin = 80, counter = null }) {
   const maxW = W - margin * 2;
-  const hLines = headline ? wrap(headline, size, maxW) : [];
-  const bSize = Math.round(size * 0.66);
-  const bLines = body ? wrap(body, bSize, maxW, 0.5) : [];
-  const hLead = Math.round(size * 1.16);
-  const bLead = Math.round(bSize * 1.4);
-  const gap = hLines.length && bLines.length ? Math.round(size * 0.45) : 0;
+  const fit = fitText(headline, body, maxW, size);
+  const { hLines, bLines, bSize } = fit;
+  size = fit.size;
+  const hLead = Math.round(size * 1.1);
+  const bLead = Math.round(bSize * 1.36);
+  const gap = hLines.length && bLines.length ? Math.round(size * 0.36) : 0;
   const blockH = hLines.length * hLead + gap + bLines.length * bLead;
   const brandZone = brand ? 90 : 0;
   let y0;
@@ -161,7 +219,7 @@ export async function renderSlide(slide, outPath, { W = 1080, H = 1350, counter 
   const auto = mean > 150 ? Math.max(0.74, 1 - (mean - 150) / 260) : 1;
   const brightness = Math.min(auto, [1, 0.82, 0.72][slide.darken ?? 0]);
   if (brightness < 1) buf = await sharp(buf).modulate({ brightness }).toBuffer();
-  const svg = overlaySvg({ W, H, headline: slide.headline, body: slide.body, position: slide.position ?? "bottom", size: slide.size ?? 64, counter });
+  const svg = overlaySvg({ W, H, headline: slide.headline, body: slide.body, position: slide.position ?? "bottom", size: slide.size ?? TYPE.headline, counter });
   mkdirSync(dirname(outPath), { recursive: true });
   await sharp(buf).composite([{ input: svg }]).jpeg({ quality: 90, mozjpeg: true }).toFile(outPath);
   return outPath;
