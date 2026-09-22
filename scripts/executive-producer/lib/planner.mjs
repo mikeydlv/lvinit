@@ -52,7 +52,7 @@ CLAIMS (verified after you write them; unsupported posts are rewritten or droppe
 - No generic Realtor advice. Never invent statistics, quotes or testimonials.
 - CTAs only point to things that exist (LVINIT guides, a manual DM). Never promise automated delivery.
 
-DUPLICATES: nothing Mikey published, scheduled or approved in the last 21 days (see ledger). Earlier unapproved drafts don't count as published.
+DUPLICATES: nothing Mikey published, scheduled, approved or has ready to post (status "ready") in the last 21 days (see ledger). Earlier unapproved drafts don't count.
 
 MEDIA: carousels by default (5–7 slides, one idea each, short white text). A montage only when the footage is clearly stronger in motion. For each slide request a source from the approved catalog: { "clip": path } for a specific video, { "still": path }, or { "folder": path } to let the system pick, plus "want": what the frame must show. Distinct images across the week. No house numbers, license plates, builder sales signage, or close-up faces.
 

@@ -30,7 +30,9 @@ const readJson = (p) => {
   }
 };
 
-export const STATUSES = ["draft", "approved", "scheduled", "published"];
+// "ready": a finished batch handed over to post (e.g. an immediate batch). Not published yet,
+// but it counts for duplicate and repeated-image checks like approved posts do.
+export const STATUSES = ["draft", "ready", "approved", "scheduled", "published"];
 
 export function weekFolders(outRoot) {
   if (!existsSync(outRoot)) return [];
@@ -48,8 +50,8 @@ export function previousWeeks(outRoot, currentWeekOf) {
 }
 
 /** status.json for a new batch: every post starts as a draft. */
-export function initialStatus(week) {
-  return { note: "Change a post to approved, scheduled or published if you like. Published is also detected automatically.", posts: Object.fromEntries(week.posts.map((p) => [p.day, { title: p.title, status: "draft" }])) };
+export function initialStatus(week, status = "draft") {
+  return { note: "Change a post to approved, scheduled or published if you like. Published is also detected automatically.", posts: Object.fromEntries(week.posts.map((p) => [p.day, { title: p.title, status }])) };
 }
 
 // Words every LVINIT post shares; they say nothing about which post it is.

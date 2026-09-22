@@ -75,7 +75,8 @@ async function coverCrop(input, W, H, focus) {
   const meta = await img.metadata();
   let { width, height } = meta;
   if ([5, 6, 7, 8].includes(meta.orientation)) [width, height] = [height, width];
-  const scale = Math.max(W / width, H / height);
+  // focus.zoom > 1 crops tighter (e.g. to trim a car hood from the bottom of a drive frame).
+  const scale = Math.max(W / width, H / height) * Math.max(1, focus?.zoom ?? 1);
   const sw = Math.round(width * scale);
   const sh = Math.round(height * scale);
   const fx = focus?.x ?? 0.5;

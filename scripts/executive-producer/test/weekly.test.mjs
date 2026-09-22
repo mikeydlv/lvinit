@@ -36,11 +36,11 @@ test("distinct takeaways: three area posts teaching the same lesson are flagged"
   assert.equal(checkDistinctTakeaways(distinct).size, 0);
 });
 
-test("drafts are not history; approved, scheduled and published are", () => {
+test("drafts are not history; ready, approved, scheduled and published are", () => {
   const today = "2026-10-05";
   const post = { title: "HOA dues and SID assessments", takeaway: "Get the HOA and SID for the parcel." };
   assert.equal(checkDuplicate(post, [{ date: "2026-09-28", source: "batch", status: "draft", text: "HOA and SID costs", tags: ["hoa-sid-lid"] }], today).length, 0);
-  for (const status of ["approved", "scheduled", "published"]) {
+  for (const status of ["ready", "approved", "scheduled", "published"]) {
     assert.equal(checkDuplicate(post, [{ date: "2026-09-28", source: "batch", status, text: "HOA and SID costs", tags: ["hoa-sid-lid"] }], today).length, 1, status);
   }
 });
@@ -185,4 +185,16 @@ test("mondayOf: a Sunday-evening run produces the week starting the next day", (
   assert.equal(mondayOf(new Date("2026-09-26T20:00:00Z")), "2026-09-28"); // Saturday
   assert.equal(mondayOf(new Date("2026-09-28T16:00:00Z")), "2026-09-28"); // Monday catch-up
   assert.equal(mondayOf(new Date("2026-10-01T16:00:00Z")), "2026-09-28"); // Thursday catch-up
+});
+
+test("an immediate batch counts for the next week's checks without marking that week done", () => {
+  const root = mkdtempSync(join(tmpdir(), "lvinit-imm-"));
+  const dir = join(root, "Immediate posting batch (from Sep 22, 2026)");
+  mkdirSync(dir);
+  const week = { weekOf: "2026-09-22", posts: [{ day: "Tue", title: "Announced is not built", takeaway: "Fiesta site", topics: ["development"] }] };
+  writeFileSync(join(dir, "week.json"), JSON.stringify(week));
+  writeFileSync(join(dir, "status.json"), JSON.stringify(initialStatus(week, "ready")));
+  const ledger = buildLedger({ outRoot: root, currentWeekOf: "2026-09-28" });
+  assert.equal(ledger.find((e) => e.source === "batch").status, "ready");
+  assert.ok(!existsSync(join(root, "Week of 2026-09-28", "DONE.json")));
 });

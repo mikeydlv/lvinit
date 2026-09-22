@@ -54,7 +54,7 @@ function captionText(p) {
 
 function notesMd(p, week) {
   const L = [];
-  L.push(`# ${DAY_NAMES[p.day]}: ${p.title}`, "");
+  L.push(`# ${p.label ?? DAY_NAMES[p.day]}: ${p.title}`, "");
   L.push(`**Format:** ${p.format === "montage" ? "Reel (short montage)" : `Carousel, ${p.slides.length} slides`}  `);
   L.push(`**Category:** ${p.category}  `);
   L.push(`**Takeaway:** ${p.takeaway}  `);
@@ -100,7 +100,7 @@ async function previewHtml(week, posts) {
     for (const f of p.files.slice(0, big ? 10 : 10)) imgs.push(`<img src="${await thumb(f, big ? 300 : 220)}" alt="">`);
     const badge = p.format === "montage" ? `Reel · ${Math.round(p.duration)}s` : `Carousel · ${p.slides.length}`;
     return `<section class="post${big ? " lead" : ""}">
-  <header><span class="day">${DAY_NAMES[p.day]}</span><span class="badge">${badge}</span>${p.lead ? '<span class="badge gold">Strongest this week</span>' : ""}</header>
+  <header><span class="day">${esc(p.label ?? DAY_NAMES[p.day])}</span><span class="badge">${badge}</span>${p.lead ? '<span class="badge gold">Strongest this week</span>' : ""}</header>
   <h2>${esc(p.title)}</h2>
   <p class="take">${esc(p.takeaway)}</p>
   <div class="strip">${imgs.join("")}</div>
@@ -111,7 +111,7 @@ async function previewHtml(week, posts) {
   const body = [await card(lead, true)];
   for (const p of posts) body.push(await card(p));
   return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>LVINIT Week of ${esc(week.weekOf)}</title>
+<title>${esc(week.title ?? `LVINIT Week of ${week.weekOf}`)}</title>
 <style>
 :root{--bg:#FAFAF8;--ink:#111;--muted:#6E6A63;--line:#E8E6E1;--gold:#C8A46A;--blue:#2B6CB0;--card:#fff}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#121212;--ink:#F2F0EC;--muted:#A8A39A;--line:#2A2A2A;--card:#1A1A1A}}
@@ -129,8 +129,8 @@ h2{font-size:18px;margin:8px 0 4px}.take{margin:0 0 10px;color:var(--muted)}
 details{margin-top:8px}summary{cursor:pointer;color:var(--blue)}pre{white-space:pre-wrap;font:14px/1.5 inherit;background:transparent;margin:8px 0 0}
 .folder{font-size:12px;color:var(--muted);margin:8px 0 0}
 </style></head><body><main>
-<h1>LVINIT · Week of ${esc(week.weekOf)}</h1>
-<p class="sub">${posts.length} finished posts, Monday–Sunday. Drafts only; nothing has been published. ${esc(week.note ?? "")}</p>
+<h1>${esc(week.title ?? `LVINIT · Week of ${week.weekOf}`)}</h1>
+<p class="sub">${esc(week.subtitle ?? `${posts.length} finished posts, Monday–Sunday. Drafts only; nothing has been published.`)} ${esc(week.note ?? "")}</p>
 ${(week.exceptions ?? []).length ? `<section class="post exceptions"><h2>Needs your decision</h2>${week.exceptions.map((x) => `<p><b>${esc(DAY_NAMES[x.day] ?? x.day)}: ${esc(x.title ?? "")}</b><br>${x.issues.map((i) => esc(i.message)).join("<br>")}<br><i>${esc(x.resolution)}</i></p>`).join("")}</section>` : ""}
 ${body.join("\n")}
 ${(week.gaps ?? []).length ? `<p class="folder">${week.gaps.map((g) => esc(g)).join("<br>")}</p>` : ""}
@@ -173,7 +173,7 @@ export async function renderPost(p, i, { weekDir, week, mediaRoot }) {
 export async function packageWeek(week, weekDir, posts, log = () => {}) {
   writeFileSync(join(weekDir, "preview.html"), await previewHtml(week, posts));
   for (const p of posts) for (const f of readdirSync(p.dir)) if (f.startsWith(".frame-")) rmSync(join(p.dir, f));
-  const zip = join(weekDir, `LVINIT-week-${week.weekOf}.zip`);
+  const zip = join(weekDir, week.zipName ?? `LVINIT-week-${week.weekOf}.zip`);
   rmSync(zip, { force: true });
   const tar = process.platform === "win32" ? join(process.env.SystemRoot ?? "C:\\Windows", "System32", "tar.exe") : "tar";
   execFileSync(tar, ["-a", "-c", "-f", zip, "-C", weekDir, ...posts.map((p) => p.folder), "preview.html"]);
