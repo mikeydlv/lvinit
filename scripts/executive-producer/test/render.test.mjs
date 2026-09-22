@@ -13,7 +13,10 @@ test("the approved style: white text, soft shadow, small wordmark, and no panels
   const svg = overlaySvg({ W: 1080, H: 1350, headline: "Headline", body: "Body copy", counter: "1/7" }).toString();
   assert.doesNotMatch(svg, /<rect|<path|<circle|linearGradient|radialGradient/);
   assert.match(svg, /fill="#FFFFFF"/);
-  assert.match(svg, /feDropShadow[^>]*flood-opacity="0\.\d+"/);
+  // Shadows are built only from the letters themselves (SourceAlpha), never a shape behind them.
+  assert.match(svg, /<feGaussianBlur in="SourceAlpha"/);
+  assert.match(svg, /flood-opacity="0\.\d+"/);
+  assert.doesNotMatch(svg, /BackgroundImage|feImage/);
   assert.match(svg, /<tspan fill="#FFFFFF">LVI<\/tspan><tspan fill="#C8A46A">NIT<\/tspan>/);
 });
 
