@@ -161,9 +161,13 @@ export async function runWeek(argv = process.argv.slice(2), { log = console.log,
     const ledger = await step("ledger", async () => {
       const own = [];
       if (hasApify && env.LVINIT_INSTAGRAM) {
-        const r = await apify.ownRecentPosts({ instagram: env.LVINIT_INSTAGRAM, tiktok: env.LVINIT_TIKTOK, token: env.APIFY_TOKEN, fetchImpl });
-        own.push(...r.posts);
-        addCost("apify", "ledger", r.usd);
+        try {
+          const r = await apify.ownRecentPosts({ instagram: env.LVINIT_INSTAGRAM, tiktok: env.LVINIT_TIKTOK, token: env.APIFY_TOKEN, fetchImpl });
+          own.push(...r.posts);
+          addCost("apify", "ledger", r.usd);
+        } catch (e) {
+          report.gaps.unshift(`Your recent Instagram/TikTok posts couldn't be refreshed (${String(e.message).slice(0, 120)}); duplicate checks used the last saved snapshot.`);
+        }
       } else {
         report.notConfigured.push("Instagram/TikTok recent posts: not refreshed (Apify not configured); the live-session snapshot was used for Instagram.");
       }
@@ -203,7 +207,14 @@ export async function runWeek(argv = process.argv.slice(2), { log = console.log,
         return Object.assign([], { note: "not run: no APIFY_TOKEN" });
       }
       const queries = (env.LVINIT_RESEARCH_QUERIES ?? "moving to las vegas,las vegas neighborhoods,summerlin,henderson nevada,las vegas homes,relocation tips,first time home buyer tips,hoa fees").split(",").map((s) => s.trim());
-      const r = await apify.research({ queries, token: env.APIFY_TOKEN, fetchImpl });
+      let r;
+      try {
+        r = await apify.research({ queries, token: env.APIFY_TOKEN, fetchImpl });
+      } catch (e) {
+        // Out of Apify credit or a scraper outage: still deliver the week, on evergreen topics, and say so.
+        report.gaps.unshift(`Creator research didn't run this week (${String(e.message).slice(0, 120)}). Posts are evergreen; no "recent example" references.`);
+        return Object.assign([], { note: "research unavailable; evergreen week" });
+      }
       addCost("apify", "research", r.usd);
       report.apifyRuns = r.runs;
       return Object.assign(r.posts, { note: `${r.posts.length} posts from ${queries.length} queries` });
