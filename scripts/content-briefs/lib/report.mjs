@@ -114,6 +114,14 @@ export function buildJsonReport({ analysis, config, meta }) {
       policy: "Any grouped query touching a protected class or recognized proxy excludes the whole intent. Reuses the GSC agent's rules through the Internal Linking Agent's single 'single-family' property-type exemption.",
       excluded: a.exclusions,
     },
+    navigationalQueries: {
+      policy:
+        "Address and street lookups are set aside before grouping so they cannot dilute a real neighborhood intent. This is NOT a Fair Housing exclusion and says nothing about the searcher: the raw rows are preserved here, and they count toward no brief's demand, score or confidence. A query about traffic, construction, development, access or a neighborhood is never treated this way, however many road words it contains.",
+      code: "NAVIGATIONAL_STREET_QUERY",
+      count: a.navigational?.length ?? 0,
+      impressions: (a.navigational ?? []).reduce((s, n) => s + n.raw.impressions, 0),
+      queries: a.navigational ?? [],
+    },
     inventory: inventorySummary(a.inventory),
     notes: a.notes,
     prohibited: PROHIBITED_ACTIONS,
@@ -179,7 +187,7 @@ export function buildMarkdownReport({ analysis, config, meta }) {
   }
   const s = a.selection;
   push(
-    `${a.groupsFound} search intent${a.groupsFound === 1 ? "" : "s"} found · ${a.thin.groups} below the ${a.thin.threshold}-impression minimum · ${a.exclusions.length} excluded (Fair Housing) · ${a.rejected.length} rejected · ${s.newBriefs.length} new-content brief${s.newBriefs.length === 1 ? "" : "s"} · ${s.updateBriefs.length} update brief${s.updateBriefs.length === 1 ? "" : "s"} · ${s.reportOnly.length} report-only`,
+    `${a.groupsFound} search intent${a.groupsFound === 1 ? "" : "s"} found · ${a.thin.groups} below the ${a.thin.threshold}-impression minimum · ${(a.navigational ?? []).length} address/street lookups set aside · ${a.exclusions.length} excluded (Fair Housing) · ${a.rejected.length} rejected · ${s.newBriefs.length} new-content brief${s.newBriefs.length === 1 ? "" : "s"} · ${s.updateBriefs.length} update brief${s.updateBriefs.length === 1 ? "" : "s"} · ${s.reportOnly.length} report-only`,
     ""
   );
   for (const note of a.notes) push(`- ${note}`);
@@ -285,6 +293,19 @@ export function buildMarkdownReport({ analysis, config, meta }) {
     push("");
   }
 
+  // --- Navigational queries ------------------------------------------------
+  const nav = a.navigational ?? [];
+  if (nav.length) {
+    push("## Address and street lookups (not briefed)", "");
+    push(
+      "Set aside **before** grouping so they cannot dilute a real neighborhood intent. This is not a Fair Housing exclusion and says nothing about the searcher — the raw numbers are below, and they count toward no brief.",
+      ""
+    );
+    push("| Query | Impr. (RAW) | Clicks | Pos. | Why |", "|---|---:|---:|---:|---|");
+    for (const n of nav) push(`| ${escapeCell(n.query)} | ${n.raw.impressions} | ${n.raw.clicks} | ${pos(n.raw.position)} | ${n.kind} ("${escapeCell(n.matched)}") |`);
+    push("", "*A query about traffic, construction, development, access or a neighborhood is never set aside this way — a roadway in a query is not noise by itself.*", "");
+  }
+
   // --- How it decides ------------------------------------------------------------
   push("## How this report decides", "");
   push(
@@ -355,7 +376,7 @@ export function summaryLines(analysis) {
   const a = analysis;
   const lines = [];
   lines.push(`  Search demand: ${a.gsc.available ? `${a.gsc.reportDate} (${a.gsc.mode})` : `UNAVAILABLE — ${a.gsc.reason}`}`);
-  lines.push(`  Intents:       ${a.groupsFound} found, ${a.thin.groups} below minimum, ${a.exclusions.length} Fair Housing excluded, ${a.rejected.length} rejected`);
+  lines.push(`  Intents:       ${a.groupsFound} found, ${a.thin.groups} below minimum, ${(a.navigational ?? []).length} address/street lookups, ${a.exclusions.length} Fair Housing excluded, ${a.rejected.length} rejected`);
   lines.push(`  Briefs:        ${a.selection.newBriefs.length} new-content, ${a.selection.updateBriefs.length} update, ${a.selection.reportOnly.length} report-only`);
   lines.push(`  Handoff:       ${a.queue.queue.length} ${a.queue.mode === "live" ? "queued" : "would be handed off (dry run)"}`);
   if (a.queue.queue.length === 0) lines.push("  No high-confidence content briefs this week.");

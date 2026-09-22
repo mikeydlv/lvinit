@@ -251,6 +251,94 @@ export function shortHash(text) {
   return createHash("sha1").update(String(text)).digest("hex").slice(0, 12);
 }
 
+// ---------------------------------------------------------------------------
+// NAVIGATIONAL / ADDRESS QUERIES
+//
+// "summerlin avenue" and "summerlin rd" are someone looking for a road. They
+// are not the same question as "where is summerlin" or "summerlin nv
+// neighborhood guide", and grouping them together drags a real neighborhood
+// intent's clarity down (it did, in the 22 September 2026 run: clarity 0.6).
+//
+// The rule is deliberately NARROW, because LVINIT writes about roads all the
+// time. A query is navigational only when BOTH hold:
+//
+//   1. a street NAME meets a street SUFFIX at the end of the query (allowing a
+//      trailing city/state/ZIP), optionally with a house number in front, and
+//   2. nothing in the query is about transportation, development, access,
+//      traffic, construction, a neighborhood, or housing.
+//
+// So "summerlin parkway traffic", "road construction summerlin", "charleston
+// boulevard redevelopment", "i-15 construction las vegas" and "water street
+// district henderson" all stay — a roadway in a query is not noise by itself.
+//
+// An excluded query is NOT a Fair Housing exclusion and is not a judgement
+// about the searcher. Its raw row is preserved and reported; it simply never
+// counts toward editorial demand, scoring or confidence.
+// ---------------------------------------------------------------------------
+
+/** Suffixes that can END a street name. "trail" is deliberately absent — LVINIT writes about trails. */
+const STREET_SUFFIX =
+  "rd|road|st|street|ave|avenue|blvd|boulevard|dr|drive|ln|lane|ct|court|way|pkwy|parkway|hwy|highway|cir|circle|pl|place";
+
+/** A house number at the front: "1234 summerlin avenue". */
+const ADDRESS_PREFIX = /^\d{1,6}\s+\S/;
+
+/**
+ * Words that make a query editorial rather than an address lookup: it is about
+ * getting somewhere, what is being built, what it is like, or living there.
+ */
+const EDITORIAL_CONTEXT =
+  /\b(traffic|congestion|construction|closure|closures|closed|closing|widening|expansion|extension|improvements?|project|projects|redevelopment|development|corridor|interchange|exit|access|commute|commuting|drive\s+time|how\s+(do|to)\s+get|where\s+is|where's|directions|map|maps|guide|neighborhood|neighbourhood|area|areas|district|community|communities|suburb|zip|homes?|houses?|housing|condos?|townhomes?|apartments?|real\s+estate|rent|rental|renting|lease|buy|buying|price|prices|cost|costs|living|live|moving|move|relocat\w*|school|schools|park|parks|trail|trails|restaurants?|shops?|shopping|bus|rtc|transit|route)\b/;
+
+/**
+ * Is this query an address or street lookup rather than an editorial question?
+ *
+ * @param {string} normalizedText  the output of normalizeQuery().text
+ * @param {string[]} entities      entities already extracted from it
+ * @returns {{code:string, matched:string, kind:string}|null}
+ */
+export function classifyNavigational(normalizedText, entities = []) {
+  const text = String(normalizedText ?? "").trim();
+  if (!text) return null;
+
+  // A query about transport, development, access or a neighborhood is never an
+  // address lookup, however many road words it carries.
+  if (EDITORIAL_CONTEXT.test(` ${text} `)) return null;
+  // Neither is one that names a housing decision or an angle LVINIT covers.
+  if (entities.some((k) => k.startsWith("concept:") || k.startsWith("facet:"))) return null;
+
+  // A street name meeting a suffix, at the end of the query. A trailing city,
+  // state or ZIP is allowed, because "summerlin avenue las vegas" is the same
+  // lookup as "summerlin avenue".
+  const tail = "(?:\\s+(?:las\\s+vegas|vegas|nv|nevada|henderson|summerlin|\\d{5}))*";
+  const streetRe = new RegExp(`\\b([a-z][a-z'’-]*)\\s+(${STREET_SUFFIX})\\b${tail}\\s*$`);
+  const m = streetRe.exec(text);
+  if (!m) return null;
+
+  return {
+    code: "NAVIGATIONAL_STREET_QUERY",
+    matched: `${m[1]} ${m[2]}`,
+    kind: ADDRESS_PREFIX.test(text) ? "address lookup" : "street lookup",
+  };
+}
+
+/**
+ * Split raw query rows into the ones that carry editorial intent and the
+ * navigational ones. Navigational rows keep their raw metrics for the report.
+ */
+export function partitionNavigational(rows = []) {
+  const editorial = [];
+  const navigational = [];
+  for (const row of rows) {
+    const { text } = normalizeQuery(row.query);
+    const { entities } = extractEntities(text);
+    const verdict = classifyNavigational(text, entities);
+    if (verdict) navigational.push({ query: row.query, raw: { clicks: row.clicks, impressions: row.impressions, ctr: row.ctr, position: row.position }, ...verdict });
+    else editorial.push(row);
+  }
+  return { editorial, navigational };
+}
+
 /**
  * Group query rows into intents.
  *

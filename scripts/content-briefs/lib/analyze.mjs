@@ -9,7 +9,7 @@
 // ---------------------------------------------------------------------------
 
 import { ACTIONS, BRIEF_ACTIONS, NEW_ACTIONS } from "../config.mjs";
-import { groupQueries } from "./intent.mjs";
+import { groupQueries, partitionNavigational } from "./intent.mjs";
 import { checkCoverage, CLUSTER_TOPICS } from "./coverage.mjs";
 import { gateGroup, classifyGroup } from "./classify.mjs";
 import { scoreOpportunity, confidenceFor } from "./score.mjs";
@@ -35,7 +35,19 @@ export function analyze({ gsc, inventory, factDecay, internalLinks, previousRepo
   }
   if (!published.available) notes.push(`Publisher execution status is unverified: ${published.reason}. Handoff is blocked until it can be read.`);
 
-  const groups = groupQueries({ currentRows: rows.current, previousRows: rows.previous, currentPairs: rows.pairs });
+  // Address and street lookups are set aside BEFORE grouping, so they cannot
+  // dilute a real neighborhood intent's clarity or inflate its demand. Their
+  // raw rows are kept and reported; this is not a Fair Housing exclusion.
+  const { editorial: currentEditorial, navigational } = partitionNavigational(rows.current);
+  const { editorial: previousEditorial } = partitionNavigational(rows.previous);
+  if (navigational.length) {
+    const impressions = navigational.reduce((s, n) => s + n.raw.impressions, 0);
+    notes.push(
+      `${navigational.length} address or street lookup${navigational.length === 1 ? "" : "s"} (${impressions} impressions) were set aside before grouping as NAVIGATIONAL_STREET_QUERY. They are listed in full below and counted toward no brief.`
+    );
+  }
+
+  const groups = groupQueries({ currentRows: currentEditorial, previousRows: previousEditorial, currentPairs: rows.pairs });
 
   const exclusions = [];
   const rejections = [];
@@ -253,6 +265,7 @@ export function analyze({ gsc, inventory, factDecay, internalLinks, previousRepo
     demandTotals: demandTotals(gsc, rows),
     groupsFound: groups.length,
     thin: { groups: thinGroups, impressions: thinImpressions, threshold: config.demand.minGroupImpressions },
+    navigational,
     exclusions,
     opportunities,
     selection: { newBriefs, updateBriefs, reportOnly, stillOpen, overflow },

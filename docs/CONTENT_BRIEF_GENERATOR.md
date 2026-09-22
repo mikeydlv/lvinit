@@ -152,6 +152,38 @@ Every group keeps its queries with their **raw** metrics. Group totals are
 labelled **calculated**. Which pages Google showed comes from the query+page
 rows only, so query and page aggregation are never mixed.
 
+### Address and street lookups are set aside first
+
+"summerlin avenue" and "summerlin rd" are someone looking for a road. They are
+not the question "where is summerlin" or "summerlin nv neighborhood guide", and
+grouping them together drags a real neighborhood intent's clarity down — it did,
+in the 22 September 2026 run (clarity 0.6, which blocked the brief as
+`INTENT_UNCLEAR`).
+
+So before grouping, a query is set aside as **`NAVIGATIONAL_STREET_QUERY`**
+when **both** hold:
+
+1. a street **name** meets a street **suffix** at the end of the query (`rd`,
+   `road`, `st`, `street`, `ave`, `avenue`, `blvd`, `boulevard`, `dr`, `drive`,
+   `ln`, `lane`, `ct`, `court`, `way`, `pkwy`, `parkway`, `hwy`, `highway`,
+   `cir`, `circle`, `pl`, `place`), allowing a trailing city, state or ZIP, and
+   optionally a house number in front; **and**
+2. **nothing** in the query is about traffic, construction, closures, a project
+   or redevelopment, access, a commute, directions, a map, a neighborhood, a
+   district, or housing.
+
+The rule is deliberately narrow, because LVINIT writes about roads constantly.
+These all stay: *summerlin parkway traffic*, *road construction summerlin*,
+*charleston boulevard redevelopment*, *i-15 construction las vegas*, *water
+street district henderson*, *summerlin las vegas map*, *where is summerlin*.
+**A roadway in a query is not noise by itself.** `trail` is deliberately not a
+suffix, because LVINIT writes about trails.
+
+This is **not** a Fair Housing exclusion and says nothing about the searcher.
+The raw rows are preserved and listed in their own report section with their
+impressions, clicks and position, and they count toward no brief's demand,
+score or confidence.
+
 ## How intent is determined
 
 * **Intent type and depth** — the GSC agent's `classifyIntent` (relocation

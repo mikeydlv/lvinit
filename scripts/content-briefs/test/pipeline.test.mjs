@@ -237,3 +237,28 @@ test("Internal Linking signal: a GSC internal-link finding already fixed in the 
   assert.match(analysis.pageSignals[0].reason, /Already done/);
   assert.equal(analysis.opportunities.length, 0, "a page-level finding never becomes a brief");
 });
+
+test("address/street lookups are reported separately from Fair Housing and count toward no brief", () => {
+  const report = gscReport({
+    queries: [qrow("summerlin nv neighborhood guide", 30, 0, 20), qrow("where is summerlin", 20, 0, 30), qrow("summerlin avenue", 40, 0, 52), qrow("2150 water street", 30, 0, 60)],
+  });
+  const { analysis, config } = run({ report });
+  assert.equal(analysis.navigational.length, 2);
+  assert.deepEqual(analysis.navigational.map((n) => n.query).sort(), ["2150 water street", "summerlin avenue"]);
+  assert.equal(analysis.exclusions.length, 0, "this is NOT a Fair Housing exclusion");
+
+  const summerlin = analysis.opportunities.find((o) => o.intentKey === "topic:place:summerlin");
+  assert.equal(summerlin.metrics.impressions, 50, "only the editorial queries count toward demand");
+  assert.ok(!summerlin.queries.some((q) => /avenue|street/.test(q.query)));
+
+  const json = buildJsonReport({ analysis, config, meta: {} });
+  assert.equal(json.navigationalQueries.count, 2);
+  assert.equal(json.navigationalQueries.code, "NAVIGATIONAL_STREET_QUERY");
+  assert.equal(json.navigationalQueries.impressions, 70);
+  assert.ok(json.navigationalQueries.queries[0].raw, "raw GSC data is preserved for audit");
+  assert.match(json.navigationalQueries.policy, /NOT a Fair Housing exclusion/);
+
+  const md = buildMarkdownReport({ analysis, config, meta: {} });
+  assert.match(md, /## Address and street lookups \(not briefed\)/);
+  assert.match(md, /summerlin avenue/);
+});

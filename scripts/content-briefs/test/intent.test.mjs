@@ -1,7 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 
-import { analyzeQuery, groupQueries, normalizeQuery } from "../lib/intent.mjs";
+import { analyzeQuery, classifyNavigational, extractEntities, groupQueries, normalizeQuery, partitionNavigational } from "../lib/intent.mjs";
 import { qrow, prow } from "./helpers.mjs";
 
 // ---------------------------------------------------------------------------
@@ -120,4 +120,66 @@ test("intent clarity drops when grouped phrasings ask different things", () => {
 test("unrelated generic queries do not merge into one blob", () => {
   const groups = groupQueries({ currentRows: [qrow("las vegas weather", 10), qrow("las vegas zip", 10)] });
   assert.equal(groups.length, 2);
+});
+
+// ---------------------------------------------------------------------------
+// Navigational / address queries
+//
+// A road in a query is not noise by itself. Only an address or street LOOKUP
+// is set aside, and only when nothing in the query is about transport,
+// development, access or a neighborhood.
+// ---------------------------------------------------------------------------
+
+const navVerdict = (q) => {
+  const { text } = normalizeQuery(q);
+  return classifyNavigational(text, extractEntities(text).entities);
+};
+
+test("address and street lookups are classified as navigational", () => {
+  for (const q of ["summerlin avenue", "summerlin rd", "1234 summerlin avenue", "2150 water street"]) {
+    const v = navVerdict(q);
+    assert.ok(v, `expected "${q}" to be navigational`);
+    assert.equal(v.code, "NAVIGATIONAL_STREET_QUERY");
+  }
+  assert.equal(navVerdict("1234 summerlin avenue").kind, "address lookup");
+  assert.equal(navVerdict("summerlin avenue").kind, "street lookup");
+  assert.equal(navVerdict("summerlin avenue las vegas").code, "NAVIGATIONAL_STREET_QUERY", "a trailing city does not change the lookup");
+});
+
+test("legitimate place, neighborhood, development, transport and access queries are KEPT", () => {
+  for (const q of [
+    "where is summerlin",
+    "summerlin nv neighborhood guide",
+    "summerlin las vegas map",
+    "summerlin parkway traffic",
+    "road construction summerlin",
+    "charleston boulevard redevelopment",
+    "i-15 construction las vegas",
+    "water street district henderson",
+    "summerlin area",
+    "homes on summerlin parkway",
+    "st rose parkway closure",
+    "boulder highway redevelopment",
+    "rtc route to summerlin",
+  ]) {
+    assert.equal(navVerdict(q), null, `expected "${q}" to be kept`);
+  }
+});
+
+test("a navigational query is set aside before grouping, with its raw row preserved", () => {
+  const rows = [qrow("summerlin nv neighborhood guide", 5), qrow("summerlin avenue", 2, 0, 52), qrow("where is summerlin", 3)];
+  const { editorial, navigational } = partitionNavigational(rows);
+  assert.deepEqual(editorial.map((r) => r.query), ["summerlin nv neighborhood guide", "where is summerlin"]);
+  assert.equal(navigational.length, 1);
+  assert.deepEqual(navigational[0].raw, { clicks: 0, impressions: 2, ctr: 0, position: 52 }, "raw GSC data is preserved for audit");
+  assert.equal(navigational[0].code, "NAVIGATIONAL_STREET_QUERY");
+});
+
+test("street lookups never reach a group, so they cannot inflate demand or dilute clarity", () => {
+  const rows = [qrow("summerlin nv neighborhood guide", 5), qrow("where is summerlin", 3), qrow("summerlin rd", 2), qrow("summerlin avenue", 2)];
+  const { editorial } = partitionNavigational(rows);
+  const groups = groupQueries({ currentRows: editorial });
+  assert.equal(groups.length, 1);
+  assert.equal(groups[0].metrics.impressions, 8, "only the editorial queries count");
+  assert.equal(groups[0].queries.length, 2);
 });
