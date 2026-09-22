@@ -245,13 +245,14 @@ export const guides: Guide[] = [
     date: "September 2026",
     publishedAt: "2026-09-19",
     category: "Local Feature",
-    // No repo photography of this specific, not-yet-open building exists, and
-    // C:\LVINIT\Images was confirmed unreachable from this Linux cloud
-    // session. Generated LVINIT editorial cover per the standard fallback
-    // order — see the command logged in the article's own header comment.
+    // UPDATED 2026-09-22 — Mikey shot the building himself and supplied real,
+    // first-party photography, replacing the generated placeholder cover
+    // (see the article's own header comment for the full note). Genuine
+    // photograph, so no imageMode override.
     image:
-      "/images/covers/henderson-sport-social-grand-opening-editorial-cover.webp",
-    imageMode: "editorial-cover",
+      "/images/hero/henderson-sport-social-exterior-signage-hero.webp",
+    imageAlt:
+      "Straight-on view of the Henderson Sport & Social building's gray and tan metal-panel exterior with HENDERSON SPORT & SOCIAL facade lettering, mountains and blue sky behind it, and construction equipment still parked on site in front of the building",
     href: "/guides/henderson-sport-social-grand-opening",
   },
   {

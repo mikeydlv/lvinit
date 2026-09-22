@@ -7,6 +7,7 @@ import {
   StoryLede,
   StorySection,
   StoryPullQuote,
+  StoryGallery,
 } from "@/components/story";
 
 // ---------------------------------------------------------------------------
@@ -79,15 +80,35 @@ import {
 //   funding structure, and — as of this piece's publish date — not approved,
 //   let alone built.
 //
-// IMAGERY — C:\LVINIT\Images was checked for and confirmed not reachable
-// from this Linux cloud session (it's a path on Mikey's local Windows
-// machine, not mounted here). No existing repo photography depicts this
-// specific building — it doesn't open to the public until Oct. 16, 2026, and
-// LVINIT has no rights to KemperSports' or the city's own renderings. Per the
-// standard fallback order, this piece carries a generated LVINIT editorial
-// cover (registered in lib/content.ts as the card image only, imageMode
-// "editorial-cover") and a photoless StoryHero — never a stand-in photo of
-// Henderson generally.
+// IMAGERY — UPDATED 2026-09-22: Mikey shot the building himself and supplied
+// two original, first-party photos, replacing the generated placeholder
+// setup below. Both show the site pre-opening — active construction
+// equipment and materials are visible in both frames, which the alt text and
+// captions say plainly. Neither claims a finished, open building.
+//   - Hero (straight-on exterior elevation, gray/tan metal-panel cladding,
+//     "HENDERSON SPORT & SOCIAL" facade lettering, a backhoe/water truck/
+//     boom lift parked out front): ordinary resize + WebP conversion only,
+//     no crop, no color/content changes.
+//     -> public/images/hero/henderson-sport-social-exterior-signage-hero.webp
+//   - Inline figure (angled elevated view of the navy entrance plaza — the
+//     mural, "CHEERS/CELEBRATE/CONNECT/COMPETE" banners, second-floor patio,
+//     benches, and the fenced mini-golf course, with construction materials
+//     still staged on the right side of the plaza): ordinary resize + WebP
+//     conversion only, placed in "What's actually inside," the section this
+//     shot actually illustrates (entertainment-side amenities).
+//     -> public/images/features/henderson-sport-social-entrance-plaza-mini-golf.webp
+// The generated editorial cover below is now superseded as the lib/content.ts
+// card image (real photography always wins per LVINIT's photography rules)
+// but the file itself is left in place/unreferenced rather than deleted.
+//
+// ORIGINAL NOTE (pre-2026-09-22, kept for history) — C:\LVINIT\Images was
+// checked for and confirmed not reachable from this Linux cloud session
+// (it's a path on Mikey's local Windows machine, not mounted here). No
+// existing repo photography depicted this specific building at the time —
+// it hadn't opened to the public yet, and LVINIT has no rights to
+// KemperSports' or the city's own renderings. Per the standard fallback
+// order, this piece originally carried a generated LVINIT editorial cover
+// and a photoless StoryHero:
 //   node scripts/generate-guide-cover.mjs \
 //     --slug henderson-sport-social-grand-opening --category "Local Feature" \
 //     --subject "Henderson Sport & Social"
@@ -104,6 +125,11 @@ const meta: StoryMeta = {
   description:
     "The $70 million, 180,000-square-foot sports and entertainment complex at St. Rose and Maryland Parkways has a confirmed grand-opening date. What's actually inside, what it costs, and how it's different from the Fiesta Henderson site.",
   path: PATH,
+  image: "/images/hero/henderson-sport-social-exterior-signage-hero.webp",
+  imageWidth: 2000,
+  imageHeight: 1500,
+  imageAlt:
+    "Straight-on view of the Henderson Sport & Social building's gray and tan metal-panel exterior with HENDERSON SPORT & SOCIAL facade lettering, mountains and blue sky behind it, and construction equipment still parked on site in front of the building",
   datePublished: "2026-09-19",
   author: "LVINIT Editorial",
   breadcrumbs: [
@@ -164,6 +190,9 @@ export default function HendersonSportSocialGrandOpeningPage() {
           "Henderson Sport & Social Opens October 16. Here's What West Henderson Is Getting",
         subheadline:
           "The $70 million, 180,000-square-foot sports and entertainment complex the city broke ground on in May 2025 as the West Henderson Fieldhouse has a confirmed grand-opening date, a new name, and a full list of what's actually inside.",
+        image: "/images/hero/henderson-sport-social-exterior-signage-hero.webp",
+        imageAlt:
+          "Straight-on view of the Henderson Sport & Social building's gray and tan metal-panel exterior with HENDERSON SPORT & SOCIAL facade lettering, mountains and blue sky behind it, and construction equipment — a backhoe, water truck, and boom lift — still parked on site in front of the building",
         backLink: { label: "LVINIT", href: "/" },
         ctas: [
           { label: "See the numbers", href: "#by-the-numbers", variant: "primary" },
@@ -308,6 +337,18 @@ export default function HendersonSportSocialGrandOpeningPage() {
           like birthday parties.
         </p>
       </StorySection>
+
+      <StoryGallery
+        columns={1}
+        images={[
+          {
+            src: "/images/features/henderson-sport-social-entrance-plaza-mini-golf.webp",
+            alt: "Elevated angled view of Henderson Sport & Social's navy-blue entrance plaza, with CHEERS, CELEBRATE, CONNECT, and COMPETE banners, a mural, a second-floor patio with seating, benches, and the fenced mini-golf course with blue umbrellas to the right; construction materials are still staged on the plaza's edge",
+            caption:
+              "The entrance plaza and mini-golf course, shot September 22, 2026 — still pre-opening, with construction materials staged on site.",
+          },
+        ]}
+      />
 
       <StorySection heading="How Henderson paid for it">
         <p className="text-body-lg text-lvinit-warmgray">
