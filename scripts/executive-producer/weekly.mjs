@@ -15,13 +15,13 @@
 //   3. plan      7 posts + 3 backups (Claude, text only)
 //   4. verify    local gate (duplicates, superlatives, comparisons, money/law,
 //                generic, distinct takeaways) + Claude claim-by-claim check;
-//                one automatic revision; still failing → backup
+//                two rewrites, a backup, then new posts for any missing day
 //   5. frames    candidates from approved footage, scored locally (sharpness,
 //                text band, no repeats); Claude picks from low-res candidates unless LVINIT_VISION_FRAMES=off
 //   6. render    slides / reel
 //   7. review    local readability + repeated-image checks, then Claude looks at
 //                every finished post; fixes (text position, new frame) are
-//                applied and re-checked once; what remains is an exception with
+//                applied over three rounds; what remains is an exception with
 //                a recommended resolution
 //   8. package   week.json, status.json (all drafts), preview.html, ZIP
 //   9. notify    email (Resend) + Windows notification, success or failure

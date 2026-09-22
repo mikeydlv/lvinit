@@ -52,10 +52,10 @@ node scripts/executive-producer/rehearsal/run-rehearsal.mjs   # full chain, paid
 | ledger | Refresh Mikey's recent posts (Instagram/TikTok via Apify, YouTube from his public channel); mark drafts that were actually posted as published | Apify, YouTube |
 | research | Other creators on Instagram and TikTok | Apify |
 | plan | 7 posts + 3 backups | Claude (text) |
-| verify | Local gate + claim-by-claim meaning check against the cited evidence; one automatic revision; still failing → backup | Claude (text) |
+| verify | Local gate + claim-by-claim meaning check against the cited evidence; up to two rewrites (unsupported sentences are deleted, not reworded); then a backup through the same check; any day still missing gets a new post written for it and checked, so the week reaches seven | Claude (text) |
 | frames | Candidates from approved footage; local variety rules (no repeats, no burst twins, clip moments far apart); Claude picks from a low-res sheet | Claude (images) |
 | render | Slides / reel | local |
-| review | Local readability and repeat checks, then Claude reviews every finished post (readability, crop, relevance, repeats, excluded content); fixes are applied and re-checked once; what remains becomes an exception with a recommended resolution | Claude (images) |
+| review | Claude reviews every finished post (readability, crop, relevance, repeats, excluded content). Readability: move text, then pull exposure (two steps), then change the image. Wrong/private/repeated image: exclude it and search wider. Three repair rounds; a middle slide with no usable image is dropped (4+ slides kept). What remains becomes an exception with a recommended resolution | Claude (images) |
 | package | `week.json`, `status.json`, preview, ZIP | local |
 | notify | Email (Resend) + Windows notification, success or failure | Resend |
 
