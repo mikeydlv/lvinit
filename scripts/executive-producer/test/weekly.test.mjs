@@ -6,7 +6,7 @@ import { join } from "node:path";
 
 import sharp from "sharp";
 
-import { runWeek } from "../weekly.mjs";
+import { runWeek, mondayOf } from "../weekly.mjs";
 import { buildLedger, similarity, reconcilePublished, initialStatus } from "../lib/ledger.mjs";
 import { checkComparatives, checkDistinctTakeaways, checkDuplicate } from "../lib/gate.mjs";
 import { composeMessage } from "../lib/notify.mjs";
@@ -178,4 +178,11 @@ test("unattended run failure: RUN-FAILED.md and a failure email", { timeout: 600
   assert.equal(sent.length, 1);
   assert.match(sent[0].subject, /FAILED \(plan\)/);
   assert.match(sent[0].text, /simulated API outage/);
+});
+
+test("mondayOf: a Sunday-evening run produces the week starting the next day", () => {
+  assert.equal(mondayOf(new Date("2026-09-28T02:00:00Z")), "2026-09-28"); // Sun Sep 27, 7 PM Pacific
+  assert.equal(mondayOf(new Date("2026-09-26T20:00:00Z")), "2026-09-28"); // Saturday
+  assert.equal(mondayOf(new Date("2026-09-28T16:00:00Z")), "2026-09-28"); // Monday catch-up
+  assert.equal(mondayOf(new Date("2026-10-01T16:00:00Z")), "2026-09-28"); // Thursday catch-up
 });

@@ -60,11 +60,18 @@ export function loadEnv(file) {
   return keys;
 }
 
-/** Monday of the current week in Las Vegas time. */
+/**
+ * The week to produce, in Las Vegas time. The run is scheduled Sunday evening,
+ * so on Saturday or Sunday it is the week starting next Monday;
+ * Monday through Friday (a missed Sunday run catching up) it's the current week.
+ */
 export function mondayOf(now = new Date()) {
   const la = new Date(now.toLocaleString("en-US", { timeZone: "America/Los_Angeles" }));
   const d = new Date(Date.UTC(la.getFullYear(), la.getMonth(), la.getDate()));
-  d.setUTCDate(d.getUTCDate() - ((d.getUTCDay() + 6) % 7));
+  const dow = d.getUTCDay();
+  if (dow === 0) d.setUTCDate(d.getUTCDate() + 1);
+  else if (dow === 6) d.setUTCDate(d.getUTCDate() + 2);
+  else d.setUTCDate(d.getUTCDate() - (dow - 1));
   return d.toISOString().slice(0, 10);
 }
 

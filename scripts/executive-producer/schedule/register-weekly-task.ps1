@@ -1,12 +1,13 @@
 # ---------------------------------------------------------------------------
-# Registers the Monday production run in Windows Task Scheduler.
-# NOT run automatically. Mikey confirms the time and timezone first, then:
+# Registers the weekly production run in Windows Task Scheduler.
+# Mikey chose Sunday 8:00 PM delivery (confirmed 2026-09-21), so it starts at 7:00 PM:
 #
-#   powershell -ExecutionPolicy Bypass -File scripts\executive-producer\schedule\register-monday-task.ps1 -At 05:00
+#   powershell -ExecutionPolicy Bypass -File scripts\executive-producer\schedule\register-weekly-task.ps1 -Day Sunday -At 19:00
 #
 # Behaviour:
-#   * Weekly, Monday at -At (this PC's local time; the script refuses to register
-#     unless the PC is on Pacific Time, so "5:00" means 5:00 AM Las Vegas time)
+#   * Weekly, on -Day at -At (this PC's local time; the script refuses to register
+#     unless the PC is on Pacific Time, so "19:00" means 7:00 PM Las Vegas time).
+#     On Saturday/Sunday it produces the week starting the next Monday.
 #   * WakeToRun: wakes the PC from sleep to run
 #   * StartWhenAvailable: if the PC was off at that time, runs at next startup
 #   * Retries twice, 30 minutes apart, if the run fails
@@ -18,7 +19,8 @@
 # ---------------------------------------------------------------------------
 param(
   [Parameter(Mandatory = $true)][string]$At,
-  [string]$TaskName = "LVINIT Monday Production"
+  [ValidateSet("Sunday","Monday","Saturday")][string]$Day = "Sunday",
+  [string]$TaskName = "LVINIT Weekly Production"
 )
 
 $tz = (Get-TimeZone).Id
@@ -33,10 +35,10 @@ $log = Join-Path $env:USERPROFILE ".lvinit\executive-producer\weekly.log"
 $cmd = "/c `"`"$node`" scripts\executive-producer\weekly.mjs >> `"$log`" 2>&1`""
 
 $action = New-ScheduledTaskAction -Execute "cmd.exe" -Argument $cmd -WorkingDirectory $repo
-$trigger = New-ScheduledTaskTrigger -Weekly -DaysOfWeek Monday -At $At
+$trigger = New-ScheduledTaskTrigger -Weekly -DaysOfWeek $Day -At $At
 $settings = New-ScheduledTaskSettingsSet -WakeToRun -StartWhenAvailable -MultipleInstances IgnoreNew `
   -RestartCount 2 -RestartInterval (New-TimeSpan -Minutes 30) -ExecutionTimeLimit (New-TimeSpan -Hours 2)
 
 Register-ScheduledTask -TaskName $TaskName -Action $action -Trigger $trigger -Settings $settings `
-  -Description "LVINIT Executive Producer: seven finished draft posts every Monday. Never publishes." -Force
-Write-Output "Registered '$TaskName' for Mondays at $At Pacific. Log: $log"
+  -Description "LVINIT Executive Producer: seven finished draft posts for the coming week. Never publishes." -Force
+Write-Output "Registered '$TaskName' for ${Day}s at $At Pacific. Log: $log"

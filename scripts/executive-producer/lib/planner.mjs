@@ -62,7 +62,8 @@ VOICE: Mikey's: direct, local, honest, a little opinionated. Not hype.`;
 
 async function client() {
   const { default: Anthropic } = await import("@anthropic-ai/sdk");
-  return new Anthropic();
+  // Always the public API with Mikey's key, never a proxy inherited from the shell.
+  return new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY, baseURL: "https://api.anthropic.com" });
 }
 
 function parseJson(text) {

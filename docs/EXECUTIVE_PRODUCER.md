@@ -35,7 +35,7 @@ films, edits the site, or contacts anyone but Mikey.
 
 ## Monday production (current direction)
 
-Every Monday the Producer delivers **seven finished draft posts** (Mon–Sun) to
+Every Sunday by 8:00 PM Pacific the Producer delivers **seven finished draft posts** for the coming week (Mon–Sun) to
 `OneDrive\Documents\LVINIT\Weekly Posts\Week of <date>\`, with one `preview.html`,
 a ZIP, and an email saying it's ready or that it failed and why. Nothing is ever
 published.
@@ -86,8 +86,10 @@ visible to the system; every run and email says so.
 
 ### Missed starts, duplicates, failures
 
-`schedule/register-monday-task.ps1` (registered only after Mikey confirms the
-time) runs weekly in Pacific time with WakeToRun and StartWhenAvailable, retries
+`schedule/register-weekly-task.ps1` starts the run **Sunday 7:00 PM Pacific**
+for delivery by 8:00 PM (Mikey's choice), producing the week that starts the
+next day. It wakes the PC (WakeToRun), catches up at next startup if the PC was
+off (StartWhenAvailable; a Monday–Friday catch-up produces the current week), retries
 twice, never overlaps. `DONE.json` makes re-runs of a finished week exit. Any
 failure writes `RUN-FAILED.md` and sends a failure email naming the step and
 reason. **Gap:** if the PC stays off all week, nothing runs and nothing is sent.
