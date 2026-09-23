@@ -27,16 +27,16 @@ export function statusRank(status) {
   return i === -1 ? -1 : i;
 }
 
-const FUTURE = /\b(will|would|set to|slated|expected|(?<!master[- ])planned|plans to|scheduled|targeted|could|aims? to|coming|next (year|spring|summer|fall|winter)|by (early |late )?20\d\d|in (early |late )?20\d\d|later this year)\b/;
+export const FUTURE = /\b(will|would|set to|slated|expected|(?<!master[- ])planned|plans to|scheduled|targeted|could|aims? to|coming|next (year|spring|summer|fall|winter)|by (early |late )?20\d\d|in (early |late )?20\d\d|later this year)\b/;
 
 /** A dated past reference: "opened there in 2021", "since 1963", "years ago". */
-const HISTORICAL = /\b(in|since|back in) (19|20)\d\d\b|\b(decades|years) ago\b|\bhistoric(al)?\b/;
+export const HISTORICAL = /\b(in|since|back in) (19|20)\d\d\b|\b(decades|years) ago\b|\bhistoric(al)?\b/;
 
 /** Wording that says it is open NOW, which a year in the sentence cannot undo. */
-const OPEN_NOW = /\b(now open|grand opening|ribbon[- ]cutting|opened (today|this week|on (monday|tuesday|wednesday|thursday|friday|saturday|sunday)))\b/;
+export const OPEN_NOW = /\b(now open|grand opening|ribbon[- ]cutting|opened (today|this week|on (monday|tuesday|wednesday|thursday|friday|saturday|sunday)))\b/;
 
 /** Language each status needs in its evidence quote. */
-const REQUIRES = {
+export const REQUIRES = {
   OPEN: /\b(now open|opened|opens|grand opening|officially open|is open|welcomed (its )?first|ribbon[- ]cutting|debuted)\b/,
   "UNDER CONSTRUCTION": /\b(under construction|construction (is )?(underway|began|begins|has begun|started)|broke ground|breaks ground|groundbreaking|crews (are|have)|topping[- ]out|being built|work (is )?underway|construction continues)\b/,
   APPROVED: /\b(approv\w*|green[- ]?light\w*|ok'?d|signed off|voted (\d+-\d+ )?to (approve|allow|advance)|authoriz\w*|unanimously (backed|passed)|won approval|entitle\w*)\b/,

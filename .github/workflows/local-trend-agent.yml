@@ -1,17 +1,26 @@
 # ---------------------------------------------------------------------------
 # LVINIT Local Trend Agent — daily 6:30 AM Pacific, weekly summary on Monday
 #
+# Includes the Development Watch module (docs/DEVELOPMENT_WATCH.md): same run,
+# same collection pass, so no source is polled twice. Development Watch is
+# report-only; its Publisher handoff queue is a dry run and nothing reads it.
+#
 # What this job is allowed to do:
 #   * read public RSS/Atom feeds and Google News searches (read-only GETs)
 #   * read the repository to see what LVINIT has already published
 #   * send the short list to Claude for judgment (only if ANTHROPIC_API_KEY
 #     is set as a repository secret — otherwise it runs rules-only)
+#   * read Clark County's public Legistar agenda API and a few developer feeds
+#     (Development Watch), and the repo's git log for Publisher commit trailers
 #   * write the trend report, the watchlist and the reviewed-story memory
+#   * write the Development Watch report, project registry, event ledger and a
+#     DRY-RUN handoff queue (DEVWATCH_HANDOFF_ENABLED is never set here)
 #   * commit those files to the lvinit-agent-state branch — never to main
 #   * upload the report as a workflow artifact and summarize it on the run page
 #
 # What it is NOT allowed to do, by construction:
 #   * publish, post to social media, or edit any page, article or metadata
+#   * hand anything to the Content Publisher — the queue is a file, stamped dry-run
 #   * commit to main — the only push is in the shared agent-state action,
 #     which hardcodes lvinit-agent-state and refuses the default branch
 #   * contact builders, leads or anyone else; send email; touch a CRM
@@ -107,6 +116,9 @@ jobs:
         uses: actions/checkout@v4
         with:
           persist-credentials: false
+          # Full history: Development Watch reads Publisher commit trailers
+          # (LVINIT-DevWatch-Fingerprint) so it never queues work already done.
+          fetch-depth: 0
 
       - name: Set up Node
         if: steps.gate.outputs.run == 'true'
@@ -121,9 +133,11 @@ jobs:
         if: steps.gate.outputs.run == 'true'
         run: npm ci --ignore-scripts --no-audit --no-fund
 
-      - name: Run the agent's own test suite
+      - name: Run the agent's own test suites
         if: steps.gate.outputs.run == 'true'
-        run: npm run trends:test
+        run: |
+          npm run trends:test
+          npm run devwatch:test
 
       - name: Check out lvinit-agent-state
         if: steps.gate.outputs.run == 'true'
@@ -142,7 +156,7 @@ jobs:
           TODAY: ${{ inputs.today }}
         run: |
           set -euo pipefail
-          ARGS="--mode=$MODE --state-dir=.agent-state"
+          ARGS="--mode=$MODE --state-dir=.agent-state --devwatch"
           if [ "${NO_LLM:-false}" = "true" ]; then ARGS="$ARGS --no-llm"; fi
           if [ "${USE_FIXTURES:-false}" = "true" ]; then
             echo "FIXTURE run — synthetic stories; nothing will be committed."
@@ -157,8 +171,8 @@ jobs:
         with:
           mode: commit
           token: ${{ secrets.GITHUB_TOKEN }}
-          paths: reports/social-trends data/social-trends
-          message: "local-trends: ${{ steps.gate.outputs.mode }} report (run ${{ github.run_number }})"
+          paths: reports/social-trends data/social-trends reports/development-watch data/development-watch
+          message: "local-trends: ${{ steps.gate.outputs.mode }} report + development watch (run ${{ github.run_number }})"
 
       - name: Write the report onto the run page
         if: always() && steps.gate.outputs.run == 'true'
@@ -180,6 +194,19 @@ jobs:
               echo
               cat "$REPORT"
             fi
+            DEV="$(ls -1 .agent-state/reports/development-watch/development-watch-*.md 2>/dev/null | sort | tail -n 1 || true)"
+            echo
+            echo "---"
+            echo
+            if [ -n "$DEV" ]; then
+              echo "Development Watch: https://github.com/$REPO/tree/lvinit-agent-state/reports/development-watch"
+              echo
+              cat "$DEV"
+            else
+              echo "## Development Watch"
+              echo
+              echo "No Development Watch report was written this run — see the log above."
+            fi
             echo
             echo "Discovery only: nothing was published, posted, deployed, or sent to anyone."
           } >> "$GITHUB_STEP_SUMMARY"
@@ -192,5 +219,7 @@ jobs:
           path: |
             .agent-state/reports/social-trends/
             .agent-state/data/social-trends/
+            .agent-state/reports/development-watch/
+            .agent-state/data/development-watch/
           if-no-files-found: warn
           retention-days: 30

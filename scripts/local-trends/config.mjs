@@ -16,6 +16,8 @@
 // See docs/LOCAL_TREND_AGENT.md for what each group means in plain English.
 // ---------------------------------------------------------------------------
 
+import { trendFeeds } from "./sources.mjs";
+
 function envInt(name, fallback) {
   const raw = process.env[name];
   if (raw === undefined || raw === null || String(raw).trim() === "") return fallback;
@@ -143,22 +145,11 @@ const NOISE = [
  *   official  city/county/agency newsrooms — can establish status
  *   news      local news outlets — can establish status
  *   social    Reddit — DEMAND SIGNAL ONLY, never a fact source
+ *
+ * Defined once in the shared source registry (./sources.mjs), which the
+ * Development Watch module reads too — same ids, names, tiers and URLs.
  */
-const FEEDS = [
-  { id: "henderson-news", name: "City of Henderson newsroom", tier: "official", url: "https://www.cityofhenderson.com/Home/Components/RssFeeds/RssFeed/View?ctID=5&cateIDs=1" },
-  { id: "city-lv-news", name: "City of Las Vegas newsroom", tier: "official", url: "https://www.lasvegasnevada.gov/rss" },
-  { id: "rj-business", name: "Las Vegas Review-Journal — Business", tier: "news", url: "https://www.reviewjournal.com/business/feed/" },
-  { id: "rj-local", name: "Las Vegas Review-Journal — Local", tier: "news", url: "https://www.reviewjournal.com/local/feed/" },
-  { id: "sun-business", name: "Las Vegas Sun — Business", tier: "news", url: "https://lasvegassun.com/feeds/headlines/business/" },
-  { id: "sun-news", name: "Las Vegas Sun — News", tier: "news", url: "https://lasvegassun.com/feeds/headlines/news/" },
-  { id: "vegas-inc", name: "Vegas Inc", tier: "news", url: "https://vegasinc.lasvegassun.com/feeds/headlines/" },
-  { id: "ktnv", name: "KTNV 13 Action News", tier: "news", url: "https://www.ktnv.com/news.rss" },
-  { id: "8newsnow", name: "8 News Now", tier: "news", url: "https://www.8newsnow.com/feed/" },
-  { id: "news3lv", name: "News 3 Las Vegas", tier: "news", url: "https://news3lv.com/news/local.rss" },
-  { id: "nevada-current", name: "Nevada Current", tier: "news", url: "https://nevadacurrent.com/feed/" },
-  // One combined request: Reddit rate-limits back-to-back requests hard.
-  { id: "reddit", name: "Reddit (r/vegas, r/LasVegas, r/henderson, r/summerlin)", tier: "social", url: "https://www.reddit.com/r/vegas+LasVegas+henderson+summerlin/new/.rss?limit=100" },
-];
+const FEEDS = trendFeeds();
 
 /** Domains whose own announcements can establish project status. */
 const OFFICIAL_DOMAINS = [

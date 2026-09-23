@@ -19,6 +19,15 @@ edits the site, contacts builders or leads, or sends anything to anyone.
 | Secrets | `ANTHROPIC_API_KEY` (optional; without it the agent runs rules-only) |
 | Cost | Claude judgment: about $0.40–$0.70 a day (see [Cost](#cost)). Everything else is free. |
 
+**Development Watch.** The same daily run also runs the
+[Development Watch](DEVELOPMENT_WATCH.md) module (`--devwatch`) on this
+collection. It tracks development *change* (project identity, verified status,
+dedupe, and a dry-run Publisher queue) and writes to
+`reports/development-watch/` and `data/development-watch/`. Its project registry
+is the source of truth for development project status. This agent's watchlist
+remains the content-idea list. All sources for both live in
+`scripts/local-trends/sources.mjs`.
+
 ---
 
 ## Where to read the reports
@@ -208,8 +217,9 @@ In GitHub Actions, **Run workflow** accepts `mode`, `no_llm`, `fixtures` and
 | Google News targeted searches (areas × topics, builders, infrastructure, cost of living) | news, or official/builder by publisher domain | yes |
 | Reddit: r/vegas, r/LasVegas, r/henderson, r/summerlin (one combined feed) | social | **never**, demand signal only |
 
-All sources are in `scripts/local-trends/config.mjs`: feeds, areas, categories,
-builders, noise rules and thresholds.
+Feeds are defined in the shared source registry, `scripts/local-trends/sources.mjs`.
+Areas, categories, builders, noise rules and thresholds are in
+`scripts/local-trends/config.mjs`.
 
 ### Known limits
 

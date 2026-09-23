@@ -39,6 +39,7 @@ import { prioritize } from "./lib/score.mjs";
 import { loadWatchlist, loadReviewed, mergeTopics, updateReviewed, writeJson } from "./lib/state.mjs";
 import { buildDailyMarkdown, buildWeeklyMarkdown } from "./lib/report.mjs";
 import { fixtureItems, fixtureHealth, fixtureJudgment } from "./fixtures/fixture-feed.mjs";
+import { runDevelopmentWatch } from "./devwatch/run.mjs";
 
 const REPO_ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..", "..");
 
@@ -62,6 +63,8 @@ Options
   --state-dir=DIR            Root for reports/ and data/ (default: repo root;
                              CI passes a checkout of lvinit-agent-state).
   --max-candidates=N         Judgment budget (default 30).
+  --devwatch                 Also run the Development Watch module on this
+                             run's collection (docs/DEVELOPMENT_WATCH.md).
   --help                     This message.
 
 Environment
@@ -131,7 +134,22 @@ export async function run(argv = process.argv.slice(2), { log = console.log, rep
     const weekly = runWeekly({ today, dirs, dryRun, log });
     exitCode = Math.max(exitCode, weekly.exitCode);
   }
-  return { exitCode, daily };
+
+  // Development Watch rides on the same collection — no feed is polled twice.
+  // Its failure is reported, but never costs Mikey the trend report.
+  let devwatch = null;
+  if (args.devwatch) {
+    try {
+      devwatch = await runDevelopmentWatch({ today, mode, fixtures, dryRun, stateDir, repoRoot, log, fetchImpl, delay, shared: daily?.collected ?? null });
+      if (devwatch.exitCode) log("  devwatch:  FAILED — see above. The trend report is unaffected.");
+    } catch (error) {
+      log(`  devwatch:  FAILED — ${error.message}. The trend report is unaffected.`);
+      devwatch = { exitCode: 1, error: String(error.message ?? error) };
+    }
+    // Deliberately not folded into exitCode: a failing step would skip the
+    // commit and lose the trend agent's state too. The run page shows it.
+  }
+  return { exitCode, daily, devwatch };
 }
 
 async function runDaily({ config, today, fixtures, dryRun, dirs, repoRoot, log, fetchImpl, claudeClient, delay }) {
@@ -308,7 +326,7 @@ async function runDaily({ config, today, fixtures, dryRun, dirs, repoRoot, log, 
     writeJson(reviewedFile, nextReviewed);
     log(`  wrote:     ${mdFile}`);
   }
-  return { exitCode: 0, run, markdown, summary, watchlist: merged.watchlist, reviewed: nextReviewed };
+  return { exitCode: 0, run, markdown, summary, watchlist: merged.watchlist, reviewed: nextReviewed, collected: fixtures ? null : { items: raw, health } };
 }
 
 function runWeekly({ today, dirs, dryRun, log }) {

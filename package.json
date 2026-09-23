@@ -23,6 +23,9 @@
     "trends:weekly": "node scripts/local-trends/run.mjs --mode=weekly",
     "trends:report:fixtures": "node scripts/local-trends/run.mjs --fixtures --mode=both",
     "trends:test": "node --test \"scripts/local-trends/test/*.test.mjs\"",
+    "devwatch:report": "node scripts/local-trends/devwatch/run.mjs",
+    "devwatch:report:fixtures": "node scripts/local-trends/devwatch/run.mjs --fixtures",
+    "devwatch:test": "node --test \"scripts/local-trends/devwatch/test/*.test.mjs\"",
     "briefs:report": "node scripts/content-briefs/run.mjs",
     "briefs:report:fixtures": "node scripts/content-briefs/run.mjs --fixtures",
     "briefs:test": "node --test \"scripts/content-briefs/test/*.test.mjs\""

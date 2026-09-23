@@ -27,6 +27,7 @@ data/<namespace>/              machine state (JSON, with schema_version + agent)
 | Agent | Namespace paths |
 |---|---|
 | Local Trend Agent | `reports/social-trends/`, `data/social-trends/` |
+| Development Watch (module of the Local Trend Agent) | `reports/development-watch/`, `data/development-watch/` |
 
 ## How agents use it
 
