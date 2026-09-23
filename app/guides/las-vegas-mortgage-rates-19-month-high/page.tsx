@@ -293,7 +293,7 @@ export default function LasVegasMortgageRates19MonthHighPage() {
           national weekly average, not a Las Vegas number specifically —
           local buyers borrow against the same national market everyone
           else does, with their own rate then set by credit, down payment,
-          loan type, and lender. Here&rsquo;s the last six weeks of that
+          loan type, and lender. Here&rsquo;s the last five weeks of that
           survey, all directly fetched from Freddie Mac&rsquo;s own site and
           cross-checked against its official press release:
         </p>
