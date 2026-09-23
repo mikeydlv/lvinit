@@ -45,18 +45,23 @@ chosen. It is never a changed sentence.
 ## What it does
 
 1. Builds the internal link graph from `app/**/page.tsx` (plus the data modules
-   those pages import, like `lib/areas/summerlin.tsx`).
+   those pages import, like `lib/areas/summerlin.tsx`), telling apart links in
+   prose, citations in a Sources block, and cards / CTA buttons.
 2. Finds orphaned and weakly linked pages, broken links, repeated links, and
    pages missing from the sitemap.
-3. Finds places where one page already names another page's subject and does not
+3. Reads its own earlier reports, so each finding keeps its identity week to
+   week, and so a link it shipped that a person later removed is never put back.
+4. Finds places where one page already names another page's subject and does not
    link to it.
-4. Scores each of those, applies every safety gate, and ranks what is left.
-5. Adds the ones that clear every gate — at most **8 links across 5 pages, 2 per
+5. Scores each of those, applies every safety gate, and ranks what is left
+   (GSC, discovery need and Content Brief targets affect the ranking only).
+6. Adds the ones that clear every gate — at most **8 links across 5 pages, 2 per
    page**, per run.
-6. Runs `tsc --noEmit`, `npm run lint` and `npm run build`. If any fails, it
-   reverts every edit and ships nothing.
-7. Commits and pushes to `main`.
-8. Writes `reports/internal-links/internal-links-YYYY-MM-DD.{md,json}`.
+7. Runs the Internal Linking, GSC, Fact-Decay and Content Brief test suites, then
+   `tsc --noEmit`, `npm run lint` and `npm run build`. If any fails, it reverts
+   every edit and ships nothing.
+8. Inspects its own diff, commits and pushes to `main`.
+9. Writes `reports/internal-links/internal-links-YYYY-MM-DD.{md,json}`.
 
 ## What it refuses to do
 
@@ -68,7 +73,11 @@ chosen. It is never a changed sentence.
 * change navigation, the homepage, CTAs, lead forms or design
 * change brokerage, licensing, Equal Housing or other compliance copy
 * update a market fact, price, rate or statistic
-* modify the GSC or Fact-Decay agents' reports or scoring
+* modify the GSC, Fact-Decay or Content Brief agents' reports, scoring or
+  brief status, or trigger the Content Publisher
+* link to an unpublished or proposed page, or create a link only because a
+  brief exists
+* re-add a link it shipped that a person has since removed
 * force-push, rebase through a conflict, or push from a dirty or diverged tree
 
 ### About bridge sentences
@@ -99,17 +108,18 @@ scripts/internal-links/
     topics.mjs             LVINIT's topic vocabulary and anchor phrases
     source.mjs             reading and editing TSX; the copy checksum
     opportunities.mjs      detection, scoring, gating, run limits
-    signals.mjs            the GSC and Fact-Decay signals (read-only)
+    signals.mjs            the GSC, Fact-Decay and Content Brief signals (read-only)
     analyze.mjs            the pure analysis pass
     apply.mjs              writing edits and re-checking them
-    verify.mjs             typecheck / lint / build
-    git.mjs                preflight, diff inspection, commit, push
+    verify.mjs             test suites / typecheck / lint / build
+    git.mjs                preflight, diff inspection, commit, clean rebase, push
     report.mjs             Markdown and JSON
     fair-housing.mjs       the one "single-family" prose normalization
   fixtures/fixture-site.mjs  a synthetic site, for demos and tests
-  test/                    123 tests
+  test/                    146 tests
 .github/workflows/internal-linking-agent.yml
-reports/internal-links/    generated, gitignored
+reports/internal-links/          generated, gitignored (fixture runs go in fixtures/)
+reports/internal-links-history/  earlier CI reports, downloaded each run, gitignored
 ```
 
 ---
@@ -134,7 +144,20 @@ npm run links:report:fixtures
 
 Runs against a synthetic five-page site built to show all three outcomes: one
 link added, one refused for Fair Housing framing, one refused for being inside
-compliance copy. Every line of that report is stamped FIXTURE DATA.
+compliance copy. Every line of that report is stamped FIXTURE DATA, and it is
+written to `reports/internal-links/fixtures/` so it never overwrites a real
+report for the same date.
+
+### Prove the proposed links build, then undo them
+
+```bash
+node scripts/internal-links/run.mjs --trial
+```
+
+Applies the links a real run would add, runs every validation command and the
+diff inspection against them, then **reverts every edit**. It never commits or
+pushes. Unlike `--apply`, it only needs the files it edits to be clean, so it
+can run beside unrelated work; its diff inspection is limited to those files.
 
 ### Actually add the links
 
@@ -152,6 +175,7 @@ Edits, validates, commits and pushes. This is what the weekly job runs.
 | `--no-push` | edit and commit, but leave the push to you |
 | `--no-commit` | edit and validate, leave the diff in the working tree |
 | `--dry-run` | force report-only even with `--apply` |
+| `--trial` | apply, validate, then always revert; never commits |
 | `--max-links=N` | maximum links this run (default 8) |
 | `--max-pages=N` | maximum pages modified this run (default 5) |
 | `--min-confidence=N` | the auto-execution line, 0–1 (default 0.72) |
@@ -159,6 +183,7 @@ Edits, validates, commits and pushes. This is what the weekly job runs.
 | `--exclude=/path` | never touch this page. Repeatable |
 | `--no-gsc` | ignore search data entirely |
 | `--no-fact-decay` | ignore destination freshness entirely |
+| `--no-briefs` | ignore Content Brief context entirely |
 | `--today=YYYY-MM-DD` | pretend it is a different date |
 | `--out=DIR` | write the reports somewhere else |
 
@@ -186,16 +211,34 @@ links every page to `/contact`; the homepage card feed links whatever is newest.
 If those counted, every page would look well connected and nothing would ever be
 an orphan. They are collected and reported, never counted.
 
+**Inside a page, every link is also tagged by where it sits:**
+
+| Context | What it is |
+|---|---|
+| `contextual` | a link in body prose — what a reader meets mid-article |
+| `citation` | a link in a Sources / methodology block (`heading="Sources"`, `AreaSources`, a `sources` prop) |
+| `card` | a "Keep reading" card (`relatedStories` and similar), a CTA `<Button href>`, hero, or any `href:` in a data object |
+
+Discovery support is measured on **contextual links only**. A page reachable
+solely from other pages' cards or Sources lists is not supported by any copy a
+reader meets, so it counts as an orphan — and the report shows those card and
+citation referrers beside it, so it is never mistaken for an unreachable page.
+
 From that the agent derives:
 
-* **orphans** — no editorial page links to them
-* **weakly linked** — one referring page or fewer
+* **orphans** — no editorial page links to them in prose
+* **weakly linked** — one prose referrer or fewer
 * **newly published and hard to find** — published in the last 30 days with one
-  referrer or fewer
+  prose referrer or fewer
 * **broken links** — pointing at a route with no page file
-* **repeat links** — the same destination linked 3+ times from one page (twice
-  is normal in a long guide and is not reported)
+* **repeat links** — the same destination linked 3+ times in one page's prose
+  (twice is normal in a long guide and is not reported; citing the same report
+  in Sources, or listing it in a card, is never counted)
 * **sitemap drift** — editorial pages missing from `app/sitemap.ts`
+
+The **density gate** is the one place that still counts every in-page link,
+cards and citations included, so that separating contexts could never make a
+safety gate looser.
 
 The agent **never manufactures a link to clear an orphan.** An orphan is a
 reason to do a genuine link first, not a reason to invent one.
@@ -258,7 +301,17 @@ confidence = 0.35 × anchor quality
 | **structural fit** | 1.0 inside a `<StorySection>`, 0.9 in a `<StoryLede>`, 0.85 in a `<LocalsNote>`, and nowhere else at all |
 
 **Search traffic is deliberately not in this formula.** How useful a link is to a
-reader cannot depend on how many people saw the page.
+reader cannot depend on how many people saw the page. Neither are Content
+Briefs.
+
+Ranking between links that are all safe uses a separate priority:
+
+```
+priority = 100 × confidence × GSC multiplier × discovery multiplier × brief multiplier
+```
+
+Every multiplier is 1.0 when there is no signal, so priority never decides
+whether a link is safe — only which safe link goes first.
 
 ### Two hard gates before the score matters
 
@@ -290,15 +343,36 @@ A link is added automatically only when **all** of this is true:
 | the same anchor already pointing at that destination site-wide | < 3 times |
 | a new factual claim needed | never — the anchor is existing words, so no claim can be introduced |
 | Fair Housing | clean on the anchor, the paragraph, the section heading and the destination headline |
-| compliance copy | not brokerage, licensing, Equal Housing, disclaimer or sourcing copy |
+| compliance copy | not brokerage, licensing, Equal Housing or disclaimer copy |
+| sourcing copy | not under a Sources / methodology heading (a bare `heading="Sources"` counts) |
 | competing destinations | exactly one candidate for those words |
 | search-intent overlap | the two pages are not ≥ 0.80 related on identical topics |
 | Fact-Decay | the destination is eligible (below) |
+| live Publisher work | no LIVE Content Brief handoff queued on the source page |
+| human decisions | this exact link was not shipped before and then removed by a person, and its fingerprint is not vetoed |
 | `next/link` imported | yes |
 
 Below 0.72 but at or above **0.45**, it is reported with the exact sentence and
-anchor it would have used. Below 0.45 it is not reported at all — that is the
-difference between a maintenance system and a weekly homework list.
+anchor it would have used. Below 0.45 it is not reported at all — only counted
+as "ignored" — which is the difference between a maintenance system and a
+weekly homework list.
+
+### Saying no once
+
+Every review item prints a **fingerprint**. Add it to `decisions.rejected` in
+`scripts/internal-links/config.mjs` (or the `LINKS_REJECTED_FINGERPRINTS`
+environment variable) and that link is never auto-executed and never listed for
+review again — only counted as vetoed.
+
+```js
+decisions: {
+  rejected: [{ fingerprint: "a9a759f9b3ba", note: "street, not the district", date: "2026-09-30" }],
+},
+```
+
+If a person or the Content Publisher **removes** a link this agent shipped, the
+agent sees the same opportunity reappear, recognizes it from its history, and
+leaves it report-only (`PREVIOUSLY_AUTO_FIXED`). It never fights an edit.
 
 ## Maximum changes per run
 
@@ -370,12 +444,35 @@ check could not be made.
 
 ---
 
+## How Content Briefs are used
+
+Read-only, off disk (`reports/content-briefs/`), and weaker than GSC on purpose.
+The Content Brief Generator's clusters hold a dozen or more pages each, so
+sharing one is not evidence that two pages belong linked together. A brief is
+used for three things only:
+
+* **Context.** The report says which brief cluster a pair shares.
+* **Ordering.** A destination the Brief Generator named `INTERNAL_LINK_ONLY`
+  gets a ×1.10 priority multiplier; `UPDATE_EXISTING` / `EXPAND_EXISTING` gets
+  ×1.05. Any other page is exactly neutral (×1.0).
+* **Conflict avoidance.** A source page with a **live** handoff queued for the
+  Content Publisher is not edited that week (`PUBLISHER_EDIT_PENDING`). A
+  dry-run queue — the Brief Generator's current mode — is not real work and is
+  ignored.
+
+A brief never creates a link, never changes a confidence score, and never makes
+a proposed (unpublished) page a destination — only published graph nodes can
+be. Fixture brief reports are skipped in a real run, and a report older than
+21 days is ignored.
+
+---
+
 ## How conflicts with the Content Publisher are prevented
 
 The Content Publisher creates articles, does the research, sets the imagery,
 writes the metadata and schema, and does the major SEO work. That is unchanged.
 
-Five separate things keep the two out of each other's way:
+Six separate things keep the two out of each other's way:
 
 1. **Disjoint change surface.** This agent can only wrap existing words in a
    link. It cannot write prose, and it is structurally incapable of touching
@@ -390,9 +487,11 @@ Five separate things keep the two out of each other's way:
    paragraph in the meantime, the edit is cleanly skipped and reported, never
    applied to shifted text.
 4. **Never force, never guess.** Diverged from origin, or ahead of it? Stop and
-   report. Strictly behind? Fast-forward only. Remote moved during the run? The
-   commit stays local and says so.
-5. **Handoffs, not attempts.** Anything needing real editorial work — a bridge
+   report. Strictly behind? Fast-forward only. Remote moved during the run? See
+   the clean-rebase rule below — otherwise the commit stays local and says so.
+5. **Live handoffs.** A page with a live Content Brief handoff queued for the
+   Publisher is not edited as a source that week.
+6. **Handoffs, not attempts.** Anything needing real editorial work — a bridge
    sentence, a Fair Housing judgement, two pages competing for one search intent
    — is written up with a stable ID and handed over. The agent never tries it.
 
@@ -407,6 +506,17 @@ Before editing: right branch, clean tree, `origin` fetched, no divergence.
 Before committing: every path allowed, every diff line an added `<Link>`, every
 validation command green.
 Before pushing: the remote has not moved since the preflight.
+
+### If the remote moves mid-run
+
+The agent rebases its one commit onto the new remote **only** when all of this
+holds: HEAD is exactly its own single commit on top of the old remote head, the
+tree is clean, and the new remote commits touched **none** of the files it
+edited (if they did, the source changed between analysis and edit, and it
+stops). If `git rebase` hits any conflict it is aborted. After a clean rebase it
+re-runs every validation command and re-inspects the commit's own diff; if
+either fails, it drops its own commit (`git reset --keep`) and pushes nothing.
+It pushes once — if the remote moved again, it stops.
 
 Commit message:
 
@@ -453,11 +563,15 @@ None of these lose the report.
 | The anchor text moved since the scan | skips that edit, reports it, applies nothing on that page |
 | A destination stopped resolving | skips; nothing on that page is applied |
 | The edit would change published copy | refuses the edit outright |
-| Typecheck, lint or build fails | **reverts every edit**, commits nothing, reports the failing output |
+| Any test suite, typecheck, lint or build fails | **reverts every edit**, commits nothing, reports the failing output |
 | The diff touches a path it should not | reverts everything |
 | The diff contains anything but added `<Link>` wrappers | reverts everything |
 | The commit fails | reverts everything |
-| The remote moved mid-run | keeps the commit local, does not push, reports it |
+| The remote moved mid-run, on files it did not edit | clean rebase, re-validate, re-inspect, then one push — or drop its own commit if any check fails |
+| The remote moved mid-run, on a file it edited | keeps the commit local, does not push, reports it |
+| The rebase conflicts | aborts the rebase, does not push, reports it |
+| A live Publisher handoff is queued on a source page | leaves that page alone this week |
+| A link it shipped was removed by a person | never re-adds it; reports it once |
 | Validation was skipped | nothing may be committed from that run |
 | Malformed page, unexpected structure | that candidate is skipped, not guessed at |
 
@@ -502,7 +616,10 @@ Anything else the filter matches is still report-only, with the matched word
 printed so you can clear it in seconds.
 
 Separately, brokerage, licensing, Equal Housing, disclaimer and sourcing copy is
-never edited at all, for any reason.
+never edited at all, for any reason. Sourcing copy includes every section whose
+whole heading is "Sources" (or "Sources and methodology", "Methodology", "How
+this was reported") — a heading like "Where the new sources of supply are" is
+not caught by that rule.
 
 ---
 
@@ -514,33 +631,55 @@ the run as the `internal-links-report` artifact.
 
 The Markdown has:
 
-* **Run summary** — pages scanned, links analyzed, opportunities detected,
-  auto-executed, report-only, skipped, build status, commit hash, push result
-* **Auto-executed** — for each: stable ID, source, destination, anchor, the exact
-  sentence, the exact diff, why the relevance was high confidence, whether a
-  bridge sentence was added (always no), and the post-edit validation
-* **Needs review** — source, destination candidates, confidence, why it was not
-  safe to automate, and the handoff where one applies
+* **Run summary** — pages scanned, links analyzed (by context), opportunities
+  found, auto-executed (or "would auto-execute" in a dry run / trial),
+  report-only, ignored, vetoed, orphans, weak pages, broken links, which GSC,
+  Fact-Decay and Content Brief artifacts were used, build status, commit hash,
+  push result
+* **Auto-executed** — for each: stable ID, status, source, destination, anchor,
+  the exact sentence, the exact diff, why the relevance was high confidence,
+  **every safety gate it passed**, and the post-edit validation
+* **Needs review** — items that are new or have materially changed: source,
+  destination candidate, file and line, confidence, why it was not safe to
+  automate, the handoff where one applies, and the fingerprint to veto it
+* **Still open (not repeated)** — one line each for review items already
+  written up twice with nothing material changed
 * **Would need a sentence written** — Content Publisher handoffs, capped at five
-* **Orphans and weakly linked pages** — including newly published pages that are
-  hard to find
-* **Graph hygiene** — broken links, heavy repeat linking, sitemap drift
+* **Orphans and weakly linked pages** — prose referrers, plus the card and
+  citation referrers that are not counted
+* **Broken and duplicate links** — always present, "None" when clean; also
+  sitemap drift
 * **Validation** — every command, its result, and the failing output if any
 * **What this agent will never do**
 
-The JSON adds the whole link graph node by node, every scoring component, and
-the fingerprints.
+The JSON (schema 1.1.0, additive over 1.0.0) adds the whole link graph node by
+node with each link's context, every scoring component, the Content Brief
+signal, the fingerprints, and each item's `status`, `disposition` and
+`shownInFull`. The Content Brief Generator reads this report's `graph`,
+`needsReview` and `bridgeSentenceHandoffs`; those fields are unchanged.
 
-### Stable IDs
+### Stable IDs and lifecycle
 
 Each opportunity gets `LINK-YYYY-MM-DD-NNN`, plus a **fingerprint**: a hash of
 source, destination and normalized anchor. The fingerprint survives re-typesetting
-and re-numbering, so across weeks the agent can tell:
+and re-numbering. History comes from `reports/internal-links/` locally and from
+`reports/internal-links-history/run-*/` in CI, where the workflow downloads the
+last 12 runs' artifacts. Fixture reports are never history. Across weeks:
 
-* **new** — first time seen
-* **persisting** — reported before, still open
-* **auto-fixed-previously** — the agent linked it in an earlier run
-* **resolved** — reported last week, gone now
+* **NEW** — first time seen
+* **PERSISTING** — reported before, still open
+* **AUTO_FIXED** — this run shipped it (committed, and pushed unless push is off)
+* **RESOLVED** — open in the newest earlier report, gone now
+
+Separately, each item's **disposition** is `AUTO_EXECUTE` or `REVIEW_REQUIRED`.
+
+Only an **apply** run whose commit was pushed counts as having shipped a link. A
+dry run's or trial's "would add" list is a proposal, never history — otherwise
+the agent would believe it had linked pages it never touched.
+
+A review item that has been written up in full **twice** without its confidence
+moving 0.05 or its blockers changing goes quiet: it moves to "Still open" as one
+line. It comes back in full the moment something material changes.
 
 ---
 
@@ -548,21 +687,29 @@ and re-numbering, so across weeks the agent can tell:
 
 ```
 Monday     13:00 UTC   GSC Opportunity Agent     search performance
-Wednesday  13:00 UTC   Internal Linking Agent    reads Monday's GSC report
+Tuesday    13:00 UTC   Content Brief Generator   reads Monday's GSC report
+Wednesday  13:00 UTC   Internal Linking Agent    reads Monday's GSC report and Tuesday's briefs
 Thursday   13:00 UTC   Fact-Decay Agent          factual freshness
 ```
 
-About 06:00 Las Vegas time. Wednesday is chosen so this agent always has a fresh
-GSC report to prioritize with, and so there is a day between its push and
-Thursday's Fact-Decay scan — that scan then sees the linked site rather than
-racing it. A `concurrency` group means two of these can never overlap.
+06:00 Las Vegas time while Pacific Daylight Time is in effect, 05:00 in winter
+(PST) — the cron is fixed in UTC. Wednesday is a full day after the Brief
+Generator, so its artifact is always there, and there is a day between this
+agent's push and Thursday's Fact-Decay scan — that scan then sees the linked site
+rather than racing it. The Fact-Decay report this agent reads is therefore the
+previous Thursday's (6 days old), well inside its 45-day limit. A `concurrency`
+group means two of these can never overlap.
+
+Each run the workflow downloads, read-only: the newest GSC, Fact-Decay and
+Content Brief artifacts, and this agent's own last 12 reports (into
+`reports/internal-links-history/`, never into the output directory).
 
 ## Required GitHub permissions
 
 ```yaml
 permissions:
   contents: write   # the only elevated permission: committing its own link edits
-  actions: read     # solely to download the other two agents' report artifacts
+  actions: read     # solely to download the other agents' report artifacts and its own history
 ```
 
 Nothing else. No `pull-requests`, no `issues`, no `packages`, no `id-token`, no
@@ -587,6 +734,9 @@ want:
 | leave a page alone forever | add it to `LINKS_EXCLUDE_ROUTES` |
 | link denser pages | raise `LINKS_MAX_LINKS_PER_PAGE_TOTAL` (12) |
 | stop pushing | `LINKS_GIT_PUSH=false` |
+| never propose one specific link again | add its fingerprint to `decisions.rejected` |
+| stop Content Brief ordering | `LINKS_USE_BRIEFS=false` |
+| let unchanged review items stay in full longer | raise `LINKS_QUIET_AFTER_REPORTS` (2) |
 
 ---
 
@@ -601,6 +751,13 @@ want:
 * **Extraction is regex over TSX, not a parser.** It is the same approach the
   Fact-Decay Agent uses. Every finding prints its file, line and paragraph so you
   can check the machine in two seconds.
+* **Link context is read off structure.** A link counts as a citation when its
+  nearest preceding `heading="…"` is a Sources / methodology heading, and as a
+  card when it sits in a known card prop or component or is a bare `href`. A
+  new card component that is not on the list in `source.mjs` would be counted
+  as prose until it is added.
+* **Brief clusters are context only.** They are too broad to be relevance
+  evidence, so they never raise a confidence score.
 * **Only one page's worth of a data module is read.** Links written in
   `lib/areas/*.tsx` are counted in the graph, but the agent only ever edits the
   page file itself.

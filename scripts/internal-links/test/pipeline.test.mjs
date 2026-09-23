@@ -337,16 +337,28 @@ test("the Markdown report has every required section", () => {
   const md = buildMarkdownReport({ analysis, config, meta: { dataSource: "fixture", origin: "https://www.lvinit.com" } });
   for (const heading of [
     "## Run summary",
-    "## Auto-executed",
+    "## Would auto-execute",
     "## Needs review",
     "## Orphans and weakly linked pages",
+    "## Broken and duplicate links",
     "## Validation",
     "## What this agent will never do",
   ]) {
     assert.ok(md.includes(heading), `${heading} is present`);
   }
+  assert.ok(!md.includes("## Auto-executed"), "a dry run never claims it executed anything");
   assert.match(md, /Pages scanned \| 5/);
   assert.match(md, /FIXTURE RUN/, "a fixture report says so on its face");
+  for (const row of ["GSC artifact", "Fact-Decay artifact", "Content Brief artifact", "Ignored (below", "Broken internal links", "Links analyzed"]) {
+    assert.ok(md.includes(row), `summary row "${row}" is present`);
+  }
+
+  const applied = buildMarkdownReport({
+    analysis: { ...analysis, mode: "apply" },
+    config,
+    meta: { dataSource: "fixture", origin: "https://www.lvinit.com" },
+  });
+  assert.ok(applied.includes("## Auto-executed"), "an apply run is headed Auto-executed");
 });
 
 test("the JSON report carries the fingerprints and the configuration it ran with", () => {

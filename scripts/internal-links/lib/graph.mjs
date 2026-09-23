@@ -10,6 +10,11 @@
 // connected and no page would ever be an orphan. Chrome links are collected
 // separately and reported, never counted.
 //
+// Inside a page, links are also told apart by WHERE they sit (see
+// `linkContextClassifier` in source.mjs): contextual prose, a citation in a
+// Sources block, or a curated card / CTA. Orphans, weak pages and repeat links
+// are measured on contextual links only; the others are recorded and reported.
+//
 // Page discovery and route classification are IMPORTED from the GSC agent's
 // site-inventory and the Fact-Decay Agent's content-inventory, so all three
 // agents agree on what exists and what counts as published.
@@ -24,7 +29,7 @@ import { classifyRoute, neighborhoodOf, SECTIONS } from "../../gsc/lib/site-inve
 import { readEditorialRegistry, gitLastModified } from "../../fact-decay/lib/content-inventory.mjs";
 import { extractStoryMeta, extractLocalImports } from "../../fact-decay/lib/extract.mjs";
 
-import { extractLinks, normalizeRoute, stripComments } from "./source.mjs";
+import { extractLinks, normalizeRoute, stripComments, LINK_CONTEXTS } from "./source.mjs";
 import { topicsFor, distinctiveTokens, slugTokens } from "./topics.mjs";
 
 export { SECTIONS };
@@ -263,6 +268,9 @@ export function finalizeGraph({
         line: link.line,
         documentRole: link.documentRole,
         element: link.element,
+        // A link with no recorded context (a hand-built fixture) is treated as
+        // body prose, which is what the fixtures model.
+        context: link.context ?? LINK_CONTEXTS.CONTEXTUAL,
         targetExists: existingRoutes.has(target),
         editorialTarget: !nonEditorialTargets.has(target) && pages.has(target),
       };
@@ -272,10 +280,15 @@ export function finalizeGraph({
         continue;
       }
 
-      const count = (seenTargets.get(target) ?? 0) + 1;
-      seenTargets.set(target, count);
-      if (count > 1) {
-        page.duplicateOutgoing.push({ ...edge, occurrence: count });
+      // Repetition is a prose problem. Citing the same report in a Sources
+      // list, or listing it in a "Keep reading" card, is not the same page
+      // being linked over and over in the copy — so only contextual links count.
+      if (edge.context === LINK_CONTEXTS.CONTEXTUAL) {
+        const count = (seenTargets.get(target) ?? 0) + 1;
+        seenTargets.set(target, count);
+        if (count > 1) {
+          page.duplicateOutgoing.push({ ...edge, occurrence: count });
+        }
       }
 
       page.outgoing.push(edge);
@@ -301,10 +314,26 @@ export function finalizeGraph({
 
   // --- Derived state --------------------------------------------------------
   for (const page of pages.values()) {
-    const referrers = new Set(page.incoming.map((e) => e.from));
+    // Discovery support is measured in CONTEXTUAL links only: a page that is
+    // reachable solely from other pages' "Keep reading" cards or Sources lists
+    // is not supported by any copy a reader meets mid-article.
+    const contextualIncoming = page.incoming.filter((e) => e.context === LINK_CONTEXTS.CONTEXTUAL);
+    const referrers = new Set(contextualIncoming.map((e) => e.from));
+    const referrersOf = (context) =>
+      [...new Set(page.incoming.filter((e) => e.context === context).map((e) => e.from))].sort();
     page.uniqueReferrers = [...referrers].sort();
+    page.cardReferrers = referrersOf(LINK_CONTEXTS.CARD);
+    page.citationReferrers = referrersOf(LINK_CONTEXTS.CITATION);
+    page.allReferrers = [...new Set(page.incoming.map((e) => e.from))].sort();
+    page.incomingContextualCount = contextualIncoming.length;
     page.incomingEditorialCount = page.incoming.length;
+    // The density gate keeps counting EVERY in-page editorial link, cards and
+    // citations included. Narrowing it to prose would let more links onto
+    // pages that already carry plenty, and no safety gate gets looser here.
     page.outgoingEditorialCount = page.outgoing.filter((e) => e.editorialTarget).length;
+    page.outgoingContextualCount = page.outgoing.filter(
+      (e) => e.editorialTarget && e.context === LINK_CONTEXTS.CONTEXTUAL
+    ).length;
     page.isOrphan = referrers.size === 0;
     page.isWeaklyLinked = referrers.size <= config.graph.weaklyLinkedAtOrBelow;
     page.isNewlyPublished =

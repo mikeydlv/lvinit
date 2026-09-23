@@ -1,8 +1,8 @@
 // ---------------------------------------------------------------------------
-// OPTIONAL SIGNALS FROM THE OTHER TWO AGENTS
+// OPTIONAL SIGNALS FROM THE OTHER AGENTS
 //
-// Both are READ-ONLY and both are OPTIONAL. If neither report is on disk this
-// agent runs exactly as it would otherwise, and the report says so on its face.
+// All are READ-ONLY and all are OPTIONAL. If no report is on disk this agent
+// runs exactly as it would otherwise, and the report says so on its face.
 //
 //   GSC Opportunity Agent  ->  PRIORITY ONLY. Traffic can reorder which safe
 //                              links get done first. It can never create an
@@ -16,7 +16,13 @@
 //                              readers pushed into it. A page with an ordinary
 //                              low-priority finding is completely unaffected.
 //
-// Neither report is ever written to, re-scored, or second-guessed here.
+//   Content Brief Generator -> CONTEXT + ORDERING + CONFLICT AVOIDANCE. Shared
+//                              clusters are shown in the report; a named brief
+//                              target moves up the queue slightly; a page with
+//                              a LIVE Publisher handoff is not edited as a
+//                              source. Never touches confidence.
+//
+// No report is ever written to, re-scored, or second-guessed here.
 // ---------------------------------------------------------------------------
 
 import { readdirSync, readFileSync, existsSync } from "node:fs";
@@ -35,7 +41,13 @@ import { daysBetween } from "./graph.mjs";
  * CI `gh run download` puts each artifact in its own subdirectory.
  */
 export function findLatestReport(dir, prefix) {
-  if (!existsSync(dir)) return null;
+  const candidates = findReports(dir, prefix);
+  return candidates.length ? candidates[candidates.length - 1] : null;
+}
+
+/** Every `<prefix>-YYYY-MM-DD.json` under a directory (one level deep), oldest first. */
+export function findReports(dir, prefix) {
+  if (!existsSync(dir)) return [];
   const pattern = new RegExp(`^${prefix}-(\\d{4}-\\d{2}-\\d{2})\\.json$`);
   const candidates = [];
   const collect = (from) => {
@@ -49,9 +61,8 @@ export function findLatestReport(dir, prefix) {
   for (const entry of readdirSync(dir, { withFileTypes: true })) {
     if (entry.isDirectory()) collect(join(dir, entry.name));
   }
-  if (candidates.length === 0) return null;
   candidates.sort((a, b) => a.reportDate.localeCompare(b.reportDate) || a.path.localeCompare(b.path));
-  return candidates[candidates.length - 1];
+  return candidates;
 }
 
 /** Log curve: 0 impressions -> 0, `reference` impressions -> 1, then flat. */
@@ -331,6 +342,150 @@ export function loadFactDecaySignal({ repoRoot, config, today }) {
         worstFinding: worst,
         findingCount: findings.length,
       };
+    },
+  };
+}
+
+/** Brief actions that name an EXISTING page as the thing to work on. */
+const BRIEF_TARGET_ACTIONS = new Set(["INTERNAL_LINK_ONLY", "UPDATE_EXISTING", "EXPAND_EXISTING"]);
+
+/**
+ * The Content Brief Generator signal: optional cluster context.
+ *
+ * Read-only and deliberately weak — see the `briefs` block in config.mjs. It
+ * never changes a confidence score, never creates an opportunity, and never
+ * points a link at a proposed page (only published graph nodes are ever
+ * destinations, so a `proposedRoute` cannot become one).
+ *
+ * @returns {{available:boolean, reason:string, clustersFor:(route:string)=>string[],
+ *            sharedClusters:(a:string,b:string)=>string[], multiplierFor:(route:string)=>object,
+ *            pendingEditFor:(route:string)=>object|null}}
+ */
+export function loadBriefSignal({ repoRoot, config, today, allowFixture = false }) {
+  const neutral = (reason, extra = {}) => ({
+    available: false,
+    reason,
+    reportPath: null,
+    reportDate: null,
+    ageDays: null,
+    fixtureData: false,
+    handoffMode: null,
+    targets: new Map(),
+    pendingHandoffs: new Map(),
+    clustersFor: () => [],
+    sharedClusters: () => [],
+    multiplierFor: () => ({ value: 1, basis: reason, briefId: null }),
+    pendingEditFor: () => null,
+    ...extra,
+  });
+
+  if (!config.briefs?.enabled) {
+    return neutral("the Content Brief signal is switched off in configuration, so no cluster context was used");
+  }
+
+  // Newest REAL report. The Brief Generator keeps a fixtures/ copy next to its
+  // real output locally, so the newest file on disk can be synthetic.
+  const found = findReports(join(repoRoot, config.briefs.dir), "content-opportunities");
+  let latest = null;
+  let report = null;
+  let skippedFixture = false;
+  for (const candidate of [...found].reverse()) {
+    let parsed;
+    try {
+      parsed = JSON.parse(readFileSync(candidate.path, "utf8"));
+    } catch {
+      continue;
+    }
+    if (parsed?.fixtureData && !allowFixture) {
+      skippedFixture = true;
+      continue;
+    }
+    latest = candidate;
+    report = parsed;
+    break;
+  }
+  if (!report) {
+    return neutral(
+      skippedFixture
+        ? "only FIXTURE Content Brief reports were found on disk, so no cluster context was used in this real run"
+        : "no Content Brief Generator report was found on disk, so no cluster context was used. That is expected — briefs are optional for this agent"
+    );
+  }
+
+  const ageDays = daysBetween(latest.reportDate, today);
+  if (ageDays !== null && ageDays > config.briefs.maxReportAgeDays) {
+    return neutral(
+      `the newest Content Brief report is ${ageDays} days old, past the ${config.briefs.maxReportAgeDays}-day limit, so it was ignored`,
+      { reportPath: latest.path, reportDate: latest.reportDate, ageDays }
+    );
+  }
+
+  const clusters = new Map();
+  for (const [name, entry] of Object.entries(report.inventory?.coverage ?? {})) {
+    for (const route of entry?.routes ?? []) {
+      if (!clusters.has(route)) clusters.set(route, new Set());
+      clusters.get(route).add(name);
+    }
+  }
+
+  const targets = new Map();
+  for (const opp of report.opportunities ?? []) {
+    if (!BRIEF_TARGET_ACTIONS.has(opp.action) || !opp.target) continue;
+    const existing = targets.get(opp.target);
+    // INTERNAL_LINK_ONLY is the strongest ask; keep it if both appear.
+    if (existing && existing.action === "INTERNAL_LINK_ONLY") continue;
+    targets.set(opp.target, { briefId: opp.id, action: opp.action, cluster: opp.cluster ?? null, leadQuery: opp.leadQuery ?? null });
+  }
+
+  // Only a LIVE queue means the Publisher may actually be working on a page.
+  // A dry-run queue is "what would be handed over" and nothing reads it.
+  const handoffMode = report.handoff?.mode ?? null;
+  const pendingHandoffs = new Map();
+  if (handoffMode === "live") {
+    for (const item of report.handoff?.queue ?? []) {
+      if (item.targetRoute) pendingHandoffs.set(item.targetRoute, { briefId: item.briefId, action: item.action });
+    }
+  }
+
+  const { internalLinkTargetBoost, updateTargetBoost } = config.briefs;
+  const fixtureData = Boolean(report.fixtureData);
+  const clustersFor = (route) => [...(clusters.get(route) ?? [])].sort();
+
+  return {
+    available: true,
+    reason: fixtureData
+      ? `read from ${latest.path} — that report is FIXTURE data, so the cluster context below is synthetic too`
+      : `read from ${latest.path} (${latest.reportDate}, ${ageDays} days old; handoff ${handoffMode ?? "unknown"})`,
+    reportPath: latest.path,
+    reportDate: latest.reportDate,
+    ageDays,
+    fixtureData,
+    handoffMode,
+    targets,
+    pendingHandoffs,
+    clustersFor,
+    sharedClusters(a, b) {
+      const other = new Set(clustersFor(b));
+      return clustersFor(a).filter((c) => other.has(c));
+    },
+    multiplierFor(route) {
+      const target = targets.get(route);
+      if (!target) {
+        // Neutral, exactly like GSC absence: most pages are not the subject of
+        // a brief in any given week, and that says nothing about them.
+        return { value: 1, basis: "not the target of a current brief (neutral)", briefId: null };
+      }
+      const value = target.action === "INTERNAL_LINK_ONLY" ? internalLinkTargetBoost : updateTargetBoost;
+      return {
+        value,
+        basis:
+          `the Content Brief Generator named this page in ${target.briefId} (${target.action}` +
+          `${target.leadQuery ? `, lead query “${target.leadQuery}”` : ""}) — ordering only`,
+        briefId: target.briefId,
+      };
+    },
+    pendingEditFor(route) {
+      return pendingHandoffs.get(route) ?? null;
     },
   };
 }

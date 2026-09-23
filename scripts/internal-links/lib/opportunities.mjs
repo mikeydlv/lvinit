@@ -30,6 +30,7 @@ import {
   localLinkClass,
   hasLinkImport,
   looksLikeCompliance,
+  isSourcingHeading,
   normalizeWhitespace,
   enclosingBlockElement,
   plainTextOf,
@@ -58,6 +59,33 @@ export const REVIEW_REASONS = {
   POSSIBLE_INTENT_OVERLAP: "POSSIBLE_INTENT_OVERLAP",
   BRIDGE_SENTENCE_REQUIRED: "BRIDGE_SENTENCE_REQUIRED",
   RUN_LIMIT_REACHED: "RUN_LIMIT_REACHED",
+  PUBLISHER_EDIT_PENDING: "PUBLISHER_EDIT_PENDING",
+  PREVIOUSLY_AUTO_FIXED: "PREVIOUSLY_AUTO_FIXED",
+  REJECTED_BY_EDITOR: "REJECTED_BY_EDITOR",
+};
+
+/** Lifecycle of one opportunity across weekly runs (the Brief Generator's vocabulary). */
+export const LIFECYCLE = {
+  NEW: "NEW",
+  PERSISTING: "PERSISTING",
+  AUTO_FIXED: "AUTO_FIXED",
+  RESOLVED: "RESOLVED",
+};
+
+/** What this run decided about an opportunity. */
+export const DISPOSITION = {
+  AUTO_EXECUTE: "AUTO_EXECUTE",
+  REVIEW_REQUIRED: "REVIEW_REQUIRED",
+};
+
+/** The neutral Content Brief signal, for callers (and tests) that have none. */
+export const NEUTRAL_BRIEF_SIGNAL = {
+  available: false,
+  reason: "no Content Brief signal was supplied",
+  clustersFor: () => [],
+  sharedClusters: () => [],
+  multiplierFor: () => ({ value: 1, basis: "no Content Brief signal (neutral)", briefId: null }),
+  pendingEditFor: () => null,
 };
 
 export const REVIEW_REASON_LABELS = {
@@ -73,6 +101,9 @@ export const REVIEW_REASON_LABELS = {
   POSSIBLE_INTENT_OVERLAP: "These two pages may be competing for the same search intent",
   BRIDGE_SENTENCE_REQUIRED: "A natural link would need a new sentence written for it",
   RUN_LIMIT_REACHED: "Held back by this run's change ceiling",
+  PUBLISHER_EDIT_PENDING: "The Content Publisher has live work queued on the source page",
+  PREVIOUSLY_AUTO_FIXED: "This agent added this link before, and someone has since removed it",
+  REJECTED_BY_EDITOR: "Rejected by a person; listed in config decisions",
 };
 
 /** Editorial containers a contextual link may be added inside, and how well each fits. */
@@ -257,6 +288,9 @@ export function scoreCandidate({ source, destination, anchor, paragraphText, str
  */
 export function findCandidates({ graph, config }) {
   const candidates = [];
+  // Pairs that passed every relevance gate but scored under the reporting
+  // line: counted as "ignored" so the report can say how much it kept quiet.
+  const belowReportLine = new Set();
   const proseCache = new Map();
   const nonEditorial = new Set(config.graph.nonEditorialTargets);
 
@@ -335,7 +369,10 @@ export function findCandidates({ graph, config }) {
             continue;
           }
 
-          if (scored.confidence < config.relevance.reportMinConfidence) continue;
+          if (scored.confidence < config.relevance.reportMinConfidence) {
+            belowReportLine.add(`${source.route}|${destination.route}`);
+            continue;
+          }
 
           const candidate = {
             from: source.route,
@@ -372,6 +409,8 @@ export function findCandidates({ graph, config }) {
     }
   }
 
+  const kept = new Set(candidates.map((c) => `${c.from}|${c.to}`));
+  candidates.ignoredBelowReportLine = [...belowReportLine].filter((k) => !kept.has(k)).length;
   return candidates;
 }
 
@@ -387,7 +426,20 @@ export function directionOf(source, destination) {
  * Apply every safety gate, work out priority, and split the candidates into
  * what may be executed and what must be reported.
  */
-export function classifyAndRank({ graph, candidates, config, gscSignal, factDecaySignal, reportDate }) {
+export function classifyAndRank({
+  graph,
+  candidates,
+  config,
+  gscSignal,
+  factDecaySignal,
+  briefSignal = NEUTRAL_BRIEF_SIGNAL,
+  history = new Map(),
+  reportDate,
+}) {
+  const rejected = new Set([
+    ...(config.decisions?.rejectedFingerprints ?? []),
+    ...(config.decisions?.rejected ?? []).map((r) => (typeof r === "string" ? r : r?.fingerprint)).filter(Boolean),
+  ]);
   const byPair = new Map();
   for (const candidate of candidates) {
     const key = `${candidate.from}|${candidate.to}`;
@@ -447,6 +499,41 @@ export function classifyAndRank({ graph, candidates, config, gscSignal, factDeca
         detail:
           "the paragraph reads as brokerage, licensing, sourcing or disclaimer copy. CLAUDE.md forbids changing that " +
           "copy, and adding a link inside it is changing it.",
+      });
+    } else if (isSourcingHeading(candidate.heading)) {
+      blockers.push({
+        code: REVIEW_REASONS.COMPLIANCE_COPY,
+        detail:
+          `the paragraph sits under “${candidate.heading}”, which is sourcing copy — it says where a figure came ` +
+          "from. It is never edited, and a link inside it would read as a citation the page did not make.",
+      });
+    }
+
+    // --- Conflicting automation (Content Brief -> Publisher) -----------------
+    const pendingEdit = briefSignal.pendingEditFor(source.route);
+    if (pendingEdit) {
+      blockers.push({
+        code: REVIEW_REASONS.PUBLISHER_EDIT_PENDING,
+        detail:
+          `${pendingEdit.briefId} (${pendingEdit.action}) is queued LIVE for the Content Publisher on ${source.route}. ` +
+          "That page may be rewritten this week, so this agent leaves it alone until the queue clears.",
+      });
+    }
+
+    // --- Human decisions ------------------------------------------------------
+    const record = history.get(candidate.fingerprint);
+    if (record?.everAutoFixed) {
+      blockers.push({
+        code: REVIEW_REASONS.PREVIOUSLY_AUTO_FIXED,
+        detail:
+          `this agent added exactly this link on ${record.autoFixedOn} (${record.autoFixedId}), and it is gone now. ` +
+          "A person or the Content Publisher removed it, so the agent does not put it back.",
+      });
+    }
+    if (rejected.has(candidate.fingerprint)) {
+      blockers.push({
+        code: REVIEW_REASONS.REJECTED_BY_EDITOR,
+        detail: "this fingerprint is listed in config.decisions as rejected. It is never auto-executed and not re-reported.",
       });
     }
 
@@ -524,9 +611,11 @@ export function classifyAndRank({ graph, candidates, config, gscSignal, factDeca
     }
 
     // --- Priority -----------------------------------------------------------
+    // Ordering only. Confidence — and so every gate above — is already settled.
     const traffic = gscSignal.multiplierFor(destination.route);
     const discovery = discoveryMultiplier(destination, candidate.direction, config);
-    const priority = Math.round(100 * candidate.confidence * traffic.value * discovery.value);
+    const brief = briefSignal.multiplierFor(destination.route);
+    const priority = Math.round(100 * candidate.confidence * traffic.value * discovery.value * brief.value);
 
     evaluated.push({
       ...candidate,
@@ -535,6 +624,7 @@ export function classifyAndRank({ graph, candidates, config, gscSignal, factDeca
       fairHousing,
       traffic,
       discovery,
+      brief: { ...brief, sharedClusters: briefSignal.sharedClusters(source.route, destination.route) },
       priority,
       autoExecutable: blockers.length === 0,
     });
@@ -588,13 +678,17 @@ export function classifyAndRank({ graph, candidates, config, gscSignal, factDeca
     candidate.autoExecutable = false;
   }
 
-  const needsReview = evaluated.filter((c) => !autoExecuted.includes(c));
+  // A rejected fingerprint is a closed decision: counted, never re-listed.
+  const vetoed = evaluated.filter((c) => c.blockers.some((b) => b.code === REVIEW_REASONS.REJECTED_BY_EDITOR));
+  const needsReview = evaluated.filter((c) => !autoExecuted.includes(c) && !vetoed.includes(c));
+  for (const c of autoExecuted) c.disposition = DISPOSITION.AUTO_EXECUTE;
+  for (const c of needsReview) c.disposition = DISPOSITION.REVIEW_REQUIRED;
 
   // --- Stable IDs, assigned in report order --------------------------------
   const nextId = makeIdFactory(reportDate);
-  for (const candidate of [...autoExecuted, ...needsReview]) candidate.id = nextId();
+  for (const candidate of [...autoExecuted, ...needsReview, ...vetoed]) candidate.id = nextId();
 
-  return { evaluated, autoExecuted, needsReview };
+  return { evaluated, autoExecuted, needsReview, vetoed };
 }
 
 /** Do two pages carry exactly the same topic set? */
@@ -689,67 +783,105 @@ export function findBridgeSentenceOpportunities({ graph, candidates, config }) {
     .slice(0, config.output.maxBridgeHandoffs);
 }
 
+/**
+ * Did this earlier report actually SHIP its auto-executed links?
+ *
+ * Only an apply run whose commit reached the remote (or was deliberately kept
+ * local with push switched off) did. A dry run's "would add" list is a
+ * proposal, and treating it as history would make the agent believe it had
+ * linked things it never touched.
+ */
+export function reportShippedLinks(report) {
+  if (report?.mode !== "apply") return false;
+  const ex = report.execution ?? {};
+  if (!ex.committed) return false;
+  return ex.pushed === true || ex.pushAttempted === false;
+}
+
 /** Read earlier reports so an opportunity keeps its identity across weeks. */
 export function buildHistory(previousReports) {
   const byFingerprint = new Map();
-  for (const report of previousReports) {
-    const all = [...(report.autoExecuted ?? []), ...(report.needsReview ?? [])];
-    for (const item of all) {
+  const ordered = [...previousReports].sort((a, b) => String(a.reportDate).localeCompare(String(b.reportDate)));
+  for (const report of ordered) {
+    const shipped = reportShippedLinks(report);
+    const tagged = [
+      ...(report.autoExecuted ?? []).map((item) => ({ item, outcome: shipped ? "auto-fixed" : "proposed-auto" })),
+      ...(report.needsReview ?? []).map((item) => ({ item, outcome: "reported" })),
+    ];
+    for (const { item, outcome } of tagged) {
       const key = item.fingerprint;
       if (!key) continue;
-      const existing = byFingerprint.get(key);
-      const outcome = (report.autoExecuted ?? []).some((a) => a.fingerprint === key) ? "auto-fixed" : "reported";
-      if (!existing) {
-        byFingerprint.set(key, {
+      // Reports written before `shownInFull` existed showed everything in full.
+      const shownInFull = outcome === "reported" ? item.shownInFull !== false : false;
+      let record = byFingerprint.get(key);
+      if (!record) {
+        record = {
           firstSeen: report.reportDate,
           firstId: item.id,
           lastSeen: report.reportDate,
           lastId: item.id,
           lastOutcome: outcome,
-          timesSeen: 1,
-          previousIds: [item.id],
-        });
-        continue;
+          timesSeen: 0,
+          timesShownInFull: 0,
+          previousIds: [],
+          everAutoFixed: false,
+          autoFixedOn: null,
+          autoFixedId: null,
+          lastConfidence: null,
+          lastBlockers: [],
+        };
+        byFingerprint.set(key, record);
       }
-      existing.timesSeen += 1;
-      if (report.reportDate < existing.firstSeen) {
-        existing.firstSeen = report.reportDate;
-        existing.firstId = item.id;
+      record.timesSeen += 1;
+      if (shownInFull) record.timesShownInFull += 1;
+      record.lastSeen = report.reportDate;
+      record.lastId = item.id;
+      record.lastOutcome = outcome;
+      record.lastConfidence = Number.isFinite(item.confidence) ? item.confidence : record.lastConfidence;
+      record.lastBlockers = (item.blockers ?? []).map((b) => b.code).filter(Boolean).sort();
+      if (outcome === "auto-fixed") {
+        record.everAutoFixed = true;
+        record.autoFixedOn = report.reportDate;
+        record.autoFixedId = item.id;
       }
-      if (report.reportDate >= existing.lastSeen) {
-        existing.lastSeen = report.reportDate;
-        existing.lastId = item.id;
-        existing.lastOutcome = outcome;
-      }
-      if (!existing.previousIds.includes(item.id)) existing.previousIds.push(item.id);
+      if (!record.previousIds.includes(item.id)) record.previousIds.push(item.id);
     }
   }
   return byFingerprint;
 }
 
 /**
- * new / persisting / resolved / auto-fixed, for one opportunity.
- *
- * `resolved` is computed by the caller from the previous report's findings that
- * no longer appear in this one.
+ * NEW / PERSISTING for one open opportunity, plus whether it changed enough
+ * to be written up again. (AUTO_FIXED is set by the runner once an edit has
+ * actually shipped; RESOLVED comes from `resolvedSince`.)
  */
-export function statusFor(candidate, history) {
+export function statusFor(candidate, history, config = {}) {
   const record = history.get(candidate.fingerprint);
-  if (!record) return { status: "new", history: null };
-  if (record.lastOutcome === "auto-fixed") return { status: "auto-fixed-previously", history: record };
-  return { status: "persisting", history: record };
+  if (!record) return { status: LIFECYCLE.NEW, history: null, materialChange: true, quiet: false };
+  const threshold = config.output?.materialConfidenceChange ?? 0.05;
+  const quietAfter = config.output?.quietAfterReports ?? 2;
+  const codes = (candidate.blockers ?? []).map((b) => b.code).sort();
+  const confidenceMoved =
+    record.lastConfidence === null || Math.abs((candidate.confidence ?? 0) - record.lastConfidence) >= threshold;
+  const blockersChanged = codes.join(",") !== (record.lastBlockers ?? []).join(",");
+  const materialChange = confidenceMoved || blockersChanged;
+  const quiet = !materialChange && record.timesShownInFull >= quietAfter;
+  return { status: LIFECYCLE.PERSISTING, history: record, materialChange, quiet };
 }
 
-/** Opportunities that were reported before and are gone now. */
+/** Opportunities that were open in the newest earlier report and are gone now. */
 export function resolvedSince(previousReports, currentFingerprints) {
   if (previousReports.length === 0) return [];
-  const last = previousReports[previousReports.length - 1];
+  const last = [...previousReports].sort((a, b) => String(a.reportDate).localeCompare(String(b.reportDate))).at(-1);
   const seen = new Set(currentFingerprints);
-  return (last.needsReview ?? [])
+  // A dry run's proposed auto links were still open; a shipped run's were fixed.
+  const open = [...(last.needsReview ?? []), ...(reportShippedLinks(last) ? [] : last.autoExecuted ?? [])];
+  return open
     .filter((item) => item.fingerprint && !seen.has(item.fingerprint))
     .map((item) => ({
       id: item.id,
       fingerprint: item.fingerprint,
+      status: LIFECYCLE.RESOLVED,
       from: item.from,
       to: item.to,
       anchor: item.anchor ?? null,

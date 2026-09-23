@@ -398,23 +398,65 @@ test("ids are sequential and carry the run date", () => {
   assert.equal(next(), "LINK-2026-09-17-002");
 });
 
-test("history recognizes new, persisting and previously auto-fixed findings", () => {
+test("history recognizes NEW, PERSISTING and RESOLVED findings, and records a shipped auto-fix", () => {
   const previous = [
     {
       reportDate: "2026-09-10",
+      mode: "apply",
+      execution: { committed: true, pushAttempted: true, pushed: true },
       autoExecuted: [{ id: "LINK-2026-09-10-001", fingerprint: "aaa" }],
       needsReview: [{ id: "LINK-2026-09-10-002", fingerprint: "bbb", from: "/a", to: "/b" }],
     },
   ];
   const history = buildHistory(previous);
-  assert.equal(statusFor({ fingerprint: "aaa" }, history).status, "auto-fixed-previously");
-  assert.equal(statusFor({ fingerprint: "bbb" }, history).status, "persisting");
-  assert.equal(statusFor({ fingerprint: "ccc" }, history).status, "new");
+  assert.equal(history.get("aaa").everAutoFixed, true);
+  assert.equal(history.get("aaa").autoFixedId, "LINK-2026-09-10-001");
+  assert.equal(statusFor({ fingerprint: "bbb" }, history).status, "PERSISTING");
+  assert.equal(statusFor({ fingerprint: "ccc" }, history).status, "NEW");
   assert.deepEqual(
-    resolvedSince(previous, ["aaa"]).map((r) => r.fingerprint),
-    ["bbb"],
+    resolvedSince(previous, ["aaa"]).map((r) => [r.fingerprint, r.status]),
+    [["bbb", "RESOLVED"]],
     "a finding that no longer appears is resolved"
   );
+});
+
+test("a DRY-RUN report's would-add list is never mistaken for links the agent shipped", () => {
+  const previous = [
+    {
+      reportDate: "2026-09-17",
+      mode: "dry-run",
+      execution: { committed: false },
+      autoExecuted: [{ id: "LINK-2026-09-17-001", fingerprint: "aaa", from: "/a", to: "/b" }],
+      needsReview: [],
+    },
+  ];
+  const history = buildHistory(previous);
+  assert.equal(history.get("aaa").everAutoFixed, false);
+  assert.equal(history.get("aaa").lastOutcome, "proposed-auto");
+  // Still open in a dry run, so if it is gone now it resolved (e.g. linked by hand).
+  assert.deepEqual(resolvedSince(previous, []).map((r) => r.fingerprint), ["aaa"]);
+  // An apply run whose push failed did not ship either.
+  assert.equal(
+    buildHistory([{ ...previous[0], mode: "apply", execution: { committed: true, pushAttempted: true, pushed: false } }])
+      .get("aaa").everAutoFixed,
+    false
+  );
+});
+
+test("an unchanged review item goes quiet after being written up; a material change brings it back", () => {
+  const config = testConfig();
+  const item = { id: "X", fingerprint: "fff", confidence: 0.6, blockers: [{ code: "LOW_CONFIDENCE" }] };
+  const reports = ["2026-09-03", "2026-09-10"].map((reportDate) => ({ reportDate, mode: "dry-run", autoExecuted: [], needsReview: [item] }));
+  const history = buildHistory(reports);
+  const same = statusFor({ fingerprint: "fff", confidence: 0.61, blockers: [{ code: "LOW_CONFIDENCE" }] }, history, config);
+  assert.equal(same.status, "PERSISTING");
+  assert.equal(same.quiet, true, "shown twice already, nothing changed");
+  const moved = statusFor({ fingerprint: "fff", confidence: 0.7, blockers: [{ code: "LOW_CONFIDENCE" }] }, history, config);
+  assert.equal(moved.quiet, false, "confidence moved by 0.1");
+  const reblocked = statusFor({ fingerprint: "fff", confidence: 0.6, blockers: [{ code: "DESTINATION_REQUIRES_REFRESH" }] }, history, config);
+  assert.equal(reblocked.quiet, false, "a different blocker is a material change");
+  const once = statusFor({ fingerprint: "fff", confidence: 0.6, blockers: [{ code: "LOW_CONFIDENCE" }] }, buildHistory(reports.slice(0, 1)), config);
+  assert.equal(once.quiet, false, "shown only once so far");
 });
 
 test("link direction is read off publication dates", () => {

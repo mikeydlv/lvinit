@@ -8,7 +8,8 @@
 # What this job is allowed to do:
 #   * read the repository's published editorial content
 #   * build the internal link graph
-#   * read (never write) the GSC and Fact-Decay agents' report artifacts
+#   * read (never write) the GSC, Fact-Decay and Content Brief agents' report
+#     artifacts, and its own earlier reports
 #   * add contextual internal links that meet every safety rule, by wrapping
 #     words that are ALREADY on the page in a <Link>
 #   * run TypeScript, ESLint and a production build against those edits
@@ -24,12 +25,13 @@
 #   * touch anything outside app/ and lib/areas/
 #   * force-push, rebase through a conflict, or push from a dirty or diverged
 #     working tree
-#   * modify the GSC or Fact-Decay agents' reports or scoring
+#   * modify the GSC, Fact-Decay or Content Brief agents' reports, scoring or
+#     brief status
 #
 # `contents: write` is the minimum this job needs, and it is the ONLY elevated
 # permission granted. There is no `pull-requests`, no `issues`, no `packages`,
 # no `id-token`, no `deployments`. `actions: read` exists solely so the run can
-# download the other two agents' report artifacts.
+# download the other agents' report artifacts and its own history.
 #
 # TO TURN OFF AUTONOMOUS PUSHING without deleting anything: set the repository
 # variable LINKS_GIT_PUSH to "false". The job then edits, validates, reports,
@@ -48,12 +50,17 @@ on:
     # The week is deliberately laid out so each agent reads a fresh copy of the
     # one before it and nothing lands on the same morning:
     #
-    #   Monday     GSC Opportunity Agent    (search performance)
-    #   Wednesday  Internal Linking Agent   (this job — reads Monday's GSC report)
-    #   Thursday   Fact-Decay Agent         (factual freshness)
+    #   Monday     13:00  GSC Opportunity Agent    (search performance)
+    #   Tuesday    13:00  Content Brief Generator  (reads Monday's GSC report)
+    #   Wednesday  13:00  Internal Linking Agent   (this job — reads Monday's GSC
+    #                                               report and Tuesday's briefs)
+    #   Thursday   13:00  Fact-Decay Agent         (factual freshness)
     #
+    # A full day after the Brief Generator, so its artifact is always there.
     # Wednesday also puts a day between this job's push and Thursday's
     # Fact-Decay scan, so that scan sees the linked site rather than racing it.
+    # The Fact-Decay report this job reads is therefore the PREVIOUS Thursday's
+    # (6 days old) — well inside the 45-day freshness limit.
     - cron: "0 13 * * 3"
   workflow_dispatch:
     inputs:
@@ -89,7 +96,8 @@ permissions:
   # The only elevated permission, and the only one this agent needs: it commits
   # its own link edits to main.
   contents: write
-  # Read-only, and solely to download the other two agents' report artifacts.
+  # Read-only, and solely to download the other agents' report artifacts and
+  # this agent's own earlier reports.
   actions: read
 
 concurrency:
@@ -198,6 +206,48 @@ jobs:
           else
             echo "No Fact-Decay report was downloaded. Destination freshness will not be checked."
           fi
+
+      - name: Fetch the newest Content Brief report, if there is one
+        # Optional cluster context, read-only. It can reorder safe links and it
+        # keeps this job off a page with a LIVE Publisher handoff queued; it can
+        # never create a link or change a confidence score. The artifact's own
+        # fixtures/ folder lands two levels deep and is never picked up.
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          set -uo pipefail
+          mkdir -p reports/content-briefs
+          RUN_IDS="$(gh run list --workflow content-brief-generator.yml --status success \
+            --limit 5 --json databaseId --jq '.[].databaseId' 2>/dev/null || true)"
+          for RUN_ID in $RUN_IDS; do
+            gh run download "$RUN_ID" --name content-briefs --dir "reports/content-briefs/run-$RUN_ID" 2>/dev/null \
+              && echo "Downloaded content-briefs from run $RUN_ID."
+          done
+          FOUND="$(find reports/content-briefs -maxdepth 2 -name 'content-opportunities-*.json' -printf '%f\t%p\n' \
+            | sort | tail -n 1 | cut -f2)"
+          echo "Content Brief report for context: ${FOUND:-none}"
+
+      - name: Fetch this agent's earlier reports (week-to-week identity)
+        # Downloaded into reports/internal-links-history/, NEVER into the output
+        # directory — otherwise every artifact would contain every earlier one
+        # (the Content Brief Generator's convention). History is what keeps
+        # LINK ids stable, stops an unchanged review item being written up every
+        # week, and stops the agent re-adding a link a person removed.
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          set -uo pipefail
+          mkdir -p reports/internal-links-history
+          RUN_IDS="$(gh run list --workflow internal-linking-agent.yml --status success \
+            --limit 12 --json databaseId --jq '.[].databaseId' 2>/dev/null || true)"
+          for RUN_ID in $RUN_IDS; do
+            gh run download "$RUN_ID" --name internal-links-report --dir "reports/internal-links-history/run-$RUN_ID" 2>/dev/null \
+              && echo "Downloaded earlier internal-links-report from run $RUN_ID."
+          done
 
       - name: Confirm the working tree is clean before editing
         # The downloaded reports live in gitignored directories, so they must

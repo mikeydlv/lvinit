@@ -105,6 +105,72 @@ export function looksLikeCompliance(text) {
 }
 
 /**
+ * Section headings that mark sourcing / bibliography copy.
+ *
+ * LVINIT pages close with `<StorySection heading="Sources">`. That copy says
+ * where a figure came from, and it is never this agent's to change. The
+ * compliance patterns above only caught "Sources and methodology", so a bare
+ * "Sources" heading used to read as ordinary body prose. Matched against the
+ * WHOLE heading, so a section titled "Where the new sources of supply are"
+ * is not mistaken for a bibliography.
+ */
+export const SOURCING_HEADINGS = [
+  /^sources?$/i,
+  /^sources?\s*(?:and|&)\s*(?:methods?|methodology|notes)$/i,
+  /^(?:methodology|notes on sources|about the data|about this data)$/i,
+  /^how (?:we|this was|this is) (?:reported|sourced)(?: this)?$/i,
+];
+
+/** Is this section heading a sources / methodology block? */
+export function isSourcingHeading(heading) {
+  const value = normalizeWhitespace(String(heading ?? "")).replace(/[.:]$/, "");
+  return value.length > 0 && SOURCING_HEADINGS.some((re) => re.test(value));
+}
+
+/**
+ * Where a link sits, for the link graph. Only `contextual` links are what the
+ * brief calls "meaningful editorial links".
+ *
+ *   contextual  a link inside body prose
+ *   citation    a link inside a sources / methodology block
+ *   card        a curated related-content card, CTA button, hero or other
+ *               structured block (`relatedStories`, `href:` data, <Button href>)
+ */
+export const LINK_CONTEXTS = { CONTEXTUAL: "contextual", CITATION: "citation", CARD: "card" };
+
+/** Props whose contents render as cards, buttons or structured blocks, not prose. */
+export const CARD_PROPS = [
+  "meta",
+  "hero",
+  "ctas",
+  "relatedStories",
+  "relatedNeighborhood",
+  "video",
+  "facts",
+  "quickFacts",
+  "communities",
+  "projects",
+  "items",
+  "stories",
+  "breadcrumbs",
+];
+/** Components whose rendered span is a card / conversion block, not prose. */
+export const CARD_COMPONENTS = [
+  "StoryCTAs",
+  "RelatedStories",
+  "RelatedNeighborhood",
+  "AreaCommunities",
+  "AreaQuickFacts",
+  "DevelopmentWatch",
+  "ComparisonBar",
+  "SearchHomesStrip",
+  "Newsletter",
+  "ContactForm",
+];
+export const CITATION_PROPS = ["sources"];
+export const CITATION_COMPONENTS = ["AreaSources"];
+
+/**
  * Find the index of the brace/bracket/paren that closes the one at `open`.
  * Skips quoted strings so a brace inside prose cannot end a span early.
  * Returns -1 when unbalanced.
@@ -151,52 +217,7 @@ export function protectedRanges(code, {
   props = PROTECTED_PROPS,
   components = PROTECTED_COMPONENTS,
 } = {}) {
-  const ranges = [];
-
-  // --- Object-valued props: `ctas={{ ... }}`, `meta={meta}`, `facts={x}` ----
-  for (const prop of props) {
-    const re = new RegExp(`\\b${prop}\\s*=\\s*\\{`, "g");
-    let m;
-    while ((m = re.exec(code)) !== null) {
-      const open = m.index + m[0].length - 1;
-      const close = matchDelimiter(code, open);
-      if (close > open) ranges.push({ start: m.index, end: close + 1, reason: `inside the \`${prop}\` prop` });
-    }
-  }
-
-  // --- Top-level object literals a page declares for those props -----------
-  // `const meta: StoryMeta = { ... }` and `const quickFacts = [ ... ]`.
-  const declRe = /\bconst\s+([A-Za-z_][A-Za-z0-9_]*)\s*(?::[^=]*)?=\s*([[{])/g;
-  let dm;
-  while ((dm = declRe.exec(code)) !== null) {
-    if (!props.includes(dm[1])) continue;
-    const open = dm.index + dm[0].length - 1;
-    const close = matchDelimiter(code, open);
-    if (close > open) ranges.push({ start: dm.index, end: close + 1, reason: `inside the \`${dm[1]}\` declaration` });
-  }
-
-  // --- Whole components -----------------------------------------------------
-  for (const name of components) {
-    const openRe = new RegExp(`<${name}\\b`, "g");
-    let m;
-    while ((m = openRe.exec(code)) !== null) {
-      const selfClose = code.indexOf("/>", m.index);
-      const closeTag = code.indexOf(`</${name}>`, m.index);
-      // A self-closing tag ends at the first "/>" that comes before any children.
-      const gt = code.indexOf(">", m.index);
-      if (gt > -1 && selfClose === gt - 1) {
-        ranges.push({ start: m.index, end: selfClose + 2, reason: `inside <${name}>` });
-        continue;
-      }
-      if (closeTag > m.index) {
-        ranges.push({ start: m.index, end: closeTag + name.length + 3, reason: `inside <${name}>` });
-        continue;
-      }
-      // No closing tag found: treat the opening tag alone as protected rather
-      // than guessing where it ends.
-      if (gt > m.index) ranges.push({ start: m.index, end: gt + 1, reason: `inside the <${name}> tag` });
-    }
-  }
+  const ranges = structuralRanges(code, { props, components });
 
   // --- Existing links: never nest a link inside a link ----------------------
   for (const tag of ["Link", "a"]) {
@@ -221,6 +242,84 @@ export function protectedRanges(code, {
   return ranges.sort((a, b) => a.start - b.start);
 }
 
+/**
+ * The spans of named props, top-level declarations and components. Shared by
+ * the edit guard (`protectedRanges`) and the link-context classifier, so "inside
+ * the relatedStories block" means one thing to both.
+ *
+ * @returns {Array<{start:number, end:number, reason:string, name:string}>}
+ */
+export function structuralRanges(code, { props = [], components = [] } = {}) {
+  const ranges = [];
+
+  // --- Object-valued props: `ctas={{ ... }}`, `meta={meta}`, `facts={x}` ----
+  for (const prop of props) {
+    const re = new RegExp(`\\b${prop}\\s*=\\s*\\{`, "g");
+    let m;
+    while ((m = re.exec(code)) !== null) {
+      const open = m.index + m[0].length - 1;
+      const close = matchDelimiter(code, open);
+      if (close > open) ranges.push({ start: m.index, end: close + 1, reason: `inside the \`${prop}\` prop`, name: prop });
+    }
+  }
+
+  // --- Top-level object literals a page declares for those props -----------
+  // `const meta: StoryMeta = { ... }` and `const quickFacts = [ ... ]`.
+  const declRe = /\bconst\s+([A-Za-z_][A-Za-z0-9_]*)\s*(?::[^=]*)?=\s*([[{])/g;
+  let dm;
+  while ((dm = declRe.exec(code)) !== null) {
+    if (!props.includes(dm[1])) continue;
+    const open = dm.index + dm[0].length - 1;
+    const close = matchDelimiter(code, open);
+    if (close > open) ranges.push({ start: dm.index, end: close + 1, reason: `inside the \`${dm[1]}\` declaration`, name: dm[1] });
+  }
+
+  // --- Whole components -----------------------------------------------------
+  for (const name of components) {
+    const openRe = new RegExp(`<${name}\\b`, "g");
+    let m;
+    while ((m = openRe.exec(code)) !== null) {
+      const selfClose = code.indexOf("/>", m.index);
+      const closeTag = code.indexOf(`</${name}>`, m.index);
+      // A self-closing tag ends at the first "/>" that comes before any children.
+      const gt = code.indexOf(">", m.index);
+      if (gt > -1 && selfClose === gt - 1) {
+        ranges.push({ start: m.index, end: selfClose + 2, reason: `inside <${name}>`, name });
+        continue;
+      }
+      if (closeTag > m.index) {
+        ranges.push({ start: m.index, end: closeTag + name.length + 3, reason: `inside <${name}>`, name });
+        continue;
+      }
+      // No closing tag found: treat the opening tag alone as protected rather
+      // than guessing where it ends.
+      if (gt > m.index) ranges.push({ start: m.index, end: gt + 1, reason: `inside the <${name}> tag`, name });
+    }
+  }
+
+  return ranges;
+}
+
+/**
+ * Classify every link position in a file as contextual, citation or card.
+ * Returns a function from a code index (and whether the href belongs to a
+ * <Link>/<a> element) to one of LINK_CONTEXTS.
+ */
+export function linkContextClassifier(code) {
+  const cardRanges = structuralRanges(code, { props: CARD_PROPS, components: CARD_COMPONENTS });
+  const citationRanges = structuralRanges(code, { props: CITATION_PROPS, components: CITATION_COMPONENTS });
+  const inside = (ranges, index) => ranges.some((r) => index >= r.start && index < r.end);
+  return (index, element) => {
+    // A bare `href="/x"` on a Button, or `href: "/x"` in a data object, is a
+    // CTA or a card, never a link a reader meets mid-sentence.
+    if (!element) return LINK_CONTEXTS.CARD;
+    if (inside(cardRanges, index)) return LINK_CONTEXTS.CARD;
+    if (inside(citationRanges, index)) return LINK_CONTEXTS.CITATION;
+    if (isSourcingHeading(nearestHeading(code, index))) return LINK_CONTEXTS.CITATION;
+    return LINK_CONTEXTS.CONTEXTUAL;
+  };
+}
+
 /** Is [start, end) entirely outside every protected range? */
 export function protectionFor(ranges, start, end) {
   for (const range of ranges) {
@@ -233,11 +332,12 @@ export function protectionFor(ranges, start, end) {
  * Every internal href in a file, with its anchor text when the href belongs to
  * a `<Link>` or `<a>` element.
  *
- * @returns {Array<{href:string, raw:string, anchor:string|null, index:number, line:number, element:boolean}>}
+ * @returns {Array<{href:string, raw:string, anchor:string|null, index:number, line:number, element:boolean, context:string}>}
  */
 export function extractLinks(source) {
   const { code } = stripComments(source);
   const lineOf = lineIndexer(code);
+  const contextOf = linkContextClassifier(code);
   const found = [];
   const seen = new Set();
 
@@ -260,6 +360,7 @@ export function extractLinks(source) {
         index: m.index,
         line: lineOf(m.index),
         element: true,
+        context: contextOf(m.index, true),
       });
       seen.add(`${m.index}`);
     }
@@ -271,7 +372,7 @@ export function extractLinks(source) {
   while ((bm = bare.exec(code)) !== null) {
     const route = normalizeRoute(bm[1]);
     if (!route) continue;
-    const alreadyInElement = found.some((f) => bm.index >= f.index && bm.index < f.index + 200 && f.href === route);
+    const alreadyInElement = found.some((f) => f.element && bm.index >= f.index && bm.index < f.index + 200 && f.href === route);
     if (alreadyInElement) continue;
     found.push({
       href: route,
@@ -280,6 +381,7 @@ export function extractLinks(source) {
       index: bm.index,
       line: lineOf(bm.index),
       element: false,
+      context: contextOf(bm.index, false),
     });
   }
 

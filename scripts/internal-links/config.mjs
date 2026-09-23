@@ -337,6 +337,47 @@ export const DEFAULT_CONFIG = {
   },
 
   // -------------------------------------------------------------------------
+  // Content Brief Generator signal — optional cluster context
+  //
+  // Read-only, and weaker than GSC on purpose. The Brief Generator's clusters
+  // are broad (a dozen or more pages each), so sharing one is not evidence that
+  // two pages belong linked together. It is used for three things only:
+  //
+  //   * CONTEXT in the report: which brief cluster a pair shares
+  //   * ORDERING: a destination the Brief Generator itself named as an update
+  //     or internal-link target moves up the queue slightly. Confidence is
+  //     never touched, so this can never make an unsafe link safe.
+  //   * CONFLICT AVOIDANCE: a page with a LIVE brief queued for the Content
+  //     Publisher is not edited as a source this week — the Publisher may be
+  //     rewriting it.
+  //
+  // A brief never creates a link, a proposed (unpublished) page is never a
+  // destination, and nothing here writes to reports/content-briefs/.
+  // -------------------------------------------------------------------------
+  briefs: {
+    enabled: envBool("LINKS_USE_BRIEFS", true),
+    dir: process.env.LINKS_BRIEFS_DIR || "reports/content-briefs",
+    /** Briefs describe a moment in search demand; ignore a stale report. */
+    maxReportAgeDays: envInt("LINKS_BRIEFS_MAX_AGE", 21),
+    /** Ordering boost for a destination the Brief Generator named INTERNAL_LINK_ONLY. */
+    internalLinkTargetBoost: envFloat("LINKS_BRIEFS_LINK_BOOST", 1.1),
+    /** Ordering boost for a destination it named UPDATE_EXISTING / EXPAND_EXISTING. */
+    updateTargetBoost: envFloat("LINKS_BRIEFS_UPDATE_BOOST", 1.05),
+  },
+
+  // -------------------------------------------------------------------------
+  // Editorial decisions — standing vetoes
+  //
+  // An opportunity fingerprint listed here is never auto-executed again and is
+  // not re-reported. This is how a person says "no, not that link" once and
+  // has it stick. Each entry: { fingerprint, note, date }.
+  // -------------------------------------------------------------------------
+  decisions: {
+    rejectedFingerprints: envList("LINKS_REJECTED_FINGERPRINTS", []),
+    rejected: [],
+  },
+
+  // -------------------------------------------------------------------------
   // Discovery weighting — how much a weakly-linked destination is prioritized
   //
   // This is ordering only, exactly like traffic. An orphan is not a reason to
@@ -352,8 +393,16 @@ export const DEFAULT_CONFIG = {
   // Validation — what has to pass before an edit is allowed to survive
   // -------------------------------------------------------------------------
   validation: {
-    /** Run these, in order, after the edits are on disk. Each must exit 0. */
+    /**
+     * Run these, in order, after the edits are on disk. Each must exit 0.
+     * Cheapest first: the four agents' own test suites take seconds, so a
+     * change that broke shared helpers fails before a full Next.js build.
+     */
     commands: [
+      { key: "links-tests", label: "Internal Linking tests", argv: ["npm", "run", "links:test"] },
+      { key: "gsc-tests", label: "GSC Opportunity tests", argv: ["npm", "run", "gsc:test"] },
+      { key: "fact-tests", label: "Fact-Decay tests", argv: ["npm", "run", "fact:test"] },
+      { key: "briefs-tests", label: "Content Brief tests", argv: ["npm", "run", "briefs:test"] },
       { key: "typecheck", label: "TypeScript", argv: ["npx", "tsc", "--noEmit"] },
       { key: "lint", label: "ESLint", argv: ["npm", "run", "lint"] },
       { key: "build", label: "Production build", argv: ["npm", "run", "build"] },
@@ -415,6 +464,21 @@ export const DEFAULT_CONFIG = {
     duplicateReportThreshold: envInt("LINKS_DUPLICATE_THRESHOLD", 3),
     /** How many previous reports to read back for stable-ID continuity. */
     historyLookback: envInt("LINKS_HISTORY_LOOKBACK", 12),
+    /**
+     * Where CI puts earlier runs' reports (one `run-<id>/` folder each). Kept
+     * apart from `dir` so an artifact never contains every earlier one —
+     * the Content Brief Generator's convention.
+     */
+    historyDir: process.env.LINKS_HISTORY_DIR || "reports/internal-links-history",
+    /**
+     * A review item that has already been shown in full this many times, and
+     * has not materially changed, is listed as one line under "Still open"
+     * instead of being written up again. Stops the same item resurfacing
+     * forever.
+     */
+    quietAfterReports: envInt("LINKS_QUIET_AFTER_REPORTS", 2),
+    /** A confidence move at least this large counts as a material change. */
+    materialConfidenceChange: envFloat("LINKS_MATERIAL_CONFIDENCE_CHANGE", 0.05),
   },
 };
 

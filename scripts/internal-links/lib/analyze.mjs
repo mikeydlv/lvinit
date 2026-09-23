@@ -18,6 +18,7 @@ import {
   resolvedSince,
   sentenceAround,
   REVIEW_REASONS,
+  NEUTRAL_BRIEF_SIGNAL,
 } from "./opportunities.mjs";
 
 /**
@@ -28,6 +29,7 @@ import {
  * @param {string} opts.reportDate       YYYY-MM-DD, injected so runs are deterministic
  * @param {object} opts.gscSignal
  * @param {object} opts.factDecaySignal
+ * @param {object} opts.briefSignal      optional Content Brief context
  * @param {Array}  opts.previousReports
  * @param {string} opts.mode             "dry-run" | "apply"
  */
@@ -38,26 +40,37 @@ export function analyze({
   reportDate,
   gscSignal,
   factDecaySignal,
+  briefSignal = NEUTRAL_BRIEF_SIGNAL,
   previousReports = [],
   mode = "dry-run",
 }) {
   const graph = prebuilt ?? buildLinkGraph({ repoRoot, config, today: reportDate });
 
+  // History first: whether this agent already shipped a link, and whether a
+  // person has since removed it, is itself a safety gate.
+  const history = buildHistory(previousReports);
+
   const candidates = findCandidates({ graph, config });
-  const { evaluated, autoExecuted, needsReview } = classifyAndRank({
+  const { evaluated, autoExecuted, needsReview, vetoed } = classifyAndRank({
     graph,
     candidates,
     config,
     gscSignal,
     factDecaySignal,
+    briefSignal,
+    history,
     reportDate,
   });
 
-  const history = buildHistory(previousReports);
   for (const candidate of evaluated) {
-    const { status, history: record } = statusFor(candidate, history);
+    const { status, history: record, materialChange, quiet } = statusFor(candidate, history, config);
     candidate.status = status;
     candidate.historyRecord = record;
+    candidate.materialChange = materialChange;
+    // Auto-executed items are always shown in full; only an unchanged review
+    // item that has already been written up goes quiet.
+    candidate.quiet = candidate.disposition === "REVIEW_REQUIRED" ? quiet : false;
+    candidate.shownInFull = !candidate.quiet;
     candidate.sentence = sentenceAround(candidate.paragraph, candidate.anchor);
     // The exact replacement text, computed whether or not this run will write
     // it. A dry run has to be able to show the change, character for character.
@@ -71,6 +84,7 @@ export function analyze({
         REVIEW_REASONS.FAIR_HOUSING_REVIEW,
         REVIEW_REASONS.COMPLIANCE_COPY,
         REVIEW_REASONS.POSSIBLE_INTENT_OVERLAP,
+        REVIEW_REASONS.PUBLISHER_EDIT_PENDING,
       ].includes(b.code)
     );
     candidate.handoff = needsPublisher
@@ -80,6 +94,8 @@ export function analyze({
 
   const bridgeSentenceHandoffs = findBridgeSentenceOpportunities({ graph, candidates, config });
   const currentFingerprints = evaluated.map((c) => c.fingerprint);
+  const shownReview = needsReview.filter((c) => !c.quiet);
+  const quietReview = needsReview.filter((c) => c.quiet);
   const resolved = resolvedSince(previousReports, currentFingerprints);
 
   const blockedDestinations = [
@@ -100,7 +116,11 @@ export function analyze({
     publishedAt: p.publishedAt,
     ageDays: p.ageDays,
     incomingEditorialCount: p.incomingEditorialCount,
+    incomingContextualCount: p.incomingContextualCount,
     uniqueReferrers: p.uniqueReferrers,
+    cardReferrers: p.cardReferrers,
+    citationReferrers: p.citationReferrers,
+    briefClusters: briefSignal.clustersFor(p.route),
     chromeReferrers: p.chromeIncoming.map((c) => c.from),
     inSitemap: p.inSitemap,
   });
@@ -116,8 +136,12 @@ export function analyze({
     graph,
     gscSignal,
     factDecaySignal,
+    briefSignal,
     autoExecuted,
     needsReview,
+    shownReview,
+    quietReview,
+    vetoed,
     evaluated,
     bridgeSentenceHandoffs,
     resolved,
@@ -137,6 +161,9 @@ export function analyze({
     graphSummary: {
       pages: graph.totals.pages,
       editorialEdges: graph.totals.editorialEdges,
+      contextualEdges: countContext(graph, "contextual"),
+      citationEdges: countContext(graph, "citation"),
+      cardEdges: countContext(graph, "card"),
       allEdges: graph.totals.allEdges,
       chromeLinks: graph.chromeLinkCount + graph.componentLinkCount,
     },
@@ -157,12 +184,18 @@ export function analyze({
         line: e.line,
         file: e.file,
         editorial: e.editorialTarget,
+        context: e.context,
         targetExists: e.targetExists,
       })),
-      incoming: p.incoming.map((e) => ({ from: e.from, anchor: e.anchor, line: e.line })),
+      incoming: p.incoming.map((e) => ({ from: e.from, anchor: e.anchor, line: e.line, context: e.context })),
       uniqueReferrers: p.uniqueReferrers,
+      cardReferrers: p.cardReferrers,
+      citationReferrers: p.citationReferrers,
       incomingEditorialCount: p.incomingEditorialCount,
+      incomingContextualCount: p.incomingContextualCount,
       outgoingEditorialCount: p.outgoingEditorialCount,
+      outgoingContextualCount: p.outgoingContextualCount,
+      briefClusters: briefSignal.clustersFor(p.route),
       isOrphan: p.isOrphan,
       isWeaklyLinked: p.isWeaklyLinked,
       isNewlyPublished: p.isNewlyPublished,
@@ -171,11 +204,16 @@ export function analyze({
       pagesScanned: graph.totals.pages,
       pagesOutOfScope: graph.skipped.length,
       editorialLinks: graph.totals.editorialEdges,
+      contextualLinks: countContext(graph, "contextual"),
       allInternalLinks: graph.totals.allEdges,
       candidatesExamined: candidates.length,
       opportunitiesDetected: evaluated.length,
       autoExecuted: autoExecuted.length,
       needsReview: needsReview.length,
+      reviewShownInFull: shownReview.length,
+      reviewStillOpenQuiet: quietReview.length,
+      vetoed: vetoed.length,
+      ignoredBelowReportLine: candidates.ignoredBelowReportLine ?? 0,
       heldByRunLimits: countBlocker(REVIEW_REASONS.RUN_LIMIT_REACHED),
       blockedByFactDecay: countBlocker(REVIEW_REASONS.DESTINATION_REQUIRES_REFRESH),
       blockedByCompliance:
@@ -187,4 +225,13 @@ export function analyze({
       duplicateLinks: graph.duplicateLinks.length,
     },
   };
+}
+
+/** Editorial edges of one context kind across the graph. */
+function countContext(graph, context) {
+  let n = 0;
+  for (const page of graph.pages.values()) {
+    for (const edge of page.outgoing) if (edge.editorialTarget && edge.context === context) n += 1;
+  }
+  return n;
 }
