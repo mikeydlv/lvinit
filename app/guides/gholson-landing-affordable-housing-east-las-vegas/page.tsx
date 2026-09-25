@@ -7,6 +7,7 @@ import {
   StoryLede,
   StorySection,
   StoryPullQuote,
+  StoryGallery,
 } from "@/components/story";
 
 // ---------------------------------------------------------------------------
@@ -249,7 +250,9 @@ export default function GholsonLandingPage() {
             </span>
             the image above is a real photograph of Gholson Landing, not
             captured by Mikey Del Rosario or LVINIT and not AI-generated. Its
-            original source hasn&rsquo;t been independently confirmed.
+            original source hasn&rsquo;t been independently confirmed. The
+            three photos further down this page, in the &ldquo;What&rsquo;s
+            actually on site&rdquo; section, are credited the same way.
           </p>
         </Container>
       </div>
@@ -305,6 +308,40 @@ export default function GholsonLandingPage() {
       </StorySection>
 
       <SnapshotPanel />
+
+      <StorySection heading="What's actually on site">
+        <p className="text-body-lg text-lvinit-warmgray">
+          Three more real photos of the property, showing the clubhouse
+          building, the on-site basketball court, and the courtyard where the
+          picnic tables sit — the same amenities described above.
+        </p>
+        <StoryGallery
+          columns={2}
+          images={[
+            {
+              src: "/images/features/gholson-landing-clubhouse-exterior.webp",
+              alt: "Exterior of Gholson Landing's clubhouse building, a modern structure with large glass storefronts and two palm trees out front",
+              label: "Photo note",
+              caption:
+                "The community clubhouse building, which SNRHA says holds a kitchen, fitness center, and computer lab. Not Mikey/LVINIT's photography; source not independently confirmed.",
+            },
+            {
+              src: "/images/features/gholson-landing-basketball-court-parking.webp",
+              alt: "An outdoor basketball court and parking lot at Gholson Landing, with the apartment buildings visible behind it",
+              label: "Photo note",
+              caption:
+                "The on-site basketball court and parking area. Not Mikey/LVINIT's photography; source not independently confirmed.",
+            },
+            {
+              src: "/images/features/gholson-landing-courtyard-picnic-area.webp",
+              alt: "A courtyard at Gholson Landing with blue picnic tables under a shade structure, next to one of the apartment buildings",
+              label: "Photo note",
+              caption:
+                "A courtyard with covered picnic seating between buildings. Not Mikey/LVINIT's photography; source not independently confirmed.",
+            },
+          ]}
+        />
+      </StorySection>
 
       <StorySection heading="The name behind the building">
         <p className="text-body-lg text-lvinit-warmgray">
