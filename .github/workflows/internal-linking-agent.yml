@@ -285,7 +285,12 @@ jobs:
           if [ "${PUSH_INPUT:-true}" != "true" ]; then
             ARGS="$ARGS --no-push"
           fi
-          node scripts/internal-links/run.mjs $ARGS | tee run-output.txt
+          # The console copy goes to $RUNNER_TEMP, OUTSIDE the checkout. `tee`
+          # starts alongside the agent and creates its file immediately, so a
+          # file in the repository would already exist, untracked, when the
+          # agent's clean-tree preflight runs — and the agent would (correctly)
+          # refuse to edit. The preflight itself is unchanged.
+          node scripts/internal-links/run.mjs $ARGS | tee "$RUNNER_TEMP/internal-links-run-output.txt"
 
       - name: Write the summary onto the run page
         if: always()
@@ -294,7 +299,7 @@ jobs:
             echo "## LVINIT Internal Linking Agent"
             echo
             echo '```'
-            cat run-output.txt 2>/dev/null || echo "The run produced no output."
+            cat "$RUNNER_TEMP/internal-links-run-output.txt" 2>/dev/null || echo "The run produced no output."
             echo '```'
             echo
             echo "Only contextual internal links were changed, and only by wrapping words that were"

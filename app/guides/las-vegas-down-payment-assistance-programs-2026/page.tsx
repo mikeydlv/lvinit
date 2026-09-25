@@ -299,6 +299,12 @@ export default function LasVegasDownPaymentAssistanceProgramsPage() {
             category: "Cost of living",
             dek: "The other number on a resale listing that isn't automatically yours. Worth understanding before you finalize a budget.",
           },
+          {
+            name: "Gholson Landing Just Opened 121 Affordable Apartments in East Las Vegas",
+            href: "/guides/gholson-landing-affordable-housing-east-las-vegas",
+            category: "Local Feature",
+            dek: "Not everyone is ready to buy yet. A look at the rental side of the valley's affordability picture, and how it's different from the assistance programs above.",
+          },
         ],
       }}
       ctas={{
@@ -548,6 +554,19 @@ export default function LasVegasDownPaymentAssistanceProgramsPage() {
           $500K home with, say, an FHA loan is roughly $17,500, not the
           $100,000 that 20% would imply, before any assistance program is even
           factored in.
+        </p>
+        <p className="mt-5 text-body-lg text-lvinit-warmgray">
+          And if none of this is realistic yet, that&rsquo;s real information
+          too, not a failure — Nevada&rsquo;s affordable-housing pipeline is
+          also growing. Southern Nevada&rsquo;s public housing authority just{" "}
+          <Link
+            href="/guides/gholson-landing-affordable-housing-east-las-vegas"
+            className={linkCls}
+          >
+            opened 121 income-restricted apartments in east Las Vegas
+          </Link>
+          , a different kind of answer to the same affordability question,
+          for households the loan programs above aren&rsquo;t built for yet.
         </p>
       </StorySection>
 

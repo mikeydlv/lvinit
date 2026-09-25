@@ -265,7 +265,7 @@ export default function HendersonVsSouthwestLasVegasPage() {
           one, in stretches like Nevada Trails and central Enterprise, you get
           whatever each builder did on each parcel: more variety, sometimes
           more house for the money, with a lot less of a plan holding it
-          together. Both resale and new build are genuinely available in both
+          together. Both resale and <Link href="/guides/new-build-vs-resale-las-vegas" className={linkCls}>new build</Link> are genuinely available in both
           places, which isn&rsquo;t true everywhere in the valley.
         </p>
         <p className="mt-5 text-body-lg text-lvinit-warmgray">

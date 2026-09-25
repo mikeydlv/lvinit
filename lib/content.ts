@@ -238,6 +238,28 @@ export type Guide = {
  */
 export const guides: Guide[] = [
   {
+    slug: "gholson-landing-affordable-housing-east-las-vegas",
+    title: "Gholson Landing Just Opened 121 Affordable Apartments in East Las Vegas",
+    dek: "A $32 million community named for a man who once lived in public housing himself opened this week at 2601 Sunrise Ave. Who it's actually for, what's inside, and how it fits the valley's bigger affordability story.",
+    byline: "LVINIT Editorial",
+    date: "September 2026",
+    publishedAt: "2026-09-25",
+    category: "Local Feature",
+    // Built via the autonomous scheduled editorial-publishing routine. Topic
+    // selection: explicitly told NOT to add a third mortgage-rate piece this
+    // run (two open PRs already cover that thread), so a fresh, non-
+    // duplicative, well-corroborated story was researched instead — see the
+    // article's own header comment for full sourcing notes (Fox5 Vegas x2,
+    // KTNV, RJ headline-corroborated, The Michaels Organization, Nevada
+    // Housing Division). No repo photography depicts this specific East Las
+    // Vegas apartment community, and C:\LVINIT\Images was confirmed
+    // unreachable from this Linux cloud session, so it carries a generated
+    // LVINIT editorial cover and a photoless StoryHero.
+    image: "/images/covers/gholson-landing-editorial-cover.webp",
+    imageMode: "editorial-cover",
+    href: "/guides/gholson-landing-affordable-housing-east-las-vegas",
+  },
+  {
     slug: "las-vegas-mortgage-rates-19-month-high",
     title: "Mortgage Rates Just Hit Their Highest Point Since January 2025",
     dek: "Freddie Mac's official average jumped to 6.95% the week of September 17, 2026 — a bigger one-week move than any before it in this run-up, and the highest print in 19 months. Daily trackers already had it back above 7% by September 22.",
