@@ -133,6 +133,15 @@ import {
 // (public/images/covers/sandstone-tule-springs-editorial-cover.webp) was
 // deleted since nothing points to it anymore.
 //
+// HERO SWAP — 2026-09-25: Mikey uploaded his own photo of the Landings model
+// row ("Landings-Sandstone-KB-Hero.png", 1908x791) and asked for it as the
+// hero and card; he confirmed he shot it. Optimized with Sharp (no crop) to
+//   public/images/hero/landings-at-sandstone-model-homes-strip-view-hero.webp
+// The raw PNG and the superseded KB Home hero
+// (sandstone-tule-springs-model-homes-hero.webp) were removed as
+// unreferenced. The credit banner now credits Mikey; the four inline KB Home
+// images keep their own "Photo: KB Home" credits.
+//
 // VIDEO — added 2026-09-25: Mikey's own walkthrough of Landings at Sandstone
 // (https://www.youtube.com/watch?v=aBdmoKLjoeY). Upload date (2026-09-24) and
 // duration (1714s) read from the YouTube watch page. The poster is Mikey's own
@@ -244,13 +253,11 @@ export default function SandstoneTuleSpringsPage() {
           "Sandstone at Tule Springs: KB Home Opens a 1,500-Home North Las Vegas Community",
         subheadline:
           "First-phase homes are open for sale now in a nearly 300-acre master plan on North Las Vegas's northern edge, starting in the high $300,000s. Here's what's actually built, what's still coming, and how it fits the area we already cover as Tule Springs.",
-        // KB Home's own photo/rendering of the actual model homes at this
-        // community — not Mikey's photography, not AI-generated. See the
-        // visible "Photo: KB Home" credit banner rendered immediately below
-        // the hero, before the lede.
-        image: "/images/hero/sandstone-tule-springs-model-homes-hero.webp",
+        // Mikey's own photo of the Landings model homes (see IMAGERY note up
+        // top). Credit banner rendered immediately below the hero.
+        image: "/images/hero/landings-at-sandstone-model-homes-strip-view-hero.webp",
         imageAlt:
-          "Three KB Home model home elevations along the street at Sandstone at Tule Springs in North Las Vegas",
+          "Three two-story model homes at Landings at Sandstone in North Las Vegas, with graded lots, the Las Vegas Strip, and mountains on the horizon",
         backLink: { label: "LVINIT", href: "/" },
         ctas: [
           { label: "See the numbers", href: "#by-the-numbers", variant: "primary" },
@@ -299,11 +306,11 @@ export default function SandstoneTuleSpringsPage() {
         <Container className="py-4">
           <p className="mx-auto max-w-[680px] text-caption text-lvinit-warmgray">
             <span className="font-bold uppercase tracking-wide text-lvinit-blue">
-              Photo: KB Home \u2014{" "}
+              Photo: Mikey Del Rosario &mdash;{" "}
             </span>
-            the model-home image above was supplied by KB Home, not captured
-            by Mikey Del Rosario. The inline photos further down this page are
-            also KB Home&rsquo;s own marketing images, credited the same way.
+            the Landings model homes above, with the Strip on the horizon. The
+            inline photos further down this page are KB Home&rsquo;s own
+            marketing images, credited to KB Home where they appear.
           </p>
         </Container>
       </div>

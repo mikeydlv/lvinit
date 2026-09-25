@@ -491,9 +491,11 @@ export const guides: Guide[] = [
     // instruction. The superseded generated cover
     // (public/images/covers/sandstone-tule-springs-editorial-cover.webp) is
     // deleted since nothing references it anymore.
-    image: "/images/hero/sandstone-tule-springs-model-homes-hero.webp",
+    // On 2026-09-25 hero + card were swapped to Mikey's own photo of the
+    // Landings model row (he confirmed he shot it), replacing the KB Home image.
+    image: "/images/hero/landings-at-sandstone-model-homes-strip-view-hero.webp",
     imageAlt:
-      "Three KB Home model home elevations along the street at Sandstone at Tule Springs in North Las Vegas",
+      "Three two-story model homes at Landings at Sandstone in North Las Vegas, with graded lots, the Las Vegas Strip, and mountains on the horizon",
     href: "/guides/sandstone-tule-springs-north-las-vegas",
   },
   {
