@@ -83,6 +83,9 @@ import {
 //   /guides/las-vegas-home-prices-august-2026).
 // - HOA fees: KB Home's own pages note association fees apply but do not
 //   disclose an amount — not asserted here.
+//   Updated 2026-09-25: Mikey confirmed Landings has NO HOA (walked the
+//   community for the video below). HOA status for Reserves is unconfirmed,
+//   so the article only tells readers to verify it there.
 // - Added 2026-09-14 (fetched KB Home's landings-at-sandstone-at-tule-springs
 //   page directly, plus corroborating search results from KB Home's other
 //   Sandstone community pages): KB Home's own "community highlights" section
@@ -289,7 +292,7 @@ export default function SandstoneTuleSpringsPage() {
       ctas={{
         heading: "Weighing new construction on the valley's north edge?",
         body:
-          "A community this new comes with real tradeoffs \u2014 distance from the valley's core, an HOA and homesite premiums that change the final price, phases still under construction nearby. Tell me what you're weighing and I'll give you the honest read.",
+          "A community this new comes with real tradeoffs \u2014 distance from the valley's core, homesite premiums (and, outside Landings, possible HOA dues) that change the final price, phases still under construction nearby. Tell me what you're weighing and I'll give you the honest read.",
       }}
     >
       <div className="border-b border-lvinit-lightgray bg-lvinit-lightgray/40">
@@ -462,15 +465,16 @@ export default function SandstoneTuleSpringsPage() {
           story rather than a marketing line.
         </p>
         <p className="mt-5 text-body-lg text-lvinit-warmgray">
-          Two honest caveats, both straight from KB Home&rsquo;s own listing
-          pages. First, &ldquo;from the high $300,000s&rdquo; is the Landings
+          Two honest caveats. First, per KB Home&rsquo;s own listing pages,
+          &ldquo;from the high $300,000s&rdquo; is the Landings
           sub-community specifically; Reserves, the other open
           sub-community, starts from the mid $400,000s for a larger,
-          build-to-order home. Second, KB Home&rsquo;s own pages note that
-          homesite premiums and HOA/association fees can apply on top of the
-          base price, without disclosing a specific amount &mdash; get the
-          actual out-the-door number, including any HOA dues, in writing
-          before treating a listed starting price as your monthly budget.
+          build-to-order home. Second, homesite premiums can apply on top of
+          the base price. Landings itself has no HOA (Mikey confirmed that
+          walking the community for the video above), but check whether
+          HOA/association fees apply before buying in Reserves &mdash; either
+          way, get the actual out-the-door number in writing before treating
+          a listed starting price as your monthly budget.
         </p>
       </StorySection>
 
@@ -546,9 +550,9 @@ export default function SandstoneTuleSpringsPage() {
               className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-lvinit-blue"
             />
             <span>
-              The actual out-the-door monthly cost once HOA dues and any
-              homesite premium are added to the base price &mdash; neither is
-              published yet.
+              The actual out-the-door monthly cost once any homesite premium
+              (and, in Reserves, any HOA dues) is added to the base price
+              &mdash; neither is published yet.
             </span>
           </li>
           <li className="flex gap-3">
