@@ -298,13 +298,20 @@ export const guides: Guide[] = [
     // hypothetical. No rate forecast anywhere in the piece. A financing-cost
     // topic, not a place, so no repo photography fits; C:\LVINIT\Images
     // (a Windows path) was confirmed unreachable from this Linux cloud
-    // session (no /mnt/c mount). No standing approval exists to substitute
-    // AI-generated imagery on an autonomous run — the two prior pieces' AI
-    // hero graphics were each a one-time, live, in-the-moment approval from
-    // Mikey — so this carries a generated LVINIT editorial cover as the
-    // card image and a photoless StoryHero instead.
-    image:
-      "/images/covers/las-vegas-mortgage-rates-19-month-high-editorial-cover.webp",
+    // session (no /mnt/c mount). Originally carried a generated LVINIT
+    // editorial cover and a photoless StoryHero.
+    //
+    // Updated 2026-09-25: Mikey supplied an AI-generated image directly
+    // ("Mortgage Rates 9-17-26.jpg" via GitHub upload — confirmed
+    // AI-generated, not a real photo of any actual Las Vegas neighborhood),
+    // now used as both the StoryHero and this card image
+    // (hero/las-vegas-mortgage-rates-19-month-high-hero.webp), with a
+    // visible on-page disclosure banner and no Mikey photo credit.
+    // imageMode stays "editorial-cover" so the card renders it honestly as
+    // a graphic, not a claimed photograph — same convention as the two
+    // prior mortgage-rates pieces' AI hero graphics. Superseded generated
+    // cover deleted.
+    image: "/images/hero/las-vegas-mortgage-rates-19-month-high-hero.webp",
     imageMode: "editorial-cover",
     href: "/guides/las-vegas-mortgage-rates-19-month-high",
   },

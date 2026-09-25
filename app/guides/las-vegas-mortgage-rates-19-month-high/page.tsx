@@ -226,6 +226,15 @@ export default function LasVegasMortgageRates19MonthHighPage() {
         headline: "Mortgage Rates Just Hit Their Highest Point Since January 2025",
         subheadline:
           "Freddie Mac's official average jumped to 6.95% the week of September 17, 2026 — a bigger one-week move than any of the three weekly increases before it, and the highest that average has been in 19 months. Daily trackers already had it back above 7% by September 22.",
+        // Mikey-supplied AI-generated image ("Mortgage Rates 9-17-26.jpg") —
+        // not a real photograph, not any actual Las Vegas neighborhood. See
+        // the visible disclosure banner rendered immediately below the
+        // hero, same convention as the AI hero graphics on
+        // las-vegas-mortgage-rates-approach-7-percent and the Fiesta
+        // Henderson concept illustration.
+        image: "/images/hero/las-vegas-mortgage-rates-19-month-high-hero.webp",
+        imageAlt:
+          "AI-generated illustration of a family and a dog walking down a suburban Las Vegas street at sunset, with palm trees, tile-roofed homes, and the Stratosphere Tower visible in the distance — not a photograph of a real location",
         backLink: { label: "LVINIT", href: "/" },
         ctas: [
           { label: "See the numbers", href: "#by-the-numbers", variant: "primary" },
@@ -268,6 +277,20 @@ export default function LasVegasMortgageRates19MonthHighPage() {
           "A national average, daily or weekly, is a starting point, not your quote. Your actual rate depends on your credit, your down payment, and your lender. Tell me your target budget and I'll walk you through what it realistically looks like right now, rate included. No sales pitch.",
       }}
     >
+      <div className="border-b border-lvinit-lightgray bg-lvinit-lightgray/40">
+        <Container className="py-4">
+          <p className="mx-auto max-w-[680px] text-caption text-lvinit-warmgray">
+            <span className="font-bold uppercase tracking-wide text-lvinit-blue">
+              AI-generated illustration —{" "}
+            </span>
+            the image above is an AI-generated illustration of a generic
+            Las Vegas-style residential street. It is not a photograph,
+            and it does not depict any specific real address, subdivision,
+            or view.
+          </p>
+        </Container>
+      </div>
+
       <StoryLede
         kicker="Market Watch"
         lead="Six days ago, we wrote that daily rate trackers already had the 30-year fixed sitting at 7%, even as Freddie Mac's slower official average still read 6.76%. That gap closed fast. Freddie Mac's own weekly survey — the number the industry actually treats as the benchmark — jumped to 6.95% for the week of September 17, 2026, a fourth straight weekly increase and its highest print since January 30, 2025."
