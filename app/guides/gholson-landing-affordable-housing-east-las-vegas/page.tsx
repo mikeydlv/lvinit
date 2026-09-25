@@ -197,6 +197,14 @@ export default function GholsonLandingPage() {
           "Gholson Landing Just Opened 121 Affordable Apartments in East Las Vegas",
         subheadline:
           "A $32 million community named for a man who once lived in public housing himself opened this week at 2601 Sunrise Ave. Here's who it's actually for, what's inside, and why it's worth understanding even if you're not the one renting it.",
+        // Not Mikey's own photography and not AI-generated — a real
+        // photograph of the property that Mikey found online and supplied
+        // for this piece (source not independently confirmed). See the
+        // visible credit banner rendered immediately below the hero, before
+        // the lede, mirroring the KB Home / sandstone-tule-springs pattern.
+        image: "/images/hero/gholson-landing-affordable-housing-hero.webp",
+        imageAlt:
+          "Straight-on view of a three-story stucco apartment building at Gholson Landing with red front doors, private balconies, new landscaping, blue benches, and a lawn in the foreground",
         backLink: { label: "LVINIT", href: "/" },
         ctas: [
           { label: "See the numbers", href: "#by-the-numbers", variant: "primary" },
@@ -233,6 +241,19 @@ export default function GholsonLandingPage() {
           "Gholson Landing isn't a home you can buy into, but the question behind it — what actually fits your budget in this valley right now — is one I help people work through every day. Tell me where you're starting from and I'll give you the honest read.",
       }}
     >
+      <div className="border-b border-lvinit-lightgray bg-lvinit-lightgray/40">
+        <Container className="py-4">
+          <p className="mx-auto max-w-[680px] text-caption text-lvinit-warmgray">
+            <span className="font-bold uppercase tracking-wide text-lvinit-blue">
+              Photo note —{" "}
+            </span>
+            the image above is a real photograph of Gholson Landing, not
+            captured by Mikey Del Rosario or LVINIT and not AI-generated. Its
+            original source hasn&rsquo;t been independently confirmed.
+          </p>
+        </Container>
+      </div>
+
       <StoryLede
         kicker="Local Feature"
         lead="This week, a new 121-unit apartment community opened at 2601 Sunrise Ave. in Las Vegas, not far from Nellis Boulevard. It's income-restricted, not for sale, and it's not the kind of story LVINIT usually leads with. But it's a real, verifiable data point in the same affordability conversation running through everything else we cover this year — from starter-home prices to down-payment assistance — so it's worth understanding on its own terms."

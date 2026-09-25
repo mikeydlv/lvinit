@@ -251,12 +251,25 @@ export const guides: Guide[] = [
     // duplicative, well-corroborated story was researched instead — see the
     // article's own header comment for full sourcing notes (Fox5 Vegas x2,
     // KTNV, RJ headline-corroborated, The Michaels Organization, Nevada
-    // Housing Division). No repo photography depicts this specific East Las
-    // Vegas apartment community, and C:\LVINIT\Images was confirmed
-    // unreachable from this Linux cloud session, so it carries a generated
-    // LVINIT editorial cover and a photoless StoryHero.
-    image: "/images/covers/gholson-landing-editorial-cover.webp",
-    imageMode: "editorial-cover",
+    // Housing Division).
+    //
+    // IMAGERY — originally shipped with a generated LVINIT editorial cover
+    // because C:\LVINIT\Images was unreachable from that cloud session and
+    // no repo photography depicted this specific site. On 2026-09-25, Mikey
+    // uploaded a real photograph of the property he found online (via
+    // GitHub web upload) and asked that it be used as the hero; used here as
+    // the card image too, same as the sandstone-tule-springs precedent. This
+    // is genuine photography, not Mikey's own and not AI-generated — not
+    // independently confirmed as to original source — so `imageMode` is left
+    // unset ("photo"). The hero carries a visible "Photo note" credit
+    // stating plainly it wasn't captured by Mikey/LVINIT, per the same
+    // no-fabricated-attribution rule as the KB Home imagery elsewhere on the
+    // site. The superseded generated cover
+    // (public/images/covers/gholson-landing-editorial-cover.webp) is deleted
+    // since nothing references it anymore.
+    image: "/images/hero/gholson-landing-affordable-housing-hero.webp",
+    imageAlt:
+      "Straight-on view of a three-story stucco apartment building at Gholson Landing with red front doors, private balconies, new landscaping, blue benches, and a lawn in the foreground",
     href: "/guides/gholson-landing-affordable-housing-east-las-vegas",
   },
   {
