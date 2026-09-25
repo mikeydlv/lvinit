@@ -8,6 +8,7 @@ import {
   StorySection,
   StoryPullQuote,
   StoryGallery,
+  StoryVideo,
 } from "@/components/story";
 
 // ---------------------------------------------------------------------------
@@ -128,6 +129,12 @@ import {
 // The now-unreferenced generated cover
 // (public/images/covers/sandstone-tule-springs-editorial-cover.webp) was
 // deleted since nothing points to it anymore.
+//
+// VIDEO — added 2026-09-25: Mikey's own walkthrough of Landings at Sandstone
+// (https://www.youtube.com/watch?v=aBdmoKLjoeY). Upload date (2026-09-24) and
+// duration (1714s) read from the YouTube watch page. The poster is Mikey's own
+// thumbnail design, uploaded via GitHub and used as-is (no duplicate copy):
+//   public/images/lvinit-tule-springs-new-homes-under-400k-thumbnail.png
 // ---------------------------------------------------------------------------
 
 const PATH = "/guides/sandstone-tule-springs-north-las-vegas";
@@ -141,11 +148,22 @@ const meta: StoryMeta = {
     "KB Home just opened first-phase sales at Sandstone, a nearly-300-acre, 1,500-home community in North Las Vegas's Tule Springs area, with homes from the high $300,000s. What's actually built, what's still coming, and what it means for buyers.",
   path: PATH,
   datePublished: "2026-09-11",
+  dateModified: "2026-09-25",
   author: "LVINIT Editorial",
   breadcrumbs: [
     { name: "Home", path: "/" },
     { name: "Sandstone at Tule Springs", path: PATH },
   ],
+  video: {
+    name: "Brand-New Homes Under $400K in Tule Springs? | Landings at Sandstone",
+    description:
+      "Mikey Del Rosario walks Landings at Sandstone, a new KB Home community in North Las Vegas's Tule Springs area, showing the homes, lots, upgrades, and the growth around the community right now.",
+    thumbnailUrl: "/images/lvinit-tule-springs-new-homes-under-400k-thumbnail.png",
+    uploadDate: "2026-09-24",
+    duration: "PT28M34S",
+    embedUrl: "https://www.youtube.com/embed/aBdmoKLjoeY",
+    contentUrl: "https://www.youtube.com/watch?v=aBdmoKLjoeY",
+  },
 };
 
 export const metadata: Metadata = buildStoryMetadata(meta);
@@ -305,6 +323,15 @@ export default function SandstoneTuleSpringsPage() {
           whole story.
         </p>
       </StoryLede>
+
+      <StoryVideo
+        youtubeId="aBdmoKLjoeY"
+        title="Brand-New Homes Under $400K in Tule Springs? | Landings at Sandstone"
+        eyebrow="Watch the walkthrough"
+        heading="See what Landings at Sandstone actually looks like"
+        intro="Tour Landings at Sandstone with me and see what the homes, lots, upgrades, and surrounding growth actually look like right now."
+        poster="/images/lvinit-tule-springs-new-homes-under-400k-thumbnail.png"
+      />
 
       <StorySection heading="What just opened">
         <p className="text-body-lg text-lvinit-warmgray">

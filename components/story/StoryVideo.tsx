@@ -6,6 +6,8 @@ export type StoryVideoProps = {
   youtubeId: string;
   /** Accessible iframe title — describe the clip, credit the creator. */
   title: string;
+  /** Optional uppercase eyebrow above the heading, styled like StoryLede's kicker. */
+  eyebrow?: string;
   heading?: string;
   intro?: string;
   /** Anchor id so a hero CTA can jump here. Default "watch". */
@@ -28,6 +30,7 @@ export type StoryVideoProps = {
 export default function StoryVideo({
   youtubeId,
   title,
+  eyebrow,
   heading = "See it for yourself",
   intro,
   id = "watch",
@@ -37,6 +40,12 @@ export default function StoryVideo({
     <section id={id} aria-label={heading} className="scroll-mt-24">
       <Container className="py-8">
         <div className="mx-auto max-w-[900px]">
+          {eyebrow && (
+            <p className="mb-4 flex items-center gap-3 text-caption uppercase tracking-wide text-lvinit-warmgray">
+              <span className="h-px w-8 bg-lvinit-blue" aria-hidden="true" />
+              {eyebrow}
+            </p>
+          )}
           {heading && (
             <h2 className="font-display text-heading-sm sm:text-heading font-bold text-lvinit-black">
               {heading}
