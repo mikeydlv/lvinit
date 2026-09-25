@@ -245,10 +245,16 @@ export default function LasVegasMortgageRatesApproach7PercentPage() {
           "The rate is one half of what a home actually costs a buyer. Here's the other half, and what it looks like to actually get into the market at today's numbers.",
         stories: [
           {
+            name: "Mortgage Rates Just Hit Their Highest Point Since January 2025",
+            href: "/guides/las-vegas-mortgage-rates-19-month-high",
+            category: "Market Watch",
+            dek: "Update: rates kept climbing. Freddie Mac's next weekly print jumped to 6.95%, the biggest one-week move of this run-up.",
+          },
+          {
             name: "Mortgage Rates Just Hit a 13-Month High",
             href: "/guides/las-vegas-mortgage-rates-september-2026",
             category: "Market Watch",
-            dek: "Our last update, from ten days earlier — the same climb, one reporting period back.",
+            dek: "Our earlier update, from ten days before this piece — the same climb, one reporting period back.",
           },
           {
             name: "Las Vegas Home Prices Dipped Again in August 2026",
@@ -546,6 +552,18 @@ export default function LasVegasMortgageRatesApproach7PercentPage() {
           rather see a buyer lock a number they can actually plan around
           today than sit on the sidelines waiting for a rate that may not
           show up.
+        </p>
+        <p className="mt-5 text-body-lg text-lvinit-warmgray">
+          Update: the next weekly print is in, and it jumped further than
+          any of the increases before it. Read{" "}
+          <Link
+            href="/guides/las-vegas-mortgage-rates-19-month-high"
+            className="text-lvinit-blue underline underline-offset-4 decoration-transparent hover:decoration-lvinit-blue"
+          >
+            what the September 17 report shows
+          </Link>{" "}
+          &mdash; Freddie Mac&rsquo;s official average at 6.95%, its highest
+          in 19 months.
         </p>
         <p className="mt-5 text-body-lg text-lvinit-warmgray">
           If you&rsquo;re trying to figure out whether this month&rsquo;s

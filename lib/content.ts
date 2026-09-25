@@ -260,6 +260,42 @@ export const guides: Guide[] = [
     href: "/guides/gholson-landing-affordable-housing-east-las-vegas",
   },
   {
+    slug: "las-vegas-mortgage-rates-19-month-high",
+    title: "Mortgage Rates Just Hit Their Highest Point Since January 2025",
+    dek: "Freddie Mac's official average jumped to 6.95% the week of September 17, 2026 — a bigger one-week move than any before it in this run-up, and the highest print in 19 months. Daily trackers already had it back above 7% by September 22.",
+    byline: "Mikey Del Rosario",
+    date: "September 2026",
+    publishedAt: "2026-09-23",
+    category: "Market Watch",
+    // Built via the autonomous scheduled editorial-publishing routine, the
+    // direct sequel to las-vegas-mortgage-rates-approach-7-percent
+    // (published 2026-09-17, week-of-Sept-10 print at 6.76%). Fresh,
+    // well-corroborated news, independently re-verified this run: Freddie
+    // Mac's PMMS put the 30-year fixed average at 6.95% for the week of
+    // September 17, 2026 (up from 6.76%, its biggest one-week jump in this
+    // run-up), independently corroborated as a "highest since Jan. 30,
+    // 2025" (~19-month) print by AP wire coverage (Alex Veiga, carried on
+    // the Arkansas Democrat-Gazette) and CNBC. Daily trackers (NerdWallet,
+    // Forbes Advisor, Mortgage Daily, Nadlan Capital Group) independently
+    // put the 30-year back at ~7.02%-7.04% on Sept 22, 2026. Reuses the
+    // already-sourced LVR August 2026 local price figure ($475,000 median)
+    // rather than re-deriving it; no LVR September report exists yet.
+    // Central payment-math example ($475,000 loan, 6.76% vs 6.95% vs the
+    // Sept 22 daily rate) is independently computed and clearly labeled
+    // hypothetical. No rate forecast anywhere in the piece. A financing-cost
+    // topic, not a place, so no repo photography fits; C:\LVINIT\Images
+    // (a Windows path) was confirmed unreachable from this Linux cloud
+    // session (no /mnt/c mount). No standing approval exists to substitute
+    // AI-generated imagery on an autonomous run — the two prior pieces' AI
+    // hero graphics were each a one-time, live, in-the-moment approval from
+    // Mikey — so this carries a generated LVINIT editorial cover as the
+    // card image and a photoless StoryHero instead.
+    image:
+      "/images/covers/las-vegas-mortgage-rates-19-month-high-editorial-cover.webp",
+    imageMode: "editorial-cover",
+    href: "/guides/las-vegas-mortgage-rates-19-month-high",
+  },
+  {
     slug: "henderson-sport-social-grand-opening",
     title: "Henderson Sport & Social Opens October 16. Here's What West Henderson Is Getting",
     dek: "The $70 million, 180,000-square-foot sports and entertainment complex at St. Rose and Maryland Parkways has a confirmed grand-opening date. What's actually inside, what it costs, and how it's different from the Fiesta Henderson site.",
