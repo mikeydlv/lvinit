@@ -238,6 +238,28 @@ export type Guide = {
  */
 export const guides: Guide[] = [
   {
+    slug: "gholson-landing-affordable-housing-east-las-vegas",
+    title: "Gholson Landing Just Opened 121 Affordable Apartments in East Las Vegas",
+    dek: "A $32 million community named for a man who once lived in public housing himself opened this week at 2601 Sunrise Ave. Who it's actually for, what's inside, and how it fits the valley's bigger affordability story.",
+    byline: "LVINIT Editorial",
+    date: "September 2026",
+    publishedAt: "2026-09-25",
+    category: "Local Feature",
+    // Built via the autonomous scheduled editorial-publishing routine. Topic
+    // selection: explicitly told NOT to add a third mortgage-rate piece this
+    // run (two open PRs already cover that thread), so a fresh, non-
+    // duplicative, well-corroborated story was researched instead — see the
+    // article's own header comment for full sourcing notes (Fox5 Vegas x2,
+    // KTNV, RJ headline-corroborated, The Michaels Organization, Nevada
+    // Housing Division). No repo photography depicts this specific East Las
+    // Vegas apartment community, and C:\LVINIT\Images was confirmed
+    // unreachable from this Linux cloud session, so it carries a generated
+    // LVINIT editorial cover and a photoless StoryHero.
+    image: "/images/covers/gholson-landing-editorial-cover.webp",
+    imageMode: "editorial-cover",
+    href: "/guides/gholson-landing-affordable-housing-east-las-vegas",
+  },
+  {
     slug: "henderson-sport-social-grand-opening",
     title: "Henderson Sport & Social Opens October 16. Here's What West Henderson Is Getting",
     dek: "The $70 million, 180,000-square-foot sports and entertainment complex at St. Rose and Maryland Parkways has a confirmed grand-opening date. What's actually inside, what it costs, and how it's different from the Fiesta Henderson site.",

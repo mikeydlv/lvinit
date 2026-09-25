@@ -42,6 +42,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     { url: `${BASE_URL}/guides`, changeFrequency: "weekly", priority: 0.8 },
     {
+      url: `${BASE_URL}/guides/gholson-landing-affordable-housing-east-las-vegas`,
+      changeFrequency: "monthly",
+      priority: 0.7,
+    },
+    {
       url: `${BASE_URL}/guides/henderson-sport-social-grand-opening`,
       changeFrequency: "monthly",
       priority: 0.7,
