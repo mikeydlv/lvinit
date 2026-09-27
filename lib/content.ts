@@ -238,6 +238,35 @@ export type Guide = {
  */
 export const guides: Guide[] = [
   {
+    slug: "wayne-newton-casa-de-shenandoah-redevelopment",
+    title:
+      "Wayne Newton's Casa de Shenandoah Could Become a 77-Home Neighborhood",
+    dek: "A Las Vegas homebuilder wants to turn the entertainer's 39.5-acre former estate into 77 single-family lots around its existing lake. What's actually confirmed, what isn't yet, and where the property really sits.",
+    byline: "LVINIT Editorial",
+    date: "September 2026",
+    publishedAt: "2026-09-27",
+    category: "Local Feature",
+    // Built via the autonomous scheduled editorial-publishing routine. Topic
+    // selection: checked lib/content.ts and /guides first — mortgage rates
+    // (three installments already live), Gholson Landing, and Sandstone were
+    // all already covered and explicitly excluded. A fresh Freddie Mac PMMS
+    // print (7.03% for the week of Sept 24, 2026, the first weekly average
+    // above 7% since Jan 2025) was found and considered, but a fourth
+    // mortgage-rate installment in three weeks was judged too repetitive, so
+    // this genuinely new, well-corroborated story was published instead: Las
+    // Vegas Review-Journal (Eli Segall) plus independent corroboration from
+    // KLAS/8 News Now and Hoodline — see the article's own header comment for
+    // full sourcing notes and what's attributed to a single outlet only.
+    //
+    // IMAGERY — C:\LVINIT\Images was confirmed unreachable from this Linux
+    // cloud session (no /mnt/c mount), and no repo photography depicts this
+    // specific, privately walled estate, so it carries a generated LVINIT
+    // editorial cover as the card image and a photoless StoryHero.
+    image: "/images/covers/casa-de-shenandoah-editorial-cover.webp",
+    imageMode: "editorial-cover",
+    href: "/guides/wayne-newton-casa-de-shenandoah-redevelopment",
+  },
+  {
     slug: "gholson-landing-affordable-housing-east-las-vegas",
     title: "Gholson Landing Just Opened 121 Affordable Apartments in East Las Vegas",
     dek: "A $32 million community named for a man who once lived in public housing himself opened this week at 2601 Sunrise Ave. Who it's actually for, what's inside, and how it fits the valley's bigger affordability story.",

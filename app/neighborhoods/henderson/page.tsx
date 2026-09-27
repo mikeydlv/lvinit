@@ -204,6 +204,12 @@ export default function HendersonPage() {
             dek: "A youth sports complex, hotel, and retail were just announced for the empty lot at Lake Mead Parkway — what's actually confirmed, and what isn't.",
           },
           {
+            name: "Wayne Newton's Casa de Shenandoah Could Become 77 Homes",
+            href: "/guides/wayne-newton-casa-de-shenandoah-redevelopment",
+            category: "Local feature",
+            dek: "A famous 39.5-acre estate a few minutes from Henderson, proposed as a subdivision — and a reminder that the address isn't actually in Henderson or Las Vegas at all.",
+          },
+          {
             name: "Summerlin vs. Henderson",
             href: "/guides/summerlin-vs-henderson",
             category: "Comparison",
