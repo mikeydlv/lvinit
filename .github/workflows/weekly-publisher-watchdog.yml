@@ -1,0 +1,87 @@
+# ---------------------------------------------------------------------------
+# LVINIT Weekly Publisher — Monday watchdog (a dead-man's switch)
+#
+# The Weekly Publisher itself runs on Mikey's PC every Sunday at 8:00 PM
+# Pacific (Task Scheduler; see docs/WEEKLY_PUBLISHER.md). If the PC was off,
+# asleep past the catch-up window, or the run broke before it could report,
+# nothing on the PC can say so. This job can: every Monday it checks the
+# lvinit-agent-state branch for this week's plan and, if it is missing or
+# FAILED, opens a GitHub issue (GitHub emails Mikey) and fails the run.
+#
+# What it may do: read the repo, open/comment on ONE issue.
+# What it may NOT do: write to the repo, publish, deploy, or post anything.
+# ---------------------------------------------------------------------------
+
+name: Weekly Publisher Watchdog
+
+on:
+  schedule:
+    # 15:00 UTC Monday = 8:00 AM PDT / 7:00 AM PST. GitHub often starts
+    # scheduled runs a few hours late; the check still happens Monday.
+    - cron: "0 15 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: weekly-publisher-watchdog
+  cancel-in-progress: false
+
+jobs:
+  check:
+    name: Check this week's content plan exists
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Find this week's plan on lvinit-agent-state
+        id: find
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # The Monday of the current week in Las Vegas time.
+          dow=$(TZ=America/Los_Angeles date +%u)
+          monday=$(TZ=America/Los_Angeles date -d "-$((dow - 1)) days" +%F)
+          echo "monday=$monday" >> "$GITHUB_OUTPUT"
+          base="repos/${GITHUB_REPOSITORY}/contents/reports/weekly-content"
+          if gh api "$base/${monday}-weekly-content-plan.md?ref=lvinit-agent-state" --silent 2>/dev/null; then
+            echo "state=ok" >> "$GITHUB_OUTPUT"
+          elif gh api "$base/${monday}-weekly-content-plan-FAILED.md?ref=lvinit-agent-state" --silent 2>/dev/null; then
+            echo "state=failed" >> "$GITHUB_OUTPUT"
+          else
+            echo "state=missing" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: All good
+        if: steps.find.outputs.state == 'ok'
+        run: |
+          echo "### Weekly content plan for ${{ steps.find.outputs.monday }} exists" >> "$GITHUB_STEP_SUMMARY"
+          echo "https://github.com/${GITHUB_REPOSITORY}/blob/lvinit-agent-state/reports/weekly-content/${{ steps.find.outputs.monday }}-weekly-content-plan.md" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Raise the alarm
+        if: steps.find.outputs.state != 'ok'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          MONDAY: ${{ steps.find.outputs.monday }}
+          STATE: ${{ steps.find.outputs.state }}
+        run: |
+          title="Weekly content plan missing: week of ${MONDAY}"
+          if [ "$STATE" = "failed" ]; then
+            why="The Sunday run FAILED. The failure report explains why: https://github.com/${GITHUB_REPOSITORY}/blob/lvinit-agent-state/reports/weekly-content/${MONDAY}-weekly-content-plan-FAILED.md"
+          else
+            why="No plan and no failure report reached GitHub. Most likely the PC was off or asleep Sunday night, or the run could not push. Check reports\\weekly-content\\LATEST.md in the LVINIT folder and %USERPROFILE%\\.lvinit\\weekly-publisher\\weekly-publisher.log."
+          fi
+          body="$why
+
+          Fix: open Claude Code in the LVINIT repo and say \"The weekly content plan failed — fix it and produce this week's plan.\"
+
+          (Opened by the Weekly Publisher Watchdog. Close this issue once the plan exists.)"
+          existing=$(gh issue list --repo "$GITHUB_REPOSITORY" --state open --search "\"$title\" in:title" --json number --jq '.[0].number')
+          if [ -n "$existing" ]; then
+            gh issue comment "$existing" --repo "$GITHUB_REPOSITORY" --body "$body"
+          else
+            gh issue create --repo "$GITHUB_REPOSITORY" --title "$title" --body "$body"
+          fi
+          echo "### ⚠ $title ($STATE)" >> "$GITHUB_STEP_SUMMARY"
+          exit 1

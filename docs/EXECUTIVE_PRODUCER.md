@@ -98,7 +98,7 @@ visible to the system; every run and email says so.
 
 ### Missed starts, duplicates, failures
 
-`schedule/register-weekly-task.ps1` starts the run **Sunday 7:00 PM Pacific**
+**Since 2026-09-28 the task is registered by `scripts/weekly-publisher/schedule/register-sunday-tasks.ps1`** and runs from the dedicated runner checkout (`%USERPROFILE%\.lvinit\runner`, following `origin/main`), never from the working folder; see [WEEKLY_PUBLISHER.md](WEEKLY_PUBLISHER.md). The Weekly Publisher runs at 8:00 PM, consumes this batch, and reports if it is missing. (The older `schedule/register-weekly-task.ps1` pointed the task at the working folder, which is how the 2026-09-27 run lost its code.) The task starts the run **Sunday 7:00 PM Pacific**
 for delivery by 8:00 PM (Mikey's choice), producing the week that starts the
 next day. It wakes the PC (WakeToRun), catches up at next startup if the PC was
 off (StartWhenAvailable; a Monday–Friday catch-up produces the current week), retries

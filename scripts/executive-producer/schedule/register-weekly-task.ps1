@@ -1,4 +1,6 @@
 # ---------------------------------------------------------------------------
+# SUPERSEDED 2026-09-28 by scripts/weekly-publisher/schedule/register-sunday-tasks.ps1, which runs
+# this job from a dedicated runner checkout. Do not use this script any more.
 # Registers the weekly production run in Windows Task Scheduler.
 # Mikey chose Sunday 8:00 PM delivery (confirmed 2026-09-21), so it starts at 7:00 PM:
 #

@@ -13,6 +13,11 @@
 > photography placement, SEO/schema, internal links, YouTube + social copy).
 > Agent: [`.claude/agents/lvinit-content-publisher.md`](../.claude/agents/lvinit-content-publisher.md)
 > · Usage guide: [CONTENT_PUBLISHER_AGENT.md](CONTENT_PUBLISHER_AGENT.md).
+>
+> **Weekly Publisher (editor-in-chief):** every Sunday 8:00 PM Pacific it reads
+> every agent's output and writes ONE plan of what Mikey creates and posts that
+> week: `reports/weekly-content/LATEST.md`. It is not the Content Publisher.
+> Agent map, schedule and failure handling: [WEEKLY_PUBLISHER.md](WEEKLY_PUBLISHER.md).
 
 ---
 

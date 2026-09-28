@@ -1,5 +1,11 @@
 # Content Publisher Agent
 
+> **Not the Weekly Publisher.** This agent researches, builds and publishes
+> *approved* site content when Mikey asks. The **LVINIT Weekly Publisher**
+> (`scripts/weekly-publisher/`, Sunday 8 PM) is the editor-in-chief that decides
+> what gets made and posted each week and hands website items here as
+> recommendations. See [WEEKLY_PUBLISHER.md](WEEKLY_PUBLISHER.md).
+
 > How to use the **`lvinit-content-publisher`** subagent — LVINIT's Content
 > Publisher and Editorial Producer. It turns Mikey's real source material into a
 > complete, connected, honest content package (website + social) without needing
