@@ -28,6 +28,7 @@ data/<namespace>/              machine state (JSON, with schema_version + agent)
 |---|---|
 | Local Trend Agent | `reports/social-trends/`, `data/social-trends/` |
 | Development Watch (module of the Local Trend Agent) | `reports/development-watch/`, `data/development-watch/` |
+| Executive Producer | `reports/executive-producer/`, `data/executive-producer/` |
 
 ## How agents use it
 

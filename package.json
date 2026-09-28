@@ -28,7 +28,13 @@
     "devwatch:test": "node --test \"scripts/local-trends/devwatch/test/*.test.mjs\"",
     "briefs:report": "node scripts/content-briefs/run.mjs",
     "briefs:report:fixtures": "node scripts/content-briefs/run.mjs --fixtures",
-    "briefs:test": "node --test \"scripts/content-briefs/test/*.test.mjs\""
+    "briefs:test": "node --test \"scripts/content-briefs/test/*.test.mjs\"",
+    "producer:catalog": "node scripts/executive-producer/catalog.mjs",
+    "producer:catalog:push": "node scripts/executive-producer/catalog.mjs --push",
+    "producer:test": "node --test \"scripts/executive-producer/test/*.test.mjs\"",
+    "producer:brief": "node scripts/executive-producer/run.mjs",
+    "producer:sample": "node scripts/executive-producer/run.mjs --sample",
+    "producer:fixtures": "node scripts/executive-producer/run.mjs --fixtures"
   },
   "dependencies": {
     "next": "^14.2.5",
