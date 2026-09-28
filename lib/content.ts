@@ -258,12 +258,16 @@ export const guides: Guide[] = [
     // KLAS/8 News Now and Hoodline — see the article's own header comment for
     // full sourcing notes and what's attributed to a single outlet only.
     //
-    // IMAGERY — C:\LVINIT\Images was confirmed unreachable from this Linux
-    // cloud session (no /mnt/c mount), and no repo photography depicts this
-    // specific, privately walled estate, so it carries a generated LVINIT
-    // editorial cover as the card image and a photoless StoryHero.
-    image: "/images/covers/casa-de-shenandoah-editorial-cover.webp",
-    imageMode: "editorial-cover",
+    // IMAGERY — Updated 2026-09-28: Mikey supplied a real photograph of the
+    // estate (Wikimedia Commons, Ken Lund, CC BY-SA 2.0, verified via the
+    // photo's own Wikipedia caption and Commons file page — see the article's
+    // own header comment for the full note and why a second supplied photo,
+    // sourced to a travel blog with no reuse license, was left out). Genuine
+    // photograph, so no imageMode override. Superseded generated cover
+    // (covers/casa-de-shenandoah-editorial-cover.webp) deleted.
+    image: "/images/hero/casa-de-shenandoah-estate-aerial-hero.webp",
+    imageAlt:
+      "Aerial view from a departing airplane of Wayne Newton's Casa de Shenandoah estate, showing the mansion, ponds, and grounds surrounded by the Las Vegas Valley, May 2015",
     href: "/guides/wayne-newton-casa-de-shenandoah-redevelopment",
   },
   {

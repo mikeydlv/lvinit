@@ -21,6 +21,11 @@ export type StoryHeroProps = {
   imageAlt?: string;
   /** Optional title attr — used site-wide for a discreet in-image photo credit. */
   imageTitle?: string;
+  /** For licensed/third-party imagery only — a muted, visible credit line in
+   *  the hero's bottom-right corner (e.g. "Photo: Ken Lund / Wikimedia Commons
+   *  / CC BY-SA 2.0"). Omit for Mikey's own photography, which the footer
+   *  already credits. */
+  imageCredit?: string;
   backLink?: { label: string; href: string };
   ctas?: StoryHeroCta[];
 };
@@ -32,6 +37,7 @@ export default function StoryHero({
   image,
   imageAlt,
   imageTitle,
+  imageCredit,
   backLink,
   ctas,
 }: StoryHeroProps) {
@@ -115,6 +121,11 @@ export default function StoryHero({
           aria-hidden="true"
           className="absolute inset-0 bg-gradient-to-t from-lvinit-black/45 via-lvinit-black/20 to-transparent"
         />
+        {imageCredit && (
+          <p className="absolute bottom-2 right-4 z-10 text-[11px] leading-none tracking-wide text-lvinit-white/50">
+            {imageCredit}
+          </p>
+        )}
         <Container className="relative z-10 pb-14 pt-40 sm:pb-20">
           {back}
           <div className={backLink ? "mt-4" : ""}>

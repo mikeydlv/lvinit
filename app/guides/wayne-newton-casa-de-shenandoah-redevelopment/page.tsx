@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { buildStoryMetadata, type StoryMeta } from "@/lib/story";
-import { StoryPage, StoryLede, StorySection } from "@/components/story";
+import { StoryPage, StoryLede, StorySection, StoryGallery } from "@/components/story";
 
 // ---------------------------------------------------------------------------
 // LOCAL FEATURE — Wayne Newton's former Casa de Shenandoah estate is proposed
@@ -58,14 +58,24 @@ import { StoryPage, StoryLede, StorySection } from "@/components/story";
 //   any HOA/amenity detail beyond the lake and walls, and any outcome of the
 //   Commission hearing — nothing has been approved yet.
 //
-// IMAGERY — C:\LVINIT\Images (Mikey's approved first-party library) is a
-// Windows path and was confirmed unreachable from this Linux cloud session
-// (no /mnt/c mount, no direct path access). No existing repo photography
-// depicts this specific, privately walled estate. Carries a generated LVINIT
-// editorial cover as the /guides card image, and a photoless StoryHero:
-//   node scripts/generate-guide-cover.mjs --slug wayne-newton-casa-de-shenandoah-redevelopment \
-//     --category "Local Feature" --subject "Casa de Shenandoah" \
-//     --out casa-de-shenandoah-editorial-cover.webp
+// IMAGERY — Updated 2026-09-28: Mikey supplied two real photographs of the
+// property directly. Both are verified third-party Wikimedia Commons files,
+// NOT Mikey's own photography, so neither is credited to him:
+//   - Hero: aerial view of the estate taken from a departing airplane,
+//     photographed by Ken Lund, May 25, 2015. Verified via the photo's own
+//     Wikipedia caption ("Aerial view of Casa de Shenandoah in May 2015") and
+//     the Wikimedia Commons file page. Licensed CC BY-SA 2.0 — credited
+//     in a muted on-image line via StoryHero's `imageCredit`.
+//   - Inline (car collection): photographed by Bob n Renee, Aug. 2, 2016,
+//     verified via its Wikimedia Commons file page. Licensed CC BY 2.0.
+// A third supplied photo (a ground-level fountain/facade shot) was NOT used:
+// its actual source turned out to be landlopers.com, travel writer Matt
+// Long's personal blog, with no Creative Commons license or reuse permission
+// stated anywhere on the site — i.e. conventionally copyrighted, all rights
+// reserved. It was not added to this article or the repository.
+// Originally carried a generated LVINIT editorial cover and a photoless
+// StoryHero (node scripts/generate-guide-cover.mjs ...); both are superseded
+// by the real photography above and have been removed.
 // ---------------------------------------------------------------------------
 
 const PATH = "/guides/wayne-newton-casa-de-shenandoah-redevelopment";
@@ -77,7 +87,13 @@ const meta: StoryMeta = {
   description:
     "A Las Vegas homebuilder wants to turn Wayne Newton's 39.5-acre former estate into 77 single-family lots around its existing lake. What's actually confirmed, what isn't yet, and where the property really sits.",
   path: PATH,
+  image: "/images/hero/casa-de-shenandoah-estate-aerial-hero.webp",
+  imageWidth: 2200,
+  imageHeight: 1650,
+  imageAlt:
+    "Aerial view from a departing airplane of Wayne Newton's Casa de Shenandoah estate, showing the mansion, ponds, and grounds surrounded by the Las Vegas Valley, May 2015",
   datePublished: "2026-09-27",
+  dateModified: "2026-09-28",
   author: "LVINIT Editorial",
   breadcrumbs: [
     { name: "Home", path: "/" },
@@ -159,6 +175,10 @@ export default function CasaDeShenandoahRedevelopmentPage() {
           "Wayne Newton's Casa de Shenandoah Could Become a 77-Home Neighborhood",
         subheadline:
           "A Las Vegas luxury homebuilder has filed plans to turn the entertainer's 39.5-acre former estate into 77 single-family lots around the property's existing lake. Nothing is approved yet, and the property isn't in Las Vegas or Henderson at all \u2014 here's what's actually going on.",
+        image: "/images/hero/casa-de-shenandoah-estate-aerial-hero.webp",
+        imageAlt:
+          "Aerial view from a departing airplane of Wayne Newton's Casa de Shenandoah estate, showing the mansion, ponds, and grounds surrounded by the Las Vegas Valley, May 2015",
+        imageCredit: "Photo: Ken Lund / Wikimedia Commons / CC BY-SA 2.0",
         ctas: [
           { label: "See the proposal", href: "#by-the-numbers", variant: "primary" },
         ],
@@ -285,6 +305,17 @@ export default function CasaDeShenandoahRedevelopmentPage() {
           selling it as 77 ordinary building lots might actually work.
         </p>
       </StorySection>
+
+      <StoryGallery
+        images={[
+          {
+            src: "/images/features/casa-de-shenandoah-car-collection.webp",
+            alt: "Vintage Rolls-Royce and Bentley limousines on display along a red carpet in Wayne Newton's car collection at Casa de Shenandoah",
+            caption:
+              "Newton's car collection on display during the property's 2015–2018 run as a public museum. Photo: Bob n Renee / Wikimedia Commons / CC BY 2.0",
+          },
+        ]}
+      />
 
       <StorySection heading="One honest correction: this isn't Las Vegas, and it isn't Henderson">
         <p className="text-body-lg text-lvinit-warmgray">
