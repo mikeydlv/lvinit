@@ -718,17 +718,42 @@ was photographed when it was not.
 
 #### 5.1d External imagery
 
-Every existing copyright and licensing rule still applies. **Do not
-automatically search the public web for article photography.** Never scrape
-Google Images or download images from the web, never hotlink, never copy
-copyrighted news photography merely because another article uses it, never use
-news-site images or stock photography, and never use any third-party
-photography without explicit licensing and Mikey's approval. When external
-imagery *is* properly licensed and approved: verify the usage rights, store the
-asset through the normal `/public/images/` workflow, preserve required
-attribution (see **Attribution** below), and record the source and license.
-External imagery comes only after original LVINIT options were checked; if it
-isn't cleared, skip to the next source rather than blocking the article.
+External imagery comes only after original LVINIT options were checked. You
+may use it **autonomously only when its usage rights are explicitly verified
+and documented under the approved source policy below.** Manual approval from
+Mikey is required only when rights are ambiguous or the source is outside the
+approved list.
+
+**Approved external sources** (Mikey's decision, 2026-09-28):
+
+| Source | Qualifies only when |
+|---|---|
+| **U.S. federal public-domain media** | The work was made by a U.S. federal agency (e.g. NPS, USGS, NASA, BLM) and the source page or agency policy marks it public domain. State, county, and city agency imagery is **not** covered unless its own license page explicitly grants reuse. |
+| **Creative Commons CC0 or CC BY** | The license (any version, incl. CC BY 4.0) is stated explicitly on the source page, e.g. Wikimedia Commons. **NC, ND, and SA variants are excluded.** |
+| **Official press / media kits** | A developer, builder, or public agency's press or media kit whose written terms explicitly allow editorial reuse. Renderings stay labeled as renderings and never as photographs of completed work. |
+
+Anything else — Shutterstock and other stock libraries (even LVINIT's own
+account), news photography, social-media images, personal blogs, sources with
+no stated license, or a license you can't confirm — is **outside the list** and
+needs Mikey's approval. A missing, contradictory, or unclear license, an image
+reposted by a third party rather than the original rights-holder, identifiable
+private individuals, or visible third-party trademarks as the main subject
+count as **ambiguous rights**, so they need Mikey's approval too.
+
+**Documentation is required** before an approved external image ships. Record
+it in a code comment beside the image's use, following the North Las Vegas hero
+(`app/neighborhoods/north-las-vegas/page.tsx`). Include: the original source
+URL, the rights-holder/creator, the exact license or terms (with a link),
+the date verified, and the credit line used.
+
+**Always, regardless of source:** only search the approved sources directly;
+never scrape Google Images or general web image search; never hotlink; never
+copy news photography merely because another article uses it; store the asset
+through the normal `/public/images/` workflow; and preserve required
+attribution (see **Attribution** below). A CC BY credit names the creator, the
+license, and the source. Never imply Mikey captured it. If no approved source
+has a suitable image, or the rights are ambiguous and Mikey isn't available,
+skip to the next tier rather than blocking the article.
 
 #### 5.1e Generated imagery
 
@@ -824,7 +849,8 @@ clear source record, add an appropriate visible/contextual credit where required
 (mirror the North Las Vegas hero's muted "Photo: … / Shutterstock" credit), never
 imply Mikey captured it, and recommend the exact matching credit language for any
 video the same assets appear in. Make no legal guarantees — use accurate
-attribution and flag uncertain licensing for Mikey's review.
+attribution, document the rights per §5.1d, and flag uncertain licensing for
+Mikey's review.
 
 ## 6. Video and social workflow
 
@@ -870,7 +896,8 @@ to approve ordinary implementation decisions already governed by project rules.
 
 **Ask exactly one focused question only when truly blocked** by something you
 cannot safely infer: which of two contradictory facts is correct; whether Mikey
-owns/has permission for a **third-party** asset (never for files in
+owns/has permission for a **third-party** asset whose rights are ambiguous or
+whose source is outside the approved list (§5.1d) (never for files in
 `C:\LVINIT\Images` — that permission is already established, §5.0); a missing
 URL required for an embed; an identity or compliance issue; a destructive
 structural change; or a request that could publish materially false

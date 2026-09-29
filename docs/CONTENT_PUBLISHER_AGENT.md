@@ -204,7 +204,8 @@ below) rather than fabricating.
   links → cards/indexes → docs → build → verify desktop/mobile → commit → push)
   without asking again for ordinary decisions.
 - It asks **one focused question only when genuinely blocked** — contradictory
-  facts, third-party asset permission, a missing embed URL, an identity/compliance
+  facts, third-party asset permission (ambiguous rights or off-list sources
+  only), a missing embed URL, an identity/compliance
   issue, a destructive structural change, or a risk of publishing false info.
 - **Honest fallbacks:** no real hero → the repo's own approved imagery, then
   `C:\LVINIT\Images` and other reachable LVINIT media, then a still from
@@ -259,8 +260,11 @@ lives in the agent file (§5.1) and is the source of truth. In short:
 3. **A clean still frame from original LVINIT video footage** (B-roll, drone,
    model-home, neighborhood footage, LVINIT YouTube videos) — relevant,
    unmanipulated, no private info, no player UI/captions/watermarks.
-4. **Properly licensed external imagery** — only with explicit licensing and
-   your approval, per the existing rules below.
+4. **Properly licensed external imagery** — used autonomously only from the
+   approved source list (U.S. federal public domain; CC0 / CC BY; official
+   press kits with editorial-reuse terms), with rights verified and documented
+   in the code. Ambiguous rights or any other source (stock, including
+   Shutterstock) still come to you for approval.
 5. **A generated LVINIT editorial cover**, only when no sufficiently relevant
    permitted image exists:
 
@@ -280,10 +284,10 @@ lives in the agent file (§5.1) and is the source of truth. In short:
 6. **Emergency fallback: nothing.** The runtime non-photographic `GuideCard`
    fallback panel is still correct and finished.
 
-Authentic first-party photography always beats generated artwork. The agent does
-**not** automatically search the public web for article photography. Never
-scrape web images, never hotlink, never use news-site or stock photography
-without explicit licensing and approval, and never produce a fake photographic
+Authentic first-party photography always beats generated artwork. The agent
+searches only the approved external sources directly, never general web image
+search. Never scrape web images, never hotlink, never use news-site or stock
+photography without explicit licensing and approval, and never produce a fake photographic
 representation of a real Las Vegas neighborhood, project, home, development,
 business, or event. Covers must always read as intentional graphic artwork.
 
