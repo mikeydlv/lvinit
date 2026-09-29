@@ -13,7 +13,9 @@
 #
 # What it is NOT allowed to do, by construction:
 #   * edit any page, write any article, change metadata, links or the registry
-#   * commit or push (contents: read — the token cannot write to the repo)
+#   * commit or push (contents: read — the token cannot write to the repo;
+#     only the separate publish-state job below can write, and only to
+#     reports/content-briefs/ on lvinit-agent-state)
 #   * dispatch, trigger or call the Content Publisher
 #   * open pull requests or issues
 #   * deploy anything
@@ -24,6 +26,16 @@
 # docs/CONTENT_BRIEF_GENERATOR.md, "Handoff architecture".
 #
 # No secrets are used. This agent has no credentials of any kind.
+#
+# publish-state (second job): downloads THIS run's content-briefs artifact,
+# builds reports/content-briefs/publisher-input.json — the file the Content
+# Publisher reads (read-only) — and commits that one namespace to
+# lvinit-agent-state through the shared agent-state action, which refuses main
+# and anything outside reports/content-briefs/. The file carries no raw Search
+# Console query (the branch is public; see docs/PUBLISHER_HANDOFF.md). It is
+# the only job with contents: write. Fixture runs build it but never commit.
+# BRIEFS_HANDOFF_ENABLED is unrelated and unchanged: the file is an input the
+# Publisher weighs, not a dispatch.
 # ---------------------------------------------------------------------------
 
 name: Content Brief Generator
@@ -53,8 +65,8 @@ on:
         type: boolean
         default: false
 
-# Read-only. `contents: read` is what stops the job ever writing to the
-# repository. `actions: read` exists solely to download the other agents'
+# Read-only by default. `contents: read` is what stops the briefs job ever
+# writing to the repository; only publish-state raises it, for itself alone. `actions: read` exists solely to download the other agents'
 # report artifacts and this agent's own earlier ones.
 permissions:
   contents: read
@@ -183,7 +195,7 @@ jobs:
             echo '```'
             echo
             echo "The report, the brief files and the handoff queue are attached as the content-briefs artifact."
-            echo "Nothing was written to the site, committed, published, or dispatched to the Content Publisher."
+            echo "Nothing was written to the site, published, or dispatched to the Content Publisher. This job committed nothing; publish-state commits only reports/content-briefs/publisher-input.json to lvinit-agent-state."
           } >> "$GITHUB_STEP_SUMMARY"
 
       - name: Upload the report as an artifact
@@ -194,3 +206,81 @@ jobs:
           path: reports/content-briefs/
           if-no-files-found: warn
           retention-days: 90
+
+  publish-state:
+    name: Publish the Publisher handoff to lvinit-agent-state
+    needs: briefs
+    if: needs.briefs.result == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    # The one place this workflow can write: the agent-state action pushes only
+    # to lvinit-agent-state, only under reports/content-briefs/, and refuses main.
+    permissions:
+      contents: write
+
+    steps:
+      - name: Check out main (no credentials left on disk)
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Download this run's briefs
+        uses: actions/download-artifact@v4
+        with:
+          name: content-briefs
+          path: briefs-artifact
+
+      - name: Check out lvinit-agent-state
+        uses: ./.github/actions/agent-state
+        with:
+          mode: checkout
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Run the handoff contract tests
+        run: node --test "scripts/publisher-inputs/test/*.test.mjs"
+
+      - name: Build the Publisher input
+        # No token in this step's environment. Fails closed: if a raw query
+        # would reach the public file, the builder exits 1 and nothing is
+        # committed — the previous handoff simply ages.
+        env:
+          USE_FIXTURES: ${{ inputs.fixtures }}
+        run: |
+          set -euo pipefail
+          DIR=briefs-artifact
+          if [ "${USE_FIXTURES:-false}" = "true" ]; then DIR=briefs-artifact/fixtures; fi
+          node scripts/content-briefs/publisher-input.mjs             --report-dir="$DIR"             --out=.agent-state/reports/content-briefs/publisher-input.json | tee handoff-output.txt
+
+      - name: Commit reports/content-briefs/publisher-input.json to lvinit-agent-state
+        if: inputs.fixtures != true
+        uses: ./.github/actions/agent-state
+        with:
+          mode: commit
+          token: ${{ secrets.GITHUB_TOKEN }}
+          paths: reports/content-briefs
+          message: "content-briefs: publisher input (run ${{ github.run_number }})"
+
+      - name: Write the handoff summary onto the run page
+        if: always()
+        env:
+          REPO: ${{ github.repository }}
+          FIXTURES: ${{ inputs.fixtures }}
+        run: |
+          {
+            echo "## Publisher handoff"
+            echo
+            echo '```'
+            cat handoff-output.txt 2>/dev/null || echo "The handoff was not built — see the log above."
+            echo '```'
+            echo
+            if [ "${FIXTURES:-false}" = "true" ]; then
+              echo "Fixture run: the handoff was built and validated but NOT committed."
+            else
+              echo "Publisher input: https://github.com/$REPO/blob/lvinit-agent-state/reports/content-briefs/publisher-input.json"
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"

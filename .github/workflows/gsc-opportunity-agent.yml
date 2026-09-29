@@ -1,22 +1,27 @@
 # ---------------------------------------------------------------------------
 # LVINIT GSC Opportunity Agent — weekly run
 #
-# What this job is allowed to do:
+# Two jobs.
+#
+# `report` — the analysis. Allowed to:
 #   * authenticate to Google Search Console with a read-only service account
 #   * fetch Search Console data
 #   * run the opportunity analysis
-#   * upload the report as a workflow artifact
+#   * upload the full report as a workflow artifact (raw queries included —
+#     unchanged, for Mikey and for debugging)
 #   * print a short summary on the run page
+# It is NOT allowed to commit or push (contents: read — the token cannot write
+# to the repo), modify any site file, publish, deploy, open PRs or issues, or
+# send email.
 #
-# What it is NOT allowed to do, by construction:
-#   * modify any site file, article, or page
-#   * publish content or deploy anything
-#   * commit or push (contents: read — the token cannot write to the repo)
-#   * open pull requests or issues
-#   * send email or touch a CRM
-#
-# The permissions block below is the enforcement, not just documentation: with
-# `contents: read` the GITHUB_TOKEN physically cannot push to this repository.
+# `publish-state` — the Content Publisher handoff. It never sees a Search
+# Console credential. It downloads THIS run's artifact, builds the SANITIZED
+# reports/gsc/publisher-input.json (no raw query strings — the branch is
+# public; see docs/PUBLISHER_HANDOFF.md), and commits that one namespace to
+# lvinit-agent-state through the shared agent-state action, which refuses
+# main and anything outside reports/gsc/. It is the only job with
+# contents: write, and the token is handed only to the action's steps.
+# Fixture runs build and validate the file but never commit it.
 # ---------------------------------------------------------------------------
 
 name: GSC Opportunity Agent
@@ -46,7 +51,8 @@ on:
         type: boolean
         default: false
 
-# Read-only. This is what stops the job from ever writing to the repository.
+# Read-only by default. This is what stops the analysis job from ever writing
+# to the repository. Only publish-state raises it, for itself alone.
 permissions:
   contents: read
 
@@ -105,7 +111,7 @@ jobs:
             echo '```'
             echo
             echo "The full Markdown and JSON reports are attached to this run as an artifact."
-            echo "Nothing was committed, published, or deployed."
+            echo "This job committed nothing. The publish-state job commits only the sanitized handoff (no raw queries) to lvinit-agent-state. Nothing was published or deployed."
           } >> "$GITHUB_STEP_SUMMARY"
 
       - name: Upload the report as an artifact
@@ -116,3 +122,77 @@ jobs:
           path: reports/gsc/
           if-no-files-found: warn
           retention-days: 90
+
+  publish-state:
+    name: Publish the sanitized Publisher handoff to lvinit-agent-state
+    needs: report
+    if: needs.report.result == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    # The one place this workflow can write: the agent-state action pushes only
+    # to lvinit-agent-state, only under reports/gsc/, and refuses main.
+    permissions:
+      contents: write
+
+    steps:
+      - name: Check out main (no credentials left on disk)
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Download this run's GSC report
+        uses: actions/download-artifact@v4
+        with:
+          name: gsc-opportunities
+          path: gsc-artifact
+
+      - name: Check out lvinit-agent-state
+        uses: ./.github/actions/agent-state
+        with:
+          mode: checkout
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Run the handoff contract tests
+        run: node --test "scripts/publisher-inputs/test/*.test.mjs"
+
+      - name: Build the sanitized Publisher input
+        # No token in this step's environment. Fails closed: if a raw query
+        # would reach the public file, the builder exits 1 and nothing is
+        # committed — the previous handoff simply ages.
+        run: |
+          set -euo pipefail
+          node scripts/gsc/publisher-input.mjs             --report-dir=gsc-artifact             --out=.agent-state/reports/gsc/publisher-input.json | tee handoff-output.txt
+
+      - name: Commit reports/gsc/publisher-input.json to lvinit-agent-state
+        if: inputs.fixtures != true
+        uses: ./.github/actions/agent-state
+        with:
+          mode: commit
+          token: ${{ secrets.GITHUB_TOKEN }}
+          paths: reports/gsc
+          message: "gsc: publisher input (run ${{ github.run_number }})"
+
+      - name: Write the handoff summary onto the run page
+        if: always()
+        env:
+          REPO: ${{ github.repository }}
+          FIXTURES: ${{ inputs.fixtures }}
+        run: |
+          {
+            echo "## Publisher handoff"
+            echo
+            echo '```'
+            cat handoff-output.txt 2>/dev/null || echo "The handoff was not built — see the log above."
+            echo '```'
+            echo
+            if [ "${FIXTURES:-false}" = "true" ]; then
+              echo "Fixture run: the handoff was built and validated but NOT committed."
+            else
+              echo "Sanitized (no raw queries): https://github.com/$REPO/blob/lvinit-agent-state/reports/gsc/publisher-input.json"
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"

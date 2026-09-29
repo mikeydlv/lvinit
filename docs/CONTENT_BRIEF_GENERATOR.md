@@ -26,6 +26,11 @@ normal, correct result.**
 nothing reads it. Turning handoff on is a separate decision — see
 [Turning handoff on](#turning-handoff-on).
 
+Separately, each run publishes a slim, query-free summary of its actionable
+briefs to `lvinit-agent-state:reports/content-briefs/publisher-input.json`,
+which the Content Publisher reads as an advisory **input** (not a dispatch).
+See [docs/PUBLISHER_HANDOFF.md](PUBLISHER_HANDOFF.md).
+
 ---
 
 ## What it does NOT do
@@ -40,8 +45,9 @@ nothing reads it. Turning handoff on is a separate decision — see
 * modify the GSC, Fact-Decay, or Internal Linking agents' reports or scoring
 
 These are enforced, not just stated. The agent has no code path that writes
-outside `reports/content-briefs/`, which is gitignored. The workflow runs with
-`contents: read`. And the queue is a file inside the agent's own artifact, so
+outside `reports/content-briefs/`, which is gitignored. The briefs job runs with
+`contents: read`; only the separate `publish-state` job can write, and only
+`reports/content-briefs/` on `lvinit-agent-state` — never `main`. And the queue is a file inside the agent's own artifact, so
 there is nothing it could dispatch even if it wanted to.
 
 ---
@@ -462,6 +468,12 @@ same morning.
 permissions:
   contents: read   # cannot write to the repository
   actions: read    # download the other agents' artifacts and its own earlier ones
+
+jobs:
+  publish-state:
+    permissions:
+      contents: write   # this job only: commits reports/content-briefs/ to
+                        # lvinit-agent-state through .github/actions/agent-state
 ```
 
 No secrets. `fetch-depth: 0` so the Publisher's commit trailers are readable.

@@ -27,6 +27,7 @@ second agent. It runs in the same daily job, reads the same collection pass
 | Secrets | None. It runs on rules only, with no model call. |
 | Cost | Free. About 25 extra requests a day on top of the trend agent's roughly 55. |
 | Publisher handoff | **Off.** The queue file is always stamped `dry-run`, and nothing reads it. |
+| Publisher input | `reports/development-watch/publisher-input.json`: a slim list the Content Publisher reads as an advisory input (see [PUBLISHER_HANDOFF.md](PUBLISHER_HANDOFF.md)). |
 
 ---
 
@@ -48,6 +49,7 @@ On GitHub, switch to the **`lvinit-agent-state`** branch:
 - `reports/development-watch/development-watch-YYYY-MM-DD.md` is the daily report
 - `reports/development-watch/weekly.md` is the latest weekly summary
 - `reports/development-watch/handoff-queue.json` shows what WOULD go to the Publisher (dry-run)
+- `reports/development-watch/publisher-input.json` is the slim input the Publisher actually reads: Publisher-action events from the last 7 days, one per project, each classified `ok` or `needs_revalidation`
 - `reports/development-watch/local-development-signals.json` holds the signals for the Brief Generator
 - `data/development-watch/projects.json` is the project registry
 

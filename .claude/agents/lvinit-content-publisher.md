@@ -114,15 +114,13 @@ now?"** Inspect:
 - planned / recent video content where visible (the `videos` data in
   `lib/content.ts`, and `reports/weekly-content/` +
   `reports/executive-producer/` on `lvinit-agent-state`);
-- the latest outputs of the input agents, **if available** (§1a.8): GSC
-  Opportunity Agent (`gsc-opportunities` artifact), Content Brief Generator
-  (`content-briefs` artifact), Development Watch
-  (`reports/development-watch/` on `lvinit-agent-state`), Internal Linking
-  Agent (`internal-links-report` artifact). The state branch is readable with
-  `git fetch origin lvinit-agent-state`; artifacts need `gh run download` with
-  a token that has `actions: read`. If an input cannot be read, say so in the
-  run summary and continue from the content map — a missing input never
-  blocks a run, and you never pretend you read it.
+- the latest outputs of the input agents, **if available** (§1a.8), read
+  under §1a.2b: the GSC Opportunity Agent, Content Brief Generator and
+  Development Watch publisher inputs on `lvinit-agent-state`, plus the
+  Internal Linking Agent (`internal-links-report` artifact) when you can reach
+  it. If an input cannot be read, say so in the run summary and continue from
+  the content map — a missing input never blocks a run, and you never pretend
+  you read it.
 
 Then determine: which cluster is thin; which pillar or core page needs
 support; which search-intent gaps exist; which GSC queries/pages are gaining
@@ -178,6 +176,70 @@ redirects, slug changes, new hub routes) stays with Mikey.
 
 Don't edit the strategy map during a publishing run. Recommend map updates in
 the run summary instead.
+
+### 1a.2b Upstream inputs — where they are and when they count
+
+Each upstream agent owns **one** stable file on the `lvinit-agent-state` branch.
+You **read** these files; you never write, edit, or delete them, and you never
+download GitHub Actions artifacts or run `gh run download` to get them.
+
+| Input | File on `origin/lvinit-agent-state` | Only writer |
+|---|---|---|
+| GSC Opportunity Agent | `reports/gsc/publisher-input.json` | GSC workflow (`publish-state` job) |
+| Content Brief Generator | `reports/content-briefs/publisher-input.json` | Brief workflow (`publish-state` job) |
+| Development Watch | `reports/development-watch/publisher-input.json` | Local Trend Agent workflow |
+
+Read them with plain git:
+
+```bash
+git fetch origin lvinit-agent-state
+git show origin/lvinit-agent-state:reports/gsc/publisher-input.json
+git show origin/lvinit-agent-state:reports/content-briefs/publisher-input.json
+git show origin/lvinit-agent-state:reports/development-watch/publisher-input.json
+```
+
+or run `node scripts/publisher-inputs/read.mjs` (read-only; same fetch + show),
+which applies the rules below and prints what is usable. The schema, the
+thresholds and the exclusion rules live in `scripts/publisher-inputs/contract.mjs`
+and `docs/PUBLISHER_HANDOFF.md`; this section is the working summary.
+
+**Freshness** (age from the older of `generatedAt` and `reportDate`):
+
+| Input | Fresh | Caution | Stale for prioritization |
+|---|---|---|---|
+| GSC | ≤ 8 days | 9–15 days | > 15 days |
+| Content Brief | ≤ 8 days, and its source GSC report ≤ 15 days | 9–15 days | > 15 days |
+| Development Watch report | ≤ 2 days | 3–7 days | > 7 days |
+
+Development Watch items are signals, not facts: **always re-verify the
+underlying primary source** before publishing a factual claim or prioritizing a
+time-sensitive story.
+
+**Never use an input or item as a reason to prioritize** when `generatedAt` or
+`reportDate` is missing; `fixture` is true; `provisional` is true;
+`classification` is `needs_revalidation` (e.g. the Apex / Switch
+misattribution); it has an unresolved Fair Housing / compliance flag; or source
+validation failed. Low-confidence items may support a decision but may never be
+its sole reason. While the GSC file reports `dataQuality.lowVolume`, treat GSC
+as an early signal, not definitive search demand.
+
+**When something is off:**
+
+- *Unavailable* — report it as unavailable and continue with the repo, the
+  strategy map and the other inputs.
+- *Stale* — report it as stale; use it as background only, never as a primary
+  ranking reason.
+- *Agents disagree* — prefer the stronger direct evidence: GSC measurements
+  outrank Brief inference; verified primary agency/developer evidence outranks
+  secondary development reporting. Explain the disagreement in the run summary.
+- *Repository reality contradicts an input* — **current repository state wins.**
+- *All three unavailable* — operate from current repository state,
+  `docs/LVINIT_CONTENT_CLUSTER_MAP.md` and current factual research. Missing
+  agent inputs alone never block a safe run.
+
+The public GSC and Brief files never contain raw search queries — by design.
+Work from the page, the vocabulary topic and the metrics; don't try to
+reconstruct the query.
 
 ### 1a.3 Core content clusters
 

@@ -32,6 +32,7 @@ import { buildQueue, readPublishedTrailers } from "./lib/handoff.mjs";
 import { loadState, saveState, trackedEntities, applyRun, rememberSeen, recordSourceHealth, writeJson } from "./lib/state.mjs";
 import { buildDailyMarkdown, buildDailyJson, buildWeeklyMarkdown } from "./lib/report.mjs";
 import { fixtureDevItems, FIXTURE_SEEDS } from "./fixtures/fixture-dev.mjs";
+import { buildDevwatchPublisherInput } from "./lib/publisher-input.mjs";
 
 const REPO_ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..", "..", "..");
 
@@ -238,8 +239,34 @@ async function runDaily({ config, today, fixtures, dryRun, paths, repoRoot, log,
     writeJson(join(paths.reports, "local-development-signals.json"), signalsFile);
     saveState(paths, { ...nextState, seen, sources: sourcesState }, today);
     log(`  devwatch:  wrote ${join(paths.reports, `development-watch-${today}.md`)}`);
+    writePublisherInput({ paths, today, fixtures, json, projects: nextState.projects ?? {}, log });
   }
   return { exitCode: 0, run, markdown, json, queue, signals: signalsFile, state: { ...nextState, seen, sources: sourcesState } };
+}
+
+/**
+ * The slim Content Publisher handoff (reports/development-watch/publisher-input.json).
+ * A failure here is logged and never breaks the daily report: the old file
+ * simply ages, and the Publisher's freshness rules treat it as stale.
+ */
+function writePublisherInput({ paths, today, fixtures, json, projects, log }) {
+  try {
+    const earlier = readdirSync(paths.reports)
+      .filter((f) => /^development-watch-d{4}-d{2}-d{2}.json$/.test(f) && f !== `development-watch-${today}.json`)
+      .map((f) => {
+        try {
+          return JSON.parse(readFileSync(join(paths.reports, f), "utf8"));
+        } catch {
+          return null;
+        }
+      })
+      .filter(Boolean);
+    const doc = buildDevwatchPublisherInput({ today, fixture: fixtures, reports: [...earlier, json], projects });
+    writeJson(join(paths.reports, "publisher-input.json"), doc);
+    log(`  devwatch:  publisher input — ${doc.items.length} item(s), ${doc.counts.needsRevalidation} need revalidation`);
+  } catch (error) {
+    log(`  devwatch:  publisher input NOT written — ${error.message}`);
+  }
 }
 
 export async function main(argv = process.argv.slice(2), { log = console.log, repoRoot = REPO_ROOT, fetchImpl = fetch, delay } = {}) {

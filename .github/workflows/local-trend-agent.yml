@@ -3,7 +3,11 @@
 #
 # Includes the Development Watch module (docs/DEVELOPMENT_WATCH.md): same run,
 # same collection pass, so no source is polled twice. Development Watch is
-# report-only; its Publisher handoff queue is a dry run and nothing reads it.
+# report-only; its handoff QUEUE is a dry run and nothing reads it. It also
+# writes reports/development-watch/publisher-input.json — a slim, read-only
+# INPUT the Content Publisher weighs (this workflow is its only writer; see
+# docs/PUBLISHER_HANDOFF.md). Writing it needs no new permission: it lives in
+# the namespace this job already commits.
 #
 # What this job is allowed to do:
 #   * read public RSS/Atom feeds and Google News searches (read-only GETs)
@@ -13,8 +17,9 @@
 #   * read Clark County's public Legistar agenda API and a few developer feeds
 #     (Development Watch), and the repo's git log for Publisher commit trailers
 #   * write the trend report, the watchlist and the reviewed-story memory
-#   * write the Development Watch report, project registry, event ledger and a
-#     DRY-RUN handoff queue (DEVWATCH_HANDOFF_ENABLED is never set here)
+#   * write the Development Watch report, project registry, event ledger, a
+#     DRY-RUN handoff queue (DEVWATCH_HANDOFF_ENABLED is never set here) and
+#     the slim publisher-input.json
 #   * commit those files to the lvinit-agent-state branch — never to main
 #   * upload the report as a workflow artifact and summarize it on the run page
 #

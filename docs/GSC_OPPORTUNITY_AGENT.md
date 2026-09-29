@@ -446,8 +446,11 @@ These are enforced, not just stated:
 
 * the agent has no code path that writes anywhere except `reports/gsc/`
 * `reports/gsc/` is gitignored, so its own output cannot be committed
-* the GitHub workflow runs with `permissions: contents: read`, so its token
-  physically cannot push to the repository
+* the analysis job runs with `permissions: contents: read`, so its token
+  physically cannot push to the repository. A separate `publish-state` job
+  (no Search Console credentials) is the only writer, and it can only commit
+  the sanitized `reports/gsc/publisher-input.json` to `lvinit-agent-state` —
+  never to `main` (see [the Publisher handoff](PUBLISHER_HANDOFF.md))
 * the Google scope is `webmasters.readonly`
 
 It may **recommend** any of those actions. Execution belongs to the
@@ -467,12 +470,19 @@ own content map and other inputs.
 4. fetches Search Console data and runs the analysis
 5. uploads `reports/gsc/` as a workflow artifact (kept 90 days)
 6. prints the summary on the run page
+7. in a separate `publish-state` job, builds the **sanitized** Publisher input
+   from that artifact and commits it to
+   `lvinit-agent-state:reports/gsc/publisher-input.json` (skipped on fixture
+   runs)
 
 It can also be run on demand from the **Actions** tab with **Run workflow**,
 where you can override the period, lag buffer and minimum score — or tick
 `fixtures` to do a dry run with synthetic data.
 
-Reports are **artifacts, not commits**. To keep one permanently, download it.
+The full reports are **artifacts, not commits**. To keep one permanently,
+download it. The only committed output is the sanitized Publisher input, which
+carries no raw query strings — the state branch is public. How it is sanitized:
+[docs/PUBLISHER_HANDOFF.md](PUBLISHER_HANDOFF.md).
 
 ---
 

@@ -30,6 +30,14 @@ data/<namespace>/              machine state (JSON, with schema_version + agent)
 | Development Watch (module of the Local Trend Agent) | `reports/development-watch/`, `data/development-watch/` |
 | Executive Producer | `reports/executive-producer/`, `data/executive-producer/` |
 | Weekly Publisher (local, Sunday 8 PM) | `reports/weekly-content/` |
+| GSC Opportunity Agent (`publish-state` job) | `reports/gsc/` — only the sanitized `publisher-input.json` |
+| Content Brief Generator (`publish-state` job) | `reports/content-briefs/` — only `publisher-input.json` |
+
+The three Content Publisher inputs — `reports/gsc/publisher-input.json`,
+`reports/content-briefs/publisher-input.json` and
+`reports/development-watch/publisher-input.json` — each have exactly one
+writer, and the Publisher only reads them. See
+[PUBLISHER_HANDOFF.md](PUBLISHER_HANDOFF.md).
 
 ## How agents use it
 
