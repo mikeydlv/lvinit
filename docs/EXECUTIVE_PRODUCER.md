@@ -33,6 +33,84 @@ films, edits the site, or contacts anyone but Mikey.
 
 ---
 
+## YouTube growth objective
+
+*Added 2026-09-29 by Mikey. This is standing strategy for choosing each week's
+long-form topic and the Shorts built from it.*
+
+The channel is building toward the YouTube Partner Program milestone:
+**500 subscribers** and **3,000 qualified public watch hours**.
+
+**Baseline (late September 2026):** 64 subscribers, 211 qualified watch hours,
+1 long-form video a week, up to 7 Shorts from each long-form topic.
+
+**10-month target (average):** **+50 subscribers** and **+325 qualified long-form
+watch hours** a month. Weekly working target: ~10–12 new subscribers and ~65–75
+qualified watch hours.
+
+**Cadence stays the same.** Do not increase long-form frequency by default:
+1 strong long-form video a week, plus 5–7 useful Shorts from the same topic
+ecosystem. The priority is making each weekly topic **perform better**, not
+producing more.
+
+### Choosing the weekly long-form topic
+
+Evaluate every idea for what it contributes to:
+
+1. Search/discovery potential
+2. Click potential from title + thumbnail
+3. Long-form watch time
+4. Subscriber conversion
+5. Las Vegas buyer/relocation relevance
+6. Real-estate lead potential
+7. Evergreen usefulness after publication
+
+Balance the mix so the channel never becomes only community tours:
+
+| Audience acquisition (reaches people who don't know LVINIT yet) | Bottom of funnel (viewers researching where/what to buy) |
+|---|---|
+| Las Vegas affordability · mortgage/payment changes · builder incentives · why people are moving to Las Vegas · cost of living · buying vs waiting · buyer mistakes · what different budgets buy · Las Vegas growth/development · new construction opportunities | Community walkthroughs · neighborhood guides · builder/community comparisons · new-home tours · specific developments · area updates |
+
+### Shorts
+
+Don't cut the long video into seven arbitrary clips. Each Short is an
+**independent discovery hook** into the larger topic: 5–7 distinct angles,
+questions or hooks from the week's long-form topic, for example a misconception,
+a surprising fact, a payment/cost example, a mistake to avoid, a buyer question,
+a comparison, or a strong opinion/insight supported by facts. Shorts should help
+people discover Mikey/LVINIT and ideally create interest in the long-form topic.
+
+### Monthly review
+
+At the end of each month, compare actuals against +50 subscribers and +325
+qualified watch hours, and identify:
+
+- which topics created the most watch time
+- which videos converted the most subscribers
+- which titles/thumbnails earned the strongest CTR
+- which videos had the strongest retention
+- which Shorts brought new viewers
+- which topics created buyer inquiries or meaningful real-estate engagement
+
+Use those results to shape the next month's content calendar. The objective is
+not just consistency: it's turning the 1-long-video + Shorts system into a
+compounding YouTube library that reaches monetization **and** generates Las
+Vegas real-estate opportunities.
+
+### What's wired today
+
+Recorded as strategy only; the agents don't act on it yet.
+
+- The weekly batch (below) produces **seven social posts**; it does not pick the
+  long-form topic or plan Shorts from it.
+- The monthly review needs YouTube Studio numbers (subscribers gained, watch
+  hours, CTR, retention, traffic sources) that the public channel page doesn't
+  expose. That is phase 6 (YouTube analytics): either the YouTube Analytics API
+  with Mikey's authorization, or a monthly Studio export he drops in. Until then,
+  no performance figure is estimated or invented.
+
+---
+
 ## Monday production (current direction)
 
 Every Sunday by 8:00 PM Pacific the Producer delivers **seven finished draft posts** for the coming week (Mon–Sun) to
