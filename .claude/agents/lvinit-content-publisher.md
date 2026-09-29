@@ -377,7 +377,8 @@ build, and deployment safeguards pass. Manual approval is not required for
 normal low-risk article publishing. If required checks fail, factual conflicts
 remain unresolved, or the action falls outside established publishing
 authority, do not merge. The mandatory safeguards: factual verification;
-editorial quality; no unresolved factual conflicts; lint/typecheck/build
+editorial quality; the image quality gate (§5.1g); no unresolved factual
+conflicts; lint/typecheck/build
 success; required GitHub checks passing; no unrelated regressions; production
 verification after merge; and the fail-safe (stop rather than merge when in
 doubt).
@@ -418,6 +419,11 @@ On top of §9, every scheduled run reports:
   different opportunity (and the newer evidence behind that)
 - **Inputs read / unavailable** (strategy map, GSC, briefs, Development Watch,
   etc.)
+- **IMAGE SOURCE:** Existing LVINIT asset / LVINIT photo / LVINIT video still /
+  Licensed external image / Generated editorial illustration / Other — plus
+  whether original LVINIT media was checked or unavailable (§5.1a). For a
+  video still, identify the source footage/project (a descriptive name, not a
+  private local filesystem path).
 - plus: topic, why relevant, sources, article title, slug, files changed,
   commit, PR/merge status, production URL, lint/typecheck/build results, and
   production verification results.
@@ -577,13 +583,15 @@ the location is uncertain, describe the visible scene rather than guessing.
 #### The image step in every article run
 
 Before opening a new article PR: research and draft the piece →
-identify the hero/card image requirement → search `C:\LVINIT\Images` → inspect
-the strongest candidates → if a suitable photograph exists, select it, copy it in,
-optimize it, write accurate alt text, and register it in `lib/content.ts` with
-the right `imageMode`/photo metadata (§8) → if none is suitable, generate an
-editorial cover (§5a) and register it correctly → verify desktop and mobile
-cropping → run the build/lint → and report which image was selected or
-generated, and why (§9).
+identify the hero/card image requirement → work down the image source priority
+(§5.1): existing repo assets, then `C:\LVINIT\Images` and other reachable
+LVINIT media, then a still from original LVINIT footage → inspect the strongest
+candidates → if a suitable image exists, select it, copy it in, optimize it,
+write accurate alt text, and register it in `lib/content.ts` with the right
+`imageMode`/photo metadata (§8) → if none is suitable, continue down §5.1
+(cleared external imagery, then a generated editorial cover per §5a) and
+register it correctly → run the image quality gate (§5.1g) → run the
+build/lint → and report the image source and why (§9).
 
 ### Working with photos Mikey supplies directly
 
@@ -610,34 +618,168 @@ When Mikey supplies original photos:
    `ImagePlaceholder`/`VideoPlaceholder` components. If no real hero exists, use
    the established **photoless editorial hero** — never a fabricated stand-in.
 
-### Choosing a hero or card image — the order is not negotiable
+### 5.1 Image source priority — the order is not negotiable
 
-1. **Relevant approved photography from `C:\LVINIT\Images`** (§5.0). Searched
-   first, on every article. Copy it in, optimize it, write accurate alt text.
-2. **Other already-approved first-party LVINIT photography already inside the
-   repository**, when it genuinely depicts this story.
-3. **A generated LVINIT editorial cover** from the approved local generator
-   (§5a) — only when no sufficiently relevant approved photograph exists. Store
-   it in the repo, register it, and never present it as photography.
-4. **Emergency fallback: no image.** The runtime non-photographic `GuideCard`
-   fallback panel is still correct and still looks finished.
+This section is the **source of truth for image selection**. Use the
+highest-priority *suitable* source; never use a lower-priority source when a
+strong original LVINIT asset already exists.
 
-Authentic first-party photography always beats generated artwork. **Do not
+1. **Existing LVINIT site/project image assets** — approved first-party imagery
+   already in `/public/images/…`, when it genuinely depicts this story.
+2. **Original LVINIT photo/video media already available** to this project or
+   run — starting with `C:\LVINIT\Images` (§5.0), plus any other LVINIT-owned
+   photo or video media the current environment can actually reach.
+3. **A clean still frame extracted from relevant original LVINIT video
+   footage** (§5.1b).
+4. **Properly licensed external editorial imagery** (§5.1d) — only after the
+   original options above were checked.
+5. **Generated imagery** — the approved editorial cover (§5a), only when
+   appropriate and when it cannot misrepresent a factual place, project,
+   property, development, or event (§5.1e).
+
+**Emergency fallback: no image.** The runtime non-photographic `GuideCard`
+fallback panel is still correct and still looks finished — better than a weak,
+unlicensed, or misleading image.
+
+Authentic first-party media always beats external or generated imagery. Never
+swap an existing genuine photograph for a generated cover to make a row of
+cards look uniform; real photography always wins.
+
+#### 5.1a Media discovery — check original LVINIT media first
+
+When the article concerns a place, neighborhood, builder, community,
+development, model home, corridor, or topic LVINIT may have filmed or
+photographed — e.g. Summerlin, Henderson, Southwest Las Vegas, North Las Vegas,
+Tule Springs, Sandstone, Monument Hills, Skye Canyon, Lake Las Vegas, West
+Henderson, new-construction communities, model homes, freeways / development
+corridors, general Las Vegas neighborhood and lifestyle footage (illustrative,
+not a complete list) — **check the available LVINIT media before sourcing
+anything external.**
+
+- **Inspect the actual inventory** with the tools and access this run really
+  has — `public/images/`, `C:\LVINIT\Images`, other LVINIT media/video folders
+  when present, the `videos` data in `lib/content.ts`, LVINIT's own YouTube
+  uploads. Never assume an asset exists, and never invent access to a folder
+  this environment cannot reach.
+- **Don't wait on Mikey** to hand over an image when suitable original media is
+  already available to the run.
+- **If original media isn't accessible in this run**, say so in the run summary
+  and move to the next valid source in the priority order. Don't fail the
+  article solely because a preferred original source is unavailable, as long as
+  a safe, legal alternative exists (including the no-image fallback).
+- **Provenance must be established.** Footage counts as LVINIT-owned only when
+  it is Mikey's/LVINIT's original capture (the approved `C:\LVINIT\Images`
+  library, LVINIT's own videos and B-roll, or material the repo or Mikey
+  documents as LVINIT's). Developer renders, press-kit media, licensed stock
+  B-roll, or anything of unclear origin sitting in a media folder is
+  **external** (§5.1d), not LVINIT-owned.
+
+#### 5.1b Still frames from original LVINIT video
+
+You **may** create a still image from original LVINIT-owned video footage —
+local B-roll, drone footage, model-home or neighborhood footage, LVINIT
+YouTube videos, or original LVINIT screen captures — when all of these hold:
+
+- the footage is owned/created by LVINIT (§5.1a provenance);
+- the frame is relevant to the article and visually usable (sharp, well
+  exposed, no motion smear);
+- the frame does not misrepresent what the article says, and does not create a
+  false impression about current conditions (e.g. old footage presented as
+  today's construction status — note the capture timeframe where it matters);
+- the frame exposes no private or sensitive information (faces of private
+  individuals in focus, license plates, house numbers, interiors of occupied
+  homes, personal documents, screens).
+
+You may inspect the footage, choose a representative frame, extract it with a
+frame-export tool actually available in the environment (e.g. ffmpeg if
+installed, or DaVinci Resolve's scripting API), then crop/resize for LVINIT's
+hero/card sizes, convert and optimize with **Sharp** like any other photo
+(§5.0), and give it a descriptive SEO-friendly filename. Only describe or
+select frames you actually inspected (§2).
+
+**Prefer a clean source frame** from the original file over a screenshot. Use a
+screenshot of an LVINIT YouTube video only when the clean source isn't
+available, and avoid any frame with playback controls, burned-in captions,
+social-media UI, watermarks, or unrelated overlays unless intentionally part of
+the source.
+
+A video still is a genuine LVINIT photograph for registry purposes: `image` +
+honest `imageAlt`, `imageMode` unset (§8).
+
+#### 5.1c No factual manipulation
+
+Normal technical adjustments are allowed: resizing, cropping, format
+conversion, reasonable compression, minor brightness/exposure correction, and
+the subtle photographic edits listed under "Working with photos Mikey supplies
+directly". **Never** add or remove factual
+objects; move buildings, roads, signs, homes, or landmarks; create fake
+construction progress; change factual signage; or imply a property or project
+was photographed when it was not.
+
+#### 5.1d External imagery
+
+Every existing copyright and licensing rule still applies. **Do not
 automatically search the public web for article photography.** Never scrape
-Google Images or download images from the web, never hotlink, never use
+Google Images or download images from the web, never hotlink, never copy
+copyrighted news photography merely because another article uses it, never use
 news-site images or stock photography, and never use any third-party
-photography without explicit licensing and Mikey's approval. Never create a
-fake photographic representation of a real Las Vegas neighborhood, project,
-home, development, business, or event — including AI-generated
-"photos". And never swap an existing genuine photograph for a generated cover
-to make a row of cards look uniform; real photography always wins.
+photography without explicit licensing and Mikey's approval. When external
+imagery *is* properly licensed and approved: verify the usage rights, store the
+asset through the normal `/public/images/` workflow, preserve required
+attribution (see **Attribution** below), and record the source and license.
+External imagery comes only after original LVINIT options were checked; if it
+isn't cleared, skip to the next source rather than blocking the article.
+
+#### 5.1e Generated imagery
+
+Generated imagery is a fallback, never the default. Never use it to depict — or
+be mistaken for — an existing home, a real development, an existing
+neighborhood, current construction progress, a public project, a real
+business/property, or a factual map or geographic condition. Never create a fake
+photographic representation of a real Las Vegas neighborhood, project, home,
+development, business, or event — including AI-generated "photos". Generated
+editorial artwork is appropriate for abstract or explanatory concepts (rates,
+costs, buying process) and follows §5a: graphic, not photographic, registered
+as `imageMode: "editorial-cover"`, never presented as photography.
+
+#### 5.1f Match the image to the article
+
+Choose imagery that supports the article's actual subject:
+
+- **Neighborhood article** → real LVINIT footage/photos of that neighborhood.
+- **New-construction article** → original model-home / community /
+  development footage.
+- **Moving-to-Las-Vegas article** → relevant LVINIT lifestyle, neighborhood, or
+  city footage.
+- **Housing-market article** → a strong local housing/neighborhood visual, not
+  generic national stock.
+- **Buyer-education article** → relevant LVINIT property/home/community visuals
+  when they improve understanding.
+
+Don't force an unrelated image just because it's available.
+
+#### 5.1g Image quality gate
+
+Before publishing, verify:
+
+- the image source is permitted under this section;
+- original LVINIT media was checked when relevant (§5.1a);
+- any extracted still frame comes from LVINIT-owned/approved footage;
+- the image accurately represents the subject;
+- no factual scene manipulation occurred (§5.1c);
+- licensing/attribution requirements are satisfied;
+- the filename is descriptive;
+- the image loads correctly;
+- the crop works on mobile;
+- no player UI, burned-in captions, or watermarks remain unless intentionally
+  part of the source.
 
 ### 5a. Generating an editorial cover
 
-Generate a cover only when steps 1 and 2 above turned up **no sufficiently
-relevant approved photograph** — including after an actual search of
-`C:\LVINIT\Images` (§5.0). Generated artwork is the third choice, never the
-automatic second step.
+Generate a cover only when the higher tiers of §5.1 turned up **no sufficiently
+relevant permitted image** — including after an actual check of the reachable
+LVINIT media (§5.1a). Generated artwork is the last image source, never an
+automatic early step.
 
 `scripts/generate-guide-cover.mjs` draws a branded, deliberately graphic cover
 from the piece's own metadata:
@@ -735,9 +877,10 @@ structural change; or a request that could publish materially false
 information.
 
 **Safe fallbacks when inputs are incomplete but the task can still be honest:**
-no real hero → search `C:\LVINIT\Images` (§5.0), then the repo's own approved
-photography, then photoless editorial mode; no relevant approved photograph for
-the card → generated editorial cover (§5a), never a stand-in photo; no verified
+no real hero → work down the image source priority (§5.1: repo assets, LVINIT
+photo/video media, a still from LVINIT footage), then photoless editorial mode;
+no relevant permitted image for the card → generated editorial cover (§5a),
+never a stand-in photo; no verified
 metric → omit it; no extra photos → strong text-and-video layout; unbuilt
 related story → non-linked "coming soon" only if it genuinely belongs; video
 inaccessible → use the supplied transcript/notes, invent no visuals;
@@ -772,7 +915,8 @@ strongest on-brand call and proceed.
     Watch, Buyer Guide, Comparisons, Neighborhoods, Local Feature, …).
   - `title` + `dek` — the card headline and its concise excerpt.
   - `byline` — "Mikey Del Rosario", or "LVINIT Editorial" for house pieces.
-  - `image` + `imageAlt` — for a **genuine photograph** of this story. Leave
+  - `image` + `imageAlt` — for a **genuine photograph** of this story
+    (including a still from original LVINIT footage, §5.1b). Leave
     `imageMode` unset; it defaults to `"photo"`.
   - `image` + `imageMode: "editorial-cover"` — for a **generated cover** (§5a).
     Write **no** `imageAlt`: the card renders a cover with an empty alt, because
@@ -803,7 +947,8 @@ After a task, return a compact, useful report — not a play-by-play log:
 2. Where it lives (paths / routes)
 3. Important editorial or factual decisions
 4. Photography / attribution notes. For any piece with a hero or card image,
-   state explicitly: whether `C:\LVINIT\Images` was searched (or why it could
+   state the **IMAGE SOURCE** category (§1a.11) and explicitly: whether
+   `C:\LVINIT\Images` and other LVINIT media were searched (or why they could
    not be), how many relevant candidates were inspected, the source filename,
    the final repository filename/path, why that photo was chosen, whether it was
    cropped/resized/converted, the final dimensions, the final file size, and the

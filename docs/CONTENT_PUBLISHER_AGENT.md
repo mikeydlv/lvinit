@@ -206,9 +206,10 @@ below) rather than fabricating.
 - It asks **one focused question only when genuinely blocked** — contradictory
   facts, third-party asset permission, a missing embed URL, an identity/compliance
   issue, a destructive structural change, or a risk of publishing false info.
-- **Honest fallbacks:** no real hero → search `C:\LVINIT\Images`, then the
-  repo's own approved photography, then photoless editorial mode; no relevant
-  approved photograph for the card → generated editorial cover, never a stand-in
+- **Honest fallbacks:** no real hero → the repo's own approved imagery, then
+  `C:\LVINIT\Images` and other reachable LVINIT media, then a still from
+  LVINIT footage, then photoless editorial mode; no relevant permitted image
+  for the card → generated editorial cover, never a stand-in
   photo; no verified metric → omit it; no extra photos → strong text-and-video
   layout; unbuilt related story → non-linked "coming soon" only if it belongs;
   inaccessible video
@@ -245,14 +246,23 @@ Two rules worth repeating:
   which the imagery rules forbid. When there is no authentic photograph, the
   answer is a generated cover — or nothing.
 
-### Image hierarchy: approved photography first, a generated cover last
+### Image hierarchy: original LVINIT media first, a generated cover last
 
-1. **Relevant approved photography from `C:\LVINIT\Images`** — searched first
-   on every article, copied in, optimized, with accurate alt text.
-2. **Other already-approved first-party LVINIT photography already in the
-   repository**, when it genuinely depicts the story.
-3. **A generated LVINIT editorial cover**, only when no sufficiently relevant
-   approved photograph exists:
+The full image-selection policy — source priority, media discovery, still-frame
+extraction, external and generated-image limits, and the image quality gate —
+lives in the agent file (§5.1) and is the source of truth. In short:
+
+1. **Existing LVINIT site/project image assets** already in the repository,
+   when they genuinely depict the story.
+2. **Original LVINIT photo/video media** the run can actually reach — starting
+   with `C:\LVINIT\Images` — copied in, optimized, with accurate alt text.
+3. **A clean still frame from original LVINIT video footage** (B-roll, drone,
+   model-home, neighborhood footage, LVINIT YouTube videos) — relevant,
+   unmanipulated, no private info, no player UI/captions/watermarks.
+4. **Properly licensed external imagery** — only with explicit licensing and
+   your approval, per the existing rules below.
+5. **A generated LVINIT editorial cover**, only when no sufficiently relevant
+   permitted image exists:
 
    ```bash
    node scripts/generate-guide-cover.mjs --slug <registry-slug> --category "<Category>" --subject "<short subject>"
@@ -267,7 +277,7 @@ Two rules worth repeating:
    Keep `--subject` short — the card prints the headline right below the image,
    so the cover carries `LAS VEGAS SUMMER`, never the full title. The motif is
    chosen by `--category`, which is what keeps covers varied but coherent.
-4. **Emergency fallback: nothing.** The runtime non-photographic `GuideCard`
+6. **Emergency fallback: nothing.** The runtime non-photographic `GuideCard`
    fallback panel is still correct and finished.
 
 Authentic first-party photography always beats generated artwork. The agent does
