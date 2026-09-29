@@ -104,6 +104,9 @@ low-value, weakly sourced, or unnecessary content.
 Before researching any news, answer: **"What does LVINIT most need right
 now?"** Inspect:
 
+- the **LVINIT content strategy map**, `docs/LVINIT_CONTENT_CLUSTER_MAP.md`,
+  when that file exists: read it **first**, before editorial prioritization,
+  under the rules in §1a.2a;
 - the article inventory — the `guides` registry in `lib/content.ts`, `app/`
   routes, `app/sitemap.ts` — and what was published recently (`publishedAt`,
   `git log`);
@@ -129,6 +132,53 @@ and whether strengthening an existing page beats creating a new one.
 
 Only after this review do you research current news (§1a.5).
 
+### 1a.2a The strategy map is an advisory input, not a task queue
+
+`docs/LVINIT_CONTENT_CLUSTER_MAP.md` is the **single source of truth** for
+LVINIT's current cluster map and editorial priority queue. Read it there; this
+file deliberately does not copy its queue, so there is only one list to
+maintain. If the file is missing, say so in the run summary and continue with
+the rest of §1a.2.
+
+Use it for: current cluster structure; pillar status; known content gaps;
+cannibalization risks; internal-link priorities; the Top 30 editorial actions;
+next-run recommendations; and holds / do-not-create guidance. Its recorded
+strategy decisions (e.g., the evergreen rates and housing-market URLs, the
+no-development-silo rule, the video companion rule) are standing direction
+from Mikey.
+
+**It is advisory.** Don't blindly execute the next numbered item. Before acting
+on any recommendation, validate it against:
+
+- current repository state, and whether the page has already been created;
+- recent Publisher runs (`git log`, recent `publishedAt` / `dateModified`);
+- current GSC signals, Search Brief output, and Development Watch output, when
+  available;
+- factual freshness;
+- duplication / cannibalization;
+- current user intent;
+- current LVINIT editorial standards (§2 onward).
+
+**Current repository state wins.** The map is a point-in-time analysis. When
+reality conflicts with it (a recommended article or pillar already exists, a
+page was recently expanded, a priority is already done, a recommended URL now
+exists, a new GSC signal changes the order, a Development Watch item has been
+invalidated), skip the stale recommendation rather than duplicate work, and
+note the skip in the run summary.
+
+If newer evidence makes a lower-ranked item (or something not in the map)
+clearly better, choose it and explain why in the run summary. The map doesn't
+change your autonomy (§1a.9): items in it don't need Mikey's approval, and it
+doesn't add an approval step. Its pillar / cluster-core items are
+`/guides/` articles, and so are its two decided evergreen pages
+(`/guides/las-vegas-mortgage-rates`, `/guides/las-vegas-housing-market`).
+Creating those at exactly the recorded URLs is normal publishing, not a new
+hub route. Anything the map itself marks as Mikey's call (consolidation,
+redirects, slug changes, new hub routes) stays with Mikey.
+
+Don't edit the strategy map during a publishing run. Recommend map updates in
+the run summary instead.
+
 ### 1a.3 Core content clusters
 
 Most new editorial content belongs to **exactly one primary cluster**. Record
@@ -148,7 +198,9 @@ it — not by you on your own.
 Neighborhood pillars (`/neighborhoods/…`) anchor cluster B. Clusters A, C, D
 and E do not yet have dedicated hub pages; anchor them to their strongest
 existing core guide. **Do not create a new hub/pillar route or restructure URLs
-on your own** — recommend it in the run summary instead (§1a.9).
+on your own** — recommend it in the run summary instead (§1a.9). A
+cluster-core article under `/guides/`, like the ones the strategy map
+recommends, is a normal article, not a hub route (§1a.2a).
 
 ### 1a.4 Step 2 — opportunity selection
 
@@ -299,7 +351,11 @@ On top of §9, every scheduled run reports:
 - **Duplication / cannibalization check result**
 - **Internal-link plan** (links added, back-links recommended)
 - **Internal Linking Agent follow-up recommended?** yes/no and which pages
-- **Inputs read / unavailable** (GSC, briefs, Development Watch, etc.)
+- **Strategy map use** (§1a.2a): which map item(s) you considered; whether you
+  followed the recommended item, skipped it as stale (and why), or chose a
+  different opportunity (and the newer evidence behind that)
+- **Inputs read / unavailable** (strategy map, GSC, briefs, Development Watch,
+  etc.)
 - plus: topic, why relevant, sources, article title, slug, files changed,
   commit, PR/merge status, production URL, lint/typecheck/build results, and
   production verification results.

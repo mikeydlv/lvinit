@@ -51,6 +51,14 @@ file. In short:
 - **Content map first.** Each run starts by asking what LVINIT most needs:
   thin clusters, pillar support, search-intent gaps, GSC traction, and
   duplication/cannibalization risk. News research comes after.
+- **Strategy map as advisory input.** The run reads
+  [`LVINIT_CONTENT_CLUSTER_MAP.md`](LVINIT_CONTENT_CLUSTER_MAP.md) (the single
+  source of truth for the cluster map and priority queue) before prioritizing.
+  It isn't a task queue: every recommendation is checked against the current
+  repo, recent runs, GSC / brief / Development Watch output, freshness, and
+  duplication. Current repository state wins over a stale recommendation, and
+  a clearly better lower-ranked item can be chosen with the reason given in the
+  run summary (agent §1a.2a).
 - **Five core clusters:** Moving to Las Vegas · Where to Live / Neighborhoods ·
   Buying a Home · New Construction · Housing Market. Each new article has one
   primary cluster.

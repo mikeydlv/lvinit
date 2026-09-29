@@ -2,10 +2,14 @@
 
 > **Strategic planning artifact. Analysis only.** Nothing in this document has
 > been executed. No article was published, edited, merged, redirected or
-> re-slugged to produce it, and it is **not wired into any automation**. It is
-> intended as the strategic input for the LVINIT Content Publisher's
-> "content map first" step (`.claude/agents/lvinit-content-publisher.md` §1a.2)
-> and for the Internal Linking Agent.
+> re-slugged to produce it. It is the **advisory priority input** the LVINIT
+> Content Publisher reads in its "content map first" step
+> (`.claude/agents/lvinit-content-publisher.md` §1a.2a) and a reference for
+> the Internal Linking Agent. It is **not** a task queue: it's a point-in-time
+> analysis, and wherever it conflicts with the current repository, **the
+> repository wins**. This file is the single source of truth for the cluster
+> map and priority queue; the agent instructions point here rather than copying
+> it.
 >
 > **Snapshot date:** 2026-09-28 · **Repo state:** `main` @ `0facbd3`
 > **Revised:** 2026-09-28 (strategy decisions; see [Strategy decisions](#strategy-decisions-2026-09-28-revision)).
@@ -72,10 +76,13 @@ No page, slug, redirect, registry entry or agent was changed to record them.
   get evaluated later for historical usefulness, consolidation, redirect, or a
   supporting-content role. No consolidation or redirect happens as part of this
   revision.
-- **Open (Mikey):** which URL serves as the evergreen page. All three existing
-  slugs are dated, so the likely answer is one new, undated `/guides/` article
-  that becomes the permanent rates page. Existing slugs are not changed either
-  way.
+- **Mortgage rates hub. Canonical future evergreen route:
+  `/guides/las-vegas-mortgage-rates`** (decided by Mikey 2026-09-28). An
+  undated URL, updated in place. The route doesn't exist yet; creating it is
+  §13 #4 / §15 Run 4. Existing slugs are not changed.
+- Dated supporting rate stories continue **only** when they have distinct
+  value or intent. The existing dated pages are evaluated later **using GSC /
+  performance evidence** before any consolidation or redirect decision.
 
 ### D2. Housing market / home prices: one evergreen hub, updated in place
 
@@ -90,8 +97,13 @@ No page, slug, redirect, registry entry or agent was changed to record them.
   stronger internal linking to the hub.
 - `will-las-vegas-home-prices-drop` stays a question-intent explainer that
   supports the hub. It isn't the hub itself.
-- **Open (Mikey):** the hub's URL. Same logic as D1: likely one undated
-  `/guides/` article. No slug changes.
+- **Housing market hub. Canonical future evergreen route:
+  `/guides/las-vegas-housing-market`** (decided by Mikey 2026-09-28). An
+  undated URL, updated in place. The route doesn't exist yet; creating it is
+  §13 #5 / §15 Run 5. Existing slugs are not changed.
+- Dated supporting market reports continue **only** when they have distinct
+  value or intent. The existing dated price pages are evaluated later **using
+  GSC / performance evidence** before any consolidation or redirect decision.
 
 ### D3. PR #25: do not merge as-is
 
@@ -484,9 +496,10 @@ All of them ──► what-500k, DPA, starter (dense, healthy internal mesh)
 - The Fact-Decay Agent is already flagging the older installments (July prices
   FACT-001/002; September rates FACT-003/005, per the 2026-09-28 weekly plan).
   Dated series decay by design.
-- Timely hooks this week: Freddie Mac PMMS 7.03% (week of Sept 24), LVR
-  September report expected around Oct 7–9 (date unconfirmed), and the next
-  Home Builders Research new-home release (not yet checked).
+- Timely hooks this week: Freddie Mac PMMS 7.03% (week of Sept 24), the
+  official Las Vegas REALTORS September market data (release date not
+  confirmed; check at run time), and the next Home Builders Research new-home
+  release (not yet checked).
 
 **Recommendation (D1, D2): give E two evergreen anchors, updated in place.**
 
@@ -537,6 +550,10 @@ larger cluster rather than stand alone. The three pages above stay as they are.
 > §1a.9). The pillar-building items in §13 are written as **articles under
 > `/guides/`** that can act as a cluster's core. Promoting any of them to a
 > dedicated hub route, or consolidating dated series, is **Mikey's call**.
+> Exception already decided: the two evergreen E pages have fixed URLs,
+> `/guides/las-vegas-mortgage-rates` and `/guides/las-vegas-housing-market`
+> (D1, D2). Creating them at exactly those URLs is a normal `/guides/`
+> article, not a new hub route.
 
 ---
 
@@ -737,8 +754,8 @@ re-ranked around the new Top 10. Holds are listed separately below the table.
 | 1 | EXPAND EXISTING PAGE | North Las Vegas pillar: answer "is NLV its own city / is it Clark County" early; add Tule Springs + Sandstone section with the tour video; add 215 Northern Beltway Trail (DEV-2026-09-24-003, sourced); set honest `datePublished`/`dateModified` | B | Deciding whether to move to NLV | Page with the most GSC momentum (GSC-2026-09-22-002), thinnest pillar, flagged by the weekly plan. Also the D4 home for Sandstone / Tule Springs development news | NLV pillar itself | **Is** the expansion | HIGH if a new NLV article is made instead (R3) | → Sandstone, Monument Hills, One Civic, new-build-vs-resale, starter homes, first-summer. Later → #2, #3 | GSC, cluster weakness, existing video, local development | E | HIGH |
 | 2 | BUILD PILLAR (as `/guides/` article) | "Moving to Las Vegas": the main relocation hub. Honest overview that routes to cost of living, rent-vs-buy, choosing an area, moving mistakes, utilities / ownership costs, heat, commute, practical planning (§3 recommendation) | A | Relocating, don't know where to start | Cluster A has no pillar and the homepage leads with relocation. Every A page (and the homepage chips, D5) needs a real destination | first-summer, all area pillars, 3-way comparison, #9, #10, #7, #8, #15, #18 | No. Nothing covers this | MEDIUM vs #9 (R11) and vs the 3-way (R6). Keep it a hub | → all 5 area pillars, 3-way, first-summer, #9, #10, DPA, property tax, and planned A pages as they ship. ← every A page, area pillars | Cluster weakness, content gap, homepage placeholder issue | E | HIGH |
 | 3 | BUILD PILLAR (as `/guides/` article) | "Buying New Construction in Las Vegas": incentives, new build vs resale hand-off, lot premiums, upgrades, HOA/SID/LID, builder sales process, community research, current new-build areas, LVINIT model-home coverage (§6 recommendation) | D | Touring models, about to sign with a builder | D has no core. Strongest first-party footage (Sandstone tour + Shorts). New-build data is the top GSC page. Gives D4 development stories somewhere to link up to | new-build-vs-resale, Sandstone, Monument Hills, Four Seasons, new-home sales | No. new-build-vs-resale covers *whether*, not *how* | MEDIUM (R9) | → new-build-vs-resale, Sandstone, Monument Hills, new-home sales, #7, #13. ← all D pages, area pillars, #2 | Cluster weakness, existing video, GSC (adjacent) | E | HIGH |
-| 4 | STRUCTURE / EXPAND | Evergreen Las Vegas mortgage-rates page, updated in place: current rate context, what it means for a Las Vegas payment, a dated "latest print" section (7.03% PMMS for the week of Sept 24, then later prints), honest `dateModified` (D1) | E | Current rate & payment impact | Stops the rate thread from spawning a URL every few weeks (R1). Gives the most-searched timely topic a permanent home | Rate thread (3 dated installments) | **Yes in spirit:** one page updated forever. Which URL (new undated `/guides/` article vs an existing one) is Mikey's call; no slug changes | HIGH if handled as another dated URL (R1) | → will-prices-drop, DPA, #5, #10. ← all three dated rate pages, August prices | Market data, weekly plan, cannibalization fix | E (T data inside) | HIGH |
-| 5 | STRUCTURE / EXPAND | Evergreen Las Vegas Housing Market / current home prices hub, updated in place as each month's data lands (LVR September report expected ~Oct 7–9, unconfirmed) (D2) | E | Where are prices / the market right now | Stops monthly URL sprawl (R2). Gives "las vegas home prices" one page to accumulate authority. Google already tests LVINIT's price pages at pos ~7–8 | July, August reports, will-prices-drop, starter homes, new-home sales | **Yes in spirit** (one page updated forever); URL is Mikey's call, no slug changes | MEDIUM vs will-prices-drop and dated reports (R12) | → will-prices-drop, starter homes, new-home sales, #4, DPA, what-500k. ← July, August, will-prices-drop, rate pages | GSC (GSC-2026-09-22-001), market data, cannibalization fix | E (T data inside) | HIGH |
+| 4 | STRUCTURE / EXPAND | Evergreen Las Vegas mortgage-rates page at `/guides/las-vegas-mortgage-rates`, updated in place: current rate context, what it means for a Las Vegas payment, a dated "latest print" section (7.03% PMMS for the week of Sept 24, then later prints), honest `dateModified` (D1) | E | Current rate & payment impact | Stops the rate thread from spawning a URL every few weeks (R1). Gives the most-searched timely topic a permanent home | Rate thread (3 dated installments) | No: new evergreen page at **`/guides/las-vegas-mortgage-rates`** (decided), then updated in place forever. Existing dated slugs untouched | HIGH if handled as another dated URL (R1) | → will-prices-drop, DPA, #5, #10. ← all three dated rate pages, August prices | Market data, weekly plan, cannibalization fix | E (T data inside) | HIGH |
+| 5 | STRUCTURE / EXPAND | Evergreen Las Vegas Housing Market / current home prices hub, at **`/guides/las-vegas-housing-market`**, updated in place as each month's data lands (D2) | E | Where are prices / the market right now | Stops monthly URL sprawl (R2). Gives "las vegas home prices" one page to accumulate authority. Google already tests LVINIT's price pages at pos ~7–8 | July, August reports, will-prices-drop, starter homes, new-home sales | No: new evergreen page at **`/guides/las-vegas-housing-market`** (decided), then updated in place forever. Existing dated slugs untouched | MEDIUM vs will-prices-drop and dated reports (R12) | → will-prices-drop, starter homes, new-home sales, #4, DPA, what-500k. ← July, August, will-prices-drop, rate pages | GSC (GSC-2026-09-22-001), market data, cannibalization fix | E (T data inside) | HIGH |
 | 6 | INTERNAL-LINK FOLLOW-UP | Give `what-500k-buys` real outbound links; surface `new-build-vs-resale` from pillars and D pages; connect both to the new pillars (#2, #3) as they ship (§12) | C (sec. A, D) | n/a | Highest-leverage link fixes on the site. The most-linked page leads nowhere; the deepest buyer guide has 2 inbound links | what-500k, new-build-vs-resale, #2, #3 | n/a | None | See §12 | Cluster weakness | E | HIGH |
 | 7 | NEW ARTICLE | "HOA Fees in Las Vegas: What They Cover, Master vs Sub-HOA, and What to Check Before You Offer" | C (sec. D) | Budgeting true monthly cost | Core ownership cost with no page. Audience interest shown by Sandstone "no HOA" content. Feeds both pillars | #3, #2, new-build-vs-resale | No | LOW | → new-build-vs-resale, #3, property tax, Sandstone. ← #3, #2, area pillars | Content gap, existing video (social) | E | MEDIUM |
 | 8 | NEW ARTICLE | "Closing Costs When Buying a Home in Las Vegas" (buyer vs seller norms, Clark County transfer tax, escrow/title), every figure sourced | C (sec. A) | Cash-to-close planning | Durable, locally specific, high commercial intent. Pairs with DPA. Completes the cost trio with HOA and property tax | DPA, property tax, #2 | No | LOW | → DPA, property tax, #7. ← DPA, #2, #10 | Content gap | E | MEDIUM |
@@ -749,7 +766,7 @@ re-ranked around the new Top 10. Holds are listed separately below the table.
 | 13 | NEW ARTICLE | "SIDs and LIDs in Las Vegas: The Assessment Some Buyers Don't See Coming" | C (sec. D) | Understanding a tax-bill line item | Very local, buyers rarely know to ask. Strengthens property-tax page and #3 | property tax, #3 | Could be a section of #3 or the property-tax page. Separate intent, so new is fine | LOW | ↔ property tax, → #3, Summerlin pillar | Content gap | E | MEDIUM |
 | 14 | NEW ARTICLE | "Las Vegas, Henderson, North Las Vegas or Clark County? How the Valley's Cities Actually Work" | A (sec. B) | Orientation: where is what, who governs it | GSC long-tail ("is north las vegas its own city", "where is summerlin"). LVINIT already teaches this in pieces | #2, pillars | No (valley-wide; NLV-specific answers stay on #1) | LOW–MEDIUM | → all pillars, Wayne Newton, SW pillar. ← #2, #9 | GSC, content gap | E | MEDIUM |
 | 15 | NEW ARTICLE | "Cost of Living in Las Vegas (2026)": housing, utilities, taxes, insurance, strictly sourced | A | Can I afford to move | Promised by a homepage chip. Durable relocation demand. A named supporting topic of #2 | #2, property tax, DPA | No | MEDIUM (registry slug `cost-of-living-2026` already points at the property-tax page, D5; pick a distinct slug) | → property tax, #18, starter homes, #10, #5. ← #2 | Content gap, homepage placeholder issue | E | MEDIUM |
-| 16 | MARKET UPDATE | LVR September 2026 report (expected ~Oct 7–9, unconfirmed): goes **into the hub (#5)** by default. A separate dated URL only if it carries a distinct analytical angle (D2) | E | Current prices | Recurring data Google tests, now routed into one page | #5, August prices | **Yes: update #5** | MEDIUM if published as a default monthly URL (R2) | → will-prices-drop, #4. ← August | Market data | T | MEDIUM |
+| 16 | MARKET UPDATE | Las Vegas REALTORS September 2026 market data. Run when the official Las Vegas REALTORS September market data becomes available. Goes **into the hub (#5, `/guides/las-vegas-housing-market`)** by default. A separate dated URL only if it carries a distinct analytical angle (D2) | E | Current prices | Recurring data Google tests, now routed into one page | #5, August prices | **Yes: update #5** | MEDIUM if published as a default monthly URL (R2) | → will-prices-drop, #4. ← August | Market data | T | MEDIUM |
 | 17 | MARKET UPDATE | New-home sales follow-up (next Home Builders Research release) | E (sec. D) | Is the new-build market slowing | Top GSC page (107 impr, pos 6.2) is the July installment. A distinct dataset, so a dated report can be justified; either way it feeds #5 and #3 | new-home sales July, #3, #5 | Consider updating the July page vs a new report (D2 test: distinct angle?) | MEDIUM | → #3, #5, new-build-vs-resale, Sandstone | GSC, market data | T | MEDIUM |
 | 18 | NEW ARTICLE | "Setting Up Utilities in Las Vegas": NV Energy, water by jurisdiction, trash, internet (+ daily demand charge **only if verified**) | A | Practical move-in tasks | Evergreen with a possible timely hook (weekly plan). A named supporting topic of #2 | #2, #15 | No | LOW | → first-summer, #15, #14. ← #2 | Content gap, local development (utility rate change) | E (T hook) | MEDIUM |
 | 19 | NEW ARTICLE | "Where New Homes Are Being Built in Las Vegas": corridor map linking every D page | D (sec. B) | Scanning new-build options by area | Connects isolated D pages. The D4 landing spot for new-housing development news | #3, Sandstone, Monument Hills | Likely a section of #3 first. Split out only if it outgrows it | MEDIUM (R9) | → all D pages, pillars. ← #3 | Cluster weakness | E | MEDIUM |
@@ -837,8 +854,8 @@ a pillar (D4). A quiet news week never justifies a filler timely piece.
 | 1 | EXPAND EXISTING PAGE | North Las Vegas pillar (queue #1) | B | Expansion | Strongest live search signal, thinnest pillar, and every input agrees. Cheapest high-confidence win. Folds in the Beltway Trail and Sandstone / Tule Springs coverage without a new URL |
 | 2 | BUILD PILLAR (article) | Moving to Las Vegas (queue #2) | A | New page | Cluster A has no hub. Every later A page (Runs 7, 9) and the eventual homepage fix (D5) need it to exist first |
 | 3 | BUILD PILLAR (article) | Buying New Construction in Las Vegas (queue #3) | D | New page | Gives D a core while the Sandstone tour is fresh, and gives HOA / SID pages and new-housing development news something to link up to |
-| 4 | STRUCTURE / EXPAND | Evergreen mortgage-rates page (queue #4), with the 7.03% print and later prints | E | Expansion or one new evergreen URL (Mikey picks the URL; no slug changes) | The week's timely rate news, handled in the permanent page instead of a 4th dated URL (R1). **Needs Mikey's URL decision before the run** |
-| 5 | STRUCTURE / EXPAND | Evergreen housing-market hub (queue #5), timed to the LVR September report (queue #16) | E | Expansion or one new evergreen URL (Mikey picks the URL) | September data lands in the hub, not a default monthly page (R2). If LVR hasn't published, build the hub on August data and swap Run 5 with Run 6. **Needs Mikey's URL decision before the run** |
+| 4 | STRUCTURE / EXPAND | Evergreen mortgage-rates page at `/guides/las-vegas-mortgage-rates` (queue #4), with the 7.03% print and later prints | E | New evergreen page (then updated in place; no slug changes) | The week's timely rate news, handled in the permanent page instead of a 4th dated URL (R1) |
+| 5 | STRUCTURE / EXPAND | Evergreen housing-market hub at `/guides/las-vegas-housing-market` (queue #5). Run when the official Las Vegas REALTORS September market data becomes available (queue #16) | E | New evergreen page (then updated in place; no slug changes) | September data lands in the hub, not a default monthly page (R2). If the official September data isn't out yet, swap Run 5 with Run 6 rather than guessing a date |
 | 6 | NEW ARTICLE | HOA Fees in Las Vegas (queue #7) | C | New page | First ownership-cost gap. Links into Run 3 and Run 2 immediately |
 | 7 | NEW ARTICLE / VIDEO COMPANION | Choose the Area Before the House (queue #9) | A | New page | Featured homepage video, now supporting the Run 2 pillar instead of standing in for it (D6, R11) |
 | 8 | NEW ARTICLE | Closing Costs in Las Vegas (queue #8) | C | New page | Completes the cost trio with HOA and property tax. Strong lead intent. Links to DPA, Run 2 and Run 6 |
@@ -850,11 +867,11 @@ a pillar (D4). A quiet news week never justifies a filler timely piece.
 is Internal Linking Agent work. It can go any week, and it should follow Runs 2
 and 3 closely.
 
-**Needs Mikey before or during these runs:** the evergreen URLs for the rates
-page and the housing-market hub (Runs 4 and 5); PR #25 refresh-or-close (D3);
+**Needs Mikey before or during these runs:** PR #25 refresh-or-close (D3);
 the three D5 cleanup flags (homepage relocation placeholders, the
 `cost-of-living-2026` registry entry, the Apex / Development Watch mismatch);
-and the later evaluation of the dated rate and price pages (D1, D2).
+and the later GSC/performance-based evaluation of the dated rate and price
+pages (D1, D2). The evergreen URLs are already decided (D1, D2).
 
 ---
 
@@ -905,9 +922,11 @@ and the later evaluation of the dated rate and price pages (D1, D2).
    evergreen "Las Vegas mortgage rates" page and an evergreen "Las Vegas
    housing market" page, updated in place with dated sections, would
    concentrate that authority. **Decided (D1, D2):** both evergreen pages are
-   adopted, and the September LVR data should land in the hub. The exact URLs,
-   and the later fate of the dated pages (historical support, consolidation,
-   redirect), are still Mikey's call.
+   adopted at `/guides/las-vegas-mortgage-rates` and
+   `/guides/las-vegas-housing-market`, and the September LVR data should land
+   in the hub. The later fate of the dated pages (historical support,
+   consolidation, redirect) is still Mikey's call, based on GSC/performance
+   evidence.
 5. **Cluster D is the biggest commercial opportunity and the weakest
    structure.** New construction is where buyers most need an advocate (model
    homes, builder lenders, incentives), where Mikey has the freshest footage,
