@@ -275,11 +275,14 @@ and none may be added by hand. Real LVINIT maps come from
 `scripts/generate-area-map.mjs`, which is built on verified coordinates.
 
 Generating covers belongs to **draft and PR preparation**, not to deployment.
-Merging stays Mikey's call.
 
-Publishing still ends where it always did: build, verify, commit, open a PR.
-**Merging and deploying remain Mikey's call** — the agent does not self-merge or
-self-deploy.
+**Merge authority.** The LVINIT Content Publisher may autonomously merge its
+own completed publishing PR when all required factual, editorial, repository,
+build, and deployment safeguards pass. Manual approval is not required for
+normal low-risk article publishing. If required checks fail, factual conflicts
+remain unresolved, or the action falls outside established publishing
+authority, do not merge. After a merge, the Publisher verifies production and
+reports it (agent §1a.9).
 
 ## Honesty and attribution rules
 

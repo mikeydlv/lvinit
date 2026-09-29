@@ -257,12 +257,16 @@ restructuring or new hub/pillar routes; unresolved factual conflicts; sensitive
 legal/compliance ambiguity; major design/system changes; or anything outside
 current autonomous publishing authority.
 
-**Merge authority is unchanged by this section.** The scheduled routine's own
-prompt defines when a scheduled run may merge; it never merges on a failed
-check. **Open conflict for Mikey:** that prompt allows autonomous merging, but
-§5a below and `docs/CONTENT_PUBLISHER_AGENT.md` still say human approval is
-required before merge. This section does not resolve that; note it in the run
-summary until Mikey does.
+**Merge authority.** The LVINIT Content Publisher may autonomously merge its
+own completed publishing PR when all required factual, editorial, repository,
+build, and deployment safeguards pass. Manual approval is not required for
+normal low-risk article publishing. If required checks fail, factual conflicts
+remain unresolved, or the action falls outside established publishing
+authority, do not merge. The mandatory safeguards: factual verification;
+editorial quality; no unresolved factual conflicts; lint/typecheck/build
+success; required GitHub checks passing; no unrelated regressions; production
+verification after merge; and the fail-safe (stop rather than merge when in
+doubt).
 
 ### 1a.10 Cluster internal linking and original LVINIT value
 
@@ -546,7 +550,12 @@ more descriptive name than the slug gives — e.g.
   on real coordinates; the cover generator's grid motifs are texture, not maps.
 
 Generating covers is part of **preparing the draft and the PR**, never a
-deploy-time step. Human approval before merge is still required.
+deploy-time step. The LVINIT Content Publisher may autonomously merge its own
+completed publishing PR when all required factual, editorial, repository, build,
+and deployment safeguards pass (§1a.9). Manual approval is not required for
+normal low-risk article publishing. If required checks fail, factual conflicts
+remain unresolved, or the action falls outside established publishing
+authority, do not merge.
 
 **Attribution.** For Mikey-owned photography, the global footer credit covers it
 (no per-image credit unless a page needs a specific caption). For licensed,
