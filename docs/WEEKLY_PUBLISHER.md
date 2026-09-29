@@ -31,11 +31,11 @@ Facebook, and it never publishes to the website.
 | **Internal Linking Agent** | Finds and (when safe) adds internal links | Actions artifact `internal-links-report` + link commits |
 | **Site Quality Agent** | Audits the built site for technical issues | `reports/site-quality/` |
 | **Executive Producer** | Produces 7 finished draft social posts for the week (Sunday 7 PM) | `OneDrive\Documents\LVINIT\Weekly Posts\Week of <Monday>\` |
-| **lvinit-content-publisher** | Researches, builds and publishes **approved** site content (a Claude Code subagent Mikey invokes) | Site pages via its normal approval flow |
+| **lvinit-content-publisher** | The only agent that creates and publishes new website articles — on Mikey's request, or on its own scheduled routine via its editorial priority system | Site pages via its normal publishing flow |
 | **LVINIT Weekly Publisher** | **Editor-in-chief.** Reads all of the above and decides what Mikey makes and posts this week | `reports/weekly-content/` |
 
 The Weekly Publisher is **not** the Content Publisher. The Content Publisher
-builds and ships a specific piece of website content once it is approved; the
+builds and ships website content; the
 Weekly Publisher decides what the week's work should be and hands website items
 to the Content Publisher as recommendations. The specialist agents collect
 signals; the Weekly Publisher consumes their outputs and does not redo their

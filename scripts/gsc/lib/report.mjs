@@ -310,7 +310,7 @@ export function buildMarkdownReport({ analysis, config, meta }) {
       lines.push("");
       lines.push(
         `*To act on this:* \`Have the LVINIT Real Estate Content Publisher execute ${opp.id}.\` ` +
-          "(Nothing happens until you say so — this agent never hands work over by itself.)"
+          "(This agent never hands work over by itself; the Publisher weighs findings as editorial inputs.)"
       );
       lines.push("");
     });
@@ -482,8 +482,8 @@ export function buildMarkdownReport({ analysis, config, meta }) {
   for (const action of PROHIBITED_ACTIONS) lines.push(`- ${action}`);
   lines.push("");
   lines.push(
-    "Execution belongs to the **LVINIT Real Estate Content Publisher**, and only after you approve a " +
-      "specific finding by its ID. Nothing above has been handed over."
+    "Execution belongs to the **LVINIT Real Estate Content Publisher**, which treats these findings as " +
+      "inputs to its editorial priority system. Nothing above has been handed over by this agent."
   );
   lines.push("");
 

@@ -3,7 +3,10 @@
 A weekly maintenance system that keeps LVINIT's contextual internal links in
 good shape without you having to read a list of suggestions every Monday.
 
-It is the only LVINIT agent allowed to change the site on its own. Everything
+It is the only LVINIT *maintenance* agent allowed to change existing pages on
+its own. (New editorial articles are created and published only by the
+[Content Publisher](CONTENT_PUBLISHER_AGENT.md), which also links each new
+article; this agent handles site-wide and historical back-links.) Everything
 below is about why that is safe.
 
 ---

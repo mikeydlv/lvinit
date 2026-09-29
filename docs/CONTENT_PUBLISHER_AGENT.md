@@ -1,7 +1,8 @@
 # Content Publisher Agent
 
 > **Not the Weekly Publisher.** This agent researches, builds and publishes
-> *approved* site content when Mikey asks. The **LVINIT Weekly Publisher**
+> site content when Mikey asks, and runs the scheduled **LVINIT Real Estate
+> Content Publisher** routine. The **LVINIT Weekly Publisher**
 > (`scripts/weekly-publisher/`, Sunday 8 PM) is the editor-in-chief that decides
 > what gets made and posted each week and hands website items here as
 > recommendations. See [WEEKLY_PUBLISHER.md](WEEKLY_PUBLISHER.md).
@@ -40,6 +41,35 @@
   with hooks, clip concepts, and a distribution plan.
 - Runs the production build, verifies the browser preview, then commits and (for
   build tasks) pushes through the GitHub → Vercel workflow.
+
+## Scheduled editorial runs
+
+The cloud routine **LVINIT Real Estate Content Publisher** (every other day,
+08:00 UTC) runs this agent's **editorial priority system** — §1a of the agent
+file. In short:
+
+- **Content map first.** Each run starts by asking what LVINIT most needs:
+  thin clusters, pillar support, search-intent gaps, GSC traction, and
+  duplication/cannibalization risk. News research comes after.
+- **Five core clusters:** Moving to Las Vegas · Where to Live / Neighborhoods ·
+  Buying a Home · New Construction · Housing Market. Each new article has one
+  primary cluster.
+- **News is an input, not the default.** A timely story jumps the queue only
+  when it materially affects supply, prices, affordability, financing,
+  ownership cost, infrastructure, a major community, or relocation decisions.
+  Rough target over time: 70% cluster/evergreen/search, 30% timely — not a
+  quota.
+- **Publishing is not mandatory.** Actions, in order: new cluster article →
+  important timely article → supporting content for a proven search
+  opportunity → expand an existing page → publish nothing.
+- **It is the only agent that creates and publishes new articles.** GSC, the
+  Brief Generator, and Development Watch are advisory inputs; you do not need
+  to review routine opportunities. Architecture changes, deletions,
+  consolidation, URL restructuring, unresolved factual conflicts, and
+  legal/compliance ambiguity still come to you.
+- Every run reports its action, cluster, opportunity source, why it beat the
+  alternatives, the duplication check, the link plan, and any Internal Linking
+  Agent follow-up.
 
 ## Approved photography library — `C:\LVINIT\Images`
 

@@ -4,9 +4,9 @@
 > the genuine organic-search opportunities are — in plain English, with the
 > arithmetic shown.
 >
-> It **reads and recommends. It never writes.** Execution belongs to the
-> [Content Publisher agent](CONTENT_PUBLISHER_AGENT.md), and only after you
-> approve a specific finding.
+> It **reads and recommends. It never writes.** Its findings are an input to the
+> [Content Publisher's](CONTENT_PUBLISHER_AGENT.md) editorial priority system;
+> execution belongs to the Content Publisher alone.
 
 ---
 
@@ -31,8 +31,12 @@ Each finding gets a stable ID like `GSC-2026-09-04-001`, so you can say:
 
 > "Have the LVINIT Real Estate Content Publisher execute GSC-2026-09-04-001."
 
-Nothing is handed over automatically. **You are the approval layer between
-discovery and execution.**
+This agent never hands work over by itself. GSC, search, and development
+systems feed the Content Publisher's editorial priority system, and the
+Publisher may act on low-risk opportunities on its own judgment within LVINIT's
+editorial, compliance, and publishing guardrails — you do not need to review
+routine opportunities. See the Publisher agent's §1a
+(`.claude/agents/lvinit-content-publisher.md`).
 
 ---
 
@@ -447,7 +451,8 @@ These are enforced, not just stated:
 * the Google scope is `webmasters.readonly`
 
 It may **recommend** any of those actions. Execution belongs to the
-[Content Publisher](CONTENT_PUBLISHER_AGENT.md), after you approve it.
+[Content Publisher](CONTENT_PUBLISHER_AGENT.md), which weighs it against its
+own content map and other inputs.
 
 ---
 
@@ -485,7 +490,10 @@ Every finding carries a `handoff` block:
 ```
 
 `authorized` is always `false`. The agent never triggers the Content Publisher.
-When you have read a finding and want it done, say the `invoke` line yourself.
+`authorized` and `approvalRequired` describe *this agent's* handoff — it never
+dispatches work on its own. They do not block the Publisher's scheduled run
+from independently choosing a low-risk finding. To force a specific finding
+yourself, say the `invoke` line.
 
 For a **create-new-content** recommendation, the finding carries an *editorial
 angle*, not an article — a brief describing what the search suggests people are

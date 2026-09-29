@@ -391,8 +391,8 @@ Not done in the first build. When you approve:
    `gh run download --repo <owner>/lvinit --name content-briefs` (it needs a
    token with `actions: read`). If it cannot, handoff stays off — the agent
    must not pretend a handoff it cannot verify.
-2. Add to the Publisher routine's topic-selection step, *after* the fresh-news
-   check and *before* its own gap-filling: *"If the newest
+2. Add to the Publisher routine's content-map step (STEP 1, where it already
+   reads this agent's report as an advisory input): *"If the newest
    `content-briefs/handoff-queue.json` has `mode: live`, take the first item
    whose fingerprint no commit already carries, read its brief file, research
    every fact independently, execute it, and commit with the two trailers. If
