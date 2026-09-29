@@ -8,6 +8,10 @@
 > and for the Internal Linking Agent.
 >
 > **Snapshot date:** 2026-09-28 · **Repo state:** `main` @ `0facbd3`
+> **Revised:** 2026-09-28 (strategy decisions; see [Strategy decisions](#strategy-decisions-2026-09-28-revision)).
+> The inventory, link counts and GSC evidence are unchanged from the original
+> snapshot. The Top 10, the next-10-runs plan and the rate / market / development
+> guidance were revised to match Mikey's decisions.
 > **Related:** [CONTENT_PUBLISHER_AGENT.md](CONTENT_PUBLISHER_AGENT.md) ·
 > [PROJECT_STATE.md](PROJECT_STATE.md) ·
 > [INTERNAL_LINKING_AGENT.md](INTERNAL_LINKING_AGENT.md) ·
@@ -28,6 +32,7 @@ demand beyond them.
 
 ## Contents
 
+0. [Strategy decisions (2026-09-28 revision)](#strategy-decisions-2026-09-28-revision)
 1. [Executive summary](#1-executive-summary)
 2. [Current article inventory](#2-current-article-inventory)
 3. [Cluster A: Moving to Las Vegas](#3-cluster-a--moving-to-las-vegas)
@@ -45,6 +50,102 @@ demand beyond them.
 15. [Recommended next 10 Publisher runs](#15-recommended-next-10-publisher-runs)
 16. [Missing data / unavailable inputs](#16-missing-data--unavailable-inputs)
 17. [Strategic observations](#17-strategic-observations)
+
+---
+
+## Strategy decisions (2026-09-28 revision)
+
+These are **decided direction**, not open questions. Where they conflict with
+older wording further down, this section wins. Nothing here has been executed.
+No page, slug, redirect, registry entry or agent was changed to record them.
+
+### D1. Mortgage rates: one evergreen page, updated in place
+
+- LVINIT keeps **one primary evergreen Las Vegas mortgage-rates page** and
+  updates it in place (dated "latest print" section, honest `dateModified`).
+- **No new near-duplicate rate URLs every few weeks.** A new rate URL is
+  justified only by a genuinely distinct search intent or a standalone story of
+  major significance (e.g., a Fed policy explainer), never by a new weekly print.
+- Rate duplication is a **cannibalization risk** in all future planning (§11 R1).
+- The three existing dated installments (`las-vegas-mortgage-rates-september-2026`,
+  `…-approach-7-percent`, `…-19-month-high`) are **left untouched for now**. They
+  get evaluated later for historical usefulness, consolidation, redirect, or a
+  supporting-content role. No consolidation or redirect happens as part of this
+  revision.
+- **Open (Mikey):** which URL serves as the evergreen page. All three existing
+  slugs are dated, so the likely answer is one new, undated `/guides/` article
+  that becomes the permanent rates page. Existing slugs are not changed either
+  way.
+
+### D2. Housing market / home prices: one evergreen hub, updated in place
+
+- LVINIT keeps **one strong evergreen Las Vegas Housing Market / current home
+  prices page**, updated in place as each month's data lands.
+- Monthly or dated market reports exist **only when they add a distinct
+  analytical angle or real standalone value**. No repetitive monthly pages by
+  default.
+- The existing monthly price pages (`las-vegas-home-prices-july-2026`,
+  `…-august-2026`) are **not modified now**. They get evaluated later as
+  supporting historical reports, consolidation candidates, or candidates for
+  stronger internal linking to the hub.
+- `will-las-vegas-home-prices-drop` stays a question-intent explainer that
+  supports the hub. It isn't the hub itself.
+- **Open (Mikey):** the hub's URL. Same logic as D1: likely one undated
+  `/guides/` article. No slug changes.
+
+### D3. PR #25: do not merge as-is
+
+- PR #25 (`/guides/las-vegas-income-needed-to-buy-a-home-2026`, open since
+  2026-09-01, Redfin data as of June 2026) is **stale**. Don't merge it as-is.
+- Recommendation: **either** refresh and substantially reframe it into stronger
+  evergreen affordability / buyer-intent content (current data, Las Vegas
+  mechanics, links into DPA, starter homes and the housing-market hub), **or**
+  close it if it would overlap too heavily with existing affordability content
+  (R5).
+- The PR was not modified or closed as part of this revision.
+
+### D4. Development news: no separate silo
+
+- LVINIT does **not** get a generic "Las Vegas development news" editorial
+  cluster.
+- Development coverage should mainly **strengthen the most relevant existing
+  cluster, area pillar, or the New Construction cluster (D)**:
+
+  | Development | Belongs to |
+  |---|---|
+  | Monument Hills | Northwest Las Vegas (future area guide) + D |
+  | Sandstone / Tule Springs | North Las Vegas pillar + D |
+  | West Henderson projects | Henderson pillar + D |
+  | Southwest developments | Southwest pillar + D |
+
+- Timely development stories can still be published, but each one should hang
+  off a larger location or topic cluster (link up to the pillar and, for
+  housing, the D pillar) instead of becoming an isolated one-off page. Where the
+  news is small, a sourced paragraph in the pillar's development section beats
+  a new URL.
+
+### D5. High-priority cleanup flags (not executed)
+
+| Flag | Type | Priority | What's wrong | Rule until fixed |
+|---|---|---|---|---|
+| **Homepage Moving to Las Vegas placeholders** | Site / content architecture | **HIGH** | The homepage `MovingToLasVegas` section's topic chips (Cost of Living, Getting Around, Schools & Family, Climate & Lifestyle) all point at the `#guides` placeholder anchor. No real page sits behind any of them | Homepage code is not changed now. Once the Moving to Las Vegas pillar and its supporting pages exist, the relocation section should point to them. "Schools & Family" still needs a Fair-Housing-safe framing decision first |
+| **`cost-of-living-2026` registry mismatch** | Technical / content inventory | **HIGH** | The `guides[]` entry in `lib/content.ts` with slug `"cost-of-living-2026"` implies a cost-of-living article but points to the property-tax article (`/guides/nevada-property-tax-abatement-resale-buyers`). LVINIT has no cost-of-living article | **Automation must not rely on that entry** (cluster mapping, gap detection, "already covered" checks) until it's corrected. A future cost-of-living article needs a distinct slug |
+| **Development Watch "Apex Industrial Park" item** | Classification / data quality | **HIGH** (for agent inputs) | DEV-2026-09-24-004 / DEV-2026-09-25-001 are labeled "Apex Industrial Park", but the extracted text describes a Switch data center in southwest Las Vegas. Entity mismatch | **Must not influence Publisher priority decisions** until corrected or revalidated. The Development Watch system is not modified by this revision |
+
+### D6. Video companion rule
+
+An existing LVINIT YouTube video is a real advantage (original footage,
+firsthand value, ready-made script), but it **does not automatically outrank**
+stronger search-intent or cluster-architecture work. A video companion rises in
+priority when it:
+
+- fills a real content gap,
+- supports a pillar,
+- matches meaningful buyer or relocation intent, and
+- adds original LVINIT firsthand value.
+
+**Don't create a page just because a video exists.** That's why the two orphaned
+homepage videos now sit at #9 and #10, behind the pillars they'll support.
 
 ---
 
@@ -66,8 +167,9 @@ demand beyond them.
   longest, the best linked, and they carry Mikey's own footage. **Two of the
   five homepage videos have no companion article:** *"Moving to Las Vegas in
   2026? Choose the Area Before the House"* (the featured, position-0 homepage
-  video) and *"Rent First or Buy First When Moving to Las Vegas?"*. Those two
-  are the fastest way to give Cluster A a real core.
+  video) and *"Rent First or Buy First When Moving to Las Vegas?"*. They're
+  strong supporting pieces for Cluster A, but the cluster first needs a true
+  **Moving to Las Vegas pillar** for them to link up to (D6).
 - **Search signal is early but consistent.** Google is testing Market Watch
   and buyer pages at positions 6–8 (new-home sales July: 107 page impressions
   at 6.2; July prices: 60 at 7.9; starter homes: 21 at 6.8; property tax: 15
@@ -77,14 +179,22 @@ demand beyond them.
   pages about them.**
 - **Biggest cannibalization risk: the mortgage-rate thread.** Three dated
   installments in 16 days, two with near-identical `<title>`s, and pressure
-  this week for a fourth. **Update in place. No new rate URLs.**
+  this week for a fourth. **Decision (D1): one evergreen rates page, updated in
+  place. No new dated rate URLs.** The same logic now applies to monthly price
+  reports (D2): one evergreen housing-market hub, dated reports only when they
+  add a distinct angle.
 - **Biggest internal-link gaps:** `/guides/new-build-vs-resale-las-vegas` (the
   site's deepest buyer guide at ~3,700 words) has only **2** inbound editorial
   links. `/guides/what-500k-buys-in-las-vegas` receives 17 but links out to
   only **1** page. None of the three big pillars links to the three-way
   comparison or the new-build guide.
 - **Pillars:** B is STRONG. C and E are USABLE BUT NEED EXPANSION. **A and D
-  have NO CLEAR PILLAR.**
+  have NO CLEAR PILLAR**, and building those two pillars is now #2 and #3 in
+  the queue, right behind the North Las Vegas expansion.
+- **High-priority cleanup flags (D5):** homepage Moving to Las Vegas chips point
+  at a placeholder anchor; the `cost-of-living-2026` registry entry points at the
+  property-tax article; Development Watch's "Apex Industrial Park" item actually
+  describes a Switch data center. None were fixed in this revision.
 
 ---
 
@@ -133,15 +243,17 @@ cluster. Dates come from each page's `StoryMeta` (`datePublished` /
 
 **Not live, but in flight:** PR #25 (open since 2026-09-01), branch
 `claude/fervent-davinci-9aez0p`, adds `/guides/las-vegas-income-needed-to-buy-a-home-2026`
-(Market Watch, Redfin data as of June 2026). Treated as a **HOLD** item in §13.
+(Market Watch, Redfin data as of June 2026). **Don't merge as-is** (D3):
+refresh and reframe, or close. See §13 #30.
 
 **Registry notes (flag only, nothing changed):**
 
-- The `guides[]` entry whose `slug` is `"cost-of-living-2026"` actually points at
-  the **property-tax** article (`/guides/nevada-property-tax-abatement-resale-buyers`).
-  Any tooling that maps clusters by registry slug will read that page as a
-  cost-of-living piece, and it isn't one. LVINIT has **no** cost-of-living
-  article.
+- **HIGH PRIORITY (D5).** The `guides[]` entry whose `slug` is
+  `"cost-of-living-2026"` actually points at the **property-tax** article
+  (`/guides/nevada-property-tax-abatement-resale-buyers`). Any tooling that maps
+  clusters by registry slug will read that page as a cost-of-living piece, and
+  it isn't one. LVINIT has **no** cost-of-living article. **Automation should
+  not rely on this entry until it's corrected.**
 - The four big area pillars (Summerlin, Henderson, Southwest, North Las Vegas)
   are **not** in `guides[]`. That's by design, but it means registry-only
   inventory scans undercount Cluster B.
@@ -172,12 +284,34 @@ cluster. Dates come from each page's `StoryMeta` (`datePublished` /
 - The homepage `MovingToLasVegas` section shows four topic chips (Cost of
   Living, Getting Around, Schools & Family, Climate & Lifestyle) that all link
   to the `#guides` anchor. **No real page exists for any of them.** (Only
-  Climate is partly covered, by the first-summer piece.)
+  Climate is partly covered, by the first-summer piece.) This is flagged as a
+  **HIGH-PRIORITY site/content-architecture task** (D5). Homepage code isn't
+  touched now; the fix comes once the pillar and supporting pages below exist.
 - GSC shows small but real relocation/orientation queries: "moving to north
   las vegas", "is north las vegas its own city", "is north las vegas clark
   county", "where is summerlin". These currently land on area pillars at
   positions 40–95.
 - The one existing page is effectively isolated (1 inbound link).
+
+**Recommendation: Cluster A needs a true pillar before anything else.** A
+"Moving to Las Vegas" pillar (built as a `/guides/` article, §9 note) should be
+the site's main relocation hub. It gives an honest overview and routes readers
+to the supporting pages, existing or planned:
+
+| Supporting topic | Page | Status |
+|---|---|---|
+| Cost of living | Cost of Living in Las Vegas (§13 #15) | Planned (distinct slug; see D5 registry flag) |
+| Rent first vs buy first | Rent First or Buy First (§13 #10) | Planned, video companion |
+| Choosing an area | Choose the Area Before the House (§13 #9) → area pillars, 3-way comparison | Planned, video companion |
+| Moving mistakes | Section of the pillar at first; its own page only if the section outgrows it | Not yet planned as a page |
+| Utilities / ownership costs | Setting Up Utilities (§13 #18); HOA fees (#7); closing costs (#8); property tax (live) | Mixed |
+| Heat / climate | `first-summer-in-vegas` | Live |
+| Commute / location decisions | Getting Around / commute tradeoffs (§13 #29) | Planned |
+| Practical relocation planning | Section of the pillar; Buying From Out of State (§13 #21) | Planned |
+
+The pillar should be a hub, not a long version of every supporting article.
+The area-first decision process belongs in the Choose the Area companion (R6,
+R11), and the side-by-side area comparison stays with the 3-way.
 
 ---
 
@@ -298,6 +432,27 @@ representation at the model, or where the building is happening.
 - Four Seasons is on the CLAUDE.md "current priority" list but is the thinnest
   page on the site (~470 words, 0 in-prose links, temporary thumbnail image).
 
+**Recommendation: Cluster D needs a true evergreen pillar, "Buying New
+Construction in Las Vegas"** (built as a `/guides/` article, §9 note). It should
+organize:
+
+- builder incentives (rate buydowns vs price cuts, preferred-lender strings)
+- new build vs resale (hand off to `new-build-vs-resale-las-vegas` for the
+  *whether*; the pillar owns the *how*, R9)
+- lot premiums
+- upgrades (what's standard, what's priced in, where the design-center money
+  goes)
+- HOA / SID / LID considerations (→ HOA fees #7, SIDs and LIDs #13)
+- the builder sales process (model-home visits, bringing your own agent,
+  contract timelines)
+- community research (what to check before committing to a master plan)
+- current new-build areas (Tule Springs / North Las Vegas, the far northwest,
+  Southwest, West Henderson; → "Where New Homes Are Being Built" #19, which may
+  start as a section here)
+- LVINIT community and model-home coverage (Sandstone and future tours)
+
+This pillar is also where D4 development stories about new housing link up to.
+
 ---
 
 ## 7. Cluster E: Las Vegas Housing Market
@@ -333,6 +488,20 @@ All of them ──► what-500k, DPA, starter (dense, healthy internal mesh)
   September report expected around Oct 7–9 (date unconfirmed), and the next
   Home Builders Research new-home release (not yet checked).
 
+**Recommendation (D1, D2): give E two evergreen anchors, updated in place.**
+
+```
+Evergreen mortgage-rates page (one URL) ◄── rate installments (historical / supporting, evaluated later)
+Evergreen housing-market hub (one URL)  ◄── July, August reports (historical / supporting, evaluated later)
+                                        ◄── will-prices-drop (question-intent explainer)
+                                        ◄── starter homes, new-home sales (distinct angles, keep)
+```
+
+New data flows into those two pages first. A dated report ships as its own URL
+only when it carries a distinct analytical angle (the new-home sales dataset and
+the starter-home affordability cut are examples of that; a routine "prices for
+month X" is not).
+
 ---
 
 ## 8. Unclustered content
@@ -345,11 +514,12 @@ All of them ──► what-500k, DPA, starter (dense, healthy internal mesh)
 | `/guides/one-civic-center-north-las-vegas-redevelopment` | Civic/mixed-use redevelopment with a long, uncertain timeline | B (NLV pillar) | Keep. Fold future updates into the NLV pillar's development section rather than new URLs |
 | `/guides/gholson-landing-affordable-housing-east-las-vegas` | Income-restricted rental housing, explicitly not a path to ownership | E (affordability), C (DPA contrast) | Keep. Good civic journalism, but it isn't buyer/relocation intent. Low priority for follow-ups |
 
-**Strategy note:** LVINIT has no "local development" cluster, yet 6 of 31 pages
-are development-news pieces (these three plus Monument Hills, Wayne Newton and
-Sport & Social). Mikey should decide whether development coverage stays
-**attached to area pillars** (current practice, recommended) or becomes its own
-strand. The Publisher shouldn't create one on its own (§1a.3).
+**Strategy note (decided, D4):** 6 of 31 pages are development-news pieces
+(these three plus Monument Hills, Wayne Newton and Sport & Social). LVINIT will
+**not** create a separate "Las Vegas development news" silo. Development
+coverage stays **attached to the most relevant area pillar, existing cluster, or
+the New Construction cluster (D)**, and timely stories should link up into that
+larger cluster rather than stand alone. The three pages above stay as they are.
 
 ---
 
@@ -357,11 +527,11 @@ strand. The Publisher shouldn't create one on its own (§1a.3).
 
 | Cluster | Status | Current best page | Why |
 |---|---|---|---|
-| **A. Moving to Las Vegas** | **NO CLEAR PILLAR** | `/guides/first-summer-in-vegas` (not pillar-grade) | One narrow page. The homepage's featured relocation video has no companion. Homepage topic chips point nowhere |
+| **A. Moving to Las Vegas** | **NO CLEAR PILLAR** | `/guides/first-summer-in-vegas` (not pillar-grade) | One narrow page. The homepage's featured relocation video has no companion. Homepage topic chips point nowhere. **Build the Moving to Las Vegas pillar (§13 #2)** |
 | **B. Where to Live** | **STRONG EXISTING PILLAR** | `/neighborhoods/summerlin`, `/henderson`, `/southwest-las-vegas` (+ 3-way comparison as de-facto hub) | Deep, photographed, well-linked area guides. Weak spots: the NLV pillar is thin, there's no Northwest pillar, and no valley-level hub |
 | **C. Buying a Home** | **USABLE BUT NEEDS EXPANSION** | `/guides/new-build-vs-resale-las-vegas` | Deep and honest, but it's a decision guide, not a process pillar. Only 2 inbound links. Core cost topics missing |
-| **D. New Construction** | **NO CLEAR PILLAR** | (none; nearest is new-build-vs-resale in C) | All D pages are single-community news. No evergreen new-construction guide despite the strongest first-party footage and the top GSC page being new-build data |
-| **E. Housing Market** | **USABLE BUT NEEDS EXPANSION** | `/guides/will-las-vegas-home-prices-drop` | Only semi-evergreen explainer, June-anchored. The rest are dated installments that fragment authority. No page represents "the market right now" |
+| **D. New Construction** | **NO CLEAR PILLAR** | (none; nearest is new-build-vs-resale in C) | All D pages are single-community news. No evergreen new-construction guide despite the strongest first-party footage and the top GSC page being new-build data. **Build Buying New Construction in Las Vegas (§13 #3)** |
+| **E. Housing Market** | **USABLE BUT NEEDS EXPANSION** | `/guides/will-las-vegas-home-prices-drop` | Only semi-evergreen explainer, June-anchored. The rest are dated installments that fragment authority. No page represents "the market right now". **Structure the evergreen rates page and housing-market hub (§13 #4, #5; D1, D2)** |
 
 > The Publisher may not create new hub/pillar **routes** on its own (§1a.3 /
 > §1a.9). The pillar-building items in §13 are written as **articles under
@@ -376,9 +546,11 @@ Each gap is chosen for local specificity and durable value. Items tied to real
 LVINIT material (video, photos, existing pages) are marked ★.
 
 ### A. Moving to Las Vegas
+0. **Moving to Las Vegas pillar.** The relocation hub the cluster lacks (§3
+   recommendation). Everything below links up to it.
 1. ★ **Choose the area before the house.** Companion to the featured homepage
-   video. The natural core for A: how to choose a part of the valley before
-   touring homes, linking out to every area pillar and comparison.
+   video. How to choose a part of the valley before touring homes, linking out
+   to every area pillar and comparison. Supports the pillar (R11).
 2. ★ **Rent first or buy first when moving to Las Vegas.** Companion to the
    existing video. Bridges A → C and sets up DPA and new-build links.
 3. **What "Las Vegas" actually means: city vs Henderson vs North Las Vegas vs
@@ -421,9 +593,9 @@ LVINIT material (video, photos, existing pages) are marked ★.
 
 ### D. New Construction
 1. ★ **Buying new construction in Las Vegas** (incentives vs price, preferred
-   lender strings, lot premiums, phases, HOA/SID, bringing your own agent to
-   the model). D core candidate. Draws on the Sandstone tour and
-   new-build-vs-resale.
+   lender strings, lot premiums, upgrades, phases, HOA/SID/LID, bringing your
+   own agent to the model). **D pillar** (§6 recommendation). Draws on the
+   Sandstone tour and new-build-vs-resale.
 2. **Where new homes are being built in Las Vegas** (corridor map: Tule
    Springs, far northwest, Southwest, West Henderson/Inspirada, Cadence).
    Connects existing D pages.
@@ -432,11 +604,14 @@ LVINIT material (video, photos, existing pages) are marked ★.
 4. **Four Seasons expansion** (needs new real material from Mikey).
 
 ### E. Housing Market
-1. **Rates: one updatable page, not a fourth installment.**
-2. **September 2026 LVR report** (when published). Format decision needed
-   (§11 R2).
+1. **Rates: one evergreen page, updated in place (D1).** Not a fourth
+   installment.
+2. **Housing market / home prices: one evergreen hub, updated in place (D2).**
+   The September 2026 LVR report (when published) feeds the hub rather than
+   becoming a default monthly URL.
 3. **New-home sales follow-up** (next Home Builders Research release). Tied to
-   the top GSC page.
+   the top GSC page. A distinct dataset, so a dated report can be justified, but
+   it should also feed the hub and the D pillar.
 4. **Refresh `will-las-vegas-home-prices-drop`** with current data so the
    cluster has a live explainer.
 5. **Rent vs buy math in Las Vegas.** Best folded into A-2 rather than a
@@ -448,16 +623,19 @@ LVINIT material (video, photos, existing pages) are marked ★.
 
 | # | Risk | Pages | Level | Guidance (flag only, nothing merged) |
 |---|---|---|---|---|
-| R1 | **Mortgage-rate installments competing for one intent.** Three URLs in 16 days. `<title>`s for #26 and #28 differ by one phrase ("13-Month" vs "19-Month High — What It Means for Las Vegas Buyers"). The weekly plan wants the 7.03% print this week | `las-vegas-mortgage-rates-september-2026`, `…-approach-7-percent`, `…-19-month-high` | **HIGH** | No new rate URL. Update `…-19-month-high` in place. Consolidating into one evergreen rates page is a **Mikey decision** |
-| R2 | **Monthly price reports as new URLs.** July and August already split "las vegas home prices". July is the one Google is testing (pos 7.9) and it's decaying (Fact-Decay flags) | `las-vegas-home-prices-july-2026`, `…-august-2026`, future September | **MEDIUM** (HIGH if it continues through Q4) | Before September ships, decide: new monthly URL plus a "latest" link chain, or one updated tracker page. Hub route = Mikey decision |
+| R1 | **Mortgage-rate installments competing for one intent.** Three URLs in 16 days. `<title>`s for #26 and #28 differ by one phrase ("13-Month" vs "19-Month High — What It Means for Las Vegas Buyers"). The weekly plan wants the 7.03% print this week | `las-vegas-mortgage-rates-september-2026`, `…-approach-7-percent`, `…-19-month-high` | **HIGH** | **Decided (D1):** one evergreen rates page, updated in place. No new dated rate URLs unless the intent is genuinely distinct. The three existing installments are evaluated later (historical value, consolidation, redirect, supporting role). Nothing consolidated or redirected yet |
+| R2 | **Monthly price reports as new URLs.** July and August already split "las vegas home prices". July is the one Google is testing (pos 7.9) and it's decaying (Fact-Decay flags) | `las-vegas-home-prices-july-2026`, `…-august-2026`, future September | **MEDIUM** (HIGH if it continues through Q4) | **Decided (D2):** one evergreen housing-market hub, updated in place. September data goes into the hub. Dated reports only for a distinct angle. July/August evaluated later as historical support, consolidation candidates, or link sources to the hub. Not modified now |
 | R3 | **New "Summerlin guide" or "moving to North Las Vegas" articles** would duplicate pillars | `/neighborhoods/summerlin`, `/neighborhoods/north-las-vegas` | **HIGH if created** | Brief Generator and GSC both say expand the pillar. Don't create standalone articles on these intents |
 | R4 | **Three comparisons with overlapping pairs.** The 3-way (~3,200 words) contains both pairings. S vs H (~1,160 words) is the thinnest | `summerlin-vs-henderson`, `henderson-vs-southwest-las-vegas`, `summerlin-vs-henderson-vs-southwest-las-vegas` | **MEDIUM** | No new comparisons of these same areas. If S vs H is touched, give it a differentiated angle (e.g., cost of ownership, commute) and point to the 3-way for the full picture |
-| R5 | **Affordability pieces overlapping.** will-prices-drop, starter homes, DPA and the unmerged PR #25 (income needed) all answer "can I afford Las Vegas". PR #25 has been open 4 weeks on June data and edits files that have changed since | `will-las-vegas-home-prices-drop`, `las-vegas-starter-home-prices-2026`, DPA, PR #25 | **MEDIUM** | Resolve PR #25 (close, or refresh then merge) before any new affordability article |
+| R5 | **Affordability pieces overlapping.** will-prices-drop, starter homes, DPA and the unmerged PR #25 (income needed) all answer "can I afford Las Vegas". PR #25 has been open 4 weeks on June data and edits files that have changed since | `will-las-vegas-home-prices-drop`, `las-vegas-starter-home-prices-2026`, DPA, PR #25 | **MEDIUM** | **Decided (D3):** don't merge PR #25 as-is. Refresh and substantially reframe it into evergreen affordability / buyer-intent content, or close it if the overlap is too heavy. Resolve it before any new affordability article |
 | R6 | **Future "Moving to Las Vegas" core vs the 3-way comparison.** Both could target "where should I live in Las Vegas" | future A-1 article, 3-way comparison | **MEDIUM** | Scope A-1 as the *decision process* (area-first, rent-vs-buy, timing, what to check) and hand off to the 3-way for the actual comparison |
 | R7 | **Future Tule Springs area page vs Sandstone** | `sandstone-tule-springs-north-las-vegas` | **MEDIUM if created** | Any Tule Springs area coverage belongs in the NLV pillar expansion first, not a new URL that competes with the Sandstone page |
 | R8 | **Henderson development features vs the Henderson pillar's Development Watch section** | Fiesta, Sport & Social, Water Street, Henderson pillar | **LOW** | Already disambiguated and cross-linked. Keep new Henderson development news as pillar updates unless it's major |
 | R9 | **New-build-vs-resale vs a future "buying new construction" guide** | `new-build-vs-resale-las-vegas`, future D-1 | **MEDIUM** | D-1 must be *how new-build buying works* (process, incentives, representation), not *whether* to buy new. Link to new-build-vs-resale for that decision |
-| R10 | **Monument Hills filed under the NLV cluster** though it's City of Las Vegas | `monument-hills-northwest-las-vegas`, NLV pillar | **LOW** (IA hygiene) | Keep as-is. A future Northwest guide becomes its natural parent |
+| R10 | **Monument Hills filed under the NLV cluster** though it's City of Las Vegas | `monument-hills-northwest-las-vegas`, NLV pillar | **LOW** (IA hygiene) | Keep as-is. A future Northwest guide becomes its natural parent (D4: Monument Hills → Northwest Las Vegas / D) |
+| R11 | **Future Moving to Las Vegas pillar vs the Choose the Area companion** | future #2, future #9 | **MEDIUM** | The pillar is the hub (overview + routing to every supporting topic). The companion owns the deep area-first decision process. The pillar summarizes and links; it doesn't re-teach it |
+| R12 | **Future housing-market hub vs will-prices-drop and dated reports** | future #5, `will-las-vegas-home-prices-drop`, July/August reports | **MEDIUM** | The hub owns "the Las Vegas market right now". will-prices-drop keeps the "should I wait / will prices fall" question intent. Dated reports point to the hub for current numbers |
+| R13 | **Development news as isolated one-offs** | Monument Hills, Wayne Newton, Sport & Social, Fiesta, One Civic Center, Gholson Landing, future stories | **MEDIUM** (authority dilution, orphans) | **Decided (D4):** no development silo. Each story links up to its area pillar and/or the D pillar, and small news goes into the pillar's development section instead of a new URL |
 
 ---
 
@@ -521,10 +699,23 @@ Fair Housing gates.*
    factor), and from new Cluster A articles as they ship.
 4. `will-las-vegas-home-prices-drop`: from every rate installment.
 
+### New pillars → support (once they exist)
+- Moving to Las Vegas pillar (#2) → every area pillar, the 3-way comparison,
+  `first-summer-in-vegas`, #9, #10, cost of living, utilities, closing costs,
+  HOA fees, DPA. Each of those links back up.
+- Buying New Construction pillar (#3) ↔ `new-build-vs-resale-las-vegas`,
+  Sandstone, Monument Hills, Four Seasons, Wayne Newton, new-home sales, HOA
+  fees, SIDs/LIDs.
+- Evergreen rates page (#4) ← all three dated rate installments; evergreen
+  housing-market hub (#5) ← July and August reports, will-prices-drop, starter
+  homes, new-home sales.
+
 ### Structural (for Mikey, not agents)
-- The homepage `MovingToLasVegas` chips link to `#guides`. Once Cluster A
-  articles exist, wiring the chips to them is a design change (not Publisher
-  or Linking Agent scope).
+- **HIGH PRIORITY (D5).** The homepage `MovingToLasVegas` chips link to the
+  `#guides` placeholder anchor. Once the Moving to Las Vegas pillar and its
+  supporting pages exist, the relocation section should point to them. That's
+  a homepage code change (not Publisher or Linking Agent scope) and isn't made
+  here.
 
 ---
 
@@ -534,38 +725,54 @@ Fair Housing gates.*
 confidence. *Expand instead?* answers "should an existing page be expanded
 instead of creating this?". Input IDs are cited where they exist.
 
+**Revised 2026-09-28.** The Top 10 follows Mikey's decisions (see [Strategy
+decisions](#strategy-decisions-2026-09-28-revision)): the missing A and D
+pillars and the E structure (evergreen rates page, housing-market hub) come
+before new standalone articles, and the two homepage video companions follow
+the pillars they support (D6). Ranks 11–30 keep the original analysis,
+re-ranked around the new Top 10. Holds are listed separately below the table.
+
 | Rank | Action | Topic / title direction | Cluster | Target intent | Why it matters | Supports | Expand instead? | Dup risk | Link relationships | Src | E/T | Conf |
 |---:|---|---|---|---|---|---|---|---|---|---|---|---|
-| 1 | EXPAND EXISTING PAGE | North Las Vegas pillar: answer "is NLV its own city / is it Clark County" early; add Tule Springs + Sandstone section with the tour video; add 215 Northern Beltway Trail (DEV-2026-09-24-003, sourced); set honest `datePublished`/`dateModified` | B | Deciding whether to move to NLV | Page with the most GSC momentum (GSC-2026-09-22-002), thinnest pillar, flagged by the weekly plan | NLV pillar itself | **Is** the expansion | HIGH if a new NLV article is made instead (R3) | → Sandstone, Monument Hills, One Civic, new-build-vs-resale, starter homes, first-summer | GSC, cluster weakness, existing video, local development | E | HIGH |
-| 2 | BUILD PILLAR (as `/guides/` article) | "Moving to Las Vegas in 2026: Choose the Area Before the House" (companion to `nyK0cchUt14`) | A | Relocating, don't know where to start | Fills an empty cluster with the homepage's featured video. Becomes A's core | All area pillars, 3-way comparison, first-summer | No. Nothing covers this | MEDIUM vs 3-way (R6). Scope as process | → all 5 pillars, 3-way, first-summer, rent-or-buy (#3), DPA. ← first-summer, pillars | Existing video, cluster weakness | E | HIGH |
-| 3 | NEW ARTICLE | "Rent First or Buy First When Moving to Las Vegas?" (companion to `2rboWkJ9j48`) | A | Timing a move; rent vs buy | Second orphaned homepage video. A→C bridge with real lead intent | #2, DPA, new-build-vs-resale | No | LOW | → #2, DPA, 500K, starter homes, rates page. ← #2, DPA | Existing video, content gap | E | HIGH |
-| 4 | EXPAND EXISTING PAGE | Update `las-vegas-mortgage-rates-19-month-high` with the Sept 24 PMMS print (7.03%) and subsequent weekly prints, honest `dateModified` | E | Current rate & payment impact | Timely, most-searched topic this week (weekly plan), and avoids a 4th installment | Rate thread | **Yes: expand, don't create** | HIGH if a new URL (R1) | → will-prices-drop, DPA, #3. ← August prices | Market data, weekly plan | T | HIGH |
-| 5 | BUILD PILLAR (as `/guides/` article) | "Buying New Construction in Las Vegas: Incentives, Lot Premiums, Phases, and Bringing Your Own Agent" | D | Touring models, about to sign with a builder | D has no core. Strongest first-party footage (Sandstone tour + Shorts). New-build data is the top GSC page | new-build-vs-resale, Sandstone, Monument Hills, new-home sales | No. new-build-vs-resale covers *whether*, not *how* | MEDIUM (R9) | → new-build-vs-resale, Sandstone, Monument Hills, new-home sales, HOA (#9), SID (#11). ← all D pages | Cluster weakness, existing video, GSC (adjacent) | E | HIGH |
-| 6 | INTERNAL-LINK FOLLOW-UP | Give `what-500k-buys` real outbound links; surface `new-build-vs-resale` from pillars and D pages (§12) | C | n/a | Two highest-leverage link fixes on the site | what-500k, new-build-vs-resale | n/a | None | See §12 | Cluster weakness | E | HIGH |
-| 7 | EXPAND EXISTING PAGE | `las-vegas-home-prices-july-2026`: date-anchor the rate and $480K figures (Fact-Decay FACT-001/002) and add a clear "newer data" pointer to August | E | Current prices | Second GSC page (60 impr, pos 7.9). Decaying facts on the page Google tests most | July prices | **Yes** | LOW | → August (inline), will-prices-drop | GSC (GSC-2026-09-22-001), fact decay | E | HIGH |
-| 8 | EXPAND EXISTING PAGE | Summerlin pillar: answer-first intro ("what you need to understand before choosing Summerlin"), sharpen the map section, add missing links | B | Deciding on Summerlin | BRIEF-2026-09-22-001; position ~58 | Summerlin pillar | **Is** the expansion | HIGH if a new Summerlin article is made (R3) | → 3-way, new-build-vs-resale, new-home sales, parade (in prose), first-summer | Search brief, GSC | E | MEDIUM |
-| 9 | NEW ARTICLE | "HOA Fees in Las Vegas: What They Cover, Master vs Sub-HOA, and What to Check Before You Offer" | C | Budgeting true monthly cost | Core ownership cost with no page. Audience interest shown by Sandstone "no HOA" content | new-build-vs-resale, #5 | No | LOW | → new-build-vs-resale, #5, property tax, Sandstone. ← #5, pillars | Content gap, existing video (social) | E | MEDIUM |
-| 10 | NEW ARTICLE | "Closing Costs When Buying a Home in Las Vegas" (buyer vs seller norms, Clark County transfer tax, escrow/title), every figure sourced | C | Cash-to-close planning | Durable, locally specific, high commercial intent. Pairs with DPA | DPA, property tax | No | LOW | → DPA, property tax, #9. ← DPA, #3 | Content gap | E | MEDIUM |
-| 11 | NEW ARTICLE | "SIDs and LIDs in Las Vegas: The Assessment Some Buyers Don't See Coming" | C (sec. D) | Understanding a tax-bill line item | Very local, buyers rarely know to ask. Strengthens property-tax page and D | property tax, #5 | Could be a section of property-tax page. Separate intent, so new is fine | LOW | ↔ property tax, → #5, Summerlin pillar | Content gap | E | MEDIUM |
-| 12 | MARKET UPDATE | LVR September 2026 report (expected ~Oct 7–9, unconfirmed) | E | Current prices | Recurring, proven E format that Google tests | August prices | **Decision needed** (R2): new monthly URL vs update | MEDIUM | ↔ August, → will-prices-drop, rates page | Market data | T | MEDIUM |
-| 13 | MARKET UPDATE | New-home sales follow-up (next Home Builders Research release) | E (sec. D) | Is the new-build market slowing | Top GSC page (107 impr, pos 6.2) is the July installment | new-home sales July | Consider updating July page vs new month (same R2 logic) | MEDIUM | → #5, new-build-vs-resale, Sandstone | GSC, market data | T | MEDIUM |
-| 14 | NEW ARTICLE | "Las Vegas, Henderson, North Las Vegas or Clark County? How the Valley's Cities Actually Work" | A (sec. B) | Orientation: where is what, who governs it | GSC long-tail ("is north las vegas its own city", "where is summerlin"). LVINIT already teaches this in pieces | #2, pillars | No (valley-wide; NLV-specific answers stay on #1) | LOW–MEDIUM | → all pillars, Wayne Newton, SW pillar. ← #2 | GSC, content gap | E | MEDIUM |
-| 15 | NEW ARTICLE | "Cost of Living in Las Vegas (2026)": housing, utilities, taxes, insurance, strictly sourced | A | Can I afford to move | Promised by a homepage chip. Durable relocation demand | #2, property tax, DPA | No | MEDIUM (registry slug `cost-of-living-2026` already points at the property-tax page; pick a distinct slug) | → property tax, #16, starter homes, #3 | Content gap | E | MEDIUM |
-| 16 | NEW ARTICLE | "Setting Up Utilities in Las Vegas": NV Energy, water by jurisdiction, trash, internet (+ daily demand charge **only if verified**) | A | Practical move-in tasks | Evergreen with a possible timely hook (weekly plan) | #2, #15 | No | LOW | → first-summer, #15, #14 | Content gap, local development (utility rate change) | E (T hook) | MEDIUM |
-| 17 | NEW ARTICLE | "Where New Homes Are Being Built in Las Vegas": corridor map linking every D page | D (sec. B) | Scanning new-build options by area | Connects isolated D pages into a network | #5, Sandstone, Monument Hills | Could be a section of #5. Build #5 first, split later if long | MEDIUM (R9) | → all D pages, pillars | Cluster weakness | E | MEDIUM |
-| 18 | EXPAND EXISTING PAGE | `will-las-vegas-home-prices-drop`: refresh with the latest LVR data and make it E's live explainer | E | Should I wait for prices to drop | E's only evergreen candidate. June-anchored today | Market cluster | **Yes** | LOW | ← all rate pages, price reports | Cluster weakness, fact decay | E | MEDIUM |
-| 19 | EXPAND EXISTING PAGE | Summerlin vs. Henderson: differentiate (ownership cost, commute) and point to the 3-way | B | Two-suburb decision | Thinnest comparison. Overlaps the 3-way | S vs H | **Yes** | MEDIUM (R4) | → 3-way, both pillars | Cluster weakness | E | MEDIUM |
-| 20 | NEW ARTICLE | "Buying a Home in Las Vegas From Out of State" | C (sec. A) | Remote relocation buyer | Clear lead intent. Bridges A and C | #2, #3, DPA | No | LOW | → #2, #3, #10, new-build-vs-resale | Content gap | E | MEDIUM |
-| 21 | NEW ARTICLE | Mountain's Edge community guide (Southwest child) | B | Evaluating a specific master plan | Named in SW pillar but unlinked. Mikey drone photo already exists | SW pillar | No | LOW | ↔ SW pillar, H vs SW | Content gap | E | MEDIUM |
-| 22 | NEW ARTICLE | Lake Las Vegas community guide (Henderson child) | B | Evaluating a specific community | Named in `PROJECT_STATE.md` as next Henderson child. Roster `href` ready | Henderson pillar | No | LOW | ↔ Henderson pillar | Content gap | E | MEDIUM |
-| 23 | EXPAND EXISTING PAGE | Four Seasons Private Residences: replace temporary image, add confirmed status updates (**needs Mikey's material**) | D | Luxury buyer tracking the project | CLAUDE.md current priority. Thinnest page, 0 in-prose links | Four Seasons | **Yes** | LOW | ← Henderson pillar (in prose) | Cluster weakness | E | LOW (blocked on source material) |
-| 24 | EXPAND EXISTING PAGE | DPA guide: resolve FACT-2026-09-17-001 (Home Is Possible for Teachers deadline) and add links from new C pages | C | Low-down-payment options | Durable page with a dated fact. GSC query "low money down mortgage" | DPA | **Yes** | LOW | ↔ #10, #3, property tax | Fact decay, GSC | E | MEDIUM |
-| 25 | LOCAL DEVELOPMENT OPPORTUNITY | Jewel (Chinatown, 380 units, 10.54 acres, 2029 target): DEV-2026-09-23-001 | UNCLUSTERED → B if kept | What's being built near the Strip core | Weekly plan named it. Real supply news. But likely rental, and geography doesn't match the SW pillar Dev Watch mapped it to | (none cleanly) | Could be a paragraph on a pillar instead | LOW | → SW pillar or none | Local development | T | LOW |
-| 26 | NEW ARTICLE | Green Valley Ranch community guide (Henderson child) | B | Evaluating a specific community | Named in `PROJECT_STATE.md` | Henderson pillar | No | LOW | ↔ Henderson pillar | Content gap | E | LOW–MEDIUM |
-| 27 | NEW ARTICLE | Northwest Las Vegas area guide (Centennial Hills / Skye Canyon / Monument Hills area) | B | Evaluating the far northwest | Fixes Monument Hills' parent mismatch (R10). **Needs photography.** A new pillar-level guide may be a Mikey call | Monument Hills | No | LOW | ← Monument Hills, → Sandstone, NLV pillar | Cluster weakness | E | LOW |
-| 28 | HOLD / DO NOT CREATE | A 4th mortgage-rate installment as a new URL | E | n/a | Covered by #4 | Rate thread | Yes (#4) | HIGH (R1) | n/a | Market data | T | HIGH |
-| 29 | HOLD / DO NOT CREATE | PR #25 income-needed article (June data, open since 9/1) or any new affordability piece before it's resolved | E | n/a | Stale data, conflicting edits, overlaps R5 | starter homes, DPA, will-prices-drop | Mikey to close or refresh | MEDIUM (R5) | n/a | Other | T | HIGH |
-| 30 | HOLD / DO NOT CREATE | Standalone pages for: Paradise Hills data-center cancellation (DEV-2026-09-24-002, no reader action), "Apex Industrial Park" (DEV-2026-09-24-004/09-25-001; the detected text describes a Switch data center in southwest Las Vegas, an **entity mismatch**), Beltway Trail (fold into #1) | n/a | n/a | Low buyer value or unreliable signal | NLV / Henderson pillars | Fold relevant facts into pillars | n/a | n/a | Local development | T | HIGH |
+| 1 | EXPAND EXISTING PAGE | North Las Vegas pillar: answer "is NLV its own city / is it Clark County" early; add Tule Springs + Sandstone section with the tour video; add 215 Northern Beltway Trail (DEV-2026-09-24-003, sourced); set honest `datePublished`/`dateModified` | B | Deciding whether to move to NLV | Page with the most GSC momentum (GSC-2026-09-22-002), thinnest pillar, flagged by the weekly plan. Also the D4 home for Sandstone / Tule Springs development news | NLV pillar itself | **Is** the expansion | HIGH if a new NLV article is made instead (R3) | → Sandstone, Monument Hills, One Civic, new-build-vs-resale, starter homes, first-summer. Later → #2, #3 | GSC, cluster weakness, existing video, local development | E | HIGH |
+| 2 | BUILD PILLAR (as `/guides/` article) | "Moving to Las Vegas": the main relocation hub. Honest overview that routes to cost of living, rent-vs-buy, choosing an area, moving mistakes, utilities / ownership costs, heat, commute, practical planning (§3 recommendation) | A | Relocating, don't know where to start | Cluster A has no pillar and the homepage leads with relocation. Every A page (and the homepage chips, D5) needs a real destination | first-summer, all area pillars, 3-way comparison, #9, #10, #7, #8, #15, #18 | No. Nothing covers this | MEDIUM vs #9 (R11) and vs the 3-way (R6). Keep it a hub | → all 5 area pillars, 3-way, first-summer, #9, #10, DPA, property tax, and planned A pages as they ship. ← every A page, area pillars | Cluster weakness, content gap, homepage placeholder issue | E | HIGH |
+| 3 | BUILD PILLAR (as `/guides/` article) | "Buying New Construction in Las Vegas": incentives, new build vs resale hand-off, lot premiums, upgrades, HOA/SID/LID, builder sales process, community research, current new-build areas, LVINIT model-home coverage (§6 recommendation) | D | Touring models, about to sign with a builder | D has no core. Strongest first-party footage (Sandstone tour + Shorts). New-build data is the top GSC page. Gives D4 development stories somewhere to link up to | new-build-vs-resale, Sandstone, Monument Hills, Four Seasons, new-home sales | No. new-build-vs-resale covers *whether*, not *how* | MEDIUM (R9) | → new-build-vs-resale, Sandstone, Monument Hills, new-home sales, #7, #13. ← all D pages, area pillars, #2 | Cluster weakness, existing video, GSC (adjacent) | E | HIGH |
+| 4 | STRUCTURE / EXPAND | Evergreen Las Vegas mortgage-rates page, updated in place: current rate context, what it means for a Las Vegas payment, a dated "latest print" section (7.03% PMMS for the week of Sept 24, then later prints), honest `dateModified` (D1) | E | Current rate & payment impact | Stops the rate thread from spawning a URL every few weeks (R1). Gives the most-searched timely topic a permanent home | Rate thread (3 dated installments) | **Yes in spirit:** one page updated forever. Which URL (new undated `/guides/` article vs an existing one) is Mikey's call; no slug changes | HIGH if handled as another dated URL (R1) | → will-prices-drop, DPA, #5, #10. ← all three dated rate pages, August prices | Market data, weekly plan, cannibalization fix | E (T data inside) | HIGH |
+| 5 | STRUCTURE / EXPAND | Evergreen Las Vegas Housing Market / current home prices hub, updated in place as each month's data lands (LVR September report expected ~Oct 7–9, unconfirmed) (D2) | E | Where are prices / the market right now | Stops monthly URL sprawl (R2). Gives "las vegas home prices" one page to accumulate authority. Google already tests LVINIT's price pages at pos ~7–8 | July, August reports, will-prices-drop, starter homes, new-home sales | **Yes in spirit** (one page updated forever); URL is Mikey's call, no slug changes | MEDIUM vs will-prices-drop and dated reports (R12) | → will-prices-drop, starter homes, new-home sales, #4, DPA, what-500k. ← July, August, will-prices-drop, rate pages | GSC (GSC-2026-09-22-001), market data, cannibalization fix | E (T data inside) | HIGH |
+| 6 | INTERNAL-LINK FOLLOW-UP | Give `what-500k-buys` real outbound links; surface `new-build-vs-resale` from pillars and D pages; connect both to the new pillars (#2, #3) as they ship (§12) | C (sec. A, D) | n/a | Highest-leverage link fixes on the site. The most-linked page leads nowhere; the deepest buyer guide has 2 inbound links | what-500k, new-build-vs-resale, #2, #3 | n/a | None | See §12 | Cluster weakness | E | HIGH |
+| 7 | NEW ARTICLE | "HOA Fees in Las Vegas: What They Cover, Master vs Sub-HOA, and What to Check Before You Offer" | C (sec. D) | Budgeting true monthly cost | Core ownership cost with no page. Audience interest shown by Sandstone "no HOA" content. Feeds both pillars | #3, #2, new-build-vs-resale | No | LOW | → new-build-vs-resale, #3, property tax, Sandstone. ← #3, #2, area pillars | Content gap, existing video (social) | E | MEDIUM |
+| 8 | NEW ARTICLE | "Closing Costs When Buying a Home in Las Vegas" (buyer vs seller norms, Clark County transfer tax, escrow/title), every figure sourced | C (sec. A) | Cash-to-close planning | Durable, locally specific, high commercial intent. Pairs with DPA. Completes the cost trio with HOA and property tax | DPA, property tax, #2 | No | LOW | → DPA, property tax, #7. ← DPA, #2, #10 | Content gap | E | MEDIUM |
+| 9 | NEW ARTICLE / VIDEO COMPANION | "Moving to Las Vegas in 2026: Choose the Area Before the House" (companion to `nyK0cchUt14`) | A | Relocating; how to pick a part of the valley | Featured homepage video, real firsthand value, and it now supports a pillar rather than standing in for one (D6) | #2, all area pillars, 3-way comparison | No. Nothing covers the area-first process | MEDIUM vs #2 (R11) and the 3-way (R6). Scope as the decision process | → all 5 pillars, 3-way, first-summer, #2, #10. ← #2, pillars | Existing video, content gap | E | HIGH |
+| 10 | NEW ARTICLE / VIDEO COMPANION | "Rent First or Buy First When Moving to Las Vegas?" (companion to `2rboWkJ9j48`) | A (sec. C) | Timing a move; rent vs buy | Second orphaned homepage video. A→C bridge with real lead intent. Supports #2 (D6) | #2, DPA, new-build-vs-resale | No | LOW | → #2, #9, DPA, 500K, starter homes, #4, #8. ← #2, DPA | Existing video, content gap | E | HIGH |
+| 11 | EXPAND EXISTING PAGE | Summerlin pillar: answer-first intro ("what you need to understand before choosing Summerlin"), sharpen the map section, add missing links | B | Deciding on Summerlin | BRIEF-2026-09-22-001; position ~58 | Summerlin pillar | **Is** the expansion | HIGH if a new Summerlin article is made (R3) | → 3-way, new-build-vs-resale, new-home sales, parade (in prose), first-summer | Search brief, GSC | E | MEDIUM |
+| 12 | EXPAND EXISTING PAGE | `las-vegas-home-prices-july-2026`: date-anchor the rate and $480K figures (Fact-Decay FACT-001/002) and add a clear "current data" pointer to the housing-market hub (#5) | E | Current prices | Second GSC page (60 impr, pos 7.9). Decaying facts on the page Google tests most. Part of the later D2 evaluation | July prices | **Yes** | LOW | → #5, August (inline), will-prices-drop | GSC (GSC-2026-09-22-001), fact decay | E | HIGH |
+| 13 | NEW ARTICLE | "SIDs and LIDs in Las Vegas: The Assessment Some Buyers Don't See Coming" | C (sec. D) | Understanding a tax-bill line item | Very local, buyers rarely know to ask. Strengthens property-tax page and #3 | property tax, #3 | Could be a section of #3 or the property-tax page. Separate intent, so new is fine | LOW | ↔ property tax, → #3, Summerlin pillar | Content gap | E | MEDIUM |
+| 14 | NEW ARTICLE | "Las Vegas, Henderson, North Las Vegas or Clark County? How the Valley's Cities Actually Work" | A (sec. B) | Orientation: where is what, who governs it | GSC long-tail ("is north las vegas its own city", "where is summerlin"). LVINIT already teaches this in pieces | #2, pillars | No (valley-wide; NLV-specific answers stay on #1) | LOW–MEDIUM | → all pillars, Wayne Newton, SW pillar. ← #2, #9 | GSC, content gap | E | MEDIUM |
+| 15 | NEW ARTICLE | "Cost of Living in Las Vegas (2026)": housing, utilities, taxes, insurance, strictly sourced | A | Can I afford to move | Promised by a homepage chip. Durable relocation demand. A named supporting topic of #2 | #2, property tax, DPA | No | MEDIUM (registry slug `cost-of-living-2026` already points at the property-tax page, D5; pick a distinct slug) | → property tax, #18, starter homes, #10, #5. ← #2 | Content gap, homepage placeholder issue | E | MEDIUM |
+| 16 | MARKET UPDATE | LVR September 2026 report (expected ~Oct 7–9, unconfirmed): goes **into the hub (#5)** by default. A separate dated URL only if it carries a distinct analytical angle (D2) | E | Current prices | Recurring data Google tests, now routed into one page | #5, August prices | **Yes: update #5** | MEDIUM if published as a default monthly URL (R2) | → will-prices-drop, #4. ← August | Market data | T | MEDIUM |
+| 17 | MARKET UPDATE | New-home sales follow-up (next Home Builders Research release) | E (sec. D) | Is the new-build market slowing | Top GSC page (107 impr, pos 6.2) is the July installment. A distinct dataset, so a dated report can be justified; either way it feeds #5 and #3 | new-home sales July, #3, #5 | Consider updating the July page vs a new report (D2 test: distinct angle?) | MEDIUM | → #3, #5, new-build-vs-resale, Sandstone | GSC, market data | T | MEDIUM |
+| 18 | NEW ARTICLE | "Setting Up Utilities in Las Vegas": NV Energy, water by jurisdiction, trash, internet (+ daily demand charge **only if verified**) | A | Practical move-in tasks | Evergreen with a possible timely hook (weekly plan). A named supporting topic of #2 | #2, #15 | No | LOW | → first-summer, #15, #14. ← #2 | Content gap, local development (utility rate change) | E (T hook) | MEDIUM |
+| 19 | NEW ARTICLE | "Where New Homes Are Being Built in Las Vegas": corridor map linking every D page | D (sec. B) | Scanning new-build options by area | Connects isolated D pages. The D4 landing spot for new-housing development news | #3, Sandstone, Monument Hills | Likely a section of #3 first. Split out only if it outgrows it | MEDIUM (R9) | → all D pages, pillars. ← #3 | Cluster weakness | E | MEDIUM |
+| 20 | EXPAND EXISTING PAGE | `will-las-vegas-home-prices-drop`: refresh with the latest LVR data as a question-intent explainer that supports the hub (#5) | E | Should I wait for prices to drop | June-anchored today. Keeps its own intent next to the hub (R12) | #5 | **Yes** | MEDIUM vs #5 (R12) | → #5. ← all rate pages, price reports | Fact decay | E | MEDIUM |
+| 21 | NEW ARTICLE | "Buying a Home in Las Vegas From Out of State" | C (sec. A) | Remote relocation buyer | Clear lead intent. Bridges A and C. Covers the "practical relocation planning" branch of #2 | #2, #10, DPA | No | LOW | → #2, #10, #8, new-build-vs-resale. ← #2 | Content gap | E | MEDIUM |
+| 22 | EXPAND EXISTING PAGE | Summerlin vs. Henderson: differentiate (ownership cost, commute) and point to the 3-way | B | Two-suburb decision | Thinnest comparison. Overlaps the 3-way | S vs H | **Yes** | MEDIUM (R4) | → 3-way, both pillars | Cluster weakness | E | MEDIUM |
+| 23 | EXPAND EXISTING PAGE | DPA guide: resolve FACT-2026-09-17-001 (Home Is Possible for Teachers deadline) and add links from new C pages | C | Low-down-payment options | Durable page with a dated fact. GSC query "low money down mortgage" | DPA | **Yes** | LOW | ↔ #8, #10, property tax | Fact decay, GSC | E | MEDIUM |
+| 24 | NEW ARTICLE | Mountain's Edge community guide (Southwest child) | B | Evaluating a specific master plan | Named in SW pillar but unlinked. Mikey drone photo already exists | SW pillar | No | LOW | ↔ SW pillar, H vs SW | Content gap | E | MEDIUM |
+| 25 | NEW ARTICLE | Lake Las Vegas community guide (Henderson child) | B | Evaluating a specific community | Named in `PROJECT_STATE.md` as next Henderson child. Roster `href` ready | Henderson pillar | No | LOW | ↔ Henderson pillar | Content gap | E | MEDIUM |
+| 26 | NEW ARTICLE | Northwest Las Vegas area guide (Centennial Hills / Skye Canyon / Monument Hills area) | B | Evaluating the far northwest | Fixes Monument Hills' parent mismatch (R10) and is the D4 home for Monument Hills coverage. **Needs photography.** A new pillar-level guide may be a Mikey call | Monument Hills | No | LOW | ← Monument Hills, → Sandstone, NLV pillar, #3 | Cluster weakness | E | LOW |
+| 27 | EXPAND EXISTING PAGE | Four Seasons Private Residences: replace temporary image, add confirmed status updates (**needs Mikey's material**) | D | Luxury buyer tracking the project | CLAUDE.md current priority. Thinnest page, 0 in-prose links | Four Seasons | **Yes** | LOW | ← Henderson pillar (in prose), → #3 | Cluster weakness | E | LOW (blocked on source material) |
+| 28 | NEW ARTICLE | Green Valley Ranch community guide (Henderson child) | B | Evaluating a specific community | Named in `PROJECT_STATE.md` | Henderson pillar | No | LOW | ↔ Henderson pillar | Content gap | E | LOW–MEDIUM |
+| 29 | NEW ARTICLE | "Getting Around Las Vegas": commute tradeoffs (215 Beltway, I-15, Summerlin Pkwy, airport access) by area | A (sec. B) | Choosing a location by commute | Promised by a homepage chip. The "commute / location decisions" branch of #2 | #2, #9, area pillars | Could start as a section of #2 | LOW–MEDIUM vs #9 | → area pillars, #9. ← #2 | Content gap, homepage placeholder issue | E | MEDIUM |
+| 30 | REFRESH OR CLOSE (Mikey) | PR #25 income-needed article: **don't merge as-is** (June data, open since 9/1). Refresh and substantially reframe into evergreen affordability / buyer-intent content, or close if it overlaps too heavily (D3) | E (sec. C) | Can I afford to buy here | Stale data and conflicting edits. Blocks any new affordability piece (R5) | starter homes, DPA, will-prices-drop, #5 | If refreshed, it must not duplicate starter homes / DPA | MEDIUM (R5) | If refreshed → DPA, starter homes, #5, what-500k | Other | E (if reframed) | HIGH (on the don't-merge-as-is call) |
+
+### Holds (do not create)
+
+| Hold | What | Why | Rule |
+|---|---|---|---|
+| H1 | A new dated mortgage-rate URL for a new weekly print | Covered by #4 | HIGH dup risk (R1). Only a genuinely distinct intent justifies a new rate URL (D1) |
+| H2 | A default monthly home-price URL ("…-september-2026") | Covered by #5 / #16 | Only a distinct analytical angle justifies a dated report (D2) |
+| H3 | Standalone pages for: Paradise Hills data-center cancellation (DEV-2026-09-24-002, no reader action); Beltway Trail (fold into #1); Jewel in Chinatown (DEV-2026-09-23-001; likely rental, no pillar fits cleanly; a sourced line on a pillar at most) | Low buyer value, or better as a pillar update (D4) | Fold relevant facts into the matching pillar |
+| H4 | Anything based on the Development Watch "Apex Industrial Park" item (DEV-2026-09-24-004 / DEV-2026-09-25-001) | The extracted text describes a Switch data center in southwest Las Vegas: **entity mismatch** (D5) | Must not influence priority until the item is corrected or revalidated |
 
 ---
 
@@ -573,9 +780,13 @@ instead of creating this?". Input IDs are cited where they exist.
 
 Avoid these unless strong new evidence appears:
 
-1. **Another dated mortgage-rate installment.** Update the live one (R1). A new
-   URL is only justified by a genuinely different intent (e.g., a Fed policy
-   explainer), not a new weekly print.
+1. **Another dated mortgage-rate installment.** Update the evergreen rates page
+   (D1, R1). A new URL is only justified by a genuinely different intent (e.g.,
+   a Fed policy explainer) or major standalone significance, not a new weekly
+   print.
+   - **Default monthly home-price pages.** New data goes into the evergreen
+     housing-market hub (D2, R2). A dated report needs a distinct analytical
+     angle.
 2. **New URLs that restate a pillar's intent:** "Moving to North Las Vegas",
    "Summerlin neighborhood guide", "Is Henderson a good place to live". Expand
    the pillar (R3).
@@ -585,7 +796,9 @@ Avoid these unless strong new evidence appears:
    timelines** (casino-site concepts, civic buildings, data centers,
    industrial parks) unless they materially change housing supply, access or
    a community's day-to-day. Add a sourced line to the pillar's development
-   section instead.
+   section instead. More broadly: **no standalone "development news" silo**
+   (D4). Development stories that do ship must link up to their area pillar
+   and/or the New Construction pillar.
 5. **Routine press releases** (single restaurant/venue openings, groundbreaking
    ceremonies without housing, rebrands).
 6. **Celebrity/novelty real-estate stories** beyond the one already live
@@ -595,41 +808,53 @@ Avoid these unless strong new evidence appears:
 8. **Generic national real-estate explainers** ("what is escrow", "how
    mortgages work") without Las Vegas-specific mechanics, numbers or places.
 9. **Affordability think-pieces** that overlap starter homes, DPA and
-   will-prices-drop (R5), until PR #25 is resolved.
+   will-prices-drop (R5), until PR #25 is resolved. **Don't merge PR #25
+   as-is** (D3).
 10. **Anything framed around schools rankings, safety or who lives somewhere**
     (Fair Housing). This includes the homepage "Schools & Family" chip topic,
     which needs a compliant framing decision from Mikey before any article.
 11. **Tule Springs area articles** separate from the NLV pillar (R7).
+12. **Pages created only because a video exists** (D6). A video companion has
+    to fill a gap, support a pillar, match real buyer/relocation intent, and add
+    firsthand value.
+13. **Anything driven by the "Apex Industrial Park" Development Watch item**
+    until it's corrected or revalidated (D5, H4).
 
 ---
 
 ## 15. Recommended next 10 Publisher runs
 
-Mix: 7 cluster/search-intent runs, 3 timely/market runs (Runs 3, 6 and 9).
-It's a target, not a quota. If a genuinely material story breaks, it can
-displace a cluster run. A quiet news week should never produce a filler
-timely piece.
+**Revised 2026-09-28.** The sequence builds the missing pillars first, fixes
+the high-value E structure, then fills buyer-intent and relocation support
+pages that link up into those pillars. Timely data goes **into evergreen pages
+in place** (Runs 4, 5, and Run 10 only if the data is out), so not every run
+creates a new URL. Six runs create a new page; four update or restructure. If a
+genuinely material story breaks, it can displace a run, but it should attach to
+a pillar (D4). A quiet news week never justifies a filler timely piece.
 
 | Run | Action | Topic | Cluster | New vs expansion | Why this order |
 |---:|---|---|---|---|---|
-| 1 | EXPAND EXISTING PAGE | North Las Vegas pillar (queue #1) | B | Expansion | Strongest live search signal, thinnest pillar, and every input agrees. Cheapest high-confidence win. Folds in the Beltway Trail news without a new URL |
-| 2 | BUILD PILLAR (article) | Choose the Area Before the House (queue #2) | A | New page | Cluster A is empty and this is the homepage's featured video. Every later A article links up to it, so it must come first |
-| 3 | EXPAND EXISTING PAGE | Mortgage rates: update `…-19-month-high` with 7.03% and later prints (queue #4) | E | Expansion | The week's timely item, done without creating a 4th URL. Early in the sequence because the news is current now |
-| 4 | NEW ARTICLE | Rent First or Buy First (queue #3) | A | New page | Second orphaned video. Links immediately to Run 2 and to C pages, so A becomes a real cluster (3 pages) |
-| 5 | BUILD PILLAR (article) | Buying New Construction in Las Vegas (queue #5) | D | New page | Gives D a core while the Sandstone tour is fresh. Makes the HOA and SID articles (Runs 8 and later) link into something |
-| 6 | MARKET UPDATE | LVR September 2026 report (queue #12), **only once published** and after the R2 format decision. Include the July page's date-anchoring (queue #7) in the same pass | E | New page or expansion per R2 | Recurring E format Google already tests. Timed to the data, not the calendar. If LVR hasn't published, swap with Run 7 |
-| 7 | EXPAND EXISTING PAGE | Summerlin pillar answer-first sharpening (queue #8) | B | Expansion | The brief is waiting on it. Also lands the missing pillar→comparison and pillar→new-build links |
-| 8 | NEW ARTICLE | HOA Fees in Las Vegas (queue #9) | C | New page | First ownership-cost gap. Links into Run 5 and new-build-vs-resale |
-| 9 | MARKET UPDATE | New-home sales follow-up (queue #13), if the next Home Builders Research release is out; otherwise the Jewel feature (queue #25) only if it verifies as material to buyers | E | Per R2 logic | Feeds the top GSC page's topic. Supports Run 5 |
-| 10 | NEW ARTICLE | Closing Costs in Las Vegas (queue #10) | C | New page | Completes the core cost trio with HOA and property tax. Strong lead intent. Links to DPA and Run 4 |
+| 1 | EXPAND EXISTING PAGE | North Las Vegas pillar (queue #1) | B | Expansion | Strongest live search signal, thinnest pillar, and every input agrees. Cheapest high-confidence win. Folds in the Beltway Trail and Sandstone / Tule Springs coverage without a new URL |
+| 2 | BUILD PILLAR (article) | Moving to Las Vegas (queue #2) | A | New page | Cluster A has no hub. Every later A page (Runs 7, 9) and the eventual homepage fix (D5) need it to exist first |
+| 3 | BUILD PILLAR (article) | Buying New Construction in Las Vegas (queue #3) | D | New page | Gives D a core while the Sandstone tour is fresh, and gives HOA / SID pages and new-housing development news something to link up to |
+| 4 | STRUCTURE / EXPAND | Evergreen mortgage-rates page (queue #4), with the 7.03% print and later prints | E | Expansion or one new evergreen URL (Mikey picks the URL; no slug changes) | The week's timely rate news, handled in the permanent page instead of a 4th dated URL (R1). **Needs Mikey's URL decision before the run** |
+| 5 | STRUCTURE / EXPAND | Evergreen housing-market hub (queue #5), timed to the LVR September report (queue #16) | E | Expansion or one new evergreen URL (Mikey picks the URL) | September data lands in the hub, not a default monthly page (R2). If LVR hasn't published, build the hub on August data and swap Run 5 with Run 6. **Needs Mikey's URL decision before the run** |
+| 6 | NEW ARTICLE | HOA Fees in Las Vegas (queue #7) | C | New page | First ownership-cost gap. Links into Run 3 and Run 2 immediately |
+| 7 | NEW ARTICLE / VIDEO COMPANION | Choose the Area Before the House (queue #9) | A | New page | Featured homepage video, now supporting the Run 2 pillar instead of standing in for it (D6, R11) |
+| 8 | NEW ARTICLE | Closing Costs in Las Vegas (queue #8) | C | New page | Completes the cost trio with HOA and property tax. Strong lead intent. Links to DPA, Run 2 and Run 6 |
+| 9 | NEW ARTICLE / VIDEO COMPANION | Rent First or Buy First (queue #10) | A | New page | Second orphaned homepage video. Bridges A → C, linking to Runs 2, 4, 7 and 8 |
+| 10 | FLEX | New-home sales follow-up (queue #17) **if** the next Home Builders Research release is out and it clears the D2 "distinct angle" test; otherwise the Summerlin pillar answer-first expansion (queue #11) | E / B | Expansion or new page per D2 | Timely only when the data justifies it. Summerlin is the evergreen fallback, and the brief is waiting on it |
 
 **Running alongside, not a Publisher run:** queue #6 (the `what-500k` and
-`new-build-vs-resale` link fixes) is Internal Linking Agent work. It can go
-any week.
+`new-build-vs-resale` link fixes, plus links into the new pillars as they ship)
+is Internal Linking Agent work. It can go any week, and it should follow Runs 2
+and 3 closely.
 
-**Needs Mikey before or during these runs:** R1/R2 consolidation or hub
-decisions, PR #25, the development-coverage strand question (§8), and the
-homepage chip wiring (§12).
+**Needs Mikey before or during these runs:** the evergreen URLs for the rates
+page and the housing-market hub (Runs 4 and 5); PR #25 refresh-or-close (D3);
+the three D5 cleanup flags (homepage relocation placeholders, the
+`cost-of-living-2026` registry entry, the Apex / Development Watch mismatch);
+and the later evaluation of the dated rate and price pages (D1, D2).
 
 ---
 
@@ -639,7 +864,7 @@ homepage chip wiring (§12).
 |---|---|---|
 | **GSC Opportunity Agent** | **Available.** Latest local run 2026-09-22 (`reports/gsc/run-35764839566/`), window 2026-08-23 → 2026-09-19 | 3 opportunities + raw query/page rows. **Very low volume:** 60 query impressions, 0 clicks in 28 days (below the agent's 200-impression line). Every GSC-sourced item here is an early signal only. GitHub Actions artifacts were **not** downloaded (`gh run download` not attempted), so a newer artifact may exist |
 | **Content Brief Generator** | **Available.** 2026-09-22 local run | 1 low-confidence update brief (BRIEF-2026-09-22-001, Summerlin) + 1 rejected intent (NLV communities → existing pillar). First scheduled Actions run is Tue 2026-09-29; not yet available |
-| **Development Watch** | **Available.** Daily reports through 2026-09-28 on `origin/lvinit-agent-state` | Weekly 2026-09-28: 5 meaningful changes, 24 monitor. Handoff queue empty (dry-run). Signals cited: DEV-2026-09-23-001, DEV-2026-09-24-002/003/004, DEV-2026-09-25-001. `local-development-signals.json` on the state branch contains 0 signals |
+| **Development Watch** | **Available.** Daily reports through 2026-09-28 on `origin/lvinit-agent-state` | Weekly 2026-09-28: 5 meaningful changes, 24 monitor. Handoff queue empty (dry-run). Signals cited: DEV-2026-09-23-001, DEV-2026-09-24-002/003/004, DEV-2026-09-25-001. `local-development-signals.json` on the state branch contains 0 signals. **DEV-2026-09-24-004 / DEV-2026-09-25-001 ("Apex Industrial Park") are misclassified** (text describes a Switch data center) and are excluded from priority decisions until revalidated (D5) |
 | **Weekly Publisher plan** | **Available.** 2026-09-28 (backfilled Monday) | Website section: Jewel article, rate update, July-prices fix, NLV update, link approvals |
 | **Internal Linking Agent** | **Partly available.** Local 2026-09-22 report read. The 2026-09-23 run referenced by the weekly plan is **not** in the local repo | Orphans, weak links, LINK-2026-09-22-001/002/003. Link counts in this document were recomputed from current source, so they reflect links added after 09-22 |
 | **Fact-Decay Agent** | **Partly available.** Local 2026-09-17 report read. The 2026-09-24 run (40 findings, cited by the weekly plan) is **not** in the local repo | FACT-2026-09-17-001 (DPA). FACT-001/002 (July prices) and FACT-003/005 (Sept rates) are cited via the weekly plan only |
@@ -660,7 +885,12 @@ homepage chip wiring (§12).
    what-500k) are the deepest, most-linked, most on-brand pages. Two homepage
    videos and the Sandstone tour still have no evergreen article built around
    them. That's the cheapest route to 70% evergreen that is also "from the
-   inside".
+   inside". **But a video is an advantage, not a trump card (D6).** It doesn't
+   automatically outrank stronger search-intent or cluster-architecture work.
+   Video companions rise when they fill a real gap, support a pillar, match
+   meaningful buyer/relocation intent, and add original firsthand value. Don't
+   create pages merely because a video exists. That's why the two homepage
+   companions now follow the A pillar they'll support.
 2. **Scheduled runs have been defaulting to news.** 11 of the last 14 articles
    were timely. The content-map-first rule (§1a.2) exists to fix exactly this,
    and this document is meant to give it a concrete queue so "no fresh story
@@ -674,14 +904,21 @@ homepage chip wiring (§12).
    more coming) will keep splitting the same head intent every month. An
    evergreen "Las Vegas mortgage rates" page and an evergreen "Las Vegas
    housing market" page, updated in place with dated sections, would
-   concentrate that authority. **That's a hub/route decision for Mikey**, not
-   something the Publisher can do on its own. This document recommends
-   deciding before the September LVR report lands.
+   concentrate that authority. **Decided (D1, D2):** both evergreen pages are
+   adopted, and the September LVR data should land in the hub. The exact URLs,
+   and the later fate of the dated pages (historical support, consolidation,
+   redirect), are still Mikey's call.
 5. **Cluster D is the biggest commercial opportunity and the weakest
    structure.** New construction is where buyers most need an advocate (model
    homes, builder lenders, incentives), where Mikey has the freshest footage,
-   and where GSC impressions already cluster. The D core article (queue #5)
-   should be treated as a flagship piece.
+   and where GSC impressions already cluster. The D pillar, "Buying New
+   Construction in Las Vegas" (queue #3), should be treated as a flagship
+   piece. It's also where development news about new housing links up (D4).
+
+   **Cluster A needs a true pillar, not just companions.** The Moving to Las
+   Vegas pillar (queue #2) should be the relocation hub that cost of living,
+   rent-vs-buy, choosing an area, moving mistakes, utilities, heat, commute and
+   practical planning all connect to (§3).
 6. **Geography hygiene matters for trust.** LVINIT is already good at
    explaining the valley (Enterprise/Spring Valley, Paradise, NLV vs City of
    Las Vegas). The Monument Hills parent mismatch and Dev Watch mapping
@@ -693,8 +930,20 @@ homepage chip wiring (§12).
    expanding the NLV and Summerlin pillars and fixing the same weak links. When
    data volume is this low, that agreement is the strongest evidence
    available.
-8. **Housekeeping for Mikey (not Publisher scope):** PR #25 (open 4 weeks);
-   PR #12 (docs housekeeping, open since 2026-08-24); the `cost-of-living-2026`
-   registry slug pointing at the property-tax article; NLV pillar missing
-   `datePublished`; homepage Moving-to-Las-Vegas chips linking to `#guides`;
-   the "Schools & Family" chip needing a Fair-Housing-safe framing decision.
+8. **Housekeeping for Mikey (not Publisher scope):**
+   - **HIGH:** homepage Moving-to-Las-Vegas chips linking to the `#guides`
+     placeholder (D5).
+   - **HIGH:** the `cost-of-living-2026` registry slug pointing at the
+     property-tax article. Automation shouldn't rely on it until fixed (D5).
+   - **HIGH:** Development Watch "Apex Industrial Park" item describing a Switch
+     data center. Excluded from priority decisions until revalidated (D5).
+   - PR #25 (open 4 weeks): don't merge as-is; refresh and reframe, or close
+     (D3).
+   - PR #12 (docs housekeeping, open since 2026-08-24); NLV pillar missing
+     `datePublished`; the "Schools & Family" chip needing a Fair-Housing-safe
+     framing decision.
+9. **Development news supports clusters; it isn't one (D4).** LVINIT is
+   already good at local development coverage, but six standalone development
+   pages without a shared home is how orphans happen. Routing each story to its
+   area pillar and the D pillar keeps the timeliness and builds the clusters
+   at the same time.
