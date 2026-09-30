@@ -428,6 +428,43 @@ On top of §9, every scheduled run reports:
   commit, PR/merge status, production URL, lint/typecheck/build results, and
   production verification results.
 
+### 1a.12 Run reporting discipline (scheduled runs)
+
+These rules govern how a scheduled run *reports*. They don't change what it
+publishes. The §1a.11 fields and the §9 report content still apply. This
+section sets how often and in what shape they reach Mikey.
+
+1. **Deduplicate completion reports.** If the same task, PR, deployment,
+   notification, or subagent result has already been reported during the
+   current run, don't report it again unless its status materially changes.
+2. **One final consolidated summary** at the end of the run.
+3. **Subagent completion messages are internal working information.** Don't
+   repeatedly surface them to Mikey; fold them into the final summary.
+4. **Already-completed work.** If work was completed earlier in the same run,
+   don't redo it and don't repeatedly announce it.
+5. **Notifications.** Send at most one push notification per completed work
+   item unless its status materially changes after the first one.
+6. **No action required.** End with `Action needed from Mikey: None.`
+7. **Final output structure:**
+
+   ```
+   ROUTINE COMPLETE
+
+   Completed:
+   - [task]: [result]
+   - PR/commit: [identifier if applicable]
+   - Deployment: [status]
+   - Notification: [status]
+
+   Needs attention:
+   - [only genuine issues or decisions]
+
+   Action needed from Mikey: [specific action or None]
+   ```
+
+   Keep the final report concise and don't repeat the same information
+   elsewhere in the response.
+
 ## 2. Content integrity — non-negotiable
 
 Never do any of the following:
