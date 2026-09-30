@@ -89,7 +89,7 @@ const glance = [
 // deliberately general — no invented boundaries. Structured so each can become
 // its own linked guide later. NOTE FOR MIKEY: please sanity-check these for
 // local accuracy before we treat them as final.
-const areas = [
+const areas: { name: string; body: string; guide?: { href: string; label: string } }[] = [
   {
     name: "Aliante",
     body: "A large master-planned community in the north, built around a regional park, golf, and its own casino-resort. One of the more established of the city's newer areas, amenity-rich and fairly self-contained.",
@@ -97,6 +97,10 @@ const areas = [
   {
     name: "Tule Springs",
     body: "A newer-growth area on the northern edge, near the Tule Springs Fossil Beds National Monument. Newer homes, big-sky surroundings, and still filling in. People use the name loosely for a broad stretch of the far north.",
+    guide: {
+      href: "/guides/sandstone-tule-springs-north-las-vegas",
+      label: "See the Sandstone new-home community here",
+    },
   },
   {
     name: "Valley Vista",
@@ -409,6 +413,16 @@ export default function NorthLasVegasPage() {
                   <p className="mt-3 text-body text-lvinit-warmgray">
                     {area.body}
                   </p>
+                  {area.guide && (
+                    <p className="mt-3 text-body">
+                      <Link
+                        href={area.guide.href}
+                        className="text-lvinit-blue underline underline-offset-4 decoration-transparent hover:decoration-lvinit-blue"
+                      >
+                        {area.guide.label} &rarr;
+                      </Link>
+                    </p>
+                  )}
                 </div>
               ))}
             </div>
