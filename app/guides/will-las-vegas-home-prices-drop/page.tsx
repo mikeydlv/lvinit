@@ -61,8 +61,10 @@ const meta: StoryMeta = {
 
 export const metadata: Metadata = buildStoryMetadata(meta);
 
-// FAQ JSON-LD — three genuinely useful questions this article answers. Kept in
+// FAQ JSON-LD — two genuinely useful questions this article answers. Kept in
 // sync with the article body; answers are drawn only from cited, dated figures.
+// The "buyer's or seller's market right now?" question was removed 2026-10-01:
+// /guides/is-las-vegas-a-buyers-market owns that intent. Don't re-add it here.
 const faqJsonLd = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
@@ -73,14 +75,6 @@ const faqJsonLd = {
       acceptedAnswer: {
         "@type": "Answer",
         text: "As of the June 2026 reporting period, they hadn't. Las Vegas Realtors reported the median existing single-family home price at a record $490,000, up 1% from a year earlier, even as inventory rose modestly and homes took a bit longer to sell. Prices held because supply stayed relatively tight (about 3.5 months) and buyer demand stayed strong, with single-family sales up 18.3% year over year. Market conditions can change; these figures reflect June 2026.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "Is it a buyer's or seller's market in Las Vegas right now?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "As of June 2026 it was moving toward more balance. Supply sat at about 3.5 months and homes took a little longer to sell (78.5% of single-family homes sold within 60 days, down from 82.8% a year earlier), which gives buyers more choice and negotiating room than in 2021–2022, but prices had not fallen and supply was still short of a balanced five-to-six months, so it was not a clear buyer's market.",
       },
     },
     {
