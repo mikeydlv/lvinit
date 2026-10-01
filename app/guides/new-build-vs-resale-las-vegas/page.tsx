@@ -118,6 +118,11 @@ const meta: StoryMeta = {
   imageHeight: 1062,
   imageAlt: HERO_ALT,
   datePublished: "2026-09-10",
+  // 2026-10-01: added a short paragraph, a SECONDARY embed of Mikey's
+  // buyer's-market video (aMeXy1frj-o) at the end of the incentives section,
+  // and a link to the evergreen buyer's-market guide. The New Build vs Resale
+  // video above stays the page's primary video and its only VideoObject.
+  dateModified: "2026-10-01",
   author: "Mikey Del Rosario",
   breadcrumbs: [
     { name: "Home", path: "/" },
@@ -723,7 +728,28 @@ export default function NewBuildVsResaleLasVegasPage() {
           </Link>{" "}
           covers programs that can apply on either side of this comparison.
         </p>
+        <p className="mt-5 text-body-lg text-lvinit-warmgray">
+          Which is the bigger point. In this market the decision is not only
+          new build versus resale. It is which home gives you the best total
+          payment once the builder&rsquo;s incentives, the resale
+          seller&rsquo;s concessions and the leverage buyers have right now are
+          all on the table. I talk through that tradeoff, and what it is worth
+          with rates near 7%, in a separate video below, and the current market
+          numbers are in{" "}
+          <Link href="/guides/is-las-vegas-a-buyers-market" className={linkCls}>
+            Is Las Vegas a Buyer&rsquo;s Market Right Now?
+          </Link>
+        </p>
       </StorySection>
+
+      <StoryVideo
+        id="market-video"
+        eyebrow="Related video"
+        heading="Incentives, concessions and a 7% rate"
+        intro="A separate video on today's market: why buyers have leverage again, how builder incentives compare with resale, and what it all means for your monthly payment."
+        youtubeId="aMeXy1frj-o"
+        title="The Las Vegas Housing Market Finally Shifted… But There's a Catch | Mikey Del Rosario, LVINIT"
+      />
 
       <StoryPullQuote>
         The right question is not which one is cheaper. It is which one is

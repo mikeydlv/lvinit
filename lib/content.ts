@@ -238,6 +238,27 @@ export type Guide = {
  */
 export const guides: Guide[] = [
   {
+    slug: "is-las-vegas-a-buyers-market",
+    title: "Is Las Vegas a Buyer's Market Right Now?",
+    dek: "More homes are sitting, sellers are negotiating, and builders are leaning on incentives. The catch is a mortgage rate above 7%. What buyers can negotiate, how to weigh the payment, and when waiting makes sense.",
+    byline: "Mikey Del Rosario",
+    date: "October 2026",
+    publishedAt: "2026-10-01",
+    category: "Buyer Guide",
+    // Evergreen buyer-leverage guide and companion to Mikey's video "The Las
+    // Vegas Housing Market Finally Shifted… But There's a Catch"
+    // (youtube.com/watch?v=aMeXy1frj-o, published 2026-09-30). Updated in
+    // place as new data lands; see the page's header comment for sourcing and
+    // for how it stays distinct from the future housing-market and rates hubs.
+    // Card image is a real, Mikey-owned drone frame (the page's hero), from
+    // C:\LVINIT\Images and previously unused on LVINIT.
+    image:
+      "/images/hero/west-summerlin-new-and-established-homes-aerial-drone.webp",
+    imageAlt:
+      "Aerial drone view over newer homes on the west side of Summerlin in Las Vegas: finished modern homes with rooftop solar in the foreground, homes still under construction behind them, and established neighborhoods running toward the Red Rock escarpment.",
+    href: "/guides/is-las-vegas-a-buyers-market",
+  },
+  {
     slug: "wayne-newton-casa-de-shenandoah-redevelopment",
     title:
       "Wayne Newton's Casa de Shenandoah Could Become a 77-Home Neighborhood",

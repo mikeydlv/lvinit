@@ -7,6 +7,7 @@ import {
   StoryLede,
   StorySection,
   StoryPullQuote,
+  StoryVideo,
 } from "@/components/story";
 
 // ---------------------------------------------------------------------------
@@ -105,6 +106,11 @@ const meta: StoryMeta = {
     "Freddie Mac's official weekly average jumped to 6.95% the week of September 17, 2026 — its biggest one-week move of the current run-up, and its highest print since January 2025. Daily trackers already had it above 7% again by September 22. Here's the real math on a Las Vegas payment.",
   path: PATH,
   datePublished: "2026-09-23",
+  // Rate figures stay a dated snapshot of the Sept 17 print. On 2026-10-01 a
+  // short "should you wait?" bridge, Mikey's buyer's-market video and a link
+  // to the evergreen buyer's-market guide were added after the payment math.
+  // No new figures were introduced.
+  dateModified: "2026-10-01",
   author: "Mikey Del Rosario",
   breadcrumbs: [
     { name: "Home", path: "/" },
@@ -479,6 +485,33 @@ export default function LasVegasMortgageRates19MonthHighPage() {
           only as outside context.
         </p>
       </StorySection>
+
+      <StorySection id="should-you-wait" heading="So should you wait to buy?">
+        <p className="text-body-lg text-lvinit-warmgray">
+          That&rsquo;s the rate side of the math. The question it leads to is
+          the one I hear most: if rates are this high, should I just wait? The
+          rate is only half of the answer. The same stretch that pushed rates
+          up has also left more Las Vegas homes sitting without offers and
+          given buyers more room to negotiate. Whether that leverage is worth
+          more than a lower rate later is the tradeoff I walk through in the
+          video below, and in{" "}
+          <Link
+            href="/guides/is-las-vegas-a-buyers-market"
+            className="text-lvinit-blue underline underline-offset-4 decoration-transparent hover:decoration-lvinit-blue"
+          >
+            Is Las Vegas a Buyer&rsquo;s Market Right Now?
+          </Link>
+        </p>
+      </StorySection>
+
+      <StoryVideo
+        id="watch"
+        eyebrow="Watch"
+        heading="The market shifted toward buyers. Here's the catch."
+        intro="Why a rate near 7% doesn't automatically mean you shouldn't buy, and when waiting actually does make sense."
+        youtubeId="aMeXy1frj-o"
+        title="The Las Vegas Housing Market Finally Shifted… But There's a Catch | Mikey Del Rosario, LVINIT"
+      />
 
       <StorySection heading="What this actually changes for someone shopping right now">
         <ul className="space-y-3 text-body-lg text-lvinit-warmgray">
