@@ -7,6 +7,7 @@ import {
   StoryLede,
   StorySection,
   StoryPullQuote,
+  StoryVideo,
 } from "@/components/story";
 
 // ---------------------------------------------------------------------------
@@ -44,6 +45,10 @@ const meta: StoryMeta = {
     "Las Vegas inventory and days on market climbed in mid-2026, yet June prices hit a record. Here's why prices aren't dropping, and what it means for buyers and sellers.",
   path: "/guides/will-las-vegas-home-prices-drop",
   datePublished: "2026-08-04",
+  // June-anchored body unchanged. On 2026-10-01 a short bridge, Mikey's
+  // buyer's-market video and a link to the evergreen buyer's-market guide
+  // were added after "What buyers should know". No new figures.
+  dateModified: "2026-10-01",
   author: "Mikey Del Rosario",
   breadcrumbs: [
     { name: "Home", path: "/" },
@@ -56,8 +61,10 @@ const meta: StoryMeta = {
 
 export const metadata: Metadata = buildStoryMetadata(meta);
 
-// FAQ JSON-LD — three genuinely useful questions this article answers. Kept in
+// FAQ JSON-LD — two genuinely useful questions this article answers. Kept in
 // sync with the article body; answers are drawn only from cited, dated figures.
+// The "buyer's or seller's market right now?" question was removed 2026-10-01:
+// /guides/is-las-vegas-a-buyers-market owns that intent. Don't re-add it here.
 const faqJsonLd = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
@@ -68,14 +75,6 @@ const faqJsonLd = {
       acceptedAnswer: {
         "@type": "Answer",
         text: "As of the June 2026 reporting period, they hadn't. Las Vegas Realtors reported the median existing single-family home price at a record $490,000, up 1% from a year earlier, even as inventory rose modestly and homes took a bit longer to sell. Prices held because supply stayed relatively tight (about 3.5 months) and buyer demand stayed strong, with single-family sales up 18.3% year over year. Market conditions can change; these figures reflect June 2026.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "Is it a buyer's or seller's market in Las Vegas right now?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "As of June 2026 it was moving toward more balance. Supply sat at about 3.5 months and homes took a little longer to sell (78.5% of single-family homes sold within 60 days, down from 82.8% a year earlier), which gives buyers more choice and negotiating room than in 2021–2022, but prices had not fallen and supply was still short of a balanced five-to-six months, so it was not a clear buyer's market.",
       },
     },
     {
@@ -382,7 +381,30 @@ export default function WillLasVegasHomePricesDropPage() {
             </span>
           </li>
         </ul>
+        <p className="mt-6 text-body-lg text-lvinit-warmgray">
+          Those points were written on June data. Since then, buyers&rsquo;
+          leverage has grown (see the updates further down), and so have
+          mortgage rates. That raises the next question: use the leverage now,
+          or wait for rates to come down and risk more competition? The video
+          below goes deeper on that tradeoff, and{" "}
+          <Link
+            href="/guides/is-las-vegas-a-buyers-market"
+            className="text-lvinit-blue underline underline-offset-4 decoration-transparent hover:decoration-lvinit-blue"
+          >
+            Is Las Vegas a Buyer&rsquo;s Market Right Now?
+          </Link>{" "}
+          has the current numbers and the payment math.
+        </p>
       </StorySection>
+
+      <StoryVideo
+        id="watch"
+        eyebrow="Watch"
+        heading="The market shifted toward buyers. Here's the catch."
+        intro="The follow-up to this question: what today's leverage is worth with rates near 7%, and when waiting actually makes sense."
+        youtubeId="aMeXy1frj-o"
+        title="The Las Vegas Housing Market Finally Shifted… But There's a Catch | Mikey Del Rosario, LVINIT"
+      />
 
       <StorySection heading="What sellers and homeowners should know">
         <ul className="space-y-3 text-body-lg text-lvinit-warmgray">

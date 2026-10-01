@@ -7,6 +7,7 @@ import {
   StoryLede,
   StorySection,
   StoryPullQuote,
+  StoryVideo,
 } from "@/components/story";
 
 // ---------------------------------------------------------------------------
@@ -94,6 +95,13 @@ const meta: StoryMeta = {
   imageAlt:
     "Aerial drone view of a Las Vegas residential neighborhood, with rows of tile-roofed tract homes, rooftop solar panels, and desert mountains under a blue sky in the background.",
   datePublished: "2026-09-09",
+  // The August body is unchanged as a record of that report. On 2026-10-01 a
+  // short "leverage vs. rates" bridge, Mikey's buyer's-market video, and a
+  // link to the evergreen buyer's-market guide were added before "What buyers
+  // should know". The only new figures are Freddie Mac's Sept 24 (7.03%) and
+  // Oct 1 (7.28%) weekly averages, verified against freddiemac.com/pmms and
+  // FRED MORTGAGE30US.
+  dateModified: "2026-10-01",
   author: "Mikey Del Rosario",
   breadcrumbs: [
     { name: "Home", path: "/" },
@@ -413,6 +421,46 @@ export default function LasVegasHomePricesAugust2026Page() {
         </p>
       </StorySection>
 
+      <StorySection
+        id="leverage-vs-rates"
+        heading="More leverage for buyers, with one big catch"
+      >
+        <p className="text-body-lg text-lvinit-warmgray">
+          Put the August numbers together and buyers have something they
+          haven&rsquo;t had in a while: leverage. More homes are sitting without
+          offers, single-family homes are taking longer to sell, and sellers
+          are competing for the buyers who are out there. The catch is the
+          other half of the payment. Since this report came out, Freddie
+          Mac&rsquo;s national 30-year average has kept climbing, past 7% for
+          the week of September 24 and to{" "}
+          <span className="text-lvinit-black">
+            7.28% for the week of October 1, 2026
+          </span>
+          .
+        </p>
+        <p className="mt-5 text-body-lg text-lvinit-warmgray">
+          That&rsquo;s the tension I get asked about most: use today&rsquo;s
+          leverage at a rate above 7%, or wait for rates to come down and risk
+          competing with more buyers again. I talk through it in the video
+          below, and the full payment math is in{" "}
+          <Link
+            href="/guides/is-las-vegas-a-buyers-market"
+            className="text-lvinit-blue underline underline-offset-4 decoration-transparent hover:decoration-lvinit-blue"
+          >
+            Is Las Vegas a Buyer&rsquo;s Market Right Now?
+          </Link>
+        </p>
+      </StorySection>
+
+      <StoryVideo
+        id="watch"
+        eyebrow="Watch"
+        heading="The market shifted toward buyers. Here's the catch."
+        intro="What this kind of leverage is worth when rates are near 7%, and when waiting actually makes sense."
+        youtubeId="aMeXy1frj-o"
+        title="The Las Vegas Housing Market Finally Shifted… But There's a Catch | Mikey Del Rosario, LVINIT"
+      />
+
       <StorySection heading="What buyers should know">
         <ul className="space-y-3 text-body-lg text-lvinit-warmgray">
           <li className="flex gap-3">
@@ -559,7 +607,10 @@ export default function LasVegasHomePricesAugust2026Page() {
           <li>
             <span className="text-lvinit-black">Freddie Mac</span>. Primary
             Mortgage Market Survey, 30-year fixed average of 6.71% for the
-            week of September 3, 2026, as reported in LVINIT&rsquo;s own{" "}
+            week of September 3, 2026 (plus, in the section added October 1,
+            7.03% for the week of September 24 and 7.28% for the week of
+            October 1, 2026), the September 3 figure as reported in
+            LVINIT&rsquo;s own{" "}
             <Link
               href="/guides/las-vegas-mortgage-rates-september-2026"
               className="text-lvinit-blue underline underline-offset-4"
