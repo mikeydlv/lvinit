@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "agent": "development-watch",
-  "updated": "2026-09-30",
+  "updated": "2026-10-01",
   "events": {
     "025b2cbfc757": {
       "id": "DEV-2026-09-25-002",
@@ -1449,6 +1449,54 @@
         "queued": []
       }
     },
+    "60586a582916": {
+      "id": "DEV-2026-10-01-001",
+      "fingerprint": "60586a582916",
+      "entity_id": "DEV-P-AF580E57",
+      "entity_name": "Unnamed casino resort (Las Vegas (valley-wide)) — \"50 Cent is Launching a New Casino Dice Game in Las Vegas\"",
+      "change_class": "MATERIAL_UPDATE",
+      "changes": [
+        "unclear → announced"
+      ],
+      "event_type": "announcement",
+      "status": "announced",
+      "prior_status": null,
+      "first_seen": "2026-10-01",
+      "last_seen": "2026-10-01",
+      "times_seen": 1,
+      "lifecycle": "REJECTED",
+      "lifecycle_history": [
+        {
+          "date": "2026-10-01",
+          "lifecycle": "REJECTED"
+        }
+      ],
+      "action": "REJECT_LOW_VALUE",
+      "target": null,
+      "score": 21,
+      "confidence": "Low",
+      "sources": [
+        {
+          "name": "PokerNews",
+          "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxOZXFUM3B6UUVwR1FXcXdOUHdIVERKZFlkbTFVNXgxZk9WQ3ZCXzJWM1daYXlTS05KeC1tc1ZJSzRDdXAzWk0weW8yZDNzTXRxV0hLbk5pZFBBQTBMNjFQYTR1Q2x3NTZrc1FmWnl1UmtfN0NUbl80eUFkSW1PUTN0ZXpxQW5PTTVSM25UUkwzRzhBRThxSWttZ096YnM",
+          "authority": 9,
+          "published": "2026-09-30T21:08:00.000Z"
+        }
+      ],
+      "superseded_by": null,
+      "handoff": {
+        "eligible": false,
+        "blockers": [
+          "NOT_A_PUBLISHER_ACTION",
+          "SCORE_BELOW_THRESHOLD",
+          "CONFIDENCE_NOT_HIGH",
+          "NO_PRIMARY_SOURCE",
+          "NOT_NEW",
+          "PROVISIONAL_ENTITY"
+        ],
+        "queued": []
+      }
+    },
     "685000bceac8": {
       "id": "DEV-2026-09-30-001",
       "fingerprint": "685000bceac8",
@@ -1543,6 +1591,58 @@
           "CONFIDENCE_NOT_HIGH",
           "NO_PRIMARY_SOURCE",
           "FAIR_HOUSING_SUBJECT"
+        ],
+        "queued": []
+      }
+    },
+    "697b3bc529e2": {
+      "id": "DEV-2026-10-01-003",
+      "fingerprint": "697b3bc529e2",
+      "entity_id": "DEV-HYLO-PARK",
+      "entity_name": "Hylo Park",
+      "change_class": "NEW",
+      "changes": [
+        "first time this project has been seen"
+      ],
+      "event_type": "announcement",
+      "status": "announced",
+      "prior_status": null,
+      "first_seen": "2026-10-01",
+      "last_seen": "2026-10-01",
+      "times_seen": 1,
+      "lifecycle": "NEW",
+      "lifecycle_history": [
+        {
+          "date": "2026-10-01",
+          "lifecycle": "NEW"
+        }
+      ],
+      "action": "MONITOR_ONLY",
+      "target": null,
+      "score": 54,
+      "confidence": "Medium",
+      "sources": [
+        {
+          "name": "KTNV 13 Action News",
+          "url": "https://ktnv.com/neighborhoods/north-las-vegas/hylo-park-final-phase-moving-forward-in-north-las-vegas",
+          "authority": 8,
+          "published": "2026-10-01T00:58:53.000Z"
+        },
+        {
+          "name": "Las Vegas Review-Journal — Business",
+          "url": "https://reviewjournal.com/business/developer-unveils-375m-project-to-turn-former-casino-site-into-athletics-centered-campus-3893554",
+          "authority": 8,
+          "published": "2026-09-30T20:58:41.000Z"
+        }
+      ],
+      "superseded_by": null,
+      "handoff": {
+        "eligible": false,
+        "blockers": [
+          "NOT_A_PUBLISHER_ACTION",
+          "SCORE_BELOW_THRESHOLD",
+          "CONFIDENCE_NOT_HIGH",
+          "NO_PRIMARY_SOURCE"
         ],
         "queued": []
       }
@@ -2308,18 +2408,22 @@
       "status": "unclear",
       "prior_status": null,
       "first_seen": "2026-09-29",
-      "last_seen": "2026-09-29",
-      "times_seen": 1,
-      "lifecycle": "NEW",
+      "last_seen": "2026-10-01",
+      "times_seen": 2,
+      "lifecycle": "PERSISTING",
       "lifecycle_history": [
         {
           "date": "2026-09-29",
           "lifecycle": "NEW"
+        },
+        {
+          "date": "2026-10-01",
+          "lifecycle": "PERSISTING"
         }
       ],
-      "action": "MONITOR_ONLY",
+      "action": "DUPLICATE",
       "target": null,
-      "score": 48,
+      "score": 31,
       "confidence": "Low",
       "sources": [
         {
@@ -2333,6 +2437,12 @@
           "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxOaVp3WjVna2RkWVExaWZxSndOTHVYc25tMVRERGpiaklMSGhVZ1RzUTluczNTTTR1MU9MRnZWR3FUMmZMSjZkYzAyTEN0ZlpMRzc4SndTSzFwNkVZdmw4c01CczUzV1d0Z29sakZ6blpSV0diRTd0ZXlDazJ2Y1UzZVBrbmhWWW9TMEhiX1ZCOW1aNzBCTExwTERySzFhR0tlMTJLLXFkYjdYNU5HcEMteDZ30gHGAUFVX3lxTE0tQ0p6R2NTbkpkb3h0UFd2aTdoQzJrTmNNM2pVX1c3QUlZZ1Y5b0hyTV8wS0hadDgweVgzR2JDcC1iYzM4cEpYMFV6MmptV3JmVVBKWGxFZmlXRTB4OFVidE90OTJGYkNOeWI2RVVEWVRQeXRiWWgxeXprNnAtMnlrT3VwSUlDemVWZUhwTGcwY0Z2Q2o4MkZqblNzMlBUc1Q4UG9HbG5oczZFa2k1S0d5bHFTTzVqTnU2SHlCV01PYjFDSkV4QQ",
           "authority": 8,
           "published": "2026-09-28T20:10:00.000Z"
+        },
+        {
+          "name": "FOX5 Vegas",
+          "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxORVAtejZ4TWhUMjFkUTVmWTN4cXRyLVVqNHNIM0Jha0FrYzBIYldkRC1ZejRaSUZMN0pxRlRnUUtlbTcyZlpkbkp2LVVxbW9xRERjeWhKbEZPNzh2OEZ3UE5EU0NaOFFxYS14cEtNVHNfenJ2aGR4V3d2b1g1blVlZzJsS1J6NHg3QW5YMWlVYmtaRVRFWlM1SDh2WWxzeVNRdDE0bkc3Z0wwVGdrOUdpWg",
+          "authority": 8,
+          "published": "2026-09-28T19:49:00.000Z"
         }
       ],
       "superseded_by": null,
@@ -2343,6 +2453,8 @@
           "SCORE_BELOW_THRESHOLD",
           "CONFIDENCE_NOT_HIGH",
           "NO_PRIMARY_SOURCE",
+          "NOT_MATERIAL",
+          "NOT_NEW",
           "PROVISIONAL_ENTITY"
         ],
         "queued": []
@@ -2529,6 +2641,51 @@
           "NO_PRIMARY_SOURCE",
           "NOT_NEW",
           "PROVISIONAL_ENTITY"
+        ],
+        "queued": []
+      }
+    },
+    "b5f3a3299d56": {
+      "id": "DEV-2026-10-01-002",
+      "fingerprint": "b5f3a3299d56",
+      "entity_id": "DEV-CLIFF",
+      "entity_name": "Cliff'",
+      "change_class": "NEW",
+      "changes": [
+        "first time this project has been seen"
+      ],
+      "event_type": "opening",
+      "status": "open",
+      "prior_status": null,
+      "first_seen": "2026-10-01",
+      "last_seen": "2026-10-01",
+      "times_seen": 1,
+      "lifecycle": "NEW",
+      "lifecycle_history": [
+        {
+          "date": "2026-10-01",
+          "lifecycle": "NEW"
+        }
+      ],
+      "action": "ADD_TO_NEIGHBORHOOD_GUIDE",
+      "target": "/neighborhoods/henderson",
+      "score": 66,
+      "confidence": "Medium",
+      "sources": [
+        {
+          "name": "KTNV 13 Action News",
+          "url": "https://ktnv.com/neighborhoods/henderson/hendersons-100-million-the-cliff-retail-center-aims-to-transform-unused-office-space",
+          "authority": 8,
+          "published": "2026-10-01T02:27:34.000Z"
+        }
+      ],
+      "superseded_by": null,
+      "handoff": {
+        "eligible": false,
+        "blockers": [
+          "SCORE_BELOW_THRESHOLD",
+          "CONFIDENCE_NOT_HIGH",
+          "NO_PRIMARY_SOURCE"
         ],
         "queued": []
       }
@@ -3089,6 +3246,77 @@
           "SCORE_BELOW_THRESHOLD",
           "CONFIDENCE_NOT_HIGH",
           "NO_PRIMARY_SOURCE"
+        ],
+        "queued": []
+      }
+    },
+    "eaa7bd6062c8": {
+      "id": "DEV-2026-10-01-004",
+      "fingerprint": "eaa7bd6062c8",
+      "entity_id": "DEV-P-D83AE26E",
+      "entity_name": "Unnamed residential (Northwest Las Vegas) — \"Neighbors voice concerns about proposed northwest Las Vegas subdivision\"",
+      "change_class": "NEW",
+      "changes": [
+        "first time this project has been seen"
+      ],
+      "event_type": "announcement",
+      "status": "proposed",
+      "prior_status": null,
+      "first_seen": "2026-10-01",
+      "last_seen": "2026-10-01",
+      "times_seen": 1,
+      "lifecycle": "NEW",
+      "lifecycle_history": [
+        {
+          "date": "2026-10-01",
+          "lifecycle": "NEW"
+        }
+      ],
+      "action": "MONITOR_ONLY",
+      "target": null,
+      "score": 46,
+      "confidence": "Low",
+      "sources": [
+        {
+          "name": "FOX5 Vegas",
+          "url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxPLU1vbVBMRDBnZG9sVHZLbHRWeFVqXy1YSWRra2JSbWk4QkVBZUc0S1dmSkdhc2ZQS2hJejNIamJYZkxXQ0VJa244RWRWeVpZalREc1o2blduQjdGQjF0dC02eFJWTjV5eVBFbW0zZHdkZzdXdE96Z0dwa1FRYUxnN01uTDJvLUlUVFhHU21FcUlqNVlRVVM4dDRRMzVHdmc2cnd6Sm9rZV9qc1NjcmR0WE5fV2xjdTgybEl5NG5LLVh0Z9IBwgFBVV95cUxPLU1vbVBMRDBnZG9sVHZLbHRWeFVqXy1YSWRra2JSbWk4QkVBZUc0S1dmSkdhc2ZQS2hJejNIamJYZkxXQ0VJa244RWRWeVpZalREc1o2blduQjdGQjF0dC02eFJWTjV5eVBFbW0zZHdkZzdXdE96Z0dwa1FRYUxnN01uTDJvLUlUVFhHU21FcUlqNVlRVVM4dDRRMzVHdmc2cnd6Sm9rZV9qc1NjcmR0WE5fV2xjdTgybEl5NG5LLVh0Zw",
+          "authority": 8,
+          "published": "2026-10-01T06:25:00.000Z"
+        },
+        {
+          "name": "FOX5 Vegas",
+          "url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxPR0F0UnlYYmdQVFp1anktRXNrdWZiMVRxZVVKWWFaYktLWUQyRGtYOFNSaUsyTUYxZmNHQXFGc3U2NGk2eUVTSGl5cHNVU0pDZXZkUm55d3dZcDhJVDQ3bWtTQWpxMHlSYTBfSk5XcHlTYlVtRXlPamdpeVJSWjV2RTRaZTF6NXpVLWs0dXVQcTRQWmhNVWc3ZFVwWklsdGNvTzhaNTduUHJMVEQwRlHSAcIBQVVfeXFMTy1Nb21QTEQwZ2RvbFR2S2x0VnhVal8tWElka2tiUm1pOEJFQWVHNEtXZkpHYXNmUEtoSXozSGpiWGZMV0NFSWtuOEVkVnlaWWpURHNaNm5XbkI3RkIxdHQtNnhSVk41eXlQRW1tM2R3ZGc3V3RPemdHcGtRUWFMZzdNbkwyby1JVFRYR1NtRXFJajVZUVVTOHQ0UTM1R3ZnNnJ3ekpva2VfanNTY3JkdFhOX1dsY3U4MmxJeTRuSy1YdGc",
+          "authority": 8,
+          "published": "2026-10-01T06:25:00.000Z"
+        },
+        {
+          "name": "FOX5 Vegas",
+          "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxPX0dlT2R0N3RQVjh2My0tOVI0bF85Y3NHODdIVkREeUptUnUtQktGS0cyREJwSTdSUkd0V1dMUTdOdVZGWDJuYlQ0UnUzTnFiQUdGYW5oYnVMOE1ucS1NVFlMcllCbGdEUEh3b1JSRjcxX2p0cWxTZV9mcXRuS0NycHdHbGc1V3hCSDZFOVN0bV9oNWRQdTF2a3Zpc0ZfS2JfZFBkcXpjV3N0VTBVQWJmVnhwZDBsZw",
+          "authority": 8,
+          "published": "2026-10-01T06:25:00.000Z"
+        },
+        {
+          "name": "FOX5 Vegas",
+          "url": "https://news.google.com/rss/articles/CBMiygFBVV95cUxNS2ZXVG00ZkVTZzJPQ0JSSGdPUE0tdlV6MVZmUHp4VW03eFNkZXNDX0pETHAtQ2ljNUhWZlBVRk93bTJiTngtVzU2c205a2dQS1hVZlotdmJTYnA0Rk9sWk0zaDg1VnBJVFo0V004TmE0QmpDMDhPX01hdzJoTEZWZXRkSkU2U1pidkhKcnliVVZuWFl6c1JBM29fSjdtSmVVMVZ5a0ctZGNVNk1oNjdJV3NvRlpTTFh4cC1EQmdXRVlPLTlCTFNZY0dR",
+          "authority": 8,
+          "published": "2026-10-01T06:25:00.000Z"
+        },
+        {
+          "name": "WTVG",
+          "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxQOE03R3lBbFF0SW41bmdkM3hZbk5tM2ZIbjFaWXRZUHg4SFJHWVRNdk1NcHE2NUpzUGhsUGkwOHF2MFRULVlFVGt0TVRvQmgtZjJQMnJmZERYSDMyZVBuUnZwOWJfUGdibmtKR1hGSWxYUGs2R2k3NVFiVmVpRzNBMlFVSDNzWlhfcGJfMFluVE1ZREpKU3hydVBSNHotR29qYlhDR3h1aTVKNUFEeTZkcw",
+          "authority": 9,
+          "published": "2026-10-01T06:25:00.000Z"
+        }
+      ],
+      "superseded_by": null,
+      "handoff": {
+        "eligible": false,
+        "blockers": [
+          "NOT_A_PUBLISHER_ACTION",
+          "SCORE_BELOW_THRESHOLD",
+          "CONFIDENCE_NOT_HIGH",
+          "NO_PRIMARY_SOURCE",
+          "PROVISIONAL_ENTITY"
         ],
         "queued": []
       }
