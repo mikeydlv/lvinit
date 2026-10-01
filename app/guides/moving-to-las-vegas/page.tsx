@@ -6,6 +6,8 @@ import {
   StoryLede,
   StorySection,
   StoryPullQuote,
+  StoryVideo,
+  StoryGallery,
 } from "@/components/story";
 
 // ---------------------------------------------------------------------------
@@ -25,7 +27,13 @@ import {
 //   carry and source them (home prices, rates, starter homes).
 // - No schools, safety or "who lives where" framing (Fair Housing). Area
 //   descriptions track what the linked LVINIT pages already say.
-// - Photo: same Mikey-owned valley-wide residential aerial already live on the
+// - Video: Mikey's own "Moving to Las Vegas in 2026? Choose the Area Before the
+//   House" (YouTube nyK0cchUt14, 5:45, the featured homepage video). Title as
+//   in the videos[] registry. Click-to-play facade with the local title-card
+//   poster; no VideoObject JSON-LD because the upload date is not verified.
+// - Inline photos are Mikey-owned and already live elsewhere on LVINIT; the
+//   alt text is carried over from those pages. None repeats the hero.
+// - Hero photo: same Mikey-owned valley-wide residential aerial already live on the
 //   DPA and August price guides; the alt text makes no neighborhood claim.
 // ---------------------------------------------------------------------------
 
@@ -108,6 +116,15 @@ export default function MovingToLasVegasPage() {
         </p>
       </StoryLede>
 
+      <StoryVideo
+        id="watch"
+        heading="Prefer to watch first?"
+        intro="This is the short video version of the area-first approach. The sections below go deeper on each step."
+        youtubeId="nyK0cchUt14"
+        title="Moving to Las Vegas in 2026? Choose the Area Before the House"
+        poster="/images/video-moving-to-las-vegas-2026-choose-the-area.jpg"
+      />
+
       <StorySection heading="1. Choose the area before the house" >
         <div id="choose-the-area" className="scroll-mt-24" />
         <p className="text-body-lg text-lvinit-warmgray">
@@ -181,6 +198,17 @@ export default function MovingToLasVegasPage() {
         </p>
       </StorySection>
 
+      <StoryGallery
+        images={[
+          {
+            src: "/images/hero/summerlin-established-neighborhood-red-rock-aerial-drone.webp",
+            alt: "Aerial drone view over an established Las Vegas neighborhood of tile-roofed homes with grown-in trees and a green golf corridor, the 215 Beltway running across the foreground and the Red Rock escarpment and La Madre range on the horizon.",
+            caption:
+              "One valley, many different settings: a freeway, a finished neighborhood and the mountains all within a few miles.",
+          },
+        ]}
+      />
+
       <StoryPullQuote>
         Same city name, very different daily lives. Choose the area first and
         the house gets easier.
@@ -199,6 +227,17 @@ export default function MovingToLasVegasPage() {
           .
         </p>
       </StorySection>
+
+      <StoryGallery
+        images={[
+          {
+            src: "/images/features/southwest-las-vegas-rooftops-vacant-land-aerial-drone.webp",
+            alt: "Aerial view in southwest Las Vegas of a finished block of homes ending abruptly at open, undeveloped desert, with a newly built road and an empty parking lot alongside.",
+            caption:
+              "Parts of the valley are still being built out, with young landscaping and little established shade. Worth noticing on a summer-afternoon tour.",
+          },
+        ]}
+      />
 
       <StorySection heading="3. Know what the market looks like right now" muted>
         <p className="text-body-lg text-lvinit-warmgray">
@@ -271,6 +310,17 @@ export default function MovingToLasVegasPage() {
           </li>
         </ul>
       </StorySection>
+
+      <StoryGallery
+        images={[
+          {
+            src: "/images/features/las-vegas-new-construction-model-home-builder-flag.webp",
+            alt: "A two-story new-construction model home in southwest Las Vegas with a builder flag on a pole out front, a low metal rail along the sidewalk, young shrubs in fresh rock landscaping, and neighboring new homes on either side.",
+            caption:
+              "A model home is a sales tool. Most of what you like about one is an option, an upgrade, or a cost that lands after closing.",
+          },
+        ]}
+      />
 
       <StorySection heading="5. The first-month basics" muted>
         <p className="text-body-lg text-lvinit-warmgray">
