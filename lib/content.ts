@@ -259,6 +259,22 @@ export const guides: Guide[] = [
     href: "/guides/is-las-vegas-a-buyers-market",
   },
   {
+    slug: "moving-to-las-vegas",
+    title: "Moving to Las Vegas: Where to Start",
+    dek: "Pick the part of the valley before you pick the house. The order I'd tackle a move in, with the LVINIT guide that goes deep on each step.",
+    byline: "Mikey Del Rosario",
+    date: "October 2026",
+    publishedAt: "2026-10-01",
+    category: "Moving Here",
+    // Real Mikey-owned valley-wide residential aerial, also the hero on the
+    // down-payment and August price guides. Valley-wide hub, so the alt text
+    // makes no specific-neighborhood claim.
+    image: "/images/hero/las-vegas-residential-neighborhood-aerial-drone.webp",
+    imageAlt:
+      "Aerial drone view of a Las Vegas residential neighborhood, with rows of tile-roofed tract homes, rooftop solar panels, and desert mountains under a blue sky in the background.",
+    href: "/guides/moving-to-las-vegas",
+  },
+  {
     slug: "wayne-newton-casa-de-shenandoah-redevelopment",
     title:
       "Wayne Newton's Casa de Shenandoah Could Become a 77-Home Neighborhood",

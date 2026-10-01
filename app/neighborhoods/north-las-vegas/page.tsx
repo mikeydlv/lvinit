@@ -30,6 +30,10 @@ const meta: StoryMeta = {
   imageWidth: 2500,
   imageHeight: 1667,
   imageAlt: HERO_ALT,
+  // Original publish date not recorded on this pillar; only the honest
+  // last-substantive-update date is set (2026-09-29 expansion: city/county
+  // answer, Tule Springs + Sandstone section, I-215 trail item).
+  dateModified: "2026-09-29",
   breadcrumbs: [
     { name: "Home", path: "/" },
     { name: "North Las Vegas", path: PATH },
@@ -85,7 +89,7 @@ const glance = [
 // deliberately general — no invented boundaries. Structured so each can become
 // its own linked guide later. NOTE FOR MIKEY: please sanity-check these for
 // local accuracy before we treat them as final.
-const areas = [
+const areas: { name: string; body: string; guide?: { href: string; label: string } }[] = [
   {
     name: "Aliante",
     body: "A large master-planned community in the north, built around a regional park, golf, and its own casino-resort. One of the more established of the city's newer areas, amenity-rich and fairly self-contained.",
@@ -93,6 +97,10 @@ const areas = [
   {
     name: "Tule Springs",
     body: "A newer-growth area on the northern edge, near the Tule Springs Fossil Beds National Monument. Newer homes, big-sky surroundings, and still filling in. People use the name loosely for a broad stretch of the far north.",
+    guide: {
+      href: "/guides/sandstone-tule-springs-north-las-vegas",
+      label: "See the Sandstone new-home community here",
+    },
   },
   {
     name: "Valley Vista",
@@ -166,6 +174,44 @@ export default function NorthLasVegasPage() {
           </p>
         </Container>
 
+        {/* Quick answer — "is North Las Vegas its own city / is it Clark County".
+            Governance facts verified against the City of North Las Vegas
+            (mayor + four ward councilmembers, council-manager government;
+            cityofnorthlasvegas.com/our-city/city-council), 2026-09-29. */}
+        <Container className="pt-12 sm:pt-16">
+          <div className="max-w-3xl border-t border-lvinit-lightgray pt-10" id="own-city">
+            <h2 className="font-display text-heading-sm sm:text-heading font-bold text-lvinit-black">
+              Is North Las Vegas its own city, or part of Clark County?
+            </h2>
+            <p className="mt-5 text-body-lg text-lvinit-black">
+              Both, in different ways. North Las Vegas is its own city, and it
+              sits inside Clark County.
+            </p>
+            <p className="mt-5 text-body-lg text-lvinit-warmgray">
+              The City of North Las Vegas has its own government: a mayor and a
+              four-member council, with each councilmember representing a ward.
+              It is separate from the City of Las Vegas and from Henderson.
+              Clark County is the larger government that all of them sit
+              inside.
+            </p>
+            <p className="mt-5 text-body-lg text-lvinit-warmgray">
+              Why it matters when you shop: the city line decides who runs
+              planning, permits, and local services for a given address. It can
+              also change what a news headline means for you. The{" "}
+              <Link
+                href="/guides/monument-hills-northwest-las-vegas"
+                className="text-lvinit-blue underline underline-offset-4 decoration-transparent hover:decoration-lvinit-blue"
+              >
+                Monument Hills
+              </Link>{" "}
+              land sale borders the areas people call Tule Springs, for
+              example, yet it sits in the City of Las Vegas, not North Las
+              Vegas. Check the jurisdiction for any specific address before you
+              assume.
+            </p>
+          </div>
+        </Container>
+
         {/* The Local's Note — LVINIT signature callout (Doc 02 §21) */}
         <Container className="py-14 sm:py-16">
           <aside className="mx-auto max-w-3xl border-l-2 border-lvinit-blue pl-6 sm:pl-8">
@@ -214,6 +260,97 @@ export default function NorthLasVegasPage() {
             id="home-tour"
           />
         </div>
+
+        {/* Tule Springs + Sandstone — reuses the existing Sandstone guide's facts
+            (KB Home release + LVR, verified in that guide) and Mikey's own photo
+            of the Landings model row (credited to him in that guide's registry
+            note, 2026-09-25) and his tour video (aBdmoKLjoeY). */}
+        <Container className="py-16 sm:py-20" >
+          <div className="max-w-3xl" id="tule-springs-sandstone">
+            <p className="text-caption uppercase tracking-wide text-lvinit-blue">
+              The northern edge
+            </p>
+            <h2 className="mt-3 font-display text-heading-sm sm:text-heading font-bold text-lvinit-black">
+              Tule Springs and Sandstone: where new construction is happening
+            </h2>
+            <p className="mt-5 text-body-lg text-lvinit-warmgray">
+              If you&rsquo;re asking where the newest homes are going up in
+              North Las Vegas, this is the answer right now.{" "}
+              <Link
+                href="/guides/sandstone-tule-springs-north-las-vegas"
+                className="text-lvinit-blue underline underline-offset-4 decoration-transparent hover:decoration-lvinit-blue"
+              >
+                Sandstone
+              </Link>{" "}
+              is KB Home&rsquo;s nearly 300-acre, 1,500-home master plan in the
+              Tule Springs area. KB Home opened first-phase sales on September
+              4, 2026. The two open sub-communities are Landings, from the high
+              $300,000s, and Reserves, from the mid $400,000s. Meadows and
+              Gardens are listed as coming soon.
+            </p>
+            <p className="mt-5 text-body-lg text-lvinit-warmgray">
+              It sits north of the 215 Beltway&rsquo;s North Fifth Street
+              interchange, in the 89084 zip code, and KB Home says a trailhead
+              into the Tule Springs Fossil Beds National Monument is nearby.
+              The trade-off is the one this whole page keeps coming back to:
+              this is the newest, farthest-out part of the city, with the
+              longest drive to the rest of the valley, and it&rsquo;s still
+              filling in around you.
+            </p>
+          </div>
+          <figure className="mt-10 max-w-4xl">
+            <div className="relative aspect-[3/2] overflow-hidden">
+              <Image
+                src="/images/hero/landings-at-sandstone-model-homes-strip-view-hero.webp"
+                alt="Three two-story model homes at Landings at Sandstone in North Las Vegas, with graded lots, the Las Vegas Strip, and mountains on the horizon"
+                fill
+                sizes="(min-width: 1024px) 896px, 100vw"
+                className="object-cover"
+              />
+            </div>
+            <figcaption className="mt-3 text-caption text-lvinit-warmgray">
+              The Landings model row at Sandstone, with graded lots still open
+              around it. Photo: Mikey Del Rosario.
+            </figcaption>
+          </figure>
+          <div className="mt-10 max-w-3xl">
+            <p className="text-body-lg text-lvinit-warmgray">
+              Before you fall for a builder price, read{" "}
+              <Link
+                href="/guides/new-build-vs-resale-las-vegas"
+                className="text-lvinit-blue underline underline-offset-4 decoration-transparent hover:decoration-lvinit-blue"
+              >
+                new build vs. resale in Las Vegas
+              </Link>
+              , and see where entry-level pricing sits in the{" "}
+              <Link
+                href="/guides/las-vegas-starter-home-prices-2026"
+                className="text-lvinit-blue underline underline-offset-4 decoration-transparent hover:decoration-lvinit-blue"
+              >
+                starter-home price trend
+              </Link>
+              . Moving from somewhere cooler? The far north is open desert, so
+              read{" "}
+              <Link
+                href="/guides/first-summer-in-vegas"
+                className="text-lvinit-blue underline underline-offset-4 decoration-transparent hover:decoration-lvinit-blue"
+              >
+                surviving your first Las Vegas summer
+              </Link>{" "}
+              too.
+            </p>
+          </div>
+        </Container>
+
+        <StoryVideo
+          youtubeId="aBdmoKLjoeY"
+          title="Brand-New Homes Under $400K in Tule Springs? | Landings at Sandstone"
+          eyebrow="Watch the walkthrough"
+          heading="A look at Landings at Sandstone"
+          intro="Tour Landings at Sandstone with me and see what the homes, lots, upgrades, and surrounding growth actually look like right now."
+          poster="/images/lvinit-tule-springs-new-homes-under-400k-thumbnail.png"
+          id="sandstone-tour"
+        />
 
         {/* What living here actually feels like */}
         <Container className="py-16 sm:py-24">
@@ -276,6 +413,16 @@ export default function NorthLasVegasPage() {
                   <p className="mt-3 text-body text-lvinit-warmgray">
                     {area.body}
                   </p>
+                  {area.guide && (
+                    <p className="mt-3 text-body">
+                      <Link
+                        href={area.guide.href}
+                        className="text-lvinit-blue underline underline-offset-4 decoration-transparent hover:decoration-lvinit-blue"
+                      >
+                        {area.guide.label} &rarr;
+                      </Link>
+                    </p>
+                  )}
                 </div>
               ))}
             </div>
@@ -320,6 +467,26 @@ export default function NorthLasVegasPage() {
               sold to a private developer this year — the first market-rate
               housing planned for downtown North Las Vegas in about two
               decades, though nothing there is buyable yet.
+            </p>
+
+            <p className="mt-6 max-w-2xl text-body text-lvinit-warmgray">
+              On the recreation side, the city broke ground on September 23,
+              2026 on a 2.7-mile expansion of the I-215 Northern Beltway Trail.
+              The first phase runs alongside the 215 from North Decatur
+              Boulevard to Clayton Street, with completion estimated for late
+              2027, according to the{" "}
+              <a
+                href="https://www.cityofnorthlasvegas.com/Home/Components/News/News/612/17"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-lvinit-blue underline underline-offset-4 decoration-transparent hover:decoration-lvinit-blue"
+              >
+                City of North Las Vegas
+              </a>
+              . The project includes lighting, landscaping, and wayfinding
+              signage, and the city says later sections are still being
+              designed. It&rsquo;s a quality-of-life project, not a
+              home-value promise.
             </p>
 
             <p className="mt-6 max-w-2xl text-caption text-lvinit-warmgray">
