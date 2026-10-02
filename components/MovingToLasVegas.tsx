@@ -48,7 +48,7 @@ export default function MovingToLasVegas() {
         </div>
 
         <div className="mt-8">
-          <ButtonLink href="#guides" variant="tertiary">
+          <ButtonLink href="/guides/moving-to-las-vegas" variant="tertiary">
             Start with the moving-to-Vegas guides
           </ButtonLink>
         </div>
