@@ -46,7 +46,7 @@ export default function ContactForm() {
       "Message:",
       payload.message,
     ].join("\n");
-    window.location.href = `mailto:hello@lvinit.com?subject=${encodeURIComponent(
+    window.location.href = `mailto:mikey@scofieldgroup.com?subject=${encodeURIComponent(
       subject
     )}&body=${encodeURIComponent(body)}`;
   }
@@ -183,8 +183,8 @@ export default function ContactForm() {
 
         <p className="mt-4 text-caption text-lvinit-warmgray">
           Prefer to write directly?{" "}
-          <a href="mailto:hello@lvinit.com" className="text-lvinit-blue underline underline-offset-4">
-            hello@lvinit.com
+          <a href="mailto:mikey@scofieldgroup.com" className="text-lvinit-blue underline underline-offset-4">
+            mikey@scofieldgroup.com
           </a>
           .
         </p>

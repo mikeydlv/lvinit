@@ -1080,7 +1080,7 @@ All optional — the site runs without them (see `.env.example`). Set in Vercel
 |---|---|---|
 | `RESEND_API_KEY` | Contact-form email sending | `/api/contact` returns 503 → form falls back to a mailto draft |
 | `CONTACT_FROM_EMAIL` | Verified Resend sender | Defaults to `LVINIT <hello@lvinit.com>` |
-| `CONTACT_TO_EMAIL` | Where leads land | Defaults to `hello@lvinit.com` |
+| `CONTACT_TO_EMAIL` | Where leads land | Defaults to `mikey@scofieldgroup.com` |
 | `NEXT_PUBLIC_GA_ID` | GA4 Measurement ID (`G-XXXX…`) | Analytics simply doesn't load |
 
 ---

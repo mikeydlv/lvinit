@@ -138,7 +138,7 @@ All optional — the site runs without them (see `.env.example`).
 |---|---|---|
 | `RESEND_API_KEY` | Contact-form email sending | `/api/contact` returns 503 → mailto fallback |
 | `CONTACT_FROM_EMAIL` | Verified Resend sender | Defaults to `LVINIT <hello@lvinit.com>` |
-| `CONTACT_TO_EMAIL` | Where leads land | Defaults to `hello@lvinit.com` |
+| `CONTACT_TO_EMAIL` | Where leads land | Defaults to `mikey@scofieldgroup.com` |
 | `NEXT_PUBLIC_GA_ID` | GA4 Measurement ID | Analytics doesn't load |
 | `GSC_SITE_URL` | Search Console property for the opportunity agent | `npm run gsc:report` exits with setup instructions |
 | `GSC_SERVICE_ACCOUNT_JSON` | Read-only Google service-account key for that agent | Same — use `npm run gsc:report:fixtures` meanwhile |
