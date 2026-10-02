@@ -1,0 +1,109 @@
+# ---------------------------------------------------------------------------
+# LVINIT YouTube → Website Pipeline
+#
+# Event-driven, never scheduled. It runs only when:
+#
+#   * the approved-video manifest or a transcript changes on main (a new
+#     long-form video was approved, or its transcript landed or was corrected)
+#   * Mikey runs it by hand (Actions → YouTube → Website Pipeline → Run)
+#
+# It never polls YouTube, never edits the site, never commits, and never
+# triggers the Content Publisher. Output is a report artifact: Markdown + JSON,
+# one handoff package per video, and a DRY-RUN handoff queue that nothing reads.
+# See docs/YOUTUBE_PIPELINE.md.
+# ---------------------------------------------------------------------------
+
+name: YouTube → Website Pipeline
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "data/youtube-pipeline/**"
+  workflow_dispatch:
+    inputs:
+      video:
+        description: "One video id or URL from the manifest. Leave blank for every approved video."
+        required: false
+        default: ""
+
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: youtube-pipeline
+  cancel-in-progress: false
+
+jobs:
+  pipeline:
+    name: Turn approved videos into Publisher packages (report-only)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Check out the repository (read-only)
+        uses: actions/checkout@v4
+        with:
+          # Full history: Publisher commit trailers (LVINIT-Video-Fingerprint)
+          # mark work as PUBLISHED. Without them handoff is blocked.
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      # No install step: zero runtime dependencies, Node built-ins only.
+
+      - name: Run the pipeline's own test suite
+        run: npm run video:test
+
+      - name: Fetch earlier reports for lifecycle history
+        # Optional. Without them every video is judged fresh; Publisher commit
+        # trailers in git history still prevent re-handing-off published work.
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          set -uo pipefail
+          mkdir -p reports/youtube-pipeline-history
+          RUN_IDS="$(gh run list --workflow youtube-pipeline.yml --status success \
+            --limit 6 --json databaseId --jq '.[].databaseId' 2>/dev/null || true)"
+          for RUN_ID in $RUN_IDS; do
+            gh run download "$RUN_ID" --name youtube-pipeline --dir "reports/youtube-pipeline-history/run-$RUN_ID" 2>/dev/null || true
+          done
+          find reports/youtube-pipeline-history -name 'youtube-pipeline-*.json' -exec mv -n {} reports/youtube-pipeline-history/ \; 2>/dev/null || true
+
+      - name: Run the pipeline
+        env:
+          VIDEO: ${{ github.event.inputs.video }}
+        run: |
+          if [ -n "${VIDEO:-}" ]; then
+            node scripts/youtube-pipeline/run.mjs "--video=${VIDEO}"
+          else
+            node scripts/youtube-pipeline/run.mjs
+          fi
+
+      - name: Summarize
+        if: always()
+        run: |
+          {
+            echo "## YouTube → Website Pipeline"
+            echo
+            f="$(ls -1 reports/youtube-pipeline/youtube-pipeline-*.md 2>/dev/null | tail -n 1)"
+            if [ -n "$f" ]; then sed -n '1,40p' "$f"; else echo "No report was written."; fi
+            echo
+            echo "The report, handoff packages and the dry-run queue are attached as the youtube-pipeline artifact. Nothing was published, committed, or sent to the Content Publisher."
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload the report as an artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: youtube-pipeline
+          path: reports/youtube-pipeline/
+          if-no-files-found: warn
+          retention-days: 90

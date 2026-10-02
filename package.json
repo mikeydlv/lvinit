@@ -42,7 +42,10 @@
     "quality:audit": "node scripts/site-quality/run.mjs --build --validate",
     "quality:trial": "node scripts/site-quality/run.mjs --build --trial",
     "quality:report:fixtures": "node scripts/site-quality/run.mjs --fixtures",
-    "quality:test": "node --test \"scripts/site-quality/test/*.test.mjs\""
+    "quality:test": "node --test \"scripts/site-quality/test/*.test.mjs\"",
+    "video:report": "node scripts/youtube-pipeline/run.mjs",
+    "video:report:fixtures": "node scripts/youtube-pipeline/run.mjs --fixtures",
+    "video:test": "node --test \"scripts/youtube-pipeline/test/*.test.mjs\""
   },
   "dependencies": {
     "next": "^14.2.5",
