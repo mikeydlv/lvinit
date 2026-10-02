@@ -5,7 +5,7 @@ import { Resend } from "resend";
 // Requires these env vars to actually send (add them in Vercel):
 //   RESEND_API_KEY      — your Resend API key
 //   CONTACT_FROM_EMAIL  — a verified sender, e.g. "LVINIT <hello@lvinit.com>"
-//   CONTACT_TO_EMAIL    — where leads land (defaults to hello@lvinit.com)
+//   CONTACT_TO_EMAIL    — where leads land (defaults to mikey@scofieldgroup.com)
 // Until RESEND_API_KEY is set, this returns 503 and the form falls back to
 // a mailto draft — so nothing is lost and no fake service is wired.
 
@@ -29,7 +29,7 @@ export async function POST(req: Request) {
     return NextResponse.json({ ok: false, error: "missing_fields" }, { status: 400 });
   }
 
-  const to = process.env.CONTACT_TO_EMAIL || "hello@lvinit.com";
+  const to = process.env.CONTACT_TO_EMAIL || "mikey@scofieldgroup.com";
   const from = process.env.CONTACT_FROM_EMAIL || "LVINIT <hello@lvinit.com>";
 
   const text = [
