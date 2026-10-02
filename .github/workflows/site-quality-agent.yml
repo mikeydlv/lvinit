@@ -1,0 +1,397 @@
+# ---------------------------------------------------------------------------
+# LVINIT Site Quality Agent — weekly technical SEO / site-quality audit
+#
+# Three jobs:
+#
+#   audit          READ-ONLY. Always runs. Builds the site, audits it, writes
+#                  the Markdown + JSON report and the updated issue ledger.
+#   autofix        Writes main. Runs ONLY when the repository variable
+#                  SITE_QUALITY_AUTO_FIX is "true" AND the audit planned at
+#                  least one safe fix AND no CRITICAL issue is open. The
+#                  variable is unset today, so this job is skipped.
+#   publish-state  Writes lvinit-agent-state only, and only
+#                  data/site-quality/ledger.json, through the shared
+#                  agent-state action (which refuses main and any other path).
+#
+# What the audit job is allowed to do:
+#   * build the site exactly as Vercel would (npm ci + next build)
+#   * run TypeScript and ESLint, and report a failure as a finding
+#   * read the prerendered HTML, sitemap.xml and robots.txt the build produced
+#   * read (never write) the newest GSC Opportunity report, for ordering only
+#   * read its own earlier reports and the ledger on lvinit-agent-state, for
+#     stable ids and week-to-week lifecycle
+#   * upload its Markdown + JSON report (and ledger) as a workflow artifact
+#   * fail the run (a red X, so GitHub notifies) when a CRITICAL issue is open
+#
+# What it is NOT allowed to do, by construction:
+#   * write to the repository. `contents: read` means its GITHUB_TOKEN cannot
+#     push, and it never passes --apply. Fixes are proposed in the report and
+#     can be proven locally with `npm run quality:trial`, which always reverts.
+#   * change copy, metadata wording, alt text, schema claims, dates, images,
+#     navigation, robots policy, redirects or anything else — see
+#     docs/SITE_QUALITY_AGENT.md for the full list. The autofix job is bound
+#     by the same list in code (lib/fixes.mjs + the diff inspector).
+#
+# TO ENABLE AUTONOMOUS REPAIR (not yet): set the repository variable
+# SITE_QUALITY_AUTO_FIX to "true" (Settings → Secrets and variables → Actions
+# → Variables). Delete it to turn repair off again. Setting the variable
+# SITE_QUALITY_GIT_PUSH to "false" makes the autofix job commit without
+# pushing (nothing ships). Nothing in this file turns repair on by accident.
+#
+# No secrets are used. The only token is the run's own GITHUB_TOKEN.
+# ---------------------------------------------------------------------------
+
+name: Site Quality Agent
+
+on:
+  schedule:
+    # 13:00 UTC every Friday — about 06:00 Las Vegas time (PDT).
+    #
+    #   Monday     13:00  GSC Opportunity Agent
+    #   Monday     15:00  Weekly Publisher watchdog
+    #   Tuesday    13:00  Content Brief Generator
+    #   Wednesday  13:00  Internal Linking Agent   (pushes link edits)
+    #   Thursday   13:00  Fact-Decay Agent
+    #   Friday     13:00  Site Quality Agent       (this job)
+    #   Daily      13:30 / 14:30  Local Trend + Development Watch (state branch)
+    #
+    # Friday audits the week's finished state: after Wednesday's link edits have
+    # deployed and after the week's Publisher work, and before the weekend. It
+    # reads Monday's GSC report (4 days old). Nothing depends on the exact start
+    # time: scheduled runs have started 4–5 hours late, and a Friday-evening
+    # start still audits the same week. The autofix job takes the same
+    # concurrency lock and its own git preflight refuses a moved or dirty tree,
+    # so it cannot race the Internal Linking Agent even on a very late start.
+    - cron: "0 13 * * 5"
+  workflow_dispatch:
+    inputs:
+      today:
+        description: "Pretend today is this date (YYYY-MM-DD). Leave blank for the real date."
+        required: false
+        default: ""
+      fixtures:
+        description: "Run against the synthetic fixture site instead of LVINIT"
+        required: false
+        type: boolean
+        default: false
+
+permissions:
+  # Read-only by default. Only autofix (main) and publish-state (the state
+  # branch) raise it, each for itself alone.
+  contents: read
+  # Solely to download the GSC report artifact and this agent's own history.
+  actions: read
+
+concurrency:
+  group: site-quality-agent
+  cancel-in-progress: false
+
+jobs:
+  audit:
+    name: Audit site quality and publish a report
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    outputs:
+      reported: ${{ steps.result.outputs.reported }}
+      candidates: ${{ steps.result.outputs.candidates }}
+      critical: ${{ steps.result.outputs.critical }}
+
+    steps:
+      - name: Check out main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          # Full history, so "is this image committed?" is answered by git.
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Install dependencies
+        # The audit reads a real production build, so the project's own
+        # dependencies (and TypeScript, for reading lib/content.ts) are needed.
+        run: npm ci
+
+      - name: Run the agent's own test suite
+        run: npm run quality:test
+
+      - name: Check out lvinit-agent-state (read-only, outside the checkout)
+        # The durable issue ledger is data/site-quality/ledger.json there.
+        # Cloned into $RUNNER_TEMP so it can never dirty the working tree, and
+        # the action strips the token from the clone. Absence is "no history".
+        continue-on-error: true
+        uses: ./.github/actions/agent-state
+        with:
+          mode: checkout
+          token: ${{ secrets.GITHUB_TOKEN }}
+          path: ${{ runner.temp }}/agent-state
+
+      - name: Fetch the newest GSC report, if there is one
+        # Optional, read-only, ordering only. Same approach as the Internal
+        # Linking Agent. Absence is fine and is stated in the report.
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          set -uo pipefail
+          mkdir -p reports/gsc
+          RUN_IDS="$(gh run list --workflow gsc-opportunity-agent.yml --status success \
+            --limit 5 --json databaseId --jq '.[].databaseId' 2>/dev/null || true)"
+          for RUN_ID in $RUN_IDS; do
+            gh run download "$RUN_ID" --name gsc-opportunities --dir "reports/gsc/run-$RUN_ID" 2>/dev/null \
+              && echo "Downloaded gsc-opportunities from run $RUN_ID."
+          done
+          FOUND="$(find reports/gsc -maxdepth 2 -name 'gsc-opportunities-*.json' -printf '%f\t%p\n' | sort | tail -n 1 | cut -f2)"
+          echo "GSC report for prioritization: ${FOUND:-none}"
+
+      - name: Fetch this agent's earlier reports (fallback history)
+        # The ledger is the durable history; these 90-day artifacts are the
+        # fallback for a first run. Into reports/site-quality-history/, never
+        # the output directory, so an artifact never contains every earlier one.
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          set -uo pipefail
+          mkdir -p reports/site-quality-history
+          RUN_IDS="$(gh run list --workflow site-quality-agent.yml --status success \
+            --limit 12 --json databaseId --jq '.[].databaseId' 2>/dev/null || true)"
+          for RUN_ID in $RUN_IDS; do
+            for NAME in site-quality-report site-quality-apply-report; do
+              gh run download "$RUN_ID" --name "$NAME" --dir "reports/site-quality-history/$NAME-$RUN_ID" 2>/dev/null \
+                && echo "Downloaded earlier $NAME from run $RUN_ID."
+            done
+          done
+
+      - name: Audit the site
+        env:
+          TODAY: ${{ inputs.today }}
+          USE_FIXTURES: ${{ inputs.fixtures }}
+        run: |
+          set -euo pipefail
+          ARGS="--build --validate --state-dir=$RUNNER_TEMP/agent-state"
+          if [ "${USE_FIXTURES:-false}" = "true" ]; then ARGS="--fixtures"; fi
+          if [ -n "${TODAY:-}" ]; then ARGS="$ARGS --today=$TODAY"; fi
+          # Console copy goes to $RUNNER_TEMP, outside the checkout.
+          node scripts/site-quality/run.mjs $ARGS | tee "$RUNNER_TEMP/site-quality-run-output.txt"
+
+      - name: Read the result
+        id: result
+        if: ${{ inputs.fixtures != true }}
+        run: |
+          set -euo pipefail
+          REPORT="$(ls -1 reports/site-quality/site-quality-*.json | sort | tail -n 1)"
+          read -r CRITICAL CANDIDATES < <(node -e "const r=require('./' + process.argv[1]); console.log(r.summary.counts.CRITICAL, r.summary.autoFixCandidates)" "$REPORT")
+          {
+            echo "reported=true"
+            echo "critical=$CRITICAL"
+            echo "candidates=$CANDIDATES"
+          } >> "$GITHUB_OUTPUT"
+          echo "Open CRITICAL: $CRITICAL. Safe-fix candidates: $CANDIDATES."
+
+      - name: Write the summary onto the run page
+        if: always()
+        run: |
+          {
+            echo "## LVINIT Site Quality Agent — audit"
+            echo
+            echo '```'
+            cat "$RUNNER_TEMP/site-quality-run-output.txt" 2>/dev/null || echo "The run produced no output."
+            echo '```'
+            echo
+            echo "This job is read-only: nothing in the repository was changed here."
+            echo "The full Markdown and JSON reports are attached to this run as an artifact."
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload the report as an artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: site-quality-report
+          path: |
+            reports/site-quality/
+            !reports/site-quality/fixtures/
+          if-no-files-found: warn
+          retention-days: 90
+
+      - name: Fail the run if a CRITICAL issue is open
+        # A red X is the notification. CRITICAL means indexing or deploys are
+        # broken (a failed build, a site-wide noindex, a blocked robots.txt,
+        # canonicals collapsing onto one URL) — never a cosmetic issue. The
+        # ledger is still published (publish-state does not need success).
+        if: ${{ inputs.fixtures != true }}
+        env:
+          CRITICAL: ${{ steps.result.outputs.critical }}
+        run: |
+          if [ "${CRITICAL:-0}" != "0" ]; then
+            echo "::error::$CRITICAL CRITICAL site-quality finding(s) — see the report artifact."
+            exit 1
+          fi
+
+  autofix:
+    name: Apply proven safe fixes (only when enabled)
+    needs: audit
+    # Off unless the repository variable says so. Never on a fixture run, never
+    # with a CRITICAL open (fix the emergency first), never with nothing to do.
+    if: >-
+      vars.SITE_QUALITY_AUTO_FIX == 'true' &&
+      inputs.fixtures != true &&
+      needs.audit.result == 'success' &&
+      needs.audit.outputs.candidates != '0' &&
+      needs.audit.outputs.candidates != ''
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    permissions:
+      # The only job that can write main, and it can do nothing else.
+      contents: write
+      actions: read
+
+    steps:
+      - name: Check out main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+          # Kept, deliberately: this job has to be able to push its commit.
+          persist-credentials: true
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Identify the committer
+        run: |
+          set -euo pipefail
+          git config user.name "LVINIT Site Quality Agent"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      - name: Check out lvinit-agent-state (read-only, outside the checkout)
+        continue-on-error: true
+        uses: ./.github/actions/agent-state
+        with:
+          mode: checkout
+          token: ${{ secrets.GITHUB_TOKEN }}
+          path: ${{ runner.temp }}/agent-state
+
+      - name: Confirm the working tree is clean before editing
+        run: |
+          set -euo pipefail
+          if [ -n "$(git status --porcelain)" ]; then
+            echo "::warning::The working tree is not clean. The agent will refuse to edit."
+            git status --porcelain
+          else
+            echo "Working tree is clean."
+          fi
+
+      - name: Apply, validate, re-audit, commit and push
+        env:
+          SITE_QUALITY_AUTO_FIX: "true"
+          SITE_QUALITY_GIT_PUSH: ${{ vars.SITE_QUALITY_GIT_PUSH || 'true' }}
+          TODAY: ${{ inputs.today }}
+        run: |
+          set -euo pipefail
+          ARGS="--build --validate --apply --state-dir=$RUNNER_TEMP/agent-state"
+          if [ -n "${TODAY:-}" ]; then ARGS="$ARGS --today=$TODAY"; fi
+          # $RUNNER_TEMP, never the checkout: a file here would make the
+          # agent's own clean-tree preflight (correctly) refuse to edit.
+          node scripts/site-quality/run.mjs $ARGS | tee "$RUNNER_TEMP/site-quality-apply-output.txt"
+
+      - name: Write the summary onto the run page
+        if: always()
+        run: |
+          {
+            echo "## LVINIT Site Quality Agent — autofix"
+            echo
+            echo '```'
+            cat "$RUNNER_TEMP/site-quality-apply-output.txt" 2>/dev/null || echo "The run produced no output."
+            echo '```'
+            echo
+            echo "HEAD: $(git rev-parse --short HEAD)"
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload the apply report as an artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: site-quality-apply-report
+          path: reports/site-quality/
+          if-no-files-found: warn
+          retention-days: 90
+
+  publish-state:
+    name: Publish the issue ledger to lvinit-agent-state
+    needs: [audit, autofix]
+    # Runs even when the audit failed on a CRITICAL (the ledger should record
+    # it) and whether or not autofix ran — but only if a report was written.
+    if: ${{ always() && inputs.fixtures != true && needs.audit.outputs.reported == 'true' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      # The agent-state action pushes only to lvinit-agent-state, only under
+      # data/site-quality/, and refuses main.
+      contents: write
+
+    steps:
+      - name: Check out main (no credentials left on disk)
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Download this run's audit report
+        uses: actions/download-artifact@v4
+        with:
+          name: site-quality-report
+          path: sq-audit
+
+      - name: Download this run's apply report, if autofix ran
+        if: needs.autofix.result == 'success'
+        continue-on-error: true
+        uses: actions/download-artifact@v4
+        with:
+          name: site-quality-apply-report
+          path: sq-apply
+
+      - name: Check out lvinit-agent-state
+        uses: ./.github/actions/agent-state
+        with:
+          mode: checkout
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Validate and stage the ledger
+        # The apply run's ledger supersedes the audit's: it is a complete run of
+        # its own and also knows which fixes shipped. Fails closed if the file
+        # is not this agent's ledger or carries Search Console numbers (the
+        # branch is public).
+        run: |
+          set -euo pipefail
+          SRC="sq-audit/site-quality-ledger.json"
+          if [ -f sq-apply/site-quality-ledger.json ]; then SRC="sq-apply/site-quality-ledger.json"; fi
+          node -e '
+            const fs = require("fs");
+            const text = fs.readFileSync(process.argv[1], "utf8");
+            const l = JSON.parse(text);
+            if (l.agent !== "lvinit-site-quality" || typeof l.schema_version !== "number" || typeof l.issues !== "object") {
+              console.error("Not a site-quality ledger."); process.exit(1);
+            }
+            if (/"(impressions|clicks|searchVisible)"/.test(text)) { console.error("Ledger carries search data."); process.exit(1); }
+            console.log(`Ledger OK: ${Object.keys(l.issues).length} issue(s), last run ${l.lastRun?.reportDate}.`);
+          ' "$SRC"
+          mkdir -p .agent-state/data/site-quality
+          cp "$SRC" .agent-state/data/site-quality/ledger.json
+
+      - name: Commit data/site-quality/ledger.json to lvinit-agent-state
+        uses: ./.github/actions/agent-state
+        with:
+          mode: commit
+          token: ${{ secrets.GITHUB_TOKEN }}
+          paths: data/site-quality
+          message: "site-quality: issue ledger (run ${{ github.run_number }})"

@@ -37,7 +37,12 @@
     "producer:fixtures": "node scripts/executive-producer/run.mjs --fixtures",
     "publisher:week": "node scripts/weekly-publisher/run.mjs",
     "publisher:dry-run": "node scripts/weekly-publisher/run.mjs --dry-run --force",
-    "publisher:test": "node --test \"scripts/weekly-publisher/test/*.test.mjs\""
+    "publisher:test": "node --test \"scripts/weekly-publisher/test/*.test.mjs\"",
+    "quality:report": "node scripts/site-quality/run.mjs",
+    "quality:audit": "node scripts/site-quality/run.mjs --build --validate",
+    "quality:trial": "node scripts/site-quality/run.mjs --build --trial",
+    "quality:report:fixtures": "node scripts/site-quality/run.mjs --fixtures",
+    "quality:test": "node --test \"scripts/site-quality/test/*.test.mjs\""
   },
   "dependencies": {
     "next": "^14.2.5",

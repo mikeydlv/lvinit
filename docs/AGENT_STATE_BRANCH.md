@@ -32,6 +32,7 @@ data/<namespace>/              machine state (JSON, with schema_version + agent)
 | Weekly Publisher (local, Sunday 8 PM) | `reports/weekly-content/` |
 | GSC Opportunity Agent (`publish-state` job) | `reports/gsc/` — only the sanitized `publisher-input.json` |
 | Content Brief Generator (`publish-state` job) | `reports/content-briefs/` — only `publisher-input.json` |
+| Site Quality Agent (`publish-state` job) | `data/site-quality/` — only `ledger.json`, no Search Console data |
 
 The three Content Publisher inputs — `reports/gsc/publisher-input.json`,
 `reports/content-briefs/publisher-input.json` and
