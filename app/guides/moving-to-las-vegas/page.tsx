@@ -234,7 +234,7 @@ export default function MovingToLasVegasPage() {
             src: "/images/features/southwest-las-vegas-rooftops-vacant-land-aerial-drone.webp",
             alt: "Aerial view in southwest Las Vegas of a finished block of homes ending abruptly at open, undeveloped desert, with a newly built road and an empty parking lot alongside.",
             caption:
-              "Parts of the valley are still being built out, with young landscaping and little established shade. Worth noticing on a summer-afternoon tour.",
+              "Homes meeting open desert on the southwest side of the valley. General context for the setting you would be living in.",
           },
         ]}
       />
