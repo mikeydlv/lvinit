@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "agent": "development-watch",
-  "updated": "2026-10-01",
+  "updated": "2026-10-02",
   "events": {
     "025b2cbfc757": {
       "id": "DEV-2026-09-25-002",
@@ -2923,6 +2923,53 @@
         "queued": []
       }
     },
+    "d2cb6731c552": {
+      "id": "DEV-2026-10-02-003",
+      "fingerprint": "d2cb6731c552",
+      "entity_id": "DEV-ARROWHEAD-WEST",
+      "entity_name": "Arrowhead West",
+      "change_class": "NEW",
+      "changes": [
+        "first time this project has been seen"
+      ],
+      "event_type": "announcement",
+      "status": "unclear",
+      "prior_status": null,
+      "first_seen": "2026-10-02",
+      "last_seen": "2026-10-02",
+      "times_seen": 1,
+      "lifecycle": "REJECTED",
+      "lifecycle_history": [
+        {
+          "date": "2026-10-02",
+          "lifecycle": "REJECTED"
+        }
+      ],
+      "action": "REJECT_LOW_VALUE",
+      "target": null,
+      "score": 35,
+      "confidence": "Low",
+      "sources": [
+        {
+          "name": "Las Vegas Sun — News",
+          "url": "https://lasvegassun.com/news/2026/oct/02/arrowhead-west-no-more-raiders-fast-start-could-me",
+          "authority": 8,
+          "published": "2026-10-02T09:00:00.000Z"
+        }
+      ],
+      "superseded_by": null,
+      "handoff": {
+        "eligible": false,
+        "blockers": [
+          "NOT_A_PUBLISHER_ACTION",
+          "SCORE_BELOW_THRESHOLD",
+          "CONFIDENCE_NOT_HIGH",
+          "NO_PRIMARY_SOURCE",
+          "NOT_NEW"
+        ],
+        "queued": []
+      }
+    },
     "db4185093d14": {
       "id": "DEV-2026-09-29-005",
       "fingerprint": "db4185093d14",
@@ -2936,18 +2983,22 @@
       "status": "unclear",
       "prior_status": null,
       "first_seen": "2026-09-29",
-      "last_seen": "2026-09-29",
-      "times_seen": 1,
-      "lifecycle": "NEW",
+      "last_seen": "2026-10-02",
+      "times_seen": 2,
+      "lifecycle": "PERSISTING",
       "lifecycle_history": [
         {
           "date": "2026-09-29",
           "lifecycle": "NEW"
+        },
+        {
+          "date": "2026-10-02",
+          "lifecycle": "PERSISTING"
         }
       ],
-      "action": "MONITOR_ONLY",
+      "action": "DUPLICATE",
       "target": null,
-      "score": 40,
+      "score": 34,
       "confidence": "Low",
       "sources": [
         {
@@ -2955,6 +3006,12 @@
           "url": "https://news.google.com/rss/articles/CBMirgJBVV95cUxPbUszSWxDOU5QbXFDWVpSMUltTmxwVkkyQmt3U1dWQ3FpVTY5WlcycDlTMGZNNnVfWlVCQjk4UkNhTUFwd0hPRmNPR1BEZnFmQnhDNWYtQWZpanhLNDdxUlV1VEJvTHVQUmkyQ2FUMFdJOXlETkpPSEVXbU5aaWtWZVpBT1FCSGQ2WlN3Q1FFUTdVeUFmbzlDemZId0NoSjB3N3pSN01ma2YzTUpjYkpENmhkX1NrZnhLd1RsWmczdF8xZWtUV0RSX3NRRjBMTFJ0VS0xaTZ4bWxpbVJTUjdUc25vSEVGVExiOXZnS0Vua3puVTJpeDl3emRWUjVtSE8yd3AwdWp3ZDNSRHhJSmJJYUxCaUJQamRsSExpUmVwNW4tRWtZcjhQeWhVVnV3dw",
           "authority": 9,
           "published": "2026-09-28T18:03:00.000Z"
+        },
+        {
+          "name": "AOL.com",
+          "url": "https://news.google.com/rss/articles/CBMieEFVX3lxTFBaT1dNUE5PdjFrS2c2UDFnTXZKRnY0aUZVbEZFLVBUTk1UYjd5UEZOU3BweTJYcW9WWTFMZU5yZTNhZjNyUWpMTVBKY1c0ZU0wWkVoMXJvOHk2T2JPN2N6dlFvcE1rVFliWWNKbTFvcEFZWm9BUXJBUw",
+          "authority": 9,
+          "published": "2026-09-28T18:03:24.000Z"
         }
       ],
       "superseded_by": null,
@@ -2965,6 +3022,8 @@
           "SCORE_BELOW_THRESHOLD",
           "CONFIDENCE_NOT_HIGH",
           "NO_PRIMARY_SOURCE",
+          "NOT_MATERIAL",
+          "NOT_NEW",
           "PROVISIONAL_ENTITY"
         ],
         "queued": []
@@ -3364,6 +3423,99 @@
           "CONFIDENCE_NOT_HIGH",
           "NO_PRIMARY_SOURCE",
           "PROVISIONAL_ENTITY"
+        ],
+        "queued": []
+      }
+    },
+    "f353213186e8": {
+      "id": "DEV-2026-10-02-001",
+      "fingerprint": "f353213186e8",
+      "entity_id": "DEV-P-622A0EE0",
+      "entity_name": "Unnamed residential (Las Vegas (valley-wide)) — \"Famed Las Vegas saloon breaks ground on new home\"",
+      "change_class": "NEW",
+      "changes": [
+        "first time this project has been seen"
+      ],
+      "event_type": "construction",
+      "status": "under construction",
+      "prior_status": null,
+      "first_seen": "2026-10-02",
+      "last_seen": "2026-10-02",
+      "times_seen": 1,
+      "lifecycle": "NEW",
+      "lifecycle_history": [
+        {
+          "date": "2026-10-02",
+          "lifecycle": "NEW"
+        }
+      ],
+      "action": "MONITOR_ONLY",
+      "target": null,
+      "score": 43,
+      "confidence": "Low",
+      "sources": [
+        {
+          "name": "Las Vegas Review-Journal",
+          "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxNaG1sRGlxendEQTFFYjVjb0J1VnFaLVdMbjRFVTBHcHp4ZWQ5aVZqanp2VnJrazRyR05DdnVmel9wbFVDX29KSjg5VkVpU3hZb2N4eFJNYTRZYTFCMDRlQUQ3NDlhSWE0aENwTGtKa3lLSEdVZ0tHLVZDWmg1SVo4LVpNWks4T0VxdFZzT1N0VkllSlJtNEtxVA",
+          "authority": 8,
+          "published": "2026-10-02T00:03:14.000Z"
+        }
+      ],
+      "superseded_by": null,
+      "handoff": {
+        "eligible": false,
+        "blockers": [
+          "NOT_A_PUBLISHER_ACTION",
+          "SCORE_BELOW_THRESHOLD",
+          "CONFIDENCE_NOT_HIGH",
+          "NO_PRIMARY_SOURCE",
+          "PROVISIONAL_ENTITY"
+        ],
+        "queued": []
+      }
+    },
+    "f902e2f47b98": {
+      "id": "DEV-2026-10-02-002",
+      "fingerprint": "f902e2f47b98",
+      "entity_id": "DEV-HUNTRIDGE-PARK",
+      "entity_name": "Huntridge Park",
+      "change_class": "NEW",
+      "changes": [
+        "first time this project has been seen"
+      ],
+      "event_type": "opening",
+      "status": "open",
+      "prior_status": null,
+      "first_seen": "2026-10-02",
+      "last_seen": "2026-10-02",
+      "times_seen": 1,
+      "lifecycle": "NEW",
+      "lifecycle_history": [
+        {
+          "date": "2026-10-02",
+          "lifecycle": "NEW"
+        }
+      ],
+      "action": "MONITOR_ONLY",
+      "target": null,
+      "score": 42,
+      "confidence": "Medium",
+      "sources": [
+        {
+          "name": "Las Vegas Sun — News",
+          "url": "https://lasvegassun.com/news/2026/oct/02/public-private-partnership-could-restore-huntridge",
+          "authority": 8,
+          "published": "2026-10-02T09:00:00.000Z"
+        }
+      ],
+      "superseded_by": null,
+      "handoff": {
+        "eligible": false,
+        "blockers": [
+          "NOT_A_PUBLISHER_ACTION",
+          "SCORE_BELOW_THRESHOLD",
+          "CONFIDENCE_NOT_HIGH",
+          "NO_PRIMARY_SOURCE"
         ],
         "queued": []
       }
