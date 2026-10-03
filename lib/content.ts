@@ -238,6 +238,24 @@ export type Guide = {
  */
 export const guides: Guide[] = [
   {
+    slug: "buying-new-construction-las-vegas",
+    title: "Buying New Construction in Las Vegas: How It Works",
+    dek: "The sales office, bringing your own agent, incentives versus price cuts, lot premiums, the design center, phases, HOA and SID/LID, and inspection. How the process works, so you know the rules before the first model-home visit.",
+    byline: "LVINIT Editorial",
+    date: "October 2026",
+    publishedAt: "2026-10-03",
+    category: "Buyer Guide",
+    // Cluster D pillar (docs/LVINIT_CONTENT_CLUSTER_MAP.md). Covers HOW buying
+    // new construction works; the "should I?" question stays with
+    // /guides/new-build-vs-resale-las-vegas. Card image is Mikey's own photo of
+    // the Landings at Sandstone model row (confirmed his, see the Sandstone
+    // entry), reused from the repo; no new asset.
+    image: "/images/hero/landings-at-sandstone-model-homes-strip-view-hero.webp",
+    imageAlt:
+      "Three two-story model homes at Landings at Sandstone in North Las Vegas, with graded lots, the Las Vegas Strip, and mountains on the horizon",
+    href: "/guides/buying-new-construction-las-vegas",
+  },
+  {
     slug: "is-las-vegas-a-buyers-market",
     title: "Is Las Vegas a Buyer's Market Right Now?",
     dek: "More homes are sitting, sellers are negotiating, and builders are leaning on incentives. The catch is a mortgage rate above 7%. What buyers can negotiate, how to weigh the payment, and when waiting makes sense.",

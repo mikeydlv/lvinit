@@ -408,7 +408,14 @@ export default function NewBuildVsResaleLasVegasPage() {
             >
               Summerlin vs Henderson vs Southwest
             </Link>
-            , then come back to this question.
+            , then come back to this question. Leaning new? See{" "}
+            <Link
+              href="/guides/buying-new-construction-las-vegas"
+              className="text-lvinit-blue underline underline-offset-4"
+            >
+              how buying new construction works
+            </Link>
+            .
           </>
         ),
       }}

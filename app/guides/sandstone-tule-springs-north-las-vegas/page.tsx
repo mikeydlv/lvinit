@@ -281,6 +281,12 @@ export default function SandstoneTuleSpringsPage() {
             dek: "A much larger, much earlier-stage project just south of here \u2014 on City of Las Vegas land, with first homes not expected until spring 2028.",
           },
           {
+            name: "Buying New Construction in Las Vegas: How It Works",
+            href: "/guides/buying-new-construction-las-vegas",
+            category: "Buyer Guide",
+            dek: "How the new-home buying process works, from the sales office to the walkthrough, if Sandstone has you shopping.",
+          },
+          {
             name: "Las Vegas New-Home Sales Jumped in July 2026",
             href: "/guides/las-vegas-new-home-sales-july-2026",
             category: "Market Watch",
