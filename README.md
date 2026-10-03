@@ -39,6 +39,7 @@ with `main`. It is never merged, never deployed, and never read by the site.
 | GSC Opportunity Agent | `.github/workflows/gsc-opportunity-agent.yml` (`publish-state` job) | `reports/gsc/` | Only `publisher-input.json`: sanitized, **no raw Search Console queries**. Full reports stay in the private workflow artifact. |
 | Content Brief Generator | `.github/workflows/content-brief-generator.yml` (`publish-state` job) | `reports/content-briefs/` | Only `publisher-input.json`: actionable briefs, no raw queries. |
 | Weekly Publisher | local Task Scheduler, Sundays 8:00 PM Pacific (`scripts/weekly-publisher/run.mjs`); checked Mondays by `.github/workflows/weekly-publisher-watchdog.yml` | `reports/weekly-content/` | The one weekly content plan + `LATEST.md` (or a FAILED report). See `docs/WEEKLY_PUBLISHER.md` on `main`. |
+| Site Quality Agent | `.github/workflows/site-quality-agent.yml` (`publish-state` job) | `data/site-quality/` | Only `ledger.json`: the durable issue history (ids, first/last seen, severity, resolution, auto-fix commit, owner). No Search Console data. See `docs/SITE_QUALITY_AGENT.md` on `main`. |
 
 When you add an agent, add a row here (on `main`) and give the agent its own
 namespace.
