@@ -259,6 +259,12 @@ export default function MonumentHillsPage() {
             category: "Local Feature",
             dek: "A smaller, much closer-to-market project just north of here — homes are for sale today, unlike Monument Hills.",
           },
+          {
+            name: "Buying New Construction in Las Vegas: How It Works",
+            href: "/guides/buying-new-construction-las-vegas",
+            category: "Buyer Guide",
+            dek: "How buying new works once a community is actually open, from the sales office to the walkthrough.",
+          },
         ],
       }}
       relatedNeighborhood={{

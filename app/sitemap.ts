@@ -107,6 +107,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.7,
     },
     {
+      url: `${BASE_URL}/guides/buying-new-construction-las-vegas`,
+      changeFrequency: "monthly",
+      priority: 0.7,
+    },
+    {
       url: `${BASE_URL}/guides/new-build-vs-resale-las-vegas`,
       changeFrequency: "monthly",
       priority: 0.7,
