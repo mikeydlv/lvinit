@@ -238,6 +238,22 @@ export type Guide = {
  */
 export const guides: Guide[] = [
   {
+    slug: "las-vegas-mortgage-rates",
+    title: "Las Vegas Mortgage Rates: Where They Are and What They Do to Your Payment",
+    dek: "Freddie Mac's 30-year average hit 7.28% the week of October 1, 2026, the highest since November 2023. The latest print, seven weeks of history, and the payment math on a Las Vegas loan. Updated in place.",
+    byline: "Mikey Del Rosario",
+    date: "October 2026",
+    publishedAt: "2026-10-05",
+    category: "Market Watch",
+    // Evergreen rates page (D1, cluster map queue #4), updated in place; no new
+    // dated rate URLs. Card image is Mikey's existing Las Vegas residential
+    // aerial, reused from the repo; no new asset.
+    image: "/images/hero/las-vegas-residential-neighborhood-aerial-drone.webp",
+    imageAlt:
+      "Aerial drone view of a Las Vegas residential neighborhood, with rows of tile-roofed tract homes, rooftop solar panels, and desert mountains under a blue sky in the background.",
+    href: "/guides/las-vegas-mortgage-rates",
+  },
+  {
     slug: "buying-new-construction-las-vegas",
     title: "Buying New Construction in Las Vegas: How It Works",
     dek: "The sales office, bringing your own agent, incentives versus price cuts, lot premiums, the design center, phases, HOA and SID/LID, and inspection. How the process works, so you know the rules before the first model-home visit.",
