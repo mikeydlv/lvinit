@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "agent": "development-watch",
-  "updated": "2026-10-04",
+  "updated": "2026-10-05",
   "events": {
     "025b2cbfc757": {
       "id": "DEV-2026-09-25-002",
@@ -1184,6 +1184,52 @@
         "queued": []
       }
     },
+    "4f59fe9a9ca2": {
+      "id": "DEV-2026-10-05-002",
+      "fingerprint": "4f59fe9a9ca2",
+      "entity_id": "DEV-NORTH-LAS-VEGAS-TY-S-PLACE",
+      "entity_name": "North Las Vegas' Ty's Place",
+      "change_class": "NEW",
+      "changes": [
+        "first time this project has been seen"
+      ],
+      "event_type": "access change",
+      "status": "unclear",
+      "prior_status": null,
+      "first_seen": "2026-10-05",
+      "last_seen": "2026-10-05",
+      "times_seen": 1,
+      "lifecycle": "NEW",
+      "lifecycle_history": [
+        {
+          "date": "2026-10-05",
+          "lifecycle": "NEW"
+        }
+      ],
+      "action": "MONITOR_ONLY",
+      "target": null,
+      "score": 41,
+      "confidence": "Low",
+      "sources": [
+        {
+          "name": "8 News Now",
+          "url": "https://8newsnow.com/news/local-news/nonprofit-fights-to-save-north-las-vegas-tys-place-as-it-faces-closure",
+          "authority": 8,
+          "published": "2026-10-05T16:14:47.000Z"
+        }
+      ],
+      "superseded_by": null,
+      "handoff": {
+        "eligible": false,
+        "blockers": [
+          "NOT_A_PUBLISHER_ACTION",
+          "SCORE_BELOW_THRESHOLD",
+          "CONFIDENCE_NOT_HIGH",
+          "NO_PRIMARY_SOURCE"
+        ],
+        "queued": []
+      }
+    },
     "537905b3f848": {
       "id": "DEV-2026-09-23-020",
       "fingerprint": "537905b3f848",
@@ -1606,21 +1652,25 @@
       ],
       "event_type": "announcement",
       "status": "announced",
-      "prior_status": null,
+      "prior_status": "announced",
       "first_seen": "2026-10-01",
-      "last_seen": "2026-10-01",
-      "times_seen": 1,
-      "lifecycle": "NEW",
+      "last_seen": "2026-10-05",
+      "times_seen": 2,
+      "lifecycle": "PERSISTING",
       "lifecycle_history": [
         {
           "date": "2026-10-01",
           "lifecycle": "NEW"
+        },
+        {
+          "date": "2026-10-05",
+          "lifecycle": "PERSISTING"
         }
       ],
-      "action": "MONITOR_ONLY",
-      "target": null,
-      "score": 54,
-      "confidence": "Medium",
+      "action": "DUPLICATE",
+      "target": "/guides/fiesta-henderson-redevelopment",
+      "score": 42,
+      "confidence": "Low",
       "sources": [
         {
           "name": "KTNV 13 Action News",
@@ -1633,6 +1683,12 @@
           "url": "https://reviewjournal.com/business/developer-unveils-375m-project-to-turn-former-casino-site-into-athletics-centered-campus-3893554",
           "authority": 8,
           "published": "2026-09-30T20:58:41.000Z"
+        },
+        {
+          "name": "96.3 KKLZ",
+          "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxQS2ZUa3JPYkFJcWJGYVA1bk1aeWh2UTRZaG90UnBab0Vfa016VnpxaG5OQUx3MmtMZFFNODRPMHRTdno0ZmM3QXk2WjBZR0JQWGhsVWptczdWZzA2M1d3aHJqNldEMFFMVEw4UXdCaG1IeWdVbi1qN3dKb00tRDdJbGJrOVNyVExmRF9lUjNvNlBSUmgyNmFTTzJ3LTRjYmJSejhZODczX1RBQ3RDQnBXdHRGWWg3QQ",
+          "authority": 9,
+          "published": "2026-10-05T14:52:25.000Z"
         }
       ],
       "superseded_by": null,
@@ -1642,7 +1698,9 @@
           "NOT_A_PUBLISHER_ACTION",
           "SCORE_BELOW_THRESHOLD",
           "CONFIDENCE_NOT_HIGH",
-          "NO_PRIMARY_SOURCE"
+          "NO_PRIMARY_SOURCE",
+          "NOT_MATERIAL",
+          "NOT_NEW"
         ],
         "queued": []
       }
@@ -2871,6 +2929,53 @@
           "SCORE_BELOW_THRESHOLD",
           "CONFIDENCE_NOT_HIGH",
           "NO_PRIMARY_SOURCE"
+        ],
+        "queued": []
+      }
+    },
+    "c7b4f94b301e": {
+      "id": "DEV-2026-10-05-001",
+      "fingerprint": "c7b4f94b301e",
+      "entity_id": "DEV-P-23282B38",
+      "entity_name": "Unnamed road (Las Vegas Strip) — \"F1 Las Vegas Grand Prix prep work adds another stretch of Strip, as Flamingo bridge build \"",
+      "change_class": "NEW",
+      "changes": [
+        "first time this project has been seen"
+      ],
+      "event_type": "construction",
+      "status": "under construction",
+      "prior_status": null,
+      "first_seen": "2026-10-05",
+      "last_seen": "2026-10-05",
+      "times_seen": 1,
+      "lifecycle": "NEW",
+      "lifecycle_history": [
+        {
+          "date": "2026-10-05",
+          "lifecycle": "NEW"
+        }
+      ],
+      "action": "MONITOR_ONLY",
+      "target": null,
+      "score": 46,
+      "confidence": "Low",
+      "sources": [
+        {
+          "name": "Las Vegas Review-Journal — Local",
+          "url": "https://reviewjournal.com/sports/motor-sports/formula-1/f1-las-vegas-grand-prix-prep-work-adds-another-stretch-of-strip-as-flamingo-bridge-build-looms-3895898",
+          "authority": 8,
+          "published": "2026-10-05T19:56:53.000Z"
+        }
+      ],
+      "superseded_by": null,
+      "handoff": {
+        "eligible": false,
+        "blockers": [
+          "NOT_A_PUBLISHER_ACTION",
+          "SCORE_BELOW_THRESHOLD",
+          "CONFIDENCE_NOT_HIGH",
+          "NO_PRIMARY_SOURCE",
+          "PROVISIONAL_ENTITY"
         ],
         "queued": []
       }
