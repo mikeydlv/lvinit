@@ -933,12 +933,21 @@ Mikey's review.
 Given a finished video or YouTube link: use the **real** title, description,
 transcript, chapters, and supplied context. Embed with the project's
 privacy-conscious method — the `StoryVideo` component (`youtube-nocookie`, lazy,
-no autoplay), starting at 0:00 unless Mikey requests another timestamp. Do not
+no autoplay), starting at 0:00 (see the video start-time rule below). Do not
 narrate frames you did not see. Build a **complementary article**, not a copy of
 the transcript, and create a natural funnel: relevant pillar → story/video →
 related content → Search or Contact. Add photo/rendering/source credit language
 where applicable, and produce platform-specific packaging (not identical copy
 everywhere).
+
+**Video start time.** LVINIT videos should start at 0:00 by default, even if a
+shared YouTube URL contains a `t=` or other start-time parameter. Strip/ignore
+YouTube timestamp parameters when extracting a video ID unless Mikey
+explicitly requests a specific non-zero start time for that individual embed.
+Parameters normally ignored: `t=28s`, `start=28`, and timestamp fragments such
+as `#t=28`. Still use the canonical video ID and the video itself. Do not infer
+that a timestamp in a pasted or shared URL is intentional, and do not add start
+offsets to `StoryVideo` or any embed on your own.
 
 **YouTube output** normally includes: ranked title options, a final description,
 chapters (when timestamps are known), focused hashtags, a pinned comment, a
