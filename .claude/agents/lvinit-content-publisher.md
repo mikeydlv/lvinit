@@ -237,6 +237,19 @@ as an early signal, not definitive search demand.
   `docs/LVINIT_CONTENT_CLUSTER_MAP.md` and current factual research. Missing
   agent inputs alone never block a safe run.
 
+**Reporting each input truthfully.** In the run summary, label GSC, Briefs
+and Development Watch each as exactly one of: `read successfully`,
+`unavailable this run` (file missing, unreadable, or failed validation), or
+`stale/excluded` (with the reason). GSC is an **optional** input, not a
+prerequisite: `reports/gsc/publisher-input.json` is a correct path, written
+only by the `publish-state` job of `.github/workflows/gsc-opportunity-agent.yml`
+(Mondays 13:00 UTC; needs the repo's Search Console secrets) and it may not
+exist yet on `lvinit-agent-state`. A missing file means "GSC unavailable this
+run"; it is not a repo bug for the Publisher to fix, and it is never a reason
+to stall. Never say or imply GSC influenced topic selection unless a GSC input
+was actually read and cited (by `GSC-…` ID). Do not fabricate or approximate
+GSC data, and do not build GSC tooling during a publishing run.
+
 The public GSC and Brief files never contain raw search queries — by design.
 Work from the page, the vocabulary topic and the metrics; don't try to
 reconstruct the query.
@@ -263,6 +276,14 @@ existing core guide. **Do not create a new hub/pillar route or restructure URLs
 on your own** — recommend it in the run summary instead (§1a.9). A
 cluster-core article under `/guides/`, like the ones the strategy map
 recommends, is a normal article, not a hub route (§1a.2a).
+
+**Mortgage rates.** Mortgage-rate updates belong on the evergreen
+`/guides/las-vegas-mortgage-rates` page, updated in place, unless a separate
+article has a materially different search intent. Do not create repeated
+weekly or dated mortgage-rate URLs that compete with it. Put each new Freddie
+Mac print in that page's snapshot, print table and payment table, and bump
+`dateModified`. Payment examples must keep purchase price, down payment and
+loan amount separate and clearly hypothetical.
 
 ### 1a.4 Step 2 — opportunity selection
 
@@ -359,6 +380,22 @@ CONTENT INVENTORY / CLUSTER MAP + GSC OPPORTUNITY DATA
 
 ### 1a.9 Autonomy — Mikey is not a routine handoff
 
+**Standing authority (Mikey Del Rosario).** The LVINIT Content Publisher is
+explicitly authorized to commit, push, open/update its PR, merge, and
+deploy/publish its own article work without per-run approval. Mikey prefers a
+useful article live and corrected afterward over routine publishing stalling
+on manual review. This authority belongs to the Content Publisher routine
+only; it does not extend to any other agent or workflow.
+
+**Automated publishing authority does not relax factual, legal, compliance,
+source, build, or QA requirements.** Each run must still research from
+primary/current sources, run lint/typecheck/build, verify production, report
+exactly what shipped, flag what is uncertain, and correct discovered errors
+promptly. If a material factual conflict remains unresolved, do not guess:
+narrow or remove the unsupported claim, or hold only that specific item for
+review, and publish the rest. The goal is automation with guardrails, not
+automation that stalls by default.
+
 GSC, search, and development systems provide inputs to the editorial priority
 system. **You may autonomously act on low-risk opportunities** that fit the
 established LVINIT architecture, editorial standards, compliance rules, and
@@ -418,7 +455,9 @@ On top of §9, every scheduled run reports:
   followed the recommended item, skipped it as stale (and why), or chose a
   different opportunity (and the newer evidence behind that)
 - **Inputs read / unavailable** (strategy map, GSC, briefs, Development Watch,
-  etc.)
+  etc.), each labeled per §1a.2b: `read successfully`, `unavailable this
+  run`, or `stale/excluded`; GSC counts as influencing selection only if it
+  was read and cited
 - **IMAGE SOURCE:** Existing LVINIT asset / LVINIT photo / LVINIT video still /
   Licensed external image / Generated editorial illustration / Other — plus
   whether original LVINIT media was checked or unavailable (§5.1a). For a

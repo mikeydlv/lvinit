@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { buildStoryMetadata, type StoryMeta } from "@/lib/story";
 import Container from "@/components/ui/Container";
-import { StoryPage, StoryLede, StorySection } from "@/components/story";
+import { StoryPage, StoryLede, StorySection, StoryVideo } from "@/components/story";
 
 // ---------------------------------------------------------------------------
 // MARKET WATCH — the evergreen Las Vegas mortgage-rates page (D1,
@@ -24,19 +24,34 @@ import { StoryPage, StoryLede, StorySection } from "@/components/story";
 // - Aug 20 - Sept 10 prints (6.65, 6.66, 6.71, 6.76) are carried from LVINIT's
 //   own earlier pieces, each verified against Freddie Mac when published.
 //   Seven prints, six straight weekly increases (arithmetic on the table).
-// - "Highest since Nov 22, 2023 (7.29%)": not Freddie Mac's own phrasing;
-//   Fox Business coverage of the release states it, and search-result
-//   summaries of the AP/Real Deal coverage agree. The Freddie archive page
-//   fetched shows only the three most recent weeks, so the 2023 print itself
-//   was not independently opened; it is attributed, not asserted.
+// - "Highest since Nov 22, 2023 (7.29%)": verified 2026-10-05 against Freddie
+//   Mac's own downloadable history (freddiemac.com/pmms/docs/PMMS_history.csv).
+//   The only weekly 30-year prints at or above 7.28% in the series since
+//   Nov 2023 are Nov 16, 2023 (7.44%), Nov 22, 2023 (7.29%) and Oct 1, 2026
+//   (7.28%); the highest print between Nov 22, 2023 and Oct 1, 2026 is 7.22%
+//   (Nov 30, 2023). So it is a sourced fact, stated with the Freddie Mac
+//   citation. Fox Business reported the same comparison independently. The
+//   same file confirms every weekly print in the PRINTS table (Aug 20 - Oct 1,
+//   2026).
 // - Local price context: LVR August 2026 median single-family $475,000
 //   (see /guides/las-vegas-home-prices-august-2026). LVR's September report
 //   was not out as of 2026-10-05; none is asserted.
-// - Payment table: principal & interest only, 30-year amortization, $475,000
-//   loan, computed independently; labeled hypothetical.
+// - Payment table (corrected 2026-10-05): purchase price $475,000 (the LVR
+//   August median), 20% down ($95,000), loan $380,000, 30-year fixed, standard
+//   amortization, principal & interest only. Computed independently:
+//   6.65% = $2,439.47, 7.03% = $2,535.81, 7.28% = $2,600.01. Labeled
+//   hypothetical; 20% down is not assumed typical. An earlier version treated
+//   $475,000 as the loan amount, which conflated price and loan.
 // CLAIMS DELIBERATELY NOT MADE: any rate forecast; a single cause for the
 // move (Freddie Mac names none); the Fox-cited 10-year yield and economist
 // quotes (not independently re-verified); any local lender rate.
+//
+// VIDEO: youtubeId aMeXy1frj-o, title confirmed via YouTube oEmbed 2026-10-05:
+// "The Las Vegas Housing Market Finally Shifted… But There's a Catch"
+// (channel: Mikey Del Rosario). It is the buyer's-market video already used on
+// several LVINIT pages; the lead-in describes it that way, not as a
+// rates-only breakdown. Direct youtube-nocookie lazy embed via StoryVideo, as
+// elsewhere; no start-time offset (StoryVideo has none; starts at 0:00).
 //
 // IMAGERY — existing Mikey-owned Las Vegas residential aerial already in the
 // repo (hero/las-vegas-residential-neighborhood-aerial-drone.webp, live on the
@@ -89,7 +104,7 @@ const faqJsonLd = {
       name: "How much does a higher rate add to a Las Vegas payment?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "On a hypothetical $475,000 loan, 30-year fixed, principal and interest only, moving from 6.65% to 7.28% adds roughly $200 a month. That example excludes taxes, insurance, HOA dues and mortgage insurance, and it is an illustration, not a quote.",
+        text: "In a hypothetical example, a $475,000 purchase with 20% down ($95,000) means a $380,000 loan. On a 30-year fixed, principal and interest only, moving from 6.65% to 7.28% takes the payment from about $2,439 to about $2,600 a month, roughly $160 more. The example excludes taxes, insurance, HOA dues, mortgage insurance and closing costs. 20% down is not required, and it is an illustration, not a quote.",
       },
     },
     {
@@ -139,10 +154,9 @@ const PRINTS: { week: string; r30: string; r15: string }[] = [
 ];
 
 const PAYMENTS: { rate: string; pi: string; note: string }[] = [
-  { rate: "6.65%", pi: "$3,049", note: "Aug 20 print, the low before this run of increases" },
-  { rate: "7.03%", pi: "$3,170", note: "Sept 24 print" },
-  { rate: "7.28%", pi: "$3,250", note: "Oct 1 print, latest" },
-  { rate: "6.50%", pi: "$3,002", note: "Hypothetical, not a forecast" },
+  { rate: "6.65%", pi: "$2,439", note: "Aug 20 print, the low before this run of increases" },
+  { rate: "7.03%", pi: "$2,536", note: "Sept 24 print" },
+  { rate: "7.28%", pi: "$2,600", note: "Oct 1 print, latest" },
 ];
 
 const link =
@@ -237,7 +251,7 @@ export default function LasVegasMortgageRatesPage() {
     >
       <StoryLede
         kicker="Market Watch"
-        lead="Freddie Mac's weekly survey put the average 30-year fixed rate at 7.28% for the week of October 1, 2026, up from 7.03% a week earlier. That is the sixth straight weekly increase, and by the coverage of the release, the highest average since November 2023."
+        lead="Freddie Mac's weekly survey put the average 30-year fixed rate at 7.28% for the week of October 1, 2026, up from 7.03% a week earlier. That is the sixth straight weekly increase, and the highest weekly average in Freddie Mac's own history since November 22, 2023 (7.29%)."
       >
         <p className="mt-6 text-body-lg text-lvinit-warmgray">
           Mortgage rates are not a Las Vegas number. Local buyers borrow in the
@@ -249,6 +263,15 @@ export default function LasVegasMortgageRatesPage() {
       </StoryLede>
 
       <SnapshotPanel />
+
+      <StoryVideo
+        id="watch"
+        eyebrow="Watch"
+        heading="Prefer the quick version?"
+        intro="I walk through why the Las Vegas market has shifted toward buyers, and the catch: mortgage rates around 7%. Watch it here, then pick up with the numbers below."
+        youtubeId="aMeXy1frj-o"
+        title="The Las Vegas Housing Market Finally Shifted… But There's a Catch | Mikey Del Rosario, LVINIT"
+      />
 
       <StorySection heading="How we got here: seven weeks of prints">
         <p className="text-body-lg text-lvinit-warmgray">
@@ -289,16 +312,34 @@ export default function LasVegasMortgageRatesPage() {
       <StorySection muted heading="What a rate move does to a Las Vegas payment">
         <p className="text-body-lg text-lvinit-warmgray">
           Here is a <span className="text-lvinit-black">hypothetical example</span>,
-          not a real transaction: a $475,000 loan, the size of the most recent
-          verified Las Vegas single-family median (LVR, August 2026), at
-          different 30-year rates. Principal and interest only.
+          not a real transaction or a quote. Price, down payment and loan
+          amount are three different numbers, so here they are separately:
+        </p>
+        <ul className="mt-4 space-y-2 text-body-lg text-lvinit-warmgray">
+          <li>
+            <span className="text-lvinit-black">Purchase price: $475,000</span>,
+            the most recent verified Las Vegas single-family median (LVR,
+            August 2026). A median is a market statistic, not a specific home.
+          </li>
+          <li>
+            <span className="text-lvinit-black">Down payment: 20% ($95,000)</span>.
+            Illustration only. 20% is not required, and it is not assumed to be
+            typical.
+          </li>
+          <li>
+            <span className="text-lvinit-black">Loan amount: $380,000</span>,
+            on a 30-year fixed loan.
+          </li>
+        </ul>
+        <p className="mt-4 text-body-lg text-lvinit-warmgray">
+          Monthly principal and interest at three Freddie Mac weekly averages:
         </p>
         <div className="mt-6 overflow-x-auto">
           <table className="w-full min-w-[480px] border-collapse text-body text-lvinit-warmgray">
             <thead>
               <tr className="border-b border-lvinit-lightgray text-left text-caption uppercase tracking-wide text-lvinit-warmgray">
                 <th className="py-3 pr-4 font-normal">Rate (30-year fixed)</th>
-                <th className="py-3 pr-4 font-normal">Monthly P&amp;I</th>
+                <th className="py-3 pr-4 font-normal">Monthly P&amp;I on $380,000</th>
                 <th className="py-3 font-normal">Where it comes from</th>
               </tr>
             </thead>
@@ -315,13 +356,14 @@ export default function LasVegasMortgageRatesPage() {
         </div>
         <p className="mt-5 text-body-lg text-lvinit-warmgray">
           From the August low to the latest print, that is about{" "}
-          <span className="text-lvinit-black">$200 more a month</span>, roughly
-          $2,400 a year, on the same loan. Taxes, homeowners insurance, HOA dues
-          and mortgage insurance are on top of this and are not included. Since
-          rates move the payment far more than most people expect, it is worth
-          running your own number before you decide a house is in or out of
-          range.
-        </p>
+          <span className="text-lvinit-black">$160 more a month</span>, roughly
+          $1,900 a year, on the same loan. These figures are principal and
+          interest only. Property taxes, homeowners insurance, HOA dues,
+          mortgage insurance, closing costs and other expenses are not included.
+          Freddie Mac&rsquo;s PMMS rate is a national benchmark, not a quote for
+          any borrower: actual pricing depends on credit profile, loan type,
+          down payment, points, occupancy, lender and more. Run your own number
+          before deciding a house is in or out of range.</p>
       </StorySection>
 
       <StorySection heading="Which rate will you actually get?">
@@ -429,28 +471,36 @@ export default function LasVegasMortgageRatesPage() {
             >
               archive
             </a>
-            . The Aug 20 through Sept 10 prints come from our earlier coverage,
-            each checked against Freddie Mac when published.
+            . 
           </li>
           <li>
-            <span className="text-lvinit-black">Fox Business</span>, coverage
-            of the same release (
+            <span className="text-lvinit-black">Freddie Mac</span>, downloadable
+            PMMS history (
+            <a
+              href="https://www.freddiemac.com/pmms/docs/PMMS_history.csv"
+              className="text-lvinit-blue underline underline-offset-4"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              PMMS_history.csv
+            </a>
+            ): the source for the &ldquo;highest since November 22, 2023
+            (7.29%)&rdquo; comparison and a cross-check of every weekly print
+            in the table. Fox Business reported the same comparison in its{" "}
             <a
               href="https://www.foxbusiness.com/economy/mortgage-rates-10-1-2026"
               className="text-lvinit-blue underline underline-offset-4"
               target="_blank"
               rel="noopener noreferrer"
             >
-              &ldquo;Mortgage rates rise to 7.28%&rdquo;
+              coverage of the release
             </a>
-            ): the source for the &ldquo;highest since November 22, 2023&rdquo;
-            comparison, which is the reporter&rsquo;s framing, not Freddie
-            Mac&rsquo;s.
+            .
           </li>
           <li>
             <span className="text-lvinit-black">Las Vegas Realtors (LVR)</span>,
-            August 2026 housing report: the $475,000 median used in the
-            payment example. See{" "}
+            August 2026 housing report: the $475,000 median used as the
+            purchase price in the payment example. See{" "}
             <Link href="/guides/las-vegas-home-prices-august-2026" className="text-lvinit-blue underline underline-offset-4">
               our coverage
             </Link>
