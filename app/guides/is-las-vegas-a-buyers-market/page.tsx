@@ -382,6 +382,12 @@ export default function IsLasVegasABuyersMarketPage() {
           "Once you know the market is on your side, these are the decisions that come next: what kind of home, at what budget, with how much down.",
         stories: [
           {
+            name: "Las Vegas Mortgage Rates: Where They Are and What They Do to Your Payment",
+            href: "/guides/las-vegas-mortgage-rates",
+            category: "Market Watch",
+            dek: "The latest Freddie Mac print, the weekly history, and the payment math, updated in place.",
+          },
+          {
             name: "New Build vs Resale in Las Vegas: Which Should You Buy?",
             href: "/guides/new-build-vs-resale-las-vegas",
             category: "Buyer Guide",

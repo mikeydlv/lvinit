@@ -252,6 +252,12 @@ export default function LasVegasMortgageRates19MonthHighPage() {
           "The rate is one half of what a home actually costs a buyer. Here's the other half, and what it looks like to actually get into the market at today's numbers.",
         stories: [
           {
+            name: "Las Vegas Mortgage Rates: Where They Are and What They Do to Your Payment",
+            href: "/guides/las-vegas-mortgage-rates",
+            category: "Market Watch",
+            dek: "Our evergreen rates page, with the latest Freddie Mac print (7.28%, week of Oct 1), updated in place.",
+          },
+          {
             name: "Mortgage Rates Kept Climbing. Daily Trackers Already Show 7%.",
             href: "/guides/las-vegas-mortgage-rates-approach-7-percent",
             category: "Market Watch",
