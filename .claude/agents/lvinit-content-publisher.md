@@ -855,29 +855,37 @@ sites don't have.
 
 #### 5.0b.7 Image reuse rule (Mikey's rule, 2026-10-07)
 
-This refines the site-wide "one image, one use" rule (CLAUDE.md, §5.1) for
-article imagery. Mikey set it explicitly on 2026-10-07, and it is the newer
-rule:
+This is the canonical image-reuse policy Mikey approved on 2026-10-07.
+CLAUDE.md and routine §6.7 carry the same policy.
 
-- **Hero images are never reused across articles.** An image that has served as
-  any article's hero can't appear in another article, as hero or inline.
-- **A hero must be an image that has never been used before.** Any record with
-  a non-empty `usedOn` or `usage`, or whose path a repo grep finds in `app/`,
-  `lib/` or `components/`, is ineligible as a hero. That includes an image
-  previously used only inline.
-- **Inline images default to one use.** Prefer unused images every time.
-  Reuse a previously *inline-only* image only when it's genuinely relevant to
-  the section **and** there's a strong editorial reason. Examples: an
-  important landmark or reference image with no viable alternative, or a core
-  explanatory image that is legitimately useful in more than one context.
-  "It's easier" is never a reason. Record the reason in the code comment and
-  the run summary.
-- **Never place the same image twice in one article**, and never use
+**Hero images**
+
+- A hero image may only be used as a hero once.
+- Never reuse the same hero image on another article.
+- Any image that has previously been used anywhere, including inline, is
+  **not** eligible to become a hero later. That covers any record with a
+  non-empty `usedOn` or `usage`, and any image whose path a repo grep finds in
+  `app/`, `lib/` or `components/`.
+- If prior usage role is unknown, treat the image as previously used and
+  therefore not hero-eligible. Examples: a library record with `usedOn` but no
+  `usage` entry, or a non-library repo image.
+
+**Inline images**
+
+- Prefer unused inline images whenever possible.
+- Inline images may be reused only when there is a strong editorial reason and
+  the image genuinely supports the section. Examples: an important landmark or
+  reference image with no viable alternative, or a core explanatory image
+  that is legitimately useful in more than one context. Record the reason in a
+  code comment and in the run summary.
+- Don't reuse inline images merely for convenience.
+- Avoid repeated inline reuse across many articles.
+- An inline reuse can't be a former hero, because hero images are never reused
+  on another article. When an image's prior role is unknown, check the
+  referencing file. If you can't confirm the earlier use was inline, don't
+  reuse it.
+- Never place the same image twice in one article, and never use
   near-identical frames from the same moment of a clip as separate images.
-- **If a record's prior role is unknown**, treat it as possibly a hero, so it
-  isn't eligible for reuse. Examples: a library record with `usedOn` but no
-  `usage` entry, or a non-library repo image. Check the referencing file. If
-  you can't confirm the earlier use was inline only, don't reuse the image.
 
 Before selecting any image: read its library record, check `usedOn` and
 `usage`, grep the repo for its path, and check whether another filename is the
@@ -910,9 +918,12 @@ image the article uses, hero and inline:
   `chore(image-library): record usage for <slug>`) through the same
   branch/merge path the run used.
 
-**Never mark an image as used before publication succeeds.** If publishing
-fails, is held, or is rolled back, don't consume the image: leave `usedOn` and
-`usage` untouched and report that in the summary.
+**Tracking, in short:** keep `usedOn` in its existing format so the nightly
+Image Library Agent can rebuild it safely, and keep role data in the separate
+persistent `usage` field. Only write usage after the article is verified live.
+Don't mark images used if publishing fails, is held, or is rolled back. In
+that case don't consume the image: leave `usedOn` and `usage` untouched and
+report it in the summary.
 
 #### 5.0b.9 Visual diversity
 
@@ -974,7 +985,7 @@ strong original LVINIT asset already exists.
 
 1. **Existing LVINIT site/project image assets** — approved first-party imagery
    already in `/public/images/…`, when it genuinely depicts this story
-   **and is not already used anywhere else on the site** (one-use rule, below).
+   **and is eligible under the reuse policy** (below and §5.0b.7).
    Start with the LVINIT Image Library index (§5.0b).
 2. **Original LVINIT photo/video media already available** to this project or
    run — starting with `C:\LVINIT\Images` (§5.0), plus any other LVINIT-owned
@@ -991,11 +1002,11 @@ strong original LVINIT asset already exists.
 fallback panel is still correct and still looks finished — better than a weak,
 unlicensed, or misleading image.
 
-**One image, one use (Mikey's rule, 2026-10-07; article refinement in
-§5.0b.7).** Never use the same image file more than once on the site, whether
-for a second hero, a card, or an inline placement. The only exception is the
-narrow inline-reuse case in §5.0b.7. Heroes are never reused, and an image
-that has already been used anywhere is never a hero. Before selecting any image,
+**Image reuse: heroes once, inline sparingly (Mikey's policy, 2026-10-07;
+full rule in §5.0b.7).** A hero image is used as a hero once and never reused
+on another article. An image already used anywhere, including inline, or one
+whose prior role is unknown, is never a hero. Inline images may be reused only
+for a strong editorial reason, never for convenience. Before selecting any image,
 grep the repo (`app/`, `lib/`, `components/`) for its path and check its library
 `usedOn`/`usage`. If it's already referenced, it's off the table, unless it
 qualifies for §5.0b.7 inline reuse. Reusing an existing repo photo "because it

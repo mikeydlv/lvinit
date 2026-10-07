@@ -35,11 +35,28 @@ business second.
 - When adding photos, use **local files in `/public/images/`** with descriptive
   filenames (e.g. `hero/summerlin-drone-overlook-golden-hour.webp`).
 - **Never hotlink** random external images.
-- **One image, one use.** Never use the same image file more than once on the
-  site (hero, card, or inline). Before choosing an image, check that its path
-  isn't already referenced anywhere in `app/`, `lib/` or `components/`. If no
-  unused, suitable image exists, use a new one or the no-image fallback, never
-  a repeat.
+- **Image reuse: heroes once, inline sparingly** (Mikey's policy, 2026-10-07;
+  the Content Publisher routine §6.7 and the agent file §5.0b.7 carry the same
+  policy). Before choosing an image, check whether its path is referenced in
+  `app/`, `lib/` or `components/`, and check its image-library `usedOn` and
+  `usage`.
+  - **Hero images:** A hero image may only be used as a hero once. Never reuse
+    the same hero image on another article. Any image that has previously been
+    used anywhere, including inline, is not eligible to become a hero later. If
+    prior usage role is unknown, treat the image as previously used and
+    therefore not hero-eligible.
+  - **Inline images:** Prefer unused inline images whenever possible. Inline
+    images may be reused only when there is a strong editorial reason and the
+    image genuinely supports the section. Don't reuse inline images merely for
+    convenience, and avoid repeated inline reuse across many articles.
+  - **Tracking:** Keep `usedOn` in its existing format so the nightly Image
+    Library Agent can rebuild it safely. Keep the separate persistent `usage`
+    field for role (hero or inline), article slug, article URL, article
+    section when practical, and assignment/publication date. Only write usage
+    after the article is verified live, and don't mark images used if
+    publishing fails.
+  - If no eligible, suitable image exists, use a new one or the no-image
+    fallback.
 
 ## Brand & design system
 
