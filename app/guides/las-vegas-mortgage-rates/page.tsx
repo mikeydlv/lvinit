@@ -68,7 +68,7 @@ const meta: StoryMeta = {
     "Freddie Mac's 30-year fixed average hit 7.28% the week of October 1, 2026, the highest since November 2023. The latest print, the weekly history, and what a rate move does to a Las Vegas payment. Updated in place.",
   path: PATH,
   datePublished: "2026-10-05",
-  dateModified: "2026-10-05",
+  dateModified: "2026-10-07",
   author: "Mikey Del Rosario",
   breadcrumbs: [
     { name: "Home", path: "/" },
@@ -139,7 +139,7 @@ const SNAPSHOT: Stat[] = [
   {
     value: "$475,000",
     label: "Las Vegas single-family median",
-    note: "August 2026, most recent verified LVR figure",
+    note: "August 2026, the median used in the payment example below. September was $470,000.",
   },
 ];
 
@@ -422,7 +422,12 @@ export default function LasVegasMortgageRatesPage() {
         <p className="text-body-lg text-lvinit-warmgray">
           LVR&rsquo;s August report put the valley&rsquo;s median single-family
           price at $475,000, with more homes sitting without offers than a year
-          ago. Details are in{" "}
+          ago; its September report, released October 6, had it at $470,000.
+          The latest figures live on{" "}
+          <Link href="/guides/las-vegas-housing-market" className={link}>
+            our Las Vegas housing market page
+          </Link>
+          , and the August detail is in{" "}
           <Link href="/guides/las-vegas-home-prices-august-2026" className={link}>
             our August 2026 coverage
           </Link>

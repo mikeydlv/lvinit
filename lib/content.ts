@@ -238,6 +238,22 @@ export type Guide = {
  */
 export const guides: Guide[] = [
   {
+    slug: "las-vegas-housing-market",
+    title: "Las Vegas Housing Market: Prices, Inventory and Sales Right Now",
+    dek: "The single-family median slipped to $470,000 in September, about 4% under the May-June record, while sales fell and supply grew. The latest LVR numbers and what they mean for buyers, sellers and owners. Updated in place.",
+    byline: "Mikey Del Rosario",
+    date: "October 2026",
+    publishedAt: "2026-10-07",
+    category: "Market Watch",
+    // Evergreen housing-market hub (D2, cluster map queue #5), updated in
+    // place monthly; no default monthly URLs. Card image is Mikey's existing
+    // valley-wide residential aerial, reused from the repo; no new asset.
+    image: "/images/hero/las-vegas-residential-neighborhood-aerial-drone.webp",
+    imageAlt:
+      "Aerial drone view of a Las Vegas residential neighborhood, with rows of tile-roofed tract homes, rooftop solar panels, and desert mountains under a blue sky in the background.",
+    href: "/guides/las-vegas-housing-market",
+  },
+  {
     slug: "las-vegas-mortgage-rates",
     title: "Las Vegas Mortgage Rates: Where They Are and What They Do to Your Payment",
     dek: "Freddie Mac's 30-year average hit 7.28% the week of October 1, 2026, the highest since November 2023. The latest print, seven weeks of history, and the payment math on a Las Vegas loan. Updated in place.",
