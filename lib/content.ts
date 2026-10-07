@@ -246,11 +246,11 @@ export const guides: Guide[] = [
     publishedAt: "2026-10-07",
     category: "Market Watch",
     // Evergreen housing-market hub (D2, cluster map queue #5), updated in
-    // place monthly; no default monthly URLs. Card image is Mikey's existing
-    // valley-wide residential aerial, reused from the repo; no new asset.
-    image: "/images/hero/las-vegas-residential-neighborhood-aerial-drone.webp",
+    // place monthly; no default monthly URLs. Hero and card use Mikey's own
+    // drone photo, unique to this page (no image is reused).
+    image: "/images/hero/las-vegas-suburban-homes-mountains-aerial-drone.webp",
     imageAlt:
-      "Aerial drone view of a Las Vegas residential neighborhood, with rows of tile-roofed tract homes, rooftop solar panels, and desert mountains under a blue sky in the background.",
+      "Aerial drone view of a Las Vegas suburban neighborhood: rows of tile-roofed homes and curving streets in the foreground, open desert beyond, and a mountain range under a blue sky with scattered clouds.",
     href: "/guides/las-vegas-housing-market",
   },
   {
