@@ -43,9 +43,10 @@ import { StoryPage, StoryLede, StorySection, StoryVideo } from "@/components/sto
 // - NOT used: total-dollar-volume figures (reported inconsistently across
 //   earlier months and not needed). No forecast, no cause beyond LVR's own
 //   attribution to rates, no neighborhood-level claims.
-// IMAGERY — existing Mikey-owned valley-wide residential aerial already in
-// the repo (hero/las-vegas-residential-neighborhood-aerial-drone.webp).
-// C:\LVINIT\Images is a Windows path, not reachable from this cloud session.
+// IMAGERY — Mikey's own drone photo, uploaded to the repo 2026-10-07 as
+// lvinit-sky-canyon-drone.png and converted to WebP with Sharp. Used ONLY here
+// (one image, one page). Location is not stated in the alt text: the hub is
+// valley-wide and the filename's place name is not independently confirmed.
 // ---------------------------------------------------------------------------
 
 const PATH = "/guides/las-vegas-housing-market";
@@ -187,9 +188,9 @@ export default function LasVegasHousingMarketPage() {
         headline: "Las Vegas Housing Market: Prices, Inventory and Sales Right Now",
         subheadline:
           "The single-family median slipped to $470,000 in September, about 4% under the record, while sales fell and supply grew. The latest numbers and what they mean for buyers, sellers and owners. Updated in place.",
-        image: "/images/hero/las-vegas-residential-neighborhood-aerial-drone.webp",
+        image: "/images/hero/las-vegas-suburban-homes-mountains-aerial-drone.webp",
         imageAlt:
-          "Aerial drone view of a Las Vegas residential neighborhood, with rows of tile-roofed tract homes, rooftop solar panels, and desert mountains under a blue sky in the background.",
+          "Aerial drone view of a Las Vegas suburban neighborhood: rows of tile-roofed homes and curving streets in the foreground, open desert beyond, and a mountain range under a blue sky with scattered clouds.",
         backLink: { label: "Guides", href: "/guides" },
         ctas: [{ label: "See the latest numbers", href: "#latest", variant: "primary" }],
       }}

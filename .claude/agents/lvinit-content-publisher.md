@@ -701,7 +701,8 @@ highest-priority *suitable* source; never use a lower-priority source when a
 strong original LVINIT asset already exists.
 
 1. **Existing LVINIT site/project image assets** — approved first-party imagery
-   already in `/public/images/…`, when it genuinely depicts this story.
+   already in `/public/images/…`, when it genuinely depicts this story
+   **and is not already used anywhere else on the site** (one-use rule, below).
 2. **Original LVINIT photo/video media already available** to this project or
    run — starting with `C:\LVINIT\Images` (§5.0), plus any other LVINIT-owned
    photo or video media the current environment can actually reach.
@@ -716,6 +717,16 @@ strong original LVINIT asset already exists.
 **Emergency fallback: no image.** The runtime non-photographic `GuideCard`
 fallback panel is still correct and still looks finished — better than a weak,
 unlicensed, or misleading image.
+
+**One image, one use (Mikey's rule, 2026-10-07).** Never use the same image
+file more than once on the site: not for a second hero, a card, or an inline
+placement. Before selecting any image, grep the repo (`app/`, `lib/`,
+`components/`) for its path; if it is already referenced, it is off the table.
+Reusing an existing repo photo "because it fits" is no longer allowed. If no
+unused suitable image exists, work down this list (a new original photo or
+video still, approved external imagery, an editorial cover for abstract topics)
+or use the no-image fallback. Never repeat an image to fill a slot. Existing
+duplicates are left alone unless Mikey asks for a cleanup.
 
 Authentic first-party media always beats external or generated imagery. Never
 swap an existing genuine photograph for a generated cover to make a row of

@@ -35,6 +35,11 @@ business second.
 - When adding photos, use **local files in `/public/images/`** with descriptive
   filenames (e.g. `hero/summerlin-drone-overlook-golden-hour.webp`).
 - **Never hotlink** random external images.
+- **One image, one use.** Never use the same image file more than once on the
+  site (hero, card, or inline). Before choosing an image, check that its path
+  isn't already referenced anywhere in `app/`, `lib/` or `components/`. If no
+  unused, suitable image exists, use a new one or the no-image fallback, never
+  a repeat.
 
 ## Brand & design system
 
