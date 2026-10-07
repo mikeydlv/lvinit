@@ -74,6 +74,7 @@ if (-not $node) { $node = "C:\Program Files\nodejs\node.exe" }
 $script = Join-Path $Worktree "scripts\image-library\run.mjs"
 if (-not (Test-Path $script)) { Fail "The agent script is missing from the worktree ($script)." }
 Push-Location $Worktree
+$env:IMAGE_LIBRARY_STDOUT_ONLY = "1"
 & $node $script @NodeArgs 2>&1 | ForEach-Object { "$_" | Out-File -Append -Encoding utf8 $log }
 $code = $LASTEXITCODE
 Pop-Location

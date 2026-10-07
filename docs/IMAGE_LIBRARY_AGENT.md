@@ -53,7 +53,7 @@ fails safely and says why. It never fills the quota with weak frames.
    with evidence: the folder's documented place (`FOLDER_HINTS`), a place read
    on visible signage, or an unmistakable landmark. The code re-checks every
    filename (`lib/naming.mjs`) and strips unproven place names.
-8. **Selection.** Best-scoring 10, at most one per clip, two per place, two
+8. **Selection.** Best-scoring 10, at most one per clip, one per folder, two per place, three per area (Summerlin, Henderson…), two
    portrait, all visually distinct. Fewer than 10 → the run fails and records
    why; nothing is saved.
 9. **Export.** Source-resolution frame (HDR/HLG tone-mapped to SDR), resized to

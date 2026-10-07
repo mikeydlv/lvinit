@@ -205,19 +205,26 @@ export function selectFinal(pool, target, sel) {
   const sorted = [...pool].sort((a, b) => b.score - a.score);
   for (const relax of [0, 1]) {
     const picked = [];
-    const perClip = {};
-    const perPlace = {};
+    const n = { clip: {}, place: {}, folder: {}, area: {} };
+    const bump = (k, v) => (n[k][v] = (n[k][v] ?? 0) + 1);
     let portraits = 0;
     for (const c of sorted) {
       if (picked.length >= target) break;
       const place = c.review.location || c.hint.place || "unplaced";
-      if ((perClip[c.clip.rel] ?? 0) >= sel.maxPerClip + relax) continue;
-      if ((perPlace[place] ?? 0) >= sel.maxPerPlace + relax) continue;
+      const folder = c.clip.folder ?? c.clip.rel.split("/").slice(0, -1).join("/");
+      // Area = the folder's primary topic, so "Summerlin West" and "Downtown Summerlin" count together.
+      const area = c.hint.topics?.[0] ?? place;
+      if ((n.clip[c.clip.rel] ?? 0) >= sel.maxPerClip + relax) continue;
+      if ((n.place[place] ?? 0) >= sel.maxPerPlace + relax) continue;
+      if ((n.folder[folder] ?? 0) >= (sel.maxPerFolder ?? 1) + relax) continue;
+      if ((n.area[area] ?? 0) >= (sel.maxPerArea ?? 3) + relax) continue;
       if (c.clip.portrait && portraits >= sel.maxPortrait) continue;
       if (picked.some((p) => hammingHex(p.hash, c.hash) <= 14)) continue;
       picked.push(c);
-      perClip[c.clip.rel] = (perClip[c.clip.rel] ?? 0) + 1;
-      perPlace[place] = (perPlace[place] ?? 0) + 1;
+      bump("clip", c.clip.rel);
+      bump("place", place);
+      bump("folder", folder);
+      bump("area", area);
       if (c.clip.portrait) portraits++;
     }
     if (picked.length >= target) return picked;
@@ -303,6 +310,8 @@ export async function run(argv = process.argv.slice(2)) {
   const log = (m) => {
     const line = `${laNow()} ${m}`;
     console.log(line);
+    // Under Task Scheduler the wrapper already appends stdout to the same log.
+    if (process.env.IMAGE_LIBRARY_STDOUT_ONLY === "1") return;
     try {
       appendFileSync(config.log, line + "\n");
     } catch {}
@@ -377,15 +386,26 @@ export async function run(argv = process.argv.slice(2)) {
     const tried = new Set();
     const runHashes = [];
     let visionLeft = config.selection.maxVisionImages;
-    for (let round = 0; round < config.selection.maxRounds && pool.length < config.target * 1.6 && visionLeft > 0; round++) {
+    const enough = () => pool.length >= config.target * 1.6 && selectFinal(pool, config.target, config.selection).length >= config.target;
+    for (let round = 0; round < config.selection.maxRounds && !enough() && visionLeft > 0; round++) {
+      // Spread each round across areas: ≤2 clips per folder and ≤3 per area, and skip
+      // areas whose keepers already exceed what the final selection can use.
       const perFolder = {};
+      const perArea = {};
+      const poolArea = {};
+      for (const p of pool) poolArea[p.hint.topics?.[0] ?? "other"] = (poolArea[p.hint.topics?.[0] ?? "other"] ?? 0) + 1;
       const batchClips = [];
-      for (const c of ranked) {
-        if (batchClips.length >= config.selection.clipsPerRound) break;
-        if (tried.has(c.rel) || (perFolder[c.folder] ?? 0) >= 2) continue;
-        tried.add(c.rel);
-        perFolder[c.folder] = (perFolder[c.folder] ?? 0) + 1;
-        batchClips.push(c);
+      for (const strict of [true, false]) {
+        for (const c of ranked) {
+          if (batchClips.length >= config.selection.clipsPerRound) break;
+          const area = c.topics[0] ?? "other";
+          if (tried.has(c.rel) || (perFolder[c.folder] ?? 0) >= 2) continue;
+          if (strict && ((perArea[area] ?? 0) >= 3 || (poolArea[area] ?? 0) > config.selection.maxPerArea + 1)) continue;
+          tried.add(c.rel);
+          perFolder[c.folder] = (perFolder[c.folder] ?? 0) + 1;
+          perArea[area] = (perArea[area] ?? 0) + 1;
+          batchClips.push(c);
+        }
       }
       if (!batchClips.length) break;
       const candidates = [];

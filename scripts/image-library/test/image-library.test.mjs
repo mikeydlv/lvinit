@@ -116,7 +116,7 @@ test("rankClips prefers needed topics and fresh clips", () => {
 });
 
 test("selectFinal enforces one per clip, place caps and distinct pictures", () => {
-  const mk = (i, clip, place, hash) => ({ clip: { rel: clip, portrait: false }, hint: { place }, review: { location: place }, hash, score: 20 - i });
+  const mk = (i, clip, place, hash) => ({ clip: { rel: clip, folder: `F/${clip}`, portrait: false }, hint: { place }, review: { location: place }, hash, score: 20 - i });
   const pool = [mk(0, "a", "X", "0000000000000000"), mk(1, "a", "X", "ffff000000000000"), mk(2, "b", "X", "0000000000000001"), mk(3, "c", "Y", "ffffffff00000000")];
   const out = selectFinal(pool, 2, { maxPerClip: 1, maxPerPlace: 3, maxPortrait: 2 });
   assert.equal(out.length, 2);
@@ -143,4 +143,18 @@ test("commitExactly refuses unrelated changes", () => {
   } finally {
     rmSync(dir, { recursive: true, force: true });
   }
+});
+
+test("selectFinal caps one area even when place names differ", () => {
+  const mk = (i, clip, folder, place, hash) => ({ clip: { rel: `${folder}/${clip}`, folder, portrait: false }, hint: { place, topics: ["summerlin"] }, review: { location: place }, hash, score: 30 - i });
+  const hashes = ["0000000000000000", "00000000ffffffff", "ffffffff00000000", "ffffffffffffffff", "0f0f0f0f0f0f0f0f"];
+  const pool = [
+    mk(0, "a", "Media/Summerlin/GrandPark West", "Grand Park", hashes[0]),
+    mk(1, "b", "Media/Summerlin/Downtown Summerlin", "Downtown Summerlin", hashes[1]),
+    mk(2, "c", "Media/Summerlin/Red Rock", "Red Rock Canyon", hashes[2]),
+    mk(3, "d", "Media/Summerlin/Mesa Ridge park", "Mesa Ridge", hashes[3]),
+    { ...mk(4, "e", "Media/Henderson", "Henderson", hashes[4]), hint: { place: "Henderson", topics: ["henderson"] } },
+  ];
+  const out = selectFinal(pool, 4, { maxPerClip: 1, maxPerPlace: 2, maxPerFolder: 2, maxPerArea: 3, maxPortrait: 2 });
+  assert.deepEqual(out.map((p) => p.clip.rel.split("/").pop()), ["a", "b", "c", "e"]);
 });

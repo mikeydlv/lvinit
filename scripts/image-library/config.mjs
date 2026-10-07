@@ -181,6 +181,8 @@ export function loadConfig(overrides = {}) {
       maxVisionImages: 90,
       batchSize: 6,
       maxPerPlace: 2,
+      maxPerFolder: 1, // +1 only if 10 can't be met otherwise
+      maxPerArea: 3, // by the folder's primary topic (summerlin, henderson, southwest…)
       maxPerClip: 1,
       maxPortrait: 2,
     },
