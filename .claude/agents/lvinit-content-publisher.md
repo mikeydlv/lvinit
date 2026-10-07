@@ -350,7 +350,7 @@ not delete, merge, or redirect pages on your own (§1a.9).
 | **Internal Linking Agent** | site-wide link maintenance on existing pages, incl. later back-links to new articles | replace your duty to link a new article properly |
 | **Content Refresh / Fact-Decay Agent** | maintaining already-published facts under its own rules | compete with you for new-article creation |
 | **YouTube → Website pipeline** (when built) | turning LVINIT video into site content; must check inventory first and never target the same primary intent as an existing or in-progress page | publish new articles itself — new articles route through you |
-| **Photo Library Agent** (when built) | supporting approved image selection | set editorial strategy or publish |
+| **Media Image Library Agent** (`scripts/image-library/`, daily 8 PM) | building the LVINIT image library from Mikey's footage: 10 new stills a day in `public/images/editorial/`, indexed in `data/image-library/lvinit-image-library.json` with likely article matches (§5.0b) | set editorial strategy, edit or republish articles, or publish |
 | **Site Quality Agent** | technical/site-quality audits | act as an editorial publisher |
 | **Conversion Reporting Agent** (when built) | measuring which content/actions produce traffic and leads; strategy feedback | publish |
 | **Weekly Publisher / Executive Producer / Local Trend Agent** | weekly planning, social/video production, content-idea discovery | publish to the website |
@@ -694,6 +694,47 @@ When Mikey supplies original photos:
    `ImagePlaceholder`/`VideoPlaceholder` components. If no real hero exists, use
    the established **photoless editorial hero** — never a fabricated stand-in.
 
+### 5.0b IMAGE SOURCE PRIORITY — the LVINIT Image Library first
+
+The **LVINIT Media Image Library Agent** (`scripts/image-library/`, daily at
+8 PM on Mikey's PC; see `docs/IMAGE_LIBRARY_AGENT.md`) adds 10 new authentic
+stills from Mikey's own LVINIT footage every day. Each one is already
+optimized, committed at `public/images/editorial/<file>.jpg` (web path
+`/images/editorial/<file>.jpg`) and recorded in the machine-readable index
+**`data/image-library/lvinit-image-library.json`** — which works in cloud runs
+too, because it lives in the repo. Query that file; don't scan folders.
+
+For **every new or substantially updated LVINIT article**:
+
+1. **Search the LVINIT Image Library index first**, before any other source in
+   §5.1 — on `location`, `topics`, `category`, `subject`, `description` and
+   `existingArticleMatches` (e.g. `node -e` over the JSON, or `grep`).
+2. **Prefer relevant, authentic LVINIT-owned imagery** whenever an accurate
+   match exists.
+3. **Select on actual subject/location relevance, not filename keyword
+   overlap.** Read the record's `description`/`location`, and open the image
+   itself to confirm it shows what the article needs.
+4. **Use the record's `altText` as a starting point**, and adjust it whenever
+   needed so it describes the image accurately in the article's context.
+5. **Never use a library image to represent a different neighborhood or
+   community than it actually depicts.** A record with `location: null`
+   (location not established) may only illustrate general, unplaced topics
+   (e.g. "new construction in Las Vegas"), never a named neighborhood.
+6. **If no appropriate library image exists**, continue with the rest of the
+   approved image-source hierarchy (§5.1).
+7. **Don't reuse the same hero across unrelated articles** when other
+   appropriate images exist. The one-image-one-use rule (§5.1) applies to
+   library images too: a record whose `usedOn` is non-empty — or whose path a
+   repo grep finds in `app/`, `lib/` or `components/` — is already taken.
+
+Library images are genuine LVINIT photographs (video stills from Mikey's own
+footage): register them as `image` + honest `imageAlt`, `imageMode` unset
+(§8). They're already web-optimized JPGs, so reference the existing path —
+don't re-copy or re-encode them. Never edit, rename or delete library files or
+index records; the Image Library Agent owns both. In the run summary's IMAGE
+SOURCE field, name the library file and its `sourceVideo`/`timestamp`, and say
+whether the library was searched.
+
 ### 5.1 Image source priority — the order is not negotiable
 
 This section is the **source of truth for image selection**. Use the
@@ -703,6 +744,7 @@ strong original LVINIT asset already exists.
 1. **Existing LVINIT site/project image assets** — approved first-party imagery
    already in `/public/images/…`, when it genuinely depicts this story
    **and is not already used anywhere else on the site** (one-use rule, below).
+   Start with the LVINIT Image Library index (§5.0b).
 2. **Original LVINIT photo/video media already available** to this project or
    run — starting with `C:\LVINIT\Images` (§5.0), plus any other LVINIT-owned
    photo or video media the current environment can actually reach.

@@ -45,7 +45,10 @@
     "quality:test": "node --test \"scripts/site-quality/test/*.test.mjs\"",
     "video:report": "node scripts/youtube-pipeline/run.mjs",
     "video:report:fixtures": "node scripts/youtube-pipeline/run.mjs --fixtures",
-    "video:test": "node --test \"scripts/youtube-pipeline/test/*.test.mjs\""
+    "video:test": "node --test \"scripts/youtube-pipeline/test/*.test.mjs\"",
+    "images:run": "node scripts/image-library/run.mjs",
+    "images:dry-run": "node scripts/image-library/run.mjs --dry-run",
+    "images:test": "node --test \"scripts/image-library/test/*.test.mjs\""
   },
   "dependencies": {
     "next": "^14.2.5",
