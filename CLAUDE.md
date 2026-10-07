@@ -35,26 +35,33 @@ business second.
 - When adding photos, use **local files in `/public/images/`** with descriptive
   filenames (e.g. `hero/summerlin-drone-overlook-golden-hour.webp`).
 - **Never hotlink** random external images.
-- **Image reuse: heroes once, inline sparingly** (Mikey's policy, 2026-10-07;
-  the Content Publisher routine §6.7 and the agent file §5.0b.7 carry the same
-  policy). Before choosing an image, check whether its path is referenced in
-  `app/`, `lib/` or `components/`, and check its image-library `usedOn` and
-  `usage`.
-  - **Hero images:** A hero image may only be used as a hero once. Never reuse
-    the same hero image on another article. Any image that has previously been
-    used anywhere, including inline, is not eligible to become a hero later. If
-    prior usage role is unknown, treat the image as previously used and
-    therefore not hero-eligible.
-  - **Inline images:** Prefer unused inline images whenever possible. Inline
-    images may be reused only when there is a strong editorial reason and the
-    image genuinely supports the section. Don't reuse inline images merely for
-    convenience, and avoid repeated inline reuse across many articles.
+- **Image reuse: ONE IMAGE → MAXIMUM ONE HERO PLACEMENT** (Mikey's policy,
+  2026-10-07; the Content Publisher routine §6.7/§6.8/§6.11 and the agent file
+  §5.0b.7/§5.0b.8 carry the same policy). Before choosing an image, check its
+  image-library `usedOn` and `usage`, and check whether its path is referenced
+  in `app/`, `lib/` or `components/` when needed.
+  - **Hero images:** The same image may only serve as a hero image on ONE
+    article. Never use an image as a hero if its `usage` history already
+    contains a hero placement, which makes it permanently hero-ineligible.
+    Previous inline use does NOT disqualify an image from becoming a hero.
+    Hero uniqueness depends on previous HERO usage, not on earlier use of any
+    kind. For an image used before `usage` tracking began, check the
+    referencing file. If it was a hero, or you can't tell, treat it as a prior
+    hero placement.
+  - **Inline images:** Prefer unused inline images whenever equally relevant
+    alternatives exist. Inline images may be reused when they genuinely
+    support the section and are the best available visual. A previous hero
+    may appear inline, and a previous inline image may be reused inline, when
+    genuinely useful. Don't reuse inline images merely for convenience, and
+    avoid repeating the same inline image across many articles when other
+    relevant images are available.
   - **Tracking:** Keep `usedOn` in its existing format so the nightly Image
     Library Agent can rebuild it safely. Keep the separate persistent `usage`
-    field for role (hero or inline), article slug, article URL, article
-    section when practical, and assignment/publication date. Only write usage
-    after the article is verified live, and don't mark images used if
-    publishing fails.
+    array (one entry per placement: role hero or inline, article slug, article
+    URL, article section when practical, assignment/publication date). Never
+    alter or remove previous `usage` records. Only write usage after the
+    article is verified live. If publishing fails, don't add the article to
+    `usedOn` and don't add a `usage` entry.
   - If no eligible, suitable image exists, use a new one or the no-image
     fallback.
 

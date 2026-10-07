@@ -476,12 +476,13 @@ On top of §9, every scheduled run reports:
   private local filesystem path).
 - **Images used** (one line for every image, not only the hero): the hero
   filename, then each inline filename with the section/topic it supports;
-  whether each is a reuse (an inline reuse needs its editorial reason,
-  §5.0b.7). Also give the **total number of first-party LVINIT images** used.
+  whether each was used before (for the hero, confirm it had no prior hero
+  placement; for an inline reuse, say why it was the best visual, §5.0b.7).
+  Also give the **total number of first-party LVINIT images** used.
 - **Image Library records updated:** for each Media Image Library image used,
   its `usedOn`/`usage` status (`updated after publish`, `not updated: publish
   failed`, or `not applicable`), plus any image-library limitations hit (thin
-  coverage for the area, no unused hero candidate, index unavailable).
+  coverage for the area, no hero-eligible candidate, index unavailable).
 - **Routine/agent instruction drift detected:** none, or what differed and
   which rule was followed (the one carrying the newer explicit Mikey-approved
   rule wins).
@@ -855,42 +856,48 @@ sites don't have.
 
 #### 5.0b.7 Image reuse rule (Mikey's rule, 2026-10-07)
 
-This is the canonical image-reuse policy Mikey approved on 2026-10-07.
-CLAUDE.md and routine §6.7 carry the same policy.
+This is the canonical image-reuse policy Mikey approved on 2026-10-07. Routine
+§6.7 and CLAUDE.md carry the same policy.
+
+**The hard rule: ONE IMAGE → MAXIMUM ONE HERO PLACEMENT.** Inline usage is
+flexible, but should favor visual variety.
+
+Before selecting any image: inspect its library record; inspect `usedOn` and
+`usage`; grep the repo (`app/`, `lib/`, `components/`) for its path when
+needed; check whether another filename is the same or a near-identical frame
+(same `sourceVideo` and close `timestamp`, or a matching `hash`); and prefer
+unused images when they're equally relevant.
 
 **Hero images**
 
-- A hero image may only be used as a hero once.
-- Never reuse the same hero image on another article.
-- Any image that has previously been used anywhere, including inline, is
-  **not** eligible to become a hero later. That covers any record with a
-  non-empty `usedOn` or `usage`, and any image whose path a repo grep finds in
-  `app/`, `lib/` or `components/`.
-- If prior usage role is unknown, treat the image as previously used and
-  therefore not hero-eligible. Examples: a library record with `usedOn` but no
-  `usage` entry, or a non-library repo image.
+- The same image may only serve as a hero image on ONE article.
+- Never use an image as a hero if its `usage` history already contains a hero
+  placement. That placement makes it permanently ineligible for another hero.
+- Previous inline use does **not** automatically disqualify an image from
+  becoming a hero.
+- Hero uniqueness depends on previous **hero** usage, not on earlier use of any
+  kind.
+- **Images used before `usage` tracking began.** Some images have repo
+  references but no `usage` entry, such as library records with `usedOn` but no
+  `usage`, and non-library repo photos. `usage` can't answer for these, so
+  check the referencing file. An image is a hero if it is a registry
+  `image` in `lib/content.ts` or a page's hero/OpenGraph image. If it is a
+  hero, or you can't tell, treat it as a prior hero placement, so it isn't
+  hero-eligible. That keeps the one-hero hard rule intact for older pages.
 
 **Inline images**
 
-- Prefer unused inline images whenever possible.
-- Inline images may be reused only when there is a strong editorial reason and
-  the image genuinely supports the section. Examples: an important landmark or
-  reference image with no viable alternative, or a core explanatory image
-  that is legitimately useful in more than one context. Record the reason in a
-  code comment and in the run summary.
+- Prefer unused inline images whenever equally relevant alternatives exist.
+- Inline images may be reused when they genuinely support the section and are
+  the best available visual.
+- A previous hero image may later appear inline when genuinely useful.
+- A previous inline image may be reused inline when genuinely useful.
 - Don't reuse inline images merely for convenience.
-- Avoid repeated inline reuse across many articles.
-- An inline reuse can't be a former hero, because hero images are never reused
-  on another article. When an image's prior role is unknown, check the
-  referencing file. If you can't confirm the earlier use was inline, don't
-  reuse it.
+- Avoid repeatedly using the same inline image across many articles when other
+  relevant images are available.
 - Never place the same image twice in one article, and never use
-  near-identical frames from the same moment of a clip as separate images.
-
-Before selecting any image: read its library record, check `usedOn` and
-`usage`, grep the repo for its path, and check whether another filename is the
-same or a near-identical frame (same `sourceVideo` and close `timestamp`, or a
-matching `hash`). Prefer unused images that widen LVINIT's visual coverage.
+  near-identical frames from the same moment of a clip as separate images
+  (§5.0b.9).
 
 #### 5.0b.8 Record usage only after successful publication
 
@@ -918,12 +925,20 @@ image the article uses, hero and inline:
   `chore(image-library): record usage for <slug>`) through the same
   branch/merge path the run used.
 
+**`usage` drives hero eligibility.** When selecting a hero image, use `usage`
+to find out whether the image has already served as a hero. An image with
+prior inline usage remains hero-eligible if it has never been used as a hero.
+An image with a previous hero placement is permanently ineligible for another
+hero placement. That's why the card-mirrors-hero entry above is always
+recorded as `role: "hero"`. For images used before `usage` tracking began, see
+§5.0b.7.
+
 **Tracking, in short:** keep `usedOn` in its existing format so the nightly
 Image Library Agent can rebuild it safely, and keep role data in the separate
 persistent `usage` field. Only write usage after the article is verified live.
-Don't mark images used if publishing fails, is held, or is rolled back. In
-that case don't consume the image: leave `usedOn` and `usage` untouched and
-report it in the summary.
+If publishing fails, is held, or is rolled back, don't consume the image: don't
+add the article to `usedOn`, don't add a `usage` entry, and report it in the
+summary.
 
 #### 5.0b.9 Visual diversity
 
@@ -953,7 +968,12 @@ topic**. It should be visually strong, immediately relevant, factually
 representative, locally identifiable when appropriate, and work at
 social/OpenGraph dimensions. Don't pick it automatically because it's the
 first match, the newest image, the one with the most keywords, or simply the
-most dramatic. It must also pass the reuse rule (§5.0b.7).
+most dramatic.
+
+It must also pass the hero-uniqueness rule (§5.0b.7): an image may serve as a
+hero on only one article. Previous inline usage doesn't disqualify it, but any
+image whose `usage` history already contains a hero placement is permanently
+ineligible to serve as another article's hero.
 
 #### 5.0b.12 Performance and mobile
 
@@ -1002,19 +1022,17 @@ strong original LVINIT asset already exists.
 fallback panel is still correct and still looks finished — better than a weak,
 unlicensed, or misleading image.
 
-**Image reuse: heroes once, inline sparingly (Mikey's policy, 2026-10-07;
-full rule in §5.0b.7).** A hero image is used as a hero once and never reused
-on another article. An image already used anywhere, including inline, or one
-whose prior role is unknown, is never a hero. Inline images may be reused only
-for a strong editorial reason, never for convenience. Before selecting any image,
-grep the repo (`app/`, `lib/`, `components/`) for its path and check its library
-`usedOn`/`usage`. If it's already referenced, it's off the table, unless it
-qualifies for §5.0b.7 inline reuse. Reusing an existing repo photo "because it
-fits" isn't allowed. If no unused suitable image exists, work down this list (a
-new original photo or video still, approved external imagery, an editorial
-cover for abstract topics) or use the no-image fallback. Never repeat an image
-to fill a slot. Existing duplicates are left alone unless Mikey asks for a
-cleanup.
+**Image reuse: one image, at most one hero placement (Mikey's policy,
+2026-10-07; full rule in §5.0b.7).** An image may serve as a hero on only one
+article. Previous inline use doesn't disqualify it from becoming a hero, but
+a previous hero placement does, permanently. Inline reuse is allowed when the
+image genuinely supports the section and is the best available visual, but
+never for convenience. Favor visual variety. Before selecting any image, check
+its library `usedOn`/`usage`, and grep the repo (`app/`, `lib/`, `components/`)
+for its path when needed. If no eligible suitable image exists, work down this
+list (a new original photo or video still, approved external imagery, an
+editorial cover for abstract topics) or use the no-image fallback. Existing
+duplicates are left alone unless Mikey asks for a cleanup.
 
 Authentic first-party media always beats external or generated imagery. Never
 swap an existing genuine photograph for a generated cover to make a row of
@@ -1184,8 +1202,9 @@ For the hero and **every** inline image (§5.0b), also verify:
   and captions are factual when used;
 - image locations match the article's claims, and nothing gives a misleading
   geographic representation or makes an unsupported visual claim (§5.0b.10);
-- no unintended reuse: no reused hero, no previously used image as hero, and
-  any inline reuse has a recorded editorial reason (§5.0b.7);
+- the hero has no prior hero placement (one image, at most one hero
+  placement), and any inline reuse genuinely supports its section and is the
+  best available visual (§5.0b.7);
 - no duplicate or near-duplicate images within the article (§5.0b.9);
 - first-party images were preferred when relevant, and each inline placement
   supports its surrounding section (§5.0b.4);
