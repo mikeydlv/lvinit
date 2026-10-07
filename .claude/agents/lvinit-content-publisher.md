@@ -339,6 +339,16 @@ under the same research, integrity, build, and verification rules as a new
 article. Keep its URL, keep `publishedAt`, set `dateModified` honestly, and do
 not delete, merge, or redirect pages on your own (§1a.9).
 
+The image rules (§5.0b) and SEO/AEO standards apply to expansions too, and every
+expansion checks the page's **visual coverage**. When the content is strong but
+the page has only a hero, repeats images, uses weak generic imagery, or is
+missing relevant imagery, **and** suitable first-party LVINIT images that follow
+the reuse rule (§5.0b.7) now exist, improve its visual coverage as part of the
+substantive update. Don't update an old article only to force images into it
+unless that has genuine editorial or search value. A strong article with weak
+visual coverage is a legitimate expansion candidate when weighing candidates
+(§1a.4).
+
 ### 1a.8 Agent ownership — no clashes
 
 | Agent | Owns | Does **not** |
@@ -350,7 +360,7 @@ not delete, merge, or redirect pages on your own (§1a.9).
 | **Internal Linking Agent** | site-wide link maintenance on existing pages, incl. later back-links to new articles | replace your duty to link a new article properly |
 | **Content Refresh / Fact-Decay Agent** | maintaining already-published facts under its own rules | compete with you for new-article creation |
 | **YouTube → Website pipeline** (when built) | turning LVINIT video into site content; must check inventory first and never target the same primary intent as an existing or in-progress page | publish new articles itself — new articles route through you |
-| **Media Image Library Agent** (`scripts/image-library/`, daily 8 PM) | building the LVINIT image library from Mikey's footage: 10 new stills a day in `public/images/editorial/`, indexed in `data/image-library/lvinit-image-library.json` with likely article matches (§5.0b) | set editorial strategy, edit or republish articles, or publish |
+| **Media Image Library Agent** (`scripts/image-library/`, daily 8 PM) | building the LVINIT image library from Mikey's footage: 10 new stills a day in `public/images/editorial/`, indexed in `data/image-library/lvinit-image-library.json` with likely article matches (§5.0b); every other field of each index record | set editorial strategy, edit or republish articles, or publish. (The Publisher writes only the `usedOn`/`usage` fields, and only after publishing, §5.0b.8) |
 | **Site Quality Agent** | technical/site-quality audits | act as an editorial publisher |
 | **Conversion Reporting Agent** (when built) | measuring which content/actions produce traffic and leads; strategy feedback | publish |
 | **Weekly Publisher / Executive Producer / Local Trend Agent** | weekly planning, social/video production, content-idea discovery | publish to the website |
@@ -445,7 +455,8 @@ On top of §9, every scheduled run reports:
 - **Action selected:** NEW ARTICLE / EXISTING PAGE EXPANSION / NO PUBLISH
 - **Primary cluster** (A–E)
 - **Opportunity source:** GSC / SEARCH BRIEF / LOCAL DEVELOPMENT / CONTENT GAP
-  / EVERGREEN / MARKET UPDATE / OTHER (with any input IDs)
+  / EVERGREEN / MARKET UPDATE / VIDEO / IMAGE LIBRARY / OTHER (with any input
+  IDs)
 - **Why this action outranked the alternatives** (name the runners-up)
 - **Pillar / supporting pages considered**
 - **Duplication / cannibalization check result**
@@ -463,6 +474,17 @@ On top of §9, every scheduled run reports:
   whether original LVINIT media was checked or unavailable (§5.1a). For a
   video still, identify the source footage/project (a descriptive name, not a
   private local filesystem path).
+- **Images used** (one line for every image, not only the hero): the hero
+  filename, then each inline filename with the section/topic it supports;
+  whether each is a reuse (an inline reuse needs its editorial reason,
+  §5.0b.7). Also give the **total number of first-party LVINIT images** used.
+- **Image Library records updated:** for each Media Image Library image used,
+  its `usedOn`/`usage` status (`updated after publish`, `not updated: publish
+  failed`, or `not applicable`), plus any image-library limitations hit (thin
+  coverage for the area, no unused hero candidate, index unavailable).
+- **Routine/agent instruction drift detected:** none, or what differed and
+  which rule was followed (the one carrying the newer explicit Mikey-approved
+  rule wins).
 - plus: topic, why relevant, sources, article title, slug, files changed,
   commit, PR/merge status, production URL, lint/typecheck/build results, and
   production verification results.
@@ -659,15 +681,21 @@ the location is uncertain, describe the visible scene rather than guessing.
 #### The image step in every article run
 
 Before opening a new article PR: research and draft the piece →
-identify the hero/card image requirement → work down the image source priority
-(§5.1): existing repo assets, then `C:\LVINIT\Images` and other reachable
-LVINIT media, then a still from original LVINIT footage → inspect the strongest
-candidates → if a suitable image exists, select it, copy it in, optimize it,
-write accurate alt text, and register it in `lib/content.ts` with the right
-`imageMode`/photo metadata (§8) → if none is suitable, continue down §5.1
+identify the hero/card image requirement **and the sections that inline images
+would genuinely help** (§5.0b.3–4) → work down the image source priority
+(§5.1), starting with the LVINIT Media Image Library index (§5.0b), then
+existing repo assets, then `C:\LVINIT\Images` and other reachable LVINIT media,
+then a still from original LVINIT footage → inspect the strongest candidates →
+if suitable images exist, select them, copy in and optimize any that aren't
+already in the repo (library images are already optimized, so don't re-copy
+them), write accurate alt text, place the inline images beside the sections
+they support, and register the hero/card in `lib/content.ts` with the right
+`imageMode`/photo metadata (§8) → if nothing is suitable, continue down §5.1
 (cleared external imagery, then a generated editorial cover per §5a) and
 register it correctly → run the image quality gate (§5.1g) → run the
-build/lint → and report the image source and why (§9).
+build/lint → publish → update the library's `usedOn`/`usage` only after
+publishing succeeds (§5.0b.8) → and report every image used and why (§9,
+§1a.11).
 
 ### Working with photos Mikey supplies directly
 
@@ -694,46 +722,249 @@ When Mikey supplies original photos:
    `ImagePlaceholder`/`VideoPlaceholder` components. If no real hero exists, use
    the established **photoless editorial hero** — never a fabricated stand-in.
 
-### 5.0b IMAGE SOURCE PRIORITY — the LVINIT Image Library first
+### 5.0b LVINIT Media Image Library and visual SEO/AEO
+
+Images are part of an article's information architecture, not decoration.
+Every new or substantially updated LVINIT article should use **several
+relevant images** when the library supports it. The aim is to make LVINIT more
+useful to readers, more visually informative, stronger in Google Search and
+Google Images, easier for AI/answer engines to understand, more authoritative
+on long-tail Las Vegas queries, and set apart by first-party local imagery.
+**Accuracy and relevance always outrank SEO opportunity.**
+
+#### 5.0b.1 Full access to the library
 
 The **LVINIT Media Image Library Agent** (`scripts/image-library/`, daily at
 8 PM on Mikey's PC; see `docs/IMAGE_LIBRARY_AGENT.md`) adds 10 new authentic
 stills from Mikey's own LVINIT footage every day. Each one is already
-optimized, committed at `public/images/editorial/<file>.jpg` (web path
+optimized, committed at **`public/images/editorial/<file>.jpg`** (web path
 `/images/editorial/<file>.jpg`) and recorded in the machine-readable index
-**`data/image-library/lvinit-image-library.json`** — which works in cloud runs
-too, because it lives in the repo. Query that file; don't scan folders.
+**`data/image-library/lvinit-image-library.json`**. Because the index lives in
+the repo, it works in cloud runs too. Query that file; don't scan folders.
 
-For **every new or substantially updated LVINIT article**:
+The indexed library is an **approved first-party LVINIT image source**. You
+have full access to it for editorial use. Never ask Mikey to approve
+individual library images.
 
-1. **Search the LVINIT Image Library index first**, before any other source in
-   §5.1 — on `location`, `topics`, `category`, `subject`, `description` and
-   `existingArticleMatches` (e.g. `node -e` over the JSON, or `grep`).
+#### 5.0b.2 Source priority and selection
+
+For every new or substantially updated article:
+
+1. **Search the Media Image Library index first**, before any other source in
+   §5.1. Search on `location`, `topics`, `category`, `subject`, `description`,
+   `possibleArticleUses` and `existingArticleMatches` (e.g. `node -e` over the
+   JSON, or `grep`).
 2. **Prefer relevant, authentic LVINIT-owned imagery** whenever an accurate
-   match exists.
-3. **Select on actual subject/location relevance, not filename keyword
-   overlap.** Read the record's `description`/`location`, and open the image
-   itself to confirm it shows what the article needs.
-4. **Use the record's `altText` as a starting point**, and adjust it whenever
-   needed so it describes the image accurately in the article's context.
-5. **Never use a library image to represent a different neighborhood or
-   community than it actually depicts.** A record with `location: null`
-   (location not established) may only illustrate general, unplaced topics
-   (e.g. "new construction in Las Vegas"), never a named neighborhood.
-6. **If no appropriate library image exists**, continue with the rest of the
-   approved image-source hierarchy (§5.1).
-7. **Don't reuse the same hero across unrelated articles** when other
-   appropriate images exist. The one-image-one-use rule (§5.1) applies to
-   library images too: a record whose `usedOn` is non-empty — or whose path a
-   repo grep finds in `app/`, `lib/` or `components/` — is already taken.
+   match exists. Other approved local LVINIT assets (§5.0, §5.1) are fair game
+   when they're useful.
+3. **Select on** the actual visible subject, the verified location/community,
+   the record's `description`, its source-video metadata (`sourceVideo`,
+   `footageDate`, `locationEvidence`), the article section the image would
+   serve, and how much it informs the reader. Open the image itself to confirm
+   it shows what the article needs.
+4. **Never choose an image just because its filename contains matching
+   keywords**, and never use a visually inaccurate image to improve keyword
+   coverage.
+5. **If the library lacks enough suitable images**, continue down the approved
+   hierarchy (§5.1). Never hotlink third-party images, never copy news
+   photography because another article used it, and never generate artificial
+   imagery when suitable authentic LVINIT imagery exists.
 
 Library images are genuine LVINIT photographs (video stills from Mikey's own
-footage): register them as `image` + honest `imageAlt`, `imageMode` unset
-(§8). They're already web-optimized JPGs, so reference the existing path —
-don't re-copy or re-encode them. Never edit, rename or delete library files or
-index records; the Image Library Agent owns both. In the run summary's IMAGE
-SOURCE field, name the library file and its `sourceVideo`/`timestamp`, and say
-whether the library was searched.
+footage). Register a library hero as `image` + honest `imageAlt`, with
+`imageMode` unset (§8). They're already web-optimized JPGs, so reference the
+existing path and don't re-copy or re-encode them. Never rename, edit or delete
+library files. Never change index records, apart from the `usedOn`/`usage`
+updates in §5.0b.8. In the run summary, name each library file with its
+`sourceVideo`/`timestamp`, and say whether the library was searched.
+
+#### 5.0b.3 Multi-image standard
+
+Don't limit an article to a hero. A normal substantive article targets about
+**1 hero + 2–5 relevant inline editorial images**. Neighborhood guides,
+development guides, community comparisons, relocation guides and
+new-construction guides may carry more when each image genuinely adds
+information. Shorter pieces may use fewer.
+
+**This is not a quota.** Never insert an image just to reach a number. Every
+image has to add something real: visual evidence, or local, geographic,
+housing, development, lifestyle or explanatory context. The goal isn't "more
+pictures in the article". The goal is an article that's more useful because the
+reader can see what's being described. Too few relevant inline images never by
+itself blocks a strong article. Use fewer images when fewer genuinely relevant
+ones exist.
+
+#### 5.0b.4 Section-level matching and inline placement
+
+Place each inline image **next to the section it actually supports**. Before
+inserting one, ask: *what question or concept in this section does this image
+help the reader understand?*
+
+- "What Does Southwest Las Vegas Look Like?" → an authentic Southwest Las Vegas
+  streetscape or neighborhood image.
+- "New Construction in Tule Springs" → actual Tule Springs new-home or
+  construction imagery.
+- "How Close Is Summerlin to the Mountains?" → a documented Summerlin/mountain
+  context image, if one exists.
+- "What Is Being Built in Northwest Las Vegas?" → documented development or
+  construction footage from that area.
+
+Avoid dumping images into a gallery at the end, adding them between arbitrary
+paragraphs, stacking similar images with no explanatory reason, and dropping
+random Las Vegas imagery in just for visual variety. In longer articles,
+distribute images naturally through the piece. Use the page's existing
+`<figure>` / `components/story/` patterns. Don't redesign article templates or
+global image components unless that's genuinely needed to support approved
+imagery safely.
+
+#### 5.0b.5 Visual query coverage
+
+Favor original images that help answer questions people search for or ask AI
+systems. Examples: what Summerlin, Henderson, Southwest Las Vegas, North Las
+Vegas, Tule Springs or Skye Canyon looks like; what homes are being built in
+Las Vegas and what new construction looks like; what living near the
+mountains is like; what the streets, model homes, parks and trails, and nearby
+commercial areas look like; what's being built in an area; how developed a
+neighborhood is; and which housing styles are common. First-party imagery
+is most valuable when it shows local detail that generic national real-estate
+sites don't have.
+
+#### 5.0b.6 Visual SEO/AEO: filenames, alt text, captions
+
+1. Keep the library's descriptive, SEO-friendly filename. Don't rename indexed
+   images unnecessarily.
+2. Write **concise, factual alt text describing what is actually visible.**
+   Start from the record's `altText` and adjust it so it's accurate in the
+   article's context.
+3. **Location-aware, not location-guessing:** name the specific
+   community/location naturally only when it's known, the metadata supports
+   it, and the image actually shows that place.
+   - Good: "New construction homes in the Tule Springs area of North Las Vegas"
+   - Good: "Residential streetscape in Summerlin on the western side of Las
+     Vegas"
+   - Bad: "Las Vegas homes best real estate houses buy Vegas Nevada property"
+4. Alt text exists first for accessibility, factual understanding of the
+   image, and semantic context. **Never keyword-stuff it.**
+5. Use a caption only when it adds useful context for the reader. Never add
+   repetitive captions under every image for SEO.
+6. Nearby copy can reinforce the relevant entities naturally: neighborhood,
+   community, development, housing type, area, roadway, park, amenity,
+   relationship to the mountains, Las Vegas Valley context.
+7. Never make a claim through a filename, alt text, caption or nearby copy that
+   the image and its metadata can't support.
+
+#### 5.0b.7 Image reuse rule (Mikey's rule, 2026-10-07)
+
+This refines the site-wide "one image, one use" rule (CLAUDE.md, §5.1) for
+article imagery. Mikey set it explicitly on 2026-10-07, and it is the newer
+rule:
+
+- **Hero images are never reused across articles.** An image that has served as
+  any article's hero can't appear in another article, as hero or inline.
+- **A hero must be an image that has never been used before.** Any record with
+  a non-empty `usedOn` or `usage`, or whose path a repo grep finds in `app/`,
+  `lib/` or `components/`, is ineligible as a hero. That includes an image
+  previously used only inline.
+- **Inline images default to one use.** Prefer unused images every time.
+  Reuse a previously *inline-only* image only when it's genuinely relevant to
+  the section **and** there's a strong editorial reason. Examples: an
+  important landmark or reference image with no viable alternative, or a core
+  explanatory image that is legitimately useful in more than one context.
+  "It's easier" is never a reason. Record the reason in the code comment and
+  the run summary.
+- **Never place the same image twice in one article**, and never use
+  near-identical frames from the same moment of a clip as separate images.
+- **If a record's prior role is unknown**, treat it as possibly a hero, so it
+  isn't eligible for reuse. Examples: a library record with `usedOn` but no
+  `usage` entry, or a non-library repo image. Check the referencing file. If
+  you can't confirm the earlier use was inline only, don't reuse the image.
+
+Before selecting any image: read its library record, check `usedOn` and
+`usage`, grep the repo for its path, and check whether another filename is the
+same or a near-identical frame (same `sourceVideo` and close `timestamp`, or a
+matching `hash`). Prefer unused images that widen LVINIT's visual coverage.
+
+#### 5.0b.8 Record usage only after successful publication
+
+After the article **successfully publishes** (merged, deployed, and verified
+live per §1a.9), update the index record for **every** Media Image Library
+image the article uses, hero and inline:
+
+- **`usedOn`** keeps its existing format: an array of repo file paths that
+  reference the image (e.g. `app/guides/<slug>/page.tsx`, `lib/content.ts`).
+  Add the referencing paths. Don't rewrite them into another shape. The Image
+  Library Agent recomputes `usedOn` from repo references every night, so this
+  field can't hold role data.
+- **`usage`** is an additive array that holds the role tracking. Append one
+  object per placement:
+  `{ "slug": "<registry slug>", "url": "https://www.lvinit.com<href>",
+  "role": "hero" | "inline", "section": "<H2 it supports, inline only>",
+  "publishedAt": "YYYY-MM-DD" }`. A card that mirrors the article's own hero
+  counts as part of that `hero` placement. Create the field when a record
+  doesn't have it yet. Never remove or edit existing entries.
+- Change **nothing else** in the record or the file (`count`, `updatedAt`,
+  quality, matches and so on belong to the Image Library Agent). Keep the
+  file's 2-space JSON formatting. Afterwards, confirm it still parses and that
+  `images.length` is unchanged.
+- Commit the change as a small follow-up to the published article (e.g.
+  `chore(image-library): record usage for <slug>`) through the same
+  branch/merge path the run used.
+
+**Never mark an image as used before publication succeeds.** If publishing
+fails, is held, or is rolled back, don't consume the image: leave `usedOn` and
+`usage` untouched and report that in the summary.
+
+#### 5.0b.9 Visual diversity
+
+Within one article, avoid several near-identical model-home angles, repeated
+streetscapes, multiple stills from nearly the same moment of a video, repeated
+front elevations with no new information, or images that all show essentially
+the same thing. Aim for complementary coverage that shows the place from
+different perspectives. Example: community sign, streetscape, homes, mountains,
+development activity. Five nearly identical elevations from one street is the
+weak version.
+
+#### 5.0b.10 Location integrity
+
+**Never use one neighborhood to visually represent another.** Don't present
+Summerlin imagery as Henderson, Tule Springs as Skye Canyon, or Southwest Las
+Vegas as Northwest Las Vegas. Don't call generic Northwest footage "Monument
+Hills" unless the metadata supports that. When a record's `location` is
+`null` or uncertain, the image may only illustrate a broader concept it
+truthfully shows. A generic new-home exterior can support a section on new
+construction in general, but it must never be captioned or described as a
+specific community. Accuracy outranks SEO/AEO value.
+
+#### 5.0b.11 Hero image
+
+The hero is the **strongest broad visual representation of the article's
+topic**. It should be visually strong, immediately relevant, factually
+representative, locally identifiable when appropriate, and work at
+social/OpenGraph dimensions. Don't pick it automatically because it's the
+first match, the newest image, the one with the most keywords, or simply the
+most dramatic. It must also pass the reuse rule (§5.0b.7).
+
+#### 5.0b.12 Performance and mobile
+
+Use the site's existing image optimization architecture (`next/image` and the
+established story patterns). Every image has to load correctly, stay
+responsive, work on mobile, keep its aspect ratio, avoid unnecessary layout
+shift and oversized files, and not materially hurt Core Web Vitals. Never
+upscale low-resolution images. Verify the hero and representative inline
+images on desktop and mobile in the build preview, and again in production
+after deploy (§5.1g).
+
+#### 5.0b.13 Image fail-safe
+
+Publishing nothing is better than publishing visually inaccurate content or
+misleading local imagery. If the image library is unavailable, continue only
+if an existing approved image workflow (§5.1, including the no-image
+fallback) can safely support the article, and record the library as
+unavailable in the run summary. Never fabricate image metadata, and never
+present an image as being from a location when that's uncertain.
+
+Existing-page expansions follow the same rules and check the page's visual
+coverage (§1a.7).
 
 ### 5.1 Image source priority — the order is not negotiable
 
@@ -760,15 +991,19 @@ strong original LVINIT asset already exists.
 fallback panel is still correct and still looks finished — better than a weak,
 unlicensed, or misleading image.
 
-**One image, one use (Mikey's rule, 2026-10-07).** Never use the same image
-file more than once on the site: not for a second hero, a card, or an inline
-placement. Before selecting any image, grep the repo (`app/`, `lib/`,
-`components/`) for its path; if it is already referenced, it is off the table.
-Reusing an existing repo photo "because it fits" is no longer allowed. If no
-unused suitable image exists, work down this list (a new original photo or
-video still, approved external imagery, an editorial cover for abstract topics)
-or use the no-image fallback. Never repeat an image to fill a slot. Existing
-duplicates are left alone unless Mikey asks for a cleanup.
+**One image, one use (Mikey's rule, 2026-10-07; article refinement in
+§5.0b.7).** Never use the same image file more than once on the site, whether
+for a second hero, a card, or an inline placement. The only exception is the
+narrow inline-reuse case in §5.0b.7. Heroes are never reused, and an image
+that has already been used anywhere is never a hero. Before selecting any image,
+grep the repo (`app/`, `lib/`, `components/`) for its path and check its library
+`usedOn`/`usage`. If it's already referenced, it's off the table, unless it
+qualifies for §5.0b.7 inline reuse. Reusing an existing repo photo "because it
+fits" isn't allowed. If no unused suitable image exists, work down this list (a
+new original photo or video still, approved external imagery, an editorial
+cover for abstract topics) or use the no-image fallback. Never repeat an image
+to fill a slot. Existing duplicates are left alone unless Mikey asks for a
+cleanup.
 
 Authentic first-party media always beats external or generated imagery. Never
 swap an existing genuine photograph for a generated cover to make a row of
@@ -927,6 +1162,27 @@ Before publishing, verify:
 - the crop works on mobile;
 - no player UI, burned-in captions, or watermarks remain unless intentionally
   part of the source.
+
+For the hero and **every** inline image (§5.0b), also verify:
+
+- every image path works, both in the build preview and in production after
+  deploy;
+- each image is genuinely relevant, and the article uses an appropriate number
+  of useful images, with no image forced in to hit a quota;
+- alt text is present, accurate, and location-aware without keyword stuffing,
+  and captions are factual when used;
+- image locations match the article's claims, and nothing gives a misleading
+  geographic representation or makes an unsupported visual claim (§5.0b.10);
+- no unintended reuse: no reused hero, no previously used image as hero, and
+  any inline reuse has a recorded editorial reason (§5.0b.7);
+- no duplicate or near-duplicate images within the article (§5.0b.9);
+- first-party images were preferred when relevant, and each inline placement
+  supports its surrounding section (§5.0b.4);
+- dimensions and loading behavior are appropriate, the mobile layout stays
+  intact, and imagery doesn't unnecessarily degrade page performance
+  (§5.0b.12);
+- the `usedOn`/`usage` updates are prepared, and are applied only after
+  publication succeeds (§5.0b.8).
 
 ### 5a. Generating an editorial cover
 
@@ -1118,7 +1374,11 @@ After a task, return a compact, useful report — not a play-by-play log:
    the final repository filename/path, why that photo was chosen, whether it was
    cropped/resized/converted, the final dimensions, the final file size, and the
    exact alt text. If no photograph was suitable, say so and name the generated
-   editorial cover used instead.
+   editorial cover used instead. List **every** inline image too, with its
+   filename, the section it supports, its alt text, and whether it is a reuse
+   (with the reason). Report whether the Media Image Library was searched, and
+   the `usedOn`/`usage` update made for each library image, or why none was
+   made (§5.0b.8).
 5. Internal links and conversion paths added
 6. Verification performed
 7. Commit hash and deployment status (when applicable)
