@@ -131,6 +131,7 @@ const meta: StoryMeta = {
   imageAlt:
     "Aerial drone photo of the existing Sunstone neighborhood's rooftops in the foreground, with the vacant Monument Hills parcel stretching toward the Spring Mountains in the distance",
   datePublished: "2026-09-03",
+  dateModified: "2026-10-09",
   author: "LVINIT Editorial",
   breadcrumbs: [
     { name: "Home", path: "/" },
@@ -162,9 +163,9 @@ const SNAPSHOT: Stat[] = [
     note: "Nothing here is buyable today",
   },
   {
-    value: "290 + 300",
-    label: "Military + workforce housing units",
-    note: "For personnel tied to Nellis AFB and Creech AFB",
+    value: "~350",
+    label: "Attainable units for military personnel",
+    note: "Per the City of Las Vegas, Oct. 2026 · for Creech AFB and Nellis AFB personnel",
   },
 ];
 
@@ -300,6 +301,41 @@ export default function MonumentHillsPage() {
         </p>
       </StoryLede>
 
+      <StorySection heading="Update, October 2026: the city says Monument Hills is approved">
+        <p className="text-body-lg text-lvinit-warmgray">
+          In her October 7, 2026 community newsletter, Las Vegas Councilwoman
+          Nancy Brune wrote that &ldquo;Monument Hills has been
+          approved,&rdquo; describing it as a planned 940-acre mixed-use
+          development with residential neighborhoods, commercial space,
+          parks, open space, and public facilities between Tule Springs
+          Fossil Beds National Monument and the Las Vegas Paiute Tribe. The
+          newsletter calls out roughly 350 attainable housing units meant to
+          support military personnel from Creech and Nellis Air Force Bases.
+        </p>
+        <p className="mt-5 text-body-lg text-lvinit-warmgray">
+          Two honest caveats. First, the newsletter doesn&rsquo;t say which
+          approval this was or give a vote date, so we&rsquo;re not
+          describing the specific action beyond what the city said. Second,
+          the housing count. The City says roughly 350 attainable units for
+          military personnel; the September Review-Journal reporting cited
+          below described 290 military units plus 300 workforce units.
+          We&rsquo;re going with the City&rsquo;s figure, since it&rsquo;s the
+          primary source and the more recent one, and treating the earlier
+          split as reporting from the time of the land sale. What
+          hasn&rsquo;t changed: the city&rsquo;s own materials still
+          describe the plan as subject to change, no builder has been
+          named, and nothing here is buyable yet.{" "}
+          <a
+            href="https://content.govdelivery.com/accounts/NVLASVEGAS/bulletins/42e5aed"
+            className="text-lvinit-blue underline underline-offset-4"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            City of Las Vegas Ward 6 newsletter, Oct. 7, 2026
+          </a>
+        </p>
+      </StorySection>
+
       <StoryVideo
         youtubeId="GQbCsZ_X3lc"
         title="Monument Hills: 6,000 Homes Coming to Northwest Las Vegas? (LVINIT)"
@@ -399,18 +435,15 @@ export default function MonumentHillsPage() {
           won&rsquo;t guess at any until a builder actually publishes them.
         </p>
         <p className="mt-5 text-body-lg text-lvinit-warmgray">
-          A meaningful share of the plan is dedicated housing:{" "}
-          <span className="text-lvinit-black">
-            290 units of military housing
-          </span>{" "}
-          plus{" "}
-          <span className="text-lvinit-black">
-            300 units of workforce housing
-          </span>
-          , intended for personnel connected to Nellis Air Force Base and
-          Creech Air Force Base — both bases our North Las Vegas guide already
-          names as a real factor for military families weighing this side of
-          the valley.
+          A meaningful share of the plan is dedicated housing: the City of
+          Las Vegas says roughly{" "}
+          <span className="text-lvinit-black">350 attainable units</span>{" "}
+          are meant to support military personnel from Creech Air Force
+          Base and Nellis Air Force Base, both bases our North Las Vegas
+          guide already names as a real factor for military families
+          weighing this side of the valley. (The September Review-Journal
+          reporting described 290 military and 300 workforce units; see the
+          October update above.)
         </p>
         <p className="mt-5 text-body-lg text-lvinit-warmgray">
           The plan also includes roughly{" "}
