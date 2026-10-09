@@ -131,6 +131,7 @@ const meta: StoryMeta = {
   imageAlt:
     "Aerial drone photo of the existing Sunstone neighborhood's rooftops in the foreground, with the vacant Monument Hills parcel stretching toward the Spring Mountains in the distance",
   datePublished: "2026-09-03",
+  dateModified: "2026-10-09",
   author: "LVINIT Editorial",
   breadcrumbs: [
     { name: "Home", path: "/" },
@@ -299,6 +300,39 @@ export default function MonumentHillsPage() {
           below.)
         </p>
       </StoryLede>
+
+      <StorySection heading="Update, October 2026: the city says Monument Hills is approved">
+        <p className="text-body-lg text-lvinit-warmgray">
+          In her October 7, 2026 community newsletter, Las Vegas Councilwoman
+          Nancy Brune wrote that &ldquo;Monument Hills has been
+          approved,&rdquo; describing it as a planned 940-acre mixed-use
+          development with residential neighborhoods, commercial space,
+          parks, open space, and public facilities between Tule Springs
+          Fossil Beds National Monument and the Las Vegas Paiute Tribe. The
+          newsletter calls out roughly 350 attainable housing units meant to
+          support military personnel from Creech and Nellis Air Force Bases.
+        </p>
+        <p className="mt-5 text-body-lg text-lvinit-warmgray">
+          Two honest caveats. First, the newsletter doesn&rsquo;t say which
+          approval this was or give a vote date, so we&rsquo;re not
+          describing the specific action beyond what the city said. Second,
+          the city&rsquo;s roughly 350 military-supporting units is framed
+          differently from the 290 military plus 300 workforce units in the
+          earlier Review-Journal reporting used below; we haven&rsquo;t
+          reconciled the two, so treat the exact housing mix as unsettled.
+          What hasn&rsquo;t changed: the city&rsquo;s own materials still
+          describe the plan as subject to change, no builder has been
+          named, and nothing here is buyable yet.{" "}
+          <a
+            href="https://content.govdelivery.com/accounts/NVLASVEGAS/bulletins/42e5aed"
+            className="text-lvinit-blue underline underline-offset-4"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            City of Las Vegas Ward 6 newsletter, Oct. 7, 2026
+          </a>
+        </p>
+      </StorySection>
 
       <StoryVideo
         youtubeId="GQbCsZ_X3lc"
