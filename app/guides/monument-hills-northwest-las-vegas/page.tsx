@@ -163,9 +163,9 @@ const SNAPSHOT: Stat[] = [
     note: "Nothing here is buyable today",
   },
   {
-    value: "290 + 300",
-    label: "Military + workforce housing units",
-    note: "For personnel tied to Nellis AFB and Creech AFB",
+    value: "~350",
+    label: "Attainable units for military personnel",
+    note: "Per the City of Las Vegas, Oct. 2026 · for Creech AFB and Nellis AFB personnel",
   },
 ];
 
@@ -316,11 +316,13 @@ export default function MonumentHillsPage() {
           Two honest caveats. First, the newsletter doesn&rsquo;t say which
           approval this was or give a vote date, so we&rsquo;re not
           describing the specific action beyond what the city said. Second,
-          the city&rsquo;s roughly 350 military-supporting units is framed
-          differently from the 290 military plus 300 workforce units in the
-          earlier Review-Journal reporting used below; we haven&rsquo;t
-          reconciled the two, so treat the exact housing mix as unsettled.
-          What hasn&rsquo;t changed: the city&rsquo;s own materials still
+          the housing count. The City says roughly 350 attainable units for
+          military personnel; the September Review-Journal reporting cited
+          below described 290 military units plus 300 workforce units.
+          We&rsquo;re going with the City&rsquo;s figure, since it&rsquo;s the
+          primary source and the more recent one, and treating the earlier
+          split as reporting from the time of the land sale. What
+          hasn&rsquo;t changed: the city&rsquo;s own materials still
           describe the plan as subject to change, no builder has been
           named, and nothing here is buyable yet.{" "}
           <a
@@ -433,18 +435,15 @@ export default function MonumentHillsPage() {
           won&rsquo;t guess at any until a builder actually publishes them.
         </p>
         <p className="mt-5 text-body-lg text-lvinit-warmgray">
-          A meaningful share of the plan is dedicated housing:{" "}
-          <span className="text-lvinit-black">
-            290 units of military housing
-          </span>{" "}
-          plus{" "}
-          <span className="text-lvinit-black">
-            300 units of workforce housing
-          </span>
-          , intended for personnel connected to Nellis Air Force Base and
-          Creech Air Force Base — both bases our North Las Vegas guide already
-          names as a real factor for military families weighing this side of
-          the valley.
+          A meaningful share of the plan is dedicated housing: the City of
+          Las Vegas says roughly{" "}
+          <span className="text-lvinit-black">350 attainable units</span>{" "}
+          are meant to support military personnel from Creech Air Force
+          Base and Nellis Air Force Base, both bases our North Las Vegas
+          guide already names as a real factor for military families
+          weighing this side of the valley. (The September Review-Journal
+          reporting described 290 military and 300 workforce units; see the
+          October update above.)
         </p>
         <p className="mt-5 text-body-lg text-lvinit-warmgray">
           The plan also includes roughly{" "}
