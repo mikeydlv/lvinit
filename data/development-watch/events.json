@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "agent": "development-watch",
-  "updated": "2026-10-09",
+  "updated": "2026-10-10",
   "events": {
     "025b2cbfc757": {
       "id": "DEV-2026-09-25-002",
@@ -399,8 +399,8 @@
       "status": "approved",
       "prior_status": null,
       "first_seen": "2026-10-08",
-      "last_seen": "2026-10-09",
-      "times_seen": 2,
+      "last_seen": "2026-10-10",
+      "times_seen": 3,
       "lifecycle": "PERSISTING",
       "lifecycle_history": [
         {
@@ -450,6 +450,12 @@
         {
           "name": "Live 5 News",
           "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxPcWdhd29zOUhzb1pOLUdBYkc2UjBHcExlTExKdmg0ZVpxOHU1NlhLdVN6MHFxS2lySXliMlNJS0Z0a043U216VDFNSUE4Wkt6b3dMdzk5RlVVdEs2NFhYOUI1LThtck5oRW5GVFRsaVBZY3FjeUJSaFhOZDN5aGh1QmdJX3hYX3NBWnJJR083RGtWZlZIbFpnSU9sNmVrNjdiQ3hDWG5abDNwa25NRjVBLXVFdXBjLXBqYkxV",
+          "authority": 9,
+          "published": "2026-10-08T06:22:00.000Z"
+        },
+        {
+          "name": "KY3",
+          "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxPb3BQanEtZVNyb3ZsZW93TTlMUUxqUEdjZU8zQmdJQU9tWEpFUFA1TFJiRDJNVFJHeXdkVGQtTXhETXppV2JLcURMQUhQWjJ3MzlCSFJLY2NFNjNwZ2NKNm9vaE5hSXR1bmxHNER5clUxeTN0SXJyendYb2JXMGUtLWNidzZfeWQ5enZiS3NkTzdVRkdzSXR2R1FWTF9weW9KX25qT0pIbGlfOVNNeHZrMWVmZw",
           "authority": 9,
           "published": "2026-10-08T06:22:00.000Z"
         }
@@ -1287,6 +1293,54 @@
         "queued": []
       }
     },
+    "43d29c535b1c": {
+      "id": "DEV-2026-10-10-004",
+      "fingerprint": "43d29c535b1c",
+      "entity_id": "DEV-P-09CF99A0",
+      "entity_name": "Unnamed transit (Las Vegas (valley-wide)) — \"A Las Vegas Resort is Building an Underground Transit Hub\"",
+      "change_class": "NEW",
+      "changes": [
+        "first time this project has been seen"
+      ],
+      "event_type": "announcement",
+      "status": "unclear",
+      "prior_status": null,
+      "first_seen": "2026-10-10",
+      "last_seen": "2026-10-10",
+      "times_seen": 1,
+      "lifecycle": "REJECTED",
+      "lifecycle_history": [
+        {
+          "date": "2026-10-10",
+          "lifecycle": "REJECTED"
+        }
+      ],
+      "action": "REJECT_LOW_VALUE",
+      "target": null,
+      "score": 30,
+      "confidence": "Low",
+      "sources": [
+        {
+          "name": "https://travelhost.com/",
+          "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxOU0Y3NjhXLUJuQUFqSi1NYWVXR1pHV1g4YXNpVHZUOFJmZkliLUJxVHZRcXJ3QWhtdlRpU2N6Ul8xSUZGQnZnVHpiUmhYUXo1WHJqUHdrbWwyMjhHYWN2UU5WMDA5Qm1EOFB2a0kwQml4aDZISjlLTXplWXNnQ3hYQ242bnpEdGdP",
+          "authority": 9,
+          "published": "2026-10-09T00:07:00.000Z"
+        }
+      ],
+      "superseded_by": null,
+      "handoff": {
+        "eligible": false,
+        "blockers": [
+          "NOT_A_PUBLISHER_ACTION",
+          "SCORE_BELOW_THRESHOLD",
+          "CONFIDENCE_NOT_HIGH",
+          "NO_PRIMARY_SOURCE",
+          "NOT_NEW",
+          "PROVISIONAL_ENTITY"
+        ],
+        "queued": []
+      }
+    },
     "45fd7f36b802": {
       "id": "DEV-2026-10-08-006",
       "fingerprint": "45fd7f36b802",
@@ -1799,6 +1853,51 @@
           "NOT_MATERIAL",
           "NOT_NEW",
           "PROVISIONAL_ENTITY"
+        ],
+        "queued": []
+      }
+    },
+    "56420a09fc2f": {
+      "id": "DEV-2026-10-10-001",
+      "fingerprint": "56420a09fc2f",
+      "entity_id": "DEV-VEGAS",
+      "entity_name": "VEGAS",
+      "change_class": "MATERIAL_UPDATE",
+      "changes": [
+        "announced → approved"
+      ],
+      "event_type": "approval",
+      "status": "approved",
+      "prior_status": "announced",
+      "first_seen": "2026-10-10",
+      "last_seen": "2026-10-10",
+      "times_seen": 1,
+      "lifecycle": "NEW",
+      "lifecycle_history": [
+        {
+          "date": "2026-10-10",
+          "lifecycle": "NEW"
+        }
+      ],
+      "action": "UPDATE_EXISTING_ARTICLE",
+      "target": "/guides/buying-new-construction-las-vegas",
+      "score": 65,
+      "confidence": "Medium",
+      "sources": [
+        {
+          "name": "KTNV 13 Action News",
+          "url": "https://ktnv.com/neighborhoods/north-las-vegas/north-las-vegas-airport-expansion-could-lead-to-closure-of-part-of-carey-avenue",
+          "authority": 8,
+          "published": "2026-10-10T00:14:51.000Z"
+        }
+      ],
+      "superseded_by": null,
+      "handoff": {
+        "eligible": false,
+        "blockers": [
+          "SCORE_BELOW_THRESHOLD",
+          "CONFIDENCE_NOT_HIGH",
+          "NO_PRIMARY_SOURCE"
         ],
         "queued": []
       }
@@ -2881,6 +2980,54 @@
         "queued": []
       }
     },
+    "80d3a93ac195": {
+      "id": "DEV-2026-10-10-005",
+      "fingerprint": "80d3a93ac195",
+      "entity_id": "DEV-P-F980E18B",
+      "entity_name": "Unnamed land (Las Vegas (valley-wide)) — \"El nuevo campus de Chaparral tendrá menor capacidad, lo que da lugar a una propuesta de re\"",
+      "change_class": "NEW",
+      "changes": [
+        "first time this project has been seen"
+      ],
+      "event_type": "announcement",
+      "status": "proposed",
+      "prior_status": null,
+      "first_seen": "2026-10-10",
+      "last_seen": "2026-10-10",
+      "times_seen": 1,
+      "lifecycle": "REJECTED",
+      "lifecycle_history": [
+        {
+          "date": "2026-10-10",
+          "lifecycle": "REJECTED"
+        }
+      ],
+      "action": "REJECT_LOW_VALUE",
+      "target": null,
+      "score": 26,
+      "confidence": "Low",
+      "sources": [
+        {
+          "name": "Las Vegas Sun — News",
+          "url": "https://lasvegassun.com/news/2026/oct/10/el-nuevo-campus-de-chaparral-tendr-menor-capacidad",
+          "authority": 8,
+          "published": "2026-10-10T09:00:00.000Z"
+        }
+      ],
+      "superseded_by": null,
+      "handoff": {
+        "eligible": false,
+        "blockers": [
+          "NOT_A_PUBLISHER_ACTION",
+          "SCORE_BELOW_THRESHOLD",
+          "CONFIDENCE_NOT_HIGH",
+          "NO_PRIMARY_SOURCE",
+          "NOT_NEW",
+          "PROVISIONAL_ENTITY"
+        ],
+        "queued": []
+      }
+    },
     "8309bdc54b9b": {
       "id": "DEV-2026-10-07-005",
       "fingerprint": "8309bdc54b9b",
@@ -3219,6 +3366,59 @@
           "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxPLTEyd0dzZkgwUUU4bllXX3VrLUl6R0FWcmRYMTFRcmxuc05ZcFV6RGhSajRxaTRiVHNRTGZsU0RlM3hGMFN0YmF5b2U5RFU1X0s3Z0F2WmxqNnE3bGVfbENMclJBQks3NHRsdVZYZzBiekV4MlRvTG9VWWxyd1prRVo3TjVQblRvdXh4MkdGUVdlYXZCRWFSSFpEWTVIS25sVlVDRHEtckE",
           "authority": 9,
           "published": "2026-09-29T16:03:18.000Z"
+        }
+      ],
+      "superseded_by": null,
+      "handoff": {
+        "eligible": false,
+        "blockers": [
+          "NOT_A_PUBLISHER_ACTION",
+          "SCORE_BELOW_THRESHOLD",
+          "CONFIDENCE_NOT_HIGH",
+          "NO_PRIMARY_SOURCE",
+          "PROVISIONAL_ENTITY"
+        ],
+        "queued": []
+      }
+    },
+    "9ae60e924bc1": {
+      "id": "DEV-2026-10-10-002",
+      "fingerprint": "9ae60e924bc1",
+      "entity_id": "DEV-P-A36C8513",
+      "entity_name": "Unnamed residential (Las Vegas (valley-wide)) — \"New owner of once-stalled Las Vegas housing complex resumes work — and keeps trespassers o\"",
+      "change_class": "NEW",
+      "changes": [
+        "first time this project has been seen"
+      ],
+      "event_type": "pause",
+      "status": "paused",
+      "prior_status": null,
+      "first_seen": "2026-10-10",
+      "last_seen": "2026-10-10",
+      "times_seen": 1,
+      "lifecycle": "NEW",
+      "lifecycle_history": [
+        {
+          "date": "2026-10-10",
+          "lifecycle": "NEW"
+        }
+      ],
+      "action": "MONITOR_ONLY",
+      "target": null,
+      "score": 44,
+      "confidence": "Low",
+      "sources": [
+        {
+          "name": "Las Vegas Review-Journal",
+          "url": "https://news.google.com/rss/articles/CBMi1AFBVV95cUxORnZuc2NUN3hYbXMwLVVMQkJTS3d3aXRBdGppTkp0V2ZINTV6aWFEYXE1cUh2eGxHZDBuTU1oV3FkOGRqSk0yVEJ5ODBEYmdZTDFGZWFsSWZ4SHNNRHBvQnFEbEdrcXV3SG9WeHZBQktpcXB5TDJNR3JVVjljT1BuS3o4VWlfcklocnJuTnd5RGtpcVFveHZGN0w3a21CS2kxeTRWS09saEFXOVJVVVcwd19faFdQUmQ2WHFERTg0N05mTTZCNmFvVUltbGRhc3FuR0xFaw",
+          "authority": 8,
+          "published": "2026-10-09T21:46:10.000Z"
+        },
+        {
+          "name": "Las Vegas Review-Journal — Business",
+          "url": "https://reviewjournal.com/business/new-owner-of-once-stalled-las-vegas-housing-complex-resumes-work-and-keeps-trespassers-out-3897983",
+          "authority": 8,
+          "published": "2026-10-09T20:11:12.000Z"
         }
       ],
       "superseded_by": null,
@@ -4482,6 +4682,53 @@
         "queued": []
       }
     },
+    "e539d96bd140": {
+      "id": "DEV-2026-10-10-003",
+      "fingerprint": "e539d96bd140",
+      "entity_id": "DEV-P-CA5A1C48",
+      "entity_name": "Unnamed road (North Las Vegas) — \"North Las Vegas Airport expansion could lead to closure of part of Carey Avenue\"",
+      "change_class": "NEW",
+      "changes": [
+        "first time this project has been seen"
+      ],
+      "event_type": "access change",
+      "status": "unclear",
+      "prior_status": null,
+      "first_seen": "2026-10-10",
+      "last_seen": "2026-10-10",
+      "times_seen": 1,
+      "lifecycle": "NEW",
+      "lifecycle_history": [
+        {
+          "date": "2026-10-10",
+          "lifecycle": "NEW"
+        }
+      ],
+      "action": "MONITOR_ONLY",
+      "target": null,
+      "score": 41,
+      "confidence": "Low",
+      "sources": [
+        {
+          "name": "KTNV Las Vegas",
+          "url": "https://news.google.com/rss/articles/CBMiygFBVV95cUxQU3J5X2FwVHoxSW1BMWNELVlvenYzWjFPR2NOQ3lTeTZpX2RHVWd2Y2JtV3FkR21QcnNVeGhaTXYtUDIxSl9pUjhPZm14YjdfN3BHVm1iZTFyN0gtXzRJX2lKekxhcHkzY191anA5WVRxU29kSDRkejlOOXVycmVKeVltZk5ycGNzVXRKOEFfSVhqazRSbjdTcjFtelVfelZpalN3UE40OVlsajBiRU9vcFN0dmJ6djdNRHhMTWx5R3BERTZ0TUF1cTJ3",
+          "authority": 8,
+          "published": "2026-10-10T00:14:51.000Z"
+        }
+      ],
+      "superseded_by": null,
+      "handoff": {
+        "eligible": false,
+        "blockers": [
+          "NOT_A_PUBLISHER_ACTION",
+          "SCORE_BELOW_THRESHOLD",
+          "CONFIDENCE_NOT_HIGH",
+          "NO_PRIMARY_SOURCE",
+          "PROVISIONAL_ENTITY"
+        ],
+        "queued": []
+      }
+    },
     "e6a6d6c2781a": {
       "id": "DEV-2026-09-23-012",
       "fingerprint": "e6a6d6c2781a",
@@ -4570,6 +4817,54 @@
           "SCORE_BELOW_THRESHOLD",
           "CONFIDENCE_NOT_HIGH",
           "NO_PRIMARY_SOURCE"
+        ],
+        "queued": []
+      }
+    },
+    "e8a35fad15da": {
+      "id": "DEV-2026-10-10-006",
+      "fingerprint": "e8a35fad15da",
+      "entity_id": "DEV-CLARK-COUNTY-SCHOOL-DISTRICT",
+      "entity_name": "Clark County School District",
+      "change_class": "DUPLICATE",
+      "changes": [
+        "same as tracked record"
+      ],
+      "event_type": "approval",
+      "status": "open",
+      "prior_status": "open",
+      "first_seen": "2026-10-10",
+      "last_seen": "2026-10-10",
+      "times_seen": 1,
+      "lifecycle": "DUPLICATE",
+      "lifecycle_history": [
+        {
+          "date": "2026-10-10",
+          "lifecycle": "DUPLICATE"
+        }
+      ],
+      "action": "DUPLICATE",
+      "target": "/guides/summerlin-vs-henderson-vs-southwest-las-vegas",
+      "score": 44,
+      "confidence": "Medium",
+      "sources": [
+        {
+          "name": "Las Vegas Sun — News",
+          "url": "https://lasvegassun.com/news/2026/oct/10/new-chaparral-campus-will-hold-fewer-students-prom",
+          "authority": 8,
+          "published": "2026-10-10T09:00:00.000Z"
+        }
+      ],
+      "superseded_by": null,
+      "handoff": {
+        "eligible": false,
+        "blockers": [
+          "NOT_A_PUBLISHER_ACTION",
+          "SCORE_BELOW_THRESHOLD",
+          "CONFIDENCE_NOT_HIGH",
+          "NO_PRIMARY_SOURCE",
+          "NOT_MATERIAL",
+          "NOT_NEW"
         ],
         "queued": []
       }
@@ -4705,13 +5000,17 @@
       "status": "under construction",
       "prior_status": null,
       "first_seen": "2026-10-02",
-      "last_seen": "2026-10-02",
-      "times_seen": 1,
-      "lifecycle": "NEW",
+      "last_seen": "2026-10-10",
+      "times_seen": 2,
+      "lifecycle": "PERSISTING",
       "lifecycle_history": [
         {
           "date": "2026-10-02",
           "lifecycle": "NEW"
+        },
+        {
+          "date": "2026-10-10",
+          "lifecycle": "PERSISTING"
         }
       ],
       "action": "MONITOR_ONLY",
@@ -4724,6 +5023,12 @@
           "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxNaG1sRGlxendEQTFFYjVjb0J1VnFaLVdMbjRFVTBHcHp4ZWQ5aVZqanp2VnJrazRyR05DdnVmel9wbFVDX29KSjg5VkVpU3hZb2N4eFJNYTRZYTFCMDRlQUQ3NDlhSWE0aENwTGtKa3lLSEdVZ0tHLVZDWmg1SVo4LVpNWks4T0VxdFZzT1N0VkllSlJtNEtxVA",
           "authority": 8,
           "published": "2026-10-02T00:03:14.000Z"
+        },
+        {
+          "name": "Las Vegas Review-Journal",
+          "url": "https://news.google.com/rss/articles/CBMijwFBVV95cUxOR1Jfdk5PUi1qZXlXRDJvTlhMOHJVT18xRFNNYTc4Vnp0TDZWbDFCUTFqcFFOQUY0bUNSLVFKcWk5MlUybkVtVGlaVFM2VWlZaGttUEN0ZVJmNlVsUGlsbks2al9OcG1EZzNkV21fNnNSSHpNYVBTSWhqNzBJZ0tmcXlJd0xHcWFJUXVOdHpsRQ",
+          "authority": 8,
+          "published": "2026-10-07T00:16:40.000Z"
         }
       ],
       "superseded_by": null,
@@ -4734,6 +5039,7 @@
           "SCORE_BELOW_THRESHOLD",
           "CONFIDENCE_NOT_HIGH",
           "NO_PRIMARY_SOURCE",
+          "NOT_NEW",
           "PROVISIONAL_ENTITY"
         ],
         "queued": []
@@ -4800,11 +5106,15 @@
       "first_seen": "2026-10-08",
       "last_seen": "2026-10-08",
       "times_seen": 1,
-      "lifecycle": "NEW",
+      "lifecycle": "RESOLVED",
       "lifecycle_history": [
         {
           "date": "2026-10-08",
           "lifecycle": "NEW"
+        },
+        {
+          "date": "2026-10-10",
+          "lifecycle": "RESOLVED"
         }
       ],
       "action": "MONITOR_ONLY",
@@ -4819,7 +5129,7 @@
           "published": "2026-10-08T14:22:29.000Z"
         }
       ],
-      "superseded_by": null,
+      "superseded_by": "56420a09fc2f",
       "handoff": {
         "eligible": false,
         "blockers": [
