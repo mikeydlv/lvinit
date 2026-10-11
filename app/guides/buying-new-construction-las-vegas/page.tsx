@@ -383,7 +383,12 @@ export default function BuyingNewConstructionLasVegasPage() {
           the actual figures for the actual lot, because none of them can be
           known without the parcel. Landings at Sandstone, for example, has no
           HOA; that is not true of every community, and I would not assume it
-          anywhere else.
+          anywhere else. For what dues cover and how to read an association&rsquo;s
+          paperwork, see{" "}
+          <Link href="/guides/hoa-fees-las-vegas-what-to-check" className={linkCls}>
+            HOA fees in Las Vegas
+          </Link>
+          .
         </p>
         <p className="mt-5 text-body-lg text-lvinit-warmgray">
           Property tax is its own question on a home with no tax history. The

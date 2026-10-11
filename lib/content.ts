@@ -238,6 +238,20 @@ export type Guide = {
  */
 export const guides: Guide[] = [
   {
+    slug: "hoa-fees-las-vegas-what-to-check",
+    title: "HOA Fees in Las Vegas: What to Check Before You Make an Offer",
+    dek: "What HOA dues pay for, how master and sub-associations stack, and how Nevada's resale package and 5-day cancellation window give you time to read the paperwork.",
+    byline: "LVINIT Editorial",
+    date: "October 2026",
+    publishedAt: "2026-10-11",
+    category: "Buyer Guide",
+    // Cluster C (cluster map queue #7). Hero is a Media Image Library still.
+    image: "/images/editorial/lake-las-vegas-golf-course-homes-mountains-aerial.jpg",
+    imageAlt:
+      "Aerial over the lake at Lake Las Vegas toward a golf fairway, rows of homes and rugged desert mountains.",
+    href: "/guides/hoa-fees-las-vegas-what-to-check",
+  },
+  {
     slug: "las-vegas-housing-market",
     title: "Las Vegas Housing Market: Prices, Inventory and Sales Right Now",
     dek: "The single-family median slipped to $470,000 in September, about 4% under the May-June record, while sales fell and supply grew. The latest LVR numbers and what they mean for buyers, sellers and owners. Updated in place.",
