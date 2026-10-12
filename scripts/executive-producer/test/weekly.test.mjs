@@ -3,6 +3,7 @@ import assert from "node:assert/strict";
 import { mkdtempSync, mkdirSync, writeFileSync, readFileSync, existsSync, readdirSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
+import { execFileSync } from "node:child_process";
 
 import sharp from "sharp";
 
@@ -10,6 +11,8 @@ import { runWeek, mondayOf } from "../weekly.mjs";
 import { buildLedger, similarity, reconcilePublished, initialStatus } from "../lib/ledger.mjs";
 import { checkComparatives, checkDistinctTakeaways, checkDuplicate } from "../lib/gate.mjs";
 import { composeMessage } from "../lib/notify.mjs";
+import { originalClips, verifyOriginal, recordWeek, overusedClips, pickTrack, validateShort } from "../lib/shorts.mjs";
+import { assignToSlots, WEEK_MIX } from "../lib/schedule.mjs";
 
 // --- unit checks ------------------------------------------------------------------
 
@@ -88,8 +91,18 @@ async function fixtureWorld() {
     await sharp(Buffer.from(svg)).jpeg().toFile(join(media, f));
     items.push({ id: `i${i}`, path: f, folder: "Media/Test", type: "image", role: "photo", area: "valley-wide" });
   }
+  // Synthetic "camera-original" clips for the short videos (metadata is injected via probeOriginal),
+  // plus one edited export that the footage policy must never use.
+  mkdirSync(join(media, "Media", "Clips"), { recursive: true });
+  for (let i = 0; i < 18; i++) {
+    const f = `Media/Clips/DJI_2026100${String(i).padStart(2, "0")}_D.MP4`;
+    execFileSync("ffmpeg", ["-v", "error", "-y", "-f", "lavfi", "-i", `cellauto=rule=${30 + i * 11}:seed=${i + 1}:size=360x640:rate=30:random_fill_ratio=0.5,scale=720:1280:flags=neighbor`, "-t", "8", "-pix_fmt", "yuv420p", join(media, f)]);
+    items.push({ id: `v${i}`, path: f, folder: "Media/Clips", type: "video", role: "b-roll", camera: "handheld", orientation: "vertical", durationSec: 8, area: "valley-wide", subject: `clip ${i}` });
+  }
+  execFileSync("ffmpeg", ["-v", "error", "-y", "-f", "lavfi", "-i", "testsrc2=size=720x1280:rate=30", "-t", "8", "-pix_fmt", "yuv420p", join(media, "Media/Clips/edited-export.mp4")]);
+  items.push({ id: "e1", path: "Media/Clips/edited-export.mp4", folder: "Media/Clips", type: "video", role: "b-roll", camera: "edited", orientation: "vertical", durationSec: 8, area: "valley-wide", subject: "edited export" });
   const catalogPath = join(root, "catalog.json");
-  writeFileSync(catalogPath, JSON.stringify({ items, folders: [{ folder: "Media/Test", photos: 20 }] }));
+  writeFileSync(catalogPath, JSON.stringify({ items, folders: [{ folder: "Media/Test", photos: 20 }, { folder: "Media/Clips", videos: 19 }] }));
   const src = [{ claim: "c", url: "https://www.lvinit.com/neighborhoods/summerlin", authority: "lvinit", checked: "2026-10-05" }];
   const areas = ["Summerlin", "Henderson", "the Arts District", "Southwest Las Vegas", "North Las Vegas", "Green Valley", "Inspirada"];
   const lessons = ["trail access", "grocery runs", "parking on First Friday", "commute to I-15", "established streets", "HOA structure", "park access"];
@@ -110,7 +123,17 @@ async function fixtureWorld() {
     sources: src,
     references: [],
   }));
-  return { root, media, catalogPath, posts };
+  // Tue/Thu/Sat are short videos: five segments each, from the synthetic original clips.
+  const shortDays = [1, 3, 5];
+  for (const [k, i] of shortDays.entries()) {
+    const { slides, ...rest } = posts[i];
+    posts[i] = {
+      ...rest,
+      format: "short",
+      segments: Array.from({ length: 5 }, (_, j) => ({ clip: `Media/Clips/DJI_2026100${String(k * 6 + j).padStart(2, "0")}_D.MP4`, want: "a scene", dur: 3.6, headline: j === 0 ? `${areas[i]}: ${lessons[i]}` : `Beat ${j + 1} in ${areas[i]}` })),
+    };
+  }
+  return { root, media, catalogPath, posts: posts.slice(0, 6) };
 }
 
 function services(posts, { failPlan = false, sent = [] } = {}) {
@@ -120,13 +143,13 @@ function services(posts, { failPlan = false, sent = [] } = {}) {
       async create(req) {
         const c = req.messages[0].content;
         const text = Array.isArray(c) ? c.filter((x) => x.type === "text").map((x) => x.text).join("") : c;
-        if (text.includes('Return JSON { "posts": [7]')) {
+        if (text.includes('Return JSON { "posts": [6]')) {
           if (failPlan) throw new Error("simulated API outage");
           return reply({ posts, backups: [] });
         }
-        if (text.startsWith("Verify every factual claim")) return reply({ posts: posts.map((p, i) => ({ day: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"][i], ok: true, problems: [] })), sameLesson: [] });
+        if (text.startsWith("Verify every factual claim")) return reply({ posts: posts.map((p, i) => ({ day: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat"][i], ok: true, problems: [] })), sameLesson: [] });
         if (text.includes("Tiles are numbered")) return reply({ pick: 0, reason: "test" });
-        if (text.includes("finished slides")) return reply({ slides: [{ n: 1, ok: true, issues: [], fix: "none" }, { n: 2, ok: true, issues: [], fix: "none" }] });
+        if (text.includes("finished slides") || text.includes("finished LVINIT short video")) return reply({ slides: [1, 2, 3, 4, 5].map((n) => ({ n, ok: true, issues: [], fix: "none" })) });
         throw new Error("unexpected call");
       },
     },
@@ -142,10 +165,12 @@ function services(posts, { failPlan = false, sent = [] } = {}) {
     }
     return { ok: false, status: 503, text: async () => "offline", json: async () => ({}) }; // YouTube offline in tests
   };
-  return { anthropic, fetchImpl, env: { APIFY_TOKEN: "t", ANTHROPIC_API_KEY: "k", LVINIT_INSTAGRAM: "me", RESEND_API_KEY: "r", LVINIT_NOTIFY_EMAIL: "me@example.com" }, notifyToast: false };
+  const scratch = mkdtempSync(join(tmpdir(), "weekly-svc-"));
+  const probeOriginal = (abs) => ({ format: { tags: { encoder: /edited/.test(abs) ? "Lavf61.7.100" : "DJI OsmoPocket3" } }, streams: [] });
+  return { anthropic, fetchImpl, probeOriginal, usageFile: join(scratch, "footage-usage.json"), musicDir: join(scratch, "no-music"), env: { APIFY_TOKEN: "t", ANTHROPIC_API_KEY: "k", LVINIT_INSTAGRAM: "me", RESEND_API_KEY: "r", LVINIT_NOTIFY_EMAIL: "me@example.com" }, notifyToast: false };
 }
 
-test("unattended run: research → 7 finished posts, drafts status, real cost accounting, email sent", { timeout: 180000 }, async () => {
+test("unattended run: 3 carousels + 3 validated short videos, no Sunday post, drafts status, costs, usage, email", { timeout: 600000 }, async () => {
   const w = await fixtureWorld();
   const sent = [];
   const svc = services(w.posts, { sent });
@@ -153,19 +178,38 @@ test("unattended run: research → 7 finished posts, drafts status, real cost ac
   assert.equal(r.exitCode, 0, JSON.stringify(r.report.steps));
   const dir = join(w.root, "out", "Week of 2026-10-05");
   const folders = readdirSync(dir).filter((f) => /^\d-/.test(f));
-  assert.equal(folders.length, 7);
-  for (const f of folders) assert.ok(existsSync(join(dir, f, "01.jpg")) && existsSync(join(dir, f, "caption.txt")));
+  assert.deepEqual(folders.map((f) => f.split("-")[1]), ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]);
+  for (const f of folders) {
+    const video = /-(Tue|Thu|Sat)-/.test(f);
+    assert.ok(existsSync(join(dir, f, video ? "short.mp4" : "01.jpg")) && existsSync(join(dir, f, "caption.txt")), f);
+    if (video) {
+      const v = validateShort(join(dir, f, "short.mp4"));
+      assert.ok(v.ok, `${f}: ${v.problems.join("; ")}`);
+      assert.equal(v.info.width, 1080);
+      assert.equal(v.info.height, 1920);
+      assert.ok(v.info.duration >= 15 && v.info.duration <= 30);
+      assert.match(readFileSync(join(dir, f, "notes.md"), "utf8"), /ONLY Mikey's original camera footage[\s\S]*End card: LVINIT · Mikey Del Rosario · The Scofield Group/);
+    }
+  }
   assert.ok(existsSync(join(dir, "preview.html")) && existsSync(join(dir, "DONE.json")));
   const status = JSON.parse(readFileSync(join(dir, "status.json"), "utf8"));
   assert.ok(Object.values(status.posts).every((p) => p.status === "draft"));
   assert.equal(r.report.manual.length, 0);
   assert.ok(r.report.costs.apifyUsd > 0 && r.report.costs.anthropicUsd > 0);
   assert.equal(sent.length, 1);
-  assert.match(sent[0].subject, /7 posts ready/);
+  assert.match(sent[0].subject, /6 posts ready/);
+  assert.match(sent[0].text, /3 carousels \+ 3 short videos; no Sunday post/);
   // Every slide in the week uses a different image.
   const week = JSON.parse(readFileSync(join(dir, "week.json"), "utf8"));
-  const used = week.posts.flatMap((p) => p.slides.map((s) => s.src.path));
+  const used = week.posts.flatMap((p) => (p.slides ?? []).map((s) => s.src.path));
   assert.equal(new Set(used).size, used.length);
+  // Shorts used only camera-original clips, never the edited export, and the usage ledger recorded them.
+  const clips = week.posts.flatMap((p) => (p.segments ?? []).map((s) => s.path));
+  assert.equal(clips.length, 15);
+  assert.ok(clips.every((c) => /DJI_/.test(c)));
+  const usage = JSON.parse(readFileSync(svc.usageFile, "utf8"));
+  assert.equal(usage.uses.filter((u) => u.kind === "short").length, 15);
+  assert.match(week.gaps.join(" "), /No licensed music/);
 });
 
 test("unattended run failure: RUN-FAILED.md and a failure email", { timeout: 60000 }, async () => {
@@ -197,4 +241,36 @@ test("an immediate batch counts for the next week's checks without marking that 
   const ledger = buildLedger({ outRoot: root, currentWeekOf: "2026-09-28" });
   assert.equal(ledger.find((e) => e.source === "batch").status, "ready");
   assert.ok(!existsSync(join(root, "Week of 2026-09-28", "DONE.json")));
+});
+
+test("footage policy: only camera-original approved clips; recently used shorts clips are held back", () => {
+  const catalog = { items: [
+    { path: "Media/A/DJI_1.MP4", type: "video", role: "b-roll", camera: "drone", durationSec: 20 },
+    { path: "Media/A/edited.mp4", type: "video", role: "b-roll", camera: "edited", durationSec: 20 },
+    { path: "Videos/X/ai-expand-9x16-1.mp4", type: "video", role: "b-roll", camera: "handheld", durationSec: 20 },
+    { path: "Media/A/stock-pexels-city.mp4", type: "video", role: "b-roll", camera: "handheld", durationSec: 20 },
+    { path: "Media/A/IMG_2.MOV", type: "video", role: "short", camera: "phone", durationSec: 20 },
+    { path: "Media/A/DJI_3.MP4", type: "video", role: "b-roll", camera: "handheld", durationSec: 20 },
+  ] };
+  const ok = originalClips(catalog, "C:/x", { exists: () => true }).map((c) => c.path);
+  assert.deepEqual(ok, ["Media/A/DJI_1.MP4", "Media/A/DJI_3.MP4"]);
+  assert.equal(verifyOriginal("C:/x/a.mp4", "Media/A/a.mp4", { probe: () => ({ format: { tags: { encoder: "Lavf61" } }, streams: [] }) }).ok, false);
+  assert.equal(verifyOriginal("C:/x/b.mp4", "Media/A/b.mp4", { probe: () => ({ format: { tags: { encoder: "DJI Mini 5 Pro" } }, streams: [] }) }).camera, "drone");
+  const usage = recordWeek({ uses: [], music: [] }, "2026-10-05", [{ day: "Tue", title: "t", segments: [{ path: "Media/A/DJI_1.MP4", start: 1, dur: 3 }], music: { file: "a.mp3" } }]);
+  assert.ok(overusedClips(usage, "2026-10-19").has("media/a/dji_1.mp4"));
+  assert.ok(!overusedClips(usage, "2026-11-09").has("media/a/dji_1.mp4"));
+  const tracks = [{ file: "a.mp3" }, { file: "b.mp3" }];
+  assert.equal(pickTrack(tracks, usage, []).file, "b.mp3");
+  assert.equal(pickTrack(tracks, usage, ["b.mp3"]).file, "a.mp3");
+  assert.equal(pickTrack([], usage, []), null);
+});
+
+test("weekly mix: carousels Mon/Wed/Fri, shorts Tue/Thu/Sat, nothing on Sunday", () => {
+  const c = (t) => ({ title: t, format: "carousel", slides: [{}] });
+  const v = (t) => ({ title: t, format: "short", segments: [{}] });
+  const r = assignToSlots([v("s1"), c("c1"), c("c2"), v("s2"), c("c3"), v("s3"), c("c4")]);
+  assert.deepEqual(r.posts.map((p) => `${p.day}:${p.title}`), ["Mon:c1", "Tue:s1", "Wed:c2", "Thu:s2", "Fri:c3", "Sat:s3"]);
+  assert.deepEqual(r.extra.map((p) => p.title), ["c4"]);
+  assert.deepEqual(assignToSlots([c("c1")]).missing.map((m) => m.day), ["Tue", "Wed", "Thu", "Fri", "Sat"]);
+  assert.ok(!WEEK_MIX.some((m) => m.day === "Sun"));
 });

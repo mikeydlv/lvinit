@@ -6,8 +6,8 @@
 #
 # Two tasks, one chain, no overlap in what they produce:
 #
-#   LVINIT Weekly Production   Sunday 7:00 PM  Executive Producer: 7 finished
-#                                              draft posts in OneDrive\...\Weekly Posts
+#   LVINIT Weekly Production   Sunday 7:00 PM  Executive Producer: 3 carousels +
+#                                              3 short videos in OneDrive\...\Weekly Posts
 #   LVINIT Weekly Publisher    Sunday 8:00 PM  Editor-in-chief: ONE plan file,
 #                                              reports\weekly-content\<Monday>-weekly-content-plan.md
 #                                              + LATEST.md, success or FAILED
@@ -67,6 +67,6 @@ function Register($name, $job, $at, $description) {
   Write-Output "Registered '$name': Sundays at $at Pacific. Next run: $($info.NextRunTime)"
 }
 
-Register "LVINIT Weekly Production" "producer" $ProducerAt "LVINIT Executive Producer: seven finished draft posts for the coming week. Never publishes."
+Register "LVINIT Weekly Production" "producer" $ProducerAt "LVINIT Executive Producer: 3 carousels (Mon/Wed/Fri) + 3 short videos (Tue/Thu/Sat) for the coming week. Never publishes."
 Register "LVINIT Weekly Publisher" "publisher" $PublisherAt "LVINIT Weekly Publisher (editor-in-chief): the one weekly content plan, reports\weekly-content\LATEST.md. Success or a visible FAILED report. Never publishes."
 Write-Output "Runner: $runner   Plans: $(Join-Path $mainRepo 'reports\weekly-content')"

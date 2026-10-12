@@ -9,11 +9,15 @@
 // nothing supplied by hand during the run. It does NOT prove Claude's
 // editorial quality or real costs; the acceptance test with real keys does.
 //
-//   node scripts/executive-producer/rehearsal/run-rehearsal.mjs
+//   node scripts/executive-producer/rehearsal/run-rehearsal.mjs [--out=DIR] [--usage-file=FILE] [--week=YYYY-MM-DD]
+//
+// Defaults keep it away from real data: output and the footage-usage ledger go
+// to a temp folder unless --out / --usage-file say otherwise.
 // ---------------------------------------------------------------------------
 
 import { readFileSync } from "node:fs";
 import { join, dirname } from "node:path";
+import { tmpdir } from "node:os";
 import { fileURLToPath } from "node:url";
 
 import { runWeek } from "../weekly.mjs";
@@ -34,7 +38,7 @@ const anthropic = {
     async create(req) {
       const parts = Array.isArray(req.messages[0].content) ? req.messages[0].content : [{ type: "text", text: req.messages[0].content }];
       const text = parts.filter((p) => p.type === "text").map((p) => p.text).join("\n");
-      if (text.includes('Return JSON { "posts": [7]')) {
+      if (text.includes('Return JSON { "posts": [6]')) {
         calls.plan++;
         return reply({ posts: mockPlan.posts, backups: mockPlan.backups }, 60000, 12000);
       }
@@ -50,12 +54,17 @@ const anthropic = {
         calls.pick++;
         return reply({ pick: 0, reason: "simulated" }, 1500, 60);
       }
-      if (text.includes("finished slides")) {
+      if (text.includes("finished slides") || text.includes("finished LVINIT short video")) {
         calls.review++;
         // First look at Tuesday only: ask for a text move, so the repair loop runs and then passes.
         const tue = text.includes("monthly costs") && !calls.tueFlagged;
         if (tue) calls.tueFlagged = true;
         const n = (text.match(/numbered 1–(\d+)/) ?? [])[1] ?? 6;
+        // First short reviewed: reject segment 3's frame once, so the short repair (new original clip, re-render, re-validate) runs.
+        if (text.includes("finished LVINIT short video") && !calls.shortFlagged) {
+          calls.shortFlagged = true;
+          return reply({ slides: Array.from({ length: Number(n) }, (_, i) => (i === 2 ? { n: 3, ok: false, issues: ["simulated: frame doesn't show the segment's subject"], fix: "new_frame" } : { n: i + 1, ok: true, issues: [], fix: "none" })) }, 3000, 300);
+        }
         return reply({ slides: Array.from({ length: Number(n) }, (_, i) => (tue && i === 1 ? { n: 2, ok: false, issues: ["simulated: text crosses a busy area"], fix: "move_text_bottom" } : { n: i + 1, ok: true, issues: [], fix: "none" })) }, 3000, 300);
       }
       throw new Error(`rehearsal: unrecognized Claude call: ${text.slice(0, 80)}`);
@@ -91,7 +100,9 @@ const fetchImpl = async (url, init = {}) => {
 
 const env = { APIFY_TOKEN: "simulated", ANTHROPIC_API_KEY: "simulated", LVINIT_INSTAGRAM: "mikey_del_rosario", RESEND_API_KEY: "simulated", LVINIT_NOTIFY_EMAIL: "simulated@example.com" };
 
-const r = await runWeek(["--week=2026-09-28", "--suffix=(rehearsal)", "--no-env", "--force"], { services: { anthropic, fetchImpl, env } });
+const arg = (k, d) => (process.argv.find((a) => a.startsWith(`--${k}=`)) ?? `=${d}`).split("=").slice(1).join("=");
+const scratch = join(tmpdir(), "lvinit-rehearsal");
+const r = await runWeek([`--week=${arg("week", "2026-10-19")}`, "--suffix=(rehearsal)", "--no-env", "--force", `--out=${arg("out", join(scratch, "Weekly Posts"))}`, `--catalog=${arg("catalog", join(process.env.USERPROFILE ?? "", "OneDrive", "Documents", "LVINIT", "lvinit", "data", "executive-producer", "footage-catalog.json"))}`], { services: { anthropic, fetchImpl, env, usageFile: arg("usage-file", join(scratch, "footage-usage.json")) } });
 console.log("\nSimulated service calls:", JSON.stringify(calls));
 console.log("Steps:", r.report.steps.map((s) => `${s.name} ${s.ok ? "ok" : "FAILED"} ${s.secs}s${s.note ? ` (${s.note})` : ""}`).join("\n       "));
 console.log("Manual:", r.report.manual, "\nNot configured:", r.report.notConfigured, "\nExceptions:", JSON.stringify(r.report.exceptions));

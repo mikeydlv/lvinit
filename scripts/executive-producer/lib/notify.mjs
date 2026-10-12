@@ -14,13 +14,13 @@ import { execFile } from "node:child_process";
 
 const esc = (s) => String(s ?? "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 
-export function composeMessage({ ok, weekOf, posts = 0, exceptions = [], costs = {}, failedStep, error, previewPath, manual = [], gaps = [] }) {
+export function composeMessage({ ok, weekOf, posts = 0, mix = null, exceptions = [], costs = {}, failedStep, error, previewPath, manual = [], gaps = [] }) {
   const subject = ok
     ? `LVINIT: ${posts} posts ready for the week of ${weekOf}${exceptions.length ? ` (${exceptions.length} to decide)` : ""}`
     : `LVINIT: this week's batch FAILED (${failedStep ?? "startup"})`;
   const lines = [];
   if (ok) {
-    lines.push(`${posts} finished draft posts for the week of ${weekOf} are ready. Nothing was published.`);
+    lines.push(`${posts} finished draft posts for the week of ${weekOf} are ready${mix ? ` (${mix})` : ""}. Nothing was published.`);
     if (exceptions.length) {
       lines.push("", "Needs your decision:");
       for (const x of exceptions) lines.push(`- ${x.day}: ${x.title ?? ""}: ${x.issues.map((i) => i.message).join(" ")} Recommended: ${x.resolution}`);

@@ -7,8 +7,9 @@
 //     panels, gradients, boxes, or decorative graphics.
 //   * a small LVINIT wordmark (LVI white, NIT gold #C8A46A).
 //
-// Carousel slides: 1080x1350 (4:5) JPEG. Montage: 1080x1920 (9:16) H.264 MP4,
-// silent, so Mikey can add audio in-app.
+// Carousel slides: 1080x1350 (4:5) JPEG. Short videos are rendered by
+// lib/shorts.mjs (renderMontage below is the older silent version, kept for
+// earlier batches and tools).
 //
 // Frames come straight from the source file via ffmpeg at the timestamp the
 // post spec names, so every image in a post traces back to one file and one
@@ -193,7 +194,7 @@ export function overlaySvg({ W, H, headline = "", body = "", position = "bottom"
 
 /** The cropped image before any text: what near-duplicate checks compare. */
 export async function baseCrop(src, focus, { W = 1080, H = 1350, fast = false } = {}) {
-  if (fast) [W, H] = [432, 540];
+  if (fast) [W, H] = [Math.round(W * 0.4), Math.round(H * 0.4)];
   return (await coverCrop(loadSource(src, { fast }), W, H, focus)).jpeg({ quality: 80 }).toBuffer();
 }
 

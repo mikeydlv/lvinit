@@ -2,7 +2,7 @@
 // PLANNER — every Claude call the Monday run makes, and what each one sends
 //
 //   planWeek      TEXT: research digest, ledger, LVINIT page excerpts, catalog
-//                 metadata → 7 posts + 3 backups (copy, sources, and a source
+//                 metadata → 6 posts (3 carousels + 3 shorts) + 3 backups (copy, sources, and a source
 //                 request per slide: clip/still/folder + what it should show)
 //   verifyClaims  TEXT: each post's copy + the evidence it cites → every factual
 //                 claim judged supported / not; week-level check that no two
@@ -37,7 +37,7 @@ export function costOf(usage) {
 
 export const EDITORIAL_STANDARD = `LVINIT weekly production standard (Mikey Del Rosario, Las Vegas relocation / real estate).
 
-Produce SEVEN posts for the week (Monday–Sunday) plus THREE backups. Categories (set "category" to one of these): neighborhood tradeoff, relocation mistake, lifestyle difference, local knowledge, buying decision. The seven posts use every category at least once and no category more than twice. Never several versions of one idea: at most ONE post about city/county lines, jurisdictions or what an area name means. Each backup is a different category and a different idea from every post and from each other, so it can replace any post without repeating a lesson.
+Produce SIX posts for the week in this FIXED order and format: Monday carousel, Tuesday short video, Wednesday carousel, Thursday short video, Friday carousel, Saturday short video. Sunday has NO post. Plus THREE backups: two carousels and one short video. Categories (set "category" to one of these): neighborhood tradeoff, relocation mistake, lifestyle difference, local knowledge, buying decision. The six posts use at least four different categories and no category more than twice. Never several versions of one idea: at most ONE post about city/county lines, jurisdictions or what an area name means. Each backup is a different category and a different idea from every post and from each other, so it can replace any post without repeating a lesson.
 
 DISTINCT TAKEAWAYS: every post teaches a different lesson. Area posts (Henderson, Summerlin, Southwest, etc.) must not all land on "different areas, different routines". Give each a lesson that only that post teaches (e.g. a specific tradeoff, a cost, a rule, a daily-life fact).
 
@@ -56,7 +56,9 @@ DUPLICATES: nothing Mikey published, scheduled, approved or has ready to post (s
 
 SLIDE COPY (large type standard): a headline of at most 8 words that fits three lines, and an optional supporting line of at most 20 words. The first slide states the hook and what the carousel delivers; the last slide gives the save/send reason and the CTA. Never state a home's orientation (e.g. west-facing) or anything else about a pictured house that the source doesn't verify.
 
-MEDIA: carousels by default (5–7 slides, one idea each, short white text). A montage only when the footage is clearly stronger in motion. For each slide request a source from the approved catalog: { "clip": path } for a specific video, { "still": path }, or { "folder": path } to let the system pick, plus "want": what the frame must show. Distinct images across the week. No house numbers, license plates, builder sales signage, or close-up faces.
+CAROUSELS (format "carousel"): 5–7 slides, one idea each, short white text. For each slide request a source from the approved catalog: { "clip": path } for a specific video, { "still": path }, or { "folder": path } to let the system pick, plus "want": what the frame must show. Distinct images across the week. No house numbers, license plates, builder sales signage, or close-up faces.
+
+SHORT VIDEOS (format "short"): a finished 15–30 second vertical video built ONLY from Mikey's original camera footage listed under SHORT VIDEO CLIPS (never any other file; the system refuses anything else). 5–7 segments of 2.5–4.5 seconds each; their durations must add up to 14–25 seconds (the system adds short transitions and a 2.5-second LVINIT / Scofield Group end card; total 15–30 s). Segment 1 is the HOOK: a headline of at most 7 words that makes someone stop scrolling, with an optional line of at most 10 words. Later segments: a headline of at most 6 words each (optional line of at most 10 words), building one idea to a payoff; the last segment states the takeaway. Each segment names one clip by exact path from SHORT VIDEO CLIPS and "want": what that moment must show. Never use one clip twice in a short; prefer clips not marked recentlyUsed; pick footage that actually shows the place named. No voiceover: the text and music carry it. The CLAIMS rules apply to on-screen text too.
 
 REFERENCES: 1–3 posts from OTHER creators per post, from the research digest only, with exact observed metrics and dates, labeled "recent example"/"older example" unless the digest gives a creator baseline. Separate topic evidence from format evidence. "Why it works" is your judgment; say so. If none fit, say it's an editorial call on an evergreen topic.
 
@@ -90,20 +92,21 @@ async function ask(api, { system, content, maxTokens = 32000, thinking = true })
   return { json: parseJson(text), usage: msg.usage, usd: costOf(msg.usage) };
 }
 
-const POST_SHAPE = `Post shape: { day, slug, title, category, topics[], format: "carousel"|"montage", takeaway, cta, caption, hashtags[], slides: [{ source: {clip|still|folder}, want, headline, body?, position: "top"|"bottom" }] | segments: [{ clip, want, dur, headline, body? }], sources: [{ claim, url, authority: "official"|"news"|"lvinit", checked, quote? }], references: [...], formatNote? }`;
+const POST_SHAPE = `Post shape: { day, slug, title, category, topics[], format: "carousel"|"short", takeaway, cta, caption, hashtags[], slides: [{ source: {clip|still|folder}, want, headline, body?, position: "top"|"bottom" }] | segments: [{ clip: exact path from SHORT VIDEO CLIPS, want, dur: seconds, headline, body? }], sources: [{ claim, url, authority: "official"|"news"|"lvinit", checked, quote? }], references: [...], formatNote? }`;
 
 export async function planWeek({ weekOf, research, ledger, pages, catalogSummary, fill }, { anthropic } = {}) {
   const api = anthropic ?? (await client());
   // fill: { days, final } — write only the missing days around posts that already passed every check.
   const ask7 = fill
-    ? `Write posts ONLY for these days: ${fill.days.join(", ")}, plus ONE backup. These posts are already final; don't repeat their lessons, and keep the week's category limits:\n${JSON.stringify(fill.final)}\nThese ideas already failed verification; don't retry them:\n${JSON.stringify(fill.failed ?? [])}\nWrite only what the cited evidence states (no rankings or comparisons). Return JSON { "posts": [one per listed day, with "day"], "backups": [1] }.`
-    : `Return JSON { "posts": [7], "backups": [3] }.`;
+    ? `Write posts ONLY for these days, in these formats: ${fill.days.map((d) => (fill.formats?.[d] ? `${d} (${fill.formats[d]})` : d)).join(", ")}, plus ONE backup. These posts are already final; don't repeat their lessons, and keep the week's category limits:\n${JSON.stringify(fill.final)}\nThese ideas already failed verification; don't retry them:\n${JSON.stringify(fill.failed ?? [])}\nWrite only what the cited evidence states (no rankings or comparisons). Return JSON { "posts": [one per listed day, with "day"], "backups": [1] }.`
+    : `Return JSON { "posts": [6], "backups": [3] } (posts in order: Mon carousel, Tue short, Wed carousel, Thu short, Fri carousel, Sat short; backups: two carousels and one short).`;
   const content = [
     `Week of ${weekOf} (posts go out Monday ${weekOf} through the following Sunday).`,
     `LEDGER (published / scheduled / approved / earlier drafts):\n${JSON.stringify(ledger.slice(0, 100))}`,
     `RESEARCH DIGEST (other creators; metrics observed ${weekOf}):\n${JSON.stringify(research.slice(0, 120))}`,
     `LVINIT PAGES (route, title, excerpt):\n${JSON.stringify(pages.map((p) => ({ route: p.route, title: p.title, excerpt: p.excerpt })))}`,
-    `APPROVED FOOTAGE CATALOG (metadata only):\n${JSON.stringify(catalogSummary)}`,
+    `APPROVED FOOTAGE CATALOG (metadata only):\n${JSON.stringify({ ...catalogSummary, shortClips: undefined })}`,
+    ...(catalogSummary.shortClips ? [`SHORT VIDEO CLIPS (Mikey's original camera footage, the ONLY files a short may use; [path, subject, seconds, orientation, recentlyUsed]):\n${JSON.stringify(catalogSummary.shortClips)}`] : []),
     `${ask7} ${POST_SHAPE}`,
   ].join("\n\n");
   const r = await ask(api, { system: EDITORIAL_STANDARD, content, maxTokens: 128000 });
@@ -173,7 +176,7 @@ export async function reviewSlides({ sheetPath, slidePaths, post }, { anthropic 
       ...(slidePaths?.length ? slidePaths.flatMap((p, i) => [{ type: "text", text: `Slide ${i + 1}:` }, imagePart(p)]) : [imagePart(sheetPath)]),
       {
         type: "text",
-        text: `These are the finished slides of an Instagram carousel for LVINIT, numbered 1–${post.slides?.length ?? post.segments?.length}. Post topic: "${post.title}". Slide texts: ${JSON.stringify((post.slides ?? post.segments).map((s) => [s.headline, s.body].filter(Boolean).join(" / ")))}.
+        text: `${post.segments?.length ? `These are frames from a finished LVINIT short video (Reel / TikTok / YouTube Short), in order, numbered 1–${post.segments.length} (one per segment; the last may be the branded end card, which is fine). Each frame should fit its segment text` : `These are the finished slides of an Instagram carousel for LVINIT, numbered 1–${post.slides?.length}`}. Post topic: "${post.title}". Slide texts: ${JSON.stringify((post.slides ?? post.segments).map((s) => [s.headline, s.body].filter(Boolean).join(" / ")))}.
 Check each slide for: (1) text readable at phone size against its background, (2) crop keeps the subject (nothing important cut off, text not covering the key subject), (3) image relevant to that slide's words, (4) same or near-identical image as another slide, (5) excluded content: readable house numbers, license plates, builder sales signage, close-up identifiable faces, anything private.
 Return only JSON {"slides":[{"n":1,"ok":true,"issues":[],"fix":"none"}]} (each issue under 15 words) with fix one of none|move_text_top|move_text_bottom|new_frame.`,
       },

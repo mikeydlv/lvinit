@@ -205,9 +205,11 @@ function producerSignal({ weeklyPostsRoot, weekOf, producerLog }) {
     folder: readdirSync(dir).filter((n) => n.startsWith(`${i + 1}-`))[0] ?? null,
     day: p.day, date: p.date, format: p.format, title: p.title, category: p.category, takeaway: p.takeaway, cta: p.cta,
     caption: p.caption, hashtags: p.hashtags, slides: (p.slides ?? []).length || undefined, sources: (p.sources ?? []).map((s) => s.url),
+    // Short videos (Tue/Thu/Sat): the finished MP4, its length and music, so the plan can name the exact file.
+    ...(p.segments?.length ? { format: "short video", video: join(dir, readdirSync(dir).filter((n) => n.startsWith(`${i + 1}-`))[0] ?? "", "short.mp4"), seconds: p.validation?.duration, music: p.music ? `${p.music.title} (${p.music.source})` : "none (silent track; add music in-app)" } : {}),
   }));
   return {
-    summary: `${posts.length} finished draft posts in "${dir}" (${(w.exceptions ?? []).length} exceptions)`,
+    summary: `${posts.length} finished draft posts in "${dir}": ${posts.filter((p) => p.format !== "short video").length} carousels + ${posts.filter((p) => p.format === "short video").length} short videos (${(w.exceptions ?? []).length} exceptions)`,
     text: clip(JSON.stringify({ folder: dir, preview: join(dir, "preview.html"), posts, exceptions: w.exceptions, backups: (w.backups ?? []).map((b) => b.title) }, null, 1), MAX * 2),
   };
 }

@@ -4,14 +4,17 @@
 //
 //   node scripts/executive-producer/produce.mjs --spec=<week.json> [--out=DIR] [--media-root=C:\LVINIT]
 //
-// Turns one week's post spec (7 posts, Monday–Sunday) into the finished batch:
+// Turns one week's post spec (Mon/Wed/Fri carousels, Tue/Thu/Sat short videos,
+// no Sunday post) into the finished batch:
 //
 //   <out>/<week>/
 //     preview.html                one visual review, Monday–Sunday, lead first
 //     LVINIT-week-<date>.zip       every finished post
 //     1-Mon-<slug>/
 //       01.jpg … 0N.jpg            ordered carousel slides (1080x1350)   or
-//       reel.mp4 + reel-cover.jpg  a short montage (1080x1920, silent)
+//       short.mp4 + short-cover.jpg  a finished 15–30 s short video (1080x1920,
+//                                  H.264 + AAC, licensed music or a silent track),
+//                                  validated before it is delivered
 //       caption.txt                caption + hashtags, ready to paste
 //       notes.md                   takeaway, CTA, sources, reference posts
 //                                  (observed metrics + dates), asset provenance
@@ -25,7 +28,9 @@ import { join, resolve, dirname, isAbsolute } from "node:path";
 import { execFileSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 
-import { renderSlide, renderMontage } from "./lib/render.mjs";
+import { renderSlide } from "./lib/render.mjs";
+import { renderShort, validateShort, verifyOriginal, shortDuration, BROKERAGE } from "./lib/shorts.mjs";
+import { isVideo } from "./lib/schedule.mjs";
 
 const { default: sharp } = await import("sharp");
 
@@ -55,7 +60,7 @@ function captionText(p) {
 function notesMd(p, week) {
   const L = [];
   L.push(`# ${p.label ?? DAY_NAMES[p.day]}: ${p.title}`, "");
-  L.push(`**Format:** ${p.format === "montage" ? "Reel (short montage)" : `Carousel, ${p.slides.length} slides`}  `);
+  L.push(`**Format:** ${isVideo(p) ? `Short video (Reel / TikTok / YouTube Short), ${Math.round(p.duration ?? shortDuration(p.segments))} s, short.mp4` : `Carousel, ${p.slides.length} slides`}  `);
   L.push(`**Category:** ${p.category}  `);
   L.push(`**Takeaway:** ${p.takeaway}  `);
   L.push(`**CTA:** ${p.cta}`, "");
@@ -76,8 +81,13 @@ function notesMd(p, week) {
   if (p.formatNote) L.push("", `**Format note:** ${p.formatNote}`);
   L.push("", "## Asset provenance", "");
   L.push("Every image is an original photo or a frame extracted from Mikey's own footage. Cropped and scaled only; nothing regenerated.", "");
-  if (p.format === "montage") {
-    p.segments.forEach((s, i) => L.push(`${i + 1}. \`${s.path}\` ${mmss(s.start)}–${mmss(s.start + s.dur)}${s.headline ? ` · "${s.headline}"` : ""}`));
+  if (isVideo(p)) {
+    L.push("Short video: ONLY Mikey's original camera footage (approved folders; each clip re-verified as camera-original from its own metadata before use). No stock, AI-generated or third-party video.", "");
+    p.segments.forEach((s, i) => L.push(`${i + 1}. \`${s.path}\` ${mmss(s.start)}–${mmss(s.start + s.dur)}${s.camera ? ` (${s.camera})` : ""}${s.headline ? ` · "${s.headline}"` : ""}`));
+    L.push(`${p.segments.length + 1}. End card: LVINIT · ${BROKERAGE.name} · ${BROKERAGE.line} · ${BROKERAGE.license}`);
+    L.push("", "## Music", "");
+    L.push(p.music ? `"${p.music.title}" by ${p.music.artist} (${p.music.source}, ${p.music.license}): ${p.music.url}` : "None: the video has a silent audio track. Add music in the app (Instagram / TikTok / YouTube licensed libraries) or add licensed tracks to C:\\LVINIT\\Music\\Licensed.");
+    if (p.validation) L.push("", `**Validated:** ${p.validation.width}x${p.validation.height}, ${p.validation.fps} fps, ${p.validation.duration} s, audio ${p.validation.audio}, ${(p.validation.bytes / 1e6).toFixed(1)} MB.`);
   } else {
     p.slides.forEach((s, i) => L.push(`${String(i + 1).padStart(2, "0")}.jpg ← \`${s.src.path}\`${s.src.t !== undefined ? ` @ ${mmss(s.src.t)}` : ""}${s.note ? ` (${s.note})` : ""}`));
   }
@@ -98,12 +108,12 @@ async function previewHtml(week, posts) {
   const card = async (p, big = false) => {
     const imgs = [];
     for (const f of p.files.slice(0, big ? 10 : 10)) imgs.push(`<img src="${await thumb(f, big ? 300 : 220)}" alt="">`);
-    const badge = p.format === "montage" ? `Reel · ${Math.round(p.duration)}s` : `Carousel · ${p.slides.length}`;
+    const badge = isVideo(p) ? `Short video · ${Math.round(p.duration)}s${p.music ? "" : " · no music"}` : `Carousel · ${p.slides.length}`;
     return `<section class="post${big ? " lead" : ""}">
   <header><span class="day">${esc(p.label ?? DAY_NAMES[p.day])}</span><span class="badge">${badge}</span>${p.lead ? '<span class="badge gold">Strongest this week</span>' : ""}</header>
   <h2>${esc(p.title)}</h2>
   <p class="take">${esc(p.takeaway)}</p>
-  <div class="strip">${imgs.join("")}</div>
+  ${isVideo(p) ? `<video class="short" src="${esc(`${p.folder}/short.mp4`)}" controls playsinline preload="metadata"></video>` : `<div class="strip">${imgs.join("")}</div>`}
   <details><summary>Caption</summary><pre>${esc(captionText(p))}</pre></details>
   <p class="folder">Folder: ${esc(p.folder)}</p>
 </section>`;
@@ -126,11 +136,12 @@ header{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.day{font-weight:7
 h2{font-size:18px;margin:8px 0 4px}.take{margin:0 0 10px;color:var(--muted)}
 .strip{display:flex;gap:6px;overflow-x:auto;padding-bottom:6px}.strip img{height:220px;width:auto;border-radius:6px;flex:none}
 .lead .strip img{height:300px}
+video.short{height:420px;max-width:100%;border-radius:8px;background:#000;display:block}
 details{margin-top:8px}summary{cursor:pointer;color:var(--blue)}pre{white-space:pre-wrap;font:14px/1.5 inherit;background:transparent;margin:8px 0 0}
 .folder{font-size:12px;color:var(--muted);margin:8px 0 0}
 </style></head><body><main>
 <h1>${esc(week.title ?? `LVINIT · Week of ${week.weekOf}`)}</h1>
-<p class="sub">${esc(week.subtitle ?? `${posts.length} finished posts, Monday–Sunday. Drafts only; nothing has been published.`)} ${esc(week.note ?? "")}</p>
+<p class="sub">${esc(week.subtitle ?? `${posts.length} finished posts: ${posts.filter((p) => !isVideo(p)).length} carousels (Mon/Wed/Fri) and ${posts.filter(isVideo).length} short videos (Tue/Thu/Sat). No Sunday post. Drafts only; nothing has been published.`)} ${esc(week.note ?? "")}</p>
 ${(week.exceptions ?? []).length ? `<section class="post exceptions"><h2>Needs your decision</h2>${week.exceptions.map((x) => `<p><b>${esc(DAY_NAMES[x.day] ?? x.day)}: ${esc(x.title ?? "")}</b><br>${x.issues.map((i) => esc(i.message)).join("<br>")}<br><i>${esc(x.resolution)}</i></p>`).join("")}</section>` : ""}
 ${body.join("\n")}
 ${(week.gaps ?? []).length ? `<p class="folder">${week.gaps.map((g) => esc(g)).join("<br>")}</p>` : ""}
@@ -138,7 +149,7 @@ ${(week.gaps ?? []).length ? `<p class="folder">${week.gaps.map((g) => esc(g)).j
 }
 
 /** Render one post into its folder. Used for the whole week and for repairs. */
-export async function renderPost(p, i, { weekDir, week, mediaRoot }) {
+export async function renderPost(p, i, { weekDir, week, mediaRoot, musicDir, renderVideo = renderShort, validate = validateShort, verifyClip = verifyOriginal }) {
   const media = (x) => (isAbsolute(x) ? x : join(mediaRoot, x));
   const folder = `${i + 1}-${p.day}-${p.slug}`;
   const dir = join(weekDir, folder);
@@ -146,14 +157,31 @@ export async function renderPost(p, i, { weekDir, week, mediaRoot }) {
   mkdirSync(dir, { recursive: true });
   const files = [];
   let duration = 0;
-  if (p.format === "montage") {
-    const mp4 = join(dir, "reel.mp4");
-    await renderMontage(p.segments.map((s) => ({ ...s, path: media(s.path) })), mp4);
-    duration = p.segments.reduce((n, s) => n + s.dur, 0);
+  if (isVideo(p)) {
+    // Last ownership check right before render: every clip must still read as camera-original.
+    for (const s of p.segments) {
+      const v = verifyClip(media(s.path), s.path);
+      if (!v.ok) throw new Error(`${s.path}: ${v.why}. Only Mikey's original footage may be used.`);
+      s.camera = v.camera;
+    }
+    const mp4 = join(dir, "short.mp4");
+    const music = p.music?.file ? { path: join(musicDir ?? process.env.LVINIT_MUSIC_DIR ?? "C:\\LVINIT\\Music\\Licensed", p.music.file) } : null;
+    const cta = (String(p.cta ?? "").match(/lvinit\.com[^\s,;)]*/i) ?? ["lvinit.com"])[0].replace(/[.!]+$/, "");
+    let r;
+    let check;
+    // One retry: a transient ffmpeg failure shouldn't cost the day.
+    for (let attempt = 0; attempt < 2; attempt++) {
+      r = await renderVideo(p.segments.map((s) => ({ ...s, path: media(s.path) })), mp4, { music, cta });
+      check = validate(mp4, { expectMusic: Boolean(music) });
+      if (check.ok) break;
+    }
+    if (!check.ok) throw new Error(`short.mp4 failed validation: ${check.problems.join("; ")}`);
+    p.validation = check.info;
+    duration = check.info.duration;
     // Preview/review frames: one per segment.
     p.segments.forEach((s, k) => {
       const f = join(dir, `.frame-${k}.jpg`);
-      const t = p.segments.slice(0, k).reduce((n, x) => n + x.dur, 0) + Math.min(1, s.dur / 2);
+      const t = p.segments.slice(0, k).reduce((n, x) => n + x.dur, 0) - k * 0.35 + s.dur / 2; // mid-segment, after the cross dissolves
       execFileSync("ffmpeg", ["-loglevel", "error", "-y", "-ss", String(t), "-i", mp4, "-frames:v", "1", "-q:v", "4", f]);
       files.push(f);
     });

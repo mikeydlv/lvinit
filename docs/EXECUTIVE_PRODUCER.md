@@ -101,7 +101,7 @@ Vegas real-estate opportunities.
 
 Recorded as strategy only; the agents don't act on it yet.
 
-- The weekly batch (below) produces **seven social posts**; it does not pick the
+- The weekly batch (below) produces **six social posts (3 carousels + 3 short videos)**; it does not pick the
   long-form topic or plan Shorts from it.
 - The monthly review needs YouTube Studio numbers (subscribers gained, watch
   hours, CTR, retention, traffic sources) that the public channel page doesn't
@@ -113,10 +113,61 @@ Recorded as strategy only; the agents don't act on it yet.
 
 ## Monday production (current direction)
 
-Every Sunday by 8:00 PM Pacific the Producer delivers **seven finished draft posts** for the coming week (Mon–Sun) to
+Every Sunday by 8:00 PM Pacific the Producer delivers **six finished draft posts** for the coming week to
 `OneDrive\Documents\LVINIT\Weekly Posts\Week of <date>\`, with one `preview.html`,
 a ZIP, and an email saying it's ready or that it failed and why. Nothing is ever
 published.
+
+### The weekly mix (permanent, Mikey 2026-10-12)
+
+| Mon | Tue | Wed | Thu | Fri | Sat | Sun |
+|---|---|---|---|---|---|---|
+| Carousel | Short video | Carousel | Short video | Carousel | Short video | No social post |
+
+Defined once in `lib/schedule.mjs`. The planner writes posts in that order; any
+post on the wrong format is sent back, backups are taken by format, and a
+missing day is written for its own format.
+
+### Short videos (`lib/shorts.mjs`)
+
+Each short is a finished, playable `short.mp4` (not a script): 1080×1920,
+H.264 + AAC, 30 fps, **15–30 s**, a hook in the first segment, 5–7 segments with
+short cross dissolves, the LVINIT wordmark and THE SCOFIELD GROUP on every
+frame, and a 2.5 s end card with the approved brokerage line (*Mikey Del Rosario
+· The Scofield Group · NV License S.0175577*, the same as the long-form closing
+card) and the white Scofield logo. No voiceover.
+
+**Footage: Mikey's original footage only.** A clip is usable only if it is in
+the approved catalog (`~/.lvinit/executive-producer/privacy.json`), is b-roll,
+and its own file metadata identifies one of Mikey's cameras (DJI drone, Osmo
+Pocket, phone). The check runs again on every clip right before render. Edited
+exports, OpusClip / AI-expanded files, and anything with a stock or download
+name are refused. **Nothing is ever substituted:** if no suitable original clip
+exists, that day becomes an exception ("approve more footage or film new
+B-roll") and the rest of the week still ships. Folders added after the last
+catalog (for example newer project folders) are only used once approved:
+`npm run producer:catalog -- --approve="Media/<folder>"`.
+
+**Music: licensed tracks only.** Tracks come from
+`C:\LVINIT\Music\Licensed\licenses.json` (file, source, URL, license),
+least-recently-used first, never the same track on consecutive shorts. Seeded on
+2026-10-12 with two Pixabay tracks verified on pixabay.com (Pixabay Content
+License). No usable track → a silent audio track, and the notes say to add
+music in the app. Commercial songs, YouTube Audio Library tracks (YouTube-only)
+and Uppbeat free-tier tracks (per-track credit) don't belong there.
+
+**Validation before delivery** (`validateShort`): ffprobe for size, codec, frame
+rate, duration and an AAC track; a full decode with no errors; no black
+stretches; the music track isn't silent. One automatic re-render; a short that
+still fails is an exception, never a broken file.
+
+**Review:** one frame per segment goes through the same Claude visual review as
+the carousels. A rejected frame gets a different original clip, then the short
+is re-rendered and re-validated (two repair rounds).
+
+**Repetition:** `~/.lvinit/executive-producer/footage-usage.json` records every
+clip (and music track) used in a finished week. A clip used in a short in the
+last 4 weeks, or 3+ times in 90 days, is held back from shorts.
 
 ```bash
 node scripts/executive-producer/weekly.mjs                    # this week (Pacific)
@@ -129,10 +180,10 @@ node scripts/executive-producer/rehearsal/run-rehearsal.mjs   # full chain, paid
 |---|---|---|
 | ledger | Refresh Mikey's recent posts (Instagram/TikTok via Apify, YouTube from his public channel); mark drafts that were actually posted as published | Apify, YouTube |
 | research | Other creators on Instagram and TikTok | Apify |
-| plan | 7 posts + 3 backups | Claude (text) |
-| verify | Local gate + claim-by-claim meaning check against the cited evidence; up to two rewrites (unsupported sentences are deleted, not reworded); then a backup through the same check; any day still missing gets a new post written for it and checked, so the week reaches seven | Claude (text) |
-| frames | Candidates from approved footage; local variety rules (no repeats, no burst twins, clip moments far apart); Claude picks from a low-res sheet | Claude (images) |
-| render | Slides / reel | local |
+| plan | 6 posts (Mon/Wed/Fri carousels, Tue/Thu/Sat shorts) + 3 backups (2 carousels, 1 short) | Claude (text) |
+| verify | Local gate + claim-by-claim meaning check against the cited evidence; up to two rewrites (unsupported sentences are deleted, not reworded); then a backup through the same check; any day still missing gets a new post written for it (same format) and checked, so the week reaches six | Claude (text) |
+| frames | Carousels: candidates from approved footage; shorts: original camera clips only, re-verified from file metadata; local variety rules (no repeats, no burst twins, clip moments far apart); Claude picks from a low-res sheet | Claude (images) |
+| render | Slides / finished short MP4s with licensed music, each validated | local |
 | review | Claude reviews every finished post (readability, crop, relevance, repeats, excluded content). Readability: move text, then pull exposure (two steps), then change the image. Wrong/private/repeated image: exclude it and search wider. Three repair rounds; a middle slide with no usable image is dropped (4+ slides kept). What remains becomes an exception with a recommended resolution | Claude (images) |
 | package | `week.json`, `status.json`, preview, ZIP | local |
 | notify | Email (Resend) + Windows notification, success or failure | Resend |

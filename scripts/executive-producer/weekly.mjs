@@ -2,7 +2,11 @@
 // ---------------------------------------------------------------------------
 // LVINIT EXECUTIVE PRODUCER — MONDAY RUN (Mikey's PC, Windows Task Scheduler)
 //
-//   node scripts/executive-producer/weekly.mjs              this week (Mon–Sun, Pacific)
+//   node scripts/executive-producer/weekly.mjs              this week (Pacific)
+//
+// Weekly mix (lib/schedule.mjs): Mon/Wed/Fri carousels, Tue/Thu/Sat finished
+// 15–30 s short videos from Mikey's ORIGINAL footage only (lib/shorts.mjs),
+// no Sunday post.
 //   node scripts/executive-producer/weekly.mjs --force      rebuild a week that already finished
 //   ... --force --reframe   keep the verified copy; redo images, render and review
 //   node scripts/executive-producer/weekly.mjs --plan=FILE  REHEARSAL ONLY: use a prepared plan
@@ -12,13 +16,13 @@
 //                YouTube from his public channel), mark matching drafts as
 //                published, build draft/approved/scheduled/published history
 //   2. research  other creators on Instagram + TikTok (Apify)
-//   3. plan      7 posts + 3 backups (Claude, text only)
+//   3. plan      6 posts (3 carousels + 3 shorts) + 3 backups (Claude, text only)
 //   4. verify    local gate (duplicates, superlatives, comparisons, money/law,
 //                generic, distinct takeaways) + Claude claim-by-claim check;
 //                two rewrites, a backup, then new posts for any missing day
 //   5. frames    candidates from approved footage, scored locally (sharpness,
 //                text band, no repeats); Claude picks from low-res candidates unless LVINIT_VISION_FRAMES=off
-//   6. render    slides / reel
+//   6. render    slides / finished short MP4s (validated: 1080x1920, H.264, 15–30 s, audio)
 //   7. review    local readability + repeated-image checks, then Claude looks at
 //                every finished post; fixes (text position, new frame) are
 //                applied over three rounds; what remains is an exception with
@@ -77,6 +81,7 @@ export function mondayOf(now = new Date()) {
 }
 
 const DAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+import { WEEK_MIX, POST_DAYS, formatFor, isVideo, assignToSlots, takeBackup, MIX_LABEL } from "./lib/schedule.mjs";
 
 export async function runWeek(argv = process.argv.slice(2), { log = console.log, now = new Date(), services = {} } = {}) {
   const args = parseArgs(argv);
@@ -149,6 +154,8 @@ export async function runWeek(argv = process.argv.slice(2), { log = console.log,
     const { renderPost, packageWeek } = await import("./produce.mjs");
     const { chooseFrame } = await import("./lib/frames.mjs");
     const V = await import("./lib/visual.mjs");
+    const SH = await import("./lib/shorts.mjs");
+    const verifyClip = (abs, rel) => SH.verifyOriginal(abs, rel, { probe: services.probeOriginal });
     const apify = await import("./lib/apify.mjs");
     const P = await import("./lib/planner.mjs");
     const ai = { anthropic: services.anthropic };
@@ -240,6 +247,15 @@ export async function runWeek(argv = process.argv.slice(2), { log = console.log,
         .map((c) => (c.type === "video" ? [c.path, c.subject, c.durationSec] : [c.path, c.subject])),
       note: "files: [exact path, subject, seconds if video]. Use exact paths/folder names from here only.",
     };
+    // Shorts: camera-original approved clips only, minus clips used in a short in the last 4 weeks.
+    const usage = SH.loadUsage(services.usageFile);
+    const overused = SH.overusedClips(usage, weekOf);
+    const recent = new Set((usage.uses ?? []).filter((u) => u.weekOf < weekOf).map((u) => String(u.path).toLowerCase()));
+    const originals = SH.originalClips(catalog, mediaRoot).filter((c) => !overused.has(c.path.toLowerCase()));
+    const shortCatalog = { folders: [], items: originals };
+    planCatalog.shortClips = originals.map((c) => [c.path, c.subject, c.durationSec, c.orientation, recent.has(c.path.toLowerCase())]);
+    report.footage = { originalClips: originals.length, excludedAsRecentlyUsed: overused.size };
+    if (originals.length < 18) report.gaps.unshift(`Only ${originals.length} original clips are available for short videos (approved, camera-original, not used in the last 4 weeks). Approve more footage folders to keep shorts varied.`);
     const plan = await step("plan", async () => {
       if (checkpoint) return { posts: checkpoint.accepted, backups: checkpoint.backups, note: "skipped: resumed from verified posts" };
       if (savedPlan) return { posts: savedPlan.posts, backups: savedPlan.backups, note: `plan from earlier attempt (${savedPlan.savedAt})` };
@@ -253,9 +269,14 @@ export async function runWeek(argv = process.argv.slice(2), { log = console.log,
       writeFileSync(planFile, JSON.stringify({ savedAt: new Date().toISOString(), posts: r.plan.posts ?? [], backups: r.plan.backups ?? [], costs: { anthropicUsd: r.usd } }, null, 2));
       return Object.assign({ posts: r.plan.posts ?? [], backups: r.plan.backups ?? [] }, { note: `${(r.plan.posts ?? []).length} posts + ${(r.plan.backups ?? []).length} backups` });
     });
-    // Days are always Mon..Sun by position (the plan sometimes writes "Monday 2026-09-28").
-    if (!checkpoint) plan.posts = (plan.posts ?? []).slice(0, 7).map((p, i) => ({ ...p, day: DAYS[i] }));
+    // Days come from the fixed mix: carousels on Mon/Wed/Fri, shorts on Tue/Thu/Sat, in plan order.
+    // Extra posts become backups; empty slots are written later (topUp), like any missing day.
     const backups = [...(plan.backups ?? [])];
+    if (!checkpoint) {
+      const slotted = assignToSlots(plan.posts ?? []);
+      plan.posts = slotted.posts;
+      backups.push(...slotted.extra);
+    }
 
     // 4. verify --------------------------------------------------------------------
     const officialQuotes = (p) => (p.sources ?? []).filter((s) => ["official", "news"].includes(s.authority) && s.quote).map((s) => s.quote);
@@ -271,7 +292,19 @@ export async function runWeek(argv = process.argv.slice(2), { log = console.log,
         .map((s, k) => ({ k, f: fitText(s.headline, s.body, 920) }))
         .filter(({ f }) => !f.fits)
         .map(({ k }) => ({ check: "fit", message: `Slide ${k + 1}: copy is too long for the slide at the standard type size; shorten it without changing the meaning.` }));
-    const localIssues = (p) => [...G.gatePost(p, { ledger, today: weekOf, sourceTexts: officialQuotes(p) }), ...fitIssues(p)];
+    const shortIssues = (p) => {
+      if (formatFor(p.day) === "short" && !p.segments?.length) return [{ check: "format", message: `${p.day} is a short-video day: write segments (5–7 clips from SHORT VIDEO CLIPS), not slides.` }];
+      if (formatFor(p.day) === "carousel" && !p.slides?.length) return [{ check: "format", message: `${p.day} is a carousel day: write slides, not video segments.` }];
+      if (!isVideo(p)) return [];
+      const out = [];
+      const segs = p.segments ?? [];
+      if (segs.length < 4 || segs.length > 8) out.push({ check: "format", message: `A short needs 5–7 segments (has ${segs.length}).` });
+      segs.forEach((g, k) => {
+        if (!fitText(g.headline ?? "", g.body ?? "", 912, k === 0 ? 84 : 72).fits) out.push({ check: "fit", message: `Segment ${k + 1}: on-screen text is too long; shorten it without changing the meaning.` });
+      });
+      return out;
+    };
+    const localIssues = (p) => [...G.gatePost(p, { ledger, today: weekOf, sourceTexts: officialQuotes(p) }), ...fitIssues(p), ...shortIssues(p)];
     const textOf = (p) => [p.title, p.takeaway, p.caption, ...(p.slides ?? p.segments ?? []).flatMap((s) => [s.headline, s.body])].filter(Boolean).join("\n");
 
     const accepted = await step("verify", async () => {
@@ -291,22 +324,26 @@ export async function runWeek(argv = process.argv.slice(2), { log = console.log,
       // Missing days (posts that couldn't be verified) get new posts written for exactly those
       // days, around the ones that already passed, and go through the same full check.
       const topUp = async (out, failed) => {
-        for (let round = 0; round < 2 && out.length < 7 && hasClaude; round++) {
+        for (let round = 0; round < 2 && out.length < POST_DAYS.length && hasClaude; round++) {
           const have = new Set(out.map((p) => p.day));
-          const days = DAYS.filter((d) => !have.has(d));
-          const r = await P.planWeek({ weekOf, research, ledger, pages: packs, catalogSummary: planCatalog, fill: { days, final: out.map((p) => ({ day: p.day, category: p.category, title: p.title, takeaway: p.takeaway })), failed } }, ai);
+          const days = POST_DAYS.filter((d) => !have.has(d));
+          const r = await P.planWeek({ weekOf, research, ledger, pages: packs, catalogSummary: planCatalog, fill: { days, final: out.map((p) => ({ day: p.day, category: p.category, title: p.title, takeaway: p.takeaway })), failed, formats: Object.fromEntries(days.map((d) => [d, formatFor(d)])) } }, ai);
           addCost("anthropic", "topup", r.usd, r.usage);
-          let fresh = (r.plan.posts ?? []).slice(0, days.length).map((p, i) => ({ ...p, day: days.includes(p.day) ? p.day : days[i] }));
-          const spare = (r.plan.backups ?? [])[0];
+          let fresh = (r.plan.posts ?? []).slice(0, days.length).map((p, i) => {
+            const day = days.includes(p.day) ? p.day : days[i];
+            return { ...p, day, format: formatFor(day) };
+          });
+          const spares = [...(r.plan.backups ?? [])];
           for (let k = 0; k < 3 && fresh.length; k++) {
             const iss = await verifyWeek([...out, ...fresh]);
             out.push(...fresh.filter((p) => !iss.get(p.day)?.length));
             fresh = fresh.filter((p) => iss.get(p.day)?.length);
             if (!fresh.length) break;
-            if (k === 1 && spare) {
+            const spare = k === 1 ? takeBackup(spares, formatFor(fresh[0].day)) : null;
+            if (spare) {
               const d = fresh[0].day;
               failed.push(fresh[0].title);
-              fresh = [{ ...spare, day: d }, ...fresh.slice(1)];
+              fresh = [{ ...spare, day: d, format: formatFor(d) }, ...fresh.slice(1)];
               continue;
             }
             if (k === 2) break;
@@ -343,8 +380,9 @@ export async function runWeek(argv = process.argv.slice(2), { log = console.log,
           if (!issues.get(p.day)?.length) return p;
           const n = (failCount.get(p.day) ?? 0) + 1;
           failCount.set(p.day, n);
-          if (n > 2 && backups.length) {
-            const b = { ...backups.shift(), day: p.day };
+          const bk = n > 2 ? takeBackup(backups, formatFor(p.day)) : null;
+          if (bk) {
+            const b = { ...bk, day: p.day, format: formatFor(p.day) };
             report.replaced.push({ day: p.day, dropped: p.title, why: issues.get(p.day).map((i) => i.message), with: b.title });
             failCount.set(p.day, 0);
             return b;
@@ -393,8 +431,8 @@ export async function runWeek(argv = process.argv.slice(2), { log = console.log,
         }
         // Without Claude (rehearsal): a backup that passes the local gate.
         let placed = false;
-        while (!hasClaude && backups.length && !placed) {
-          const b = { ...backups.shift(), day: p.day };
+        for (let bk = takeBackup(backups, formatFor(p.day)); !hasClaude && bk && !placed; bk = placed ? null : takeBackup(backups, formatFor(p.day))) {
+          const b = { ...bk, day: p.day, format: formatFor(p.day) };
           if (!localIssues(b).length) {
             out.push(b);
             placed = true;
@@ -403,7 +441,7 @@ export async function runWeek(argv = process.argv.slice(2), { log = console.log,
         }
         if (!placed) report.exceptions.push({ day: p.day, title: p.title, issues: issues.get(p.day), resolution: "Two rewrites and every backup failed the claim check. Skip this day, or rewrite the listed claims." });
       }
-      if (out.length < 7) await topUp(out, report.exceptions.map((x) => x.title));
+      if (out.length < POST_DAYS.length) await topUp(out, report.exceptions.map((x) => x.title));
       writeFileSync(checkpointFile, JSON.stringify({ savedAt: new Date().toISOString(), accepted: out, backups, replaced: report.replaced, exceptions: report.exceptions, costs: report.costs }, null, 2));
       return Object.assign(out, { note: `${out.length} verified; ${report.replaced.length} replaced by backups` });
     });
@@ -412,6 +450,7 @@ export async function runWeek(argv = process.argv.slice(2), { log = console.log,
     const usedHashes = [];
     const usedSources = []; // { path, t } of every image placed this week
     const loadCrop = (src, focus) => baseCrop(src, focus, { fast: true }); // checks and scoring only; final render is full resolution
+    const loadCropTall = (src, focus) => baseCrop(src, focus, { W: 1080, H: 1920, fast: true }); // 9:16, as the short shows it
     // On by default: Claude sees low-res candidate frames (approved clips only) to pick the one that
 // actually shows the subject. LVINIT_VISION_FRAMES=off keeps frame choice fully local.
     const vision = hasClaude && (env.LVINIT_VISION_FRAMES ?? "on") !== "off" ? (x) => P.pickFrame(x, ai) : null;
@@ -460,15 +499,51 @@ export async function runWeek(argv = process.argv.slice(2), { log = console.log,
           p.slides = p.slides.filter((s) => !dropped.some((d) => d.s === s));
           report.slidesDropped = [...(report.slidesDropped ?? []), ...dropped.map((d) => ({ day: p.day, title: p.title, slide: d.s.headline, why: d.why }))];
         }
+        // Short segments: chosen ONLY from camera-original approved clips (shortCatalog), each
+        // re-verified from the file's own metadata. Never substituted with anything else.
+        const inShort = [];
         for (const seg of p.segments ?? []) {
           if (seg.path) continue;
-          const r = await chooseFrame({ want: { clip: seg.clip, want: seg.want }, catalog, mediaRoot, sharp, loadCrop, usedHashes, usedSources, pick: vision });
-          addCost("anthropic", "frames", r.usd);
-          if (r.error) throw new Error(`${p.day} "${p.title}": ${r.error}`);
+          seg.dur = Math.min(4.5, Math.max(2.5, Number(seg.dur) || 3.5));
+          let r;
+          const rejected = [...(seg.rejected ?? [])];
+          for (let tryNo = 0; tryNo < 4; tryNo++) {
+            const exclude = [...rejected, ...inShort];
+            const tries = [{ clip: seg.clip, want: seg.want, headline: seg.headline, exclude }, { folder: "", want: `${seg.want ?? ""} ${seg.headline ?? ""}`, headline: seg.headline, exclude }];
+            r = null;
+            for (const want of tries) {
+              try {
+                r = await chooseFrame({ want, catalog: shortCatalog, mediaRoot, sharp, loadCrop: loadCropTall, usedHashes, usedSources, pick: vision });
+              } catch (e) {
+                r = { error: String(e.message) };
+              }
+              addCost("anthropic", "frames", r.usd);
+              if (!r.error) break;
+            }
+            if (r.error) break;
+            const v = SH.verifyOriginal(join(mediaRoot, r.src.path), r.src.path, { probe: services.probeOriginal });
+            if (v.ok) break;
+            rejected.push(r.src.path);
+            report.footageRefused = [...(report.footageRefused ?? []), { path: r.src.path, why: v.why }];
+            r = { error: `no camera-original clip found for "${seg.want}"` };
+          }
+          if (r.error) throw new Error(`${p.day} "${p.title}": ${r.error} (only Mikey's original footage may be used; nothing was substituted)`);
+          const clipDur = shortCatalog.items.find((c) => c.path === r.src.path)?.durationSec ?? seg.dur + 1;
           seg.path = r.src.path;
-          seg.start = Math.max(0, (r.src.t ?? 0) - (seg.dur ?? 3.5) / 2);
-          seg.dur = seg.dur ?? 3.5;
+          seg.start = Math.round(Math.min(Math.max(0, (r.src.t ?? 0) - seg.dur / 2), Math.max(0, clipDur - seg.dur - 0.1)) * 100) / 100;
+          seg.note = r.reason;
+          inShort.push(r.src.path);
           picked++;
+        }
+        // Fit the planned length into 15–30 s by scaling segment durations (never by cutting segments).
+        if (p.segments?.length) {
+          const total = SH.shortDuration(p.segments);
+          const target = total < SH.LIMITS.min + 0.5 ? SH.LIMITS.min + 1 : total > SH.LIMITS.max - 0.5 ? SH.LIMITS.max - 1.5 : null;
+          if (target) {
+            const fixed = SH.END_CARD - SH.XFADE * p.segments.length;
+            const k = (target - fixed) / p.segments.reduce((a, g) => a + g.dur, 0);
+            for (const g of p.segments) g.dur = Math.round(Math.min(5, Math.max(2.2, g.dur * k)) * 100) / 100;
+          }
         }
         // Put text where the image is calm and dark enough for white type.
         for (const s of p.slides ?? []) {
@@ -486,8 +561,8 @@ export async function runWeek(argv = process.argv.slice(2), { log = console.log,
           usedHashes.length = mark.hashes;
           usedSources.length = mark.sources;
           let placed = false;
-          while (backups.length && !placed) {
-            const b = { ...backups.shift(), day: p.day };
+          for (let bk = takeBackup(backups, formatFor(p.day)); bk && !placed; bk = placed ? null : takeBackup(backups, formatFor(p.day))) {
+            const b = { ...bk, day: p.day, format: formatFor(p.day) };
             if (localIssues(b).length) continue;
             try {
               await framePost(b);
@@ -499,18 +574,50 @@ export async function runWeek(argv = process.argv.slice(2), { log = console.log,
               usedSources.length = mark.sources;
             }
           }
+          if (!placed && isVideo(p)) {
+            // Not enough suitable original footage: report it. The rest of the week still ships.
+            report.exceptions.push({ day: p.day, title: p.title, issues: [{ check: "footage", message: String(e.message) }], resolution: "No finished video this day. Approve more original footage folders (npm run producer:catalog -- --approve=...) or film new B-roll; nothing was substituted." });
+            accepted[i] = null;
+            continue;
+          }
           if (!placed) throw e;
         }
       }
+      for (let i = accepted.length - 1; i >= 0; i--) if (!accepted[i]) accepted.splice(i, 1);
       return { note: `${picked} frames chosen automatically${vision ? " (with Claude)" : " (locally)"}` };
     });
 
     // 6. render --------------------------------------------------------------------
     const week = { weekOf, folderName, researchChecked: weekOf, verifiedAt: checkpoint?.savedAt ?? new Date().toISOString(), posts: accepted, backups, exceptions: report.exceptions, gaps: report.gaps, note: "Drafts only. Captions are copy-ready; notes.md in each folder has sources, references and file provenance." };
+    // Licensed music for each short (least recently used; none listed → silent track, said in notes).
+    let tracks = [];
+    try {
+      tracks = SH.licensedTracks(services.musicDir);
+    } catch (e) {
+      report.gaps.push(`The licensed music list couldn't be read (${String(e.message).slice(0, 80)}); shorts were rendered without music.`);
+    }
+    if (!tracks.length) report.gaps.push(`No licensed music in ${services.musicDir ?? SH.MUSIC_DIR}: the short videos have a silent audio track. Add music in the app, or add licensed tracks to that folder's licenses.json.`);
+    const musicThisWeek = [];
+    for (const p of accepted.filter(isVideo)) {
+      const t = SH.pickTrack(tracks, usage, musicThisWeek);
+      p.music = t ? { file: t.file, title: t.title, artist: t.artist, source: t.source, url: t.url, license: t.license } : null;
+      if (t) musicThisWeek.push(t.file);
+    }
     const rendered = await step("render", async () => {
       const out = [];
-      for (const [i, p] of accepted.entries()) out.push(await renderPost(p, i, { weekDir, week, mediaRoot }));
-      return Object.assign(out, { note: `${out.length} posts rendered` });
+      for (let i = 0; i < accepted.length; i++) {
+        const p = accepted[i];
+        try {
+          out.push(await renderPost(p, i, { weekDir, week, mediaRoot, musicDir: services.musicDir, verifyClip, renderVideo: services.renderVideo, validate: services.validateShort }));
+        } catch (e) {
+          if (!isVideo(p)) throw e;
+          report.exceptions.push({ day: p.day, title: p.title, issues: [{ check: "video", message: String(e.message).slice(0, 300) }], resolution: "The short couldn't be rendered into a valid MP4. Nothing was substituted; skip the day or re-run with --force --reframe." });
+          accepted.splice(i, 1);
+          i--;
+        }
+      }
+      const shorts = out.filter(isVideo).length;
+      return Object.assign(out, { note: `${out.length} posts rendered (${out.length - shorts} carousels, ${shorts} validated short videos)` });
     });
 
     // 7. review --------------------------------------------------------------------
@@ -551,7 +658,7 @@ export async function runWeek(argv = process.argv.slice(2), { log = console.log,
               problems.length = 0;
               break;
             }
-            if (attempt === ROUNDS - 1 && p.format !== "montage") {
+            if (attempt === ROUNDS - 1 && !isVideo(p)) {
               // Last resort for a middle slide nothing could fix: drop it, keeping 4+ slides.
               const n = p.slides.length;
               // Only slides whose image is wrong (irrelevant, private, repeated); readability is never a reason to lose content.
@@ -570,7 +677,31 @@ export async function runWeek(argv = process.argv.slice(2), { log = console.log,
                 bad.splice(0, bad.length, ...left);
               }
             }
-            if (attempt === ROUNDS - 1 || p.format === "montage") {
+            if (isVideo(p) && attempt < 2 && bad.some((s) => s.n >= 1)) {
+              // A frame that fails review: a different original clip for that segment; text moved if it's only readability.
+              for (const s of bad) {
+                const seg = p.segments[s.n - 1];
+                if (!seg) continue;
+                if (s.fix?.startsWith("move_text")) seg.position = s.fix.endsWith("top") ? "top" : "bottom";
+                else {
+                  seg.rejected = [...(seg.rejected ?? []), seg.path];
+                  const r = await chooseFrame({ want: { folder: "", want: `${seg.want ?? ""} ${seg.headline ?? ""}`, headline: seg.headline, avoid: s.issues.join("; "), exclude: [...seg.rejected, ...p.segments.map((g) => g.path)] }, catalog: shortCatalog, mediaRoot, sharp, loadCrop: loadCropTall, usedHashes, usedSources, pick: vision }).catch((e) => ({ error: String(e.message) }));
+                  addCost("anthropic", "review", r.usd);
+                  if (r.error || !SH.verifyOriginal(join(mediaRoot, r.src.path), r.src.path, { probe: services.probeOriginal }).ok) continue;
+                  const clipDur = shortCatalog.items.find((c) => c.path === r.src.path)?.durationSec ?? seg.dur + 1;
+                  Object.assign(seg, { path: r.src.path, start: Math.round(Math.min(Math.max(0, (r.src.t ?? 0) - seg.dur / 2), Math.max(0, clipDur - seg.dur - 0.1)) * 100) / 100, note: `replaced after review: ${s.issues.join("; ")}` });
+                }
+                fixes++;
+              }
+              try {
+                rendered[i] = await renderPost(p, i, { weekDir, week, mediaRoot, musicDir: services.musicDir, verifyClip, renderVideo: services.renderVideo, validate: services.validateShort });
+              } catch (e) {
+                report.exceptions.push({ day: p.day, title: p.title, issues: [{ check: "video", message: String(e.message).slice(0, 200) }], resolution: "Re-render failed after a review fix; check the earlier version in the folder." });
+                break;
+              }
+              continue;
+            }
+            if (attempt === ROUNDS - 1 || isVideo(p)) {
               report.exceptions.push({ day: p.day, title: p.title, issues: bad.map((s) => ({ check: "visual", message: `Slide ${s.n}: ${s.issues.join("; ")}` })), resolution: bad.map((s) => (s.fix === "new_frame" ? `Replace slide ${s.n}'s image` : s.fix?.startsWith("move_text") ? `Move slide ${s.n}'s text ${s.fix.split("_").pop()}` : `Check slide ${s.n}`)).join("; ") + "." });
               break;
             }
@@ -636,8 +767,14 @@ export async function runWeek(argv = process.argv.slice(2), { log = console.log,
     writeFileSync(join(weekDir, "run.json"), JSON.stringify(report, null, 2));
     rmSync(checkpointFile, { force: true });
     rmSync(planFile, { force: true });
-    writeFileSync(done, JSON.stringify({ weekOf, finishedAt: report.finishedAt, posts: accepted.length }, null, 2));
-    const n = await (services.notify ?? notify)({ ok: true, weekOf, posts: accepted.length, exceptions: report.exceptions, costs: report.costs, previewPath: join(weekDir, "preview.html"), manual: [...report.manual, ...report.notConfigured], gaps: report.gaps.slice(0, 1) }, { fetchImpl, env });
+    writeFileSync(done, JSON.stringify({ weekOf, finishedAt: report.finishedAt, posts: accepted.length, mix: MIX_LABEL }, null, 2));
+    // Footage + music used this week, so later weeks don't keep reusing the same clips.
+    try {
+      SH.saveUsage(SH.recordWeek(usage, weekOf, accepted), services.usageFile);
+    } catch (e) {
+      report.gaps.push(`Footage usage couldn't be recorded (${String(e.message).slice(0, 80)}).`);
+    }
+    const n = await (services.notify ?? notify)({ ok: true, weekOf, posts: accepted.length, mix: `${accepted.filter((p) => !isVideo(p)).length} carousels + ${accepted.filter(isVideo).length} short videos; no Sunday post`, exceptions: report.exceptions, costs: report.costs, previewPath: join(weekDir, "preview.html"), manual: [...report.manual, ...report.notConfigured], gaps: report.gaps.slice(0, 1) }, { fetchImpl, env });
     report.notification = n;
     writeFileSync(join(weekDir, "run.json"), JSON.stringify(report, null, 2));
     log(`Week of ${weekOf}: ${accepted.length} posts. Cost $${report.costs.totalUsd}. Manual: ${report.manual.length}. Not configured: ${report.notConfigured.length}. Exceptions: ${report.exceptions.length}. Email: ${n.email.sent ? "sent" : n.email.reason}.`);
