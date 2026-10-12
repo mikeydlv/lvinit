@@ -58,7 +58,19 @@ SLIDE COPY (large type standard): a headline of at most 8 words that fits three 
 
 CAROUSELS (format "carousel"): 5–7 slides, one idea each, short white text. For each slide request a source from the approved catalog: { "clip": path } for a specific video, { "still": path }, or { "folder": path } to let the system pick, plus "want": what the frame must show. Distinct images across the week. No house numbers, license plates, builder sales signage, or close-up faces.
 
-SHORT VIDEOS (format "short"): a finished 15–30 second vertical video built ONLY from Mikey's original camera footage listed under SHORT VIDEO CLIPS (never any other file; the system refuses anything else). 5–7 segments of 2.5–4.5 seconds each; their durations must add up to 14–25 seconds (the system adds short transitions and a 2.5-second LVINIT / Scofield Group end card; total 15–30 s). Segment 1 is the HOOK: a headline of at most 7 words that makes someone stop scrolling, with an optional line of at most 10 words. Later segments: a headline of at most 6 words each (optional line of at most 10 words), building one idea to a payoff; the last segment states the takeaway. Each segment names one clip by exact path from SHORT VIDEO CLIPS and "want": what that moment must show. Never use one clip twice in a short; prefer clips not marked recentlyUsed; pick footage that actually shows the place named. No voiceover: the text and music carry it. The CLAIMS rules apply to on-screen text too.
+SHORT VIDEOS (format "short"): finished 15–30 second vertical videos built ONLY from Mikey's original camera footage listed under SHORT VIDEO CLIPS (never any other file; the system refuses anything else). No voiceover: text and music carry it. The CLAIMS rules apply to on-screen text.
+LVINIT SHORT-VIDEO CREATIVE STANDARD (permanent):
+- Editorial, not promotional: modern Las Vegas lifestyle documentary, never a real estate ad.
+- Hook: the first 1–2 seconds create curiosity with a true, specific statement. No clickbait, no exaggeration, no "you won't believe".
+- Minimal text: headline at most 6 words (the hook may use 7), an optional supporting line of at most 8 words, and use the supporting line on no more than half the segments. Readable at a glance.
+- Every shot must show what its text says. No filler, no repeated footage, no shot that could be anywhere.
+- Visual variety when the topic supports it: drone, neighborhood scenery, architecture, streets, amenities, community details.
+- Dynamic pacing: 4–8 segments, each 1.8–5 seconds, with lengths that vary to the story (quick beats, a held shot where it lands). Segment durations total 14–26 seconds (the system adds transitions and a 3-second end card).
+- treatment: choose one per short: "editorial" (serif headlines, lower third, slow dissolves, calmer), "documentary" (clean sans headlines top-left with a gold rule, mostly straight cuts), or "kinetic" (centered text, quicker cuts, a few motion transitions). The three shorts in a week use three DIFFERENT treatments.
+- Optional per-segment "transition" into that segment: cut | fade | fadeblack | smoothup | slideleft. Most should be cuts or fades; use motion transitions sparingly.
+- Natural endings: the last segment lands the takeaway or invites a closer look (an LVINIT guide, a question worth asking, or contacting Mikey). Never pushy sales language ("call now", "don't miss", "dream home").
+- Never the same opening line, structure, text layout or CTA as another short this week or the RECENT SHORTS listed. Vary the creative treatment by topic and footage; the LVINIT branding stays constant (the system adds it).
+Each segment names one clip by exact path from SHORT VIDEO CLIPS and "want": what that moment must show. Never use one clip twice in a short; prefer clips not marked recentlyUsed.
 
 REFERENCES: 1–3 posts from OTHER creators per post, from the research digest only, with exact observed metrics and dates, labeled "recent example"/"older example" unless the digest gives a creator baseline. Separate topic evidence from format evidence. "Why it works" is your judgment; say so. If none fit, say it's an editorial call on an evergreen topic.
 
@@ -92,9 +104,9 @@ async function ask(api, { system, content, maxTokens = 32000, thinking = true })
   return { json: parseJson(text), usage: msg.usage, usd: costOf(msg.usage) };
 }
 
-const POST_SHAPE = `Post shape: { day, slug, title, category, topics[], format: "carousel"|"short", takeaway, cta, caption, hashtags[], slides: [{ source: {clip|still|folder}, want, headline, body?, position: "top"|"bottom" }] | segments: [{ clip: exact path from SHORT VIDEO CLIPS, want, dur: seconds, headline, body? }], sources: [{ claim, url, authority: "official"|"news"|"lvinit", checked, quote? }], references: [...], formatNote? }`;
+const POST_SHAPE = `Post shape: { day, slug, title, category, topics[], format: "carousel"|"short", takeaway, cta, caption, hashtags[], slides: [{ source: {clip|still|folder}, want, headline, body?, position: "top"|"bottom" }] | treatment?: "editorial"|"documentary"|"kinetic" (shorts only), segments: [{ clip: exact path from SHORT VIDEO CLIPS, want, dur: seconds, headline, body?, transition? }], sources: [{ claim, url, authority: "official"|"news"|"lvinit", checked, quote? }], references: [...], formatNote? }`;
 
-export async function planWeek({ weekOf, research, ledger, pages, catalogSummary, fill }, { anthropic } = {}) {
+export async function planWeek({ weekOf, research, ledger, pages, catalogSummary, fill, recentShorts = [] }, { anthropic } = {}) {
   const api = anthropic ?? (await client());
   // fill: { days, final } — write only the missing days around posts that already passed every check.
   const ask7 = fill
@@ -105,6 +117,7 @@ export async function planWeek({ weekOf, research, ledger, pages, catalogSummary
     `LEDGER (published / scheduled / approved / earlier drafts):\n${JSON.stringify(ledger.slice(0, 100))}`,
     `RESEARCH DIGEST (other creators; metrics observed ${weekOf}):\n${JSON.stringify(research.slice(0, 120))}`,
     `LVINIT PAGES (route, title, excerpt):\n${JSON.stringify(pages.map((p) => ({ route: p.route, title: p.title, excerpt: p.excerpt })))}`,
+    ...(recentShorts.length ? [`RECENT SHORTS (don't repeat these openings, CTAs or treatments):\n${JSON.stringify(recentShorts)}`] : []),
     `APPROVED FOOTAGE CATALOG (metadata only):\n${JSON.stringify({ ...catalogSummary, shortClips: undefined })}`,
     ...(catalogSummary.shortClips ? [`SHORT VIDEO CLIPS (Mikey's original camera footage, the ONLY files a short may use; [path, subject, seconds, orientation, recentlyUsed]):\n${JSON.stringify(catalogSummary.shortClips)}`] : []),
     `${ask7} ${POST_SHAPE}`,

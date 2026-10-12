@@ -131,11 +131,38 @@ missing day is written for its own format.
 ### Short videos (`lib/shorts.mjs`)
 
 Each short is a finished, playable `short.mp4` (not a script): 1080×1920,
-H.264 + AAC, 30 fps, **15–30 s**, a hook in the first segment, 5–7 segments with
-short cross dissolves, the LVINIT wordmark and THE SCOFIELD GROUP on every
-frame, and a 2.5 s end card with the approved brokerage line (*Mikey Del Rosario
-· The Scofield Group · NV License S.0175577*, the same as the long-form closing
-card) and the white Scofield logo. No voiceover.
+H.264 + AAC, 30 fps, **15–30 s**, a hook in the first segment, 4–8 segments, the
+LVINIT wordmark and THE SCOFIELD GROUP on every frame of footage (text never
+reaches that line), and a 3 s end card. No voiceover.
+
+**End card (Mikey, 2026-10-12).** Warm-paper background, in this order:
+LVINIT (LVI near-black, NIT gold) · *Living Las Vegas from the Inside* ·
+Mikey Del Rosario · The Scofield Group · **702-779-9780** · NV License
+S.0175577 (compliance line, kept) · the full-color Scofield Group logo
+(`C:\LVINIT\Logos\The_Scofield_Group_Full_Colored.png`, used as is) · the
+post's own link. Defined in `lib/short-style.mjs`.
+
+**Creative standard (permanent).** Editorial, not promotional: modern Las Vegas
+lifestyle documentary. A true, specific hook in the first 1–2 seconds (no
+clickbait); minimal text (headline ≤ 6 words, the hook ≤ 7, a supporting line
+≤ 8 on at most half the segments); every shot shows what its text says; varied
+pacing (1.8–5 s shots); natural endings that invite, never push. Each short gets
+one of three **treatments**, and the three shorts in a week always get three
+different ones (least recently used first):
+
+| Treatment | Type | Text | Transitions |
+|---|---|---|---|
+| editorial | Playfair Display headlines, Inter supporting line | left, lower third by default | slow dissolves, the odd cut |
+| documentary | Inter headlines under a small gold rule | top-left | mostly straight cuts |
+| kinetic | Inter, heavier | centered | quick cuts, a few slide/smooth moves |
+
+Text placement follows the footage: the treatment's default band unless it's
+busy and another band is clearly calmer (never a panel or gradient); bright
+areas get the automatic exposure pull. Free local checks reject a short whose
+opening, CTA or shot rhythm repeats another short this week (or its opening/CTA
+repeats the last 4 weeks), more than 16 words on screen, or sales language
+("call now", "don't miss", "dream home", …). The planner sees the recent shorts'
+openings, CTAs and treatments.
 
 **Footage: Mikey's original footage only.** A clip is usable only if it is in
 the approved catalog (`~/.lvinit/executive-producer/privacy.json`), is b-roll,

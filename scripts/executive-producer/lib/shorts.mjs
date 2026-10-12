@@ -32,7 +32,7 @@ import { join, dirname, basename } from "node:path";
 import { tmpdir, homedir } from "node:os";
 import { fileURLToPath } from "node:url";
 
-import { overlaySvg, GOLD } from "./render.mjs";
+import * as ST from "./short-style.mjs";
 import { detectCamera } from "./describe.mjs";
 
 const { default: sharp } = await import("sharp");
@@ -40,14 +40,55 @@ const { default: sharp } = await import("sharp");
 export const W = 1080;
 export const H = 1920;
 export const FPS = 30;
-export const XFADE = 0.35; // seconds of cross dissolve between segments
-export const END_CARD = 2.5; // seconds
-// Space kept clear at the bottom for the brand line (LVINIT / THE SCOFIELD GROUP at H-96).
-export const BRAND_RESERVE = 170;
+export const END_CARD = ST.END_CARD;
+export const BRAND_RESERVE = ST.BRAND_RESERVE;
 // Readability over bright sky: pull the shot's exposure down a little, like an edit (never a
 // panel), exactly as carousel slides do: automatic from the text band's brightness, plus
 // review-requested steps (darken 1-2).
 export const DARKEN = [1, 0.82, 0.72];
+
+/** Mean and variation of the band a segment's text would cover, at the middle of the segment. */
+export function textBandStats(path, t, position = "top", fx = 0.5) {
+  const w = 108;
+  const h = 192;
+  const px = execFileSync("ffmpeg", ["-v", "error", "-ss", String(Math.max(0, t)), "-i", path, "-frames:v", "1", "-vf", `scale=${W}:${H}:force_original_aspect_ratio=increase,crop=${W}:${H}:(iw-${W})*${fx}:(ih-${H})/2,scale=${w}:${h},format=gray`, "-f", "rawvideo", "-"], { maxBuffer: 8 * 1024 * 1024 });
+  const [y0, y1] = position === "bottom" ? [0.6, 0.88] : position === "center" ? [0.38, 0.62] : [0.05, 0.3];
+  let sum = 0;
+  let sq = 0;
+  let n = 0;
+  for (let y = Math.floor(h * y0); y < Math.floor(h * y1); y++) for (let x = 0; x < w; x++) {
+    const v = px[y * w + x] ?? 0;
+    sum += v;
+    sq += v * v;
+    n++;
+  }
+  const mean = n ? sum / n : 0;
+  return { mean, std: n ? Math.sqrt(Math.max(0, sq / n - mean * mean)) : 0 };
+}
+
+/** How hard white text is to read over a band (lower is better). Busy texture counts most. */
+// Bright but calm sky is fine (shadows + the exposure pull handle it); busy texture is not.
+const bandBadness = ({ mean, std }) => std / 40 + (mean > 215 ? 1.2 : mean > 195 ? 0.3 : 0);
+
+/**
+ * Where a segment's text goes: the plan's position if it set one, otherwise the
+ * treatment's default, unless that band is busy and another band is clearly calmer.
+ */
+export function placeText(s, treatment) {
+  if (s.position) return s.position;
+  const def = ST.TREATMENTS[treatment]?.position ?? "top";
+  const alts = ["top", "center", "bottom"].filter((p) => p !== def);
+  const t = s.start + s.dur / 2;
+  const fx = s.focus?.x ?? 0.5;
+  try {
+    const d = bandBadness(textBandStats(s.path, t, def, fx));
+    if (d < 0.9) return def;
+    const best = alts.map((p) => ({ p, b: bandBadness(textBandStats(s.path, t, p, fx)) })).sort((a, b) => a.b - b.b)[0];
+    return best.b < d - 0.3 ? best.p : def;
+  } catch {
+    return def;
+  }
+}
 
 /** Mean luminance (0-255) of the band a segment's text covers, at the middle of the segment. */
 export function textBandMean(path, t, position = "top") {
@@ -72,10 +113,9 @@ export function exposureFor(mean, darken = 0) {
 export const LIMITS = { min: 15, max: 30 };
 export const MUSIC_DIR = process.env.LVINIT_MUSIC_DIR ?? "C:\\LVINIT\\Music\\Licensed";
 export const USAGE_FILE = join(homedir(), ".lvinit", "executive-producer", "footage-usage.json");
-const REPO = join(dirname(fileURLToPath(import.meta.url)), "..", "..", "..");
-export const SCOFIELD_LOGO = join(REPO, "public", "images", "logos", "the-scofield-group.webp");
-// The approved brokerage line, exactly as on Mikey's closing card and the site footer.
-export const BROKERAGE = { name: "Mikey Del Rosario", line: "The Scofield Group", license: "NV License S.0175577" };
+export const SCOFIELD_LOGO = ST.SCOFIELD_LOGO;
+// The brokerage block on every end card (Mikey, 2026-10-12).
+export const BROKERAGE = { name: ST.BRAND.name, line: ST.BRAND.brokerage, phone: ST.BRAND.phone, license: ST.BRAND.license, tagline: ST.TAGLINE };
 
 // Names that mean "not straight from Mikey's camera".
 const NOT_ORIGINAL = /(^|[\\/_\- ])(ai[-_ ]?expand|ai[-_]|stock|pexels|pixabay|envato|storyblocks|artgrid|shutterstock|motionarray|videvo|mixkit|download(ed)?|opus ?clip|broll_cinematic)/i;
@@ -200,93 +240,48 @@ export function pickTrack(tracks, usage, usedThisWeek = []) {
 }
 
 // ---- 3. render --------------------------------------------------------------------
+// The look lives in lib/short-style.mjs (treatments, typography, transitions, end card).
 
-/** Total length after cross dissolves (segments + end card). */
-export function shortDuration(segments, endCard = END_CARD) {
-  const durs = [...segments.map((s) => s.dur), endCard];
-  return durs.reduce((a, b) => a + b, 0) - XFADE * (durs.length - 1);
-}
-
-/** Steady branding for the whole video: LVINIT bottom-left, The Scofield Group bottom-right. */
-async function brandPng(path) {
-  const svg = `<svg width="${W}" height="${H}" xmlns="http://www.w3.org/2000/svg"><defs><filter id="s" x="-20%" y="-80%" width="140%" height="260%"><feGaussianBlur in="SourceAlpha" stdDeviation="3" result="t"/><feOffset in="t" dy="2" result="o"/><feFlood flood-color="#000" flood-opacity="0.75"/><feComposite in2="o" operator="in" result="sh"/><feMerge><feMergeNode in="sh"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
-<text x="72" y="${H - 96}" font-family="Inter" font-weight="800" font-size="40" letter-spacing="3" filter="url(#s)"><tspan fill="#FFFFFF">LVI</tspan><tspan fill="${GOLD}">NIT</tspan></text>
-<text x="${W - 72}" y="${H - 98}" text-anchor="end" font-family="Inter" font-weight="600" font-size="26" letter-spacing="1.5" fill="#FFFFFF" opacity="0.92" filter="url(#s)">THE SCOFIELD GROUP</text></svg>`;
-  await sharp(Buffer.from(svg)).png().toFile(path);
-}
-
-/** End card over a darkened, blurred frame of Mikey's own footage. */
-async function endCardPng(path, bgFrame, { cta = "lvinit.com" } = {}) {
-  const bg = await sharp(bgFrame).resize(W, H, { fit: "cover" }).blur(18).modulate({ brightness: 0.45 }).toBuffer();
-  // The Scofield Group logo, recolored white (as on the long-form closing card).
-  const logoW = 720;
-  let logo = null;
-  if (existsSync(SCOFIELD_LOGO)) {
-    const a = await sharp(SCOFIELD_LOGO).resize(logoW).ensureAlpha().extractChannel(3).raw().toBuffer({ resolveWithObject: true });
-    logo = await sharp({ create: { width: a.info.width, height: a.info.height, channels: 3, background: "#FFFFFF" } })
-      .joinChannel(a.data, { raw: { width: a.info.width, height: a.info.height, channels: 1 } })
-      .png()
-      .toBuffer();
-  }
-  const t = (y, size, weight, text, extra = "") => `<text x="${W / 2}" y="${y}" text-anchor="middle" font-family="Inter" font-weight="${weight}" font-size="${size}" fill="#FFFFFF" ${extra}>${String(text).replace(/&/g, "&amp;").replace(/</g, "&lt;")}</text>`;
-  const svg = `<svg width="${W}" height="${H}" xmlns="http://www.w3.org/2000/svg">
-<text x="${W / 2}" y="640" text-anchor="middle" font-family="Inter" font-weight="800" font-size="150" letter-spacing="10"><tspan fill="#FFFFFF">LVI</tspan><tspan fill="${GOLD}">NIT</tspan></text>
-<rect x="${W / 2 - 180}" y="690" width="360" height="3" fill="${GOLD}"/>
-${t(780, 44, 600, "Living Las Vegas from the inside")}
-${t(1010, 60, 700, BROKERAGE.name)}
-${t(1080, 38, 500, BROKERAGE.line)}
-${t(1135, 34, 500, BROKERAGE.license, 'opacity="0.9"')}
-${t(1640, 44, 700, cta)}
-</svg>`;
-  const layers = [{ input: Buffer.from(svg) }];
-  if (logo) layers.push({ input: logo, left: Math.round((W - logoW) / 2), top: 1220 });
-  await sharp(bg).composite(layers).png().toFile(path);
+/** Total length after transitions (segments + end card), for a treatment. */
+export function shortDuration(segments, treatment = "editorial") {
+  return ST.styledDuration(segments, treatment);
 }
 
 /**
- * segments: [{ path (absolute), start, dur, headline?, body?, position?, focus? }]
- * music: { path } | null. Returns { path, duration, music: bool }.
+ * segments: [{ path (absolute), start, dur, headline?, body?, position?, focus?, transition?, darken? }]
+ * music: { path } | null. treatment: editorial | documentary | kinetic.
+ * Returns { path, duration, music, treatment, warnings }.
  */
-export async function renderShort(segments, outPath, { music = null, cta } = {}) {
+export async function renderShort(segments, outPath, { music = null, cta, treatment = "editorial" } = {}) {
   if (!segments.length) throw new Error("A short needs at least one segment.");
-  const total = shortDuration(segments);
+  if (!ST.TREATMENTS[treatment]) treatment = "editorial";
+  const total = shortDuration(segments, treatment);
   if (total < LIMITS.min || total > LIMITS.max) throw new Error(`Planned length ${total.toFixed(1)}s is outside ${LIMITS.min}–${LIMITS.max}s.`);
   const tmp = mkdtempSync(join(tmpdir(), "lvinit-short-"));
   try {
     const args = ["-loglevel", "error", "-y"];
     const f = [];
-    // Video inputs.
+    const n = segments.length;
     segments.forEach((s) => args.push("-ss", String(s.start), "-t", String(s.dur), "-i", s.path));
-    // Text overlays (one PNG per segment), the end card and the steady brand layer.
+    // Text layers (one per segment; they stop above the brand line), end card, brand line.
     for (const [i, s] of segments.entries()) {
+      s.position = placeText(s, treatment);
       const png = join(tmp, `t${i}.png`);
-      const size = i === 0 ? 84 : 72;
-      await sharp({ create: { width: W, height: H, channels: 4, background: { r: 0, g: 0, b: 0, alpha: 0 } } })
-        // Bottom-placed text stops above the steady LVINIT / Scofield brand line.
-        .composite([{ input: overlaySvg({ W, H: H - BRAND_RESERVE, headline: s.headline ?? "", body: s.body ?? "", position: s.position ?? (i === 0 ? "center" : "top"), size, brand: false, margin: 84 }), top: 0, left: 0 }])
-        .png()
-        .toFile(png);
+      const l = await ST.textLayer(s, treatment, i === 0, png);
+      s.position = l.position;
       args.push("-loop", "1", "-t", String(s.dur), "-i", png);
     }
-    const bgFrame = join(tmp, "bg.png");
-    execFileSync("ffmpeg", ["-loglevel", "error", "-y", "-ss", String(segments[0].start + segments[0].dur / 2), "-i", segments[0].path, "-frames:v", "1", bgFrame]);
     const card = join(tmp, "end.png");
-    await endCardPng(card, bgFrame, { cta });
-    args.push("-loop", "1", "-t", String(END_CARD), "-i", card);
+    const { warnings } = await ST.endCard(card, { cta });
+    args.push("-loop", "1", "-t", String(ST.END_CARD), "-i", card);
     const brand = join(tmp, "brand.png");
-    await brandPng(brand);
+    await ST.brandLayer(brand);
     args.push("-loop", "1", "-t", String(total + 1), "-i", brand);
-    const n = segments.length;
     const cardIdx = 2 * n;
     const brandIdx = 2 * n + 1;
-    let audioIdx = null;
-    if (music) {
-      args.push("-stream_loop", "-1", "-i", music.path);
-      audioIdx = 2 * n + 2;
-    } else {
-      args.push("-f", "lavfi", "-t", String(total), "-i", "anullsrc=channel_layout=stereo:sample_rate=48000");
-      audioIdx = 2 * n + 2;
-    }
+    const audioIdx = 2 * n + 2;
+    if (music) args.push("-stream_loop", "-1", "-i", music.path);
+    else args.push("-f", "lavfi", "-t", String(total), "-i", "anullsrc=channel_layout=stereo:sample_rate=48000");
     // Text over bright sky or pavement: pull that shot's exposure down, as the carousels do.
     for (const s of segments) {
       try {
@@ -295,36 +290,38 @@ export async function renderShort(segments, outPath, { music = null, cta } = {})
         s.exposure = DARKEN[s.darken ?? 0] ?? 1;
       }
     }
-    // Each segment: crop to 9:16 around the focus, 30 fps, text fades in.
     segments.forEach((s, i) => {
       const fx = s.focus?.x ?? 0.5;
+      // Text appears after the incoming transition has mostly played.
+      const m = ST.textMotion(treatment, i === 0, i === 0 ? 0 : ST.transitionFor(segments, i, treatment).dur);
       f.push(`[${i}:v]fps=${FPS},scale=${W}:${H}:force_original_aspect_ratio=increase,crop=${W}:${H}:(iw-${W})*${fx}:(ih-${H})/2,setsar=1,format=yuv420p${s.exposure && s.exposure < 1 ? `,lutyuv=y=val*${s.exposure}` : ""},trim=duration=${s.dur},setpts=PTS-STARTPTS[b${i}]`);
-      f.push(`[${n + i}:v]format=rgba,fade=t=in:st=${i === 0 ? 0.1 : XFADE}:d=0.35:alpha=1[o${i}]`);
-      f.push(`[b${i}][o${i}]overlay=0:0:shortest=1,format=yuv420p[s${i}]`);
+      f.push(`[${n + i}:v]format=rgba,fade=t=in:st=${m.delay}:d=${m.fade}:alpha=1[o${i}]`);
+      f.push(`[b${i}][o${i}]overlay=x=0:y='${m.y}':shortest=1,format=yuv420p[s${i}]`);
     });
-    f.push(`[${cardIdx}:v]fps=${FPS},scale=${W}:${H},setsar=1,format=yuv420p,trim=duration=${END_CARD},setpts=PTS-STARTPTS[s${n}]`);
-    // Cross dissolves.
+    f.push(`[${cardIdx}:v]fps=${FPS},scale=${W}:${H},setsar=1,format=yuv420p,trim=duration=${ST.END_CARD},setpts=PTS-STARTPTS[s${n}]`);
+    // Transitions vary by treatment (and by segment, when the plan asks for one).
     let prev = "s0";
     let length = segments[0].dur;
-    const durs = [...segments.map((s) => s.dur), END_CARD];
+    const durs = [...segments.map((s) => s.dur), ST.END_CARD];
+    let lastT = 0;
     for (let k = 1; k <= n; k++) {
-      const offset = (length - XFADE).toFixed(3);
+      const tr = ST.transitionFor(segments, k, treatment);
+      const type = tr.type === "cut" ? "fade" : tr.type;
       const out = k === n ? "joined" : `x${k}`;
-      f.push(`[${prev}][s${k}]xfade=transition=fade:duration=${XFADE}:offset=${offset}[${out}]`);
+      f.push(`[${prev}][s${k}]xfade=transition=${type}:duration=${tr.dur}:offset=${(length - tr.dur).toFixed(3)}[${out}]`);
       prev = out;
-      length = length + durs[k] - XFADE;
+      length = length + durs[k] - tr.dur;
+      if (k === n) lastT = tr.dur;
     }
-    if (n === 0) f.push(`[s0]null[joined]`);
-    // Brand layer over everything except the end card (which carries its own branding).
-    const brandEnd = (total - END_CARD + XFADE / 2).toFixed(3);
+    // Brand line over the footage only (the end card carries the full branding).
+    const brandEnd = (total - ST.END_CARD + lastT / 2).toFixed(3);
     f.push(`[joined][${brandIdx}:v]overlay=0:0:enable='lt(t,${brandEnd})':shortest=1,trim=duration=${total.toFixed(3)},format=yuv420p[v]`);
-    // Music: trimmed to the video, faded in/out, normalized to a social-safe level.
-    if (music) f.push(`[${audioIdx}:a]atrim=duration=${total.toFixed(3)},asetpts=PTS-STARTPTS,afade=t=in:st=0:d=0.4,afade=t=out:st=${Math.max(0, total - 1.6).toFixed(3)}:d=1.6,loudnorm=I=-16:TP=-1.5:LRA=11,aresample=48000[a]`);
+    if (music) f.push(`[${audioIdx}:a]atrim=duration=${total.toFixed(3)},asetpts=PTS-STARTPTS,afade=t=in:st=0:d=0.4,afade=t=out:st=${Math.max(0, total - 1.8).toFixed(3)}:d=1.8,loudnorm=I=-16:TP=-1.5:LRA=11,aresample=48000[a]`);
     else f.push(`[${audioIdx}:a]atrim=duration=${total.toFixed(3)}[a]`);
     mkdirSync(dirname(outPath), { recursive: true });
     execFileSync("ffmpeg", [...args, "-filter_complex", f.join(";"), "-map", "[v]", "-map", "[a]", "-r", String(FPS), "-c:v", "libx264", "-preset", "medium", "-crf", "20", "-maxrate", "10M", "-bufsize", "20M", "-profile:v", "high", "-pix_fmt", "yuv420p", "-c:a", "aac", "-b:a", "192k", "-ar", "48000", "-movflags", "+faststart", "-t", total.toFixed(3), outPath], { maxBuffer: 64 * 1024 * 1024 });
-    execFileSync("ffmpeg", ["-loglevel", "error", "-y", "-ss", "1.0", "-i", outPath, "-frames:v", "1", "-q:v", "3", outPath.replace(/\.mp4$/, "-cover.jpg")]);
-    return { path: outPath, duration: total, music: Boolean(music) };
+    execFileSync("ffmpeg", ["-loglevel", "error", "-y", "-ss", "1.0", "-i", outPath, "-frames:v", "1", "-strict", "-1", "-q:v", "3", outPath.replace(/\.mp4$/, "-cover.jpg")]);
+    return { path: outPath, duration: total, music: Boolean(music), treatment, warnings };
   } finally {
     rmSync(tmp, { recursive: true, force: true });
   }
@@ -337,7 +334,7 @@ export function validateShort(file, { expectMusic = null } = {}) {
   if (!existsSync(file)) return { ok: false, problems: ["file missing"] };
   let info;
   try {
-    info = JSON.parse(execFileSync("ffprobe", ["-v", "error", "-show_entries", "format=duration,size:stream=codec_type,codec_name,width,height,avg_frame_rate,pix_fmt,channels", "-of", "json", file], { encoding: "utf8" }));
+    info = JSON.parse(execFileSync("ffprobe", ["-v", "error", "-show_entries", "format=duration,size:stream=codec_type,codec_name,width,height,avg_frame_rate,pix_fmt,channels,duration", "-of", "json", file], { encoding: "utf8" }));
   } catch (e) {
     return { ok: false, problems: [`ffprobe failed: ${String(e.message).split("\n")[0]}`] };
   }
@@ -355,6 +352,9 @@ export function validateShort(file, { expectMusic = null } = {}) {
   }
   if (!(dur >= LIMITS.min - 0.05 && dur <= LIMITS.max + 0.05)) problems.push(`duration ${dur.toFixed(2)}s, expected ${LIMITS.min}–${LIMITS.max}s`);
   if (!a || a.codec_name !== "aac") problems.push("no AAC audio track");
+  // The picture must run the whole length (a broken transition can end the video early under full-length audio).
+  const vDur = Number(v?.duration);
+  if (v && Number.isFinite(vDur) && Math.abs(vDur - dur) > 0.3) problems.push(`video stream is ${vDur.toFixed(2)}s but the file is ${dur.toFixed(2)}s`);
   // Full decode: catches truncated or corrupt output that probes fine.
   const dec = spawnSync("ffmpeg", ["-v", "error", "-i", file, "-f", "null", "-"], { encoding: "utf8", maxBuffer: 16 * 1024 * 1024 });
   if (dec.status !== 0 || dec.stderr.trim()) problems.push(`decode errors: ${dec.stderr.trim().split("\n")[0]?.slice(0, 120) ?? dec.status}`);

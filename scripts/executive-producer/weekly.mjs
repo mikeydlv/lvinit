@@ -157,6 +157,7 @@ export async function runWeek(argv = process.argv.slice(2), { log = console.log,
     const { chooseFrame } = await import("./lib/frames.mjs");
     const V = await import("./lib/visual.mjs");
     const SH = await import("./lib/shorts.mjs");
+    const ST = await import("./lib/short-style.mjs");
     const verifyClip = (abs, rel) => SH.verifyOriginal(abs, rel, { probe: services.probeOriginal });
     const apify = await import("./lib/apify.mjs");
     const P = await import("./lib/planner.mjs");
@@ -291,6 +292,10 @@ export async function runWeek(argv = process.argv.slice(2), { log = console.log,
     planCatalog.shortClips = originals.map((c) => [c.path, c.subject, c.durationSec, c.orientation, recent.has(c.path.toLowerCase())]);
     report.footage = { originalClips: originals.length, excludedAsRecentlyUsed: overused.size };
     if (originals.length < 18) report.gaps.unshift(`Only ${originals.length} original clips are available for short videos (approved, camera-original, not used in the last 4 weeks). Approve more footage folders to keep shorts varied.`);
+    // Recent weeks' shorts: openings, CTAs and treatments a new short must not repeat.
+    const prevShorts = L.previousWeeks(outRoot, weekOf).slice(0, 4).flatMap((w) => (w.posts ?? []).filter(isVideo));
+    const recentTreatments = prevShorts.map((p) => p.treatment).filter(Boolean);
+    const recentShorts = prevShorts.slice(0, 9).map((p) => ({ opening: p.segments?.[0]?.headline, cta: p.cta, treatment: p.treatment }));
     const plan = await step("plan", async () => {
       if (checkpoint) return { posts: checkpoint.accepted, backups: checkpoint.backups, note: "skipped: resumed from verified posts" };
       if (savedPlan) return { posts: savedPlan.posts, backups: savedPlan.backups, note: `plan from earlier attempt (${savedPlan.savedAt})` };
@@ -299,7 +304,7 @@ export async function runWeek(argv = process.argv.slice(2), { log = console.log,
         return Object.assign(JSON.parse(readFileSync(args.plan, "utf8")), { note: "from file (rehearsal)" });
       }
       if (!hasClaude) throw new Error("No ANTHROPIC_API_KEY in ~/.lvinit/executive-producer/.env, so nothing can be planned.");
-      const r = await P.planWeek({ weekOf, research, ledger, pages: packs, catalogSummary: planCatalog }, ai);
+      const r = await P.planWeek({ weekOf, research, ledger, pages: packs, catalogSummary: planCatalog, recentShorts }, ai);
       addCost("anthropic", "plan", r.usd, r.usage);
       writeFileSync(planFile, JSON.stringify({ savedAt: new Date().toISOString(), posts: r.plan.posts ?? [], backups: r.plan.backups ?? [], costs: { anthropicUsd: r.usd } }, null, 2));
       return Object.assign({ posts: r.plan.posts ?? [], backups: r.plan.backups ?? [] }, { note: `${(r.plan.posts ?? []).length} posts + ${(r.plan.backups ?? []).length} backups` });
@@ -312,6 +317,8 @@ export async function runWeek(argv = process.argv.slice(2), { log = console.log,
       plan.posts = slotted.posts;
       backups.push(...slotted.extra);
     }
+    // Every short this week gets a different treatment (editorial / documentary / kinetic).
+    ST.assignTreatments((plan.posts ?? []).filter(isVideo), recentTreatments);
 
     // 4. verify --------------------------------------------------------------------
     const officialQuotes = (p) => (p.sources ?? []).filter((s) => ["official", "news"].includes(s.authority) && s.quote).map((s) => s.quote);
@@ -333,9 +340,9 @@ export async function runWeek(argv = process.argv.slice(2), { log = console.log,
       if (!isVideo(p)) return [];
       const out = [];
       const segs = p.segments ?? [];
-      if (segs.length < 4 || segs.length > 8) out.push({ check: "format", message: `A short needs 5–7 segments (has ${segs.length}).` });
+      if (segs.length < 4 || segs.length > 8) out.push({ check: "format", message: `A short needs 4–8 segments (has ${segs.length}).` });
       segs.forEach((g, k) => {
-        if (!fitText(g.headline ?? "", g.body ?? "", 912, k === 0 ? 84 : 72).fits) out.push({ check: "fit", message: `Segment ${k + 1}: on-screen text is too long; shorten it without changing the meaning.` });
+        if (!ST.fitsTreatment(g.headline ?? "", g.body ?? "", ST.treatmentOf(p), k === 0).fits) out.push({ check: "fit", message: `Segment ${k + 1}: on-screen text is too long; shorten it without changing the meaning.` });
       });
       return out;
     };
@@ -345,6 +352,9 @@ export async function runWeek(argv = process.argv.slice(2), { log = console.log,
     const accepted = await step("verify", async () => {
       const verifyWeek = async (posts) => {
         const issues = new Map(posts.map((p) => [p.day, localIssues(p)]));
+        // Creative variety: no repeated opening, CTA or pacing; minimal text; no sales language.
+        ST.assignTreatments(posts.filter(isVideo), recentTreatments);
+        for (const p of posts.filter(isVideo)) issues.get(p.day)?.push(...ST.varietyIssues(p, posts.filter(isVideo), prevShorts));
         for (const [day, xs] of G.checkDistinctTakeaways(posts)) issues.get(day)?.push(...xs);
         if (hasClaude) {
           const r = await P.verifyClaims(posts.map((p) => ({ day: p.day, title: p.title, takeaway: p.takeaway, text: textOf(p), evidence: evidenceFor(p) })), ai);
@@ -362,7 +372,7 @@ export async function runWeek(argv = process.argv.slice(2), { log = console.log,
         for (let round = 0; round < 2 && out.length < POST_DAYS.length && hasClaude; round++) {
           const have = new Set(out.map((p) => p.day));
           const days = POST_DAYS.filter((d) => !have.has(d));
-          const r = await P.planWeek({ weekOf, research, ledger, pages: packs, catalogSummary: planCatalog, fill: { days, final: out.map((p) => ({ day: p.day, category: p.category, title: p.title, takeaway: p.takeaway })), failed, formats: Object.fromEntries(days.map((d) => [d, formatFor(d)])) } }, ai);
+          const r = await P.planWeek({ weekOf, research, ledger, pages: packs, catalogSummary: planCatalog, recentShorts, fill: { days, final: out.map((p) => ({ day: p.day, category: p.category, title: p.title, takeaway: p.takeaway })), failed, formats: Object.fromEntries(days.map((d) => [d, formatFor(d)])) } }, ai);
           addCost("anthropic", "topup", r.usd, r.usage);
           let fresh = (r.plan.posts ?? []).slice(0, days.length).map((p, i) => {
             const day = days.includes(p.day) ? p.day : days[i];
@@ -539,7 +549,7 @@ export async function runWeek(argv = process.argv.slice(2), { log = console.log,
         const inShort = [];
         for (const seg of p.segments ?? []) {
           if (seg.path) continue;
-          seg.dur = Math.min(4.5, Math.max(2.5, Number(seg.dur) || 3.5));
+          seg.dur = Math.min(5, Math.max(1.8, Number(seg.dur) || 3.2));
           let r;
           const rejected = [...(seg.rejected ?? [])];
           for (let tryNo = 0; tryNo < 4; tryNo++) {
@@ -572,12 +582,12 @@ export async function runWeek(argv = process.argv.slice(2), { log = console.log,
         }
         // Fit the planned length into 15–30 s by scaling segment durations (never by cutting segments).
         if (p.segments?.length) {
-          const total = SH.shortDuration(p.segments);
+          const total = SH.shortDuration(p.segments, ST.treatmentOf(p));
           const target = total < SH.LIMITS.min + 0.5 ? SH.LIMITS.min + 1 : total > SH.LIMITS.max - 0.5 ? SH.LIMITS.max - 1.5 : null;
           if (target) {
-            const fixed = SH.END_CARD - SH.XFADE * p.segments.length;
-            const k = (target - fixed) / p.segments.reduce((a, g) => a + g.dur, 0);
-            for (const g of p.segments) g.dur = Math.round(Math.min(5, Math.max(2.2, g.dur * k)) * 100) / 100;
+            const sum = p.segments.reduce((a, g) => a + g.dur, 0);
+            const k = (target - (total - sum)) / sum; // keeps the plan's rhythm: every shot scales together
+            for (const g of p.segments) g.dur = Math.round(Math.min(5, Math.max(1.8, g.dur * k)) * 100) / 100;
           }
         }
         // Put text where the image is calm and dark enough for white type.
@@ -622,6 +632,7 @@ export async function runWeek(argv = process.argv.slice(2), { log = console.log,
       return { note: `${picked} frames chosen automatically${vision ? " (with Claude)" : " (locally)"}` };
     });
 
+    ST.assignTreatments(accepted.filter(isVideo), recentTreatments);
     // 6. render --------------------------------------------------------------------
     const week = { weekOf, folderName, researchChecked: weekOf, verifiedAt: checkpoint?.savedAt ?? new Date().toISOString(), posts: accepted, backups, exceptions: report.exceptions, gaps: report.gaps, note: "Drafts only. Captions are copy-ready; notes.md in each folder has sources, references and file provenance." };
     // Licensed music for each short (least recently used; none listed → silent track, said in notes).

@@ -31,6 +31,7 @@ import { fileURLToPath } from "node:url";
 import { renderSlide } from "./lib/render.mjs";
 import { renderShort, validateShort, verifyOriginal, shortDuration, BROKERAGE } from "./lib/shorts.mjs";
 import { isVideo } from "./lib/schedule.mjs";
+import { treatmentOf, transitionFor, TAGLINE, BRAND } from "./lib/short-style.mjs";
 
 const { default: sharp } = await import("sharp");
 
@@ -60,7 +61,7 @@ function captionText(p) {
 function notesMd(p, week) {
   const L = [];
   L.push(`# ${p.label ?? DAY_NAMES[p.day]}: ${p.title}`, "");
-  L.push(`**Format:** ${isVideo(p) ? `Short video (Reel / TikTok / YouTube Short), ${Math.round(p.duration ?? shortDuration(p.segments))} s, short.mp4` : `Carousel, ${p.slides.length} slides`}  `);
+  L.push(`**Format:** ${isVideo(p) ? `Short video (Reel / TikTok / YouTube Short), ${Math.round(p.duration ?? shortDuration(p.segments, treatmentOf(p)))} s, short.mp4, ${treatmentOf(p)} treatment` : `Carousel, ${p.slides.length} slides`}  `);
   L.push(`**Category:** ${p.category}  `);
   L.push(`**Takeaway:** ${p.takeaway}  `);
   L.push(`**CTA:** ${p.cta}`, "");
@@ -84,7 +85,7 @@ function notesMd(p, week) {
   if (isVideo(p)) {
     L.push("Short video: ONLY Mikey's original camera footage (approved folders; each clip re-verified as camera-original from its own metadata before use). No stock, AI-generated or third-party video.", "");
     p.segments.forEach((s, i) => L.push(`${i + 1}. \`${s.path}\` ${mmss(s.start)}–${mmss(s.start + s.dur)}${s.camera ? ` (${s.camera})` : ""}${s.headline ? ` · "${s.headline}"` : ""}`));
-    L.push(`${p.segments.length + 1}. End card: LVINIT · ${BROKERAGE.name} · ${BROKERAGE.line} · ${BROKERAGE.license}`);
+    L.push(`${p.segments.length + 1}. End card: LVINIT · ${TAGLINE} · ${BRAND.name} · ${BRAND.brokerage} · ${BRAND.phone} · ${BRAND.license} · Scofield Group logo`);
     L.push("", "## Music", "");
     L.push(p.music ? `"${p.music.title}" by ${p.music.artist} (${p.music.source}, ${p.music.license}): ${p.music.url}` : "None: the video has a silent audio track. Add music in the app (Instagram / TikTok / YouTube licensed libraries) or add licensed tracks to C:\\LVINIT\\Music\\Licensed.");
     if (p.validation) L.push("", `**Validated:** ${p.validation.width}x${p.validation.height}, ${p.validation.fps} fps, ${p.validation.duration} s, audio ${p.validation.audio}, ${(p.validation.bytes / 1e6).toFixed(1)} MB.`);
@@ -171,7 +172,9 @@ export async function renderPost(p, i, { weekDir, week, mediaRoot, musicDir, ren
     let check;
     // One retry: a transient ffmpeg failure shouldn't cost the day.
     for (let attempt = 0; attempt < 2; attempt++) {
-      r = await renderVideo(p.segments.map((s) => ({ ...s, path: media(s.path) })), mp4, { music, cta });
+      p.treatment = treatmentOf(p);
+      r = await renderVideo(p.segments.map((s) => ({ ...s, path: media(s.path) })), mp4, { music, cta, treatment: p.treatment });
+      if (r?.warnings?.length) p.renderWarnings = r.warnings;
       check = validate(mp4, { expectMusic: Boolean(music) });
       if (check.ok) break;
     }
@@ -183,11 +186,12 @@ export async function renderPost(p, i, { weekDir, week, mediaRoot, musicDir, ren
       const f = join(dir, `.frame-${k}.jpg`);
       // Start, middle and end of the segment side by side, so a plate or house number that
       // appears for a second still reaches the review.
-      const t0 = p.segments.slice(0, k).reduce((n, x) => n + x.dur, 0) - k * 0.35;
+      let t0 = p.segments.slice(0, k).reduce((n, x) => n + x.dur, 0);
+      for (let j = 1; j <= k; j++) t0 -= transitionFor(p.segments, j, treatmentOf(p)).dur;
       const ts = [t0 + 0.45, t0 + s.dur / 2, t0 + s.dur - 0.45];
       const tmpF = ts.map((t, j) => join(dir, `.f${k}-${j}.jpg`));
-      ts.forEach((t, j) => execFileSync("ffmpeg", ["-loglevel", "error", "-y", "-ss", String(Math.max(0, t)), "-i", mp4, "-frames:v", "1", "-vf", "scale=432:768", "-q:v", "4", tmpF[j]]));
-      execFileSync("ffmpeg", ["-loglevel", "error", "-y", ...tmpF.flatMap((x) => ["-i", x]), "-filter_complex", "hstack=inputs=3", "-q:v", "4", f]);
+      ts.forEach((t, j) => execFileSync("ffmpeg", ["-loglevel", "error", "-y", "-ss", String(Math.max(0, t)), "-i", mp4, "-frames:v", "1", "-vf", "scale=432:768", "-strict", "-1", "-q:v", "4", tmpF[j]]));
+      execFileSync("ffmpeg", ["-loglevel", "error", "-y", ...tmpF.flatMap((x) => ["-i", x]), "-filter_complex", "hstack=inputs=3", "-strict", "-1", "-q:v", "4", f]);
       for (const x of tmpF) rmSync(x, { force: true });
       files.push(f);
     });

@@ -130,7 +130,9 @@ async function fixtureWorld() {
     posts[i] = {
       ...rest,
       format: "short",
-      segments: Array.from({ length: 5 }, (_, j) => ({ clip: `Media/Clips/DJI_2026100${String(k * 6 + j).padStart(2, "0")}_D.MP4`, want: "a scene", dur: 3.6, headline: j === 0 ? `${areas[i]}: ${lessons[i]}` : `Beat ${j + 1} in ${areas[i]}` })),
+      cta: `More on ${areas[i]} at lvinit.com`,
+      // Each short its own rhythm (the variety check rejects identical pacing).
+      segments: Array.from({ length: 4 + k }, (_, j) => ({ clip: `Media/Clips/DJI_2026100${String(k * 6 + j).padStart(2, "0")}_D.MP4`, want: "a scene", dur: [3.8, 2.6, 4.4, 3.2, 2.4, 3.0][(j + k) % 6], headline: j === 0 ? `${areas[i]}: ${lessons[i]}` : `Beat ${j + 1} in ${areas[i]}` })),
     };
   }
   return { root, media, catalogPath, posts: posts.slice(0, 6) };
@@ -176,6 +178,7 @@ test("unattended run: 3 carousels + 3 validated short videos, no Sunday post, dr
   const svc = services(w.posts, { sent });
   const r = await runWeek(["--week=2026-10-05", `--out=${join(w.root, "out")}`, `--media-root=${w.media}`, `--catalog=${w.catalogPath}`, "--no-env"], { log: () => {}, services: { ...svc, notify: undefined } });
   assert.equal(r.exitCode, 0, JSON.stringify(r.report.steps));
+  if (process.env.DEBUG_WEEK) console.log("EXC", JSON.stringify(r.report.exceptions), JSON.stringify(r.report.replaced));
   const dir = join(w.root, "out", "Week of 2026-10-05");
   const folders = readdirSync(dir).filter((f) => /^\d-/.test(f));
   assert.deepEqual(folders.map((f) => f.split("-")[1]), ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]);
@@ -188,7 +191,7 @@ test("unattended run: 3 carousels + 3 validated short videos, no Sunday post, dr
       assert.equal(v.info.width, 1080);
       assert.equal(v.info.height, 1920);
       assert.ok(v.info.duration >= 15 && v.info.duration <= 30);
-      assert.match(readFileSync(join(dir, f, "notes.md"), "utf8"), /ONLY Mikey's original camera footage[\s\S]*End card: LVINIT · Mikey Del Rosario · The Scofield Group/);
+      assert.match(readFileSync(join(dir, f, "notes.md"), "utf8"), /ONLY Mikey's original camera footage[\s\S]*End card: LVINIT · Living Las Vegas from the Inside · Mikey Del Rosario · The Scofield Group · 702-779-9780/);
     }
   }
   assert.ok(existsSync(join(dir, "preview.html")) && existsSync(join(dir, "DONE.json")));
@@ -205,7 +208,9 @@ test("unattended run: 3 carousels + 3 validated short videos, no Sunday post, dr
   assert.equal(new Set(used).size, used.length);
   // Shorts used only camera-original clips, never the edited export, and the usage ledger recorded them.
   const clips = week.posts.flatMap((p) => (p.segments ?? []).map((s) => s.path));
-  assert.equal(clips.length, 15);
+  assert.equal(clips.length, 15); // 4 + 5 + 6 segments
+  // Three different treatments in one week.
+  assert.equal(new Set(week.posts.filter((p) => p.segments).map((p) => p.treatment)).size, 3);
   assert.ok(clips.every((c) => /DJI_/.test(c)));
   const usage = JSON.parse(readFileSync(svc.usageFile, "utf8"));
   assert.equal(usage.uses.filter((u) => u.kind === "short").length, 15);
