@@ -238,6 +238,24 @@ export type Guide = {
  */
 export const guides: Guide[] = [
   {
+    slug: "aries-henderson",
+    title: "Aries Henderson: What Buyers Should Know About Henderson's New Community",
+    dek: "An old manganese mine in east Henderson is becoming a master plan of about 3,000 homes. The cleanup, what's for sale now, the costs past the base price, and who it actually fits.",
+    byline: "Mikey Del Rosario",
+    date: "October 2026",
+    publishedAt: "2026-10-11",
+    category: "Local Feature",
+    // Video companion to "This Used to Be a Mine. Now Henderson Is Building
+    // 3,000 Homes Here" (youtube.com/watch?v=I1bWPO4q3FY, 2026-10-08).
+    // Cluster D, under the Henderson pillar. Card image is the page's hero: a
+    // still from Mikey's own Aries footage (DJI_20261006120830_0175_D),
+    // never used before on LVINIT.
+    image: "/images/hero/aries-henderson-monument-sign-mountains.webp",
+    imageAlt:
+      "The Aries monument sign at the community entrance in east Henderson, with new landscaping in front and desert mountains behind it under a blue sky.",
+    href: "/guides/aries-henderson",
+  },
+  {
     slug: "hoa-fees-las-vegas-what-to-check",
     title: "HOA Fees in Las Vegas: What to Check Before You Make an Offer",
     dek: "What HOA dues pay for, how master and sub-associations stack, and how Nevada's resale package and 5-day cancellation window give you time to read the paperwork.",

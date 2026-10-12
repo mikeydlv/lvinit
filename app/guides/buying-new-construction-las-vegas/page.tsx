@@ -175,6 +175,12 @@ export default function BuyingNewConstructionLasVegasPage() {
             dek: "A real, open-for-sale community to apply this checklist to.",
           },
           {
+            name: "Aries Henderson",
+            href: "/guides/aries-henderson",
+            category: "Local Feature",
+            dek: "An early-stage master plan on a former mine site, with a model-versus-base-house walkthrough.",
+          },
+          {
             name: "Monument Hills",
             href: "/guides/monument-hills-northwest-las-vegas",
             category: "Local Feature",

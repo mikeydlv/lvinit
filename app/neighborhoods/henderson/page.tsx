@@ -192,6 +192,12 @@ export default function HendersonPage() {
         columns: 3,
         stories: [
           {
+            name: "Aries: What Buyers Should Know About Henderson's New Community",
+            href: "/guides/aries-henderson",
+            category: "Local feature",
+            dek: "A former manganese mine on the city's east edge, now a master plan of about 3,000 homes. What's built, what's still coming, and who it fits.",
+          },
+          {
             name: "Four Seasons Private Residences",
             href: "/neighborhoods/henderson/four-seasons-private-residences",
             category: "Local feature",
