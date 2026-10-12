@@ -636,7 +636,11 @@ export default function AriesHendersonPage() {
               payment estimates don&rsquo;t include them. At the model I was
               quoted a monthly HOA figure (7:21 in the video), but I
               couldn&rsquo;t confirm it in a builder or HOA document. Get the
-              number for your specific neighborhood in writing.
+              number for your specific neighborhood in writing. The{" "}
+              <Link href="/guides/hoa-fees-las-vegas-what-to-check" className={linkCls}>
+                HOA fees guide
+              </Link>{" "}
+              covers what to ask for.
             </>,
             <>
               <span className="text-lvinit-black">An LID assessment.</span>{" "}
