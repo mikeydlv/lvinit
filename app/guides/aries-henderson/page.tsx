@@ -335,9 +335,9 @@ export default function AriesHendersonPage() {
           "Aries sits in what our Henderson guide calls the eastern half of the city, next to Cadence and Lake Las Vegas. The guide explains how that side compares with Green Valley, Anthem and Inspirada.",
       }}
       ctas={{
-        heading: "Comparing Aries with other new construction?",
+        heading: "Weighing Aries?",
         body:
-          "If you're comparing Aries with other new-construction areas around Henderson or Las Vegas, I can help you look at the tradeoffs before you narrow down builders or communities.",
+          "If Aries is on your list, I can help you compare the builders, the homes that are actually available, lot premiums, incentives and what it really costs to own there, HOA and LID included. We can line it up against other new construction in Henderson and around Las Vegas, so you see the tradeoffs before you pick a builder.",
       }}
     >
       <StoryLede
@@ -454,7 +454,7 @@ export default function AriesHendersonPage() {
         </p>
       </StorySection>
 
-      <StorySection heading="What Aries is planned to become">
+      <StorySection id="planned" heading="What Aries is planned to become">
         <p className="text-body-lg text-lvinit-warmgray">
           This isn&rsquo;t supposed to be one little Pulte subdivision. NDEP
           puts the plan at approximately 3,000 homes, built in phases through
@@ -623,7 +623,7 @@ export default function AriesHendersonPage() {
         </p>
       </StorySection>
 
-      <StorySection heading="The costs beyond the base price">
+      <StorySection id="costs" heading="The costs beyond the base price">
         <p className="text-body-lg text-lvinit-warmgray">
           The list price is where the cost starts. At Aries, plan on at least
           these on top of it:
@@ -707,7 +707,7 @@ export default function AriesHendersonPage() {
         />
       </StorySection>
 
-      <StorySection heading="Does Aries feel too far out?">
+      <StorySection id="too-far-out" heading="Does Aries feel too far out?">
         <p className="text-body-lg text-lvinit-warmgray">
           This was my biggest question before I drove out, and the honest
           answer is that it depends on what you&rsquo;re comparing it to. If
@@ -807,6 +807,41 @@ export default function AriesHendersonPage() {
             new build vs resale
           </Link>{" "}
           are good next reads.
+        </p>
+      </StorySection>
+
+      <StorySection heading="Before You Buy at Aries, Ask These 6 Questions">
+        <ol className="list-decimal space-y-3 pl-6 text-body-lg text-lvinit-warmgray marker:text-lvinit-blue">
+          <li>
+            Which LID assessment applies to this lot, how many installments are
+            left, and can I pay it off?
+          </li>
+          <li>What is the actual monthly HOA amount for this neighborhood?</li>
+          <li>What is the lot premium on this specific lot, and why?</li>
+          <li>
+            What does this plan cost with the options I&rsquo;d actually choose,
+            compared with the model?
+          </li>
+          <li>Which incentives are available right now, and what are the conditions?</li>
+          <li>
+            What&rsquo;s being built around this lot next, when is Del Webb
+            coming, and how is the drive for my own routine?
+          </li>
+        </ol>
+        <p className="mt-5 text-body text-lvinit-warmgray">
+          The background for each one is above, in{" "}
+          <a href="#costs" className={linkCls}>
+            the costs beyond the base price
+          </a>
+          ,{" "}
+          <a href="#planned" className={linkCls}>
+            what Aries is planned to become
+          </a>{" "}
+          and{" "}
+          <a href="#too-far-out" className={linkCls}>
+            does Aries feel too far out
+          </a>
+          .
         </p>
       </StorySection>
 
