@@ -1,20 +1,20 @@
 {
   "schema_version": 1,
   "agent": "gsc-opportunity-agent",
-  "generatedAt": "2026-10-05T21:06:13.168Z",
-  "reportDate": "2026-10-05",
-  "sourceGeneratedAt": "2026-10-05T20:55:24.193Z",
+  "generatedAt": "2026-10-12T21:26:23.275Z",
+  "reportDate": "2026-10-12",
+  "sourceGeneratedAt": "2026-10-12T21:26:06.529Z",
   "sourceSchemaVersion": "1.1.0",
   "fixture": false,
   "status": "ok",
   "window": {
-    "start": "2026-09-05",
-    "end": "2026-10-02"
+    "start": "2026-09-12",
+    "end": "2026-10-09"
   },
   "dataQuality": {
     "lowVolume": true,
     "lowVolumeThreshold": 200,
-    "currentImpressions": 54,
+    "currentImpressions": 63,
     "currentClicks": 0,
     "reportedFindings": 3,
     "interpretation": "Low-volume data: an early signal, not definitive search demand. Never the sole reason for a decision."
@@ -30,14 +30,14 @@
   },
   "items": [
     {
-      "id": "GSC-2026-10-05-003",
+      "id": "GSC-2026-10-12-003",
       "opportunityType": "page-gaining-momentum",
       "page": "/neighborhoods/summerlin",
       "pageRole": "affected-page",
       "pageExists": true,
       "topic": {
-        "label": "Neighborhood orientation · Summerlin",
-        "cluster": "neighborhood-orientation",
+        "label": "Summerlin",
+        "cluster": "general",
         "places": [
           "summerlin"
         ],
@@ -47,62 +47,59 @@
         ],
         "intent": "informational"
       },
-      "impressions": 110,
+      "impressions": 214,
       "clicks": 0,
-      "position": 15,
-      "positionChange": 45.9,
-      "score": 81.8,
-      "confidence": "medium",
+      "position": 13,
+      "positionChange": 46.8,
+      "score": 84.4,
+      "confidence": "high",
       "recommendedAction": "optimize-existing-page",
       "querySuppressed": true
     },
     {
-      "id": "GSC-2026-10-05-002",
-      "opportunityType": "page-gaining-momentum",
+      "id": "GSC-2026-10-12-002",
+      "opportunityType": "page-losing-momentum",
       "page": "/guides/las-vegas-new-home-sales-july-2026",
       "pageRole": "affected-page",
       "pageExists": true,
       "topic": {
-        "label": "Page gaining momentum · /guides/las-vegas-new-home-sales-july-2026",
+        "label": "Page losing momentum · /guides/las-vegas-new-home-sales-july-2026",
         "cluster": "general",
         "places": [],
         "priorities": [],
         "intent": "unknown"
       },
-      "impressions": 111,
+      "impressions": 26,
       "clicks": 0,
-      "position": 6.3,
-      "positionChange": 0,
-      "score": 64.9,
-      "confidence": "medium",
-      "recommendedAction": "optimize-existing-page",
+      "position": 6.9,
+      "positionChange": -0.7,
+      "score": 57.4,
+      "confidence": "low",
+      "recommendedAction": "investigate-existing-page",
       "querySuppressed": false
     },
     {
-      "id": "GSC-2026-10-05-001",
-      "opportunityType": "page-gaining-momentum",
+      "id": "GSC-2026-10-12-001",
+      "opportunityType": "page-losing-momentum",
       "page": "/neighborhoods/north-las-vegas",
       "pageRole": "affected-page",
       "pageExists": true,
       "topic": {
-        "label": "Relocation · North Las Vegas",
-        "cluster": "relocation",
-        "places": [
-          "north-las-vegas"
-        ],
+        "label": "Neighborhood orientation · /neighborhoods/north-las-vegas",
+        "cluster": "neighborhood-orientation",
+        "places": [],
         "priorities": [
-          "core-places",
-          "relocation"
+          "neighborhood-topic"
         ],
-        "intent": "relocation-decision"
+        "intent": "informational"
       },
-      "impressions": 53,
+      "impressions": 40,
       "clicks": 1,
-      "position": 46.2,
-      "positionChange": 16.8,
-      "score": 52.9,
+      "position": 43,
+      "positionChange": 17,
+      "score": 52.7,
       "confidence": "medium",
-      "recommendedAction": "optimize-existing-page",
+      "recommendedAction": "investigate-existing-page",
       "querySuppressed": true
     }
   ]
