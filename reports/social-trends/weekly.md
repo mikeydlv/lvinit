@@ -1,34 +1,33 @@
 # LVINIT Weekly Trend Summary
-WEEK ENDING: 2026-10-05
+WEEK ENDING: 2026-10-12
 
-_Built from 7 daily reports: 2026-09-29, 2026-09-30, 2026-10-01, 2026-10-02, 2026-10-03, 2026-10-04, 2026-10-05. Discovery only — nothing has been published._
+_Built from 7 daily reports: 2026-10-06, 2026-10-07, 2026-10-08, 2026-10-09, 2026-10-10, 2026-10-11, 2026-10-12. Discovery only — nothing has been published._
 
 # BEST CONTENT OPPORTUNITIES THIS WEEK
 
-1. **Nevada State University looks to the future with 460+ acres on campus to develop** — 30/40, P2 — STRONG OPPORTUNITY, PROPOSED  
-Full write-up: 2026-09-29-local-trends.md
+1. **Ward 6 September 2026 Legislation and Planning Update** — 31/40, P2 — STRONG OPPORTUNITY, APPROVED  
+Full write-up: 2026-10-08-local-trends.md
 
-2. **Neighbors voice concerns about proposed northwest Las Vegas subdivision** — 30/40, P2 — STRONG OPPORTUNITY, PROPOSED  
-Full write-up: 2026-10-01-local-trends.md
+2. **Apartment fire leaves one dead near UNLV** — 30/40, P2 — STRONG OPPORTUNITY, OPEN  
+Full write-up: 2026-10-06-local-trends.md
 
-3. **TPC Summerlin To Serve As New Home Of UNLV Men's Golf** — 29/40, P2 — STRONG OPPORTUNITY, RUMORED / UNCONFIRMED  
-Full write-up: 2026-09-29-local-trends.md
+3. **‘Next chapter for Summerlin’: High-rise condo project in works for Las Vegas community** — 30/40, P2 — STRONG OPPORTUNITY, RUMORED / UNCONFIRMED  
+Full write-up: 2026-10-09-local-trends.md
 
 # BEST FIELD SHOOT
 
-**Nevada State University looks to the future with 460+ acres on campus to develop** — 30/40, P2 — STRONG OPPORTUNITY, PROPOSED  
-Where: The site itself in Henderson — confirm the location from the source before driving out.  
-Full write-up: 2026-09-29-local-trends.md
+**Ward 6 September 2026 Legislation and Planning Update** — 31/40, P2 — STRONG OPPORTUNITY, APPROVED  
+Where: The site itself in Tule Springs — confirm the location from the source before driving out.  
+Full write-up: 2026-10-08-local-trends.md
 
 # BEST CAROUSEL
 
-**What are those concrete columns going up on Green Valley Parkway near the 215 in Henderson?** — 28/40, P2 — STRONG OPPORTUNITY, PROPOSED  
-Full write-up: 2026-10-05-local-trends.md
+Nothing this week earned this slot.
 
 # BEST SHORT-FORM VIDEO
 
-**Neighbors voice concerns about proposed northwest Las Vegas subdivision** — 30/40, P2 — STRONG OPPORTUNITY, PROPOSED  
-Full write-up: 2026-10-01-local-trends.md
+**Apartment fire leaves one dead near UNLV** — 30/40, P2 — STRONG OPPORTUNITY, OPEN  
+Full write-up: 2026-10-06-local-trends.md
 
 # BEST LONG-FORM VIDEO
 
@@ -36,13 +35,13 @@ Nothing this week earned this slot.
 
 # BEST LVINIT ARTICLE
 
-**TPC Summerlin To Serve As New Home Of UNLV Men's Golf** — 29/40, P2 — STRONG OPPORTUNITY, RUMORED / UNCONFIRMED  
+**‘Next chapter for Summerlin’: High-rise condo project in works for Las Vegas community** — 30/40, P2 — STRONG OPPORTUNITY, RUMORED / UNCONFIRMED  
 Angle: Possible update to /guides/summerlin-vs-henderson-vs-southwest-las-vegas  
-Full write-up: 2026-09-29-local-trends.md
+Full write-up: 2026-10-09-local-trends.md
 
 # TOP EMERGING NEIGHBORHOOD
 
-**North Las Vegas** — 9 topics this week: North Las Vegas once had plenty of homes under $400K. Not anymore; North Las Vegas replaces its oldest fire station with modern $15.3M facility; Former Fiesta site to be turned into athletics-centered campus; Hylo Park final phase moving forward in North Las Vegas
+**Clark County** — 13 topics this week: Apartment fire leaves one dead near UNLV; Clark County Renames Westside Microbusiness Park Ahead Of Grand Opening; Clark County residents can once again vote at Allegiant Stadium; Charter schools see growth, but funding concerns remain as enrollment shifts statewide
 
 # TOP AUDIENCE QUESTION
 
@@ -50,8 +49,8 @@ No clear, recurring audience question surfaced this week.
 
 # TOP DEVELOPMENT TO WATCH
 
-**Nevada State University looks to the future with 460+ acres on campus to develop** — PROPOSED, 30/40, Henderson. First seen 2026-09-29; last change 2026-09-29.  
-Rules-only mode — source summary: Nevada State University is looking at hundreds of acres of open land next to its Henderson campus as its next big opportunity, as the school reports record enro
+**Ward 6 September 2026 Legislation and Planning Update** — APPROVED, 31/40, Tule Springs. First seen 2026-10-08; last change 2026-10-08.  
+Rules-only mode — source summary: Having trouble viewing this email? View it as a Web page . A Letter From Your Councilwoman Oct. 7, 2026 Hi neighbors, We have September planning and legislation updates for you. We also have an exciting update: Monument Hills has been approved! Monument Hills is a planned 940-acre mixed-use development that will bring together residential neighborhoods, commercial spaces, parks, open space and public facilities between Tule Springs Fossil Beds National Monument and the Las Vegas Paiute Tribe. This development has been in the works for a long time, and we're ensuring that it will be intentional
 
 # ONE THING MIKEY SHOULD NOT WASTE TIME ON
 

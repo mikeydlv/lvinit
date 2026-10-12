@@ -1,23 +1,23 @@
-# LVINIT Development Watch — week ending 2026-10-05
+# LVINIT Development Watch — week ending 2026-10-12
 
 _7 daily report(s)._
 
-- **2 meaningful changes**
-- 9 monitor items
+- **4 meaningful changes**
+- 7 monitor items
 - 0 source conflicts
-- 2236 duplicate/noise items suppressed (3 duplicate events, 2177 gate noise, 56 routine agenda items) · 4868 unchanged documents skipped
+- 2047 duplicate/noise items suppressed (12 duplicate events, 2035 gate noise, 0 routine agenda items) · 4730 unchanged documents skipped
 
 ## Meaningful changes
-- **DEV-2026-10-01-002** Cliff' — first time this project has been seen · 66/100 · Medium · ADD_TO_NEIGHBORHOOD_GUIDE → /neighborhoods/henderson
-- **DEV-2026-09-30-001** Green Valley Ranch — first time this project has been seen · 62/100 · Medium · ADD_TO_NEIGHBORHOOD_GUIDE → /neighborhoods/henderson
+- **DEV-2026-10-08-001** Monument Hills — announced → approved · 82/100 · High · UPDATE_EXISTING_ARTICLE → /guides/monument-hills-northwest-las-vegas
+- **DEV-2026-10-10-001** VEGAS — announced → approved · 65/100 · Medium · UPDATE_EXISTING_ARTICLE → /guides/buying-new-construction-las-vegas
+- **DEV-2026-10-09-001** Thrasher — first time this project has been seen · 56/100 · Medium · ADD_TO_NEIGHBORHOOD_GUIDE → /neighborhoods/henderson
+- **DEV-2026-10-06-001** Switch — unclear → filed · 54/100 · Medium · UPDATE_EXISTING_ARTICLE → /guides/henderson-sport-social-grand-opening
 
 ## Monitor
-- DEV-2026-09-29-002 Unnamed land (Henderson) — "Nevada State University looks to the future with 460+ acres on campus to develop" — proposed · Low
-- DEV-2026-09-29-003 Unnamed land (Henderson) — "Nevada State University Plans for 452 Acres in Henderson" — proposed · Low
-- DEV-2026-09-29-004 Expedition Park — announced · Medium
-- DEV-2026-09-30-002 Unnamed mixed use (Las Vegas (valley-wide)) — "$100M Las Vegas-Area Office-to-Retail Project Breaks Ground" — under construction · Low
-- DEV-2026-10-01-004 Unnamed residential (Northwest Las Vegas) — "Neighbors voice concerns about proposed northwest Las Vegas subdivision" — proposed · Low
-- DEV-2026-10-02-001 Unnamed residential (Las Vegas (valley-wide)) — "Famed Las Vegas saloon breaks ground on new home" — under construction · Low
-- DEV-2026-10-02-002 Huntridge Park — open · Medium
-- DEV-2026-10-05-001 Unnamed road (Las Vegas Strip) — "F1 Las Vegas Grand Prix prep work adds another stretch of Strip, as Flamingo bridge build " — under construction · Low
-- DEV-2026-10-05-002 North Las Vegas' Ty's Place — unclear · Low
+- DEV-2026-10-06-002 Mayor Pamela Goynes-Brown — announced · Medium
+- DEV-2026-10-07-002 Unnamed park (Clark County) — "Clark County Renames Westside Microbusiness Park Ahead Of Grand Opening" — open · Low
+- DEV-2026-10-07-003 Clark County School District — open · Medium
+- DEV-2026-10-08-002 Referral Center — approved · Medium
+- DEV-2026-10-08-004 VEGAS — announced · Medium
+- DEV-2026-10-10-003 Unnamed road (North Las Vegas) — "North Las Vegas Airport expansion could lead to closure of part of Carey Avenue" — unclear · Low
+- DEV-2026-10-12-001 Unnamed residential (Las Vegas (valley-wide)) — "$38 million in state funds to expand attainable housing, support 891 homes" — unclear · Low

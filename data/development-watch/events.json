@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "agent": "development-watch",
-  "updated": "2026-10-11",
+  "updated": "2026-10-12",
   "events": {
     "025b2cbfc757": {
       "id": "DEV-2026-09-25-002",
@@ -3442,6 +3442,54 @@
         "queued": []
       }
     },
+    "985af4b72343": {
+      "id": "DEV-2026-10-12-002",
+      "fingerprint": "985af4b72343",
+      "entity_id": "DEV-P-0EBD41E8",
+      "entity_name": "Unnamed road (Las Vegas (valley-wide)) — \"I-11: When will the HOV lanes between Rancho, Rainbow reopen?\"",
+      "change_class": "NEW",
+      "changes": [
+        "first time this project has been seen"
+      ],
+      "event_type": "access change",
+      "status": "unclear",
+      "prior_status": null,
+      "first_seen": "2026-10-12",
+      "last_seen": "2026-10-12",
+      "times_seen": 1,
+      "lifecycle": "REJECTED",
+      "lifecycle_history": [
+        {
+          "date": "2026-10-12",
+          "lifecycle": "REJECTED"
+        }
+      ],
+      "action": "REJECT_LOW_VALUE",
+      "target": null,
+      "score": 34,
+      "confidence": "Low",
+      "sources": [
+        {
+          "name": "Las Vegas Review-Journal — Local",
+          "url": "https://reviewjournal.com/news/news-columns/road-warrior/i-11-when-will-the-hov-lanes-between-rancho-rainbow-reopen-3898966",
+          "authority": 8,
+          "published": "2026-10-12T13:00:20.000Z"
+        }
+      ],
+      "superseded_by": null,
+      "handoff": {
+        "eligible": false,
+        "blockers": [
+          "NOT_A_PUBLISHER_ACTION",
+          "SCORE_BELOW_THRESHOLD",
+          "CONFIDENCE_NOT_HIGH",
+          "NO_PRIMARY_SOURCE",
+          "NOT_NEW",
+          "PROVISIONAL_ENTITY"
+        ],
+        "queued": []
+      }
+    },
     "98a23576b2d7": {
       "id": "DEV-2026-09-29-003",
       "fingerprint": "98a23576b2d7",
@@ -4314,6 +4362,53 @@
           "NOT_A_PUBLISHER_ACTION",
           "SCORE_BELOW_THRESHOLD",
           "CONFIDENCE_NOT_HIGH",
+          "PROVISIONAL_ENTITY"
+        ],
+        "queued": []
+      }
+    },
+    "d102d79232f0": {
+      "id": "DEV-2026-10-12-001",
+      "fingerprint": "d102d79232f0",
+      "entity_id": "DEV-P-AC7CE4E2",
+      "entity_name": "Unnamed residential (Las Vegas (valley-wide)) — \"$38 million in state funds to expand attainable housing, support 891 homes\"",
+      "change_class": "NEW",
+      "changes": [
+        "first time this project has been seen"
+      ],
+      "event_type": "announcement",
+      "status": "unclear",
+      "prior_status": null,
+      "first_seen": "2026-10-12",
+      "last_seen": "2026-10-12",
+      "times_seen": 1,
+      "lifecycle": "NEW",
+      "lifecycle_history": [
+        {
+          "date": "2026-10-12",
+          "lifecycle": "NEW"
+        }
+      ],
+      "action": "MONITOR_ONLY",
+      "target": null,
+      "score": 49,
+      "confidence": "Low",
+      "sources": [
+        {
+          "name": "8 News Now",
+          "url": "https://8newsnow.com/news/local-news/38-million-in-state-funds-to-expand-attainable-housing-support-891-homes",
+          "authority": 8,
+          "published": "2026-10-12T20:25:10.000Z"
+        }
+      ],
+      "superseded_by": null,
+      "handoff": {
+        "eligible": false,
+        "blockers": [
+          "NOT_A_PUBLISHER_ACTION",
+          "SCORE_BELOW_THRESHOLD",
+          "CONFIDENCE_NOT_HIGH",
+          "NO_PRIMARY_SOURCE",
           "PROVISIONAL_ENTITY"
         ],
         "queued": []
@@ -5219,22 +5314,26 @@
       "changes": [
         "approved → partially open"
       ],
-      "event_type": "partial opening",
+      "event_type": "approval",
       "status": "partially open",
-      "prior_status": "approved",
+      "prior_status": "partially open",
       "first_seen": "2026-10-11",
-      "last_seen": "2026-10-11",
-      "times_seen": 1,
-      "lifecycle": "NEW",
+      "last_seen": "2026-10-12",
+      "times_seen": 2,
+      "lifecycle": "PERSISTING",
       "lifecycle_history": [
         {
           "date": "2026-10-11",
           "lifecycle": "NEW"
+        },
+        {
+          "date": "2026-10-12",
+          "lifecycle": "PERSISTING"
         }
       ],
-      "action": "UPDATE_EXISTING_ARTICLE",
+      "action": "DUPLICATE",
       "target": "/guides/buying-new-construction-las-vegas",
-      "score": 59,
+      "score": 50,
       "confidence": "Medium",
       "sources": [
         {
@@ -5242,15 +5341,24 @@
           "url": "https://nevadabusiness.com/2026/10/new-coffee-bar-almond-oat-opens-at-sharedowntown-arts-district",
           "authority": 8,
           "published": "2026-10-09T00:00:19.000Z"
+        },
+        {
+          "name": "News 3 Las Vegas",
+          "url": "https://news3lv.com/news/local/nevada-approves-38-million-for-10-housing-projects-supporting-891-attainable-homes-statewide",
+          "authority": 8,
+          "published": "2026-10-12T18:36:50.000Z"
         }
       ],
       "superseded_by": null,
       "handoff": {
         "eligible": false,
         "blockers": [
+          "NOT_A_PUBLISHER_ACTION",
           "SCORE_BELOW_THRESHOLD",
           "CONFIDENCE_NOT_HIGH",
-          "NO_PRIMARY_SOURCE"
+          "NO_PRIMARY_SOURCE",
+          "NOT_MATERIAL",
+          "NOT_NEW"
         ],
         "queued": []
       }
