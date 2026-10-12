@@ -367,6 +367,14 @@ export default function BuyingNewConstructionLasVegasPage() {
           , the land deal has closed and first homes are not expected until
           spring 2028. One you can tour. The other you can only watch.
         </p>
+        <p className="mt-5 text-body-lg text-lvinit-warmgray">
+          <Link href="/guides/aries-henderson" className={linkCls}>
+            Aries in east Henderson
+          </Link>{" "}
+          sits in between: four Pulte neighborhoods are selling, while other
+          builders&rsquo; neighborhoods and a Del Webb section are still to
+          come, and plenty of lots are still graded dirt.
+        </p>
       </StorySection>
 
       <StoryVideo

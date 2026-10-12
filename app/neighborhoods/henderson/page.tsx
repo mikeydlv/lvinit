@@ -607,8 +607,13 @@ export default function HendersonPage() {
         </h3>
         <p className="mt-4 text-body-lg text-lvinit-warmgray">
           Cadence and Lake Las Vegas, plus the Boulder Highway corridor running
-          between them. Cadence is the newest large master plan on this side.
-          Lake Las Vegas is further out again, past several miles of open desert,
+          between them. Cadence and Aries are the newest large master plans on
+          this side, and{" "}
+          <Link href="/guides/aries-henderson" className={linkClass}>
+            Aries
+          </Link>
+          , on the former Three Kids Mine site south of Lake Las Vegas, only
+          opened in September 2026. Lake Las Vegas is further out again, past several miles of open desert,
           and functions almost as its own place. This half of the city is closest
           to Lake Mead and furthest from everything on the west side of the
           valley.
