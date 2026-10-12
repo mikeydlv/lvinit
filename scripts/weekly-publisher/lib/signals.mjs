@@ -6,8 +6,10 @@
 // keeps it:
 //
 //   Local Trend Agent / Development Watch   lvinit-agent-state branch
-//   Executive Producer (7 finished posts)   OneDrive\…\Weekly Posts\Week of <date>\
-//                                           + footage/video inventory on the state branch
+//   Executive Producer (3 carousels +       OneDrive\…\Weekly Posts\Week of <date>\
+//     3 shorts)
+//   Footage + video inventory               <LVINIT repo>\data\executive-producer\ (the sanitized
+//                                           files the 7 PM run's catalog refresh writes; local only)
 //   GSC Opportunity / Fact-Decay /          latest GitHub Actions artifact (gh CLI)
 //   Internal Linking
 //   Content Brief Generator / Site Quality  latest artifact, else Mikey's local reports/ copy
@@ -25,7 +27,7 @@ import { existsSync, readFileSync, readdirSync, mkdtempSync, rmSync, statSync } 
 import { join } from "node:path";
 import { tmpdir } from "node:os";
 
-import { addDays } from "./week.mjs";
+import { addDays, laDate } from "./week.mjs";
 
 const STATE = "origin/lvinit-agent-state";
 const MAX = 14000; // characters per signal handed to the editor
@@ -267,9 +269,61 @@ async function youtubeSignal(channelId, fetchImpl) {
   return { summary: `${items.length} recent uploads (newest ${items[0]?.slice(0, 10) ?? "none"})`, text: items.join("\n") };
 }
 
-function inventorySignal(repo) {
-  const inv = JSON.parse(stateShow(repo, "data/executive-producer/video-inventory.json"));
-  return { summary: `video inventory ${String(inv.generatedAt).slice(0, 10)}: ${(inv.videos ?? []).length} videos`, text: clip(JSON.stringify({ totals: inv.totals, videos: inv.videos }, null, 1)) };
+/**
+ * Current footage + video inventory, from the sanitized files the Sunday 7 PM
+ * catalog refresh writes into Mikey's LVINIT folder (data/executive-producer/).
+ * These already passed the cataloger's leak guard; they hold only approved,
+ * public-safe metadata. Nothing is indexed again and nothing goes to GitHub.
+ *
+ * Current = refreshed on/after the Sunday before this week AND the producer's
+ * run didn't report a failed refresh. Anything else is labeled STALE with the
+ * reason; if the local files are missing, the older state-branch copy is used
+ * and labeled STALE too. Unapproved folders are a count only, never names.
+ */
+export function footageSignal({ mainRepo, repo, weekOf, weeklyPostsRoot, stateShowImpl = stateShow }) {
+  const dir = join(mainRepo, "data", "executive-producer");
+  const sunday = addDays(weekOf, -1);
+  let inv;
+  let cat = null;
+  let source;
+  let stale = null;
+  if (existsSync(join(dir, "video-inventory.json"))) {
+    inv = JSON.parse(readFileSync(join(dir, "video-inventory.json"), "utf8"));
+    if (existsSync(join(dir, "footage-catalog.json"))) cat = JSON.parse(readFileSync(join(dir, "footage-catalog.json"), "utf8"));
+    source = "local refresh";
+  } else {
+    inv = JSON.parse(stateShowImpl(repo, "data/executive-producer/video-inventory.json"));
+    source = "state-branch copy";
+    stale = "the local refreshed catalog is missing";
+  }
+  const refreshed = inv.generatedAt ? laDate(new Date(inv.generatedAt)) : "unknown";
+  if (!stale && !(refreshed >= sunday)) stale = `last refreshed ${refreshed}; the Sunday ${sunday} refresh didn't run`;
+  // The producer's own record of this week's refresh.
+  let run = null;
+  try {
+    run = JSON.parse(readFileSync(join(weeklyPostsRoot, `Week of ${weekOf}`, "run.json"), "utf8"));
+  } catch {
+    /* no batch this week */
+  }
+  const step = run?.steps?.find((x) => x.name === "catalog");
+  const failed = (run?.gaps ?? []).find((g) => /footage catalog couldn't be refreshed/i.test(g));
+  if (!stale && failed) stale = failed;
+  const week = run?.catalog
+    ? { newFilesIndexed: run.catalog.added, moved: run.catalog.moved?.length ?? 0, missing: run.catalog.missing?.length ?? 0, unreadable: run.catalog.unreadable?.length ?? 0, newFoldersAwaitingApproval: run.catalog.pendingFolders?.length ?? 0, olderFoldersAwaitingApproval: run.catalog.pendingStill ?? 0 }
+    : null;
+  // Only what the editor needs: approved footage folders with what's in them, newest first.
+  const folders = (cat?.folders ?? [])
+    .filter((f) => (f.videos ?? 0) > 0)
+    .map((f) => ({ folder: f.folder, place: f.place, area: f.area, minutes: f.minutes, broll: f.roles?.["b-roll"] ?? 0, drone: f.drone, vertical: f.vertical, shot: f.dateRange?.[1] ?? null }))
+    .sort((a, b) => String(b.shot).localeCompare(String(a.shot)))
+    .slice(0, 40);
+  const status = stale ? `STALE (${stale})` : `current (refreshed ${refreshed})`;
+  const summary = `${status}: ${(inv.videos ?? []).length} published videos${cat ? `; ${cat.totals?.videos ?? "?"} approved footage videos, ${cat.totals?.videoMinutes ?? "?"} min across ${folders.length} folders` : ""}${week ? `; this week ${week.newFilesIndexed} new files indexed, ${week.newFoldersAwaitingApproval} new folder(s) awaiting approval` : step ? "" : "; no producer run record this week"} [${source}]`;
+  return {
+    ok: !stale,
+    summary,
+    text: clip(JSON.stringify({ status, refreshed, source, thisWeek: week, publishedVideos: { totals: inv.totals, videos: inv.videos }, approvedFootageFolders: folders }, null, 1), MAX * 2),
+  };
 }
 
 function earlierPlansSignal(repo, weekOf) {
@@ -295,7 +349,7 @@ export async function collectSignals({ repo, mainRepo, weekOf, weeklyPostsRoot, 
     collect("Site Quality Agent", () => qualitySignal(repo, mainRepo, gh)),
     collect("Published site + git history", () => siteSignal(repo, weekOf)),
     collect("YouTube uploads", () => youtubeSignal(channelId, fetchImpl)),
-    collect("Video inventory", () => inventorySignal(repo)),
+    collect("Footage + video inventory", () => footageSignal({ mainRepo, repo, weekOf, weeklyPostsRoot })),
     collect("Recent social batches", () => recentBatchesSignal({ weeklyPostsRoot, weekOf })),
     collect("Earlier weekly plans", () => earlierPlansSignal(repo, weekOf)),
   ]);

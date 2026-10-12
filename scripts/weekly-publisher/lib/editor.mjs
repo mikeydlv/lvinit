@@ -36,6 +36,7 @@ You sit ABOVE the specialist agents. They collect signals; you decide. Their out
 WHAT GOOD LOOKS LIKE
 - A plan a one-person media company can actually execute. Mikey's time goes to clients and long-form video first.
 - Reuse what exists: the Executive Producer's finished posts for this week (if present), already-exported Shorts, published articles, existing footage. Name exact files/folders/URLs from the signals.
+- The footage + video inventory signal says whether it is current or STALE. If STALE, say so in signalNotes and don't assume footage newer than its refresh date exists.
 - The Executive Producer's weekly mix is fixed: Monday, Wednesday and Friday finished carousels; Tuesday, Thursday and Saturday finished 15–30 s short videos (short.mp4, Mikey's original footage only, ready to post as a Reel / TikTok / YouTube Short); NO Sunday social post. When its batch exists, schedule each post on its own day with status ALREADY CREATED and its exact folder or MP4 as the asset. Keep Sunday free of social posts from the batch (OPTIONAL or a website task is fine). If a short is missing from the batch, say so; never suggest replacing it with stock or third-party video.
 - Do NOT force seven posts. A day can be OPTIONAL (e.g. a Story only, or rest). Busywork is worse than a quiet day.
 - No two consecutive days on the same subject (e.g. never two Sandstone clips back to back). Vary hooks, caption structure and CTA across the week; never the same CTA on consecutive days.

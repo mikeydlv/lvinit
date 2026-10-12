@@ -42,6 +42,33 @@ export const H = 1920;
 export const FPS = 30;
 export const XFADE = 0.35; // seconds of cross dissolve between segments
 export const END_CARD = 2.5; // seconds
+// Space kept clear at the bottom for the brand line (LVINIT / THE SCOFIELD GROUP at H-96).
+export const BRAND_RESERVE = 170;
+// Readability over bright sky: pull the shot's exposure down a little, like an edit (never a
+// panel), exactly as carousel slides do: automatic from the text band's brightness, plus
+// review-requested steps (darken 1-2).
+export const DARKEN = [1, 0.82, 0.72];
+
+/** Mean luminance (0-255) of the band a segment's text covers, at the middle of the segment. */
+export function textBandMean(path, t, position = "top") {
+  const w = 108;
+  const h = 192;
+  const px = execFileSync("ffmpeg", ["-v", "error", "-ss", String(Math.max(0, t)), "-i", path, "-frames:v", "1", "-vf", `scale=${W}:${H}:force_original_aspect_ratio=increase,crop=${W}:${H},scale=${w}:${h},format=gray`, "-f", "rawvideo", "-"], { maxBuffer: 8 * 1024 * 1024 });
+  const [y0, y1] = position === "bottom" ? [0.55, 0.88] : position === "center" ? [0.35, 0.65] : [0.03, 0.3];
+  let sum = 0;
+  let n = 0;
+  for (let y = Math.floor(h * y0); y < Math.floor(h * y1); y++) for (let x = 0; x < w; x++) {
+    sum += px[y * w + x] ?? 0;
+    n++;
+  }
+  return n ? sum / n : 0;
+}
+
+/** Brightness factor for a segment: the carousel rule (never below 0.72). */
+export function exposureFor(mean, darken = 0) {
+  const auto = mean > 150 ? Math.max(0.74, 1 - (mean - 150) / 260) : 1;
+  return Math.round(Math.min(auto, DARKEN[darken] ?? 1) * 100) / 100;
+}
 export const LIMITS = { min: 15, max: 30 };
 export const MUSIC_DIR = process.env.LVINIT_MUSIC_DIR ?? "C:\\LVINIT\\Music\\Licensed";
 export const USAGE_FILE = join(homedir(), ".lvinit", "executive-producer", "footage-usage.json");
@@ -235,7 +262,8 @@ export async function renderShort(segments, outPath, { music = null, cta } = {})
       const png = join(tmp, `t${i}.png`);
       const size = i === 0 ? 84 : 72;
       await sharp({ create: { width: W, height: H, channels: 4, background: { r: 0, g: 0, b: 0, alpha: 0 } } })
-        .composite([{ input: overlaySvg({ W, H, headline: s.headline ?? "", body: s.body ?? "", position: s.position ?? (i === 0 ? "center" : "top"), size, brand: false, margin: 84 }) }])
+        // Bottom-placed text stops above the steady LVINIT / Scofield brand line.
+        .composite([{ input: overlaySvg({ W, H: H - BRAND_RESERVE, headline: s.headline ?? "", body: s.body ?? "", position: s.position ?? (i === 0 ? "center" : "top"), size, brand: false, margin: 84 }), top: 0, left: 0 }])
         .png()
         .toFile(png);
       args.push("-loop", "1", "-t", String(s.dur), "-i", png);
@@ -259,10 +287,18 @@ export async function renderShort(segments, outPath, { music = null, cta } = {})
       args.push("-f", "lavfi", "-t", String(total), "-i", "anullsrc=channel_layout=stereo:sample_rate=48000");
       audioIdx = 2 * n + 2;
     }
+    // Text over bright sky or pavement: pull that shot's exposure down, as the carousels do.
+    for (const s of segments) {
+      try {
+        s.exposure = exposureFor(textBandMean(s.path, s.start + s.dur / 2, s.position ?? "top"), s.darken ?? 0);
+      } catch {
+        s.exposure = DARKEN[s.darken ?? 0] ?? 1;
+      }
+    }
     // Each segment: crop to 9:16 around the focus, 30 fps, text fades in.
     segments.forEach((s, i) => {
       const fx = s.focus?.x ?? 0.5;
-      f.push(`[${i}:v]fps=${FPS},scale=${W}:${H}:force_original_aspect_ratio=increase,crop=${W}:${H}:(iw-${W})*${fx}:(ih-${H})/2,setsar=1,format=yuv420p,trim=duration=${s.dur},setpts=PTS-STARTPTS[b${i}]`);
+      f.push(`[${i}:v]fps=${FPS},scale=${W}:${H}:force_original_aspect_ratio=increase,crop=${W}:${H}:(iw-${W})*${fx}:(ih-${H})/2,setsar=1,format=yuv420p${s.exposure && s.exposure < 1 ? `,lutyuv=y=val*${s.exposure}` : ""},trim=duration=${s.dur},setpts=PTS-STARTPTS[b${i}]`);
       f.push(`[${n + i}:v]format=rgba,fade=t=in:st=${i === 0 ? 0.1 : XFADE}:d=0.35:alpha=1[o${i}]`);
       f.push(`[b${i}][o${i}]overlay=0:0:shortest=1,format=yuv420p[s${i}]`);
     });

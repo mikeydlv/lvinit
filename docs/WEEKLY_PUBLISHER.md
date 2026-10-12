@@ -93,9 +93,20 @@ Per-run record: `reports/weekly-content/.runs/<Monday>-run.json`.
 
 1. **Collect** (`lib/signals.mjs`): the latest output of every agent in the map,
    this week's Executive Producer batch, the last 3 weeks of batches, recent
-   YouTube uploads, the video inventory, 4 weeks of `main` history and the
+   YouTube uploads, footage + video inventory, 4 weeks of `main` history and the
    published routes, and the last two weekly plans. A missing signal is noted in
    the plan's PIPELINE STATUS; it never stops the run.
+
+   **Footage + video inventory** comes from the sanitized files the 7 PM run's
+   catalog refresh writes into the LVINIT folder (`data/executive-producer/`
+   `video-inventory.json` and `footage-catalog.json`). Both runs read the same
+   folder, so the runner checkout doesn't matter. It's reported as *current*
+   only if it was refreshed on or after the Sunday before the week and the
+   producer's run log shows no failed refresh; otherwise *STALE* with the
+   reason. If the files are missing, the older GitHub state-branch copy is used,
+   also marked STALE. Only approved, leak-checked folder metadata is used;
+   unapproved folders appear as a count, never by name. Nothing new is indexed
+   or pushed.
 2. **Edit** (`lib/editor.mjs`): one Claude call (`claude-opus-5`, a few web
    searches to confirm time-bound facts). Rules: reuse existing assets first;
    don't force seven posts; no same subject on consecutive days; vary hooks,

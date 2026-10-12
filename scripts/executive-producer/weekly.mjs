@@ -717,7 +717,13 @@ export async function runWeek(argv = process.argv.slice(2), { log = console.log,
               for (const s of bad) {
                 const seg = p.segments[s.n - 1];
                 if (!seg) continue;
-                if (s.fix?.startsWith("move_text")) seg.position = s.fix.endsWith("top") ? "top" : "bottom";
+                // A readability complaint (contrast, legibility) is fixed on the text, never by swapping the shot.
+                const readability = /contrast|readab|legib|hard to read|busy behind|over bright|washed/i.test((s.issues ?? []).join(" "));
+                if (s.fix?.startsWith("move_text") || (readability && s.fix === "new_frame")) {
+                  // Move the text once; after that, pull the exposure down instead of bouncing it.
+                  if (!seg.moved && s.fix?.startsWith("move_text")) Object.assign(seg, { position: s.fix.endsWith("top") ? "top" : "bottom", moved: true });
+                  else seg.darken = Math.min(2, (seg.darken ?? 0) + 1);
+                }
                 else {
                   seg.rejected = [...(seg.rejected ?? []), seg.path];
                   const r = await chooseFrame({ want: { folder: "", want: `${seg.want ?? ""} ${seg.headline ?? ""}`, headline: seg.headline, avoid: s.issues.join("; "), exclude: [...seg.rejected, ...p.segments.map((g) => g.path)], purpose: "short" }, catalog: shortCatalog, mediaRoot, sharp, loadCrop: loadCropTall, usedHashes, usedSources, pick: vision }).catch((e) => ({ error: String(e.message) }));

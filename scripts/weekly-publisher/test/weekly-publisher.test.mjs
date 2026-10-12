@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { mkdtempSync, readFileSync, existsSync, writeFileSync } from "node:fs";
+import { mkdtempSync, mkdirSync, readFileSync, existsSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { tmpdir } from "node:os";
 
@@ -150,4 +150,51 @@ test("--plan-json renders a prepared plan and a later success clears an old fail
   const r = await runPublisher([`--out=${out}`, "--week=2026-10-05", `--plan-json=${pj}`], { ...quiet, env: {} });
   assert.equal(r.exitCode, 0);
   assert.ok(!existsSync(join(out, "2026-10-05-weekly-content-plan-FAILED.md")));
+});
+
+// --- footage + video inventory: current vs. stale -------------------------------
+import { footageSignal } from "../lib/signals.mjs";
+
+function footageWorld({ generatedAt, run } = {}) {
+  const root = mkdtempSync(join(tmpdir(), "wp-foot-"));
+  const data = join(root, "repo", "data", "executive-producer");
+  mkdirSync(data, { recursive: true });
+  if (generatedAt) {
+    writeFileSync(join(data, "video-inventory.json"), JSON.stringify({ generatedAt, totals: { videos: 2 }, videos: [{ youtubeId: "a" }, { youtubeId: "b" }] }));
+    writeFileSync(join(data, "footage-catalog.json"), JSON.stringify({ generatedAt, totals: { videos: 10, videoMinutes: 30 }, folders: [{ folder: "Media/Henderson/Aries", place: "Henderson", area: "henderson", videos: 5, minutes: 12, roles: { "b-roll": 4 }, drone: 3, vertical: 0, dateRange: ["2026-10-06", "2026-10-06"] }] }));
+  }
+  const posts = join(root, "Weekly Posts");
+  if (run) {
+    mkdirSync(join(posts, "Week of 2026-10-19"), { recursive: true });
+    writeFileSync(join(posts, "Week of 2026-10-19", "run.json"), JSON.stringify(run));
+  }
+  return { mainRepo: join(root, "repo"), weeklyPostsRoot: posts };
+}
+
+test("footage signal: the Sunday 7 PM refresh is used and reported as current", () => {
+  const w = footageWorld({ generatedAt: "2026-10-19T02:05:00Z", run: { steps: [{ name: "catalog", ok: true }], gaps: [], catalog: { added: 12, moved: [], missing: [], unreadable: [], pendingFolders: [{ folder: "Media/Secret New Shoot" }], pendingStill: 31 } } }); // Sun Oct 18, 7:05 PM PDT
+  const s = footageSignal({ ...w, repo: ".", weekOf: "2026-10-19", stateShowImpl: () => { throw new Error("should not read GitHub"); } });
+  assert.equal(s.ok, true);
+  assert.match(s.summary, /^current \(refreshed 2026-10-18\): 2 published videos; 10 approved footage videos, 30 min/);
+  assert.match(s.summary, /12 new files indexed, 1 new folder\(s\) awaiting approval/);
+  assert.ok(s.text.includes("Media/Henderson/Aries"));
+  assert.ok(!s.text.includes("Secret New Shoot"), "unapproved folder names never reach the editor or the plan");
+});
+
+test("footage signal: an old refresh or a failed one is labeled STALE, never current", () => {
+  const old = footageWorld({ generatedAt: "2026-10-12T02:00:00Z" });
+  const a = footageSignal({ ...old, repo: ".", weekOf: "2026-10-19" });
+  assert.equal(a.ok, false);
+  assert.match(a.summary, /^STALE \(last refreshed 2026-10-11; the Sunday 2026-10-18 refresh didn't run\)/);
+  const failed = footageWorld({ generatedAt: "2026-10-19T02:05:00Z", run: { steps: [{ name: "catalog", ok: true }], gaps: ["The footage catalog couldn't be refreshed (disk); last week's catalog was used."] } });
+  const b = footageSignal({ ...failed, repo: ".", weekOf: "2026-10-19" });
+  assert.equal(b.ok, false);
+  assert.match(b.summary, /^STALE \(The footage catalog couldn't be refreshed/);
+});
+
+test("footage signal: no local files → the older GitHub copy, labeled STALE", () => {
+  const none = footageWorld({});
+  const s = footageSignal({ ...none, repo: ".", weekOf: "2026-10-19", stateShowImpl: () => JSON.stringify({ generatedAt: "2026-09-18T21:42:30Z", videos: [{}] }) });
+  assert.equal(s.ok, false);
+  assert.match(s.summary, /^STALE \(the local refreshed catalog is missing\).*\[state-branch copy\]/);
 });
