@@ -14,7 +14,7 @@ import { execFile } from "node:child_process";
 
 const esc = (s) => String(s ?? "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 
-export function composeMessage({ ok, weekOf, posts = 0, mix = null, exceptions = [], costs = {}, failedStep, error, previewPath, manual = [], gaps = [] }) {
+export function composeMessage({ ok, weekOf, posts = 0, mix = null, catalog = null, exceptions = [], costs = {}, failedStep, error, previewPath, manual = [], gaps = [] }) {
   const subject = ok
     ? `LVINIT: ${posts} posts ready for the week of ${weekOf}${exceptions.length ? ` (${exceptions.length} to decide)` : ""}`
     : `LVINIT: this week's batch FAILED (${failedStep ?? "startup"})`;
@@ -27,6 +27,15 @@ export function composeMessage({ ok, weekOf, posts = 0, mix = null, exceptions =
     }
   } else {
     lines.push(`The batch for the week of ${weekOf} stopped at "${failedStep ?? "startup"}".`, "", `Reason: ${error}`, "", "Nothing was published. Fix the reason and run the Monday task again; it picks up the same week.");
+  }
+  if (catalog?.pendingFolders?.length) {
+    lines.push("", "New footage folders waiting for your approval (not used until you approve them):");
+    for (const f of catalog.pendingFolders.slice(0, 12)) lines.push(`- ${f.folder}: ${f.videos} video${f.videos === 1 ? "" : "s"}${f.originalVideos ? ` (${f.originalVideos} original)` : ""}${f.images ? `, ${f.images} image${f.images === 1 ? "" : "s"}` : ""}`);
+    lines.push(`Approve one: npm run producer:catalog -- --approve="${catalog.pendingFolders[0].folder}"`);
+  }
+  if (catalog?.pendingStill) lines.push("", `${catalog.pendingStill} folder${catalog.pendingStill === 1 ? "" : "s"} listed in earlier emails still unapproved${catalog.pendingStillWithOriginal ? ` (${catalog.pendingStillWithOriginal} with original footage)` : " (none contain original footage)"}; see catalog-review.md.`);
+  if (catalog && (catalog.moved?.length || catalog.missing?.length || catalog.unreadable?.length)) {
+    lines.push("", `Footage catalog: ${catalog.added ?? 0} new files indexed, ${catalog.moved?.length ?? 0} moved (paths updated), ${catalog.missing?.length ?? 0} missing, ${catalog.unreadable?.length ?? 0} unreadable (never used).`);
   }
   if (costs.totalUsd !== undefined) lines.push("", `Service cost: $${costs.totalUsd.toFixed(2)} (Apify $${(costs.apifyUsd ?? 0).toFixed(2)}, Anthropic $${(costs.anthropicUsd ?? 0).toFixed(2)})`);
   if (manual.length) lines.push("", "Not fully automatic this run:", ...manual.map((m) => `- ${m}`));

@@ -105,6 +105,9 @@ function roleOf({ top, type, name, camera, durationSec, orientation, relPath, pr
   }
   // video
   if (/a-?roll|selfie|home-office|^intro\.|^outro\./.test(lower) || inFolder(/a&b roll|a-roll/i)) return "a-roll";
+  // Mikey on camera or a teleprompter screen, by name; a long walkthrough is one continuous take.
+  if (/(^|[^a-z])(voice ?-?over|intro|outro|talking|interview|piece[ -]?to[ -]?camera)([^a-z]|$)/.test(lower)) return "a-roll";
+  if (/walk-?th?rough|walkhtrough/.test(lower) && (durationSec ?? 0) >= 120) return "a-roll";
   if (top === "Videos" && (camera === "edited" || camera === "unknown")) {
     // A Short is vertical. A landscape export sitting in a Shorts folder is a cut.
     const shortish = /short|clip/.test(lower) || inFolder(/shorts|opusclip/i);
@@ -115,6 +118,9 @@ function roleOf({ top, type, name, camera, durationSec, orientation, relPath, pr
   }
   return "b-roll";
 }
+
+/** Original takes this long are talking heads or walkthroughs, not B-roll, until classified. */
+export const LONG_TAKE_SEC = 600;
 
 /** One catalog entry. Includes privacy status; sanitize.mjs decides what leaves the PC. */
 export function describe(file, probe, privacyResult, config) {
@@ -128,12 +134,27 @@ export function describe(file, probe, privacyResult, config) {
   const place = longestPrefix(config.areas, rel);
   const project = longestPrefix(config.projects, rel);
   const when = captureDate({ creationTime: p.creationTime, name, mtimeMs: file.mtimeMs });
+  // Role, then the safety overrides: an unreadable video is never used; a clip Mikey marked
+  // (talking head, walkthrough) or any continuous take of 10+ minutes stays out of the B-roll pool.
+  let role = roleOf({ top, type, name, camera, durationSec: p.durationSec, orientation, relPath: rel, project });
+  let roleReason = null;
+  if (type === "video" && probe && (probe.error || !p.durationSec)) {
+    role = "unreadable";
+    roleReason = probe?.error ? `ffprobe: ${probe.error}` : "no readable video stream or duration";
+  } else if (type === "video" && privacyResult?.brollHold) {
+    if (role === "b-roll") role = "a-roll";
+    roleReason = privacyResult.brollHold;
+  } else if (type === "video" && role === "b-roll" && p.durationSec >= LONG_TAKE_SEC) {
+    role = "long-take";
+    roleReason = `continuous take of ${Math.round(p.durationSec / 60)} min (talking head or walkthrough until classified)`;
+  }
   return {
     id: stableId(rel),
     path: rel,
     folder: rel.split("/").slice(0, -1).join("/"),
     type,
-    role: roleOf({ top, type, name, camera, durationSec: p.durationSec, orientation, relPath: rel, project }),
+    role,
+    roleReason,
     camera,
     orientation,
     width: p.width ?? null,

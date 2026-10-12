@@ -20,12 +20,12 @@
 // PUBLIC items can leave the PC, and only with --push.
 // ---------------------------------------------------------------------------
 
-import { mkdirSync, writeFileSync, existsSync } from "node:fs";
+import { mkdirSync, writeFileSync, existsSync, readFileSync } from "node:fs";
 import { join, resolve, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 
 import { loadConfig } from "./config.mjs";
-import { loadPrivacy, savePrivacy, editPrivacy, classifyFile } from "./lib/privacy.mjs";
+import { loadPrivacy, savePrivacy, editPrivacy, brollHoldFor, classifyFile } from "./lib/privacy.mjs";
 import { scanMedia, mediaType } from "./lib/scan.mjs";
 import { loadProbeCache, saveProbeCache, probeAll } from "./lib/probe.mjs";
 import { describe, markDuplicates } from "./lib/describe.mjs";
@@ -54,6 +54,8 @@ Options
   --approve="Path"       Approve a folder (or one file) as public-safe. Repeatable.
                          Paths are relative to the media root, e.g. "Media/Summerlin/Red Rock".
   --hold="Path|reason"   Keep a folder or file local-only. Repeatable.
+  --not-broll="Path|reason"  Index a file/folder but keep it out of the automatic
+                         B-roll pool (talking head, continuous walkthrough). Repeatable.
   --no-probe             Skip ffprobe (faster; no durations/dimensions for new files).
   --no-oembed            Don't ask YouTube for live video titles.
   --media-root=DIR       Default C:\\LVINIT (or LVINIT_MEDIA_ROOT).
@@ -67,7 +69,7 @@ export function parseArgs(argv) {
     if (!raw.startsWith("--")) continue;
     const [flag, ...rest] = raw.slice(2).split("=");
     const value = rest.length ? rest.join("=").replace(/^"|"$/g, "") : true;
-    if (["exclude", "approve", "hold"].includes(flag)) (args[flag] ??= []).push(String(value));
+    if (["exclude", "approve", "hold", "not-broll"].includes(flag)) (args[flag] ??= []).push(String(value));
     else args[flag] = value;
   }
   return args;
@@ -93,7 +95,14 @@ export async function run(argv = process.argv.slice(2), { log = console.log, rep
 
   // 1. privacy rules (local)
   const { privacy, created } = loadPrivacy(config);
-  const changes = editPrivacy(privacy, { exclude: args.exclude ?? [], approve: args.approve ?? [], hold: args.hold ?? [] });
+  const changes = editPrivacy(privacy, { exclude: args.exclude ?? [], approve: args.approve ?? [], hold: args.hold ?? [], notBroll: args["not-broll"] ?? [] });
+  // The previous local catalog, to report what was added, moved or went missing.
+  let previous = [];
+  try {
+    previous = JSON.parse(readFileSync(config.local.catalog, "utf8")).entries ?? [];
+  } catch {
+    /* first run */
+  }
   if (!dryRun && (created || changes.length)) savePrivacy(config, privacy);
   if (created) log(`Created the local privacy file: ${config.privacy.file}`);
   for (const c of changes) log(`Privacy: ${c}`);
@@ -121,7 +130,7 @@ export async function run(argv = process.argv.slice(2), { log = console.log, rep
 
   // 4. describe + classify
   const entries = markDuplicates(
-    known.map((f) => describe(f, probeResults.get(f.rel) ?? null, classifyFile(f.rel, privacy, config), config)),
+    known.map((f) => describe(f, probeResults.get(f.rel) ?? null, { ...classifyFile(f.rel, privacy, config), brollHold: brollHoldFor(f.rel, privacy) }, config)),
   );
   for (const e of entries) delete e._dupKey;
   const pub = entries.filter((e) => e.privacy.status === "public");
@@ -142,6 +151,24 @@ export async function run(argv = process.argv.slice(2), { log = console.log, rep
     return { exitCode: 3, error: err.message };
   }
 
+  const delta = catalogDelta(previous, entries);
+  // New folders with media that Mikey hasn't classified. Never approved automatically,
+  // and a parent's approval never covers them.
+  const pending = new Map();
+  for (const e of entries) {
+    const f = e.privacy?.pendingFolder;
+    if (!f) continue;
+    const x = pending.get(f) ?? { folder: f, videos: 0, originalVideos: 0, images: 0 };
+    if (e.type === "video") {
+      x.videos++;
+      if (["drone", "handheld", "phone"].includes(e.camera) && e.role !== "unreadable") x.originalVideos++;
+    } else if (e.type === "image") x.images++;
+    pending.set(f, x);
+  }
+  const pendingFolders = [...pending.values()].filter((x) => x.videos || x.images).sort((a, b) => b.originalVideos - a.originalVideos || a.folder.localeCompare(b.folder));
+  const unreadable = entries.filter((e) => e.role === "unreadable").map((e) => ({ path: e.path, why: e.roleReason }));
+  log(`Changes since the last catalog: ${delta.added.length} added, ${delta.moved.length} moved, ${delta.missing.length} missing.${pendingFolders.length ? ` ${pendingFolders.length} folder(s) waiting for approval.` : ""}`);
+
   const review = buildReviewMarkdown({ entries, catalog, inventory, privacy, excludedFolders, generatedAt, config });
   log("");
   log(`Public (may leave the PC): ${pub.length} files · ${catalog.totals.videoMinutes} min of video across ${catalog.folders.length} folders`);
@@ -150,7 +177,7 @@ export async function run(argv = process.argv.slice(2), { log = console.log, rep
 
   if (dryRun) {
     log("\nDry run: nothing written.");
-    return { exitCode: 0, catalog, inventory, entries, review };
+    return { exitCode: 0, catalog, inventory, entries, review, delta, pendingFolders, unreadable };
   }
 
   // Local-only outputs.
@@ -185,7 +212,32 @@ export async function run(argv = process.argv.slice(2), { log = console.log, rep
   } else {
     log("Not pushed. Re-run with --push once the review looks right.");
   }
-  return { exitCode: 0, catalog, inventory, entries, pushed };
+  return { exitCode: 0, catalog, inventory, entries, pushed, delta, pendingFolders, unreadable };
+}
+
+/**
+ * What changed between two catalogs. A file that disappeared from one path and
+ * appears at another with the same name and size was MOVED (its path is updated;
+ * anything that refers to the old path can be remapped).
+ */
+export function catalogDelta(previous, entries) {
+  const k = (p) => String(p).toLowerCase();
+  const before = new Map(previous.map((e) => [k(e.path), e]));
+  const now = new Map(entries.map((e) => [k(e.path), e]));
+  const added = entries.filter((e) => !before.has(k(e.path)));
+  const gone = previous.filter((e) => !now.has(k(e.path)));
+  const sig = (e) => `${String(e.path).split("/").pop().toLowerCase()}|${e.sizeMB}`;
+  const addedBySig = new Map();
+  for (const e of added) addedBySig.set(sig(e), [...(addedBySig.get(sig(e)) ?? []), e]);
+  const moved = [];
+  const missing = [];
+  for (const e of gone) {
+    const to = (addedBySig.get(sig(e)) ?? []).shift();
+    if (to) moved.push({ from: e.path, to: to.path, type: e.type });
+    else missing.push({ path: e.path, type: e.type });
+  }
+  const movedTo = new Set(moved.map((m) => k(m.to)));
+  return { added: added.filter((e) => !movedTo.has(k(e.path))).map((e) => ({ path: e.path, type: e.type, role: e.role, status: e.privacy?.status })), moved, missing };
 }
 
 if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {

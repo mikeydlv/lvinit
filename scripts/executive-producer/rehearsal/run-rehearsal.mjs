@@ -102,7 +102,7 @@ const env = { APIFY_TOKEN: "simulated", ANTHROPIC_API_KEY: "simulated", LVINIT_I
 
 const arg = (k, d) => (process.argv.find((a) => a.startsWith(`--${k}=`)) ?? `=${d}`).split("=").slice(1).join("=");
 const scratch = join(tmpdir(), "lvinit-rehearsal");
-const r = await runWeek([`--week=${arg("week", "2026-10-19")}`, "--suffix=(rehearsal)", "--no-env", "--force", `--out=${arg("out", join(scratch, "Weekly Posts"))}`, `--catalog=${arg("catalog", join(process.env.USERPROFILE ?? "", "OneDrive", "Documents", "LVINIT", "lvinit", "data", "executive-producer", "footage-catalog.json"))}`], { services: { anthropic, fetchImpl, env, usageFile: arg("usage-file", join(scratch, "footage-usage.json")) } });
+const r = await runWeek([`--week=${arg("week", "2026-10-19")}`, "--suffix=(rehearsal)", "--no-env", "--force", `--out=${arg("out", join(scratch, "Weekly Posts"))}`, `--catalog=${arg("catalog", join(process.env.USERPROFILE ?? "", "OneDrive", "Documents", "LVINIT", "lvinit", "data", "executive-producer", "footage-catalog.json"))}`], { services: { anthropic, fetchImpl, env, usageFile: arg("usage-file", join(scratch, "footage-usage.json")), pendingSeenFile: join(scratch, "pending-folders-seen.json") } });
 console.log("\nSimulated service calls:", JSON.stringify(calls));
 console.log("Steps:", r.report.steps.map((s) => `${s.name} ${s.ok ? "ok" : "FAILED"} ${s.secs}s${s.note ? ` (${s.note})` : ""}`).join("\n       "));
 console.log("Manual:", r.report.manual, "\nNot configured:", r.report.notConfigured, "\nExceptions:", JSON.stringify(r.report.exceptions));

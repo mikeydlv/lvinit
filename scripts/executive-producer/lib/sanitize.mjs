@@ -128,17 +128,28 @@ export function privateTermsFor(entries, privacy) {
   // nothing by that name, so it isn't a leak term. Anything merely containing
   // a private name is still caught.
   const publicNames = new Set();
+  // Every folder above a public file: approving "A/B/C" necessarily shows "A/B",
+  // so an unclassified "A/B" isn't a secret (its OTHER contents still are).
+  const publicAncestors = new Set();
   for (const e of entries) {
     if (e.privacy?.status !== "public") continue;
-    for (const seg of e.path.split("/")) {
+    const segs = e.path.split("/");
+    for (const seg of segs) {
       publicNames.add(seg.toLowerCase());
       publicNames.add(seg.replace(/\.[^.]+$/, "").toLowerCase());
+      // The catalog's `subject` form ("lvinit-closing-card.png" → "lvinit closing card").
+      publicNames.add(seg.replace(/\.[^.]+$/, "").replace(/[-_]+/g, " ").toLowerCase());
     }
+    for (let i = 1; i < segs.length; i++) publicAncestors.add(segs.slice(0, i).join("/").toLowerCase());
   }
   const terms = new Set(privacy.excluded);
   const add = (t) => {
     if (t && !publicNames.has(String(t).toLowerCase())) terms.add(t);
   };
+  // Editor working-folder names that identify nobody (an unclassified "Notes" or
+  // "b-roll" subfolder). Only the bare folder NAME is skipped; full paths and
+  // file names inside them stay private.
+  const GENERIC_FOLDER = new Set(["notes", "b-roll", "broll", "graphics", "review", "out", "tests", "test", "preview", "shorts", "final", "exports", "export", "renders", "scratch", "drone", "photos", "audio", "conformed", "conformedh264", "ambience", "lowerthirds", "proxies", "proxy"]);
   for (const h of privacy.localOnly) add(h.path);
   for (const e of entries) {
     if (e.privacy?.status === "public") continue;
@@ -151,10 +162,11 @@ export function privateTermsFor(entries, privacy) {
       add(name.replace(/\.[^.]+$/, "").replace(/[-_]+/g, " "));
     }
     const pending = e.privacy?.pendingFolder;
-    if (pending) {
+    if (pending && !publicAncestors.has(pending.toLowerCase())) {
       add(pending);
       // The unapproved folder's own name, which is what could identify someone.
-      add(pending.split("/").pop());
+      const last = pending.split("/").pop();
+      if (!GENERIC_FOLDER.has(last.toLowerCase())) add(last);
     }
   }
   return [...terms].filter(Boolean);

@@ -144,9 +144,41 @@ Pocket, phone). The check runs again on every clip right before render. Edited
 exports, OpusClip / AI-expanded files, and anything with a stock or download
 name are refused. **Nothing is ever substituted:** if no suitable original clip
 exists, that day becomes an exception ("approve more footage or film new
-B-roll") and the rest of the week still ships. Folders added after the last
-catalog (for example newer project folders) are only used once approved:
-`npm run producer:catalog -- --approve="Media/<folder>"`.
+B-roll") and the rest of the week still ships.
+
+**Catalog refresh (every Sunday, step 0 of the run).** Before planning, the run
+re-runs the cataloger (the same code as `npm run producer:catalog`, never with
+`--push`): a recursive scan of `C:\LVINIT\{Media,Videos,Images,Graphics}`,
+ffprobe only for new or changed files (the probe cache makes it incremental),
+and the unchanged per-folder privacy policy. It reports, in `run.json` and the
+email:
+
+- **new folders waiting for approval.** They are never approved automatically,
+  and a parent folder's approval never covers a new subfolder. Approve with
+  `npm run producer:catalog -- --approve="Media/<folder>"`. The email lists
+  folders the first week they appear; folders already reported are summarized in
+  one line (`~/.lvinit/executive-producer/pending-folders-seen.json`).
+- **moved files.** Same name and size at a new path: the catalog uses the new
+  path, and the footage-usage history follows the file, so the 4-week reuse rule
+  still applies.
+- **missing and unreadable files.** Videos ffprobe can't read (e.g. an aborted
+  1 KB recording) get role `unreadable` and are never used.
+
+A failed refresh never stops the week: the previous catalog is used and the
+email says so. `--no-catalog-refresh` skips it.
+
+**Not B-roll.** Approval makes a folder indexable; it doesn't make every clip
+usable. Talking heads and continuous walkthroughs stay out of the automatic
+B-roll pool: by name (`intro`, `outro`, `voiceover`, `talking`, `interview`,
+`a-roll`, and `walkthrough` when 2 minutes or longer), by Mikey's list
+(`--not-broll="path|reason"`, stored as `notBroll` in `privacy.json`), and any
+original take of 10 minutes or more (role `long-take`) until it is classified.
+
+**Shot choice for shorts.** Candidates are scored as 9:16 crops; native
+vertical clips get a preference; Claude picks the moment that shows the
+segment's subject most clearly and attractively and rejects talking heads,
+dashboards, readable addresses, plates and close-up faces. The review sees the
+start, middle and end of every segment.
 
 **Music: licensed tracks only.** Tracks come from
 `C:\LVINIT\Music\Licensed\licenses.json` (file, source, URL, license),

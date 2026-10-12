@@ -12,6 +12,8 @@
 //   node scripts/executive-producer/weekly.mjs --plan=FILE  REHEARSAL ONLY: use a prepared plan
 //
 // Unattended chain, each step timed and costed in run.json:
+//   0. catalog   refresh the footage catalog (recursive, incremental, privacy rules
+//                unchanged; new unapproved folders are listed in the email)
 //   1. ledger    refresh Mikey's recent posts (Instagram/TikTok via Apify,
 //                YouTube from his public channel), mark matching drafts as
 //                published, build draft/approved/scheduled/published history
@@ -160,6 +162,38 @@ export async function runWeek(argv = process.argv.slice(2), { log = console.log,
     const P = await import("./lib/planner.mjs");
     const ai = { anthropic: services.anthropic };
     const fetchImpl = services.fetchImpl ?? fetch;
+    // 0. catalog -----------------------------------------------------------------
+    // Refresh the footage catalog first, so this week can use footage added since
+    // last Sunday. Same cataloger and privacy file as `npm run producer:catalog`:
+    // only approved folders are indexed, nothing is approved automatically, and
+    // nothing is pushed. A failed refresh never stops the week (last catalog is used).
+    const stateDir = resolve(dirname(catalogPath), "..", "..");
+    const isRealCatalog = /[\\/]data[\\/]executive-producer[\\/]footage-catalog\.json$/i.test(catalogPath);
+    if (!args["no-catalog-refresh"] && (services.catalogRun || isRealCatalog)) {
+      await step("catalog", async () => {
+        try {
+          const run = services.catalogRun ?? (await import("./catalog.mjs")).run;
+          const r = await run(["--no-oembed", `--state-dir=${stateDir}`, ...(args["media-root"] ? [`--media-root=${mediaRoot}`] : [])], { log: () => {}, repoRoot: services.repoRoot ?? REPO });
+          if (r.exitCode) throw new Error(r.error ?? `cataloger exited ${r.exitCode}`);
+          // Folders already reported in an earlier email are summarized; new ones are listed.
+          const seenFile = services.pendingSeenFile ?? join(HOME, "pending-folders-seen.json");
+          let seen = [];
+          try {
+            seen = JSON.parse(readFileSync(seenFile, "utf8")).folders ?? [];
+          } catch {
+            /* first refresh */
+          }
+          const seenSet = new Set(seen.map((f) => f.toLowerCase()));
+          const newPending = r.pendingFolders.filter((f) => !seenSet.has(f.folder.toLowerCase()));
+          writeFileSync(seenFile, JSON.stringify({ note: "Unapproved footage folders already listed in a weekly email.", updated: new Date().toISOString(), folders: r.pendingFolders.map((f) => f.folder) }, null, 2));
+          report.catalog = { refreshedAt: new Date().toISOString(), public: r.catalog?.totals?.public, videoMinutes: r.catalog?.totals?.videoMinutes, added: r.delta.added.length, moved: r.delta.moved, missing: r.delta.missing, unreadable: r.unreadable, pendingFolders: newPending, pendingStill: r.pendingFolders.length - newPending.length, pendingStillWithOriginal: r.pendingFolders.filter((f) => seenSet.has(f.folder.toLowerCase()) && f.originalVideos).length };
+          return { note: `${r.catalog?.totals?.public ?? "?"} public items; ${r.delta.added.length} added, ${r.delta.moved.length} moved, ${r.delta.missing.length} missing; ${r.pendingFolders.length} folder(s) waiting for approval (${report.catalog.pendingFolders.length} new)` };
+        } catch (e) {
+          report.gaps.unshift(`The footage catalog couldn't be refreshed (${String(e.message).slice(0, 120)}); last week's catalog was used.`);
+          return { note: `refresh failed; using the previous catalog (${String(e.message).slice(0, 80)})` };
+        }
+      });
+    }
     const catalog = JSON.parse(readFileSync(catalogPath, "utf8"));
     const packs = buildSourcePacks({ repoRoot: services.repoRoot ?? REPO, today: weekOf });
     const packByRoute = Object.fromEntries(packs.map((p) => [p.route, p.fullText]));
@@ -249,6 +283,7 @@ export async function runWeek(argv = process.argv.slice(2), { log = console.log,
     };
     // Shorts: camera-original approved clips only, minus clips used in a short in the last 4 weeks.
     const usage = SH.loadUsage(services.usageFile);
+    if (report.catalog?.moved?.length) SH.remapUsage(usage, report.catalog.moved);
     const overused = SH.overusedClips(usage, weekOf);
     const recent = new Set((usage.uses ?? []).filter((u) => u.weekOf < weekOf).map((u) => String(u.path).toLowerCase()));
     const originals = SH.originalClips(catalog, mediaRoot).filter((c) => !overused.has(c.path.toLowerCase()));
@@ -509,7 +544,7 @@ export async function runWeek(argv = process.argv.slice(2), { log = console.log,
           const rejected = [...(seg.rejected ?? [])];
           for (let tryNo = 0; tryNo < 4; tryNo++) {
             const exclude = [...rejected, ...inShort];
-            const tries = [{ clip: seg.clip, want: seg.want, headline: seg.headline, exclude }, { folder: "", want: `${seg.want ?? ""} ${seg.headline ?? ""}`, headline: seg.headline, exclude }];
+            const tries = [{ clip: seg.clip, want: seg.want, headline: seg.headline, exclude, purpose: "short" }, { folder: "", want: `${seg.want ?? ""} ${seg.headline ?? ""}`, headline: seg.headline, exclude, purpose: "short" }];
             r = null;
             for (const want of tries) {
               try {
@@ -685,7 +720,7 @@ export async function runWeek(argv = process.argv.slice(2), { log = console.log,
                 if (s.fix?.startsWith("move_text")) seg.position = s.fix.endsWith("top") ? "top" : "bottom";
                 else {
                   seg.rejected = [...(seg.rejected ?? []), seg.path];
-                  const r = await chooseFrame({ want: { folder: "", want: `${seg.want ?? ""} ${seg.headline ?? ""}`, headline: seg.headline, avoid: s.issues.join("; "), exclude: [...seg.rejected, ...p.segments.map((g) => g.path)] }, catalog: shortCatalog, mediaRoot, sharp, loadCrop: loadCropTall, usedHashes, usedSources, pick: vision }).catch((e) => ({ error: String(e.message) }));
+                  const r = await chooseFrame({ want: { folder: "", want: `${seg.want ?? ""} ${seg.headline ?? ""}`, headline: seg.headline, avoid: s.issues.join("; "), exclude: [...seg.rejected, ...p.segments.map((g) => g.path)], purpose: "short" }, catalog: shortCatalog, mediaRoot, sharp, loadCrop: loadCropTall, usedHashes, usedSources, pick: vision }).catch((e) => ({ error: String(e.message) }));
                   addCost("anthropic", "review", r.usd);
                   if (r.error || !SH.verifyOriginal(join(mediaRoot, r.src.path), r.src.path, { probe: services.probeOriginal }).ok) continue;
                   const clipDur = shortCatalog.items.find((c) => c.path === r.src.path)?.durationSec ?? seg.dur + 1;
@@ -774,7 +809,7 @@ export async function runWeek(argv = process.argv.slice(2), { log = console.log,
     } catch (e) {
       report.gaps.push(`Footage usage couldn't be recorded (${String(e.message).slice(0, 80)}).`);
     }
-    const n = await (services.notify ?? notify)({ ok: true, weekOf, posts: accepted.length, mix: `${accepted.filter((p) => !isVideo(p)).length} carousels + ${accepted.filter(isVideo).length} short videos; no Sunday post`, exceptions: report.exceptions, costs: report.costs, previewPath: join(weekDir, "preview.html"), manual: [...report.manual, ...report.notConfigured], gaps: report.gaps.slice(0, 1) }, { fetchImpl, env });
+    const n = await (services.notify ?? notify)({ ok: true, weekOf, posts: accepted.length, mix: `${accepted.filter((p) => !isVideo(p)).length} carousels + ${accepted.filter(isVideo).length} short videos; no Sunday post`, catalog: report.catalog, exceptions: report.exceptions, costs: report.costs, previewPath: join(weekDir, "preview.html"), manual: [...report.manual, ...report.notConfigured], gaps: report.gaps.slice(0, 1) }, { fetchImpl, env });
     report.notification = n;
     writeFileSync(join(weekDir, "run.json"), JSON.stringify(report, null, 2));
     log(`Week of ${weekOf}: ${accepted.length} posts. Cost $${report.costs.totalUsd}. Manual: ${report.manual.length}. Not configured: ${report.notConfigured.length}. Exceptions: ${report.exceptions.length}. Email: ${n.email.sent ? "sent" : n.email.reason}.`);

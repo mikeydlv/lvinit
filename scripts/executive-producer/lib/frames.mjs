@@ -174,6 +174,11 @@ export async function chooseFrame({ want, catalog, mediaRoot, sharp, loadCrop, u
     const buf = await loadCrop({ ...c, path: join(mediaRoot, c.path) }, { x: 0.5, y: 0.5 });
     scored.push({ c, buf, ...(await scoreLocally(sharp, buf, usedHashes, textBand)) });
   }
+  // Shorts: native vertical footage keeps its framing in a 9:16 crop, so it gets a nudge.
+  if (want.purpose === "short") {
+    const orient = new Map(catalog.items.map((c) => [c.path, c.orientation]));
+    for (const s of scored) if (orient.get(s.c.path) === "vertical") s.score += 0.6;
+  }
   scored.sort((a, b) => b.score - a.score);
   const top = scored.slice(0, 6).filter((s) => s.score > -5);
   if (!top.length) return { error: `Every candidate for "${want.want}" repeats an image already used this week.` };
@@ -195,7 +200,7 @@ export async function chooseFrame({ want, catalog, mediaRoot, sharp, loadCrop, u
         .jpeg({ quality: 72 })
         .toFile(sheet);
       // A vision hiccup never stops the run: keep the best local candidate.
-      const r = await pick({ sheetPath: sheet, want: want.want, headline: want.headline, avoid: want.avoid, candidates: top }).catch((e) => ({ pick: null, usd: e.usd ?? 0, reason: String(e.message).slice(0, 120) }));
+      const r = await pick({ sheetPath: sheet, want: want.want, headline: want.headline, avoid: want.avoid, candidates: top, purpose: want.purpose }).catch((e) => ({ pick: null, usd: e.usd ?? 0, reason: String(e.message).slice(0, 120) }));
       usd += r.usd ?? 0;
       if (r.pick === null) reason += ` (vision unavailable: ${r.reason})`;
       else if (r.pick >= 0 && r.pick < top.length) {

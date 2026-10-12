@@ -124,6 +124,20 @@ export function overusedClips(usage, weekOf, { days = 28, cap = 3 } = {}) {
   return out;
 }
 
+/** A moved file keeps its reuse history: old paths in the ledger become the new ones. */
+export function remapUsage(usage, moved = []) {
+  const to = new Map(moved.map((m) => [key(m.from), m.to]));
+  let n = 0;
+  for (const u of usage.uses ?? []) {
+    const t = to.get(key(u.path));
+    if (t) {
+      u.path = t;
+      n++;
+    }
+  }
+  return n;
+}
+
 /** Records a finished week's footage and music (replacing any earlier record of the same week). */
 export function recordWeek(usage, weekOf, posts) {
   usage.uses = (usage.uses ?? []).filter((u) => u.weekOf !== weekOf);

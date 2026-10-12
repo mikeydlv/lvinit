@@ -55,6 +55,8 @@ export function loadPrivacy(config) {
       approved: raw.approved ?? [],
       approvedFiles: raw.approvedFiles ?? [],
       localOnly: raw.localOnly ?? [],
+      // Indexed, but never in the automatic B-roll pool (talking heads, continuous walkthroughs).
+      notBroll: raw.notBroll ?? [],
     },
     created: false,
   };
@@ -66,8 +68,9 @@ export function savePrivacy(config, privacy) {
 }
 
 /** Apply --exclude / --approve / --hold edits. Returns a list of what changed. */
-export function editPrivacy(privacy, { exclude = [], approve = [], hold = [] }) {
+export function editPrivacy(privacy, { exclude = [], approve = [], hold = [], notBroll = [] }) {
   const changes = [];
+  privacy.notBroll ??= [];
   const has = (list, v) => list.some((x) => key(typeof x === "string" ? x : x.path) === key(v));
   for (const name of exclude) {
     if (!has(privacy.excluded, name)) {
@@ -87,6 +90,13 @@ export function editPrivacy(privacy, { exclude = [], approve = [], hold = [] }) 
     privacy.localOnly = privacy.localOnly.filter((x) => key(x.path) !== key(path));
     if (privacy.localOnly.length !== before) changes.push(`released hold on "${path}"`);
   }
+  for (const h of notBroll) {
+    const [path, reason = "not B-roll"] = String(h).split("|");
+    if (!has(privacy.notBroll, path)) {
+      privacy.notBroll.push({ path: norm(path), reason });
+      changes.push(`"${norm(path)}" kept out of the automatic B-roll pool`);
+    }
+  }
   for (const h of hold) {
     const [path, reason = "held by Mikey"] = String(h).split("|");
     if (!has(privacy.localOnly, path)) {
@@ -105,6 +115,13 @@ function basename(p) {
 function parent(p) {
   const parts = norm(p).split("/");
   return parts.slice(0, -1).join("/");
+}
+
+/** Reason this file is kept out of the B-roll pool (exact file or anything under a listed folder), else null. */
+export function brollHoldFor(relPath, privacy) {
+  const p = key(relPath);
+  const hit = (privacy.notBroll ?? []).find((h) => p === key(h.path) || p.startsWith(key(h.path) + "/"));
+  return hit ? hit.reason || "not B-roll" : null;
 }
 
 /** Is any folder segment of this path in the excluded list? */

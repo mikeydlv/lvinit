@@ -181,8 +181,14 @@ export async function renderPost(p, i, { weekDir, week, mediaRoot, musicDir, ren
     // Preview/review frames: one per segment.
     p.segments.forEach((s, k) => {
       const f = join(dir, `.frame-${k}.jpg`);
-      const t = p.segments.slice(0, k).reduce((n, x) => n + x.dur, 0) - k * 0.35 + s.dur / 2; // mid-segment, after the cross dissolves
-      execFileSync("ffmpeg", ["-loglevel", "error", "-y", "-ss", String(t), "-i", mp4, "-frames:v", "1", "-q:v", "4", f]);
+      // Start, middle and end of the segment side by side, so a plate or house number that
+      // appears for a second still reaches the review.
+      const t0 = p.segments.slice(0, k).reduce((n, x) => n + x.dur, 0) - k * 0.35;
+      const ts = [t0 + 0.45, t0 + s.dur / 2, t0 + s.dur - 0.45];
+      const tmpF = ts.map((t, j) => join(dir, `.f${k}-${j}.jpg`));
+      ts.forEach((t, j) => execFileSync("ffmpeg", ["-loglevel", "error", "-y", "-ss", String(Math.max(0, t)), "-i", mp4, "-frames:v", "1", "-vf", "scale=432:768", "-q:v", "4", tmpF[j]]));
+      execFileSync("ffmpeg", ["-loglevel", "error", "-y", ...tmpF.flatMap((x) => ["-i", x]), "-filter_complex", "hstack=inputs=3", "-q:v", "4", f]);
+      for (const x of tmpF) rmSync(x, { force: true });
       files.push(f);
     });
   } else {

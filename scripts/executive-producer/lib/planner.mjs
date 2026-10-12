@@ -148,14 +148,14 @@ export async function revisePosts({ failures, pages, week = [] }, { anthropic } 
 
 const imagePart = (path) => ({ type: "image", source: { type: "base64", media_type: "image/jpeg", data: readFileSync(path).toString("base64") } });
 
-export async function pickFrame({ sheetPath, want, headline, avoid, candidates }, { anthropic } = {}) {
+export async function pickFrame({ sheetPath, want, headline, avoid, candidates, purpose }, { anthropic } = {}) {
   const api = anthropic ?? (await client());
   const r = await ask(api, {
     thinking: false,
     maxTokens: 2000,
     content: [
       imagePart(sheetPath),
-      { type: "text", text: `Tiles are numbered 0–${candidates.length - 1}. Pick the tile that best shows: "${want}".${headline ? ` The slide's words: "${headline}". The image must visibly fit them (a freeway doesn't illustrate a price; empty sky illustrates nothing).` : ""}${avoid ? ` A previous pick was rejected for: ${avoid}. Don't repeat that problem.` : ""} Reject tiles with readable house numbers, license plates, builder/leasing/sales signs, phone numbers, rate cards, maps or charts, identifiable faces, motion blur, or a mostly empty or very bright area where white text would sit. Murals, public art and ordinary storefront names are fine when they're the subject. Answer only JSON {"pick": n, "reason": "under 15 words"}; pick -1 if none work.` },
+      { type: "text", text: `Tiles are numbered 0–${candidates.length - 1}. Pick the tile that best shows: "${want}".${headline ? ` The slide's words: "${headline}". The image must visibly fit them (a freeway doesn't illustrate a price; empty sky illustrates nothing).` : ""}${avoid ? ` A previous pick was rejected for: ${avoid}. Don't repeat that problem.` : ""} Reject tiles with readable house numbers, license plates, builder/leasing/sales signs, phone numbers, rate cards, maps or charts, identifiable faces, motion blur, or a mostly empty or very bright area where white text would sit.${purpose === "short" ? " These tiles are 9:16 crops for a vertical SHORT VIDEO: pick the moment that most clearly and attractively shows the subject (a strong, well-lit, steady shot that works vertically). Reject a person talking to the camera, a dashboard or car hood filling the frame, interiors that aren't the topic, and readable addresses on homes or mailboxes." : ""} Murals, public art and ordinary storefront names are fine when they're the subject. Answer only JSON {"pick": n, "reason": "under 15 words"}; pick -1 if none work.` },
     ],
   });
   return { pick: r.json.pick, reason: r.json.reason, usage: r.usage, usd: r.usd };
@@ -176,7 +176,7 @@ export async function reviewSlides({ sheetPath, slidePaths, post }, { anthropic 
       ...(slidePaths?.length ? slidePaths.flatMap((p, i) => [{ type: "text", text: `Slide ${i + 1}:` }, imagePart(p)]) : [imagePart(sheetPath)]),
       {
         type: "text",
-        text: `${post.segments?.length ? `These are frames from a finished LVINIT short video (Reel / TikTok / YouTube Short), in order, numbered 1–${post.segments.length} (one per segment; the last may be the branded end card, which is fine). Each frame should fit its segment text` : `These are the finished slides of an Instagram carousel for LVINIT, numbered 1–${post.slides?.length}`}. Post topic: "${post.title}". Slide texts: ${JSON.stringify((post.slides ?? post.segments).map((s) => [s.headline, s.body].filter(Boolean).join(" / ")))}.
+        text: `${post.segments?.length ? `These are frames from a finished LVINIT short video (Reel / TikTok / YouTube Short), in order, numbered 1–${post.segments.length}, one image per segment showing its START, MIDDLE and END side by side. Check all three moments; each segment should fit its segment text and show no talking head` : `These are the finished slides of an Instagram carousel for LVINIT, numbered 1–${post.slides?.length}`}. Post topic: "${post.title}". Slide texts: ${JSON.stringify((post.slides ?? post.segments).map((s) => [s.headline, s.body].filter(Boolean).join(" / ")))}.
 Check each slide for: (1) text readable at phone size against its background, (2) crop keeps the subject (nothing important cut off, text not covering the key subject), (3) image relevant to that slide's words, (4) same or near-identical image as another slide, (5) excluded content: readable house numbers, license plates, builder sales signage, close-up identifiable faces, anything private.
 Return only JSON {"slides":[{"n":1,"ok":true,"issues":[],"fix":"none"}]} (each issue under 15 words) with fix one of none|move_text_top|move_text_bottom|new_frame.`,
       },
