@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "agent": "development-watch",
-  "updated": "2026-10-12",
+  "updated": "2026-10-13",
   "events": {
     "025b2cbfc757": {
       "id": "DEV-2026-09-25-002",
@@ -399,8 +399,8 @@
       "status": "approved",
       "prior_status": null,
       "first_seen": "2026-10-08",
-      "last_seen": "2026-10-11",
-      "times_seen": 4,
+      "last_seen": "2026-10-13",
+      "times_seen": 5,
       "lifecycle": "PERSISTING",
       "lifecycle_history": [
         {
@@ -414,7 +414,7 @@
       ],
       "action": "MONITOR_ONLY",
       "target": null,
-      "score": 43,
+      "score": 47,
       "confidence": "Low",
       "sources": [
         {
@@ -463,6 +463,12 @@
           "name": "WBTV",
           "url": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxQeS1RQTNKRVZJejhVb3lmRzNCRjFLVkNYXzZBT1J1TjBqQWNDOWFTenRiSGlSYnJtWk02X0ZxWlFEOFVfTzFVdGFZWFdZR0IyYXhUOFBoRkMyYll5X01zVHRjeEd5ZFRFSVZqb2VkN2Y1cFYzdHJTUExTNTdMdHhCWUR5MEZwM3RKdVVwaWZoTVlaVE9hVVl0cEtnNWl0X3ByUW43MjhwYll4S2w4RnVZWTUxaG9CRUswaHc1emZyYjEtREM3emhhaw",
           "authority": 9,
+          "published": "2026-10-08T06:22:00.000Z"
+        },
+        {
+          "name": "FOX5 Vegas",
+          "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxQNGJGS0pGRTdyTGFJTVB0T0N0YUtlV1ROdGJLcGpldFZ2V0x3LWtRNWVreUdoWUNXSkVQRlRTSkhERmJqM3dLMERQRUZ4TGFiRm05cWhJRC1BYmRKaUtNTGdPRmxzTGM3dFQ0MEkycUFHdjlpRXExeHRQMnZXZGdqVHJnNTZRdDlzQ1M2aWRzRnd5Z3ZRc2I0T0MtTi00YVdrM3ZTV3l2dGVlSlpwRnhGRl94cFMweUhwYy00",
+          "authority": 8,
           "published": "2026-10-08T06:22:00.000Z"
         }
       ],
@@ -1344,6 +1350,54 @@
           "NO_PRIMARY_SOURCE",
           "NOT_NEW",
           "FAIR_HOUSING_SUBJECT",
+          "PROVISIONAL_ENTITY"
+        ],
+        "queued": []
+      }
+    },
+    "411c2dc8ad28": {
+      "id": "DEV-2026-10-13-001",
+      "fingerprint": "411c2dc8ad28",
+      "entity_id": "DEV-P-63CF0B03",
+      "entity_name": "Unnamed land (North Las Vegas) — \"North Las Vegas launches community survey to shape 2055 master plan\"",
+      "change_class": "NEW",
+      "changes": [
+        "first time this project has been seen"
+      ],
+      "event_type": "announcement",
+      "status": "proposed",
+      "prior_status": null,
+      "first_seen": "2026-10-13",
+      "last_seen": "2026-10-13",
+      "times_seen": 1,
+      "lifecycle": "REJECTED",
+      "lifecycle_history": [
+        {
+          "date": "2026-10-13",
+          "lifecycle": "REJECTED"
+        }
+      ],
+      "action": "REJECT_LOW_VALUE",
+      "target": null,
+      "score": 33,
+      "confidence": "Low",
+      "sources": [
+        {
+          "name": "8 News Now",
+          "url": "https://8newsnow.com/news/north-las-vegas/north-las-vegas-launches-community-survey-to-shape-2055-master-plan",
+          "authority": 8,
+          "published": "2026-10-12T23:19:38.000Z"
+        }
+      ],
+      "superseded_by": null,
+      "handoff": {
+        "eligible": false,
+        "blockers": [
+          "NOT_A_PUBLISHER_ACTION",
+          "SCORE_BELOW_THRESHOLD",
+          "CONFIDENCE_NOT_HIGH",
+          "NO_PRIMARY_SOURCE",
+          "NOT_NEW",
           "PROVISIONAL_ENTITY"
         ],
         "queued": []
@@ -4052,12 +4106,12 @@
       "changes": [
         "same as LVINIT neighborhood roster (/neighborhoods/summerlin)"
       ],
-      "event_type": "partial opening",
+      "event_type": "announcement",
       "status": "partially open",
       "prior_status": "partially open",
       "first_seen": "2026-10-06",
-      "last_seen": "2026-10-06",
-      "times_seen": 1,
+      "last_seen": "2026-10-13",
+      "times_seen": 2,
       "lifecycle": "DUPLICATE",
       "lifecycle_history": [
         {
@@ -4067,14 +4121,20 @@
       ],
       "action": "DUPLICATE",
       "target": "/neighborhoods/summerlin",
-      "score": 59,
-      "confidence": "High",
+      "score": 64,
+      "confidence": "Medium",
       "sources": [
         {
           "name": "Summerlin news",
           "url": "https://summerlin.com/cactus-bloom-by-richmond-american-homes-opens-in-summerlin",
           "authority": 5,
           "published": "2026-10-06T11:18:37.000Z"
+        },
+        {
+          "name": "Summerlin news",
+          "url": "https://summerlin.com/summerlins-grand-park-village-teeming-with-new-home-options",
+          "authority": 5,
+          "published": "2026-10-13T11:02:44.000Z"
         }
       ],
       "superseded_by": null,
@@ -4083,6 +4143,7 @@
         "blockers": [
           "NOT_A_PUBLISHER_ACTION",
           "SCORE_BELOW_THRESHOLD",
+          "CONFIDENCE_NOT_HIGH",
           "NOT_MATERIAL",
           "NOT_NEW"
         ],
