@@ -288,7 +288,7 @@ export const guides: Guide[] = [
   {
     slug: "las-vegas-mortgage-rates",
     title: "Las Vegas Mortgage Rates: Where They Are and What They Do to Your Payment",
-    dek: "Freddie Mac's 30-year average hit 7.28% the week of October 1, 2026, the highest since November 2023. The latest print, seven weeks of history, and the payment math on a Las Vegas loan. Updated in place.",
+    dek: "Freddie Mac's 30-year average rose to 7.40% the week of October 8, 2026, the highest since November 2023. The latest print, eight weeks of history, and the payment math on a Las Vegas loan. Updated in place.",
     byline: "Mikey Del Rosario",
     date: "October 2026",
     publishedAt: "2026-10-05",

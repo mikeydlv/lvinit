@@ -16,6 +16,17 @@ import { StoryPage, StoryLede, StorySection, StoryVideo } from "@/components/sto
 // (las-vegas-mortgage-rates-september-2026, -approach-7-percent, -19-month-high)
 // are untouched historical snapshots.
 //
+// OCT 13, 2026 UPDATE — verified by direct fetch of freddiemac.com/pmms and the
+// FRED MORTGAGE30US series (Freddie Mac data): week of Oct 8, 2026, 30-year
+// 7.40% (prior week 7.28%, year ago 6.30%); 15-year 6.73% (prior 6.60%, year
+// ago 5.53%). Series check: no weekly 30-year print at or above 7.40% between
+// Nov 30, 2023 and Oct 1, 2026 (max 7.29% on Nov 22, 2023 and 7.22% after);
+// the last print above 7.40% was Nov 16, 2023 (7.44%), so "highest since the
+// week of November 16, 2023" is a sourced comparison. Seventh straight weekly
+// increase (arithmetic on the table). Payment at 7.40% on $380,000, 30-yr,
+// P&I: $2,631.04 computed independently ($2,631 vs $2,439 at 6.65% = $192/mo,
+// about $2,300/yr). Freddie Mac names no cause; none is asserted.
+//
 // FACT DISCIPLINE — verified 2026-10-05 by direct fetch:
 // - Freddie Mac PMMS (freddiemac.com/pmms and /pmms/pmms_archives), week of
 //   Oct 1, 2026: 30-year 7.28% (prior week 7.03%, year ago 6.34%); 15-year
@@ -65,10 +76,10 @@ const meta: StoryMeta = {
   title: "Las Vegas Mortgage Rates: Where They Are and What They Do to Your Payment | LVINIT",
   headline: "Las Vegas Mortgage Rates: Where They Are and What They Do to Your Payment",
   description:
-    "Freddie Mac's 30-year fixed average hit 7.28% the week of October 1, 2026, the highest since November 2023. The latest print, the weekly history, and what a rate move does to a Las Vegas payment. Updated in place.",
+    "Freddie Mac's 30-year fixed average rose to 7.40% the week of October 8, 2026, its seventh straight weekly increase and the highest since November 2023. The latest print, the weekly history, and what a rate move does to a Las Vegas payment. Updated in place.",
   path: PATH,
   datePublished: "2026-10-05",
-  dateModified: "2026-10-07",
+  dateModified: "2026-10-13",
   author: "Mikey Del Rosario",
   breadcrumbs: [
     { name: "Home", path: "/" },
@@ -88,7 +99,7 @@ const faqJsonLd = {
       name: "What are mortgage rates in Las Vegas right now?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Mortgage rates are set nationally, not by city. Freddie Mac's weekly survey put the average 30-year fixed rate at 7.28% for the week of October 1, 2026, up from 7.03% the week before, with the 15-year at 6.60%. Your own quote depends on credit score, down payment, loan type, points and lender, and can land above or below the published average.",
+        text: "Mortgage rates are set nationally, not by city. Freddie Mac's weekly survey put the average 30-year fixed rate at 7.40% for the week of October 8, 2026, up from 7.28% the week before, with the 15-year at 6.73%. Your own quote depends on credit score, down payment, loan type, points and lender, and can land above or below the published average.",
       },
     },
     {
@@ -104,7 +115,7 @@ const faqJsonLd = {
       name: "How much does a higher rate add to a Las Vegas payment?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "In a hypothetical example, a $475,000 purchase with 20% down ($95,000) means a $380,000 loan. On a 30-year fixed, principal and interest only, moving from 6.65% to 7.28% takes the payment from about $2,439 to about $2,600 a month, roughly $160 more. The example excludes taxes, insurance, HOA dues, mortgage insurance and closing costs. 20% down is not required, and it is an illustration, not a quote.",
+        text: "In a hypothetical example, a $475,000 purchase with 20% down ($95,000) means a $380,000 loan. On a 30-year fixed, principal and interest only, moving from 6.65% to 7.40% takes the payment from about $2,439 to about $2,631 a month, roughly $190 more. The example excludes taxes, insurance, HOA dues, mortgage insurance and closing costs. 20% down is not required, and it is an illustration, not a quote.",
       },
     },
     {
@@ -122,17 +133,17 @@ type Stat = { value: string; label: string; note: string };
 
 const SNAPSHOT: Stat[] = [
   {
-    value: "7.28%",
+    value: "7.40%",
     label: "Average 30-year fixed rate",
-    note: "Week of Oct 1, 2026, up from 7.03% · Freddie Mac PMMS",
+    note: "Week of Oct 8, 2026, up from 7.28% · Freddie Mac PMMS",
   },
   {
-    value: "6.60%",
+    value: "6.73%",
     label: "Average 15-year fixed rate",
-    note: "Week of Oct 1, 2026, up from 6.42% · Freddie Mac PMMS",
+    note: "Week of Oct 8, 2026, up from 6.60% · Freddie Mac PMMS",
   },
   {
-    value: "6.34%",
+    value: "6.30%",
     label: "30-year, one year earlier",
     note: "Same week of 2025 · Freddie Mac PMMS",
   },
@@ -151,12 +162,14 @@ const PRINTS: { week: string; r30: string; r15: string }[] = [
   { week: "Sept 17, 2026", r30: "6.95%", r15: "6.26%" },
   { week: "Sept 24, 2026", r30: "7.03%", r15: "6.42%" },
   { week: "Oct 1, 2026", r30: "7.28%", r15: "6.60%" },
+  { week: "Oct 8, 2026", r30: "7.40%", r15: "6.73%" },
 ];
 
 const PAYMENTS: { rate: string; pi: string; note: string }[] = [
   { rate: "6.65%", pi: "$2,439", note: "Aug 20 print, the low before this run of increases" },
   { rate: "7.03%", pi: "$2,536", note: "Sept 24 print" },
-  { rate: "7.28%", pi: "$2,600", note: "Oct 1 print, latest" },
+  { rate: "7.28%", pi: "$2,600", note: "Oct 1 print" },
+  { rate: "7.40%", pi: "$2,631", note: "Oct 8 print, latest" },
 ];
 
 const link =
@@ -188,7 +201,7 @@ function SnapshotPanel() {
             ))}
           </dl>
           <p className="mt-6 max-w-[680px] text-caption text-lvinit-warmgray">
-            Last updated October 5, 2026. This page is updated in place as new
+            Last updated October 13, 2026. This page is updated in place as new
             weekly prints land; the figures above are the dated snapshot.
           </p>
         </div>
@@ -205,7 +218,7 @@ export default function LasVegasMortgageRatesPage() {
         category: "Market Watch",
         headline: "Las Vegas Mortgage Rates: Where They Are and What They Do to Your Payment",
         subheadline:
-          "The 30-year fixed average hit 7.28% the week of October 1, 2026, the highest since November 2023. The latest print, the history behind it, and the payment math for a Las Vegas buyer. Updated in place.",
+          "The 30-year fixed average rose to 7.40% the week of October 8, 2026, the highest since November 2023. The latest print, the history behind it, and the payment math for a Las Vegas buyer. Updated in place.",
         image: "/images/hero/las-vegas-residential-neighborhood-aerial-drone.webp",
         imageAlt:
           "Aerial drone view of a Las Vegas residential neighborhood, with rows of tile-roofed tract homes, rooftop solar panels, and desert mountains under a blue sky in the background.",
@@ -251,7 +264,7 @@ export default function LasVegasMortgageRatesPage() {
     >
       <StoryLede
         kicker="Market Watch"
-        lead="Freddie Mac's weekly survey put the average 30-year fixed rate at 7.28% for the week of October 1, 2026, up from 7.03% a week earlier. That is the sixth straight weekly increase, and the highest weekly average in Freddie Mac's own history since November 22, 2023 (7.29%)."
+        lead="Freddie Mac's weekly survey put the average 30-year fixed rate at 7.40% for the week of October 8, 2026, up from 7.28% a week earlier. That is the seventh straight weekly increase, and the highest weekly average in Freddie Mac's own history since the week of November 16, 2023 (7.44%)."
       >
         <p className="mt-6 text-body-lg text-lvinit-warmgray">
           Mortgage rates are not a Las Vegas number. Local buyers borrow in the
@@ -273,7 +286,7 @@ export default function LasVegasMortgageRatesPage() {
         title="The Las Vegas Housing Market Finally Shifted… But There's a Catch | Mikey Del Rosario, LVINIT"
       />
 
-      <StorySection heading="How we got here: seven weeks of prints">
+      <StorySection heading="How we got here: eight weeks of prints">
         <p className="text-body-lg text-lvinit-warmgray">
           Freddie Mac&rsquo;s Primary Mortgage Market Survey is a weekly
           national average built from loan applications submitted to its Loan
@@ -301,10 +314,11 @@ export default function LasVegasMortgageRatesPage() {
           </table>
         </div>
         <p className="mt-5 text-body-lg text-lvinit-warmgray">
-          The 30-year has risen six weeks running since the August 20 low. The
-          latest step, 25 basis points, is the largest of the run. A year ago
-          the same survey read 6.34%, so the 30-year is running about
-          nine-tenths of a point higher. Freddie Mac&rsquo;s release names no
+          The 30-year has risen seven weeks running since the August 20 low,
+          a total of 75 basis points. The largest single step of the run was
+          25 basis points (the October 1 print); the latest was 12. A year ago
+          the same survey read 6.30%, so the 30-year is running about
+          1.1 points higher. Freddie Mac&rsquo;s release names no
           single cause for the move, and neither does this page.
         </p>
       </StorySection>
@@ -332,7 +346,7 @@ export default function LasVegasMortgageRatesPage() {
           </li>
         </ul>
         <p className="mt-4 text-body-lg text-lvinit-warmgray">
-          Monthly principal and interest at three Freddie Mac weekly averages:
+          Monthly principal and interest at four Freddie Mac weekly averages:
         </p>
         <div className="mt-6 overflow-x-auto">
           <table className="w-full min-w-[480px] border-collapse text-body text-lvinit-warmgray">
@@ -356,8 +370,8 @@ export default function LasVegasMortgageRatesPage() {
         </div>
         <p className="mt-5 text-body-lg text-lvinit-warmgray">
           From the August low to the latest print, that is about{" "}
-          <span className="text-lvinit-black">$160 more a month</span>, roughly
-          $1,900 a year, on the same loan. These figures are principal and
+          <span className="text-lvinit-black">$190 more a month</span>, roughly
+          $2,300 a year, on the same loan. These figures are principal and
           interest only. Property taxes, homeowners insurance, HOA dues,
           mortgage insurance, closing costs and other expenses are not included.
           Freddie Mac&rsquo;s PMMS rate is a national benchmark, not a quote for
@@ -456,8 +470,8 @@ export default function LasVegasMortgageRatesPage() {
         <ul className="space-y-3 text-body text-lvinit-warmgray">
           <li>
             <span className="text-lvinit-black">Freddie Mac</span>, Primary
-            Mortgage Market Survey, week of October 1, 2026: the source for
-            every 30-year and 15-year figure for Sept 17 through Oct 1 and the
+            Mortgage Market Survey, week of October 8, 2026: the source for
+            every 30-year and 15-year figure for Sept 17 through Oct 8 and the
             year-ago comparison. Directly fetched from{" "}
             <a
               href="https://www.freddiemac.com/pmms"
@@ -489,9 +503,9 @@ export default function LasVegasMortgageRatesPage() {
             >
               PMMS_history.csv
             </a>
-            ): the source for the &ldquo;highest since November 22, 2023
-            (7.29%)&rdquo; comparison and a cross-check of every weekly print
-            in the table. Fox Business reported the same comparison in its{" "}
+            ): the source for the &ldquo;highest since the week of November 16,
+            2023 (7.44%)&rdquo; comparison and a cross-check of every weekly print
+            in the table. Fox Business reported the comparison for the October 1 print in its{" "}
             <a
               href="https://www.foxbusiness.com/economy/mortgage-rates-10-1-2026"
               className="text-lvinit-blue underline underline-offset-4"
