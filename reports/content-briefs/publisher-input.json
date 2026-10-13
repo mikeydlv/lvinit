@@ -1,25 +1,88 @@
 {
   "schema_version": 1,
   "agent": "content-brief-generator",
-  "generatedAt": "2026-10-06T18:52:44.473Z",
-  "reportDate": "2026-10-06",
-  "sourceGeneratedAt": "2026-10-06T18:52:25.872Z",
+  "generatedAt": "2026-10-13T19:49:52.122Z",
+  "reportDate": "2026-10-13",
+  "sourceGeneratedAt": "2026-10-13T19:49:30.766Z",
   "fixture": false,
-  "status": "empty",
+  "status": "ok",
   "source": {
-    "gscReportDate": "2026-10-05",
+    "gscReportDate": "2026-10-12",
     "gscAvailable": true,
     "gscLowVolume": true,
     "handoffMode": "dry-run"
   },
   "scope": "Publisher actions only. Monitor-only and rejected intents are left out; the full report stays in the content-briefs artifact.",
-  "skippedByAction": {
-    "REJECT_DUPLICATE": 1
-  },
+  "skippedByAction": {},
   "privacy": {
     "rawQueriesIncluded": false,
     "policy": "This file is public. Grouped Search Console queries and brief gscEvidence stay in the private workflow artifact."
   },
   "publisherNote": "Briefs are inference from search demand. Research and confirm every fact before publishing; never publish Search Console figures as editorial facts.",
-  "items": []
+  "items": [
+    {
+      "id": "BRIEF-2026-10-13-001",
+      "fingerprint": "d585c5768966",
+      "intentKey": "topic:place:summerlin",
+      "workingTitle": null,
+      "primaryQuestion": "What does someone deciding where to live need to understand about Summerlin?",
+      "intent": "informational",
+      "cluster": "neighborhood-orientation",
+      "contentType": "focused update of an existing page",
+      "recommendedAction": "UPDATE_EXISTING",
+      "target": "/neighborhoods/summerlin",
+      "proposedRoute": null,
+      "keyQuestions": [
+        "What does someone deciding where to live need to understand about Summerlin?",
+        "What do people misunderstand about this area before they move?",
+        "What is the tradeoff this area asks you to accept?"
+      ],
+      "relatedPages": [
+        {
+          "route": "/neighborhoods/summerlin",
+          "relation": "same",
+          "overlap": 1
+        },
+        {
+          "route": "/neighborhoods/summerlin/fourth-of-july-parade",
+          "relation": "substantial",
+          "overlap": 0.7
+        },
+        {
+          "route": "/guides/summerlin-vs-henderson",
+          "relation": "substantial",
+          "overlap": 0.56
+        },
+        {
+          "route": "/guides/summerlin-vs-henderson-vs-southwest-las-vegas",
+          "relation": "substantial",
+          "overlap": 0.513
+        },
+        {
+          "route": "/neighborhoods/henderson",
+          "relation": "adjacent",
+          "overlap": 0.42
+        }
+      ],
+      "duplicateCheck": {
+        "verdict": "same",
+        "ambiguous": false,
+        "bestMatch": {
+          "route": "/neighborhoods/summerlin",
+          "overlap": 1,
+          "relation": "same"
+        },
+        "cannibalization": "none"
+      },
+      "flags": [],
+      "score": 72.1,
+      "confidence": "medium",
+      "status": "NEW",
+      "handoffStatus": "REPORT_ONLY",
+      "persistenceRuns": 3,
+      "sourceGscReportDate": "2026-10-12",
+      "fairHousingFlag": false,
+      "sourceValidation": "ok"
+    }
+  ]
 }
