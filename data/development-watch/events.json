@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "agent": "development-watch",
-  "updated": "2026-10-14",
+  "updated": "2026-10-15",
   "events": {
     "025b2cbfc757": {
       "id": "DEV-2026-09-25-002",
@@ -350,22 +350,26 @@
       "changes": [
         "approved → paused"
       ],
-      "event_type": "pause",
+      "event_type": "announcement",
       "status": "paused",
-      "prior_status": "approved",
+      "prior_status": "paused",
       "first_seen": "2026-09-25",
-      "last_seen": "2026-09-25",
-      "times_seen": 1,
-      "lifecycle": "NEW",
+      "last_seen": "2026-10-15",
+      "times_seen": 2,
+      "lifecycle": "PERSISTING",
       "lifecycle_history": [
         {
           "date": "2026-09-25",
           "lifecycle": "NEW"
+        },
+        {
+          "date": "2026-10-15",
+          "lifecycle": "PERSISTING"
         }
       ],
-      "action": "ADD_TO_NEIGHBORHOOD_GUIDE",
-      "target": "/neighborhoods/north-las-vegas",
-      "score": 55,
+      "action": "DUPLICATE",
+      "target": null,
+      "score": 46,
       "confidence": "Medium",
       "sources": [
         {
@@ -373,15 +377,24 @@
           "url": "https://news3lv.com/news/local/southern-nevada-weighs-switch-data-center-plan-in-north-las-vegas-nye-county-project-falters",
           "authority": 8,
           "published": "2026-09-25T01:14:30.000Z"
+        },
+        {
+          "name": "Las Vegas Review-Journal — Business",
+          "url": "https://reviewjournal.com/business/vegas-business/building-las-vegas/new-landlord-buys-southern-nevada-industrial-buildings-for-190m-3900038",
+          "authority": 8,
+          "published": "2026-10-14T20:42:10.000Z"
         }
       ],
       "superseded_by": null,
       "handoff": {
         "eligible": false,
         "blockers": [
+          "NOT_A_PUBLISHER_ACTION",
           "SCORE_BELOW_THRESHOLD",
           "CONFIDENCE_NOT_HIGH",
-          "NO_PRIMARY_SOURCE"
+          "NO_PRIMARY_SOURCE",
+          "NOT_MATERIAL",
+          "NOT_NEW"
         ],
         "queued": []
       }
@@ -589,6 +602,52 @@
           "CONFIDENCE_NOT_HIGH",
           "NO_PRIMARY_SOURCE",
           "NOT_NEW",
+          "PROVISIONAL_ENTITY"
+        ],
+        "queued": []
+      }
+    },
+    "1e52cb47ea59": {
+      "id": "DEV-2026-10-15-001",
+      "fingerprint": "1e52cb47ea59",
+      "entity_id": "DEV-P-03F92E82",
+      "entity_name": "Unnamed residential (Henderson) — \"Henderson mayor unveils homeless transition housing, affordable plans at state of the city\"",
+      "change_class": "NEW",
+      "changes": [
+        "first time this project has been seen"
+      ],
+      "event_type": "construction",
+      "status": "under construction",
+      "prior_status": null,
+      "first_seen": "2026-10-15",
+      "last_seen": "2026-10-15",
+      "times_seen": 1,
+      "lifecycle": "NEW",
+      "lifecycle_history": [
+        {
+          "date": "2026-10-15",
+          "lifecycle": "NEW"
+        }
+      ],
+      "action": "MONITOR_ONLY",
+      "target": null,
+      "score": 70,
+      "confidence": "Low",
+      "sources": [
+        {
+          "name": "KTNV 13 Action News",
+          "url": "https://ktnv.com/neighborhoods/henderson/henderson-mayor-unveils-homeless-transition-housing-affordable-plans-at-state-of-the-city-address",
+          "authority": 8,
+          "published": "2026-10-15T01:13:26.000Z"
+        }
+      ],
+      "superseded_by": null,
+      "handoff": {
+        "eligible": false,
+        "blockers": [
+          "NOT_A_PUBLISHER_ACTION",
+          "CONFIDENCE_NOT_HIGH",
+          "NO_PRIMARY_SOURCE",
           "PROVISIONAL_ENTITY"
         ],
         "queued": []
@@ -1374,8 +1433,8 @@
       "status": "proposed",
       "prior_status": null,
       "first_seen": "2026-10-13",
-      "last_seen": "2026-10-13",
-      "times_seen": 1,
+      "last_seen": "2026-10-15",
+      "times_seen": 2,
       "lifecycle": "REJECTED",
       "lifecycle_history": [
         {
@@ -1385,7 +1444,7 @@
       ],
       "action": "REJECT_LOW_VALUE",
       "target": null,
-      "score": 33,
+      "score": 32,
       "confidence": "Low",
       "sources": [
         {
@@ -1393,6 +1452,18 @@
           "url": "https://8newsnow.com/news/north-las-vegas/north-las-vegas-launches-community-survey-to-shape-2055-master-plan",
           "authority": 8,
           "published": "2026-10-12T23:19:38.000Z"
+        },
+        {
+          "name": "KLAS 8 News Now",
+          "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxPUGJSTjVhY1p1RGxmMGZ3ZjAxWHhzd3puNWtKREpHTFBFdURDZVRHOENMTm9vSnlGQzR3cTRfbXREVFNMWGhwY3dyaVYwb1Fsa2pTVktTUVJfNmh1Nm9WdW8teUtEZ2NPbGJVeHBDcjloUjVOdXpTSmY3N2dzSndMMTVVdFFXdk5TOEZuVUVpODd6d2RSSmpRWUFBQTUzWjFKbUN3cXREaEhKeG95THBRRTV3RTLSAboBQVVfeXFMTnVXcXlnQ3U0ZjY0MWN1MklYanIxVE5PZHdFdGlxa3FtcTd1NzhQaVIzRXJfU2wwNkE2M0RqSWh2TUF6Wnd6ekZuQVAxaHFCX1N5RXkyV2xXcnlBaVpvdkg2RVJXVWJnQ2t3R3J4cEQ2eV95TlhpLUxYUGhfakRrLWYtYl9mOWt6VzZESFNIQi15MllpUnB5SDFhZjRQMDVxZ1g3ajAtWW85LThtaktxVlU5c25rUGZKMXJB",
+          "authority": 8,
+          "published": "2026-10-12T23:19:38.000Z"
+        },
+        {
+          "name": "FOX5 Vegas",
+          "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxOeEZpbXV2dnJfN0FEODRiNzRYSmwybVplOTNna3B4X0hRQ29fczdhTnhPWm9ZNnppcTNURTRiYWdxdUdKSGhhT0ZuUm1tQUNXZEg2b2JnUmFXemVJVWhwMTUzamdoanNtQnVNaWVTdG1KcXNsbklUQmlkXy1ib0dLVFJmOGw3dEhsa1ZiT2VsaFh2Q2ZsWWR5eDRoWVo",
+          "authority": 8,
+          "published": "2026-10-12T20:06:00.000Z"
         }
       ],
       "superseded_by": null,
@@ -5268,6 +5339,50 @@
         "queued": []
       }
     },
+    "f06e19f29f62": {
+      "id": "DEV-2026-10-15-002",
+      "fingerprint": "f06e19f29f62",
+      "entity_id": "DEV-MARTY-HENNESSEY-TENNIS-CENTER-AT-LORENZI",
+      "entity_name": "Marty Hennessey Tennis Center at Lorenzi",
+      "change_class": "NEW",
+      "changes": [
+        "first time this project has been seen"
+      ],
+      "event_type": "approval",
+      "status": "approved",
+      "prior_status": null,
+      "first_seen": "2026-10-15",
+      "last_seen": "2026-10-15",
+      "times_seen": 1,
+      "lifecycle": "NEW",
+      "lifecycle_history": [
+        {
+          "date": "2026-10-15",
+          "lifecycle": "NEW"
+        }
+      ],
+      "action": "MONITOR_ONLY",
+      "target": null,
+      "score": 59,
+      "confidence": "High",
+      "sources": [
+        {
+          "name": "City of Las Vegas newsroom",
+          "url": "https://content.govdelivery.com/accounts/NVLASVEGAS/bulletins/42f1e92",
+          "authority": 1,
+          "published": "2026-10-15T14:00:28.000Z"
+        }
+      ],
+      "superseded_by": null,
+      "handoff": {
+        "eligible": false,
+        "blockers": [
+          "NOT_A_PUBLISHER_ACTION",
+          "SCORE_BELOW_THRESHOLD"
+        ],
+        "queued": []
+      }
+    },
     "f1fbef827f44": {
       "id": "DEV-2026-09-24-006",
       "fingerprint": "f1fbef827f44",
@@ -5373,6 +5488,59 @@
         "queued": []
       }
     },
+    "f5f84c0f4d73": {
+      "id": "DEV-2026-10-15-003",
+      "fingerprint": "f5f84c0f4d73",
+      "entity_id": "DEV-P-1F87F89A",
+      "entity_name": "Unnamed residential (Las Vegas (valley-wide)) — \"Vote delayed on controversial 61-home development in Las Vegas\"",
+      "change_class": "NEW",
+      "changes": [
+        "first time this project has been seen"
+      ],
+      "event_type": "filing",
+      "status": "filed",
+      "prior_status": null,
+      "first_seen": "2026-10-15",
+      "last_seen": "2026-10-15",
+      "times_seen": 1,
+      "lifecycle": "NEW",
+      "lifecycle_history": [
+        {
+          "date": "2026-10-15",
+          "lifecycle": "NEW"
+        }
+      ],
+      "action": "MONITOR_ONLY",
+      "target": null,
+      "score": 45,
+      "confidence": "Low",
+      "sources": [
+        {
+          "name": "Las Vegas Review-Journal",
+          "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxNNWRaOUJFUXpiMDJsNmhtZmxlWTN5TkVnUXZaekNkZzU0dVlWY3dGcUdjd3VGdFRtd1RnaFlRdjlOcjNuZEFJdmphMkEtUjZqbUNMQ1BsYjM0Q3BQdG04cFV1ZTQ3T1lMRi1KTFBGS0ZlUU04VVRRU0lyXzBXSXQ5bWY0Vng2WTVuQ09zN01SSGF5bnNodUo4dklUbHpYSDJjQjBLQWh4NGZDSUlaR2pMbXhpZjFZV2Ytb3c",
+          "authority": 8,
+          "published": "2026-10-15T15:22:30.000Z"
+        },
+        {
+          "name": "Las Vegas Review-Journal — Business",
+          "url": "https://reviewjournal.com/business/housing/vote-delayed-on-controversial-61-home-development-in-las-vegas-3900076",
+          "authority": 8,
+          "published": "2026-10-14T22:48:37.000Z"
+        }
+      ],
+      "superseded_by": null,
+      "handoff": {
+        "eligible": false,
+        "blockers": [
+          "NOT_A_PUBLISHER_ACTION",
+          "SCORE_BELOW_THRESHOLD",
+          "CONFIDENCE_NOT_HIGH",
+          "NO_PRIMARY_SOURCE",
+          "PROVISIONAL_ENTITY"
+        ],
+        "queued": []
+      }
+    },
     "f902e2f47b98": {
       "id": "DEV-2026-10-02-002",
       "fingerprint": "f902e2f47b98",
@@ -5428,12 +5596,12 @@
       "changes": [
         "approved → partially open"
       ],
-      "event_type": "approval",
+      "event_type": "partial opening",
       "status": "partially open",
       "prior_status": "partially open",
       "first_seen": "2026-10-11",
-      "last_seen": "2026-10-12",
-      "times_seen": 2,
+      "last_seen": "2026-10-15",
+      "times_seen": 3,
       "lifecycle": "PERSISTING",
       "lifecycle_history": [
         {
@@ -5446,8 +5614,8 @@
         }
       ],
       "action": "DUPLICATE",
-      "target": "/guides/buying-new-construction-las-vegas",
-      "score": 50,
+      "target": "/guides/aries-henderson",
+      "score": 48,
       "confidence": "Medium",
       "sources": [
         {
@@ -5461,6 +5629,12 @@
           "url": "https://news3lv.com/news/local/nevada-approves-38-million-for-10-housing-projects-supporting-891-attainable-homes-statewide",
           "authority": 8,
           "published": "2026-10-12T18:36:50.000Z"
+        },
+        {
+          "name": "News 3 Las Vegas",
+          "url": "https://news3lv.com/news/local/nevada-state-parks-feedback-survey-first-trail-development-plan-hiking-outdoors-recreation",
+          "authority": 8,
+          "published": "2026-10-15T15:50:25.000Z"
         }
       ],
       "superseded_by": null,
