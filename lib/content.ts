@@ -238,6 +238,20 @@ export type Guide = {
  */
 export const guides: Guide[] = [
   {
+    slug: "closing-costs-las-vegas-buyers",
+    title: "Closing Costs When Buying a Home in Las Vegas: What to Expect",
+    dek: "What closing costs are made of, how Clark County's $2.55 per $500 transfer tax works, and how to check the real numbers on your Loan Estimate and Closing Disclosure.",
+    byline: "LVINIT Editorial",
+    date: "October 2026",
+    publishedAt: "2026-10-15",
+    category: "Buyer Guide",
+    // Cluster C (cluster map queue #8). Hero is a Media Image Library still.
+    image: "/images/editorial/inspirada-henderson-townhomes-retail-center-aerial.jpg",
+    imageAlt:
+      "Aerial of townhomes beside a new shopping center in Inspirada, Henderson, with open desert and the distant Las Vegas Strip skyline.",
+    href: "/guides/closing-costs-las-vegas-buyers",
+  },
+  {
     slug: "aries-henderson",
     title: "Aries Henderson: What Buyers Should Know About Henderson's New Community",
     dek: "An old manganese mine in east Henderson is becoming a master plan of about 3,000 homes. The cleanup, what's for sale now, the costs past the base price, and who it actually fits.",

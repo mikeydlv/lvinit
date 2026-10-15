@@ -117,6 +117,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     },
     {
+      url: `${BASE_URL}/guides/closing-costs-las-vegas-buyers`,
+      changeFrequency: "monthly",
+      priority: 0.7,
+    },
+    {
       url: `${BASE_URL}/guides/hoa-fees-las-vegas-what-to-check`,
       changeFrequency: "monthly",
       priority: 0.7,
