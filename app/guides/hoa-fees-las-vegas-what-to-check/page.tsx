@@ -391,7 +391,11 @@ export default function HoaFeesLasVegasPage() {
           >
             down payment guide
           </Link>
-          . For a side-by-side look at new versus resale monthly costs, read{" "}
+          , and our{" "}
+          <Link href="/guides/closing-costs-las-vegas-buyers" className={linkCls}>
+            closing costs guide
+          </Link>{" "}
+          covers the rest of the cash you bring to the table. For a side-by-side look at new versus resale monthly costs, read{" "}
           <Link href="/guides/new-build-vs-resale-las-vegas" className={linkCls}>
             New Build vs Resale
           </Link>
