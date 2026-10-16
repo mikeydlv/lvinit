@@ -593,13 +593,15 @@ export default function HendersonPage() {
           home to, and it is where the newest construction and the newest jobs
           both are. The newest amenity is{" "}
           <Link
-            href="/guides/henderson-sport-social-grand-opening"
+            href="/guides/henderson-sport-and-social"
             className="text-lvinit-blue underline underline-offset-4 decoration-transparent hover:decoration-lvinit-blue"
           >
             Henderson Sport &amp; Social
           </Link>
           , a 180,000-square-foot sports and entertainment complex at St.
-          Rose and Maryland Parkways, opening October 16, 2026.
+          Rose and Maryland Parkways that soft-opened in October 2026 (grand
+          opening weekend October 16–17) — our guide has the full tour,
+          prices and hours.
         </p>
 
         <h3 className="mt-10 font-display text-subhead font-bold text-lvinit-black">

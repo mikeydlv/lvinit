@@ -107,7 +107,7 @@ export const SEED_ENTITIES = [
     jurisdiction: "City of Henderson",
     developer: "City of Henderson with KemperSports",
     type: "park",
-    routes: ["/guides/henderson-sport-social-grand-opening"],
+    routes: ["/guides/henderson-sport-and-social"],
     rosterNames: ["Henderson Sport & Social"],
   },
   {
