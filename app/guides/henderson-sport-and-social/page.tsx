@@ -65,7 +65,12 @@ import { LocalsNote } from "@/components/area";
 // walkthrough footage (DJI 4K, Rec.709 SDR — not the HLG portrait take, so
 // no tone mapping was needed), taken from the 1080p review render
 // (HSS_01_First_Cut_review_v1_compressed.mp4) at 8:44 (fitness floor), 10:05
-// (Play Zone) and 11:02 (balcony). Ordinary crop/resize/WebP only. The new
+// (Play Zone) and 11:02 (balcony). UPDATED 2026-10-15 (evening): Mikey
+// uploaded sharper replacements for the gym and balcony stills
+// (public/images/henderson-sport-and-social-fitness-center-cardio-equipment.png
+// and ...-outdoor-balcony-west-henderson.png.png, ~1916x1078); they were
+// center-cropped to 3:2 at native resolution (1617x1078, no upscaling) and
+// saved as WebP q86 in features/. The Play Zone still is unchanged. Ordinary crop/resize/WebP only. The new
 // hero has no prior hero placement; the Sept. 22 construction-era hero and
 // inline images are retired from this page but left on disk.
 // ---------------------------------------------------------------------------
@@ -601,8 +606,8 @@ export default function HendersonSportAndSocialPage() {
           membership for.
         </P>
         <Figure
-          src="/images/features/henderson-sport-and-social-fitness-center-floor.webp"
-          alt="The fitness center floor at Henderson Sport & Social, with rows of new strength machines and a large functional training rig under black open ceilings"
+          src="/images/features/henderson-sport-and-social-fitness-center-cardio-equipment.webp"
+          alt="Rows of new TRUE ellipticals, steppers and treadmills on the fitness center floor at Henderson Sport & Social, with cable machines, a colorful wall mural and long LED lights across a black open ceiling"
           caption="Still from my walkthrough footage, October 14, 2026."
         />
 
@@ -990,8 +995,8 @@ export default function HendersonSportAndSocialPage() {
           community.&rdquo;
         </Quote>
         <Figure
-          src="/images/features/henderson-sport-and-social-balcony-west-henderson-view.webp"
-          alt="Outdoor seating on the upstairs balcony of Henderson Sport & Social, looking out over the parking lot, St. Rose Parkway area and mountains across the Las Vegas Valley"
+          src="/images/features/henderson-sport-and-social-outdoor-balcony-west-henderson.webp"
+          alt="Elevated view from the Henderson Sport & Social balcony over its parking lot and the gray-striped side of the building, with West Henderson development and mountains under a clear blue sky"
           caption="The view from the upstairs balcony off The Flex. Still from my walkthrough footage, October 14, 2026."
         />
         <P>
