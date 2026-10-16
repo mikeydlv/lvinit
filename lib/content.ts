@@ -482,22 +482,23 @@ export const guides: Guide[] = [
     href: "/guides/las-vegas-mortgage-rates-19-month-high",
   },
   {
-    slug: "henderson-sport-social-grand-opening",
-    title: "Henderson Sport & Social Opens October 16. Here's What West Henderson Is Getting",
-    dek: "The $70 million, 180,000-square-foot sports and entertainment complex at St. Rose and Maryland Parkways has a confirmed grand-opening date. What's actually inside, what it costs, and how it's different from the Fiesta Henderson site.",
-    byline: "LVINIT Editorial",
+    slug: "henderson-sport-and-social",
+    title: "Henderson Sport & Social: Full Tour, Prices, Hours & What to Know Before Visiting",
+    dek: "A firsthand walkthrough of West Henderson's 180,000-square-foot sports and entertainment complex: bowling and pass prices, memberships, hours, Child Watch rules, and whether you need a membership at all.",
+    byline: "Mikey Del Rosario",
     date: "September 2026",
+    // publishedAt stays the original 2026-09-19 publication date (must match
+    // StoryMeta.datePublished). REBUILT 2026-10-15 as an evergreen visitor
+    // guide and moved from /guides/henderson-sport-social-grand-opening (now a
+    // 301 in next.config.mjs) — see the page header comment. Card image is
+    // Mikey's own Oct. 14, 2026 exterior photo (genuine photo, no imageMode).
     publishedAt: "2026-09-19",
     category: "Local Feature",
-    // UPDATED 2026-09-22 — Mikey shot the building himself and supplied real,
-    // first-party photography, replacing the generated placeholder cover
-    // (see the article's own header comment for the full note). Genuine
-    // photograph, so no imageMode override.
     image:
-      "/images/hero/henderson-sport-social-exterior-signage-hero.webp",
+      "/images/hero/henderson-sport-and-social-exterior-entrance-signage-st-rose-parkway.webp",
     imageAlt:
-      "Straight-on view of the Henderson Sport & Social building's gray and tan metal-panel exterior with HENDERSON SPORT & SOCIAL facade lettering, mountains and blue sky behind it, and construction equipment still parked on site in front of the building",
-    href: "/guides/henderson-sport-social-grand-opening",
+      "The navy-blue entrance wing of Henderson Sport & Social with large HENDERSON SPORT & SOCIAL lettering, the 3375 St. Rose Pkwy address and a COMPETE banner, under a clear blue sky in West Henderson",
+    href: "/guides/henderson-sport-and-social",
   },
   {
     slug: "las-vegas-mortgage-rates-approach-7-percent",

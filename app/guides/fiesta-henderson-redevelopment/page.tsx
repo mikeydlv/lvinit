@@ -330,8 +330,8 @@ export default function FiestaHendersonRedevelopmentPage() {
             dek: "Zoom back out to how Henderson compares as a whole to the valley's other big growth corridor.",
           },
           {
-            name: "Henderson Sport & Social Opens October 16",
-            href: "/guides/henderson-sport-social-grand-opening",
+            name: "Henderson Sport & Social: Full Tour, Prices & Hours",
+            href: "/guides/henderson-sport-and-social",
             category: "Local Feature",
             dek: "The other Henderson sports-facility story — a finished, opening building on the opposite side of the city, not to be confused with this one.",
           },
@@ -532,7 +532,7 @@ export default function FiestaHendersonRedevelopmentPage() {
           moving through Henderson at the same time, on opposite sides of the
           city. The{" "}
           <Link
-            href="/guides/henderson-sport-social-grand-opening"
+            href="/guides/henderson-sport-and-social"
             className="text-lvinit-blue underline underline-offset-4 decoration-transparent hover:decoration-lvinit-blue"
           >
             Henderson Sport &amp; Social

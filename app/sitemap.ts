@@ -62,7 +62,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.7,
     },
     {
-      url: `${BASE_URL}/guides/henderson-sport-social-grand-opening`,
+      url: `${BASE_URL}/guides/henderson-sport-and-social`,
       changeFrequency: "monthly",
       priority: 0.7,
     },
