@@ -402,6 +402,10 @@ export default function BuyingNewConstructionLasVegasPage() {
           <Link href="/guides/hoa-fees-las-vegas-what-to-check" className={linkCls}>
             HOA fees in Las Vegas
           </Link>
+          , and for how to look up a parcel&rsquo;s assessment, see{" "}
+          <Link href="/guides/sids-and-lids-las-vegas-home-buyers" className={linkCls}>
+            SIDs and LIDs in Las Vegas
+          </Link>
           .
         </p>
         <p className="mt-5 text-body-lg text-lvinit-warmgray">

@@ -245,7 +245,11 @@ export default function HoaFeesLasVegasPage() {
         <p className="mt-5 text-body-lg text-lvinit-warmgray">
           HOA dues are also not the same thing as a Special Improvement District
           or Local Improvement District assessment, which is a separate charge
-          tied to the parcel. We explain that distinction in the{" "}
+          tied to the parcel. Our{" "}
+          <Link href="/guides/sids-and-lids-las-vegas-home-buyers" className={linkCls}>
+            SID and LID guide
+          </Link>{" "}
+          covers how to look one up, and we explain the new-build side in the{" "}
           <Link href="/guides/buying-new-construction-las-vegas" className={linkCls}>
             new-construction guide
           </Link>

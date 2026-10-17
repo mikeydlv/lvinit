@@ -284,6 +284,21 @@ export const guides: Guide[] = [
     href: "/guides/hoa-fees-las-vegas-what-to-check",
   },
   {
+    slug: "sids-and-lids-las-vegas-home-buyers",
+    title: "SIDs and LIDs in Las Vegas: The Assessment Some Buyers Don't See Coming",
+    dek: "What a Special Improvement District assessment is, why it is billed apart from property tax, and how to look up a parcel before you make an offer.",
+    byline: "LVINIT Editorial",
+    date: "October 2026",
+    publishedAt: "2026-10-17",
+    category: "Buyer Guide",
+    // Cluster C (cluster map queue #13). Hero is a Media Image Library still
+    // (generic Southwest Las Vegas arterial view; no SID is depicted).
+    image: "/images/editorial/southwest-las-vegas-shopping-center-mountains-aerial.jpg",
+    imageAlt:
+      "Aerial of a shopping center and wide road in southwest Las Vegas with neighborhoods and mountains in the distance.",
+    href: "/guides/sids-and-lids-las-vegas-home-buyers",
+  },
+  {
     slug: "las-vegas-housing-market",
     title: "Las Vegas Housing Market: Prices, Inventory and Sales Right Now",
     dek: "The single-family median slipped to $470,000 in September, about 4% under the May-June record, while sales fell and supply grew. The latest LVR numbers and what they mean for buyers, sellers and owners. Updated in place.",
