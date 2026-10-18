@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { mkdtempSync, writeFileSync, rmSync } from "node:fs";
+import { mkdtempSync, mkdirSync, writeFileSync, rmSync } from "node:fs";
 import { join } from "node:path";
 import { tmpdir } from "node:os";
 import { execFileSync } from "node:child_process";
@@ -9,8 +9,8 @@ import { hintFor } from "../config.mjs";
 import { checkSlug, allowedPlaces, uniqueName, slugify } from "../lib/naming.mjs";
 import { sampleTimes, fmtTimestamp, localReject, hammingHex, nearest } from "../lib/frames.mjs";
 import { parseGuides, topicNeeds, matchArticles } from "../lib/gaps.mjs";
-import { selectFinal, settleNaming, rankClips } from "../run.mjs";
-import { commitExactly } from "../lib/git.mjs";
+import { selectFinal, settleNaming, rankClips, committedToday } from "../run.mjs";
+import { commitExactly, dirtyPaths } from "../lib/git.mjs";
 import { loadConfig } from "../config.mjs";
 
 test("folder hints use the longest prefix", () => {
@@ -157,4 +157,41 @@ test("selectFinal caps one area even when place names differ", () => {
   ];
   const out = selectFinal(pool, 4, { maxPerClip: 1, maxPerPlace: 2, maxPerFolder: 2, maxPerArea: 3, maxPortrait: 2 });
   assert.deepEqual(out.map((p) => p.clip.rel.split("/").pop()), ["a", "b", "c", "e"]);
+});
+
+// Regression: every nightly run from 2026-10-07 to 10-17 failed with "unrelated
+// changes present (ata/image-library/…)". The index is a tracked file whose
+// porcelain line (" M data/…") sorts first, and trimming the output dropped its
+// leading space, so slice(3) cut the path's first letter.
+test("commitExactly accepts a modified tracked file that sorts first", () => {
+  const dir = mkdtempSync(join(tmpdir(), "il-git-"));
+  try {
+    const g = (...a) => execFileSync("git", ["-C", dir, ...a], { stdio: "ignore" });
+    g("init", "-q");
+    g("config", "user.email", "t@example.com");
+    g("config", "user.name", "T");
+    mkdirSync(join(dir, "data", "image-library"), { recursive: true });
+    writeFileSync(join(dir, "data", "image-library", "index.json"), "{}");
+    g("add", ".");
+    g("commit", "-qm", "init");
+    writeFileSync(join(dir, "data", "image-library", "index.json"), '{"images":[1]}');
+    mkdirSync(join(dir, "public", "images", "editorial"), { recursive: true });
+    writeFileSync(join(dir, "public", "images", "editorial", "a.jpg"), "img");
+    assert.deepEqual(dirtyPaths(dir).sort(), ["data/image-library/index.json", "public/images/editorial/a.jpg"]);
+    const c = commitExactly(dir, ["public/images/editorial/a.jpg", "data/image-library/index.json"], "content: test", { authorName: "A", authorEmail: "a@example.com" });
+    assert.deepEqual(c.files.sort(), ["data/image-library/index.json", "public/images/editorial/a.jpg"]);
+  } finally {
+    rmSync(dir, { recursive: true, force: true });
+  }
+});
+
+test("committedToday: one batch per Pacific day, failed pre-commit runs don't count", () => {
+  const state = { runs: [
+    { runId: "2026-10-17-2000", status: "success", commit: "abc1234" },
+    { runId: "2026-10-18-2000", status: "failed", failedStep: "select", commit: null },
+  ] };
+  assert.equal(committedToday(state, "2026-10-18"), null);
+  state.runs.push({ runId: "2026-10-18-2105", status: "failed", failedStep: "push", commit: "def5678" });
+  assert.equal(committedToday(state, "2026-10-18").commit, "def5678"); // committed, push pending: still today's batch
+  assert.equal(committedToday({}, "2026-10-18"), null);
 });

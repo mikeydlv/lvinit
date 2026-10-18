@@ -52,6 +52,7 @@ LVINIT Media Image Library Agent — 10 new article-ready images from LVINIT foo
   --skip-sync        Don't fetch/checkout origin/main first (local testing).
   --count=N          Images per run (default 10).
   --max-vision=N     Cap on frames sent to Claude (default 90).
+  --force            Make a new batch even if today's batch is already committed.
   --help
 `;
 
@@ -259,6 +260,11 @@ export function settleNaming(review, hint) {
   return { slug: check.slug, location };
 }
 
+/** Today's batch, if a run already committed one (pushed, or committed and awaiting a push retry). */
+export function committedToday(state, day) {
+  return (state?.runs ?? []).find((r) => String(r.runId).startsWith(day) && r.commit) ?? null;
+}
+
 function ratio(w, h) {
   const g = (a, b) => (b ? g(b, a % b) : a);
   const d = g(w, h);
@@ -285,6 +291,8 @@ export async function run(argv = process.argv.slice(2)) {
     startedAt,
     startedAtPacific: laNow(),
     mode: dry ? "dry-run" : args["no-push"] ? "no-push" : "production",
+    trigger: process.env.IMAGE_LIBRARY_TRIGGER || "manual",
+    resumedPreviousBatch: null,
     status: "running",
     target: config.target,
     repo: config.repo,
@@ -346,6 +354,7 @@ export async function run(argv = process.argv.slice(2)) {
         const p = config.git.push ? pushSafely(config.repo, config.git) : { pushed: false, error: "push disabled" };
         if (!p.pushed) throw new Step("git", `An earlier image commit is still unpushed and pushing it failed: ${p.error}`);
         report.warnings.push(`Pushed an earlier run's unpushed image commit ${p.commit.slice(0, 7)} first.`);
+        report.resumedPreviousBatch = { commits: s.pending, pushed: p.commit };
         s = syncToRemote(config.repo, config.git);
       }
       log(`worktree at origin/main ${s.head}`);
@@ -354,8 +363,17 @@ export async function run(argv = process.argv.slice(2)) {
       if (dirty.length) throw new Step("git", `Worktree has unexpected changes: ${dirty.slice(0, 5).join(", ")}`);
     }
 
-    // 3. gaps
+    // One batch per Pacific day: a second trigger (manual, or a catch-up start) only reconciles.
     state = loadState(config);
+    const done = !dry && !args.force ? committedToday(state, laDate()) : null;
+    if (done) {
+      report.status = "skipped";
+      report.skippedBecause = `today's batch is already committed (run ${done.runId}, commit ${String(done.commit).slice(0, 7)})`;
+      log(`nothing to do: ${report.skippedBecause}. Use --force for another batch.`);
+      return finish(config, report, log, 0);
+    }
+
+    // 3. gaps
     const index = loadIndex(config);
     const articles = loadArticles(config.repo);
     const usage = imageUsage(config.repo);
@@ -671,7 +689,7 @@ export async function run(argv = process.argv.slice(2)) {
     return finish(config, report, log, 1);
   } finally {
     if (state && !dry) {
-      state.runs.push({ runId, status: report.status, selected: report.selected.length, commit: report.commit });
+      state.runs.push({ runId, status: report.status, ...(report.failedStep ? { failedStep: report.failedStep } : {}), trigger: report.trigger, selected: report.selected.length, commit: report.commit });
       saveState(config, state);
     }
     rmSync(tmp, { recursive: true, force: true });
@@ -718,7 +736,9 @@ export function renderReport(r) {
     `# LVINIT Media Image Library — run ${r.runId}`,
     "",
     `- **Status:** ${r.status.toUpperCase()}${r.failedStep ? ` (failed at ${r.failedStep})` : ""}`,
-    `- **Started:** ${r.startedAtPacific} Pacific · mode ${r.mode}`,
+    `- **Started:** ${r.startedAtPacific} Pacific · mode ${r.mode} · trigger ${r.trigger ?? "manual"}${r.finishedAt ? ` · finished ${r.finishedAt}` : ""}`,
+    ...(r.skippedBecause ? [`- **Skipped:** ${r.skippedBecause}`] : []),
+    ...(r.resumedPreviousBatch ? [`- **Resumed:** pushed an earlier run's unpushed commit ${String(r.resumedPreviousBatch.pushed).slice(0, 7)} before this batch`] : []),
     `- **Videos scanned:** ${r.videosScanned.length} of ${r.videosApproved} approved clips`,
     `- **Candidate frames examined:** ${r.candidatesExamined} · rejected locally ${r.rejectedLocal} · sent to review ${r.visionFrames} · rejected in review ${r.rejectedVision}`,
     `- **Commit:** ${r.commit ?? "none"} · **Push:** ${r.push ? (r.push.pushed ? "pushed" : `not pushed (${r.push.error})`) : "n/a"}`,
