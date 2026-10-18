@@ -9,7 +9,7 @@ import { hintFor } from "../config.mjs";
 import { checkSlug, allowedPlaces, uniqueName, slugify } from "../lib/naming.mjs";
 import { sampleTimes, fmtTimestamp, localReject, hammingHex, nearest } from "../lib/frames.mjs";
 import { parseGuides, topicNeeds, matchArticles } from "../lib/gaps.mjs";
-import { selectFinal, settleNaming, rankClips, committedToday } from "../run.mjs";
+import { selectFinal, settleNaming, rankClips, committedToday, autoApprovedFolders } from "../run.mjs";
 import { commitExactly, dirtyPaths } from "../lib/git.mjs";
 import { loadConfig } from "../config.mjs";
 
@@ -194,4 +194,41 @@ test("committedToday: one batch per Pacific day, failed pre-commit runs don't co
   state.runs.push({ runId: "2026-10-18-2105", status: "failed", failedStep: "push", commit: "def5678" });
   assert.equal(committedToday(state, "2026-10-18").commit, "def5678"); // committed, push pending: still today's batch
   assert.equal(committedToday({}, "2026-10-18"), null);
+});
+
+test("autoApprovedFolders: everything under Media/ incl. new folders; nothing outside; junctions that leave the tree are refused", () => {
+  const cfg = { mediaRoot: "C:/LVINIT", autoApproveTree: "Media" };
+  // A fake filesystem: Media/Linked is a junction to D:/Elsewhere.
+  const realpath = (p) => {
+    const f = p.replace(/\\/g, "/");
+    return /\/Media\/Linked(\/|$)/i.test(f) ? f.replace(/^C:\/LVINIT\/Media\/Linked/i, "D:/Elsewhere") : p;
+  };
+  const files = [
+    { rel: "Media/Henderson/Henderson Sport and Social - Walkthrough/a.mp4" },
+    { rel: "Media/Brand New Project 2027/Drone/b.MP4" },
+    { rel: "Media/c.mp4" },
+    { rel: "Media/Linked/d.mp4" },
+    { rel: "Videos/Aries Henderson/Review/e.mp4" },
+    { rel: "MediaBackup/f.mp4" },
+    { rel: "Media/../Videos/g.mp4" },
+  ];
+  const { folders, outside } = autoApprovedFolders(files, cfg, realpath);
+  assert.deepEqual(folders.sort(), ["Media", "Media/Brand New Project 2027/Drone", "Media/Henderson/Henderson Sport and Social - Walkthrough"]);
+  assert.deepEqual(outside, ["Media/Linked"]);
+  assert.deepEqual(autoApprovedFolders(files, { ...cfg, autoApproveTree: null }, realpath).folders, []);
+});
+
+test("blanket approval keeps the privacy file's exclusions, holds and file-name flags", async () => {
+  const { classifyFile } = await import("../../executive-producer/lib/privacy.mjs");
+  const { loadConfig: producerConfig } = await import("../../executive-producer/config.mjs");
+  const pc = producerConfig();
+  const files = ["Media/New Area/a.mp4", "Media/Client X/b.mp4", "Media/SouthWest/ride-along.MP4", "Media/New Area/1234 Maple Ave.mp4"].map((rel) => ({ rel }));
+  const privacy = { excluded: ["Client X"], approved: [], approvedFiles: [], localOnly: [{ path: "Media/SouthWest/ride-along.MP4", reason: "held" }] };
+  const { folders } = autoApprovedFolders(files, { mediaRoot: "C:/LVINIT", autoApproveTree: "Media" }, (p) => p);
+  const il = { ...privacy, approved: folders };
+  assert.equal(classifyFile("Media/New Area/a.mp4", il, pc).status, "public");
+  assert.equal(classifyFile("Media/Client X/b.mp4", il, pc).status, "excluded");
+  assert.equal(classifyFile("Media/SouthWest/ride-along.MP4", il, pc).status, "local-only");
+  assert.equal(classifyFile("Media/New Area/1234 Maple Ave.mp4", il, pc).status, "local-only");
+  assert.deepEqual(privacy.approved, []); // the shared privacy object is never mutated
 });

@@ -22,8 +22,8 @@
 // C:\LVINIT\Images is ever overwritten: files are only added.
 // ---------------------------------------------------------------------------
 
-import { existsSync, readFileSync, writeFileSync, mkdirSync, mkdtempSync, rmSync, accessSync, constants, readdirSync, statSync, copyFileSync, appendFileSync, unlinkSync } from "node:fs";
-import { join, basename, extname, resolve } from "node:path";
+import { existsSync, readFileSync, writeFileSync, mkdirSync, mkdtempSync, rmSync, accessSync, constants, readdirSync, statSync, copyFileSync, appendFileSync, unlinkSync, realpathSync } from "node:fs";
+import { join, basename, extname, resolve, sep } from "node:path";
 import { tmpdir } from "node:os";
 import { execFileSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
@@ -149,7 +149,11 @@ async function footageInventory(config, report) {
   const { files } = scanMedia(pc, privacy);
   const videos = files.filter((f) => mediaType(f.ext, pc) === "video");
   const cache = existsSync(config.probeCache) ? loadProbeCache(config.probeCache) : loadProbeCache(config.producerProbeCache);
-  const classified = videos.map((f) => ({ f, c: classifyFile(f.rel, privacy, pc) }));
+  const auto = autoApprovedFolders(videos, config);
+  if (auto.outside.length) report.warnings.push(`Not auto-approved (real path leaves ${config.autoApproveTree}/): ${auto.outside.slice(0, 5).join(", ")}`);
+  // Image-library view only: the shared privacy file on disk is never edited.
+  const ilPrivacy = { ...privacy, approved: [...privacy.approved, ...auto.folders] };
+  const classified = videos.map((f) => ({ f, c: classifyFile(f.rel, ilPrivacy, pc) }));
   const pending = new Map();
   for (const { f, c } of classified) if (c.status === "local-only" && c.pendingFolder) pending.set(c.pendingFolder, (pending.get(c.pendingFolder) ?? 0) + 1);
   report.pendingFolders = [...pending.entries()].map(([folder, n]) => ({ folder, videos: n }));
@@ -169,6 +173,42 @@ async function footageInventory(config, report) {
   }
   report.videosApproved = clips.length;
   return clips;
+}
+
+/**
+ * Folders covered by the blanket approval of config.autoApproveTree: every folder
+ * at or under <mediaRoot>/<tree>/ whose real path is still inside that tree.
+ * `realpath` is injectable for tests.
+ */
+export function autoApprovedFolders(files, config, realpath = (p) => realpathSync.native(p)) {
+  const tree = config.autoApproveTree;
+  if (!tree) return { folders: [], outside: [] };
+  const lc = (p) => resolve(p).toLowerCase();
+  let rootReal;
+  try {
+    rootReal = lc(realpath(join(config.mediaRoot, tree)));
+  } catch {
+    return { folders: [], outside: [] };
+  }
+  const folders = new Set();
+  const outside = new Set();
+  const seen = new Set();
+  for (const f of files) {
+    const folder = String(f.rel).replace(/\\/g, "/").split("/").slice(0, -1).join("/");
+    if (seen.has(folder)) continue;
+    seen.add(folder);
+    const segs = folder.split("/");
+    if (segs[0].toLowerCase() !== tree.toLowerCase() || segs.includes("..")) continue;
+    let real;
+    try {
+      real = lc(realpath(join(config.mediaRoot, ...segs)));
+    } catch {
+      continue;
+    }
+    if (real === rootReal || real.startsWith(rootReal + sep)) folders.add(folder);
+    else outside.add(folder);
+  }
+  return { folders: [...folders], outside: [...outside] };
 }
 
 /** Rank clips by how much the library needs what they likely show, and how fresh they are. */
@@ -395,7 +435,7 @@ export async function run(argv = process.argv.slice(2)) {
     // 4. footage
     const clips = await footageInventory(config, report);
     if (!clips.length) throw new Step("footage", "No approved footage is available to sample.");
-    log(`approved clips ${clips.length}; folders awaiting Mikey's privacy approval: ${report.pendingFolders.length}`);
+    log(`approved clips ${clips.length}; folders awaiting Mikey's privacy approval (outside the auto-approved tree): ${report.pendingFolders.length}`);
     const known = [...index.images.map((i) => i.hash), ...(await existingHashes(sharp, config, state))];
     const ranked = rankClips(clips, { priorities, index, state, day: laDate() });
 
