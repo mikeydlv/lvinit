@@ -140,6 +140,12 @@ export function loadConfig(overrides = {}) {
     libraryDir: envStr("LVINIT_IMAGE_LIBRARY_DIR", join(mediaRoot, "Images")),
     // Read-only copy of the index for anything on this PC that wants it.
     indexMirror: envStr("LVINIT_IMAGE_INDEX_MIRROR", join(mediaRoot, "Automation", "lvinit-image-library.json")),
+    // Mikey's blanket approval (2026-10-18), for THIS agent only: every folder in
+    // this tree under the media root, including folders added later, counts as
+    // approved here. The Producer's privacy file is not changed: its excluded
+    // folders, holds and file-name flags still apply, and a folder whose real
+    // path (junction/symlink) leaves the tree is not approved.
+    autoApproveTree: "Media",
     index: "data/image-library/lvinit-image-library.json",
     webDir: "public/images/editorial",
     webBase: "/images/editorial/",
