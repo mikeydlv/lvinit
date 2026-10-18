@@ -16,7 +16,9 @@ import { execFileSync } from "node:child_process";
 
 export function git(repo, args, { allowFail = false, env } = {}) {
   try {
-    return execFileSync("git", ["-C", repo, ...args], { encoding: "utf8", stdio: ["ignore", "pipe", "pipe"], env: env ? { ...process.env, ...env } : process.env }).trim();
+    // trimEnd, not trim: `status --porcelain` lines start with a space (" M path"),
+    // and stripping it shifted the first path by one character ("ata/…").
+    return execFileSync("git", ["-C", repo, ...args], { encoding: "utf8", stdio: ["ignore", "pipe", "pipe"], env: env ? { ...process.env, ...env } : process.env }).trimEnd();
   } catch (e) {
     if (allowFail) return null;
     throw new Error(`git ${args.join(" ")} failed: ${String(e.stderr || e.message).trim().slice(-400)}`);
@@ -26,7 +28,8 @@ export function git(repo, args, { allowFail = false, env } = {}) {
 /** Paths that differ from HEAD (staged, unstaged or untracked). */
 export function dirtyPaths(repo) {
   const out = git(repo, ["status", "--porcelain", "--untracked-files=all"]);
-  return out ? out.split("\n").map((l) => l.slice(3).replace(/^"|"$/g, "")) : [];
+  // "XY path" or "XY old -> new" (a rename: the new path is what's in the tree).
+  return out ? out.split("\n").filter(Boolean).map((l) => l.slice(3).split(" -> ").pop().replace(/^"|"$/g, "")) : [];
 }
 
 export function unpushed(repo, { remote, branch }) {

@@ -13,7 +13,9 @@
 # ---------------------------------------------------------------------------
 param(
   [Parameter(Mandatory = $true)][string]$Worktree,
-  [string[]]$NodeArgs = @()
+  [string[]]$NodeArgs = @(),
+  # Recorded in each run report; Task Scheduler starts this script with no -Trigger.
+  [string]$Trigger = "task-scheduler"
 )
 
 $ErrorActionPreference = "Continue"
@@ -75,6 +77,7 @@ $script = Join-Path $Worktree "scripts\image-library\run.mjs"
 if (-not (Test-Path $script)) { Fail "The agent script is missing from the worktree ($script)." }
 Push-Location $Worktree
 $env:IMAGE_LIBRARY_STDOUT_ONLY = "1"
+$env:IMAGE_LIBRARY_TRIGGER = $Trigger
 & $node $script @NodeArgs 2>&1 | ForEach-Object { "$_" | Out-File -Append -Encoding utf8 $log }
 $code = $LASTEXITCODE
 Pop-Location
