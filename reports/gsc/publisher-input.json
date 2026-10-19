@@ -1,20 +1,20 @@
 {
   "schema_version": 1,
   "agent": "gsc-opportunity-agent",
-  "generatedAt": "2026-10-12T21:26:23.275Z",
-  "reportDate": "2026-10-12",
-  "sourceGeneratedAt": "2026-10-12T21:26:06.529Z",
+  "generatedAt": "2026-10-19T18:52:19.331Z",
+  "reportDate": "2026-10-19",
+  "sourceGeneratedAt": "2026-10-19T18:52:02.215Z",
   "sourceSchemaVersion": "1.1.0",
   "fixture": false,
   "status": "ok",
   "window": {
-    "start": "2026-09-12",
-    "end": "2026-10-09"
+    "start": "2026-09-19",
+    "end": "2026-10-16"
   },
   "dataQuality": {
     "lowVolume": true,
     "lowVolumeThreshold": 200,
-    "currentImpressions": 63,
+    "currentImpressions": 93,
     "currentClicks": 0,
     "reportedFindings": 3,
     "interpretation": "Low-volume data: an early signal, not definitive search demand. Never the sole reason for a decision."
@@ -23,14 +23,14 @@
     "rawQueriesIncluded": false,
     "policy": "This file is public. Raw Search Console queries stay in the private workflow artifact (gsc-opportunities). Topics here use fixed vocabulary only.",
     "omitted": {
-      "addressLike": 0,
+      "addressLike": 1,
       "fairHousing": 0,
       "notRepresentable": 0
     }
   },
   "items": [
     {
-      "id": "GSC-2026-10-12-003",
+      "id": "GSC-2026-10-19-002",
       "opportunityType": "page-gaining-momentum",
       "page": "/neighborhoods/summerlin",
       "pageRole": "affected-page",
@@ -47,59 +47,39 @@
         ],
         "intent": "informational"
       },
-      "impressions": 214,
-      "clicks": 0,
-      "position": 13,
-      "positionChange": 46.8,
-      "score": 84.4,
+      "impressions": 321,
+      "clicks": 1,
+      "position": 14.6,
+      "positionChange": 42.3,
+      "score": 84.7,
       "confidence": "high",
       "recommendedAction": "optimize-existing-page",
       "querySuppressed": true
     },
     {
-      "id": "GSC-2026-10-12-002",
-      "opportunityType": "page-losing-momentum",
-      "page": "/guides/las-vegas-new-home-sales-july-2026",
-      "pageRole": "affected-page",
-      "pageExists": true,
-      "topic": {
-        "label": "Page losing momentum · /guides/las-vegas-new-home-sales-july-2026",
-        "cluster": "general",
-        "places": [],
-        "priorities": [],
-        "intent": "unknown"
-      },
-      "impressions": 26,
-      "clicks": 0,
-      "position": 6.9,
-      "positionChange": -0.7,
-      "score": 57.4,
-      "confidence": "low",
-      "recommendedAction": "investigate-existing-page",
-      "querySuppressed": false
-    },
-    {
-      "id": "GSC-2026-10-12-001",
-      "opportunityType": "page-losing-momentum",
+      "id": "GSC-2026-10-19-001",
+      "opportunityType": "page-gaining-momentum",
       "page": "/neighborhoods/north-las-vegas",
       "pageRole": "affected-page",
       "pageExists": true,
       "topic": {
-        "label": "Neighborhood orientation · /neighborhoods/north-las-vegas",
-        "cluster": "neighborhood-orientation",
-        "places": [],
+        "label": "North Las Vegas",
+        "cluster": "general",
+        "places": [
+          "north-las-vegas"
+        ],
         "priorities": [
-          "neighborhood-topic"
+          "core-places"
         ],
         "intent": "informational"
       },
-      "impressions": 40,
+      "impressions": 43,
       "clicks": 1,
-      "position": 43,
-      "positionChange": 17,
-      "score": 52.7,
+      "position": 39.7,
+      "positionChange": 15.9,
+      "score": 45.2,
       "confidence": "medium",
-      "recommendedAction": "investigate-existing-page",
+      "recommendedAction": "optimize-existing-page",
       "querySuppressed": true
     }
   ]
