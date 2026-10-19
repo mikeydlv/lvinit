@@ -339,7 +339,7 @@ export const communities: AreaCommunity[] = [
     housing:
       "Newer single-family construction, much of it 2018 onward, on rolling desert-edge terrain.",
     distinct:
-      "Proximity to Red Rock, and topography. The Red Rock Canyon Legacy Trails project is planned to connect out toward the conservation area from here.",
+      "Proximity to Red Rock, and topography. Summerlin describes the first phase of the Red Rock Canyon Legacy Trails project, which would connect cyclists and hikers from here out to the conservation area, as under development. No opening date has been published.",
     worthExploring:
       "The one to look at if trailhead access is genuinely the reason you're moving west, rather than a line in a brochure.",
   },
@@ -431,7 +431,8 @@ export const communities: AreaCommunity[] = [
 
 // --- 4. Development Watch ---------------------------------------------------
 //
-// Statuses checked 2026-08-20. Every entry carries its own source. If a project
+// Statuses re-checked 2026-10-19 (Grand Park, Legacy Trails, CC-215 widening, Spruce Goose
+// apartments); all other entries last checked 2026-08-20. Every entry carries its own source. If a project
 // cannot be placed confidently in one of the three states, it does not go here.
 
 export const developmentProjects: DevelopmentProject[] = [
@@ -445,7 +446,7 @@ export const developmentProjects: DevelopmentProject[] = [
       url: "https://www.reviewjournal.com/local/summerlin/part-of-90-acre-park-opens-in-summerlin-photos-3731306/",
     },
     caveat:
-      "Phases two and three are still in planning. Summerlin has not published a completion date for the full park.",
+      "Phases two and three have not opened and have no published schedule. Summerlin has not published a completion date for the full park.",
   },
   {
     name: "Council Park and The Hub",
@@ -493,7 +494,7 @@ export const developmentProjects: DevelopmentProject[] = [
     name: "CC-215 widening, Charleston Blvd to Far Hills Ave",
     status: "under-construction",
     where: "CC-215 past Downtown Summerlin",
-    what: "A $73.5 million Clark County project adding a lane in each direction, plus a braided ramp from northbound CC-215 to Charleston and new ramps giving Summerlin Centre Drive direct freeway access. It appears on the county's projects-in-construction list. Reporting put the start at summer 2026 and the duration at roughly 18 months.",
+    what: "A $73.5 million Clark County project adding a lane in each direction, plus a braided ramp from northbound CC-215 to Charleston and new ramps giving Summerlin Centre Drive direct freeway access. It appears on the county's projects-in-construction list. Reporting put the start at summer 2026 and the duration at roughly 18 months. Clark County's project page was publishing biweekly lane-restriction notices covering late September through 24 October 2026, so work is under way.",
     source: {
       label: "Clark County projects in construction",
       url: "https://www.clarkcountynv.gov/government/departments/public_works_department/projects-in-construction",
@@ -517,11 +518,13 @@ export const developmentProjects: DevelopmentProject[] = [
     name: "Grand Park: phases two and three",
     status: "planned",
     where: "Grand Park village",
-    what: "The rest of the 90-acre park. Both remaining phases are in planning, with details still to be released.",
+    what: "The rest of the 90-acre park. Coverage of the phase-one opening in March 2026 described the remaining phases as still to come, with no schedule attached. Phase one itself is roughly 22 acres, so most of the park is not built yet.",
     source: {
-      label: "Las Vegas Review-Journal, 30 March 2026",
-      url: "https://www.reviewjournal.com/local/summerlin/part-of-90-acre-park-opens-in-summerlin-photos-3731306/",
+      label: "Hoodline, 30 March 2026",
+      url: "https://hoodline.com/2026/03/summerlin-scores-as-first-chunk-of-grand-park-finally-opens/",
     },
+    caveat:
+      "No opening date or design for phases two and three has been published that we could find.",
   },
   {
     name: "354 apartments off Sahara at the beltway",
@@ -533,18 +536,19 @@ export const developmentProjects: DevelopmentProject[] = [
       url: "https://www.reviewjournal.com/business/housing/more-construction-planned-for-downtown-summerlin-area-3864107/",
     },
     caveat:
-      "Proposed only. Clark County commissioners were scheduled to consider it on 2 September 2026, which had not happened when this page was checked.",
+      "Proposed only as far as we can confirm. Clark County commissioners were scheduled to consider it on 2 September 2026, but we could not find a report of the outcome when this page was re-checked on 19 October 2026.",
   },
   {
     name: "Red Rock Canyon Legacy Trails",
     status: "planned",
     where: "First phase begins near Sky Vista Dr, running toward the Red Rock Visitor Center",
-    what: "A Clark County project to connect cyclists and hikers from the Summerlin village of Stonebridge out to Red Rock Canyon. The first phase is planned at 5.5 miles. If it gets built, it changes what 'close to Red Rock' actually means for the western villages.",
+    what: "A Clark County project to connect cyclists and hikers from the Summerlin village of Stonebridge out to Red Rock Canyon. Summerlin describes the 5.5-mile first phase, which begins near Sky Vista Drive and links to the Red Rock Visitor Center, as under development. Once it's usable, it changes what 'close to Red Rock' actually means for the western villages.",
     source: {
       label: "Summerlin, on the trail system",
       url: "https://summerlin.com/summerlin-trail-system-continues-to-grow-evolve-with-the-community/",
     },
-    caveat: "No construction start or completion date has been published.",
+    caveat:
+      "Summerlin's wording is 'under development,' not 'open' and not a construction milestone. We could not find a published construction start or completion date, so it stays in this group until the county confirms one.",
   },
 ];
 

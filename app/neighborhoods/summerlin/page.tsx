@@ -104,7 +104,7 @@ const meta: StoryMeta = {
   imageHeight: 1650,
   imageAlt: HERO_ALT,
   datePublished: "2026-07-04",
-  dateModified: "2026-08-20",
+  dateModified: "2026-10-19",
   author: "Mikey Del Rosario",
   breadcrumbs: [
     { name: "Home", path: "/" },
@@ -856,8 +856,10 @@ export default function SummerlinPage() {
             >
               actively-selling list
             </a>{" "}
-            is the only one worth trusting on the day you read it. Statuses here
-            were checked on 20 August 2026 and will move.
+            is the only one worth trusting on the day you read it. Statuses
+            were checked on 20 August 2026, and the Grand Park, Red Rock trail,
+            freeway and Spruce Goose apartment entries were re-checked on 19
+            October 2026. All of it will move.
           </>
         }
       />
@@ -926,12 +928,13 @@ export default function SummerlinPage() {
           somewhere you need to reserve.
         </p>
         <p className="mt-5 text-body-lg text-lvinit-warmgray">
-          Something to watch: the Red Rock Canyon Legacy Trails project is planned
-          to connect cyclists and hikers from Stonebridge out toward the Red Rock
-          visitor center, with a 5.5-mile first phase. If it gets built it changes
-          what &ldquo;close to Red Rock&rdquo; means on the western side. No
-          construction date has been published, so treat it as planned rather than
-          coming.
+          Something to watch: the Red Rock Canyon Legacy Trails project would
+          connect cyclists and hikers from Stonebridge out toward the Red Rock
+          visitor center, with a 5.5-mile first phase. Summerlin describes that
+          phase as &ldquo;under development,&rdquo; but no opening date has been
+          published, so don&rsquo;t buy on the assumption that the trail exists
+          yet. Once it does, it changes what &ldquo;close to Red Rock&rdquo; means
+          on the western side.
         </p>
       </StorySection>
 
@@ -1224,12 +1227,12 @@ export default function SummerlinPage() {
         <p className="mx-auto max-w-[680px] text-caption text-lvinit-warmgray">
           Photographed over Summerlin by Mikey Del Rosario. Development status
           (what&rsquo;s open, under construction, or only announced) was checked on
-          20 August 2026 and will change; check with Summerlin, the builders or
+          20 August 2026 and partly re-checked on 19 October 2026, and will change; check with Summerlin, the builders or
           Clark County before planning around it.
         </p>
       </Container>
 
-      <AreaSources checked="Checked 20 August 2026" sources={sources} />
+      <AreaSources checked="Checked 20 August 2026; partly re-checked 19 October 2026" sources={sources} />
     </StoryPage>
   );
 }
