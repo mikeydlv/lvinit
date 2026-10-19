@@ -1,14 +1,14 @@
 # LVINIT — LATEST WEEKLY CONTENT PLAN
 
-**Week of Monday, October 12, 2026** — created Oct 11, 2026, 8:00 PM Pacific.
+**Week of Monday, October 19, 2026** — created Oct 18, 2026, 8:00 PM Pacific.
 
-Open: [2026-10-12-weekly-content-plan.md](./2026-10-12-weekly-content-plan.md)
+Open: [2026-10-19-weekly-content-plan.md](./2026-10-19-weekly-content-plan.md)
 
 ## MONDAY MORNING — START HERE
 
-1. Post today: Post the North Las Vegas commute carousel at 12:00 PM on Instagram + Facebook. It's finished: Weekly Posts\Week of 2026-10-12\1-Mon-north-las-vegas-is-not-one-commute\ — caption.txt as-is.
-2. Claude already has ready: Thursday's LVR inventory carousel and Saturday's HOA carousel are finished. Claude rebuilds Tuesday's rates carousel on the new Oct 8 Freddie Mac print (7.40%), fixes slide 6 of the HOA post, cuts Wednesday's Monument Hills Reel from footage you already have, and drafts Friday's Aries checklist carousel.
-3. You need to shoot today: Nothing today. One shoot this week: Saturday morning, 20 minutes at Henderson Sport & Social on opening weekend.
-4. Most important this week: Rates moved again — Freddie Mac printed 7.40% on Oct 8, the seventh straight weekly rise. Get /guides/las-vegas-mortgage-rates updated through the publisher flow and Tuesday's carousel out before Thursday's new print lands.
+1. Post today: Post "The Cash To Close Isn't Just the Down Payment" carousel at 12:00 PM on Instagram + Facebook — Weekly Posts\Week of 2026-10-19\1-Mon-las-vegas-closing-costs-transfer-tax-2026-10-19. One condition: Claude replaces slide 6 first (the guide URL is cut off at the right edge and the CTA is unusable).
+2. Claude already has ready: Tuesday's and Thursday's shorts are finished MP4s — nothing to build, just post. Claude's queue: slide 6 on Mon, Wed and Fri; the low-contrast slide 4 inside Tuesday's short; then Saturday's SIDs/LIDs carousel and the /neighborhoods/summerlin fact-and-search update for your approval.
+3. You need to shoot today: Nothing today.
+4. Most important this week: /neighborhoods/summerlin. Google moved it from position 59.9 to 13 and from 20 to 214 impressions, and Fact-Decay says two of its Development Watch items now contradict their own cited sources. One publisher run fixes the facts and sharpens the page while Google is testing it.
 
 Earlier weeks are in this folder, named by the Monday each week starts.
