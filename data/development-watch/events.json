@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "agent": "development-watch",
-  "updated": "2026-10-19",
+  "updated": "2026-10-20",
   "events": {
     "025b2cbfc757": {
       "id": "DEV-2026-09-25-002",
@@ -3185,6 +3185,50 @@
         "queued": []
       }
     },
+    "78a530476b0b": {
+      "id": "DEV-2026-10-20-001",
+      "fingerprint": "78a530476b0b",
+      "entity_id": "DEV-LORENZI-PARK",
+      "entity_name": "Lorenzi Park",
+      "change_class": "MATERIAL_UPDATE",
+      "changes": [
+        "unclear → approved"
+      ],
+      "event_type": "approval",
+      "status": "approved",
+      "prior_status": null,
+      "first_seen": "2026-10-20",
+      "last_seen": "2026-10-20",
+      "times_seen": 1,
+      "lifecycle": "NEW",
+      "lifecycle_history": [
+        {
+          "date": "2026-10-20",
+          "lifecycle": "NEW"
+        }
+      ],
+      "action": "MONITOR_ONLY",
+      "target": null,
+      "score": 55,
+      "confidence": "High",
+      "sources": [
+        {
+          "name": "City of Las Vegas newsroom",
+          "url": "https://content.govdelivery.com/accounts/NVLASVEGAS/bulletins/42fbbe4",
+          "authority": 1,
+          "published": "2026-10-19T21:57:07.000Z"
+        }
+      ],
+      "superseded_by": null,
+      "handoff": {
+        "eligible": false,
+        "blockers": [
+          "NOT_A_PUBLISHER_ACTION",
+          "SCORE_BELOW_THRESHOLD"
+        ],
+        "queued": []
+      }
+    },
     "79ef3b1a446e": {
       "id": "DEV-2026-09-25-005",
       "fingerprint": "79ef3b1a446e",
@@ -3680,6 +3724,53 @@
         "queued": []
       }
     },
+    "95890b14b0f0": {
+      "id": "DEV-2026-10-20-003",
+      "fingerprint": "95890b14b0f0",
+      "entity_id": "DEV-P-6D12F488",
+      "entity_name": "Unnamed employment (Las Vegas (valley-wide)) — \"Data center project proposed on federal land gets sent back to square one\"",
+      "change_class": "NEW",
+      "changes": [
+        "first time this project has been seen"
+      ],
+      "event_type": "approval",
+      "status": "approved",
+      "prior_status": null,
+      "first_seen": "2026-10-20",
+      "last_seen": "2026-10-20",
+      "times_seen": 1,
+      "lifecycle": "NEW",
+      "lifecycle_history": [
+        {
+          "date": "2026-10-20",
+          "lifecycle": "NEW"
+        }
+      ],
+      "action": "MONITOR_ONLY",
+      "target": null,
+      "score": 40,
+      "confidence": "Low",
+      "sources": [
+        {
+          "name": "Nevada Current",
+          "url": "https://nevadacurrent.com/2026/10/20/data-center-project-proposed-on-federal-land-gets-sent-back-to-square-one",
+          "authority": 8,
+          "published": "2026-10-20T11:47:19.000Z"
+        }
+      ],
+      "superseded_by": null,
+      "handoff": {
+        "eligible": false,
+        "blockers": [
+          "NOT_A_PUBLISHER_ACTION",
+          "SCORE_BELOW_THRESHOLD",
+          "CONFIDENCE_NOT_HIGH",
+          "NO_PRIMARY_SOURCE",
+          "PROVISIONAL_ENTITY"
+        ],
+        "queued": []
+      }
+    },
     "9606e3780ec9": {
       "id": "DEV-2026-09-26-002",
       "fingerprint": "9606e3780ec9",
@@ -3865,6 +3956,52 @@
           "CONFIDENCE_NOT_HIGH",
           "NO_PRIMARY_SOURCE",
           "PROVISIONAL_ENTITY"
+        ],
+        "queued": []
+      }
+    },
+    "993144f623d9": {
+      "id": "DEV-2026-10-20-002",
+      "fingerprint": "993144f623d9",
+      "entity_id": "DEV-IDEFIX",
+      "entity_name": "Idefix",
+      "change_class": "NEW",
+      "changes": [
+        "first time this project has been seen"
+      ],
+      "event_type": "announcement",
+      "status": "proposed",
+      "prior_status": null,
+      "first_seen": "2026-10-20",
+      "last_seen": "2026-10-20",
+      "times_seen": 1,
+      "lifecycle": "NEW",
+      "lifecycle_history": [
+        {
+          "date": "2026-10-20",
+          "lifecycle": "NEW"
+        }
+      ],
+      "action": "MONITOR_ONLY",
+      "target": null,
+      "score": 48,
+      "confidence": "Medium",
+      "sources": [
+        {
+          "name": "Las Vegas Sun — News",
+          "url": "https://lasvegassun.com/news/2026/oct/19/japan-launches-spacecraft-to-mysterious-moons-of-m",
+          "authority": 8,
+          "published": "2026-10-19T21:16:00.000Z"
+        }
+      ],
+      "superseded_by": null,
+      "handoff": {
+        "eligible": false,
+        "blockers": [
+          "NOT_A_PUBLISHER_ACTION",
+          "SCORE_BELOW_THRESHOLD",
+          "CONFIDENCE_NOT_HIGH",
+          "NO_PRIMARY_SOURCE"
         ],
         "queued": []
       }
@@ -4726,11 +4863,15 @@
       "first_seen": "2026-10-17",
       "last_seen": "2026-10-17",
       "times_seen": 1,
-      "lifecycle": "NEW",
+      "lifecycle": "RESOLVED",
       "lifecycle_history": [
         {
           "date": "2026-10-17",
           "lifecycle": "NEW"
+        },
+        {
+          "date": "2026-10-20",
+          "lifecycle": "RESOLVED"
         }
       ],
       "action": "MONITOR_ONLY",
@@ -4751,7 +4892,7 @@
           "published": "2026-10-16T21:46:15.000Z"
         }
       ],
-      "superseded_by": null,
+      "superseded_by": "78a530476b0b",
       "handoff": {
         "eligible": false,
         "blockers": [
