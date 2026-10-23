@@ -104,7 +104,7 @@ const meta: StoryMeta = {
   imageHeight: 1650,
   imageAlt: HERO_ALT,
   datePublished: "2026-07-04",
-  dateModified: "2026-10-19",
+  dateModified: "2026-10-23",
   author: "Mikey Del Rosario",
   breadcrumbs: [
     { name: "Home", path: "/" },
@@ -662,6 +662,17 @@ export default function SummerlinPage() {
         </p>
       </StorySection>
 
+      <StoryGallery
+        images={[
+          {
+            src: "/images/editorial/summerlin-community-road-flags-desert-cliffs.jpg",
+            alt: "Curving landscaped road in Summerlin with blue banner flags and a neighborhood directional sign, running toward tall sandstone cliffs.",
+            caption:
+              "The look of a newer Summerlin arterial: gravel-and-shrub median landscaping, village banner flags and a directional sign, with the cliffs close enough to be the backdrop.",
+          },
+        ]}
+      />
+
       <StoryPullQuote>
         Summerlin&rsquo;s villages were built over thirty-six years. You can read
         the decade off the trees.
@@ -730,6 +741,17 @@ export default function SummerlinPage() {
           doesn&rsquo;t have.
         </p>
       </StorySection>
+
+      <StoryGallery
+        images={[
+          {
+            src: "/images/editorial/downtown-summerlin-retail-lawn-hotel-tower-aerial.jpg",
+            alt: "Aerial view of Downtown Summerlin's green lawns and tree-lined walkways beside retail buildings, with a casino hotel tower, parking areas and desert mountains behind.",
+            caption:
+              "Downtown Summerlin from the air: the central lawns and shaded walkways, surrounded by surface parking, with the mountains behind. Most people arrive by car, then walk around.",
+          },
+        ]}
+      />
 
       {/* ---------------------------------------------------------------- */}
       {/* SUMMERLIN WEST                                                    */}
@@ -812,6 +834,23 @@ export default function SummerlinPage() {
           scheduled one.
         </p>
       </StorySection>
+
+      <StoryGallery
+        images={[
+          {
+            src: "/images/editorial/summerlin-west-grand-park-ballfields-playground-aerial.jpg",
+            alt: "Aerial view of Grand Park in Summerlin West: a shade-sail playground and lit ballfields in the foreground, with new home neighborhoods, graded land and rugged mountains behind.",
+            caption:
+              "Grand Park in Summerlin West: shaded playground, ballfields and pavilion, with new neighborhoods and graded, not-yet-built land right behind them.",
+          },
+          {
+            src: "/images/editorial/summerlin-new-homes-under-construction-aerial-valley.jpg",
+            alt: "Street of new two-story homes in Summerlin at different build stages, from wood framing to stucco, with the Las Vegas Valley and mountains in the distance.",
+            caption:
+              "A Summerlin street of new homes at different build stages, with the valley below. This is what living next to construction looks like while a neighborhood fills in.",
+          },
+        ]}
+      />
 
       {/* ---------------------------------------------------------------- */}
       {/* DEVELOPMENT WATCH                                                 */}

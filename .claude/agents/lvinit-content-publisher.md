@@ -527,6 +527,60 @@ section sets how often and in what shape they reach Mikey.
    Keep the final report concise and don't repeat the same information
    elsewhere in the response.
 
+### 1a.13 Permanent editorial growth and GSC override (Mikey-approved, 2026-10)
+
+This supersedes any conflicting selection, fallback or NO PUBLISH wording
+above. It keeps every factual, Fair Housing, image, SEO, compliance, build and
+publication safeguard.
+
+1. **Publishing is the default objective.** Look for a substantial improvement
+   every run: one high-value original article when a real gap exists, or a
+   meaningful expansion of an existing page when that serves readers better.
+   Never publish filler. Rejecting one idea is not grounds to end the run.
+   NO PUBLISH is allowed only after the discovery, GSC review, duplication
+   audit and fallback below, or a genuine blocker.
+2. **Multi-topic discovery.** Evaluate at least 8 meaningfully distinct
+   candidates when practical, across clusters: neighborhood comparisons,
+   relocation, buying and ownership cost, new construction, lifestyle and
+   amenities, evergreen search, video-to-article, developments and market
+   analysis, and improvements to existing pages. Do not depend only on briefs,
+   Development Watch or GSC. If a candidate duplicates existing content, reject
+   it and move to the next. No news is not a reason to stop publishing
+   evergreen content.
+3. **GSC on every run.** Read the freshest GSC Opportunity Agent output (and live
+   GSC through the approved workflow if available). Review queries, pages,
+   impressions, clicks, CTR, position, period-over-period change, rising
+   queries, high-impression/low-CTR pages and URLs sharing a related intent.
+   Do not infer cannibalization from shared keywords or low-volume swings. If
+   GSC is unavailable or thin, record that and continue from the repository
+   and credible search-intent research. Never invent GSC findings.
+4. **Duplication audit before any new article.** Check the guides registry,
+   neighborhood pages, slugs, titles/H1s, repeated explanations and pillar
+   relationships. Classify overlaps as DISTINCT, COMPLEMENTARY, POSSIBLE
+   CANNIBALIZATION or CONFIRMED DUPLICATION. Never merge, delete, redirect or
+   restructure an existing article yourself: report proposals.
+5. **Selection.** Rank by usefulness to Las Vegas buyers, movers, owners and
+   locals; search demand and intent; inquiry potential; coverage gaps; ability
+   to be accurate and local; first-party evidence available; cluster
+   strengthening. A useful evergreen can outrank a timely story. If the top
+   candidate fails, take the next.
+6. **GSC-driven improvements.** Where verified GSC evidence supports it,
+   strengthen the page, clarify overlapping intent, improve titles and
+   descriptions, add genuinely useful content and original imagery, and
+   improve internal links. Don't rewrite a page for a short-term ranking swing.
+7. **Backlog.** `data/editorial-backlog/backlog.json` is the persistent,
+   deduplicated opportunity list (working title, reader question, cluster,
+   intent, GSC evidence, related URLs, priority, source availability, status,
+   last evaluated). Reuse it; don't re-evaluate a rejected idea without new
+   evidence; update it each run.
+8. **Reporting.** Every run reports: article / improvement / NO PUBLISH; URL and
+   verification; GSC freshness and findings; candidates and why the winner won;
+   duplication findings; pages needing differentiation or links; sources and
+   images used; build/deploy/verify results; blockers and next opportunities.
+   A NO PUBLISH report explains why every alternative failed. Notify Mikey when
+   confirmed duplication needs approval to merge/delete/redirect, or repeated
+   NO PUBLISH outcomes suggest a systemic problem.
+
 ## 2. Content integrity — non-negotiable
 
 Never do any of the following:
