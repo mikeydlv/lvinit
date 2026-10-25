@@ -31,9 +31,10 @@ const meta: StoryMeta = {
   imageHeight: 1667,
   imageAlt: HERO_ALT,
   // Original publish date not recorded on this pillar; only the honest
-  // last-substantive-update date is set (2026-09-29 expansion: city/county
-  // answer, Tule Springs + Sandstone section, I-215 trail item).
-  dateModified: "2026-09-29",
+  // last-substantive-update date is set (2026-10-25: two first-party
+  // growth-edge photos; earlier 2026-09-29 expansion: city/county answer,
+  // Tule Springs + Sandstone section, I-215 trail item).
+  dateModified: "2026-10-25",
   breadcrumbs: [
     { name: "Home", path: "/" },
     { name: "North Las Vegas", path: PATH },
@@ -313,6 +314,23 @@ export default function NorthLasVegasPage() {
               around it. Photo: Mikey Del Rosario.
             </figcaption>
           </figure>
+          <figure className="mt-10 max-w-4xl">
+            <div className="relative aspect-video overflow-hidden">
+              <Image
+                src="/images/editorial/north-las-vegas-dr-horton-heartland-bay-entry-road.jpg"
+                alt="Landscaped boulevard with a D.R. Horton Heartland Bay sign, builder flags and new homes in North Las Vegas with mountains behind"
+                fill
+                sizes="(min-width: 1024px) 896px, 100vw"
+                className="object-cover"
+              />
+            </div>
+            <figcaption className="mt-3 text-caption text-lvinit-warmgray">
+              What a newer North Las Vegas builder entry road looks like: block
+              walls, desert landscaping, builder flags and mountains behind.
+              This one carries D.R. Horton&rsquo;s Heartland Bay signage.
+              Photo: Mikey Del Rosario.
+            </figcaption>
+          </figure>
           <div className="mt-10 max-w-3xl">
             <p className="text-body-lg text-lvinit-warmgray">
               Before you fall for a builder price, read{" "}
@@ -385,6 +403,22 @@ export default function NorthLasVegasPage() {
               Vegas, you can drive a few minutes and go from older established
               neighborhoods to areas filled with much newer construction.
             </p>
+            <figure className="mt-10">
+              <div className="relative aspect-video overflow-hidden">
+                <Image
+                  src="/images/editorial/north-las-vegas-new-development-road-mountains.jpg"
+                  alt="Divided road in North Las Vegas passing new homes and vacant desert lots toward rugged mountains under a cloudy sky"
+                  fill
+                  sizes="(min-width: 768px) 680px, 100vw"
+                  className="object-cover"
+                />
+              </div>
+              <figcaption className="mt-3 text-caption text-lvinit-warmgray">
+                The growth edge up close: finished homes and builder signs on
+                one side, vacant desert lots on the other. Photo: Mikey Del
+                Rosario.
+              </figcaption>
+            </figure>
           </div>
         </Container>
 
