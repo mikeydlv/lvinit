@@ -1,36 +1,36 @@
 {
   "schema_version": 1,
   "agent": "gsc-opportunity-agent",
-  "generatedAt": "2026-10-19T18:52:19.331Z",
-  "reportDate": "2026-10-19",
-  "sourceGeneratedAt": "2026-10-19T18:52:02.215Z",
+  "generatedAt": "2026-10-26T18:54:21.952Z",
+  "reportDate": "2026-10-26",
+  "sourceGeneratedAt": "2026-10-26T18:54:04.831Z",
   "sourceSchemaVersion": "1.1.0",
   "fixture": false,
   "status": "ok",
   "window": {
-    "start": "2026-09-19",
-    "end": "2026-10-16"
+    "start": "2026-09-26",
+    "end": "2026-10-23"
   },
   "dataQuality": {
-    "lowVolume": true,
+    "lowVolume": false,
     "lowVolumeThreshold": 200,
-    "currentImpressions": 93,
-    "currentClicks": 0,
-    "reportedFindings": 3,
-    "interpretation": "Low-volume data: an early signal, not definitive search demand. Never the sole reason for a decision."
+    "currentImpressions": 302,
+    "currentClicks": 1,
+    "reportedFindings": 6,
+    "interpretation": "Search Console measurements. Search demand only — never publish these numbers as editorial facts."
   },
   "privacy": {
     "rawQueriesIncluded": false,
     "policy": "This file is public. Raw Search Console queries stay in the private workflow artifact (gsc-opportunities). Topics here use fixed vocabulary only.",
     "omitted": {
-      "addressLike": 1,
+      "addressLike": 0,
       "fairHousing": 0,
       "notRepresentable": 0
     }
   },
   "items": [
     {
-      "id": "GSC-2026-10-19-002",
+      "id": "GSC-2026-10-26-003",
       "opportunityType": "page-gaining-momentum",
       "page": "/neighborhoods/summerlin",
       "pageRole": "affected-page",
@@ -42,42 +42,147 @@
           "summerlin"
         ],
         "priorities": [
-          "core-places",
-          "neighborhood-topic"
+          "core-places"
         ],
-        "intent": "informational"
+        "intent": "discovery"
       },
-      "impressions": 321,
+      "impressions": 457,
       "clicks": 1,
-      "position": 14.6,
-      "positionChange": 42.3,
-      "score": 84.7,
+      "position": 19.9,
+      "positionChange": 7.2,
+      "score": 82.5,
       "confidence": "high",
       "recommendedAction": "optimize-existing-page",
       "querySuppressed": true
     },
     {
-      "id": "GSC-2026-10-19-001",
+      "id": "GSC-2026-10-26-005",
+      "opportunityType": "internal-link",
+      "page": "/guides/henderson-sport-and-social",
+      "pageRole": "affected-page",
+      "pageExists": true,
+      "topic": {
+        "label": "Henderson",
+        "cluster": "general",
+        "places": [
+          "henderson"
+        ],
+        "priorities": [
+          "core-places",
+          "costs"
+        ],
+        "intent": "informational"
+      },
+      "impressions": 379,
+      "clicks": 11,
+      "position": 6.6,
+      "positionChange": null,
+      "score": 77.4,
+      "confidence": "medium",
+      "recommendedAction": "add-internal-links",
+      "querySuppressed": true
+    },
+    {
+      "id": "GSC-2026-10-26-001",
+      "opportunityType": "emerging-query",
+      "page": "/guides/las-vegas-housing-market",
+      "pageRole": "affected-page",
+      "pageExists": true,
+      "topic": {
+        "label": "Las Vegas",
+        "cluster": "general",
+        "places": [
+          "las-vegas"
+        ],
+        "priorities": [
+          "market-questions"
+        ],
+        "intent": "discovery"
+      },
+      "impressions": 27,
+      "clicks": 0,
+      "position": 24.1,
+      "positionChange": null,
+      "score": 73,
+      "confidence": "low",
+      "recommendedAction": "optimize-existing-page",
+      "querySuppressed": true
+    },
+    {
+      "id": "GSC-2026-10-26-006",
+      "opportunityType": "internal-link",
+      "page": "/guides/aries-henderson",
+      "pageRole": "affected-page",
+      "pageExists": true,
+      "topic": {
+        "label": "Henderson",
+        "cluster": "general",
+        "places": [
+          "henderson"
+        ],
+        "priorities": [
+          "core-places"
+        ],
+        "intent": "discovery"
+      },
+      "impressions": 30,
+      "clicks": 1,
+      "position": 7.1,
+      "positionChange": null,
+      "score": 71.7,
+      "confidence": "low",
+      "recommendedAction": "add-internal-links",
+      "querySuppressed": true
+    },
+    {
+      "id": "GSC-2026-10-26-002",
+      "opportunityType": "emerging-query",
+      "page": "/neighborhoods/summerlin",
+      "pageRole": "affected-page",
+      "pageExists": true,
+      "topic": {
+        "label": "Summerlin",
+        "cluster": "general",
+        "places": [
+          "summerlin"
+        ],
+        "priorities": [
+          "core-places"
+        ],
+        "intent": "discovery"
+      },
+      "impressions": 19,
+      "clicks": 0,
+      "position": 43.2,
+      "positionChange": null,
+      "score": 67.3,
+      "confidence": "low",
+      "recommendedAction": "optimize-existing-page",
+      "querySuppressed": true
+    },
+    {
+      "id": "GSC-2026-10-26-004",
       "opportunityType": "page-gaining-momentum",
       "page": "/neighborhoods/north-las-vegas",
       "pageRole": "affected-page",
       "pageExists": true,
       "topic": {
-        "label": "North Las Vegas",
-        "cluster": "general",
+        "label": "Relocation · North Las Vegas",
+        "cluster": "relocation",
         "places": [
           "north-las-vegas"
         ],
         "priorities": [
-          "core-places"
+          "core-places",
+          "relocation"
         ],
-        "intent": "informational"
+        "intent": "relocation-decision"
       },
-      "impressions": 43,
-      "clicks": 1,
-      "position": 39.7,
-      "positionChange": 15.9,
-      "score": 45.2,
+      "impressions": 48,
+      "clicks": 0,
+      "position": 36.5,
+      "positionChange": 12.5,
+      "score": 51.1,
       "confidence": "medium",
       "recommendedAction": "optimize-existing-page",
       "querySuppressed": true
