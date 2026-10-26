@@ -1,0 +1,2333 @@
+{
+  "schema_version": 1,
+  "agent": "local-trends",
+  "date": "2026-10-26",
+  "fixture": false,
+  "mode": "rules",
+  "modeReason": "no ANTHROPIC_API_KEY is configured",
+  "model": null,
+  "counts": {
+    "read": 1127,
+    "sourcesOk": 12,
+    "fresh": 137,
+    "judged": 19,
+    "alreadyReviewed": 504,
+    "deferred": 0
+  },
+  "usage": null,
+  "health": [
+    {
+      "id": "henderson-news",
+      "name": "City of Henderson newsroom",
+      "tier": "official",
+      "ok": false,
+      "status": 403,
+      "items": 0,
+      "error": null
+    },
+    {
+      "id": "city-lv-news",
+      "name": "City of Las Vegas newsroom",
+      "tier": "official",
+      "ok": true,
+      "status": 200,
+      "items": 25,
+      "error": null
+    },
+    {
+      "id": "rj-business",
+      "name": "Las Vegas Review-Journal — Business",
+      "tier": "news",
+      "ok": true,
+      "status": 200,
+      "items": 30,
+      "error": null
+    },
+    {
+      "id": "rj-local",
+      "name": "Las Vegas Review-Journal — Local",
+      "tier": "news",
+      "ok": true,
+      "status": 200,
+      "items": 30,
+      "error": null
+    },
+    {
+      "id": "sun-business",
+      "name": "Las Vegas Sun — Business",
+      "tier": "news",
+      "ok": true,
+      "status": 200,
+      "items": 20,
+      "error": null
+    },
+    {
+      "id": "sun-news",
+      "name": "Las Vegas Sun — News",
+      "tier": "news",
+      "ok": true,
+      "status": 200,
+      "items": 20,
+      "error": null
+    },
+    {
+      "id": "vegas-inc",
+      "name": "Vegas Inc",
+      "tier": "news",
+      "ok": true,
+      "status": 200,
+      "items": 20,
+      "error": null
+    },
+    {
+      "id": "ktnv",
+      "name": "KTNV 13 Action News",
+      "tier": "news",
+      "ok": true,
+      "status": 200,
+      "items": 30,
+      "error": null
+    },
+    {
+      "id": "8newsnow",
+      "name": "8 News Now",
+      "tier": "news",
+      "ok": true,
+      "status": 200,
+      "items": 21,
+      "error": null
+    },
+    {
+      "id": "news3lv",
+      "name": "News 3 Las Vegas",
+      "tier": "news",
+      "ok": true,
+      "status": 200,
+      "items": 41,
+      "error": null
+    },
+    {
+      "id": "nevada-current",
+      "name": "Nevada Current",
+      "tier": "news",
+      "ok": true,
+      "status": 200,
+      "items": 100,
+      "error": null
+    },
+    {
+      "id": "reddit",
+      "name": "Reddit (r/vegas, r/LasVegas, r/henderson, r/summerlin)",
+      "tier": "social",
+      "ok": true,
+      "status": 200,
+      "items": 100,
+      "error": null
+    },
+    {
+      "id": "google-news",
+      "name": "Google News search (41 targeted queries)",
+      "tier": "news",
+      "ok": true,
+      "status": 200,
+      "items": 690,
+      "error": null
+    }
+  ],
+  "topics": [
+    {
+      "key": "las-vegas-valley-wide-las-vegas-homeowners-face-a-bigger-inc",
+      "isExisting": false,
+      "name": "Las Vegas homeowners face a bigger income hit when replacing roofs",
+      "kind": "project",
+      "area": "Las Vegas (valley-wide)",
+      "category": "C. Major development / redevelopment",
+      "status": "RUMORED / UNCONFIRMED",
+      "statusEvidence": null,
+      "statusEvidenceId": null,
+      "materialNewInfo": false,
+      "whatChanged": "",
+      "scores": {
+        "local_relevance": 3,
+        "relocation_value": 3,
+        "conversation_potential": 2,
+        "visual_potential": 4,
+        "evergreen_value": 3,
+        "real_estate_connection": 3,
+        "novelty": 2,
+        "lvinit_fit": 3
+      },
+      "whyItMatters": "Rules-only mode — source summary: Roof replacement in the Las Vegas Valley costs an estimated $9,020 to $18,040, but lower household incomes make the expense harder to absorb than in neighboring metros.",
+      "whyPeopleCare": "Needs Mikey's angle (rules-only mode cannot judge audience).",
+      "hook": "Needs Mikey's angle (rules-only mode does not write hooks).",
+      "bestFormat": "field-report Reel",
+      "secondaryFormats": [
+        "LVINIT article"
+      ],
+      "flywheel": [],
+      "fieldShoot": {
+        "recommended": true,
+        "locationType": "The site itself in Las Vegas (valley-wide) — confirm the location from the source before driving out.",
+        "shots": [],
+        "drone": "",
+        "aRoll": "",
+        "urgency": "shoot this month"
+      },
+      "articleOpportunity": "Possible update to /guides/is-las-vegas-a-buyers-market",
+      "existingContent": [
+        {
+          "route": "/guides/is-las-vegas-a-buyers-market",
+          "action": "internal link",
+          "note": "Related by area/topic (rules match)."
+        },
+        {
+          "route": "/guides/las-vegas-mortgage-rates-19-month-high",
+          "action": "internal link",
+          "note": "Related by area/topic (rules match)."
+        },
+        {
+          "route": "/guides/las-vegas-mortgage-rates-september-2026",
+          "action": "internal link",
+          "note": "Related by area/topic (rules match)."
+        }
+      ],
+      "missingConfirmation": "No source text states the project's status.",
+      "promotionTrigger": "",
+      "sources": [
+        {
+          "id": "c-304e06067d",
+          "title": "Las Vegas homeowners face a bigger income hit when replacing roofs",
+          "sourceName": "Las Vegas Review-Journal — Business",
+          "url": "https://reviewjournal.com/business/housing/las-vegas-homeowners-face-a-bigger-income-hit-when-replacing-roofs-3905315",
+          "published": "2026-10-26",
+          "tier": "news",
+          "via": "rj-business"
+        }
+      ],
+      "signals": [],
+      "total": 23,
+      "band": "P3",
+      "priority": "P3",
+      "capped": null,
+      "statusEvidenceUrl": null,
+      "surface": true,
+      "surfaceReasons": [
+        "new"
+      ],
+      "statusNote": null
+    },
+    {
+      "key": "henderson-raiders-and-aces-owner-mark-davis-donates-100k-to-",
+      "isExisting": false,
+      "name": "Raiders and Aces owner Mark Davis donates $100K to Boys Town Nevada",
+      "kind": "project",
+      "area": "Henderson",
+      "category": "G. Local lifestyle",
+      "status": "RUMORED / UNCONFIRMED",
+      "statusEvidence": null,
+      "statusEvidenceId": null,
+      "materialNewInfo": false,
+      "whatChanged": "",
+      "scores": {
+        "local_relevance": 5,
+        "relocation_value": 4,
+        "conversation_potential": 2,
+        "visual_potential": 4,
+        "evergreen_value": 4,
+        "real_estate_connection": 2,
+        "novelty": 2,
+        "lvinit_fit": 4
+      },
+      "whyItMatters": "Rules-only mode — source summary: Boys Town Nevada, a nonprofit child and family service organization, celebrated 35 years of serving children and families during its \"Impact Gala: Team Up for Mental Health\" event on Friday, Oct. 23, at M Resort Spa Casino in Henderson.",
+      "whyPeopleCare": "Needs Mikey's angle (rules-only mode cannot judge audience).",
+      "hook": "Needs Mikey's angle (rules-only mode does not write hooks).",
+      "bestFormat": "Reel / TikTok / Short",
+      "secondaryFormats": [
+        "LVINIT article"
+      ],
+      "flywheel": [],
+      "fieldShoot": {
+        "recommended": true,
+        "locationType": "The site itself in Henderson — confirm the location from the source before driving out.",
+        "shots": [],
+        "drone": "",
+        "aRoll": "",
+        "urgency": "shoot this month"
+      },
+      "articleOpportunity": "Possible update to /guides/water-street-district-henderson",
+      "existingContent": [
+        {
+          "route": "/guides/water-street-district-henderson",
+          "action": "internal link",
+          "note": "Related by area/topic (rules match)."
+        },
+        {
+          "route": "/guides/aries-henderson",
+          "action": "internal link",
+          "note": "Related by area/topic (rules match)."
+        },
+        {
+          "route": "/guides/fiesta-henderson-redevelopment",
+          "action": "internal link",
+          "note": "Related by area/topic (rules match)."
+        }
+      ],
+      "missingConfirmation": "No source text states the project's status.",
+      "promotionTrigger": "",
+      "sources": [
+        {
+          "id": "c-fd7545517b",
+          "title": "Raiders and Aces owner Mark Davis donates $100K to Boys Town Nevada",
+          "sourceName": "8 News Now",
+          "url": "https://8newsnow.com/news/local-news/raiders-and-aces-owner-mark-davis-donates-100k-to-boys-town-nevada",
+          "published": "2026-10-26",
+          "tier": "news",
+          "via": "8newsnow"
+        }
+      ],
+      "signals": [],
+      "total": 27,
+      "band": "P3",
+      "priority": "P3",
+      "capped": null,
+      "statusEvidenceUrl": null,
+      "surface": true,
+      "surfaceReasons": [
+        "new"
+      ],
+      "statusNote": null
+    },
+    {
+      "key": "lake-las-vegas-lake-las-vegas-triathlon-confirmed-for-octobe",
+      "isExisting": false,
+      "name": "Lake Las Vegas Triathlon Confirmed For October 25-26, 2025 - With Spectacular Amateur Bike Course In Lake Mead National Recreation Area",
+      "kind": "project",
+      "area": "Lake Las Vegas",
+      "category": "G. Local lifestyle",
+      "status": "RUMORED / UNCONFIRMED",
+      "statusEvidence": null,
+      "statusEvidenceId": null,
+      "materialNewInfo": false,
+      "whatChanged": "",
+      "scores": {
+        "local_relevance": 5,
+        "relocation_value": 4,
+        "conversation_potential": 2,
+        "visual_potential": 4,
+        "evergreen_value": 4,
+        "real_estate_connection": 2,
+        "novelty": 2,
+        "lvinit_fit": 4
+      },
+      "whyItMatters": "Rules-only mode — source summary: Lake Las Vegas Triathlon Confirmed For October 25-26, 2025 - With Spectacular Amateur Bike Course In Lake Mead National Recreation Area",
+      "whyPeopleCare": "Needs Mikey's angle (rules-only mode cannot judge audience).",
+      "hook": "Needs Mikey's angle (rules-only mode does not write hooks).",
+      "bestFormat": "Reel / TikTok / Short",
+      "secondaryFormats": [
+        "LVINIT article"
+      ],
+      "flywheel": [],
+      "fieldShoot": {
+        "recommended": true,
+        "locationType": "The site itself in Lake Las Vegas — confirm the location from the source before driving out.",
+        "shots": [],
+        "drone": "",
+        "aRoll": "",
+        "urgency": "shoot this month"
+      },
+      "articleOpportunity": "Possible update to /neighborhoods/henderson",
+      "existingContent": [
+        {
+          "route": "/neighborhoods/henderson",
+          "action": "internal link",
+          "note": "Related by area/topic (rules match)."
+        },
+        {
+          "route": "/guides/wayne-newton-casa-de-shenandoah-redevelopment",
+          "action": "internal link",
+          "note": "Related by area/topic (rules match)."
+        },
+        {
+          "route": "/guides/las-vegas-down-payment-assistance-programs-2026",
+          "action": "internal link",
+          "note": "Related by area/topic (rules match)."
+        }
+      ],
+      "missingConfirmation": "No source text states the project's status.",
+      "promotionTrigger": "",
+      "sources": [
+        {
+          "id": "c-d984ba799c",
+          "title": "Lake Las Vegas Triathlon Confirmed For October 25-26, 2025 - With Spectacular Amateur Bike Course In Lake Mead National Recreation Area",
+          "sourceName": "PTO | Professional Triathletes Organisation",
+          "url": "https://news.google.com/rss/articles/CBMihgJBVV95cUxPRWN2aVFDVDk0d24tTTlDM2N3OG9ucEFtVDV6ZE1rR2Q0OXNqZG1zQTJPZXB5dmItcURHNEtoY1FpU0lKQUlqOHBFMUN2UEFSeTFESkFEcXBFVUVmMXdfMVRyZFM3N19GWXViSjd0VVdCLW5zRkJnc1hpTE94MDNxM3hxV1RTT0JhZWxFNkFwTm93UjVUMXFYR1ZKSnhkRExDYWU3dnlNSnQ4aHhtSlZnRTY2Vlg0NGM5WjhmYlFNaDRpbnpaY2pGUlJTWVNlWmF5OVYzRkRvQWxuRlB3NDFnenFxTnVXdnBTNG84eW9DWUhsNWt6c2ludnlkMms2a1B2REVaa3Bn",
+          "published": "2026-10-25",
+          "tier": "news",
+          "via": "google-news"
+        }
+      ],
+      "signals": [],
+      "total": 27,
+      "band": "P3",
+      "priority": "P3",
+      "capped": null,
+      "statusEvidenceUrl": null,
+      "surface": true,
+      "surfaceReasons": [
+        "new"
+      ],
+      "statusNote": null
+    },
+    {
+      "key": "las-vegas-valley-wide-las-vegas-roof-replacement-costs-hit-h",
+      "isExisting": false,
+      "name": "Las Vegas Roof Replacement Costs Hit Homeowner Income Hard",
+      "kind": "project",
+      "area": "Las Vegas (valley-wide)",
+      "category": "C. Major development / redevelopment",
+      "status": "RUMORED / UNCONFIRMED",
+      "statusEvidence": null,
+      "statusEvidenceId": null,
+      "materialNewInfo": false,
+      "whatChanged": "",
+      "scores": {
+        "local_relevance": 3,
+        "relocation_value": 3,
+        "conversation_potential": 2,
+        "visual_potential": 4,
+        "evergreen_value": 3,
+        "real_estate_connection": 3,
+        "novelty": 2,
+        "lvinit_fit": 3
+      },
+      "whyItMatters": "Rules-only mode — source summary: Las Vegas Roof Replacement Costs Hit Homeowner Income Hard",
+      "whyPeopleCare": "Needs Mikey's angle (rules-only mode cannot judge audience).",
+      "hook": "Needs Mikey's angle (rules-only mode does not write hooks).",
+      "bestFormat": "field-report Reel",
+      "secondaryFormats": [
+        "LVINIT article"
+      ],
+      "flywheel": [],
+      "fieldShoot": {
+        "recommended": true,
+        "locationType": "The site itself in Las Vegas (valley-wide) — confirm the location from the source before driving out.",
+        "shots": [],
+        "drone": "",
+        "aRoll": "",
+        "urgency": "shoot this month"
+      },
+      "articleOpportunity": "Possible update to /guides/closing-costs-las-vegas-buyers",
+      "existingContent": [
+        {
+          "route": "/guides/closing-costs-las-vegas-buyers",
+          "action": "internal link",
+          "note": "Related by area/topic (rules match)."
+        },
+        {
+          "route": "/guides/las-vegas-mortgage-rates-19-month-high",
+          "action": "internal link",
+          "note": "Related by area/topic (rules match)."
+        },
+        {
+          "route": "/guides/las-vegas-mortgage-rates-september-2026",
+          "action": "internal link",
+          "note": "Related by area/topic (rules match)."
+        }
+      ],
+      "missingConfirmation": "No source text states the project's status.",
+      "promotionTrigger": "",
+      "sources": [
+        {
+          "id": "c-55864e0e5a",
+          "title": "Las Vegas Roof Replacement Costs Hit Homeowner Income Hard",
+          "sourceName": "Hoodline",
+          "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxNejFSay1wMHhPTVdRWFZ6amlnVjBfemtmanNldXNsSmktOE5Ic2RmYzB6RFZVdzFWbGdFdS1DUDlJbGRJNDZQWXQ4YTBKOUFZX3lYLWRYZWV1dnhiZjRseG4wYXloUXZ5eXhUVG5HNlQ0TnFfRkhfdl81NkRRcHRkRmZ3ZWNJWTZ4V1RNQ2ZYQkJBZUtULUU3MHRxN3ZIOGI0UzVlZE9ZYWQ5d2kwMDJ0Xw",
+          "published": "2026-10-26",
+          "tier": "news",
+          "via": "google-news"
+        }
+      ],
+      "signals": [],
+      "total": 23,
+      "band": "P3",
+      "priority": "P3",
+      "capped": null,
+      "statusEvidenceUrl": null,
+      "surface": true,
+      "surfaceReasons": [
+        "new"
+      ],
+      "statusNote": null
+    },
+    {
+      "key": "north-las-vegas-kb-home-launches-affordable-community-in-nor",
+      "isExisting": false,
+      "name": "KB Home Launches Affordable Community in North Las Vegas Targeting First-Time Buyers",
+      "kind": "project",
+      "area": "North Las Vegas",
+      "category": "E. Builder activity",
+      "status": "RUMORED / UNCONFIRMED",
+      "statusEvidence": null,
+      "statusEvidenceId": null,
+      "materialNewInfo": false,
+      "whatChanged": "",
+      "scores": {
+        "local_relevance": 4,
+        "relocation_value": 3,
+        "conversation_potential": 2,
+        "visual_potential": 3,
+        "evergreen_value": 2,
+        "real_estate_connection": 5,
+        "novelty": 2,
+        "lvinit_fit": 3
+      },
+      "whyItMatters": "Rules-only mode — source summary: KB Home Launches Affordable Community in North Las Vegas Targeting First-Time Buyers",
+      "whyPeopleCare": "Needs Mikey's angle (rules-only mode cannot judge audience).",
+      "hook": "Needs Mikey's angle (rules-only mode does not write hooks).",
+      "bestFormat": "Instagram carousel",
+      "secondaryFormats": [
+        "LVINIT article"
+      ],
+      "flywheel": [],
+      "fieldShoot": {
+        "recommended": false,
+        "locationType": "",
+        "shots": [],
+        "drone": "",
+        "aRoll": "",
+        "urgency": "no shoot needed"
+      },
+      "articleOpportunity": "Possible update to /guides/sandstone-tule-springs-north-las-vegas",
+      "existingContent": [
+        {
+          "route": "/guides/sandstone-tule-springs-north-las-vegas",
+          "action": "internal link",
+          "note": "Related by area/topic (rules match)."
+        },
+        {
+          "route": "/guides/one-civic-center-north-las-vegas-redevelopment",
+          "action": "internal link",
+          "note": "Related by area/topic (rules match)."
+        },
+        {
+          "route": "/neighborhoods/north-las-vegas",
+          "action": "internal link",
+          "note": "Related by area/topic (rules match)."
+        }
+      ],
+      "missingConfirmation": "No source text states the project's status.",
+      "promotionTrigger": "",
+      "sources": [
+        {
+          "id": "c-912d845684",
+          "title": "KB Home Launches Affordable Community in North Las Vegas Targeting First-Time Buyers",
+          "sourceName": "96.3 KKLZ",
+          "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxQWjBfLWhORmdrTncxeWFJQVdyZEl6N0ZDLTJwY3R3dWZhZnRhckJaUTBtTHl5MENJVmQ2Q2ppVEpnN1hXSjRobG9Db2t5Y1haamlrSmtpVUZFVHJTR0tXOGhuYzlXZ242U19FQ3E2WWNCVkF4ZXgtZ3dkazYyUHpMYWlGemxCcFhWV2tleksxaWl4NzB2bXZwazRINWRMN3hvSG9kVzQ3MHlvTVZnYmY1b2xIaVBkWE0",
+          "published": "2026-10-26",
+          "tier": "news",
+          "via": "google-news"
+        }
+      ],
+      "signals": [],
+      "total": 24,
+      "band": "P3",
+      "priority": "P3",
+      "capped": null,
+      "statusEvidenceUrl": null,
+      "surface": true,
+      "surfaceReasons": [
+        "new"
+      ],
+      "statusNote": null
+    },
+    {
+      "key": "las-vegas-valley-wide-senator-cortez-masto-senator-warren-to",
+      "isExisting": false,
+      "name": "Senator Cortez Masto, Senator Warren tour new Las Vegas affordable housing",
+      "kind": "project",
+      "area": "Las Vegas (valley-wide)",
+      "category": "F. Relocation / cost of living",
+      "status": "RUMORED / UNCONFIRMED",
+      "statusEvidence": null,
+      "statusEvidenceId": null,
+      "materialNewInfo": false,
+      "whatChanged": "",
+      "scores": {
+        "local_relevance": 3,
+        "relocation_value": 5,
+        "conversation_potential": 2,
+        "visual_potential": 2,
+        "evergreen_value": 4,
+        "real_estate_connection": 4,
+        "novelty": 2,
+        "lvinit_fit": 3
+      },
+      "whyItMatters": "Rules-only mode — source summary: Senator Cortez Masto, Senator Warren tour new Las Vegas affordable housing",
+      "whyPeopleCare": "Needs Mikey's angle (rules-only mode cannot judge audience).",
+      "hook": "Needs Mikey's angle (rules-only mode does not write hooks).",
+      "bestFormat": "talking-head Reel",
+      "secondaryFormats": [
+        "LVINIT article"
+      ],
+      "flywheel": [],
+      "fieldShoot": {
+        "recommended": false,
+        "locationType": "",
+        "shots": [],
+        "drone": "",
+        "aRoll": "",
+        "urgency": "no shoot needed"
+      },
+      "articleOpportunity": "Possible update to /guides/gholson-landing-affordable-housing-east-las-vegas",
+      "existingContent": [
+        {
+          "route": "/guides/gholson-landing-affordable-housing-east-las-vegas",
+          "action": "internal link",
+          "note": "Related by area/topic (rules match)."
+        },
+        {
+          "route": "/guides/las-vegas-housing-market",
+          "action": "internal link",
+          "note": "Related by area/topic (rules match)."
+        },
+        {
+          "route": "/guides/what-500k-buys-in-las-vegas",
+          "action": "internal link",
+          "note": "Related by area/topic (rules match)."
+        }
+      ],
+      "missingConfirmation": "No source text states the project's status.",
+      "promotionTrigger": "",
+      "sources": [
+        {
+          "id": "c-4a9acf8a49",
+          "title": "Senator Cortez Masto, Senator Warren tour new Las Vegas affordable housing",
+          "sourceName": "FOX5 Vegas",
+          "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxPcTdjYUx0V1cwbVFMZmVMNFNWVDlyMHdSWWZWX2lwZjNSekJqQTE2SDdoOTRpVC1YUDliNk9sSXdlVURMcEVxdkxQNDIyeTBOOGpfMkZzbGJ3ZUlvSTVUYVZ3bEF6YUhFNUVjZ19vT0FwRzdIWkxxelBZYzNRcnhXR1Fsd0hiMHMyS0FQRU8wcjF1M1FVT05yR01mYTgwaHN3SUw4WDhLTGZ4RFNocXF4btIBxAFBVV95cUxQTmstdzBvODNWd1VaczgzX2NySllVZTUwSVVUb1ZPajEweFZmZmlWVGhRQzRqLUhrVUh3TEpRVk96Z2hRVjNTTnhoaldkcjhHM1RXSU50R1diVkpneVNqbTdaNXd3Y2JBZ0JtMnJNUDBhTFhsbWpLUGlfdUpab0dWWGNlTVl2V0RWYXFkY1lWSHZYN2MwMkhFd1FBcGkybFZGNGl2N091aU90U2VkN0FBMDE1cUFKNGdNOVBOOEtHdVZZYnJq",
+          "published": "2026-10-21",
+          "tier": "news",
+          "via": "google-news"
+        }
+      ],
+      "signals": [],
+      "total": 25,
+      "band": "P3",
+      "priority": "P3",
+      "capped": null,
+      "statusEvidenceUrl": null,
+      "surface": true,
+      "surfaceReasons": [
+        "new"
+      ],
+      "statusNote": null
+    },
+    {
+      "key": "las-vegas-valley-wide-report-ranks-las-vegas-among-north-ame",
+      "isExisting": false,
+      "name": "Report ranks Las Vegas among North America’s lowest quality-of-life cities",
+      "kind": "project",
+      "area": "Las Vegas (valley-wide)",
+      "category": "F. Relocation / cost of living",
+      "status": "UNDER CONSTRUCTION",
+      "statusEvidence": "The upscale development is being built near Whole Foods at The District at Green Valley Ranch.",
+      "statusEvidenceId": "c-288a4b4169",
+      "materialNewInfo": false,
+      "whatChanged": "",
+      "scores": {
+        "local_relevance": 3,
+        "relocation_value": 5,
+        "conversation_potential": 3,
+        "visual_potential": 2,
+        "evergreen_value": 4,
+        "real_estate_connection": 4,
+        "novelty": 2,
+        "lvinit_fit": 3
+      },
+      "whyItMatters": "Rules-only mode — source summary: The Las Vegas Valley ranked 66th out of 73 North American cities in Numbeo’s quality-of-life report, with property affordability among its weakest scores.",
+      "whyPeopleCare": "Needs Mikey's angle (rules-only mode cannot judge audience).",
+      "hook": "Needs Mikey's angle (rules-only mode does not write hooks).",
+      "bestFormat": "talking-head Reel",
+      "secondaryFormats": [
+        "LVINIT article"
+      ],
+      "flywheel": [],
+      "fieldShoot": {
+        "recommended": false,
+        "locationType": "",
+        "shots": [],
+        "drone": "",
+        "aRoll": "",
+        "urgency": "no shoot needed"
+      },
+      "articleOpportunity": "Possible update to /guides/las-vegas-home-prices-august-2026",
+      "existingContent": [
+        {
+          "route": "/guides/las-vegas-home-prices-august-2026",
+          "action": "internal link",
+          "note": "Related by area/topic (rules match)."
+        },
+        {
+          "route": "/guides/las-vegas-home-prices-july-2026",
+          "action": "internal link",
+          "note": "Related by area/topic (rules match)."
+        },
+        {
+          "route": "/guides/las-vegas-new-home-sales-july-2026",
+          "action": "internal link",
+          "note": "Related by area/topic (rules match)."
+        }
+      ],
+      "missingConfirmation": "",
+      "promotionTrigger": "",
+      "sources": [
+        {
+          "id": "c-288a4b4169",
+          "title": "Report ranks Las Vegas among North America’s lowest quality-of-life cities",
+          "sourceName": "Las Vegas Review-Journal — Business",
+          "url": "https://reviewjournal.com/business/housing/report-ranks-las-vegas-among-north-americas-lowest-quality-of-life-cities-3905374",
+          "published": "2026-10-26",
+          "tier": "news",
+          "via": "rj-business"
+        }
+      ],
+      "signals": [],
+      "total": 26,
+      "band": "P3",
+      "priority": "P3",
+      "capped": null,
+      "statusEvidenceUrl": "https://reviewjournal.com/business/housing/report-ranks-las-vegas-among-north-americas-lowest-quality-of-life-cities-3905374",
+      "surface": true,
+      "surfaceReasons": [
+        "new"
+      ],
+      "statusNote": null
+    },
+    {
+      "key": "clark-county-clark-county-home-prices-fall-5-as-las-vegas-in",
+      "isExisting": false,
+      "name": "Clark County Home Prices Fall 5% as Las Vegas Inventory Hits 10,000 Listings",
+      "kind": "project",
+      "area": "Clark County",
+      "category": "F. Relocation / cost of living",
+      "status": "RUMORED / UNCONFIRMED",
+      "statusEvidence": null,
+      "statusEvidenceId": null,
+      "materialNewInfo": false,
+      "whatChanged": "",
+      "scores": {
+        "local_relevance": 4,
+        "relocation_value": 5,
+        "conversation_potential": 2,
+        "visual_potential": 2,
+        "evergreen_value": 4,
+        "real_estate_connection": 4,
+        "novelty": 2,
+        "lvinit_fit": 3
+      },
+      "whyItMatters": "Rules-only mode — source summary: Clark County Home Prices Fall 5% as Las Vegas Inventory Hits 10,000 Listings",
+      "whyPeopleCare": "Needs Mikey's angle (rules-only mode cannot judge audience).",
+      "hook": "Needs Mikey's angle (rules-only mode does not write hooks).",
+      "bestFormat": "talking-head Reel",
+      "secondaryFormats": [
+        "LVINIT article"
+      ],
+      "flywheel": [],
+      "fieldShoot": {
+        "recommended": false,
+        "locationType": "",
+        "shots": [],
+        "drone": "",
+        "aRoll": "",
+        "urgency": "no shoot needed"
+      },
+      "articleOpportunity": "Possible update to /guides/closing-costs-las-vegas-buyers",
+      "existingContent": [
+        {
+          "route": "/guides/closing-costs-las-vegas-buyers",
+          "action": "internal link",
+          "note": "Related by area/topic (rules match)."
+        },
+        {
+          "route": "/guides/will-las-vegas-home-prices-drop",
+          "action": "internal link",
+          "note": "Related by area/topic (rules match)."
+        },
+        {
+          "route": "/guides/las-vegas-home-prices-august-2026",
+          "action": "internal link",
+          "note": "Related by area/topic (rules match)."
+        }
+      ],
+      "missingConfirmation": "No source text states the project's status.",
+      "promotionTrigger": "",
+      "sources": [
+        {
+          "id": "c-287e6d0b56",
+          "title": "Clark County Home Prices Fall 5% as Las Vegas Inventory Hits 10,000 Listings",
+          "sourceName": "Hoodline",
+          "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxQUk1tRjZyQzAtLTcxT0JMMEdEODNhd2hvRW5jT2hZQWx4REpSZTVjM0oxWGY1TzBRRUt2a3NFekhpVmw5U2tuelUyaUhKeG41LU16WjhHcDRtbzR3TUwxMS15d2d4MnYxWS1tTldRS2JiaEFTTEktZ2ZQV2pDWE52Z3owNnVmUGxVSmtMRDh5RWs5OWRlYkl6QmhDcGgxd2NPSFRsWDc2Yjc",
+          "published": "2026-10-26",
+          "tier": "news",
+          "via": "google-news"
+        }
+      ],
+      "signals": [],
+      "total": 26,
+      "band": "P3",
+      "priority": "P3",
+      "capped": null,
+      "statusEvidenceUrl": null,
+      "surface": true,
+      "surfaceReasons": [
+        "new"
+      ],
+      "statusNote": null
+    },
+    {
+      "key": "clark-county-clark-county-home-price-drop-among-biggest-in-n",
+      "isExisting": false,
+      "name": "Clark County home price drop among biggest in nation, report says",
+      "kind": "project",
+      "area": "Clark County",
+      "category": "F. Relocation / cost of living",
+      "status": "RUMORED / UNCONFIRMED",
+      "statusEvidence": null,
+      "statusEvidenceId": null,
+      "materialNewInfo": false,
+      "whatChanged": "",
+      "scores": {
+        "local_relevance": 4,
+        "relocation_value": 5,
+        "conversation_potential": 2,
+        "visual_potential": 2,
+        "evergreen_value": 4,
+        "real_estate_connection": 4,
+        "novelty": 2,
+        "lvinit_fit": 3
+      },
+      "whyItMatters": "Rules-only mode — source summary: Home values in Clark County dropped by 5% in the third quarter of 2026, tying with Miami-Dade for the fourth biggest decline among major metropolitan areas, according to a new report from ATTOM, a national real estate data analyst. Middlesex County, MA, where sales prices declined 11%, led the drop among major metro areas. Orange […]",
+      "whyPeopleCare": "Needs Mikey's angle (rules-only mode cannot judge audience).",
+      "hook": "Needs Mikey's angle (rules-only mode does not write hooks).",
+      "bestFormat": "talking-head Reel",
+      "secondaryFormats": [
+        "LVINIT article"
+      ],
+      "flywheel": [],
+      "fieldShoot": {
+        "recommended": false,
+        "locationType": "",
+        "shots": [],
+        "drone": "",
+        "aRoll": "",
+        "urgency": "no shoot needed"
+      },
+      "articleOpportunity": "Possible update to /guides/closing-costs-las-vegas-buyers",
+      "existingContent": [
+        {
+          "route": "/guides/closing-costs-las-vegas-buyers",
+          "action": "internal link",
+          "note": "Related by area/topic (rules match)."
+        },
+        {
+          "route": "/guides/las-vegas-home-prices-august-2026",
+          "action": "internal link",
+          "note": "Related by area/topic (rules match)."
+        },
+        {
+          "route": "/guides/las-vegas-home-prices-july-2026",
+          "action": "internal link",
+          "note": "Related by area/topic (rules match)."
+        }
+      ],
+      "missingConfirmation": "No source text states the project's status.",
+      "promotionTrigger": "",
+      "sources": [
+        {
+          "id": "c-8bea4d9c7d",
+          "title": "Clark County home price drop among biggest in nation, report says",
+          "sourceName": "Nevada Current",
+          "url": "https://nevadacurrent.com/2026/10/26/clark-county-home-price-drop-among-biggest-in-nation-report-says",
+          "published": "2026-10-26",
+          "tier": "news",
+          "via": "nevada-current"
+        }
+      ],
+      "signals": [],
+      "total": 26,
+      "band": "P3",
+      "priority": "P3",
+      "capped": null,
+      "statusEvidenceUrl": null,
+      "surface": true,
+      "surfaceReasons": [
+        "new"
+      ],
+      "statusNote": null
+    },
+    {
+      "key": "las-vegas-valley-wide-generations-of-diners-say-goodbye-to-c",
+      "isExisting": false,
+      "name": "Generations of diners say goodbye to Chapala, Las Vegas' beloved family-run Mexican restaurant",
+      "kind": "project",
+      "area": "Las Vegas (valley-wide)",
+      "category": "B. Neighborhood changes",
+      "status": "OPEN",
+      "statusEvidence": "The Flores family opened Chapala in downtown Los Angeles in the 1960s before moving to Las Vegas, at Charleston Boulevard and Bruce Street.",
+      "statusEvidenceId": "c-89eff68ebd",
+      "materialNewInfo": false,
+      "whatChanged": "",
+      "scores": {
+        "local_relevance": 3,
+        "relocation_value": 4,
+        "conversation_potential": 3,
+        "visual_potential": 4,
+        "evergreen_value": 3,
+        "real_estate_connection": 3,
+        "novelty": 2,
+        "lvinit_fit": 3
+      },
+      "whyItMatters": "Rules-only mode — source summary: Chapala will close next month when its lease expires. The family is negotiating with another group in hopes of keeping the business running ...",
+      "whyPeopleCare": "Needs Mikey's angle (rules-only mode cannot judge audience).",
+      "hook": "Needs Mikey's angle (rules-only mode does not write hooks).",
+      "bestFormat": "Reel / TikTok / Short",
+      "secondaryFormats": [
+        "LVINIT article"
+      ],
+      "flywheel": [],
+      "fieldShoot": {
+        "recommended": true,
+        "locationType": "The site itself in Las Vegas (valley-wide) — confirm the location from the source before driving out.",
+        "shots": [],
+        "drone": "",
+        "aRoll": "",
+        "urgency": "shoot this month"
+      },
+      "articleOpportunity": "Possible update to /guides/las-vegas-down-payment-assistance-programs-2026",
+      "existingContent": [
+        {
+          "route": "/guides/las-vegas-down-payment-assistance-programs-2026",
+          "action": "internal link",
+          "note": "Related by area/topic (rules match)."
+        },
+        {
+          "route": "/guides/las-vegas-home-prices-august-2026",
+          "action": "internal link",
+          "note": "Related by area/topic (rules match)."
+        },
+        {
+          "route": "/guides/las-vegas-home-prices-july-2026",
+          "action": "internal link",
+          "note": "Related by area/topic (rules match)."
+        }
+      ],
+      "missingConfirmation": "",
+      "promotionTrigger": "",
+      "sources": [
+        {
+          "id": "c-89eff68ebd",
+          "title": "Generations of diners say goodbye to Chapala, Las Vegas' beloved family-run Mexican restaurant",
+          "sourceName": "Las Vegas Sun — Business",
+          "url": "https://lasvegassun.com/news/2026/oct/26/end-of-an-era-as-las-vegas-institutional-favorite",
+          "published": "2026-10-26",
+          "tier": "news",
+          "via": "sun-business"
+        }
+      ],
+      "signals": [
+        {
+          "title": "Spatial Awareness - Rant",
+          "url": "https://reddit.com/r/LasVegas/comments/1xfnnk5/spatial_awareness_rant",
+          "sourceName": "Reddit r/LasVegas",
+          "published": "2026-10-26T04:51:32.000Z"
+        }
+      ],
+      "total": 25,
+      "band": "P3",
+      "priority": "P3",
+      "capped": null,
+      "statusEvidenceUrl": "https://lasvegassun.com/news/2026/oct/26/end-of-an-era-as-las-vegas-institutional-favorite",
+      "surface": true,
+      "surfaceReasons": [
+        "new"
+      ],
+      "statusNote": null
+    },
+    {
+      "key": "north-las-vegas-school-loan-repayments-emerge-as-nevada-camp",
+      "isExisting": false,
+      "name": "School loan repayments emerge as Nevada campaign issue",
+      "kind": "project",
+      "area": "North Las Vegas",
+      "category": "B. Neighborhood changes",
+      "status": "RUMORED / UNCONFIRMED",
+      "statusEvidence": null,
+      "statusEvidenceId": null,
+      "materialNewInfo": false,
+      "whatChanged": "",
+      "scores": {
+        "local_relevance": 4,
+        "relocation_value": 4,
+        "conversation_potential": 3,
+        "visual_potential": 4,
+        "evergreen_value": 3,
+        "real_estate_connection": 3,
+        "novelty": 2,
+        "lvinit_fit": 3
+      },
+      "whyItMatters": "Rules-only mode — source summary: LAS VEGAS (KLAS) -- As the price of higher education climbs, so do the number of students taking out loans and the amount they borrow. During her visit to North Las Vegas last week, U.S. Secretary of Education Linda McMahon said it's a cycle that needs to shift, and she blames universities. \"[They're] treating students [...]",
+      "whyPeopleCare": "Needs Mikey's angle (rules-only mode cannot judge audience).",
+      "hook": "Needs Mikey's angle (rules-only mode does not write hooks).",
+      "bestFormat": "Reel / TikTok / Short",
+      "secondaryFormats": [
+        "LVINIT article"
+      ],
+      "flywheel": [],
+      "fieldShoot": {
+        "recommended": true,
+        "locationType": "The site itself in North Las Vegas — confirm the location from the source before driving out.",
+        "shots": [],
+        "drone": "",
+        "aRoll": "",
+        "urgency": "shoot this month"
+      },
+      "articleOpportunity": "Possible update to /guides/one-civic-center-north-las-vegas-redevelopment",
+      "existingContent": [
+        {
+          "route": "/guides/one-civic-center-north-las-vegas-redevelopment",
+          "action": "internal link",
+          "note": "Related by area/topic (rules match)."
+        },
+        {
+          "route": "/guides/sandstone-tule-springs-north-las-vegas",
+          "action": "internal link",
+          "note": "Related by area/topic (rules match)."
+        },
+        {
+          "route": "/neighborhoods/north-las-vegas",
+          "action": "internal link",
+          "note": "Related by area/topic (rules match)."
+        }
+      ],
+      "missingConfirmation": "No source text states the project's status.",
+      "promotionTrigger": "",
+      "sources": [
+        {
+          "id": "c-f250e61425",
+          "title": "School loan repayments emerge as Nevada campaign issue",
+          "sourceName": "8 News Now",
+          "url": "https://8newsnow.com/news/education/school-loan-repayments-emerge-as-nevada-campaign-issue",
+          "published": "2026-10-25",
+          "tier": "news",
+          "via": "8newsnow"
+        }
+      ],
+      "signals": [
+        {
+          "title": "Spatial Awareness - Rant",
+          "url": "https://reddit.com/r/LasVegas/comments/1xfnnk5/spatial_awareness_rant",
+          "sourceName": "Reddit r/LasVegas",
+          "published": "2026-10-26T04:51:32.000Z"
+        }
+      ],
+      "total": 26,
+      "band": "P3",
+      "priority": "P3",
+      "capped": null,
+      "statusEvidenceUrl": null,
+      "surface": true,
+      "surfaceReasons": [
+        "new"
+      ],
+      "statusNote": null
+    },
+    {
+      "key": "north-las-vegas-north-las-vegas-eyes-buying-affordable-compl",
+      "isExisting": false,
+      "name": "North Las Vegas Eyes Buying Affordable Complex, Leaves Tenants Guessing",
+      "kind": "project",
+      "area": "North Las Vegas",
+      "category": "F. Relocation / cost of living",
+      "status": "PROPOSED",
+      "statusEvidence": "North Las Vegas Eyes Buying Affordable Complex, Leaves Tenants Guessing.",
+      "statusEvidenceId": "c-75a911093e",
+      "materialNewInfo": false,
+      "whatChanged": "",
+      "scores": {
+        "local_relevance": 4,
+        "relocation_value": 5,
+        "conversation_potential": 2,
+        "visual_potential": 2,
+        "evergreen_value": 4,
+        "real_estate_connection": 4,
+        "novelty": 2,
+        "lvinit_fit": 3
+      },
+      "whyItMatters": "Rules-only mode — source summary: North Las Vegas Eyes Buying Affordable Complex, Leaves Tenants Guessing",
+      "whyPeopleCare": "Needs Mikey's angle (rules-only mode cannot judge audience).",
+      "hook": "Needs Mikey's angle (rules-only mode does not write hooks).",
+      "bestFormat": "talking-head Reel",
+      "secondaryFormats": [
+        "LVINIT article"
+      ],
+      "flywheel": [],
+      "fieldShoot": {
+        "recommended": false,
+        "locationType": "",
+        "shots": [],
+        "drone": "",
+        "aRoll": "",
+        "urgency": "no shoot needed"
+      },
+      "articleOpportunity": "Possible update to /guides/one-civic-center-north-las-vegas-redevelopment",
+      "existingContent": [
+        {
+          "route": "/guides/one-civic-center-north-las-vegas-redevelopment",
+          "action": "internal link",
+          "note": "Related by area/topic (rules match)."
+        },
+        {
+          "route": "/guides/sandstone-tule-springs-north-las-vegas",
+          "action": "internal link",
+          "note": "Related by area/topic (rules match)."
+        },
+        {
+          "route": "/neighborhoods/north-las-vegas",
+          "action": "internal link",
+          "note": "Related by area/topic (rules match)."
+        }
+      ],
+      "missingConfirmation": "",
+      "promotionTrigger": "",
+      "sources": [
+        {
+          "id": "c-75a911093e",
+          "title": "North Las Vegas Eyes Buying Affordable Complex, Leaves Tenants Guessing",
+          "sourceName": "Hoodline",
+          "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxPR2pETExITUlDYWhWZWJIVjlpbm1zdktnODZUejhaR0RGRzlxcnZkeklLbm9SdUxhU3c4NmNJazhkT2VHN2tXQnNRNmhyTi1PSjFCTWxuR2d4WXZTYzJHX3ljX1JCMFp1VGZhZjBKX3VvTThxd3d1OVlJMElJYnBPbEpxTjZEMlFTck15RVRnNzcyNnNwMGd3RjN2RVB4TlF4QXc",
+          "published": "2026-10-22",
+          "tier": "news",
+          "via": "google-news"
+        }
+      ],
+      "signals": [],
+      "total": 26,
+      "band": "P3",
+      "priority": "P3",
+      "capped": null,
+      "statusEvidenceUrl": "https://news.google.com/rss/articles/CBMiogFBVV95cUxPR2pETExITUlDYWhWZWJIVjlpbm1zdktnODZUejhaR0RGRzlxcnZkeklLbm9SdUxhU3c4NmNJazhkT2VHN2tXQnNRNmhyTi1PSjFCTWxuR2d4WXZTYzJHX3ljX1JCMFp1VGZhZjBKX3VvTThxd3d1OVlJMElJYnBPbEpxTjZEMlFTck15RVRnNzcyNnNwMGd3RjN2RVB4TlF4QXc",
+      "surface": true,
+      "surfaceReasons": [
+        "new"
+      ],
+      "statusNote": null
+    },
+    {
+      "key": "las-vegas-valley-wide-west-las-vegas-theatre-hosts-concerts-",
+      "isExisting": false,
+      "name": "West Las Vegas Theatre Hosts Concerts Nov. 7 & 14",
+      "kind": "project",
+      "area": "Las Vegas (valley-wide)",
+      "category": "G. Local lifestyle",
+      "status": "RUMORED / UNCONFIRMED",
+      "statusEvidence": null,
+      "statusEvidenceId": null,
+      "materialNewInfo": false,
+      "whatChanged": "",
+      "scores": {
+        "local_relevance": 3,
+        "relocation_value": 4,
+        "conversation_potential": 2,
+        "visual_potential": 4,
+        "evergreen_value": 4,
+        "real_estate_connection": 2,
+        "novelty": 2,
+        "lvinit_fit": 3
+      },
+      "whyItMatters": "Rules-only mode — source summary: Meghin Delaney | Director of Communications | 702-229-2207 Monday, Oct. 26, 2026 | FOR IMMEDIATE RELEASE MEDIA CONTACT: MARGARET KURTZ | 702-229-6993 | cell 702-249-1849 | mkurtz@lasvegasnevada.gov West Las Vegas Theatre Hosts Concerts Nov. 7 & 14 Get Your Tickets Now For 7 P.M. Saturday Performances The West Las Vegas Theatre will host “An Evening With Chrisette Michele” Nov. 7 and “Terry Steele’s Here and Now…The Legacy of Luther Vandross” Nov. 14. General admission tickets for the 7 p.m. concert performances are on sale now. The theatre is located at 951 W. Lake Mead Blvd. Theatre doors wil",
+      "whyPeopleCare": "Needs Mikey's angle (rules-only mode cannot judge audience).",
+      "hook": "Needs Mikey's angle (rules-only mode does not write hooks).",
+      "bestFormat": "Reel / TikTok / Short",
+      "secondaryFormats": [
+        "LVINIT article"
+      ],
+      "flywheel": [],
+      "fieldShoot": {
+        "recommended": true,
+        "locationType": "The site itself in Las Vegas (valley-wide) — confirm the location from the source before driving out.",
+        "shots": [],
+        "drone": "",
+        "aRoll": "",
+        "urgency": "shoot this month"
+      },
+      "articleOpportunity": "Possible update to /guides/henderson-vs-southwest-las-vegas",
+      "existingContent": [
+        {
+          "route": "/guides/henderson-vs-southwest-las-vegas",
+          "action": "internal link",
+          "note": "Related by area/topic (rules match)."
+        },
+        {
+          "route": "/guides/las-vegas-mortgage-rates",
+          "action": "internal link",
+          "note": "Related by area/topic (rules match)."
+        },
+        {
+          "route": "/guides/monument-hills-northwest-las-vegas",
+          "action": "internal link",
+          "note": "Related by area/topic (rules match)."
+        }
+      ],
+      "missingConfirmation": "No source text states the project's status.",
+      "promotionTrigger": "",
+      "sources": [
+        {
+          "id": "c-1de04ee456",
+          "title": "West Las Vegas Theatre Hosts Concerts Nov. 7 & 14",
+          "sourceName": "City of Las Vegas newsroom",
+          "url": "https://content.govdelivery.com/accounts/NVLASVEGAS/bulletins/4302c81",
+          "published": "2026-10-26",
+          "tier": "official",
+          "via": "city-lv-news"
+        }
+      ],
+      "signals": [],
+      "total": 24,
+      "band": "P3",
+      "priority": "P3",
+      "capped": null,
+      "statusEvidenceUrl": null,
+      "surface": true,
+      "surfaceReasons": [
+        "new"
+      ],
+      "statusNote": null
+    },
+    {
+      "key": "las-vegas-valley-wide-united-flight-returns-to-las-vegas-air",
+      "isExisting": false,
+      "name": "United flight returns to Las Vegas airport after 'passenger disturbance'",
+      "kind": "project",
+      "area": "Las Vegas (valley-wide)",
+      "category": "D. Transportation / infrastructure",
+      "status": "RUMORED / UNCONFIRMED",
+      "statusEvidence": null,
+      "statusEvidenceId": null,
+      "materialNewInfo": false,
+      "whatChanged": "",
+      "scores": {
+        "local_relevance": 3,
+        "relocation_value": 4,
+        "conversation_potential": 2,
+        "visual_potential": 3,
+        "evergreen_value": 4,
+        "real_estate_connection": 3,
+        "novelty": 2,
+        "lvinit_fit": 3
+      },
+      "whyItMatters": "Rules-only mode — source summary: LAS VEGAS (KLAS) -- A flight headed to New Jersey from Harry Reid International Airport had to return to Las Vegas following a passenger disturbance, according to airport officials. United Flight 1681 departed from Las Vegas on Saturday; however, it had to return before reaching its intended destination. No injuries were reported aboard the plane, [...]",
+      "whyPeopleCare": "Needs Mikey's angle (rules-only mode cannot judge audience).",
+      "hook": "Needs Mikey's angle (rules-only mode does not write hooks).",
+      "bestFormat": "Instagram carousel",
+      "secondaryFormats": [
+        "LVINIT article"
+      ],
+      "flywheel": [],
+      "fieldShoot": {
+        "recommended": false,
+        "locationType": "",
+        "shots": [],
+        "drone": "",
+        "aRoll": "",
+        "urgency": "no shoot needed"
+      },
+      "articleOpportunity": "Possible update to /guides/buying-new-construction-las-vegas",
+      "existingContent": [
+        {
+          "route": "/guides/buying-new-construction-las-vegas",
+          "action": "internal link",
+          "note": "Related by area/topic (rules match)."
+        },
+        {
+          "route": "/guides/closing-costs-las-vegas-buyers",
+          "action": "internal link",
+          "note": "Related by area/topic (rules match)."
+        },
+        {
+          "route": "/guides/first-summer-in-vegas",
+          "action": "internal link",
+          "note": "Related by area/topic (rules match)."
+        }
+      ],
+      "missingConfirmation": "No source text states the project's status.",
+      "promotionTrigger": "",
+      "sources": [
+        {
+          "id": "c-10911838b4",
+          "title": "United flight returns to Las Vegas airport after 'passenger disturbance'",
+          "sourceName": "8 News Now",
+          "url": "https://8newsnow.com/news/local-news/united-flight-returns-to-las-vegas-after-passenger-disturbance",
+          "published": "2026-10-25",
+          "tier": "news",
+          "via": "8newsnow"
+        }
+      ],
+      "signals": [],
+      "total": 24,
+      "band": "P3",
+      "priority": "P3",
+      "capped": null,
+      "statusEvidenceUrl": null,
+      "surface": true,
+      "surfaceReasons": [
+        "new"
+      ],
+      "statusNote": null
+    },
+    {
+      "key": "las-vegas-valley-wide-raiders-kubiak-on-possibly-starting-me",
+      "isExisting": false,
+      "name": "Raiders' Kubiak on possibly starting Mendoza: 'We're thinking about everything'",
+      "kind": "project",
+      "area": "Las Vegas (valley-wide)",
+      "category": "G. Local lifestyle",
+      "status": "RUMORED / UNCONFIRMED",
+      "statusEvidence": null,
+      "statusEvidenceId": null,
+      "materialNewInfo": false,
+      "whatChanged": "",
+      "scores": {
+        "local_relevance": 3,
+        "relocation_value": 4,
+        "conversation_potential": 2,
+        "visual_potential": 4,
+        "evergreen_value": 4,
+        "real_estate_connection": 2,
+        "novelty": 2,
+        "lvinit_fit": 3
+      },
+      "whyItMatters": "Rules-only mode — source summary: Las Vegas Raiders coach Klint Kubiak is not ruling out a quarterback change.",
+      "whyPeopleCare": "Needs Mikey's angle (rules-only mode cannot judge audience).",
+      "hook": "Needs Mikey's angle (rules-only mode does not write hooks).",
+      "bestFormat": "Reel / TikTok / Short",
+      "secondaryFormats": [
+        "LVINIT article"
+      ],
+      "flywheel": [],
+      "fieldShoot": {
+        "recommended": true,
+        "locationType": "The site itself in Las Vegas (valley-wide) — confirm the location from the source before driving out.",
+        "shots": [],
+        "drone": "",
+        "aRoll": "",
+        "urgency": "shoot this month"
+      },
+      "articleOpportunity": "Possible update to /guides/moving-to-las-vegas",
+      "existingContent": [
+        {
+          "route": "/guides/moving-to-las-vegas",
+          "action": "internal link",
+          "note": "Related by area/topic (rules match)."
+        },
+        {
+          "route": "/guides/buying-new-construction-las-vegas",
+          "action": "internal link",
+          "note": "Related by area/topic (rules match)."
+        },
+        {
+          "route": "/guides/closing-costs-las-vegas-buyers",
+          "action": "internal link",
+          "note": "Related by area/topic (rules match)."
+        }
+      ],
+      "missingConfirmation": "No source text states the project's status.",
+      "promotionTrigger": "",
+      "sources": [
+        {
+          "id": "c-a1cf35dbb3",
+          "title": "Raiders' Kubiak on possibly starting Mendoza: 'We're thinking about everything'",
+          "sourceName": "News 3 Las Vegas",
+          "url": "https://news3lv.com/news/local/las-vegas-raiders-klint-kubiak-fernando-mendoza-kirk-cousins-quarterback-change-press-conference-nfl-sports",
+          "published": "2026-10-26",
+          "tier": "news",
+          "via": "news3lv"
+        }
+      ],
+      "signals": [],
+      "total": 24,
+      "band": "P3",
+      "priority": "P3",
+      "capped": null,
+      "statusEvidenceUrl": null,
+      "surface": true,
+      "surfaceReasons": [
+        "new"
+      ],
+      "statusNote": null
+    },
+    {
+      "key": "las-vegas-valley-wide-jonah-laulu-loving-his-time-with-the-r",
+      "isExisting": false,
+      "name": "Jonah Laulu loving his time with the Raiders & supporting his Centennial Bulldogs",
+      "kind": "project",
+      "area": "Las Vegas (valley-wide)",
+      "category": "G. Local lifestyle",
+      "status": "RUMORED / UNCONFIRMED",
+      "statusEvidence": null,
+      "statusEvidenceId": null,
+      "materialNewInfo": false,
+      "whatChanged": "",
+      "scores": {
+        "local_relevance": 3,
+        "relocation_value": 4,
+        "conversation_potential": 2,
+        "visual_potential": 4,
+        "evergreen_value": 4,
+        "real_estate_connection": 2,
+        "novelty": 2,
+        "lvinit_fit": 3
+      },
+      "whyItMatters": "Rules-only mode — source summary: RAIDERS’ JONAH LAULU RETURNS TO CENTENNIAL TO SUPPORT HIS BULLDOGSSports Director Bryan Salmond caught up with Las Vegas Raiders defensive lineman Jonah Laulu a",
+      "whyPeopleCare": "Needs Mikey's angle (rules-only mode cannot judge audience).",
+      "hook": "Needs Mikey's angle (rules-only mode does not write hooks).",
+      "bestFormat": "Reel / TikTok / Short",
+      "secondaryFormats": [
+        "LVINIT article"
+      ],
+      "flywheel": [],
+      "fieldShoot": {
+        "recommended": true,
+        "locationType": "The site itself in Las Vegas (valley-wide) — confirm the location from the source before driving out.",
+        "shots": [],
+        "drone": "",
+        "aRoll": "",
+        "urgency": "shoot this month"
+      },
+      "articleOpportunity": "Possible update to /guides/gholson-landing-affordable-housing-east-las-vegas",
+      "existingContent": [
+        {
+          "route": "/guides/gholson-landing-affordable-housing-east-las-vegas",
+          "action": "internal link",
+          "note": "Related by area/topic (rules match)."
+        },
+        {
+          "route": "/guides/las-vegas-mortgage-rates",
+          "action": "internal link",
+          "note": "Related by area/topic (rules match)."
+        },
+        {
+          "route": "/guides/las-vegas-starter-home-prices-2026",
+          "action": "internal link",
+          "note": "Related by area/topic (rules match)."
+        }
+      ],
+      "missingConfirmation": "No source text states the project's status.",
+      "promotionTrigger": "",
+      "sources": [
+        {
+          "id": "c-630e24af96",
+          "title": "Jonah Laulu loving his time with the Raiders & supporting his Centennial Bulldogs",
+          "sourceName": "News 3 Las Vegas",
+          "url": "https://news3lv.com/news/local/jonah-laulu-loving-his-time-with-the-raiders-supporting-his-centennial-bulldogs",
+          "published": "2026-10-26",
+          "tier": "news",
+          "via": "news3lv"
+        }
+      ],
+      "signals": [],
+      "total": 24,
+      "band": "P3",
+      "priority": "P3",
+      "capped": null,
+      "statusEvidenceUrl": null,
+      "surface": true,
+      "surfaceReasons": [
+        "new"
+      ],
+      "statusNote": null
+    },
+    {
+      "key": "las-vegas-valley-wide-matthew-stafford-sets-rams-td-pass-rec",
+      "isExisting": false,
+      "name": "Matthew Stafford sets Rams TD pass record as Los Angeles rolls past Raiders 35-21",
+      "kind": "project",
+      "area": "Las Vegas (valley-wide)",
+      "category": "G. Local lifestyle",
+      "status": "RUMORED / UNCONFIRMED",
+      "statusEvidence": null,
+      "statusEvidenceId": null,
+      "materialNewInfo": false,
+      "whatChanged": "",
+      "scores": {
+        "local_relevance": 3,
+        "relocation_value": 4,
+        "conversation_potential": 2,
+        "visual_potential": 4,
+        "evergreen_value": 4,
+        "real_estate_connection": 2,
+        "novelty": 2,
+        "lvinit_fit": 3
+      },
+      "whyItMatters": "Rules-only mode — source summary: Matthew Stafford threw for 195 yards and three touchdowns to become the Rams’ career leader in passing TDs, and Los Angeles beat the Las Vegas Raiders 35-21 on Sunday.",
+      "whyPeopleCare": "Needs Mikey's angle (rules-only mode cannot judge audience).",
+      "hook": "Needs Mikey's angle (rules-only mode does not write hooks).",
+      "bestFormat": "Reel / TikTok / Short",
+      "secondaryFormats": [
+        "LVINIT article"
+      ],
+      "flywheel": [],
+      "fieldShoot": {
+        "recommended": true,
+        "locationType": "The site itself in Las Vegas (valley-wide) — confirm the location from the source before driving out.",
+        "shots": [],
+        "drone": "",
+        "aRoll": "",
+        "urgency": "shoot this month"
+      },
+      "articleOpportunity": "Possible update to /guides/closing-costs-las-vegas-buyers",
+      "existingContent": [
+        {
+          "route": "/guides/closing-costs-las-vegas-buyers",
+          "action": "internal link",
+          "note": "Related by area/topic (rules match)."
+        },
+        {
+          "route": "/guides/las-vegas-down-payment-assistance-programs-2026",
+          "action": "internal link",
+          "note": "Related by area/topic (rules match)."
+        },
+        {
+          "route": "/guides/las-vegas-home-prices-july-2026",
+          "action": "internal link",
+          "note": "Related by area/topic (rules match)."
+        }
+      ],
+      "missingConfirmation": "No source text states the project's status.",
+      "promotionTrigger": "",
+      "sources": [
+        {
+          "id": "c-6480d28630",
+          "title": "Matthew Stafford sets Rams TD pass record as Los Angeles rolls past Raiders 35-21",
+          "sourceName": "8 News Now",
+          "url": "https://8newsnow.com/sports/las-vegas-raiders/matthew-stafford-sets-rams-td-pass-record-as-los-angeles-rolls-past-raiders-35-21",
+          "published": "2026-10-26",
+          "tier": "news",
+          "via": "8newsnow"
+        }
+      ],
+      "signals": [],
+      "total": 24,
+      "band": "P3",
+      "priority": "P3",
+      "capped": null,
+      "statusEvidenceUrl": null,
+      "surface": true,
+      "surfaceReasons": [
+        "new"
+      ],
+      "statusNote": null
+    },
+    {
+      "key": "las-vegas-valley-wide-raiders-rally-falls-short-as-rams-turn",
+      "isExisting": false,
+      "name": "Raiders' rally falls short as Rams turn big first-half lead into 35-21 win",
+      "kind": "project",
+      "area": "Las Vegas (valley-wide)",
+      "category": "G. Local lifestyle",
+      "status": "PROPOSED",
+      "statusEvidence": "The hope for fans of the silver and black was that the Raiders, which were sitting at a surprising 3-3 considering they were projected to be one of the worst teams in the NFL, had cut into the gap.",
+      "statusEvidenceId": "c-4da9b9b7e4",
+      "materialNewInfo": false,
+      "whatChanged": "",
+      "scores": {
+        "local_relevance": 3,
+        "relocation_value": 4,
+        "conversation_potential": 2,
+        "visual_potential": 4,
+        "evergreen_value": 4,
+        "real_estate_connection": 2,
+        "novelty": 2,
+        "lvinit_fit": 3
+      },
+      "whyItMatters": "Rules-only mode — source summary: Las Vegas lost its fourth consecutive game with a 35-21 loss to the Los Angeles Rams, but the latest setback felt like a flip of the first three. ...",
+      "whyPeopleCare": "Needs Mikey's angle (rules-only mode cannot judge audience).",
+      "hook": "Needs Mikey's angle (rules-only mode does not write hooks).",
+      "bestFormat": "Reel / TikTok / Short",
+      "secondaryFormats": [
+        "LVINIT article"
+      ],
+      "flywheel": [],
+      "fieldShoot": {
+        "recommended": true,
+        "locationType": "The site itself in Las Vegas (valley-wide) — confirm the location from the source before driving out.",
+        "shots": [],
+        "drone": "",
+        "aRoll": "",
+        "urgency": "shoot this month"
+      },
+      "articleOpportunity": "Possible update to /guides/first-summer-in-vegas",
+      "existingContent": [
+        {
+          "route": "/guides/first-summer-in-vegas",
+          "action": "internal link",
+          "note": "Related by area/topic (rules match)."
+        },
+        {
+          "route": "/guides/hoa-fees-las-vegas-what-to-check",
+          "action": "internal link",
+          "note": "Related by area/topic (rules match)."
+        },
+        {
+          "route": "/guides/las-vegas-down-payment-assistance-programs-2026",
+          "action": "internal link",
+          "note": "Related by area/topic (rules match)."
+        }
+      ],
+      "missingConfirmation": "",
+      "promotionTrigger": "",
+      "sources": [
+        {
+          "id": "c-4da9b9b7e4",
+          "title": "Raiders' rally falls short as Rams turn big first-half lead into 35-21 win",
+          "sourceName": "Vegas Inc",
+          "url": "https://lasvegassun.com/news/2026/oct/25/raiders-rally-falls-short-against-rams-in-35-21-de",
+          "published": "2026-10-25",
+          "tier": "news",
+          "via": "vegas-inc"
+        }
+      ],
+      "signals": [],
+      "total": 24,
+      "band": "P3",
+      "priority": "P3",
+      "capped": null,
+      "statusEvidenceUrl": "https://lasvegassun.com/news/2026/oct/25/raiders-rally-falls-short-against-rams-in-35-21-de",
+      "surface": true,
+      "surfaceReasons": [
+        "new"
+      ],
+      "statusNote": null
+    },
+    {
+      "key": "las-vegas-valley-wide-balloon-glow-and-laser-show-at-craig-r",
+      "isExisting": false,
+      "name": "Balloon Glow and Laser Show at Craig Ranch Park, Las Vegas",
+      "kind": "project",
+      "area": "Las Vegas (valley-wide)",
+      "category": "B. Neighborhood changes",
+      "status": "RUMORED / UNCONFIRMED",
+      "statusEvidence": null,
+      "statusEvidenceId": null,
+      "materialNewInfo": false,
+      "whatChanged": "",
+      "scores": {
+        "local_relevance": 3,
+        "relocation_value": 4,
+        "conversation_potential": 3,
+        "visual_potential": 4,
+        "evergreen_value": 3,
+        "real_estate_connection": 3,
+        "novelty": 2,
+        "lvinit_fit": 3
+      },
+      "whyItMatters": "Rules-only mode — source summary: Balloon Glow and Laser Show at Craig Ranch Park, Las Vegas",
+      "whyPeopleCare": "Needs Mikey's angle (rules-only mode cannot judge audience).",
+      "hook": "Needs Mikey's angle (rules-only mode does not write hooks).",
+      "bestFormat": "Reel / TikTok / Short",
+      "secondaryFormats": [
+        "LVINIT article"
+      ],
+      "flywheel": [],
+      "fieldShoot": {
+        "recommended": true,
+        "locationType": "The site itself in Las Vegas (valley-wide) — confirm the location from the source before driving out.",
+        "shots": [],
+        "drone": "",
+        "aRoll": "",
+        "urgency": "shoot this month"
+      },
+      "articleOpportunity": "Possible update to /guides/las-vegas-home-prices-july-2026",
+      "existingContent": [
+        {
+          "route": "/guides/las-vegas-home-prices-july-2026",
+          "action": "internal link",
+          "note": "Related by area/topic (rules match)."
+        },
+        {
+          "route": "/guides/las-vegas-mortgage-rates-approach-7-percent",
+          "action": "internal link",
+          "note": "Related by area/topic (rules match)."
+        },
+        {
+          "route": "/guides/las-vegas-new-home-sales-july-2026",
+          "action": "internal link",
+          "note": "Related by area/topic (rules match)."
+        }
+      ],
+      "missingConfirmation": "No source text states the project's status.",
+      "promotionTrigger": "",
+      "sources": [
+        {
+          "id": "c-1d1920b7f9",
+          "title": "Balloon Glow and Laser Show at Craig Ranch Park, Las Vegas",
+          "sourceName": "Hoodline",
+          "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxPSEQtMjVCUU5ESDMtTWZDZmRsNkN3Qk5SM2haUkJYc0h2aThlSTBkOTFxc2VnUkFRX1pEMmRPSUxGNVkzbmpOZnZsVVZ2bW1hZE9uZzBsNTl0ZnFWUk1ycmNWbndBWVo0eTdvTmpXTWdSTkxuUThBVFVrdlNuSVhVSmc3bFdQcmN5a09tc0ViNHhXbkJmTVh0WlJiNVg0ekgwVXRNWnJnemV4WVJq",
+          "published": "2026-10-24",
+          "tier": "news",
+          "via": "google-news"
+        }
+      ],
+      "signals": [
+        {
+          "title": "Spatial Awareness - Rant",
+          "url": "https://reddit.com/r/LasVegas/comments/1xfnnk5/spatial_awareness_rant",
+          "sourceName": "Reddit r/LasVegas",
+          "published": "2026-10-26T04:51:32.000Z"
+        }
+      ],
+      "total": 25,
+      "band": "P3",
+      "priority": "P3",
+      "capped": null,
+      "statusEvidenceUrl": null,
+      "surface": true,
+      "surfaceReasons": [
+        "new"
+      ],
+      "statusNote": null
+    }
+  ],
+  "rejected": [],
+  "filtered": [
+    {
+      "title": "Rising prices squeeze more Americans ahead of pivotal midterm elections",
+      "url": "https://nevadacurrent.com/2026/10/26/repub/rising-prices-squeeze-more-americans-ahead-of-pivotal-midterm-elections",
+      "reason": "no housing, neighborhood, development or lifestyle angle",
+      "sourceName": "Nevada Current"
+    },
+    {
+      "title": "Whatever the outcome of Israel's election, its policies toward the Palestinians will largely endure",
+      "url": "https://lasvegassun.com/news/2026/oct/26/whatever-the-outcome-of-israels-election-its-polic",
+      "reason": "no housing, neighborhood, development or lifestyle angle",
+      "sourceName": "Las Vegas Sun — News"
+    },
+    {
+      "title": "Third data center gas plant seeks approval, as gas pipeline expansion advances",
+      "url": "https://nevadacurrent.com/2026/10/26/third-data-center-gas-plant-seeks-approval-as-gas-pipeline-expansion-advances",
+      "reason": "no identifiable Las Vegas-area location",
+      "sourceName": "Nevada Current"
+    },
+    {
+      "title": "Clark County Fire Department investigates reports of smoke at Sunrise Pediatrics",
+      "url": "https://8newsnow.com/news/local-news/clark-count-fire-department-investigates-smoke-investigation-at-sunrise-pediatrics",
+      "reason": "no housing, neighborhood, development or lifestyle angle",
+      "sourceName": "8 News Now"
+    },
+    {
+      "title": "Lula mobilized millions to win Brazil's election, while Bolsonaro contests victory",
+      "url": "https://lasvegassun.com/news/2026/oct/26/lula-mobilized-millions-to-win-brazils-election-wh",
+      "reason": "no housing, neighborhood, development or lifestyle angle",
+      "sourceName": "Las Vegas Sun — News"
+    },
+    {
+      "title": "Thousands of observers are expected to descend on polling places to monitor the vote on Election Day",
+      "url": "https://lasvegassun.com/news/2026/oct/26/thousands-of-observers-are-expected-to-descend-on",
+      "reason": "no housing, neighborhood, development or lifestyle angle",
+      "sourceName": "Las Vegas Sun — News"
+    },
+    {
+      "title": "9th Circuit questions DOJ demand to set aside 20,000 California mail ballots",
+      "url": "https://lasvegassun.com/news/2026/oct/26/9th-circuit-questions-doj-demand-to-set-aside-2000",
+      "reason": "no housing, neighborhood, development or lifestyle angle",
+      "sourceName": "Las Vegas Sun — News"
+    },
+    {
+      "title": "Trump heads to Mississippi as the two parties prepare for final sprint ahead of midterm Election Day",
+      "url": "https://lasvegassun.com/news/2026/oct/26/trump-heads-to-mississippi-as-the-two-parties-prep",
+      "reason": "no housing, neighborhood, development or lifestyle angle",
+      "sourceName": "Las Vegas Sun — News"
+    },
+    {
+      "title": "Vatican confirms Pope Leo's Latin America trip after postsurgery checkup",
+      "url": "https://lasvegassun.com/news/2026/oct/26/vatican-confirms-pope-leos-latin-america-trip-afte",
+      "reason": "no housing, neighborhood, development or lifestyle angle",
+      "sourceName": "Las Vegas Sun — News"
+    },
+    {
+      "title": "Dry start to week expected to give way to rain, mountain snow, cooler weather in Southern Nevada",
+      "url": "https://lasvegassun.com/news/2026/oct/26/dry-start-to-week-expected-to-give-way-to-rain-mou",
+      "reason": "no housing, neighborhood, development or lifestyle angle",
+      "sourceName": "Las Vegas Sun — News"
+    },
+    {
+      "title": "Here's how you can participate in a time capsule project for Nevada Day",
+      "url": "https://8newsnow.com/news/local-news/heres-how-you-can-participate-in-a-time-capsule-project-for-nevada-day",
+      "reason": "no housing, neighborhood, development or lifestyle angle",
+      "sourceName": "8 News Now"
+    },
+    {
+      "title": "Flood warning lingers in Four Corners as soaked towns face sewage-tainted waters. 1 death reported",
+      "url": "https://lasvegassun.com/news/2026/oct/26/flood-warning-lingers-in-four-corners-as-soaked-to",
+      "reason": "no housing, neighborhood, development or lifestyle angle",
+      "sourceName": "Las Vegas Sun — News"
+    },
+    {
+      "title": "In Las Vegas, Ocasio-Cortez makes the case for ‘working-class’ Horsford",
+      "url": "https://lasvegassun.com/news/2026/oct/26/in-las-vegas-ocasio-cortez-makes-the-case-for-work",
+      "reason": "no housing, neighborhood, development or lifestyle angle",
+      "sourceName": "Las Vegas Sun — News"
+    },
+    {
+      "title": "Anthropic files for potentially the biggest IPO ever as CEO warns of risk to humanity from AI",
+      "url": "https://lasvegassun.com/news/2026/oct/26/anthropic-files-for-potentially-the-biggest-ipo-ev",
+      "reason": "no housing, neighborhood, development or lifestyle angle",
+      "sourceName": "Las Vegas Sun — News"
+    },
+    {
+      "title": "La futura presidenta de la alianza inmobiliaria ve resiliencia y una gran demanda en el mercado del sur de Nevada",
+      "url": "https://vegasinc.lasvegassun.com/business/2026/oct/26/la-futura-presidenta-de-la-alianza-inmobiliaria-ve",
+      "reason": "no housing, neighborhood, development or lifestyle angle",
+      "sourceName": "Las Vegas Sun — Business"
+    },
+    {
+      "title": "Quirky Tropicana Field isn't a pretty ballpark, but the Rays love their home",
+      "url": "https://lasvegassun.com/news/2026/oct/26/quirky-tropicana-field-isnt-a-pretty-ballpark-but",
+      "reason": "no housing, neighborhood, development or lifestyle angle",
+      "sourceName": "Las Vegas Sun — News"
+    },
+    {
+      "title": "Susan G. Komen Nevada hosts Pop-Up Walk at Sunset Park",
+      "url": "https://8newsnow.com/news/local-news/susan-g-komen-hosts-pop-up-walk-at-sunset-park",
+      "reason": "no identifiable Las Vegas-area location",
+      "sourceName": "8 News Now"
+    },
+    {
+      "title": "Diversifying Nevada’s economy starts with banking, finance and insurance",
+      "url": "https://lasvegassun.com/news/2026/oct/26/diversifying-nevadas-economy-starts-with-banking-f",
+      "reason": "no housing, neighborhood, development or lifestyle angle",
+      "sourceName": "Las Vegas Sun — Business"
+    },
+    {
+      "title": "Los clientes habituales se despiden del Chapala de Las Vegas antes de que sus dueños se jubilen",
+      "url": "https://lasvegassun.com/news/2026/oct/26/los-clientes-habituales-se-despiden-del-chapala-de",
+      "reason": "no housing, neighborhood, development or lifestyle angle",
+      "sourceName": "Las Vegas Sun — Business"
+    },
+    {
+      "title": "Judge: Trump DOJ illegally fired ex-FBI director's daughter, Maurene Comey, as a federal prosecutor",
+      "url": "https://lasvegassun.com/news/2026/oct/26/judge-trump-doj-illegally-fired-ex-fbi-directors-d",
+      "reason": "no housing, neighborhood, development or lifestyle angle",
+      "sourceName": "Las Vegas Sun — News"
+    },
+    {
+      "title": "Kalshi courts Wall Street in bid to be the ‘inflation exchange’",
+      "url": "https://lasvegassun.com/news/2026/oct/26/kalshi-courts-wall-street-in-bid-to-be-the-inflati",
+      "reason": "no housing, neighborhood, development or lifestyle angle",
+      "sourceName": "Las Vegas Sun — News"
+    },
+    {
+      "title": "Boulder City police arrest man for murder in 2021 shooting death of Scott Dingman",
+      "url": "https://ktnv.com/news/crime/boulder-city-police-arrest-man-for-murder-in-2021-shooting-death-of-scott-dingman",
+      "reason": "crime / public safety",
+      "sourceName": "KTNV 13 Action News"
+    },
+    {
+      "title": "Incoming real estate alliance president sees resilience and high demand in Southern Nevada market",
+      "url": "https://vegasinc.lasvegassun.com/business/2026/oct/26/incoming-real-estate-alliance-president-sees-resil",
+      "reason": "no housing, neighborhood, development or lifestyle angle",
+      "sourceName": "Las Vegas Sun — Business"
+    },
+    {
+      "title": "Police: Nevada sex offender who absconded from probation arrested in Mississippi",
+      "url": "https://lasvegassun.com/news/2026/oct/26/police-nevada-sex-offender-who-absconded-from-prob",
+      "reason": "crime / public safety",
+      "sourceName": "Las Vegas Sun — News"
+    },
+    {
+      "title": "New Nevada Donor Network facility set to utilize specialized technology to save lives",
+      "url": "https://ktnv.com/news/new-nevada-donor-network-facility-set-to-utilize-specialized-technology-to-save-lives",
+      "reason": "no housing, neighborhood, development or lifestyle angle",
+      "sourceName": "KTNV 13 Action News"
+    },
+    {
+      "title": "Las Vegas police say man accused of making terroristic threats on plane",
+      "url": "https://reviewjournal.com/crime/united-flight-returns-to-las-vegas-airport-after-potential-security-concern-3904920",
+      "reason": "crime / public safety",
+      "sourceName": "Las Vegas Review-Journal — Local"
+    },
+    {
+      "title": "15-year-old arrested in Florida A&M shooting that wounded 11 after homecoming game",
+      "url": "https://lasvegassun.com/news/2026/oct/26/15-year-old-arrested-in-florida-am-shooting-that-w",
+      "reason": "crime / public safety",
+      "sourceName": "Las Vegas Sun — News"
+    },
+    {
+      "title": "Las Vegas Grand Prix circuit prep continues less than 1 month out from race weekend",
+      "url": "https://reviewjournal.com/sports/motor-sports/formula-1/las-vegas-grand-prix-circuit-prep-continues-less-than-1-month-out-from-race-weekend-3905353",
+      "reason": "no housing, neighborhood, development or lifestyle angle",
+      "sourceName": "Las Vegas Review-Journal — Local"
+    },
+    {
+      "title": "Walter Koenig, Ensign Chekov on original 'Star Trek' series, dies at 90",
+      "url": "https://lasvegassun.com/news/2026/oct/26/walter-koenig-ensign-chekov-on-original-star-trek",
+      "reason": "obituary",
+      "sourceName": "Las Vegas Sun — News"
+    },
+    {
+      "title": "Pete Davidson to perform stand-up show at The Cosmopolitan's Chelsea theater",
+      "url": "https://news3lv.com/news/local/pete-davidson-to-perform-show-stand-up-comedian-cosmopolitan-las-vegas-chelsea-theater-comedy-tickets-november",
+      "reason": "no housing, neighborhood, development or lifestyle angle",
+      "sourceName": "News 3 Las Vegas"
+    },
+    {
+      "title": "Puka Nacua returns to Vegas & shines as his Rams beat the Raiders 35-21",
+      "url": "https://news3lv.com/news/local/puka-nacua-returns-to-vegas-shines-as-his-rams-beat-the-raiders-35-21",
+      "reason": "sports results",
+      "sourceName": "News 3 Las Vegas"
+    },
+    {
+      "title": "Princess costumes and patio heaters recalled over battery-ingestion and fire hazards",
+      "url": "https://news3lv.com/news/local/princess-costumes-and-patio-heaters-recalled-over-battery-ingestion-and-fire-hazards",
+      "reason": "no housing, neighborhood, development or lifestyle angle",
+      "sourceName": "News 3 Las Vegas"
+    },
+    {
+      "title": "Dog shot and killed near Desert Inn Road",
+      "url": "https://news3lv.com/news/local/dog-shot-and-killed-near-desert-inn-road-animal-abuse-cruelty",
+      "reason": "crime / public safety",
+      "sourceName": "News 3 Las Vegas"
+    },
+    {
+      "title": "Nonprofit pairs foster youth with Nashville songwriters for healing through music",
+      "url": "https://news3lv.com/news/local/foster-youth-pairs-with-nashville-songwriters-to-turn-personal-stories-into-original-songs",
+      "reason": "no housing, neighborhood, development or lifestyle angle",
+      "sourceName": "News 3 Las Vegas"
+    },
+    {
+      "title": "More than 120 join SafeNest Run for Hope 5K, walk to support domestic violence survivors",
+      "url": "https://news3lv.com/news/local/more-than-120-join-safenest-run-for-hope-5k-walk-to-support-domestic-violence-survivors",
+      "reason": "no identifiable Las Vegas-area location",
+      "sourceName": "News 3 Las Vegas"
+    },
+    {
+      "title": "Driver killed in two-vehicle crash on Lake Mead Parkway near Lake Las Vegas",
+      "url": "https://news3lv.com/news/local/driver-killed-in-two-vehicle-crash-on-lake-mead-parkway-near-lake-las-vegas",
+      "reason": "crime / public safety",
+      "sourceName": "News 3 Las Vegas"
+    },
+    {
+      "title": "Chris Brown avoids prison time for brawling at a London nightclub",
+      "url": "https://lasvegassun.com/news/2026/oct/26/chris-brown-avoids-prison-time-for-brawling-at-a-l",
+      "reason": "casino entertainment / shows",
+      "sourceName": "Las Vegas Sun — News"
+    },
+    {
+      "title": "Over 300 students learn science and technology at CCSD Family STEM Day",
+      "url": "https://news3lv.com/news/local/over-300-students-learn-science-and-technology-at-ccsd-family-stem-day-engineering-math-magnet-school",
+      "reason": "school operations / district news",
+      "sourceName": "News 3 Las Vegas"
+    },
+    {
+      "title": "Police: Plane from Las Vegas turns around after passenger made 'terroristic threats'",
+      "url": "https://ktnv.com/news/police-plane-from-las-vegas-turns-around-after-passenger-made-terroristic-threats",
+      "reason": "crime / public safety",
+      "sourceName": "KTNV 13 Action News"
+    },
+    {
+      "title": "Bail set at $1M for man accused in 2021 Boulder City killing",
+      "url": "https://reviewjournal.com/crime/courts/bail-set-at-1m-for-man-accused-in-2021-boulder-city-killing-3905363",
+      "reason": "crime / public safety",
+      "sourceName": "Las Vegas Review-Journal — Local"
+    },
+    {
+      "title": "Woman arrested in stabbing death of husband in west Las Vegas valley, police say",
+      "url": "https://ktnv.com/news/crime/woman-arrested-in-stabbing-death-of-husband-in-west-las-vegas-valley-police-say",
+      "reason": "crime / public safety",
+      "sourceName": "KTNV 13 Action News"
+    },
+    {
+      "title": "Person in wheelchair seriously injured in hit-and-run, Las Vegas police say",
+      "url": "https://reviewjournal.com/local/local-las-vegas/person-in-wheelchair-seriously-injured-in-hit-and-run-las-vegas-police-say-3905264",
+      "reason": "crime / public safety",
+      "sourceName": "Las Vegas Review-Journal — Local"
+    },
+    {
+      "title": "‘Athletic country club’: New upscale fitness complex opening soon in Las Vegas",
+      "url": "https://reviewjournal.com/business/athletic-country-club-new-upscale-fitness-complex-opening-soon-in-las-vegas-3905212",
+      "reason": "no housing, neighborhood, development or lifestyle angle",
+      "sourceName": "Las Vegas Review-Journal — Business"
+    },
+    {
+      "title": "Boulder City principal urges mammograms after breast cancer diagnosis",
+      "url": "https://reviewjournal.com/local/boulder-city-principal-urges-mammograms-after-breast-cancer-diagnosis-3905260",
+      "reason": "no housing, neighborhood, development or lifestyle angle",
+      "sourceName": "Las Vegas Review-Journal — Local"
+    },
+    {
+      "title": "State to receive $5.4M in FEMA reimbursement for Northern Nevada Fire costs",
+      "url": "https://lasvegassun.com/news/2026/oct/26/nevada-to-receive-54-million-in-fema-reimbursement",
+      "reason": "no identifiable Las Vegas-area location",
+      "sourceName": "Las Vegas Sun — News"
+    },
+    {
+      "title": "Behind every great hospital gift is a personal story and a promise kept",
+      "url": "https://lasvegassun.com/news/2026/oct/26/behind-every-great-hospital-gift-is-a-personal-sto",
+      "reason": "no identifiable Las Vegas-area location",
+      "sourceName": "Las Vegas Sun — News"
+    },
+    {
+      "title": "25-year-old man arrested for making 'terroristic threats' on flight leaving Las Vegas airport",
+      "url": "https://8newsnow.com/crime/25-year-old-man-arrested-for-making-terroristic-threats-on-flight-leaving-las-vegas-airport",
+      "reason": "crime / public safety",
+      "sourceName": "8 News Now"
+    },
+    {
+      "title": "Person in wheelchair suffers serious injures in possible hit-and-run crash",
+      "url": "https://news3lv.com/news/local/person-wheelchair-serious-injures-possible-hit-run-northeast-las-vegas-lvmpd-metro-police-crime",
+      "reason": "crime / public safety",
+      "sourceName": "News 3 Las Vegas"
+    },
+    {
+      "title": "Dog shot, killed by man at Rita Suites",
+      "url": "https://8newsnow.com/crime/dog-shot-killed-by-man-at-rita-suites",
+      "reason": "crime / public safety",
+      "sourceName": "8 News Now"
+    },
+    {
+      "title": "Rafael Nadal returning to tennis for Las Vegas Strip exhibition match",
+      "url": "https://news3lv.com/news/local/rafael-nadal-returning-tennis-las-vegas-strip-match-the-mgm-slam-t-mobile-arena-sports",
+      "reason": "no housing, neighborhood, development or lifestyle angle",
+      "sourceName": "News 3 Las Vegas"
+    },
+    {
+      "title": "Slight chance of rain nears Halloween weekend",
+      "url": "https://8newsnow.com/weather/slight-chance-of-rain-nears-halloween-weekend",
+      "reason": "daily weather",
+      "sourceName": "8 News Now"
+    },
+    {
+      "title": "Three people hospitalized after shooting at Las Vegas bus transit center",
+      "url": "https://news3lv.com/news/local/three-people-hospitalized-after-shooting-at-las-vegas-bus-transit-center",
+      "reason": "crime / public safety",
+      "sourceName": "News 3 Las Vegas"
+    },
+    {
+      "title": "Sign of the times: How does NDOT determine when to replace aging freeway signage?",
+      "url": "https://reviewjournal.com/news/news-columns/road-warrior/sign-of-the-times-how-does-ndot-determine-when-to-replace-aging-freeway-signage-3905270",
+      "reason": "no identifiable Las Vegas-area location",
+      "sourceName": "Las Vegas Review-Journal — Local"
+    },
+    {
+      "title": "Doobie Brothers headlining residency at Fontainebleau Las Vegas",
+      "url": "https://news3lv.com/news/local/doobie-brothers-headlining-residency-fontainebleau-las-vegas-classic-rock-music-concert-bleaulive-theater",
+      "reason": "casino entertainment / shows",
+      "sourceName": "News 3 Las Vegas"
+    },
+    {
+      "title": "Las Vegas is one of the best cities for Halloween, study says",
+      "url": "https://8newsnow.com/news/local-news/las-vegas-is-one-of-the-best-cities-for-halloween-study-says",
+      "reason": "no housing, neighborhood, development or lifestyle angle",
+      "sourceName": "8 News Now"
+    },
+    {
+      "title": "Nevada fugitive arrested in Gulf Coast, extradited to Las Vegas",
+      "url": "https://news3lv.com/news/local/nevada-fugitive-arrested-gulf-coast-extradited-las-vegas-parole-probation-state-police-us-marshals",
+      "reason": "crime / public safety",
+      "sourceName": "News 3 Las Vegas"
+    },
+    {
+      "title": "Rain possible in Las Vegas on Nevada Day and Halloween",
+      "url": "https://8newsnow.com/weather/rain-possible-in-las-vegas-on-nevada-day-and-halloween",
+      "reason": "no housing, neighborhood, development or lifestyle angle",
+      "sourceName": "8 News Now"
+    },
+    {
+      "title": "Santa Monica sends iconic pier sign to Las Vegas for restoration",
+      "url": "https://news3lv.com/news/local/santa-monica-iconic-pier-sign-las-vegas-restoration-socal-nevada-travel-tourism",
+      "reason": "no housing, neighborhood, development or lifestyle angle",
+      "sourceName": "News 3 Las Vegas"
+    },
+    {
+      "title": "Las Vegas Mansion Sells Off-Market for $25 Million in the Biggest Deal of the Year",
+      "url": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxOd1Q2TjdTZnZ4ZFBQWFFVNnhCenN4VFZRX0ZmTEI5djU3a3lpYmg0enJaVFdfVnFBNzVueXJLaTFrLUtJTGVDbEp6OUhOaEpzVjZNTWt2bmg4SEpleXZwMHVENlZUNVVibERLR0l0ZVZjSlhrcUN0RlAxdDFqRVRaeTBZOWJQRTlCVklvNzk4RXRvWkp5VUE3RE5fS09CMlRmTnBJVlg3WU8zNXg1ME1udGliZ2JxTEluaWdrOU81UV9YU2xzc0N2SdIBzgFBVV95cUxNMEVCNjRXSVhQS2VQdGg3YnVPM0gtWndwOTNiVGs3VXlTYTlNeGVvbmlyV21KZG83NFlHLWVHaUhKTXVCbnpBNGt1ZHlGV3pyUmtNeTl4dlloUzJoNF9wS2NaSGhLMTJiN2JBTHNib1B6Qm1qSHdnaGZySVRGN2VCenlYYnU4bGl4cTVSUTJqUVlaaFRKUG1HLWJWRWZSWnY2Q3dCSXBTbDVlN1p3MTR1QjIyNFFwUzlhMkpnUmJEZERpdUZIRXdnWE5sdzNOQQ",
+      "reason": "no housing, neighborhood, development or lifestyle angle",
+      "sourceName": "Mansion Global"
+    },
+    {
+      "title": "Mark Wahlberg Sells Vacant Las Vegas Land for $17.25 Million",
+      "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxNYl9sSHdna2dTZkxoM0RwYmFLcXl5WkNvV0RuV0lpTGZBcGNnc0VOUmc1NWNpTE1NZFY3dGpISWhOb3BvdGZ3ODlfWkJOOHFsWmNET2hCaURHa2NWMUJNNG9qcThHNG9udnlxYjJ4aXNrRzQxbVNqWjlEcC1xSWZzdWlYRnp1UUNNc25rRHVSVV9oRmlKSzRRWkhYWlV1SndmZXN3N2VRQ0ZGNEhVWEUyRzZYdw",
+      "reason": "no housing, neighborhood, development or lifestyle angle",
+      "sourceName": "Zoom TV | Entertainment"
+    },
+    {
+      "title": "Legacy Early vs Daniel - Girls Junior Varsity Basketball 01/06/2027",
+      "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxQSUVBaTcxMHNtV3RaVkdPa2w2RXRIWXpsMVJmMEVsR2xvNWdveVZ1dnNtM3I0X1cyOVc3QUlJczZ4U2gyYWRhVVY0UFltMUtzN3YzQ2Q1YjQ1ZGpHTnlEUDN4VlpTc2VDRTdScmtiMWk0Y1J0Mkd4YUdJM3lSY3kxOUI1bXFtX28xT29WUW9LcmZDdw",
+      "reason": "outside the Las Vegas valley",
+      "sourceName": "NFHS Network"
+    },
+    {
+      "title": "$600M dual towers proposed on Knox",
+      "url": "https://news.google.com/rss/articles/CBMipwFBVV95cUxOalpyWHhraEFzRlFRbS1wQ3JVNHhHN1JsWnZ6QlpxNVYtRFhUOHpNQTVaeGVJZ21HZ2I4Q3FERzI2eTVqVllMRk56TWxoSEFqSUZpQ3JKdmFyWHBjZXllYlNwMG1ULUR2QXU4Y1prN1lLYjJlNDAzVGpMSy0zUjhiQVNIQ3puREZIMXBwelN0TWlyZWZvcTVIN0FWMUlQa0Zmay0tdmpBNA",
+      "reason": "outside the Las Vegas valley",
+      "sourceName": "The Business Journals"
+    },
+    {
+      "title": "Beyond Yoga Stretches Into Dallas With First-Ever Store Opening",
+      "url": "https://news.google.com/rss/articles/CBMinwFBVV95cUxNQjJFamRDZzZReHFBNnNYLU91ckllSzg0NzZidFQ4YWNCLXN3LWpVM3pHZV9IY0FZd1J3cjBTeUdZOEFqWW5jaTNkZFhwN2NHc00zUnkybHhUTGZxTE1LMlZlZWVDUmJqT08yUmlxYUsyQ0NRVU5vVjNWWjVCUlRZS1F6VzlZc2hxWWZTejcwM092elEyWWFTQ1lkX1UzY3M",
+      "reason": "outside the Las Vegas valley",
+      "sourceName": "WhatNow"
+    },
+    {
+      "title": "Reed Sheppard Fuels Houston’s Road Win With Veteran Guards Sidelined",
+      "url": "https://news.google.com/rss/articles/CBMic0FVX3lxTE1TQWhDSXFPQ185WFJmMDZSRXd2VXBlVDZXM2p4c0VnbE1zcGlad09jTlIyU1MxWWdGZ1k0OW9Kdm1zLUVmLWxvZmlBSWZuczItXy04SFRmRWx2cmR5UTF4Z2plMW5kSTBlNlVPVDlPX21nZEE",
+      "reason": "outside the Las Vegas valley",
+      "sourceName": "roundtable.io"
+    },
+    {
+      "title": "5 things to watch in girls volleyball playoffs: Gorman goes for 4 in a row",
+      "url": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxOeDhJM2EzREtFRUMtLW85RTVrdmIyTFMtT3ZHXzVsMUg3MXlrRk1kMW1IWElOREt0U1g4ZWM1aGpCcHpNSHdacXdtYnBZTGo4eXdYRmQ3OVNRWnJ0UTc3d3dubjU4NUJPb0J3d2NVX0Rlb1kyUmc4bmZhb2VQMlZ2TnRLZmJXZ0dKWTRxRGRlenJlRmVCek51bU5vWURpS0dtOThlM05tYl8zSTdVbUMzV09rYVkxVmN0WDRWTEtpQmJmT3c",
+      "reason": "outside the Las Vegas valley",
+      "sourceName": "Las Vegas Review-Journal"
+    },
+    {
+      "title": "Centennial’s Troy Brown stars for US in FIBA World Championships",
+      "url": "https://news.google.com/rss/articles/CBMi6gNBVV95cUxNQUhqa1hBWkstNWdNUGRXMGdNd1QtMVo4YnZlU0o0OFQ5a0VfMTlmNTZpQktXUTUzdVJxampQT3Q3TWhUdHpQNVZnb3F0NkVkbFFvZGlwOXREZnVlYmpyTjZxMDRQd2hwOGFkbnBQY0ZNV1FkSEtQVFg3SUxvWklDWTlxM3k5NEM4UElTOWxEaUROVDctbjQ4TlFTOFdjNUdycTNST2gwbGgwLUlQbzZQR0lsVUhDWUIwb19UYTF4VjFSS3EwbFdRWHlXTWhZRmNFcXU1SWVwZVdnU0hPTHF4ZUJZTzVRS3U5SXVobUNlSFV0WXZRR25VXzVTU1V2SDNxMUNVVElNVzZwX1daa3NxcjJIUjVuajdRQWdldTRNSDlyWllRSWVEbGVFMkZQQVFjZGp4czVLU0ptRzZIcFRxcWdubXVOM3UzbWpmQzVwWXFOclBUX1JlMzEwbjhjOEc2ajRDTERTN1RVMHp3X2tlVFNwNmh0RGZ6RGFQR3EwejJwRHZ4RDVjMEFaem5YX2FnMUQ3Z1loN2JpVEVQSEI2bDZSTXkxeDRZN2FNMVVyRU9fcUx5aU5zdzVjMFBpUU15aXhoeExadU9KLWpsYkhneTgyNzBxQ2tjRHNaOXFRcHZjTkVDZUdhSUlB",
+      "reason": "outside the Las Vegas valley",
+      "sourceName": "Las Vegas Review-Journal"
+    },
+    {
+      "title": "Weekend roundup: Low-cost events happening around the valley Oct. 24-26",
+      "url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxPV21laU9PRS1WcENFUmNXLXdFdG1MSy0zRHB5bXdiWEU2dWo1eGtXR0owT202Z0NUTWVlS2Q3M2tnbXEyV0g2c055TmNoNmRFeXRUNTJQS2xQRGJiT2Q1SzdQQXJqWWdEdVZCRGpKN2FGV2QyUG5fR2doY3htdEZ6MTdwVHc4T2lDMjhFczJfOWQxTEtGTGdOdXpwQXdPek50ZWVCeUNoTEtzVTBNVHc",
+      "reason": "outside the Las Vegas valley",
+      "sourceName": "KTNV Las Vegas"
+    },
+    {
+      "title": "$196 Million Powered Land Transaction Closes in North Las Vegas’ Apex Area",
+      "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxPc0Rzd1Fnbm5aSjMyTG5tTl9iNVU1ZlVWdjVOUHg4ZlJrUm44Nko1d3hsbzJjdHhfcnRvZEc4RURvaWQ5aVRPZTJfLVBaRHpsa2JzbHdzSmk3bk0yX3BzclJyWGJDM0RFYnNDSXhDV3VJWkRQRkhrWFE2SWNkZUp1Y0JJY1Z4LVJyU2J2Q21UdE1IUk1vY0lQMVN6d3Y4U2lxSUp1MnVFc0JqbE5x",
+      "reason": "no housing, neighborhood, development or lifestyle angle",
+      "sourceName": "Nevada Business Magazine"
+    },
+    {
+      "title": "George Acosta",
+      "url": "https://news.google.com/rss/articles/CBMiXEFVX3lxTE84WE82UGxCNXExNEtpTC1qNmlUN25hTER4R3dMdkk5dXotek4zNHY5VmF5Rl9zU2d0bi1PcnJGRXdGcXg0TlZWcFRjWkpXS1o5c3h6WWdOWGsxOXd6",
+      "reason": "outside the Las Vegas valley",
+      "sourceName": "KSNV"
+    },
+    {
+      "title": "Warren Joins Cortez Masto at Vegas Senior Complex to Push Housing Bill",
+      "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxOdFgxNVh1cElUcEY2ZHJiY21yelBsT2tYUXlwNFNuRlQzbjlfTTBTcUh2QUlvd2JrVll3WHNvMmNqY0FhWlBUYVp4Rk9mQTlvaG50VXFiYmxnLVhEbTFoTnU2MzdBY19sR3F3NHdWZmpWZkNwM29idHJ1UUs3bElkS2NQSkUwU3hSWWdUakNfNnZYUVY5OEFhU241YkhZbE5PdVE",
+      "reason": "outside the Las Vegas valley",
+      "sourceName": "Hoodline"
+    },
+    {
+      "title": "Pedestrian injured in south Las Vegas crash dies after fall during recovery, police say",
+      "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxQY0MwVWlLYThMdXI4REo2WnBjRU83bDY0TEF4YUhmYlRHTGM2TC1rdWJPb21HXy1mY01wbmN6aElkcHd1MHVSaWNQLW1VUXJPNmZmbWoyX25ZMDZwbnhieVZoZ2d0dXNOMVpYd0lMSXhQd0ZwQjNBUHVZRC1CYVBYa1pNQnVfN0lGNlNlS2loaXdMMFVQYmRPRWEzazh2TkZ6UGZaMVFqX21jbW5jaFMxdzFBRm5yMlJqQnA3eFdB",
+      "reason": "crime / public safety",
+      "sourceName": "FOX5 Vegas"
+    },
+    {
+      "title": "Overnight lane reductions begin near Las Vegas Strip for Grand Prix prep",
+      "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxOeTlIajk0cDB2SU10cVJhcGQyMlhuRnJGcGpOUER3Q1YyLXhlRlZqTHhnNERhcTh6REh6cW4wQzlnNURUbVQ1aDBYNzZ4YVlDV1hhX2NqT0IzbUk1TWhiMi10aHpUbWFJN2xiR0Fnc0NGRFBPdmo0Rzd2ME4zM3lPblJVUklTdmZuTlFiWlcwb3Qxbk1fVFV1a2ZuWkVydXM5a2VDNWFLanhTUQ",
+      "reason": "no housing, neighborhood, development or lifestyle angle",
+      "sourceName": "FOX5 Vegas"
+    },
+    {
+      "title": "Arrest warrants issued for suspects in deadly robbery at southeast Las Vegas business",
+      "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxORWpndUN6VXl2VHZGbGREVkF2UXV0X2U0T0JlU28tNWJIVnV2SklCSm1ySjhnOFl3UDZLTEtRVUliLWQ3Q0lIcG5LUzRLeUhaMmVaNHoydG1LRXRjZ21jMTlyd2U1VlF5aGpCUDJCWmNrYUdqWFJlNHZld0dOUGNTQXpiVG9kckE5Y29MOE5pMjJ3cW1Za2h2dnVEek90UEJTSklvUHBoQ2htRmhNYVFuekxKRTNFd9IBygFBVV95cUxObTFZT09rUGNwakg0WXpCVUgzRWZkYllxWkc3NHNYdHFpdFBJaWpKZGR4eFpnYTNNU1ROTngyaDR0WDA4d0R4eXJ5Uk41bHBLaWxtRXd5WnVzYzJyTnRBN25nRzNiRXN3emJsY0hKZnVYcXVqQ2dQTTFsS043NFlMd1RHbGlnTFhqSTQ1d1Z3aTNWT2pPeU1FN1loWm9IZldUSUVQa0sybWExTlJDZ2RaOHZFbHI4dVY2UlJ6R1QtX1VMWjNONVBHakRB",
+      "reason": "crime / public safety",
+      "sourceName": "FOX5 Vegas"
+    },
+    {
+      "title": "Neon Museum seeks F1 memorabilia ahead of Grand Prix sign lighting",
+      "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxQN2FIOVJ4SWV4MWsxNlJYU3EtVGdLVy1Fa2xWOUNTRzFQYldSNzBha2FEZDFucE44NGxLYTRISWFLekhXaUtDMHRQVzJNdlpBelF6NHhySEE3Sjk4bTNTWDZiWTViV0wxbUtoU2ZrVzMzSlNTa1dNMDVMY243NTFycmhhN0dZWGNXTXVRbTJ6bWhSUjR0Qm5peENueDVnaTVMYW5V",
+      "reason": "outside the Las Vegas valley",
+      "sourceName": "FOX5 Vegas"
+    },
+    {
+      "title": "Bicyclists say cars parked in bike lanes near Southwest Valley school create safety hazard",
+      "url": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxOMEtNUW16ZjNUSkd3d3NHREVxcXdqaVF5TDMxY2xJUDZzSjliWWZJbWdvaU1HRFJOdzVfLVEzTUZFNTJTb0t0Vk9KYlNLclhTMW5mR19ZVF9qTEE3bEpmbmJYOVlNZVl5Rm8tVFJ0cE9jTUxKU2VwSW85LTNDRkpGaXMwTUZWMDNfQnYwdmwtSHBkLW8yOTlyanFLWmdTYkhfT2xmdHR2c2FOVm1mUEhaWkVQN0FaMHhQNm5YZFo1SkhvZUXSAdcBQVVfeXFMUGFMSktsUk9qZkx1QXkxSDNLMFVsQlo3NnRNX09nUGtJM0Vsa0lzeklPUnlfSXp4MEVOa1dSaFFLSFhpTDNudUt1dlIyaVEyWG5NaVF4SWZYNGlxM0NqY1ZLTDNZcmFqMWcwdU9XZFlXZ3ByZkpfMVFYdHZhWFNqX3BqaFlWUlQ2bFhFajgzbnMwaUhOZFRnSWpBVjU2NVhZYnlKX2Z3RFpfLURpRzNwcEZMOE5XWWVVdEF3WFhlT3J3RmV2RTNxU184eEZoVXVicGY0bEFjTVk",
+      "reason": "outside the Las Vegas valley",
+      "sourceName": "FOX5 Vegas"
+    },
+    {
+      "title": "Mayor’s Cup draws hundreds of youth soccer teams from around the world",
+      "url": "https://news.google.com/rss/articles/CBMirwFBVV95cUxOT2haVm1KbllSNDVRNWk2OE10djhOZGhpcjh4QXFkVEJJUFM2ZHdqN1JNUjktUDZLakpHQ2hLUWNRUy0wWTNwaGJBdEdGaEh1M2R5TUZDQTM5ZElzazFBNzJzNUxCQVJTdEUyTHdTN0tQYTBBYS13dGdpN2c2aC1CY3NqYmJQSS1XZFd6cXRmWHBnLUNkcVF3c2pzSFpPdE1WRktOUWpESUUtcVNUZGFz0gGvAUFVX3lxTE5PaFpWbUpuWVI0NVE1aTY4TXR2OE5kaGlyOHhBcWRUQklQUzZkd2o3Uk1SOS1QNktqSkdDaEtRY1FTLTBZM3BoYkF0R0ZoSHUzZHlNRkNBMzlkSXNrMUE3MnM1TEJBUlN0RTJMd1M3S1BhMEFhLXd0Z2k3ZzZoLUJjc2piYlBJLVdkV3pxdGZYcGctQ2RxUXdzanNIWk90TVZGS05RakRJRS1xU1RkYXM",
+      "reason": "outside the Las Vegas valley",
+      "sourceName": "FOX5 Vegas"
+    },
+    {
+      "title": "Cirrus Social Club Plans Las Vegas Cannabis Lounge by 2027",
+      "url": "https://news.google.com/rss/articles/CBMimwFBVV95cUxQOUhjbjFwanVUeDMyNDJBYmMtSDd5T3ZKSmJYWTFDeGtIQmk2X3UybnlLYndUTE1YMG03cV9ING1PY0hkbUlpcm9SOEJta0IxNE5pbFB5QzRPLWgwMWFuY2ZMamkwZVFaaXVoWlBfVFo4RVFuR2tLb1lNWXhra3BqS1NFMUtSYW9XYkRXUjZ5MFl0MDhsN3VXZ0JOOA",
+      "reason": "no housing, neighborhood, development or lifestyle angle",
+      "sourceName": "Hoodline"
+    },
+    {
+      "title": "8349 Teton Crest Pl, Las Vegas, NV 89143",
+      "url": "https://news.google.com/rss/articles/CBMilgFBVV95cUxORXU3Qnh6WVRUbmlQUm5NU0lIRHN5NmlKN3VXZWhKMEU1RWpHd2JKZkxKOHFxYUlGdk1CWmRXRnJ1YnZvQzlnZzdsODd5aTFUTTFfVUpxZGI4LURELVZpdVhyQU5WbGtrNnNqY21UY2c3SWxKVHQyLW5VUGJ6NEtMclVaZWNONE1ZcW1TTXdNVWEwVWhMN2c",
+      "reason": "no housing, neighborhood, development or lifestyle angle",
+      "sourceName": "Realtor.com"
+    },
+    {
+      "title": "5029 W El Campo Grande Ave, Las Vegas, NV 89130",
+      "url": "https://news.google.com/rss/articles/CBMinwFBVV95cUxQUS1RUHFGbElMS1JObUU4NjZSa0hJWE9zc0R4Wnh2YWFZdm5tVGRTd19HYk51X2JCOUZDVG5jZWFCVjZtRG1ZNlhjTXI4bF94czZmNXFtOGNnaUNleU5aTmdtZjlETi1QaDZUekZuUkZRNm04eDdEMGZxMzdUN1d2UTd0dFN4YzJkY1Q3a05fZV9YdW1hOXFzbldndTBRLVk",
+      "reason": "no housing, neighborhood, development or lifestyle angle",
+      "sourceName": "Realtor.com"
+    },
+    {
+      "title": "8085 Texas Hills St, Las Vegas, NV 89113",
+      "url": "https://news.google.com/rss/articles/CBMilgFBVV95cUxQM0dJUFlPbzQ3OXppN1RQSnRzUmtaX2JCOEhpdjcxX3ZuQ0VDQVZoSlJEYUhXcVpFWTVIVXdhWGxnT3JpS0tuM3RmZGdHRl9Bb0l3S2ZPQ2pRd3lYTDBQcVY0RUhELWNYVWg5VXB4WVROQ21YUTRIM3BfOF9YM0l6WWloS3JvRm44LVRvcEN6ZHJ5TnNhcHc",
+      "reason": "no housing, neighborhood, development or lifestyle angle",
+      "sourceName": "Realtor.com"
+    },
+    {
+      "title": "Driver Hurt in Truck Crash Near Ann Road, Las Vegas",
+      "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxOVktNcTVUWDU5NUFBVC1DNUZoU0kyQ3ZoOTFsQm9ibHhPamtCSlFzbDdxaDM4YnZNSjhIdFo2dUJkcGR3aXZJX2Y5SHdHUk02SjZxa0JvVXVNbkJtNjNhcmJYSGlyWFhabEluazNpVk9MQ3ctczNNOXF1NlNrV1lxeXgzV2dSaEsyNWMtY3o0LUIybGVSbDdV",
+      "reason": "crime / public safety",
+      "sourceName": "Hoodline"
+    },
+    {
+      "title": "AOM Office/Retail/Mixed-Use: Zara Flagship - The Forum Shops",
+      "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxOcl9YOG53TlV5d3RqbzQyQmtrN1FTcUpzUW9ZUmlWTGdydXk2NHZRTXZpcmZaTkFCN0pUWU1lV2FfOHZ3dERoeUZGc0pDdTE1V2ZUbDhBRktvNFRqSVU4Z0hTaHEzakNTbF9UYVdyTERfZ3Q5ZXplM09WNGktUVhVNWVNeW5rdGEybkpFbVlNd2JXSXhWM0xB",
+      "reason": "outside the Las Vegas valley",
+      "sourceName": "Engineering News-Record"
+    },
+    {
+      "title": "I Sodi owners buy West Village space next door",
+      "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxNZEoxYjBBQlZGREE0ZmRZWTYwQmU2SVdncW9ReG9BdE5YUV9xREsxcU1VSmxWMGNQRkI4NHp3MGlhSUdvRUFOSExPWG1sQjBJcmE3RHUzUkZlam9BODRwUDc0QWRpN1FyUTBFamRSRHhPSWoyLTdxVmRhYkRzUVhpNmVjVmJMZHRBWnhES3dnMGZad1dRM214VS1YYVZqU2stcXdoYUd3",
+      "reason": "outside the Las Vegas valley",
+      "sourceName": "The Real Deal"
+    },
+    {
+      "title": "Las Vegas Chinatown Rolls Out Art-Wrapped Bus for New Mural Crawl",
+      "url": "https://news.google.com/rss/articles/CBMimwFBVV95cUxQSVZZT0kzelF3NzZhbGhIZmpyUVREV3ZUazJBekNiLWtYODNXSEJFcDhXa3ljcGFqSXhUcGZub0hvOG1OVHppeFNlaTUwN25NejVteTBDbUtuMG5IZG9FRWNYVmlKMzNpREFIZnR6aHc0a0VKM2RBSTNTWHdZOHdhNk54Y2IxcnZWZUxrOVhMTUJsQ18xdVp6Qk5ybw",
+      "reason": "no housing, neighborhood, development or lifestyle angle",
+      "sourceName": "Hoodline"
+    },
+    {
+      "title": "Billionaire Carl Icahn Sells Former Trump Plaza Site in Atlantic City for $6.6 Million",
+      "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxNeFRWUU1IeFg3bnVFTTNCS2lLS3Y5MTd4LU5zVk5BMXN0UVY5WDRldnZ3UVVoaGxQWV9GSm5pWGFlSFBXWWs3aXd3Sk5xc0E3ck9LeFc5TmMyTXRMRGttVWJxeHozME5adFVrYjVsbDZwSm5PUDhVYVgza1RtT3dZak0xY0pJY1EwbWp4WUhZalVVYVozdkNkeENONDZFdVh3dHl5NEVydFVPZmdTbm9RbWpURC1OT1pkckE",
+      "reason": "outside the Las Vegas valley",
+      "sourceName": "CEOWORLD magazine"
+    },
+    {
+      "title": "OCVibe — Korean-American Star Chefs Roy Choi and Debbie Lee Join $5B Project",
+      "url": "https://news.google.com/rss/articles/CBMigAFBVV95cUxPR09pUnpkVWU1TXZKODhqYW1jX3FJVDBlUkpjQVpBdC0zUm1IcWVFOTlYanczc0NkbnNQWUNrZ05wVU12Xzd6cS1pNnlmWEFYRGM2ZC1wT2RYX3lhOGxFaUNIT292NEFBWVZ4TW9TenBJckgyWFE0S2d1Y19aQnBJZg",
+      "reason": "outside the Las Vegas valley",
+      "sourceName": "The Korea Daily"
+    },
+    {
+      "title": "A Tour Inside Mavs' 'Taj Mahal of Basketball' Plans: On Church, State & Gambling",
+      "url": "https://news.google.com/rss/articles/CBMigAFBVV95cUxNWFY5cVp2UkJpNGRVOC02VS0zSnBIeUx5a2pUaHB1SVdRQVVrUU1hWkRuQmRCOTUzTFhJTUxrTDVtS1VsbGV2LXVsYTk5aU5adm1tSU1MdUJOcjFpa29ZVWVRZHhfZDZCQjg2VVNWVDlZdlpZNHB1Mkw1WU5ISjJPaA",
+      "reason": "outside the Las Vegas valley",
+      "sourceName": "Yahoo Sports"
+    },
+    {
+      "title": "Las Vegas Souvenir & Resort Gift Show Successfully Wraps Up 20th Anniversary Edition",
+      "url": "https://news.google.com/rss/articles/CBMi0wFBVV95cUxQTWJSSlVSY2hSdXh5LWplWDcwQTFWWVczaGJIck84UWNJa09jWTlUUTRxZlFHZm5aSk9QWm5OWm5pRzhKNnpyb3VyZEVHckNXcXFNLURwNWctWnRhUXhTcENPV25JV1ZRMmNGYkZpRVNJcFdTSVNlUkpqSTVRMnhKOW5raHJHLWxxU05pWFozZVZDQTVUMUNGS0EyWmsxU08xU2x4V3Z2cHBUdENObmM4S3lWUktvM0ozOE4ydk9LVnlSejZwNVB5NkxCQ0pfVHMzc1M4",
+      "reason": "no housing, neighborhood, development or lifestyle angle",
+      "sourceName": "The Tennessean"
+    },
+    {
+      "title": "Steve Wynn recalls the birth of The Mirage at Las Vegas event",
+      "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxObVdTd1Q3QUdVcjRYZUZXUi1jWkVrWVFKUW92cmdMTlZRTzUzWktBWXd5NV9zQ00xQy16dXFKWmtKVm1KTDdDQ1ZxQlVwVEFUdWc1MW8xc3Zudjgyc2xjZHhLNS11M0h1YlJ2VnZzQktnOVROV1RsbEs2YUc3Q2h3MjlHOTBNOHg4SVptbHZHaFJwZzlvTDN0M1dpZzY",
+      "reason": "no housing, neighborhood, development or lifestyle angle",
+      "sourceName": "Gambling News"
+    },
+    {
+      "title": "Ray Lewis Charity Poker Tournament Awards WPT Seat",
+      "url": "https://news.google.com/rss/articles/CBMif0FVX3lxTE9Wc0lwMmhvVUNhd0owYmNXNnd6elcyTjdBN0VyVVQyNjFMWmZVTDRJOVkxbUNRUGVsV1AyekFaaXlOUTBrYnVzNTZ1OUNDY2VEVHVCUFNtbU5QR0VjMkg0YVUzWVRMX0FqQ1hDUVpQRzRJQ0xJZVBiLXBwTUN0MUk",
+      "reason": "outside the Las Vegas valley",
+      "sourceName": "Legal US Poker Sites"
+    },
+    {
+      "title": "Best Highway/Bridge: I-15 Tropicana Interchange",
+      "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxQdXQydWppRmVab1hSc3dtaGZUdWYyVEVXT0RmRS16X2hRZ2x1akZTaTh1SVhTRnR0YXpuNFBBS1p6NUZmWi0yRzFacWY1eGJYVnlCdzdQNFhDd3cyQlRzNUZfaG8xSkVPZW1Xb2JzNjJaS3pTWVQ3RDE4ang3TUl2UlNNd00xWlEw",
+      "reason": "outside the Las Vegas valley",
+      "sourceName": "Engineering News-Record"
+    },
+    {
+      "title": "Latest schedule of lane closures for the ongoing $1.2 billion I-285 and I-20 West Interchange project in Cobb and Fulton",
+      "url": "https://news.google.com/rss/articles/CBMi9wFBVV95cUxOSVVYRXZfRmRxZGhoTk11LW5RLWZ1Vm9BM1daeFVoUXdXcDl3anpCeVN6U0xlUlVuTnExZWdaRmFjWlB3TXc2cXRTZDB4cFU3OXRSUWRZdlJjUDZsT0czT0RRSEh4cmY5RThKSVgzOXZtbWhQYUpYRzc1RGFuZmdjVXdXNXJRUkJXLXF3YTF2Z01EZjRiNWFzaWdqMVBCay1xS3V4UHE2ZWpocm5CSFhfQjRFSDdvX3JGZlRNOTB0ZFJMUTByMzBvcmgtdkhKS2VQSkpPU05aM3MtejA1Y0RjUklpNlItZmh2TU14NG8tSTRvdW1QWFpJ",
+      "reason": "outside the Las Vegas valley",
+      "sourceName": "NewsBreak: Local News & Alerts"
+    },
+    {
+      "title": "Property taxes have surged in these Central Florida cities",
+      "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxPNzFUZjNERGZsNVVBY1FrVmVRaWU0b21QQ2huWV9uX1d0QjM2OUF1bktUUThNNjdnOXdkTW50YmhvNWpZUkpLamFncjUyOHpiSUppTEZjTWJhYWRxYnhLT2ZJZGlfdS1Cb1VyeEdzRU45WDVMUGtPQnFaZlR3eUkwYXRXYmRMbF9ZdU9seUpXQ19hZm9lTEg2OVRHdV9SQi1IXzhSMkpxa2Q5V1U",
+      "reason": "outside the Las Vegas valley",
+      "sourceName": "WKMG"
+    },
+    {
+      "title": "The Thanksgiving drive, ranked: Which states’ residents travel farthest to sit down together",
+      "url": "https://news.google.com/rss/articles/CBMigwJBVV95cUxQbVMzbmVpSkp6M01vbHBkZVByM3ViNTBoVUdXaXdmbDFOdzVLdk9fQTN4TE12elBBUWZkY1ZMMVdieDVEVURuaTQzMkt2YnJYMXBRSXZpaWxTaDFEVlN4V2hZUmtZeTFTSmNJS0xkdW5fNVBCdkpJSnkyYUhQUXQtNmM4RkM0SVV6c0FOVGJ6UkNsd1dnZlhiNlYxek55eWg4bUpYb3BhV3VDYklMenRlTWRjbXhXVU1CU1U0Tm0zOE4zaWtLMHNlakZwLWNVT3BEb0loZkZqZzdxVDF3RFROQWRxYnozV0JvM09JRm0xSFFabHhBQW5hcTBQVVlac3hnQ3Nr",
+      "reason": "outside the Las Vegas valley",
+      "sourceName": "WBKB11.com"
+    },
+    {
+      "title": "Some Tennessee homeowners could get part of 2026 property taxes back as income limit rises",
+      "url": "https://news.google.com/rss/articles/CBMi6gFBVV95cUxNS041WkdhNTZGV2ZJN3piREVBV2dZd24tUUozbEVPLWMwZ0JyOEU0dTNtQzVKZUZPTEhOY2V0SmYycjMwMnlBQUhPWjdNWmU1LVIzeW9TWk5zd2kwZDdCTXF3cnJGRHNfQzBBLW1IVTR5d1FGMHRsX194dGVtQW5GUHB3bUhzOUlnZDVVUHBnbVBvNGtfLUdvQ0xYaWVRdV9PbVViYVh2NDE0X1RscW12T0NzWjdyS3lLVks2bUZYOWMxTFhYX3ZYd3ctQlpPRkRZTGgtX1c3ZlpEcTRZdGpJeDhNSHZwZG14cEE",
+      "reason": "outside the Las Vegas valley",
+      "sourceName": "NewsBreak: Local News & Alerts"
+    },
+    {
+      "title": "Top Housing Economist Issues Grim Forecast Revision as Higher Rates Slam the Market",
+      "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxPbDhEbFZydDMzc3AyTzJNeFh4VjNvS1B4cWpEZ3ExZXNBMXpkZU53MUxIakstRE9Hb1lKd2tkU2dJaVBTdE12MXRuc0hFVENKQm90Q1VRd001TTJQV29UNVczXzBhay1hLUluaDFtdEdraGZfbEY4MzdWS0RkV2ZJQ0FOUlNUcVBMR1RlWVcxdGNVQWdmbEln",
+      "reason": "outside the Las Vegas valley",
+      "sourceName": "Realtor.com"
+    },
+    {
+      "title": "'Affordability refuges' hit by rent increases as tenants in major cities spread out",
+      "url": "https://news.google.com/rss/articles/CBMikwFBVV95cUxPWlhBb1VMUHhWTnF3b2JMLUJRQV92UTk1Yjh1MGFFbFFlbnFKZjdQT0dselpmZ1ZrUl9RQ0Y1cGtPSjU1U0lJVnhkaENhaDRJMmRNeldYQUpRemxEalBPTG9zZHY3Skx0WWZWY2l6ZWFGQUcyTlRDZE93ZWxtZ1piVTdsRUtpc3hkbk05cWc0YWtMdnM",
+      "reason": "outside the Las Vegas valley",
+      "sourceName": "The Cool Down"
+    },
+    {
+      "title": "Baron Real Estate Fund Q3 2026 Shareholder Letter",
+      "url": "https://news.google.com/rss/articles/CBMilAFBVV95cUxPS2xMTi1oWkhkaktDY2E1bkxoOFgxNzU5ZTdvRXlaaWtYT2Y1TC03aUZjRklCejk2WkJ5MlFXenR1dW4tQ1NjVTJHZkc1VjVKa2wtSGdlcUNtbzNmczdwUGNwU1lKOXhqN0RLZTZTUUhXZXdlUTJjS09OdDIxLS0yTnpzaHZqV0lyTl9tbEMzS2tTd2tP",
+      "reason": "outside the Las Vegas valley",
+      "sourceName": "Seeking Alpha"
+    },
+    {
+      "title": "Adriana Gonzalez-Chavez is your east Las Vegas reporter.",
+      "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE9VQllvWTN4MVE4SHpiNFdnQnBWUGhKYnpwNkNMVVVSWDNKZF9nTlRrbURCamZSR2VUZ2hfajY0bDlzUDBYZDRHc2IxRVpTMHRfVm9zYndwd3pDLUZnN0E",
+      "reason": "no housing, neighborhood, development or lifestyle angle",
+      "sourceName": "www.ktnv.com"
+    },
+    {
+      "title": "Laughlin launches ‘Keep It Floaty’ campaign to promote easygoing river getaways",
+      "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxPcEFJSEZVMXdHT0MtUDZITXNYcGlNUnE3ZnJldzNWVms3WmdRaGh1T0x5bnktMHNyTHcwdjRvQkJtakxQYkVDemJNXzNLbm9qQWJWajBZSzBqSXpBVGpHNXpha0VocnZyZGlZY0JzMTZteExVQnBQVGd2NUd4X2Y1NUgza2Zwa2llSEVfWmhsZXpkRlE3cXNaVWxTTnZXc19qRVZncHJSMFZKWFBpRjA4bmFR",
+      "reason": "outside the Las Vegas valley",
+      "sourceName": "FOX5 Vegas"
+    },
+    {
+      "title": "Nevada’s 1st standalone children’s hospital breaks ground Monday",
+      "url": "https://news.google.com/rss/articles/CBMitwNBVV95cUxPdVdpMU1aNGEyazZ0VXREVjUzN3JKRWloTWJrRGg0R044bDJ3RTZmRXZjaVRvT1lfQjgwemk4V3dFbmxwU3BxZnlwcElZNkZvNjFTR0JfWFlKQnI4UG51VDR4UkxwWmNxbDI4SEhXRWRhZHlnMnBGZGxmd3BuUkw1OG9EVWlFQVN4Sk94QWpQVERfdTh2cFBQTERMQWwwM0w4UEpXWTJ3TlBTOHcwVnFxdVV5U2o3UHJqNjRBOG1DVGdTV0dxMGgwT05ReW8yLVpfSUE2S2lRTUNTcjlVbldBYmtHb29hWDBCLW1nblBBdEJUN0NnYVdicFdfaEE0eU5WdElRLU1aUDE3bUkxQVdZOUptX013dzdGLXh1dFR1OEU0Zks4bWJuUXJCcjRxbUZnc3hkMHdLUHRxTzdLWVhPc3ZJR0ZYdXlsZTFzRVBXS3pIOGxCazZ4Ukk5amM4Nzg5elo5WGVqTGJheGRNSTBfVlptQmRhQTExd1NlT0htQ0c3d1lScUEtRmpYTVI0SkVRVGVGdS1PNmxZVXFQVEdJUTdXWUNvTjY5cVJ0SDJadXdNMkFQWXRV",
+      "reason": "no identifiable Las Vegas-area location",
+      "sourceName": "Las Vegas Review-Journal"
+    },
+    {
+      "title": "Facing a ban on horse-drawn carriages, Central Park's drivers fear for their livelihoods",
+      "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxOc1ZNUkV4S2FldjYtdzNVNENmQ3NmNlhOdml5YlR4d3ptYlkySURCR2p4QVVxX21aaGFSUGtNOU5UUFBVeUtJTldCZU5RNndNNXZUN1ZPUTlKVTJYQXpabGF6czZtRW5vMFh6U2hrSG5pYlFXeGFXVG1JSU1EVW1MSHBGVVk2VDBpMFFGTlFYcmtTU3hzWXBHaGxOTG5wQThDQUtZdkRITmtraDIzazNhRW1vTnY3aGF1Ul8w",
+      "reason": "outside the Las Vegas valley",
+      "sourceName": "Audacy"
+    },
+    {
+      "title": "Mitsubishi to debut Outlander Diamond Trail at SEMA",
+      "url": "https://news.google.com/rss/articles/CBMikwFBVV95cUxPQUtxMlFWMEJtX3JvbDU1UDBJbjRUR3NZX08yWmV0a0hYRWxmTmxsb0RIMlQ0NTBlMDZUbGlVMzJFMFQ3elpRdWJVSURQNklTdURsV19kYWhKcWoxUWY1MEV2ZGM3RVRsbUY1bllkeFI3b3NaTDhXRmRKajktdUM3alloRHd2TV9ObUxNQVByMjM3NFE",
+      "reason": "outside the Las Vegas valley",
+      "sourceName": "Automotive World"
+    },
+    {
+      "title": "American Eagle to Open in the Las Vegas South Premium Outlets",
+      "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxQbDhyWFdYV1hhaFh2bldLUEkyVEd1RE5kTFM1UVBLOHFGV0ZUWjhxa3NOY09zZmU3WmtKQkdZTWMwcVg3aXJRWkxnTGdweHBuNlNVeFVUVG9WWXZQb1pvaWkyUHgwT0VCMHVUblVoY21vUWlUSnFja0lIVURHcnZxNEdWOWZrTUVSaHVaMGZkRkl5YzhUQUlyeXVzemZzXzVn",
+      "reason": "no housing, neighborhood, development or lifestyle angle",
+      "sourceName": "WhatNow"
+    },
+    {
+      "title": "Phillip David Lockwood Obituary (2026) - Las Vegas, NV - Davis Funeral Homes & Memorial Park - Eastern Ave.",
+      "url": "https://news.google.com/rss/articles/CBMihgFBVV95cUxOb0s0dlhkTDZ6UERQT1VobkdNODZ5U09LNmZlZzBlaXRrY3YxVWlaNTBpTC1JY3l2b1BjbGR1eGJuMFpka3NVcDlrREkzUUhxNnZlZWZoMmJEVUpwaDVwSjZneTZLZWFCWHNhRTBGa0kyLUhpNU5tRnJaNG9wQ2J3cEYwOTdVdw",
+      "reason": "obituary",
+      "sourceName": "Legacy | Obituary"
+    }
+  ],
+  "warnings": []
+}

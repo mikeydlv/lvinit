@@ -1,23 +1,24 @@
-# LVINIT Development Watch — week ending 2026-10-19
+# LVINIT Development Watch — week ending 2026-10-26
 
 _7 daily report(s)._
 
-- **1 meaningful change**
-- 10 monitor items
+- **3 meaningful changes**
+- 9 monitor items
 - 0 source conflicts
-- 1950 duplicate/noise items suppressed (7 duplicate events, 1895 gate noise, 48 routine agenda items) · 4647 unchanged documents skipped
+- 2133 duplicate/noise items suppressed (7 duplicate events, 2126 gate noise, 0 routine agenda items) · 4741 unchanged documents skipped
 
 ## Meaningful changes
-- **DEV-2026-10-16-001** That’s the highest need, — first time this project has been seen · 67/100 · Medium · ADD_TO_NEIGHBORHOOD_GUIDE → /neighborhoods/downtown-arts-district
+- **DEV-2026-10-26-003** Peaks — first time this project has been seen · 65/100 · Medium · CONTENT_BRIEF_INPUT
+- **DEV-2026-10-22-001** Casara at West Henderson — first time this project has been seen · 60/100 · Medium · ADD_TO_NEIGHBORHOOD_GUIDE → /neighborhoods/henderson
+- **DEV-2026-10-26-001** Switch — filed → approved · 47/100 · Medium · ADD_TO_NEIGHBORHOOD_GUIDE → /neighborhoods/north-las-vegas
 
 ## Monitor
-- DEV-2026-10-14-001 Unnamed park (Las Vegas (valley-wide)) — "Trump administration blocks maintenance funding for Nevada national parks" — cancelled · Low
-- DEV-2026-10-15-001 Unnamed residential (Henderson) — "Henderson mayor unveils homeless transition housing, affordable plans at state of the city" — under construction · Low
-- DEV-2026-10-15-002 Marty Hennessey Tennis Center at Lorenzi — approved · High
-- DEV-2026-10-15-003 Unnamed residential (Las Vegas (valley-wide)) — "Vote delayed on controversial 61-home development in Las Vegas" — filed · Low
-- DEV-2026-10-16-002 Unnamed residential (Las Vegas (valley-wide)) — "Las Vegas breaks ground on 1,000-plus homes near Cashman Field, Grant Sawyer building" — under construction · Low
-- DEV-2026-10-17-001 Unnamed residential (Downtown Las Vegas) — "Lennar Breaks Ground on 1,000-Home Development in Downtown Las Vegas" — under construction · Low
-- DEV-2026-10-17-002 Unnamed residential (Downtown Las Vegas) — "Groundbreaking kicks off new chapter for affordable home project in Downtown Las Vegas" — under construction · Low
-- DEV-2026-10-17-003 Lorenzi Park — under construction · Low
-- DEV-2026-10-17-004 Unnamed residential (Las Vegas (valley-wide)) — "Las Vegas Delays Vote on 61-Home Plan for Steve Wynn's Old Alta Drive Land" — proposed · Low
-- DEV-2026-10-17-005 Unnamed residential (Downtown Las Vegas) — "Final Sports Event At Cashman Field In Downtown Las Vegas Saturday; Housing Development Pl" — proposed · Low
+- DEV-2026-10-20-001 Lorenzi Park — approved · High
+- DEV-2026-10-20-002 Idefix — proposed · Medium
+- DEV-2026-10-20-003 Unnamed employment (Las Vegas (valley-wide)) — "Data center project proposed on federal land gets sent back to square one" — approved · Low
+- DEV-2026-10-21-001 Unnamed residential (Las Vegas (valley-wide)) — "Construction starts on new housing project at former Badlands golf course" — proposed · Low
+- DEV-2026-10-22-002 Unnamed road (Green Valley) — "Cone Zone: 215 beltway widening, Green Valley Parkway revamp reach halfway point" — unclear · Low
+- DEV-2026-10-23-002 Unnamed residential (Clark County) — "Nellis Grove Apartments Groundbreaking in Clark County, NV" — under construction · Low
+- DEV-2026-10-24-001 Intermountain Health Felicia — announced · Medium
+- DEV-2026-10-24-002 Unnamed residential (Las Vegas (valley-wide)) — "In 2022, Mark Wahlberg spent $15.6 million on 2.5 acres of empty Las Vegas land to build a" — unclear · Low
+- DEV-2026-10-26-002 Unnamed residential (Henderson) — "Henderson approves nearly 400 new affordable apartments in south valley" — approved · Low
