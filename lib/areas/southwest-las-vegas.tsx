@@ -286,6 +286,18 @@ export const developmentProjects: DevelopmentProject[] = [
     },
   },
   {
+    name: "Nevada's first standalone children's hospital",
+    status: "under-construction",
+    where: "UNLV's Harry Reid Research & Technology Park, reported just northeast of the CC-215 at S Durango Dr",
+    what: "Intermountain Health broke ground on October 26, 2026 on the Felicia and Ben Horowitz Children's Hospital: a 33-acre campus of about 828,600 sq ft, opening with a 180-bed inpatient tower that can expand to 228 beds. Intermountain expects it to open in 2030.",
+    caveat:
+      "Intermountain's release gives no cross streets, so the location is from local permit coverage. No construction cost or contractor is confirmed here. Not open and not visitable.",
+    source: {
+      label: "Intermountain Health, October 26, 2026",
+      url: "https://news.intermountainhealth.org/intermountain-health-breaks-ground-on-a-new-era-of-childrens-health-in-nevada/",
+    },
+  },
+  {
     name: "Desert Flow at Southwest Ridge Bike Skills Park",
     status: "under-construction",
     where: "Warm Springs Rd at Fort Apache Rd",
