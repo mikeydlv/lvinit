@@ -75,3 +75,44 @@ Manual sources not checked: Clark County, North Las Vegas, NDOT, RTC newsrooms, 
 **3. RED LINE: RTC release text read via Mass Transit Magazine; rtcsnv.com returned 403 (INACCESSIBLE).** Launched Aug 23 per plan; no post-launch source found. Reframe as "riding it now."
 
 Not found tonight: any verified new opening within 30 days (searches returned old articles). Clark County, city agendas, NDOT not fetched this run.
+
+---
+
+## Run 4 addendum (scheduled 6:00 PM PT run: new lead + tomorrow's assignment)
+
+**New lead: Casara at West Henderson (WRITE, priority 5).** Henderson council approved 390 affordable apartments (Ovation Homes, ~19 acres, Las Vegas Blvd and Larson Lane) at Tuesday's meeting, likely Oct 20. At or below 60% AMI; construction expected around the holidays; applications about mid-2028. KTNV and Fox5 read; Hoodline cites development agreement Bill No. 3938. **PRIMARY SOURCE INACCESSIBLE** (cityofhenderson.com returned 403; Bill 3938 text not found). Already in the editorial backlog (rank 11). Not contacted.
+
+**Rechecked:** Children's hospital release re-read (still PRIMARY SOURCE READ AND VERIFIED; media contact IntermountainNews@imail.org). RED LINE: rtcsnv.com still 403; News 3 confirms Aug 23 launch and 12-minute frequency; no ridership data found. Spruce Goose (354 units): Sept 2 outcome still not reported anywhere findable. Nothing new for verified openings in the next 30 days; searches returned old items (Wai Gallery ribbon cutting Oct 23 is a small arts item, skipped).
+
+**Source status:** Clark County, Henderson newsroom, RTC and Review-Journal returned 403 this run (INACCESSIBLE). NDOT surfaced via search only: I-11/US 95 repaving Sept 27 to Dec 1 between MLK and W Lake Mead, not a feature story.
+
+# TOMORROW'S RECOMMENDED LVINIT ASSIGNMENT (for Wed 2026-10-28)
+
+**Status: READY — FIRST-PARTY MEDIA RECOMMENDED**
+
+**Working headline:** Nevada's First Standalone Children's Hospital Just Broke Ground in Southwest Las Vegas: What It Means for Families
+**Location:** UNLV Harry Reid Research & Technology Park, southwest Las Vegas (33 acres)
+**Why it's tomorrow's best story:** The strongest verified and distinct story this week, primary release read, and LVINIT has no page on it. Relocating families will search for it.
+**What happened:** Groundbreaking Monday evening Oct 26 after the $150M Horowitz gift announced Oct 23.
+**Confirmed facts:** about 828,600 sq ft; 180-bed initial tower, expandable to 228; opening expected 2030; $150M Horowitz commitment.
+**Primary source verified:** Intermountain release (PRIMARY SOURCE READ AND VERIFIED).
+**Unresolved:** total cost (don't state one), contractors (secondary only), exact cross streets.
+**Related LVINIT pages:** /neighborhoods/southwest-las-vegas (mentions Harry Reid only as the airport).
+**Category:** Growth & Development, Southwest Las Vegas.
+**First-party media exists:** No. **Morning visit:** Yes.
+
+# MORNING PHOTO / VIDEO MISSION
+
+- **Where:** public roads around the Harry Reid Research & Technology Park. Entrance not confirmed, so check a map first.
+- **Access:** active construction site; shoot from public right-of-way only and don't enter. Ask Intermountain media relations before any on-site access.
+- **When:** about 7-10 AM, low morning light.
+- **Hero:** wide establishing shot of the site in its southwest-valley setting.
+- **Supporting shots:** site fencing or signage; nearest major intersection; neighboring research park buildings; nearby southwest streetscape; drone only if legal and clear of airport airspace.
+- **Don't:** show renderings as the finished hospital, imply it's open or visitable, or suggest an opening before 2030.
+- **Video:** short vertical "What's Being Built Here?" clip.
+
+## PUBLISHER FALLBACKS
+1. **The Foundry (Lennar), Cashman District:** READY. State release read; avoid site-by-site unit counts.
+2. **Casara at West Henderson:** READY with caveat. Secondary sources only; hedge the exact vote date. Already in the backlog.
+
+Handoff updated: `data/local-radar/handoff.json` (field `tomorrowAssignment`).
