@@ -618,7 +618,7 @@ export default function SouthwestLasVegasPage() {
       <DevelopmentWatch
         id="development"
         heading="Southwest Development Watch"
-        updated="Updated August 2026"
+        updated="Updated August 2026 · children's hospital added October 2026"
         intro={
           <p className="text-body-lg text-lvinit-warmgray">
             The Southwest changes faster than any page can keep up with, and most
@@ -633,7 +633,15 @@ export default function SouthwestLasVegasPage() {
         projects={developmentProjects}
         footnote={
           <>
-            Clark County has further roadwork in construction across this side of
+            The newest entry is the children&rsquo;s hospital that broke ground
+            on October 26; our{" "}
+            <Link
+              href="/guides/nevada-first-standalone-childrens-hospital-southwest-las-vegas"
+              className={linkClass}
+            >
+              full write-up
+            </Link>{" "}
+            covers what&rsquo;s confirmed and what isn&rsquo;t. Clark County has further roadwork in construction across this side of
             the valley, including the Warm Springs Road corridor, the CC-215
             frontage road between Sunset and Decatur, and the South Beltway
             widening from Decatur to I-15. The county&rsquo;s{" "}
