@@ -63,3 +63,15 @@ Manual sources not checked: Clark County, North Las Vegas, NDOT, RTC newsrooms, 
 **Needs verification:** The Cliff (Henderson, ~100,000 sq ft retail, fall 2026 grand opening; Arhaus, The Taco Stand, Killer Whale Creamery) came from trade-press snippets only; confirm with the developer. Cadence Crossing (Boyd) may already be open.
 
 **Other:** Summerlin Pkwy/Beltway/Far Hills interchange and 215 widening in Henderson are both targeted for 2028 (secondary sources), early-watch only. Official city/county agenda sites, NDOT and RTC newsrooms were not directly fetched this run (search-only); recorded as unchecked, not unavailable.
+
+---
+
+## Run 3 addendum (6:00 PM PT scheduled run: primary-source verification)
+
+**1. Children's hospital: PRIMARY SOURCE READ AND VERIFIED.** Intermountain's release (dated Oct 26) confirms the groundbreaking happened Monday evening. 33-acre campus, ~828,600 sq ft, 180-bed initial tower expandable to 228, opening 2030, $150M Horowitz commitment. Total construction cost is not in the release. Ready as article #1. Source: https://news.intermountainhealth.org/intermountain-health-breaks-ground-on-a-new-era-of-childrens-health-in-nevada/
+
+**2. The Foundry: state release READ.** Lennar, 1,000+ homes, $36.15M sale (verified, no longer needs verification), construction after demolition and end of Lights FC season. Fox5 and KTNV both say home construction starts about Oct 2027, which resolves the earlier timing conflict but is still secondary. Unit split and city record still unread.
+
+**3. RED LINE: RTC release text read via Mass Transit Magazine; rtcsnv.com returned 403 (INACCESSIBLE).** Launched Aug 23 per plan; no post-launch source found. Reframe as "riding it now."
+
+Not found tonight: any verified new opening within 30 days (searches returned old articles). Clark County, city agendas, NDOT not fetched this run.
