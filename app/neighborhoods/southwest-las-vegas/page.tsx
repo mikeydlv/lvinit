@@ -84,7 +84,8 @@ const meta: StoryMeta = {
   imageAlt:
     "A quiet street through the UnCommons mixed-use campus in southwest Las Vegas at mid-morning, with three- and four-story offices housing BDO and CBRE, young shade trees, and desert landscaping along the curb.",
   datePublished: "2026-07-16",
-  dateModified: "2026-08-20",
+  // 2026-10-27: added one first-party aerial to the offices gallery.
+  dateModified: "2026-10-27",
   author: "Mikey Del Rosario",
   breadcrumbs: [
     { name: "Home", path: "/" },
@@ -484,6 +485,12 @@ export default function SouthwestLasVegasPage() {
             alt: "A mid-morning street at the UnCommons campus in southwest Las Vegas, with a four-story office building signed for Morgan Stanley and Las Vegas Sotheby's International Realty, parked cars, and young trees casting shadows across the asphalt.",
             caption:
               "Offices at UnCommons. The southwest has quietly become a place people work, not just sleep.",
+          },
+          {
+            src: "/images/editorial/southwest-las-vegas-mixed-use-district-aerial-strip-skyline.jpg",
+            alt: "Aerial of office buildings and parking garages beside a freeway in Southwest Las Vegas, with the Strip skyline on the horizon.",
+            caption:
+              "From above: office buildings and parking garages beside a freeway, with the Strip skyline and mountains on the horizon. Photo: Mikey Del Rosario.",
           },
         ]}
       />
