@@ -1,19 +1,22 @@
 {
   "schema_version": 1,
   "agent": "content-brief-generator",
-  "generatedAt": "2026-10-20T17:53:48.769Z",
-  "reportDate": "2026-10-20",
-  "sourceGeneratedAt": "2026-10-20T17:53:30.419Z",
+  "generatedAt": "2026-10-27T18:39:08.416Z",
+  "reportDate": "2026-10-27",
+  "sourceGeneratedAt": "2026-10-27T18:38:51.753Z",
   "fixture": false,
   "status": "ok",
   "source": {
-    "gscReportDate": "2026-10-19",
+    "gscReportDate": "2026-10-26",
     "gscAvailable": true,
-    "gscLowVolume": true,
+    "gscLowVolume": false,
     "handoffMode": "dry-run"
   },
   "scope": "Publisher actions only. Monitor-only and rejected intents are left out; the full report stays in the content-briefs artifact.",
-  "skippedByAction": {},
+  "skippedByAction": {
+    "MONITOR_ONLY": 1,
+    "REJECT_DUPLICATE": 3
+  },
   "privacy": {
     "rawQueriesIncluded": false,
     "policy": "This file is public. Grouped Search Console queries and brief gscEvidence stay in the private workflow artifact."
@@ -21,12 +24,12 @@
   "publisherNote": "Briefs are inference from search demand. Research and confirm every fact before publishing; never publish Search Console figures as editorial facts.",
   "items": [
     {
-      "id": "BRIEF-2026-10-20-001",
+      "id": "BRIEF-2026-10-27-001",
       "fingerprint": "d585c5768966",
       "intentKey": "topic:place:summerlin",
       "workingTitle": null,
       "primaryQuestion": "What does someone deciding where to live need to understand about Summerlin?",
-      "intent": "informational",
+      "intent": "discovery",
       "cluster": "neighborhood-orientation",
       "contentType": "focused update of an existing page",
       "recommendedAction": "UPDATE_EXISTING",
@@ -75,12 +78,12 @@
         "cannibalization": "none"
       },
       "flags": [],
-      "score": 69.7,
-      "confidence": "medium",
+      "score": 70.6,
+      "confidence": "high",
       "status": "PERSISTING",
-      "handoffStatus": "REPORT_ONLY",
-      "persistenceRuns": 4,
-      "sourceGscReportDate": "2026-10-19",
+      "handoffStatus": "WOULD_HAND_OFF (dry run)",
+      "persistenceRuns": 5,
+      "sourceGscReportDate": "2026-10-26",
       "fairHousingFlag": false,
       "sourceValidation": "ok"
     }
