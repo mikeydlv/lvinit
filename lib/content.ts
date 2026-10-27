@@ -1089,6 +1089,23 @@ export const guides: Guide[] = [
       "Crowds lining a Summerlin street for the Fourth of July parade, flags and floats passing by.",
     href: "/neighborhoods/summerlin/fourth-of-july-parade",
   },
+  {
+    slug: "nevada-first-standalone-childrens-hospital-southwest-las-vegas",
+    title: "Nevada's First Standalone Children's Hospital Just Broke Ground in Southwest Las Vegas",
+    dek: "Intermountain Health broke ground Oct. 26 on a 33-acre campus at UNLV's Harry Reid Research & Technology Park. What's confirmed, what isn't, and what it means for families in the southwest valley.",
+    byline: "LVINIT Editorial",
+    date: "October 2026",
+    publishedAt: "2026-10-27",
+    category: "Local Feature",
+    // Built by the LVINIT Daily Publisher from Local Radar assignment
+    // LR-CHILDRENS-HOSPITAL-HARRY-REID. Primary source: Intermountain Health
+    // release of 2026-10-26. Hero is a general Southwest Las Vegas Media
+    // Image Library still (not the hospital site); the article says so.
+    image: "/images/editorial/southwest-las-vegas-office-buildings-freeway-aerial.jpg",
+    imageAlt:
+      "Aerial of new office buildings and a parking garage beside a freeway in Southwest Las Vegas, with the Las Vegas Strip skyline in the distance.",
+    href: "/guides/nevada-first-standalone-childrens-hospital-southwest-las-vegas",
+  },
 ];
 
 /**
