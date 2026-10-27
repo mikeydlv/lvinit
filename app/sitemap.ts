@@ -57,6 +57,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.7,
     },
     {
+      url: `${BASE_URL}/guides/nevada-first-standalone-childrens-hospital-southwest-las-vegas`,
+      changeFrequency: "monthly",
+      priority: 0.7,
+    },
+    {
       url: `${BASE_URL}/guides/gholson-landing-affordable-housing-east-las-vegas`,
       changeFrequency: "monthly",
       priority: 0.7,
