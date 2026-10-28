@@ -238,6 +238,22 @@ export type Guide = {
  */
 export const guides: Guide[] = [
   {
+    slug: "zillow-down-payment-assistance-nevada",
+    title: "Zillow Launches Down Payment Assistance: What Nevada Buyers Need to Know",
+    dek: "Zillow Home Loans can now cover up to 3.5% of an FHA down payment, and Nevada is included. Who qualifies, the five-year forgiveness rules, and what you still pay.",
+    byline: "Mikey Del Rosario",
+    date: "October 2026",
+    publishedAt: "2026-10-28",
+    category: "Buyer Guide",
+    // Buyer news on Zillow's October 28, 2026 launch, sourced only from
+    // Zillow's public pages. Hero and card image supplied by Mikey
+    // (uploaded 2026-10-28); not a Media Image Library file.
+    image: "/images/hero/zillow-down-payment-assistance-nevada-hero.png",
+    imageAlt:
+      "Smiling woman in a green sweater looking at her phone, next to a graphic reading: Your down payment, covered up to 3.5%. That's 14k on a $400k home.",
+    href: "/guides/zillow-down-payment-assistance-nevada",
+  },
+  {
     slug: "closing-costs-las-vegas-buyers",
     title: "Closing Costs When Buying a Home in Las Vegas: What to Expect",
     dek: "What closing costs are made of, how Clark County's $2.55 per $500 transfer tax works, and how to check the real numbers on your Loan Estimate and Closing Disclosure.",

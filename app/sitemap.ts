@@ -202,6 +202,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.7,
     },
     {
+      url: `${BASE_URL}/guides/zillow-down-payment-assistance-nevada`,
+      changeFrequency: "monthly",
+      priority: 0.7,
+    },
+    {
       url: `${BASE_URL}/guides/nevada-property-tax-abatement-resale-buyers`,
       changeFrequency: "yearly",
       priority: 0.7,
