@@ -3,6 +3,7 @@ import Link from "next/link";
 import { buildStoryMetadata, type StoryMeta } from "@/lib/story";
 import {
   StoryPage,
+  StoryGallery,
   StoryLede,
   StorySection,
   StoryPullQuote,
@@ -27,10 +28,20 @@ import {
 //   Lennar attended; ~70 acres; ~1,000 homes at full build-out.
 // DELIBERATELY OMITTED (unresolved): per-site unit counts, price by
 // collection, exact construction start, sales-office/model timing.
-// IMAGERY — no first-party Cashman photography exists in the library yet, so
-// this page has no hero image rather than a stand-in. Add Mikey's own site
-// photos when captured.
+// IMAGERY — Mikey-supplied LVINIT images (added 2026-10-28): the ceremonial
+// groundbreaking (hero) and the Lennar / AB LA site-plan board shown at the
+// event (inline). The site plan is a planning graphic, not built homes; the
+// caption says so. People in the photo are not identified.
 // ---------------------------------------------------------------------------
+
+const HERO =
+  "/images/the-foundry-lennar-homes-downtown-las-vegas-groundbreaking.webp";
+const HERO_ALT =
+  "Officials and Lennar representatives in hard hats turn gold shovels of gravel at the ceremonial groundbreaking for The Foundry, with a Deere loader, a stage and an American flag behind them.";
+const MAP =
+  "/images/the-foundry-lennar-homes-downtown-las-vegas-community-map.webp";
+const MAP_ALT =
+  "Lennar and AB LA site plan board for The Foundry showing rows of planned homes, with East Washington Avenue, North Maryland Parkway, Las Vegas Boulevard North and the Las Vegas Natural History Museum labeled.";
 
 const PATH = "/guides/the-foundry-lennar-cashman-downtown-las-vegas";
 const linkCls =
@@ -45,6 +56,10 @@ const meta: StoryMeta = {
   description:
     "Lennar broke ground on The Foundry, 1,000+ homes starting in the $300,000s on the former Cashman Center and Grant Sawyer sites. What's confirmed, what isn't, and what it means for downtown.",
   path: PATH,
+  image: HERO,
+  imageWidth: 1740,
+  imageHeight: 904,
+  imageAlt: HERO_ALT,
   datePublished: "2026-10-28",
   dateModified: "2026-10-28",
   author: "LVINIT Editorial",
@@ -67,6 +82,8 @@ export default function FoundryCashmanPage() {
           "The Foundry: What Lennar's 1,000-Home Neighborhood at Cashman Means for Downtown Las Vegas",
         subheadline:
           "A ceremonial groundbreaking on October 15 kicked off the biggest for-sale housing project downtown in years. Here's what's confirmed, what's still a reported timeline, and what it changes.",
+        image: HERO,
+        imageAlt: HERO_ALT,
         backLink: { label: "All guides", href: "/guides" },
       }}
       relatedStories={{
@@ -130,10 +147,15 @@ export default function FoundryCashmanPage() {
         <p className="text-body-lg text-lvinit-warmgray">
           The site sits near Las Vegas Boulevard and East Washington Avenue,
           just north of the core of downtown, in the city&rsquo;s Cashman
-          District. This is not the Arts District; it&rsquo;s a different
+          District. The site plan shown at the groundbreaking labels East
+          Washington Avenue along the top and North Maryland Parkway along the
+          bottom, with the Las Vegas Natural History Museum next door and a
+          parcel along Las Vegas Boulevard North marked as proposed
+          commercial. This is not the Arts District; it&rsquo;s a different
           pocket, with Cashman Field and the old state building as its
-          anchors. Check a map before you plan around it. Both sites are active
-          demolition or construction areas, not open to the public.
+          anchors. Check a map before you plan around it, and note that the
+          site is an active demolition and construction area, not open to the
+          public.
         </p>
       </StorySection>
 
@@ -177,6 +199,19 @@ export default function FoundryCashmanPage() {
         </p>
       </StorySection>
 
+      <StoryGallery
+        columns={1}
+        images={[
+          {
+            src: MAP,
+            alt: MAP_ALT,
+            label: "The site plan",
+            caption:
+              "The Lennar and AB LA site plan board displayed at the groundbreaking. It's a planning graphic, not built homes, and the layout could change.",
+          },
+        ]}
+      />
+
       <StorySection muted heading="What's still unconfirmed">
         <ul className="list-disc space-y-3 pl-5 text-body-lg text-lvinit-warmgray">
           <li>
@@ -196,10 +231,6 @@ export default function FoundryCashmanPage() {
             published opening date.
           </li>
         </ul>
-        <p className="mt-6 text-body-lg text-lvinit-warmgray">
-          I haven&rsquo;t visited the site yet, so this page has no photos of
-          it. They&rsquo;ll be added when I have my own.
-        </p>
       </StorySection>
 
       <StorySection heading="Sources">
