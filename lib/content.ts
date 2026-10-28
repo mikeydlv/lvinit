@@ -1106,6 +1106,18 @@ export const guides: Guide[] = [
       "Aerial of new office buildings and a parking garage beside a freeway in Southwest Las Vegas, with the Las Vegas Strip skyline in the distance.",
     href: "/guides/nevada-first-standalone-childrens-hospital-southwest-las-vegas",
   },
+  {
+    slug: "the-foundry-lennar-cashman-downtown-las-vegas",
+    title: "The Foundry: What Lennar's 1,000-Home Neighborhood at Cashman Means for Downtown Las Vegas",
+    dek: "Lennar broke ground Oct. 15 on 1,000+ homes starting in the $300,000s at the former Cashman Center and Grant Sawyer sites. What's confirmed, what isn't, and what it means for downtown.",
+    byline: "LVINIT Editorial",
+    date: "October 2026",
+    publishedAt: "2026-10-28",
+    category: "Local Feature",
+    // Built by the LVINIT Daily Publisher from Local Radar assignment
+    // LR-THE-FOUNDRY-CASHMAN. No first-party site photos yet, so no card image.
+    href: "/guides/the-foundry-lennar-cashman-downtown-las-vegas",
+  },
 ];
 
 /**
