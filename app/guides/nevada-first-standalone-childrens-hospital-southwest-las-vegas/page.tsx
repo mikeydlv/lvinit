@@ -33,9 +33,12 @@ import {
 // (secondary only), exact cross streets, building height, and the permit
 // square-footage that differs from Intermountain's (826,600 vs ~828,600).
 //
-// IMAGERY — no LVINIT photography of the site exists yet. Hero and inline
-// image are general Southwest Las Vegas Media Image Library stills, captioned
-// as general area context, never as the hospital site.
+// IMAGERY — updated 2026-10-28 with Mikey's own photos taken at the site that
+// day (public/images/*childrens-hospital*.webp). The earlier general-area
+// library stills were removed. The construction-fence banner shows an
+// illustration of the planned hospital; it is captioned as banner artwork, not
+// the building. Contractors visible on a site sign are still NOT named in copy
+// (sign text only partly legible; release is silent).
 // ---------------------------------------------------------------------------
 
 const PATH = "/guides/nevada-first-standalone-childrens-hospital-southwest-las-vegas";
@@ -43,9 +46,10 @@ const linkCls =
   "text-lvinit-blue underline underline-offset-4 decoration-transparent hover:decoration-lvinit-blue";
 const extCls = "text-lvinit-blue underline underline-offset-4";
 
-const HERO = "/images/editorial/southwest-las-vegas-office-buildings-freeway-aerial.jpg";
+const HERO =
+  "/images/intermountain-childrens-hospital-construction-fence-banner-opening-2030-southwest-las-vegas.webp";
 const HERO_ALT =
-  "Aerial of new office buildings and a parking garage beside a freeway in Southwest Las Vegas, with the Las Vegas Strip skyline in the distance.";
+  "Construction fence banner at the future Intermountain Health children's hospital site in Southwest Las Vegas, reading Felicia and Ben Horowitz Children's Hospital and Opening 2030, with bare gravel ground in front.";
 
 const meta: StoryMeta = {
   title:
@@ -56,10 +60,11 @@ const meta: StoryMeta = {
     "Intermountain Health broke ground Oct. 26 on a 33-acre children's hospital at UNLV's Harry Reid Research & Technology Park. What's confirmed, what isn't, and what it means for families in the southwest valley.",
   path: PATH,
   image: HERO,
-  imageWidth: 1920,
-  imageHeight: 1080,
+  imageWidth: 2000,
+  imageHeight: 1500,
   imageAlt: HERO_ALT,
   datePublished: "2026-10-27",
+  dateModified: "2026-10-28",
   author: "LVINIT Editorial",
   breadcrumbs: [
     { name: "Home", path: "/" },
@@ -236,9 +241,10 @@ export default function ChildrensHospitalPage() {
           site just northeast of the 215 Beltway at South Durango Drive.
           That&rsquo;s secondary reporting, so check a map before you plan
           around it. The site is an active construction zone and isn&rsquo;t
-          open to visitors. The photo at the top of this page is a general
-          view of Southwest Las Vegas, not the hospital site; LVINIT doesn&rsquo;t
-          have its own photos of the site yet.
+          open to visitors. The photos in this story were taken at the site
+          on October 28, two days after the groundbreaking. At this point
+          it&rsquo;s a fenced lot of gravel and bare dirt with a project banner
+          on the fence.
         </p>
       </StorySection>
 
@@ -279,14 +285,21 @@ export default function ChildrensHospitalPage() {
       </StorySection>
 
       <StoryGallery
-        columns={1}
+        columns={2}
         images={[
           {
-            src: "/images/editorial/southwest-las-vegas-homes-under-construction-framing.jpg",
-            alt: "New two-story homes under construction in Southwest Las Vegas, some in wood framing and one in stucco with scaffolding.",
-            label: "Southwest Las Vegas",
+            src: "/images/intermountain-childrens-hospital-rendering-banner-opening-2030-southwest-las-vegas.webp",
+            alt: "Construction fence banner at the hospital site showing an illustration of the planned children's hospital with palm trees and colorful panels, and the words Opening 2030.",
+            label: "The site, Oct. 28",
             caption:
-              "New homes going up in the southwest valley, the kind of growth the area has seen for years. General area photo, not near the hospital site.",
+              "The fence banner carries an illustration of the planned hospital and the words \"Opening 2030.\" It's artwork, not the building.",
+          },
+          {
+            src: "/images/felicia-and-ben-horowitz-childrens-hospital-site-banner-open-lot-southwest-las-vegas.webp",
+            alt: "Close view of the Intermountain Children's Health banner on a chain-link fence, with a large open lot and distant mountains behind it.",
+            label: "The site, Oct. 28",
+            caption:
+              "Behind the fence, the lot is still open ground. Nothing here is open to visitors.",
           },
         ]}
       />
