@@ -1099,11 +1099,11 @@ export const guides: Guide[] = [
     category: "Local Feature",
     // Built by the LVINIT Daily Publisher from Local Radar assignment
     // LR-CHILDRENS-HOSPITAL-HARRY-REID. Primary source: Intermountain Health
-    // release of 2026-10-26. Hero is a general Southwest Las Vegas Media
-    // Image Library still (not the hospital site); the article says so.
-    image: "/images/editorial/southwest-las-vegas-office-buildings-freeway-aerial.jpg",
+    // release of 2026-10-26. Image is Mikey's own 2026-10-28 photo of the
+    // construction fence banner at the hospital site (same as the article hero).
+    image: "/images/intermountain-childrens-hospital-construction-fence-banner-opening-2030-southwest-las-vegas.webp",
     imageAlt:
-      "Aerial of new office buildings and a parking garage beside a freeway in Southwest Las Vegas, with the Las Vegas Strip skyline in the distance.",
+      "Construction fence banner at the future Intermountain Health children's hospital site in Southwest Las Vegas, reading Felicia and Ben Horowitz Children's Hospital and Opening 2030, with bare gravel ground in front.",
     href: "/guides/nevada-first-standalone-childrens-hospital-southwest-las-vegas",
   },
   {
