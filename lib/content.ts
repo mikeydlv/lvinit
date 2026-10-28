@@ -1115,7 +1115,10 @@ export const guides: Guide[] = [
     publishedAt: "2026-10-28",
     category: "Local Feature",
     // Built by the LVINIT Daily Publisher from Local Radar assignment
-    // LR-THE-FOUNDRY-CASHMAN. No first-party site photos yet, so no card image.
+    // LR-THE-FOUNDRY-CASHMAN. Card image is the groundbreaking photo (same as hero).
+    image: "/images/the-foundry-lennar-homes-downtown-las-vegas-groundbreaking.webp",
+    imageAlt:
+      "Officials and Lennar representatives in hard hats turn gold shovels of gravel at the ceremonial groundbreaking for The Foundry, with a Deere loader, a stage and an American flag behind them.",
     href: "/guides/the-foundry-lennar-cashman-downtown-las-vegas",
   },
 ];
