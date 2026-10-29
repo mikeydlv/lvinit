@@ -1123,6 +1123,22 @@ export const guides: Guide[] = [
     href: "/guides/nevada-first-standalone-childrens-hospital-southwest-las-vegas",
   },
   {
+    slug: "municipal-gym-downtown-summerlin",
+    title: "Municipal Gym Is Coming to Downtown Summerlin: What We Know Before the Nov. 2 Founding Sale",
+    dek: "The Mark Wahlberg-backed gym is headed to 2315 Summa Drive, with a one-day Founding Members sale Nov. 2 and an early 2027 opening. Posted rates, terms and what's unconfirmed.",
+    byline: "LVINIT Editorial",
+    date: "October 2026",
+    publishedAt: "2026-10-29",
+    category: "Local Feature",
+    // Built by the LVINIT Daily Publisher from Local Radar assignment
+    // LR-MUNICIPAL-GYM-DOWNTOWN-SUMMERLIN. Card image is the hero (contextual
+    // Downtown Summerlin aerial, not the gym).
+    image: "/images/editorial/downtown-summerlin-park-lawn-mountains-aerial.jpg",
+    imageAlt:
+      "Aerial view of a green park lawn and tree-lined parking at Downtown Summerlin with desert mountains in the distance.",
+    href: "/guides/municipal-gym-downtown-summerlin",
+  },
+  {
     slug: "the-foundry-lennar-cashman-downtown-las-vegas",
     title: "The Foundry: What Lennar's 1,000-Home Neighborhood at Cashman Means for Downtown Las Vegas",
     dek: "Lennar broke ground Oct. 15 on 1,000+ homes starting in the $300,000s at the former Cashman Center and Grant Sawyer sites. What's confirmed, what isn't, and what it means for downtown.",

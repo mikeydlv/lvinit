@@ -57,6 +57,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.7,
     },
     {
+      url: `${BASE_URL}/guides/municipal-gym-downtown-summerlin`,
+      changeFrequency: "monthly",
+      priority: 0.7,
+    },
+    {
       url: `${BASE_URL}/guides/the-foundry-lennar-cashman-downtown-las-vegas`,
       changeFrequency: "monthly",
       priority: 0.7,
