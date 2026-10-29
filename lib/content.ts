@@ -1131,11 +1131,10 @@ export const guides: Guide[] = [
     publishedAt: "2026-10-29",
     category: "Local Feature",
     // Built by the LVINIT Daily Publisher from Local Radar assignment
-    // LR-MUNICIPAL-GYM-DOWNTOWN-SUMMERLIN. Card image is the hero (contextual
-    // Downtown Summerlin aerial, not the gym).
-    image: "/images/editorial/downtown-summerlin-park-lawn-mountains-aerial.jpg",
+    // LR-MUNICIPAL-GYM-DOWNTOWN-SUMMERLIN. Card image is the hero (storefront photo).
+    image: "/images/municipal-gym-storefront-downtown-summerlin-coming-soon.webp",
     imageAlt:
-      "Aerial view of a green park lawn and tree-lined parking at Downtown Summerlin with desert mountains in the distance.",
+      "Storefront at 2315 Summa Drive in Downtown Summerlin with Municipal Gym signage over the doors, Future Home window graphics reading late winter 2026, a blue panel above the entrance and two palm trees.",
     href: "/guides/municipal-gym-downtown-summerlin",
   },
   {
