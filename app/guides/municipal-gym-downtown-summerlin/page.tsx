@@ -25,13 +25,19 @@ import {
 // DELIBERATELY OMITTED: firm opening date, whether the 2024 square footage and
 // amenity list are unchanged, contract/fee terms beyond the posted page,
 // celebrity quotes, anything from the unread Review-Journal piece.
-// IMAGERY — Mikey's own Downtown Summerlin drone stills (Aug 19, 2026), library
-// assets. They are CONTEXT only: no gym signage or storefront is shown, and the
-// captions say so. No first-party photo of the gym space existed at publish.
+// IMAGERY — Hero is the LVINIT-supplied storefront photo at 2315 Summa Drive
+// (added 2026-10-29), showing Municipal Gym signage and "Future Home" window
+// graphics reading "late winter 2026". The two Downtown Summerlin drone stills
+// (Aug 19, 2026) are CONTEXT only, and their captions say so.
 // ---------------------------------------------------------------------------
 
-const HERO = "/images/editorial/downtown-summerlin-park-lawn-mountains-aerial.jpg";
+const HERO =
+  "/images/municipal-gym-storefront-downtown-summerlin-coming-soon.webp";
 const HERO_ALT =
+  "Storefront at 2315 Summa Drive in Downtown Summerlin with Municipal Gym signage over the doors, Future Home window graphics reading late winter 2026, a blue panel above the entrance and two palm trees.";
+const LAWN =
+  "/images/editorial/downtown-summerlin-park-lawn-mountains-aerial.jpg";
+const LAWN_ALT =
   "Aerial view of a green park lawn and tree-lined parking at Downtown Summerlin with desert mountains in the distance.";
 const RETAIL =
   "/images/editorial/downtown-summerlin-retail-lawn-hotel-tower-aerial.jpg";
@@ -52,8 +58,8 @@ const meta: StoryMeta = {
     "Mark Wahlberg's Municipal Gym is headed to 2315 Summa Drive at Downtown Summerlin, with a one-day Founding Members sale Nov. 2. Posted rates, terms and what's still unconfirmed.",
   path: PATH,
   image: HERO,
-  imageWidth: 1920,
-  imageHeight: 1080,
+  imageWidth: 1148,
+  imageHeight: 736,
   imageAlt: HERO_ALT,
   datePublished: "2026-10-29",
   dateModified: "2026-10-29",
@@ -195,14 +201,21 @@ export default function MunicipalGymDowntownSummerlinPage() {
       </StorySection>
 
       <StoryGallery
-        columns={1}
+        columns={2}
         images={[
+          {
+            src: LAWN,
+            alt: LAWN_ALT,
+            label: "Downtown Summerlin",
+            caption:
+              "A lawn and parking area at Downtown Summerlin from the air in August. Area context only, not the gym.",
+          },
           {
             src: RETAIL,
             alt: RETAIL_ALT,
             label: "Downtown Summerlin",
             caption:
-              "Downtown Summerlin from the air in August. This is context for the area, not the gym: no Municipal Gym signage or storefront is shown.",
+              "Downtown Summerlin's retail core from the air in August. Area context only, not the gym.",
           },
         ]}
       />
@@ -240,7 +253,10 @@ export default function MunicipalGymDowntownSummerlinPage() {
         <ul className="list-disc space-y-3 pl-5 text-body-lg text-lvinit-warmgray">
           <li>
             <span className="text-lvinit-black">A firm opening date.</span>{" "}
-            &ldquo;Early 2027&rdquo; is all that&rsquo;s been published.
+            &ldquo;Early 2027&rdquo; is what Fox5 reported. The storefront
+            window graphics in the photo above read &ldquo;late winter
+            2026,&rdquo; which looks older than that report, so I&rsquo;m
+            going with the later, published timeline.
           </li>
           <li>
             <span className="text-lvinit-black">The final amenity list.</span>{" "}
