@@ -1123,6 +1123,19 @@ export const guides: Guide[] = [
     href: "/guides/nevada-first-standalone-childrens-hospital-southwest-las-vegas",
   },
   {
+    slug: "maryland-parkway-red-line-rtc-las-vegas",
+    title: "The Maryland Parkway RED LINE: What's Running, and What's Still Torn Up",
+    dek: "RTC's RED LINE replaced Route 109 on Aug. 23 with a bus every 12 minutes. What's confirmed, what's still under construction south of Sahara, and what hasn't been published.",
+    byline: "LVINIT Editorial",
+    date: "October 2026",
+    publishedAt: "2026-10-30",
+    category: "Local Feature",
+    // Built by the LVINIT Daily Publisher from Local Radar assignment
+    // LR-RTC-RED-LINE-MARYLAND-PKWY. No LVINIT photography of the line yet,
+    // so the card renders its designed non-photographic fallback.
+    href: "/guides/maryland-parkway-red-line-rtc-las-vegas",
+  },
+  {
     slug: "municipal-gym-downtown-summerlin",
     title: "Municipal Gym Is Coming to Downtown Summerlin: What We Know Before the Nov. 2 Founding Sale",
     dek: "The Mark Wahlberg-backed gym is headed to 2315 Summa Drive, with a one-day Founding Members sale Nov. 2 and an early 2027 opening. Posted rates, terms and what's unconfirmed.",
