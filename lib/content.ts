@@ -1123,6 +1123,19 @@ export const guides: Guide[] = [
     href: "/guides/nevada-first-standalone-childrens-hospital-southwest-las-vegas",
   },
   {
+    slug: "patriot-housing-lv-sunrise-manor-veteran-housing",
+    title: "Patriot Housing LV: What Clark County Approved for 348 Veteran-Focused Apartments in Sunrise Manor",
+    dek: "Staff recommended denial; commissioners approved it 7-0 on Oct. 7 with conditions. What's approved, what's not known yet.",
+    byline: "LVINIT Editorial",
+    date: "October 2026",
+    publishedAt: "2026-10-31",
+    category: "Local Feature",
+    // Built by the LVINIT Daily Publisher from Local Radar assignment
+    // LR-PATRIOT-HOUSING-LV. No LVINIT photography of the site; card renders
+    // its designed non-photographic fallback.
+    href: "/guides/patriot-housing-lv-sunrise-manor-veteran-housing",
+  },
+  {
     slug: "maryland-parkway-red-line-rtc-las-vegas",
     title: "The Maryland Parkway RED LINE: What's Running, and What's Still Torn Up",
     dek: "RTC's RED LINE replaced Route 109 on Aug. 23 with a bus every 12 minutes. What's confirmed, what's still under construction south of Sahara, and what hasn't been published.",
