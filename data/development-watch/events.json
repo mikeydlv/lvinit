@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "agent": "development-watch",
-  "updated": "2026-10-30",
+  "updated": "2026-10-31",
   "events": {
     "025b2cbfc757": {
       "id": "DEV-2026-09-25-002",
@@ -560,6 +560,54 @@
           "NO_PRIMARY_SOURCE",
           "NOT_MATERIAL",
           "NOT_NEW"
+        ],
+        "queued": []
+      }
+    },
+    "16d239f72987": {
+      "id": "DEV-2026-10-31-001",
+      "fingerprint": "16d239f72987",
+      "entity_id": "DEV-P-CE24223B",
+      "entity_name": "Unnamed residential (Las Vegas (valley-wide)) — \"Developer plans $113M housing project near M Resort\"",
+      "change_class": "NEW",
+      "changes": [
+        "first time this project has been seen"
+      ],
+      "event_type": "announcement",
+      "status": "proposed",
+      "prior_status": null,
+      "first_seen": "2026-10-31",
+      "last_seen": "2026-10-31",
+      "times_seen": 1,
+      "lifecycle": "REJECTED",
+      "lifecycle_history": [
+        {
+          "date": "2026-10-31",
+          "lifecycle": "REJECTED"
+        }
+      ],
+      "action": "REJECT_LOW_VALUE",
+      "target": null,
+      "score": 38,
+      "confidence": "Low",
+      "sources": [
+        {
+          "name": "Las Vegas Review-Journal — Business",
+          "url": "https://reviewjournal.com/business/housing/developer-plans-113m-housing-project-near-m-resort-3907241",
+          "authority": 8,
+          "published": "2026-10-30T20:15:11.000Z"
+        }
+      ],
+      "superseded_by": null,
+      "handoff": {
+        "eligible": false,
+        "blockers": [
+          "NOT_A_PUBLISHER_ACTION",
+          "SCORE_BELOW_THRESHOLD",
+          "CONFIDENCE_NOT_HIGH",
+          "NO_PRIMARY_SOURCE",
+          "NOT_NEW",
+          "PROVISIONAL_ENTITY"
         ],
         "queued": []
       }
@@ -3414,6 +3462,54 @@
         "queued": []
       }
     },
+    "64c9620fd6e2": {
+      "id": "DEV-2026-10-31-002",
+      "fingerprint": "64c9620fd6e2",
+      "entity_id": "DEV-P-6211CEE6",
+      "entity_name": "Unnamed road (Las Vegas (valley-wide)) — \"NDOT announces major roadwork, lane closures across Las Vegas valley\"",
+      "change_class": "NEW",
+      "changes": [
+        "first time this project has been seen"
+      ],
+      "event_type": "access change",
+      "status": "announced",
+      "prior_status": null,
+      "first_seen": "2026-10-31",
+      "last_seen": "2026-10-31",
+      "times_seen": 1,
+      "lifecycle": "REJECTED",
+      "lifecycle_history": [
+        {
+          "date": "2026-10-31",
+          "lifecycle": "REJECTED"
+        }
+      ],
+      "action": "REJECT_LOW_VALUE",
+      "target": null,
+      "score": 36,
+      "confidence": "Low",
+      "sources": [
+        {
+          "name": "FOX5 Vegas",
+          "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxPVl82RnJPTEZQSW1vcGFEYWJTZXM1ZUc3YmxpTWMwZTlueVNON2pRNWhxTXJOZEdjNVhXR0tRa2lHTlZ6S0RTbndHWm9ZNGk2VWhsY2FXSXhnek5Vai0xNElRNzZyT0dxa3U3UEZzSnBPdzl3Zm83QTh2Q09KLVZuZGhpS3BlVUg3N0RmVnBFdXkzd28xVmR1RFI2cE1NcHdnTjdkTGcyZUk",
+          "authority": 8,
+          "published": "2026-10-30T19:16:00.000Z"
+        }
+      ],
+      "superseded_by": null,
+      "handoff": {
+        "eligible": false,
+        "blockers": [
+          "NOT_A_PUBLISHER_ACTION",
+          "SCORE_BELOW_THRESHOLD",
+          "CONFIDENCE_NOT_HIGH",
+          "NO_PRIMARY_SOURCE",
+          "NOT_NEW",
+          "PROVISIONAL_ENTITY"
+        ],
+        "queued": []
+      }
+    },
     "685000bceac8": {
       "id": "DEV-2026-09-30-001",
       "fingerprint": "685000bceac8",
@@ -5998,9 +6094,9 @@
       "status": "paused",
       "prior_status": "paused",
       "first_seen": "2026-10-28",
-      "last_seen": "2026-10-29",
-      "times_seen": 2,
-      "lifecycle": "RESOLVED",
+      "last_seen": "2026-10-31",
+      "times_seen": 3,
+      "lifecycle": "PERSISTING",
       "lifecycle_history": [
         {
           "date": "2026-10-28",
@@ -6013,11 +6109,15 @@
         {
           "date": "2026-10-30",
           "lifecycle": "RESOLVED"
+        },
+        {
+          "date": "2026-10-31",
+          "lifecycle": "PERSISTING"
         }
       ],
       "action": "DUPLICATE",
       "target": "/guides/aries-henderson",
-      "score": 71,
+      "score": 49,
       "confidence": "Medium",
       "sources": [
         {
@@ -6055,6 +6155,12 @@
           "url": "https://nevadabusiness.com/2026/10/196-million-powered-land-transaction-closes-in-north-las-vegas-apex-area",
           "authority": 8,
           "published": "2026-10-26T19:00:20.000Z"
+        },
+        {
+          "name": "News 3 Las Vegas",
+          "url": "https://news3lv.com/news/local/las-vegas-wedding-company-closure-leaves-couples-out-thousands-some-pursuing-legal-action",
+          "authority": 8,
+          "published": "2026-10-31T01:36:49.000Z"
         }
       ],
       "superseded_by": "4fed6fd13245",
@@ -6062,6 +6168,7 @@
         "eligible": false,
         "blockers": [
           "NOT_A_PUBLISHER_ACTION",
+          "SCORE_BELOW_THRESHOLD",
           "CONFIDENCE_NOT_HIGH",
           "NO_PRIMARY_SOURCE",
           "NOT_MATERIAL",
