@@ -1,0 +1,979 @@
+{
+  "schema_version": 1,
+  "agent": "local-trends",
+  "date": "2026-11-01",
+  "fixture": false,
+  "mode": "rules",
+  "modeReason": "no ANTHROPIC_API_KEY is configured",
+  "model": null,
+  "counts": {
+    "read": 1059,
+    "sourcesOk": 13,
+    "fresh": 80,
+    "judged": 8,
+    "alreadyReviewed": 473,
+    "deferred": 0
+  },
+  "usage": null,
+  "health": [
+    {
+      "id": "henderson-news",
+      "name": "City of Henderson newsroom",
+      "tier": "official",
+      "ok": true,
+      "status": 200,
+      "items": 41,
+      "error": null
+    },
+    {
+      "id": "city-lv-news",
+      "name": "City of Las Vegas newsroom",
+      "tier": "official",
+      "ok": true,
+      "status": 200,
+      "items": 25,
+      "error": null
+    },
+    {
+      "id": "rj-business",
+      "name": "Las Vegas Review-Journal — Business",
+      "tier": "news",
+      "ok": true,
+      "status": 200,
+      "items": 30,
+      "error": null
+    },
+    {
+      "id": "rj-local",
+      "name": "Las Vegas Review-Journal — Local",
+      "tier": "news",
+      "ok": true,
+      "status": 200,
+      "items": 30,
+      "error": null
+    },
+    {
+      "id": "sun-business",
+      "name": "Las Vegas Sun — Business",
+      "tier": "news",
+      "ok": true,
+      "status": 200,
+      "items": 20,
+      "error": null
+    },
+    {
+      "id": "sun-news",
+      "name": "Las Vegas Sun — News",
+      "tier": "news",
+      "ok": true,
+      "status": 200,
+      "items": 20,
+      "error": null
+    },
+    {
+      "id": "vegas-inc",
+      "name": "Vegas Inc",
+      "tier": "news",
+      "ok": true,
+      "status": 200,
+      "items": 20,
+      "error": null
+    },
+    {
+      "id": "ktnv",
+      "name": "KTNV 13 Action News",
+      "tier": "news",
+      "ok": true,
+      "status": 200,
+      "items": 30,
+      "error": null
+    },
+    {
+      "id": "8newsnow",
+      "name": "8 News Now",
+      "tier": "news",
+      "ok": true,
+      "status": 200,
+      "items": 22,
+      "error": null
+    },
+    {
+      "id": "news3lv",
+      "name": "News 3 Las Vegas",
+      "tier": "news",
+      "ok": true,
+      "status": 200,
+      "items": 41,
+      "error": null
+    },
+    {
+      "id": "nevada-current",
+      "name": "Nevada Current",
+      "tier": "news",
+      "ok": true,
+      "status": 200,
+      "items": 100,
+      "error": null
+    },
+    {
+      "id": "reddit",
+      "name": "Reddit (r/vegas, r/LasVegas, r/henderson, r/summerlin)",
+      "tier": "social",
+      "ok": true,
+      "status": 200,
+      "items": 100,
+      "error": null
+    },
+    {
+      "id": "google-news",
+      "name": "Google News search (41 targeted queries)",
+      "tier": "news",
+      "ok": true,
+      "status": 200,
+      "items": 580,
+      "error": null
+    }
+  ],
+  "topics": [
+    {
+      "key": "city-of-las-vegas-las-vegas-city-council-approves-97-unit-to",
+      "isExisting": false,
+      "name": "Las Vegas City Council Approves 97-Unit Townhome Community in La Madre Foothills",
+      "kind": "project",
+      "area": "City of Las Vegas",
+      "category": "A. Real estate development",
+      "status": "APPROVED",
+      "statusEvidence": "Las Vegas City Council Approves 97-Unit Townhome Community in La Madre Foothills.",
+      "statusEvidenceId": "c-4a11c0b270",
+      "materialNewInfo": false,
+      "whatChanged": "",
+      "scores": {
+        "local_relevance": 4,
+        "relocation_value": 4,
+        "conversation_potential": 2,
+        "visual_potential": 4,
+        "evergreen_value": 3,
+        "real_estate_connection": 5,
+        "novelty": 2,
+        "lvinit_fit": 3
+      },
+      "whyItMatters": "Rules-only mode — source summary: Las Vegas City Council Approves 97-Unit Townhome Community in La Madre Foothills",
+      "whyPeopleCare": "Needs Mikey's angle (rules-only mode cannot judge audience).",
+      "hook": "Needs Mikey's angle (rules-only mode does not write hooks).",
+      "bestFormat": "field-report Reel",
+      "secondaryFormats": [
+        "LVINIT article"
+      ],
+      "flywheel": [],
+      "fieldShoot": {
+        "recommended": true,
+        "locationType": "The site itself in City of Las Vegas — confirm the location from the source before driving out.",
+        "shots": [],
+        "drone": "",
+        "aRoll": "",
+        "urgency": "shoot this month"
+      },
+      "articleOpportunity": "Possible update to /guides/monument-hills-northwest-las-vegas",
+      "existingContent": [
+        {
+          "route": "/guides/monument-hills-northwest-las-vegas",
+          "action": "internal link",
+          "note": "Related by area/topic (rules match)."
+        },
+        {
+          "route": "/guides/buying-new-construction-las-vegas",
+          "action": "internal link",
+          "note": "Related by area/topic (rules match)."
+        },
+        {
+          "route": "/guides/gholson-landing-affordable-housing-east-las-vegas",
+          "action": "internal link",
+          "note": "Related by area/topic (rules match)."
+        }
+      ],
+      "missingConfirmation": "",
+      "promotionTrigger": "",
+      "sources": [
+        {
+          "id": "c-4a11c0b270",
+          "title": "Las Vegas City Council Approves 97-Unit Townhome Community in La Madre Foothills",
+          "sourceName": "NVBEX",
+          "url": "https://news.google.com/rss/articles/CBMifkFVX3lxTE43bkloSzd3WHczOHpBVkpkUVZOekR2Y2FGc1N5eVdkTXJ1OTktRUJ3cW9wb2NNamZ1WnRDYmFiN0Y0VENHbkhWVGozcHQ3NFFsUXpQSldCNUFpM3RCcnJPdnJGTWsyVWhtY0tBbHAxY2FIekZlaDRYcE9kQWtFQQ",
+          "published": "2026-10-31",
+          "tier": "news",
+          "via": "google-news"
+        }
+      ],
+      "signals": [],
+      "total": 27,
+      "band": "P3",
+      "priority": "P3",
+      "capped": null,
+      "statusEvidenceUrl": "https://news.google.com/rss/articles/CBMifkFVX3lxTE43bkloSzd3WHczOHpBVkpkUVZOekR2Y2FGc1N5eVdkTXJ1OTktRUJ3cW9wb2NNamZ1WnRDYmFiN0Y0VENHbkhWVGozcHQ3NFFsUXpQSldCNUFpM3RCcnJPdnJGTWsyVWhtY0tBbHAxY2FIekZlaDRYcE9kQWtFQQ",
+      "surface": true,
+      "surfaceReasons": [
+        "new"
+      ],
+      "statusNote": null
+    },
+    {
+      "key": "las-vegas-valley-wide-discover-las-vegas-november-2026",
+      "isExisting": false,
+      "name": "Discover Las Vegas - November 2026",
+      "kind": "project",
+      "area": "Las Vegas (valley-wide)",
+      "category": "G. Local lifestyle",
+      "status": "PROPOSED",
+      "statusEvidence": "Make a plan to vote at City Hall Tuesday, Nov.",
+      "statusEvidenceId": "c-52a77917ce",
+      "materialNewInfo": false,
+      "whatChanged": "",
+      "scores": {
+        "local_relevance": 3,
+        "relocation_value": 4,
+        "conversation_potential": 3,
+        "visual_potential": 4,
+        "evergreen_value": 4,
+        "real_estate_connection": 2,
+        "novelty": 2,
+        "lvinit_fit": 3
+      },
+      "whyItMatters": "Rules-only mode — source summary: November 2026 View All Events Día De Los Muertos Celebration Sunday, Nov. 1, 1-7 p.m. Las Vegas Civic Center Outdoor Plaza 525 S. Main St. Free and open to the public This vibrant homage to life is a true community event and one of the most charming and colorful holidays celebrated by Mexican and Latin American cultures. This lighthearted and joyful tribute honors the memory of family and friends who have passed away. Enjoy a fun and immersive atmosphere that includes entertainment, interactive children’s activities, artisan vendors, food, face-painting, special décor and an exhibition of alta",
+      "whyPeopleCare": "Needs Mikey's angle (rules-only mode cannot judge audience).",
+      "hook": "Needs Mikey's angle (rules-only mode does not write hooks).",
+      "bestFormat": "Reel / TikTok / Short",
+      "secondaryFormats": [
+        "LVINIT article"
+      ],
+      "flywheel": [],
+      "fieldShoot": {
+        "recommended": true,
+        "locationType": "The site itself in Las Vegas (valley-wide) — confirm the location from the source before driving out.",
+        "shots": [],
+        "drone": "",
+        "aRoll": "",
+        "urgency": "shoot this month"
+      },
+      "articleOpportunity": "Possible update to /guides/las-vegas-mortgage-rates",
+      "existingContent": [
+        {
+          "route": "/guides/las-vegas-mortgage-rates",
+          "action": "internal link",
+          "note": "Related by area/topic (rules match)."
+        },
+        {
+          "route": "/guides/las-vegas-down-payment-assistance-programs-2026",
+          "action": "internal link",
+          "note": "Related by area/topic (rules match)."
+        },
+        {
+          "route": "/guides/las-vegas-home-prices-august-2026",
+          "action": "internal link",
+          "note": "Related by area/topic (rules match)."
+        }
+      ],
+      "missingConfirmation": "",
+      "promotionTrigger": "",
+      "sources": [
+        {
+          "id": "c-52a77917ce",
+          "title": "Discover Las Vegas - November 2026",
+          "sourceName": "City of Las Vegas newsroom",
+          "url": "https://content.govdelivery.com/accounts/NVLASVEGAS/bulletins/430cb7d",
+          "published": "2026-11-01",
+          "tier": "official",
+          "via": "city-lv-news"
+        }
+      ],
+      "signals": [],
+      "total": 25,
+      "band": "P3",
+      "priority": "P3",
+      "capped": null,
+      "statusEvidenceUrl": "https://content.govdelivery.com/accounts/NVLASVEGAS/bulletins/430cb7d",
+      "surface": true,
+      "surfaceReasons": [
+        "new"
+      ],
+      "statusNote": null
+    },
+    {
+      "key": "las-vegas-valley-wide-watchlive-tv-new-york-jets-vs-las-vega",
+      "isExisting": false,
+      "name": "‍[WATCHLIVE]TV!] New York Jets vs Las Vegas Raiders live NFL Week 8 game Free",
+      "kind": "project",
+      "area": "Las Vegas (valley-wide)",
+      "category": "G. Local lifestyle",
+      "status": "RUMORED / UNCONFIRMED",
+      "statusEvidence": null,
+      "statusEvidenceId": null,
+      "materialNewInfo": false,
+      "whatChanged": "",
+      "scores": {
+        "local_relevance": 3,
+        "relocation_value": 4,
+        "conversation_potential": 3,
+        "visual_potential": 4,
+        "evergreen_value": 4,
+        "real_estate_connection": 2,
+        "novelty": 2,
+        "lvinit_fit": 3
+      },
+      "whyItMatters": "Rules-only mode — source summary: ‍[WATCHLIVE]TV!] New York Jets vs Las Vegas Raiders live NFL Week 8 game Free",
+      "whyPeopleCare": "Needs Mikey's angle (rules-only mode cannot judge audience).",
+      "hook": "Needs Mikey's angle (rules-only mode does not write hooks).",
+      "bestFormat": "Reel / TikTok / Short",
+      "secondaryFormats": [
+        "LVINIT article"
+      ],
+      "flywheel": [],
+      "fieldShoot": {
+        "recommended": true,
+        "locationType": "The site itself in Las Vegas (valley-wide) — confirm the location from the source before driving out.",
+        "shots": [],
+        "drone": "",
+        "aRoll": "",
+        "urgency": "shoot this month"
+      },
+      "articleOpportunity": "Possible update to /guides/gholson-landing-affordable-housing-east-las-vegas",
+      "existingContent": [
+        {
+          "route": "/guides/gholson-landing-affordable-housing-east-las-vegas",
+          "action": "internal link",
+          "note": "Related by area/topic (rules match)."
+        },
+        {
+          "route": "/guides/las-vegas-mortgage-rates",
+          "action": "internal link",
+          "note": "Related by area/topic (rules match)."
+        },
+        {
+          "route": "/guides/las-vegas-mortgage-rates-19-month-high",
+          "action": "internal link",
+          "note": "Related by area/topic (rules match)."
+        }
+      ],
+      "missingConfirmation": "No source text states the project's status.",
+      "promotionTrigger": "",
+      "sources": [
+        {
+          "id": "c-744ed76e8c",
+          "title": "‍[WATCHLIVE]TV!] New York Jets vs Las Vegas Raiders live NFL Week 8 game Free",
+          "sourceName": "Pierce Manufacturing",
+          "url": "https://news.google.com/rss/articles/CBMi7gJBVV95cUxORG45ZkJhcUZqTmt0UmNScEFaNkZnYTVDd2ppaFQwTXNtczFnWjlMTE9uMDlZNEJtWnBFUVZQWkxUSTJCTWdDRHFHUFJYVFVVOTVzNUdabGJCRDhCNG1GR3ZKSHZveGFmV1cwYUZmOHg1emlxNWtYTW5udjNwT1lUOFZNeFpoUVJaS3NIQ2FfdklLcVBnc1RaUEVxNGlsOVd0WDFNTFM0d3hmbTRwaXluTkdmQ0tpeDFDVy1uVjlfTmh4WGJ0cVFFSGVuQzZDYnhxZEVsVFhOYTh2alE0RTFlMk9DVlNwbG82SllGWUl1bW5XdFl2d1hmYlZWcF96ODNxc2QtbnRoMDRMTWVXSTdmVDFpeHRMVEJGV3pUUS1iT05WQXVFSG5TVHMxanZGZGRjSEg5ZEZrNWkyMWp4czhwZzBPMFgzckZzQ05aYlZvZ3VOQWRic2UzUXotSURiQUZ0WjhWR2oxU1gyWGg5V0E",
+          "published": "2026-11-01",
+          "tier": "news",
+          "via": "google-news"
+        },
+        {
+          "id": "c-8ca230f577",
+          "title": "‍#√[[ESPN!!FREE+!]] Las Vegas Raiders vs New York Jets Live Online on Novembar 01, 2026: TV & Streaming 001",
+          "sourceName": "Pierce Manufacturing",
+          "url": "https://news.google.com/rss/articles/CBMi7gJBVV95cUxPdHcyQlYwbDlnMjJabmlsRkVoaVBSX0s4bHJXMy0tWElsamFQMDZHZEZ3bnhSZTNsbWhOSnNxdUdJeGtDSk9hRG8zZlBfMlB6Zm1kR0VhNnR2R0lYdTRfaV9vdldyWWlxWF9ITWpLRWJJYVVWd1Q3YVhVRnJ2WTVZMVZTNExIeEJrU2JVVWFqVDBDT3ZjQkRXSGZ2cEdvRXlpdXRuNng5a1VudXI3a0hQVHRVR1pVazd0STB1NHNJeS10TWFtTTVsUWVfZ3lXbzlkaTFEODk4a1h3TlUycG10THpqM2VGbmVxZlpGWGpXNWM5bG9BR3dTUEVvcXJLVUd0RWk3OXRURlU4UzFRdEsxb2l5V0hEUXRwZkxINkVudmNMQXB5d016QVRfWFlvZHhKU1ZHQzJqTGNuYWF4eGhTYTlLX2FiSGh6YWdCdUliYUlLVlFlem9DV01OYk03cnRUOElSc0FKc3ZVMl9pMXc",
+          "published": "2026-11-01",
+          "tier": "news",
+          "via": "google-news"
+        },
+        {
+          "id": "c-282453b566",
+          "title": "‍(++STREAM>LIVE...!!) New York Jets vs Las Vegas Raiders Live 𝖲𝗍𝗋𝖾𝖺𝗆ING Full NFL updates and results!",
+          "sourceName": "Pierce Manufacturing",
+          "url": "https://news.google.com/rss/articles/CBMi7gJBVV95cUxNdUlucHJjb0NENmFHc0Z0OUtyVDhlcWJpYlEzSmdsRXNJeHhtd2FxUDF0dzVjb1pQeDE2a1BkeWtveXhpbXEwS3B3ZGxuUU1qS2s2UUI1STdlSFgwaEN4TTI3TmZWcHRyMGxlbE5udGJza2lhTFp6T1VpN1RzTV9zbHNiejYzRVJWWG9MT2lJRVhERnNOZFVYelkyWDZObWpLVmNCVEV5SGFISDRZbUtELUJfVTNuYkZNQ3N1aWdaWDZUSEdHRHVqZU96RlF4cFBXdTQ3QlA2dzM1X3hhQ1p2WUpoSEdUSnFVSUQzcjNrcDZpSnA5Q2Vza19ybHRDemhuTklUQXZCaDhpNWlqdU1xUEZCTW5kNFJ2c05JN01EY3hfMUw0T1dqUTJlUkxhYWctbi1zem01WjFhRE80TldjdE4zZ2I5WGRydHMyazFmQ2tHcEMzRUFIbWNBZWxZZHNPbHRGSDJ6eEd2OHZCOVE",
+          "published": "2026-11-01",
+          "tier": "news",
+          "via": "google-news"
+        },
+        {
+          "id": "c-d55a9f0fd0",
+          "title": "(LIVESTREAMs!)~ New York Jets vs Las Vegas Raiders LIVE STreams On TV Channel 01 November",
+          "sourceName": "Pierce Manufacturing",
+          "url": "https://news.google.com/rss/articles/CBMihgNBVV95cUxNYVFSOEFaaVN4MXNLNkV4S21xdlRKN0VfcjBISVdHZHNySVdqdzQtcWV4UDAyT25TS3lySHRYNzk0cWozV1lwd0JzUWFaSElHVldSeUR3eVVSSzVHTC1BYTI3T0ZMWEwxMklJRVdfMnN3X09obUdDbmt3Q3NBUFNaRTJjbHVGS2M4bDh6d1BuellSMTFCZHlLQVJtNkRLRWVpZmFnc2FmbUk5VW1OWGxMaUFRWUpfSzBmYUcxQzg0a2Y2ZVVlY28wOFVvZk5nenRhc1BULUhGTXJwOXh2U3NQVUJBS1Iwc3k3b3JpNFJoWGp0a1ZNOFMwWUtNaHpieFB0N0IxVi1Lek1jUHAwSHZreWFIRWJ6S3V4SV9xTlEtVjlUQ3k4Yy1NeFk2SGFsSVp3azZLWktzSnZoclhWTjgtRjhMVUt3M1Nkckh3emZIVVRtMWxGTDdpcTh6VjBMYXYtY2tueFl2RjNUcExSbmhlMGlTTWdMX05EU3UyWERsUHRfNndUeXc",
+          "published": "2026-11-01",
+          "tier": "news",
+          "via": "google-news"
+        }
+      ],
+      "signals": [],
+      "total": 25,
+      "band": "P3",
+      "priority": "P3",
+      "capped": null,
+      "statusEvidenceUrl": null,
+      "surface": true,
+      "surfaceReasons": [
+        "new"
+      ],
+      "statusNote": null
+    },
+    {
+      "key": "las-vegas-valley-wide-your-guide-to-family-fun-more",
+      "isExisting": false,
+      "name": "Your Guide to Family Fun & More!",
+      "kind": "project",
+      "area": "Las Vegas (valley-wide)",
+      "category": "B. Neighborhood changes",
+      "status": "OPEN",
+      "statusEvidence": "Registration is open now for Winter Break Camps Dec.",
+      "statusEvidenceId": "c-cbbd3ef393",
+      "materialNewInfo": false,
+      "whatChanged": "",
+      "scores": {
+        "local_relevance": 3,
+        "relocation_value": 4,
+        "conversation_potential": 3,
+        "visual_potential": 4,
+        "evergreen_value": 3,
+        "real_estate_connection": 3,
+        "novelty": 2,
+        "lvinit_fit": 3
+      },
+      "whyItMatters": "Rules-only mode — source summary: November 2026 Check out the community centers near you for fun events, league sports, no-school fun days, skill-building classes, music opportunities and more! See what you have been missing! Registration is open now for Winter Break Camps Dec. 21-31 and No-School Fun Days Nov. 3 and Nov. 25. See All You Can Register For Here Reserve Your Spot Día De Los Muertos Celebration Sunday, Nov. 1, 1 to 7 p.m. Las Vegas Civic Center outdoor plaza 525 S. Main St. Free and open to the public This vibrant homage to life is a true community event and one of the most charming and colorful holidays celebrate",
+      "whyPeopleCare": "Needs Mikey's angle (rules-only mode cannot judge audience).",
+      "hook": "Needs Mikey's angle (rules-only mode does not write hooks).",
+      "bestFormat": "Reel / TikTok / Short",
+      "secondaryFormats": [
+        "LVINIT article"
+      ],
+      "flywheel": [],
+      "fieldShoot": {
+        "recommended": true,
+        "locationType": "The site itself in Las Vegas (valley-wide) — confirm the location from the source before driving out.",
+        "shots": [],
+        "drone": "",
+        "aRoll": "",
+        "urgency": "shoot this month"
+      },
+      "articleOpportunity": "Possible update to /guides/buying-new-construction-las-vegas",
+      "existingContent": [
+        {
+          "route": "/guides/buying-new-construction-las-vegas",
+          "action": "internal link",
+          "note": "Related by area/topic (rules match)."
+        },
+        {
+          "route": "/guides/closing-costs-las-vegas-buyers",
+          "action": "internal link",
+          "note": "Related by area/topic (rules match)."
+        },
+        {
+          "route": "/guides/first-summer-in-vegas",
+          "action": "internal link",
+          "note": "Related by area/topic (rules match)."
+        }
+      ],
+      "missingConfirmation": "",
+      "promotionTrigger": "",
+      "sources": [
+        {
+          "id": "c-cbbd3ef393",
+          "title": "Your Guide to Family Fun & More!",
+          "sourceName": "City of Las Vegas newsroom",
+          "url": "https://content.govdelivery.com/accounts/NVLASVEGAS/bulletins/430b728",
+          "published": "2026-11-01",
+          "tier": "official",
+          "via": "city-lv-news"
+        }
+      ],
+      "signals": [
+        {
+          "title": "24 Family Hours in Vegas",
+          "url": "https://reddit.com/r/vegas/comments/1xlaak5/24_family_hours_in_vegas",
+          "sourceName": "Reddit r/vegas",
+          "published": "2026-11-01T18:20:54.000Z"
+        }
+      ],
+      "total": 25,
+      "band": "P3",
+      "priority": "P3",
+      "capped": null,
+      "statusEvidenceUrl": "https://content.govdelivery.com/accounts/NVLASVEGAS/bulletins/430b728",
+      "surface": true,
+      "surfaceReasons": [
+        "new"
+      ],
+      "statusNote": null
+    },
+    {
+      "key": "las-vegas-valley-wide-top-family-friendly-hotels-in-las-vega",
+      "isExisting": false,
+      "name": "Top Family-Friendly Hotels in Las Vegas",
+      "kind": "project",
+      "area": "Las Vegas (valley-wide)",
+      "category": "G. Local lifestyle",
+      "status": "RUMORED / UNCONFIRMED",
+      "statusEvidence": null,
+      "statusEvidenceId": null,
+      "materialNewInfo": false,
+      "whatChanged": "",
+      "scores": {
+        "local_relevance": 3,
+        "relocation_value": 4,
+        "conversation_potential": 3,
+        "visual_potential": 4,
+        "evergreen_value": 4,
+        "real_estate_connection": 2,
+        "novelty": 2,
+        "lvinit_fit": 3
+      },
+      "whyItMatters": "Rules-only mode — source summary: Top Family-Friendly Hotels in Las Vegas",
+      "whyPeopleCare": "Needs Mikey's angle (rules-only mode cannot judge audience).",
+      "hook": "Needs Mikey's angle (rules-only mode does not write hooks).",
+      "bestFormat": "Reel / TikTok / Short",
+      "secondaryFormats": [
+        "LVINIT article"
+      ],
+      "flywheel": [],
+      "fieldShoot": {
+        "recommended": true,
+        "locationType": "The site itself in Las Vegas (valley-wide) — confirm the location from the source before driving out.",
+        "shots": [],
+        "drone": "",
+        "aRoll": "",
+        "urgency": "shoot this month"
+      },
+      "articleOpportunity": "Possible update to /guides/las-vegas-home-prices-august-2026",
+      "existingContent": [
+        {
+          "route": "/guides/las-vegas-home-prices-august-2026",
+          "action": "internal link",
+          "note": "Related by area/topic (rules match)."
+        },
+        {
+          "route": "/guides/las-vegas-home-prices-july-2026",
+          "action": "internal link",
+          "note": "Related by area/topic (rules match)."
+        },
+        {
+          "route": "/guides/las-vegas-housing-market",
+          "action": "internal link",
+          "note": "Related by area/topic (rules match)."
+        }
+      ],
+      "missingConfirmation": "No source text states the project's status.",
+      "promotionTrigger": "",
+      "sources": [
+        {
+          "id": "c-dbb226292d",
+          "title": "Top Family-Friendly Hotels in Las Vegas",
+          "sourceName": "Mommy Poppins",
+          "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxPd2xiblBpZW5xZ1lZMGNLVEVaVDgzczZwS1BnWUN4dERaN2Etc0dWdkxWcEdjVXpQeVRMN3dmZHduYnhJcE95dkNHQjM3Q0l4by14cmFlVXdXYTlwYWlSOEI0Z1Q1YXpnOTZyenJPSnF2M25kWk1NUmlBLWJNeWZxaVRPOWhWR1VnbEJsZmpSLXRCelI5Vy00",
+          "published": "2026-10-27",
+          "tier": "news",
+          "via": "google-news"
+        }
+      ],
+      "signals": [
+        {
+          "title": "24 Family Hours in Vegas",
+          "url": "https://reddit.com/r/vegas/comments/1xlaak5/24_family_hours_in_vegas",
+          "sourceName": "Reddit r/vegas",
+          "published": "2026-11-01T18:20:54.000Z"
+        }
+      ],
+      "total": 25,
+      "band": "P3",
+      "priority": "P3",
+      "capped": null,
+      "statusEvidenceUrl": null,
+      "surface": true,
+      "surfaceReasons": [
+        "new"
+      ],
+      "statusNote": null
+    }
+  ],
+  "rejected": [],
+  "filtered": [
+    {
+      "title": "November is a great month for good times together",
+      "url": "https://content.govdelivery.com/accounts/NVLASVEGAS/bulletins/430b658",
+      "reason": "no housing, neighborhood, development or lifestyle angle",
+      "sourceName": "City of Las Vegas newsroom"
+    },
+    {
+      "title": "Storms interrupt 'Lampfright Village' in northwest Las Vegas valley",
+      "url": "https://8newsnow.com/news/local-news/storms-interrupt-lampfright-village-in-northwest-las-vegas-valley",
+      "reason": "no housing, neighborhood, development or lifestyle angle",
+      "sourceName": "8 News Now"
+    },
+    {
+      "title": "2-vehicle crash blocks lanes near Alexander and Rainbow",
+      "url": "https://8newsnow.com/news/local-news/2-vehicle-crash-blocks-lanes-near-alexander-and-rainbow",
+      "reason": "crime / public safety",
+      "sourceName": "8 News Now"
+    },
+    {
+      "title": "City of the World Art Gallery celebrates 30 years",
+      "url": "https://8newsnow.com/news/local-news/city-of-the-world-art-gallery-celebrates-30-years",
+      "reason": "one-off event notice",
+      "sourceName": "8 News Now"
+    },
+    {
+      "title": "Rain chances to increase late Saturday into Sunday",
+      "url": "https://8newsnow.com/weather/rain-chances-to-increase-late-saturday-into-sunday",
+      "reason": "no housing, neighborhood, development or lifestyle angle",
+      "sourceName": "8 News Now"
+    },
+    {
+      "title": "Judge issues order after woman yells at Las Vegas voters through bullhorn",
+      "url": "https://reviewjournal.com/news/civil-courts/judge-issues-order-after-woman-yells-at-las-vegas-voters-through-bullhorn-3907678",
+      "reason": "no housing, neighborhood, development or lifestyle angle",
+      "sourceName": "Las Vegas Review-Journal — Local"
+    },
+    {
+      "title": "Jackson Arnold throws 3 TD passes, UNLV hands Northern Illinois its 10th straight loss, 31-24",
+      "url": "https://lasvegassun.com/news/2026/nov/01/jackson-arnold-throws-3-td-passes-unlv-hands-north",
+      "reason": "no housing, neighborhood, development or lifestyle angle",
+      "sourceName": "Las Vegas Sun — News"
+    },
+    {
+      "title": "Scary weather: Torrential Halloween rain prompts flood warning",
+      "url": "https://reviewjournal.com/local/weather/scary-weather-torrential-halloween-rain-prompts-flood-warning-3907806",
+      "reason": "no housing, neighborhood, development or lifestyle angle",
+      "sourceName": "Las Vegas Review-Journal — Local"
+    },
+    {
+      "title": "Teen’s horse stabbing case highlights differences between juvenile, adult court",
+      "url": "https://reviewjournal.com/crime/teens-horse-stabbing-case-highlights-differences-between-juvenile-adult-court-3907971",
+      "reason": "crime / public safety",
+      "sourceName": "Las Vegas Review-Journal — Local"
+    },
+    {
+      "title": "Heavy rains expected to bring flooding risk to already saturated parts of the US Southwest",
+      "url": "https://lasvegassun.com/news/2026/oct/31/heavy-rains-expected-to-bring-flooding-risk-to-alr",
+      "reason": "no housing, neighborhood, development or lifestyle angle",
+      "sourceName": "Las Vegas Sun — News"
+    },
+    {
+      "title": "RFK Jr. is committing ‘statistical murder’ and should be held accountable",
+      "url": "https://lasvegassun.com/news/2026/nov/01/rfk-jr-is-committing-statistical-murder-and-should",
+      "reason": "crime / public safety",
+      "sourceName": "Las Vegas Sun — News"
+    },
+    {
+      "title": "Gabby Williams leads Valkyries to WNBA championship in second season",
+      "url": "https://lasvegassun.com/news/2026/oct/31/gabby-williams-leads-valkyries-to-wnba-championshi",
+      "reason": "no housing, neighborhood, development or lifestyle angle",
+      "sourceName": "Las Vegas Sun — News"
+    },
+    {
+      "title": "ICE agent charged with assault for hitting a fleeing man with his car will turn himself in on Monday",
+      "url": "https://lasvegassun.com/news/2026/oct/31/ice-agent-charged-with-assault-for-hitting-a-fleei",
+      "reason": "crime / public safety",
+      "sourceName": "Las Vegas Sun — News"
+    },
+    {
+      "title": "November highlights Native American cultures, from salmonberry picking to traditional tattoos",
+      "url": "https://lasvegassun.com/news/2026/nov/01/november-highlights-native-american-cultures-from",
+      "reason": "sports results",
+      "sourceName": "Las Vegas Sun — News"
+    },
+    {
+      "title": "Five, including four children, evaluated after house fire in the east valley",
+      "url": "https://news3lv.com/news/local/five-including-four-children-evaluated-after-house-fire-in-the-east-valley",
+      "reason": "no housing, neighborhood, development or lifestyle angle",
+      "sourceName": "News 3 Las Vegas"
+    },
+    {
+      "title": "Sunday Forecast: Showers likely with highs near 70; light snow possible in mountains",
+      "url": "https://news3lv.com/news/local/sunday-forecast-showers-likely-with-highs-near-70-light-snow-possible-in-mountains",
+      "reason": "daily weather",
+      "sourceName": "News 3 Las Vegas"
+    },
+    {
+      "title": "Halloween takes over Viva Las Vegas Wedding Chapel as 150 weddings are set",
+      "url": "https://news3lv.com/news/local/halloween-takes-over-viva-las-vegas-wedding-chapel-as-150-weddings-set-for-saturday",
+      "reason": "no housing, neighborhood, development or lifestyle angle",
+      "sourceName": "News 3 Las Vegas"
+    },
+    {
+      "title": "Las Vegas ranks No. 12 among best U.S. cities for horror film fans in 2026",
+      "url": "https://news3lv.com/news/local/las-vegas-ranks-no-12-among-best-us-cities-for-horror-film-fans-in-2026",
+      "reason": "no housing, neighborhood, development or lifestyle angle",
+      "sourceName": "News 3 Las Vegas"
+    },
+    {
+      "title": "Las Vegas tops night owl city rankings as clocks fall back this weekend",
+      "url": "https://news3lv.com/news/local/las-vegas-tops-night-owl-city-rankings-as-clocks-fall-back-this-weekend",
+      "reason": "no housing, neighborhood, development or lifestyle angle",
+      "sourceName": "News 3 Las Vegas"
+    },
+    {
+      "title": "HOA must properly fund reserve account",
+      "url": "https://reviewjournal.com/business/business-columns/barbara-holland/hoa-must-properly-fund-reserve-account-3907650",
+      "reason": "no identifiable Las Vegas-area location",
+      "sourceName": "Las Vegas Review-Journal — Business"
+    },
+    {
+      "title": "Heavy rain floods Las Vegas valley streets and businesses on Halloween weekend",
+      "url": "https://ktnv.com/news/heavy-rain-floods-las-vegas-valley-streets-and-businesses-on-halloween-weekend",
+      "reason": "no housing, neighborhood, development or lifestyle angle",
+      "sourceName": "KTNV 13 Action News"
+    },
+    {
+      "title": "Cómo los activistas del Sindicato de Trabajadores Culinarios están cambiando opiniones en las puertas de las casas de todo el Valle de Las Vegas",
+      "url": "https://lasvegassun.com/news/2026/nov/01/cmo-los-activistas-del-sindicato-de-trabajadores-c",
+      "reason": "no housing, neighborhood, development or lifestyle angle",
+      "sourceName": "Las Vegas Sun — News"
+    },
+    {
+      "title": "How Culinary canvassers are changing minds on doorsteps across the Las Vegas Valley",
+      "url": "https://lasvegassun.com/news/2026/nov/01/how-culinary-canvassers-are-changing-minds-on-door",
+      "reason": "no housing, neighborhood, development or lifestyle angle",
+      "sourceName": "Las Vegas Sun — News"
+    },
+    {
+      "title": "They moved the polling place; these HBCU students marched there anyway",
+      "url": "https://lasvegassun.com/news/2026/nov/01/they-moved-the-polling-place-these-hbcu-students-m",
+      "reason": "no housing, neighborhood, development or lifestyle angle",
+      "sourceName": "Las Vegas Sun — News"
+    },
+    {
+      "title": "Man killed in rollover crash near Las Vegas Strip, police say",
+      "url": "https://reviewjournal.com/local/local-las-vegas/man-killed-in-rollover-crash-near-las-vegas-strip-police-say-3906615",
+      "reason": "crime / public safety",
+      "sourceName": "Las Vegas Review-Journal — Local"
+    },
+    {
+      "title": "Trick-or-treaters descend on dark and stormy night in Las Vegas – PHOTOS",
+      "url": "https://reviewjournal.com/local/local-las-vegas/trick-or-treaters-descend-on-dark-and-stormy-night-in-las-vegas-photos-3907788",
+      "reason": "no housing, neighborhood, development or lifestyle angle",
+      "sourceName": "Las Vegas Review-Journal — Local"
+    },
+    {
+      "title": "This consumer watchdog should be a normal agency",
+      "url": "https://lasvegassun.com/news/2026/nov/01/this-consumer-watchdog-should-be-a-normal-agency",
+      "reason": "no housing, neighborhood, development or lifestyle angle",
+      "sourceName": "Las Vegas Sun — News"
+    },
+    {
+      "title": "1.31 inches of rain 2nd-highest October in Las Vegas history",
+      "url": "https://reviewjournal.com/local/weather/1-31-inches-of-rain-2nd-highest-october-in-las-vegas-history-3908021",
+      "reason": "no housing, neighborhood, development or lifestyle angle",
+      "sourceName": "Las Vegas Review-Journal — Local"
+    },
+    {
+      "title": "Trump is doing everything he can to shake down voters ahead of the midterms",
+      "url": "https://lasvegassun.com/news/2026/nov/01/trump-is-doing-everything-he-can-to-shake-down-vot",
+      "reason": "no housing, neighborhood, development or lifestyle angle",
+      "sourceName": "Las Vegas Sun — News"
+    },
+    {
+      "title": "Mark Mastrov unveils Founders Club brand, combining fitness, recovery and a medical spa",
+      "url": "https://news.google.com/rss/articles/CBMizwFBVV95cUxOOUlYVS1RdEx3Y1N6RFFYb0NKRTU5WGc5cE1pOUpXZGptLWFhZDMzNFk5V3lKanpYNWZ4NEZGMzJtRkczdFMyajRFUExqLUNKUU1oZ1RqYUpmcGhLVTllTmx3TWktc0dLalRKc3EyQ3JhQjBnLXl6bk1YNVhVQTh0VVpsM2lkUW1MajRWM0hQN3Fyek1RWUZ2QTNjczNrVzRtR1V3dGk4b3hyYlAtMHgxZjJpZl80U0p2eEVRTUtBS1c0VUlGNlBUcElCb2ZmaFk",
+      "reason": "outside the Las Vegas valley",
+      "sourceName": "spabusiness.com"
+    },
+    {
+      "title": "CREDA Southern Nevada 2026 Bus TourDeep Dive",
+      "url": "https://news.google.com/rss/articles/CBMie0FVX3lxTE54cDkydENUdWhPUndyZkZ5X3c0a3ZiWnBDWVFKeEkwOTJNUVRFdnVhWnRibm9SbjJBZzdCbzZteW5YRTFJM2VqWldvQU5GOWNZNXIxaV9uVzZPc0xIQzJPVEt6b2c4dUpVSWNDbGVPalp3UUhYU2otVVJ0Yw",
+      "reason": "no housing, neighborhood, development or lifestyle angle",
+      "sourceName": "Nevada Business Magazine"
+    },
+    {
+      "title": "Smoky Mountain High School (Sylva, NC) JV Football",
+      "url": "https://news.google.com/rss/articles/CBMiekFVX3lxTE0wNWRNZnVyUzR2ai03enFaMEhPSmV3R0ZQZThEcW96cEFhdWdEemRCeE43UDFlWDBUaTNoSVZlRllneWx4WVREUUUwbmtUdEFidGlPeDdmM1gyczhCTi1yWjdINW80TDhDRmFXVnBxOFN5TG93S1dranFB",
+      "reason": "outside the Las Vegas valley",
+      "sourceName": "MaxPreps"
+    },
+    {
+      "title": "Obituary for Lila Mae Flick",
+      "url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE9mUEFjSmtBZl82TUpUdjVvUGhkNjBSYnV2M1ZBVmtsOGlyQkpwS0lMNEdyQTdqZ2cyQkttMDJxMEJkdThWSmtHdUZNTVJsSS1VMXBxY0xtQzN5UXNUbWRaYlB0WTJhdDA",
+      "reason": "outside the Las Vegas valley",
+      "sourceName": "https://www.hendersonfuneralhome.com/"
+    },
+    {
+      "title": "Wycombe vs Burton: Lineups, Prediction, Odds & Bet Builder Tip",
+      "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxNcEhsR3hkUjJNd0ZaNmpVNHdKaHh2cEQ0NGlOZDlJZzhqa3FrUkpyM09xVEFFeUt3a24xOXFZbWxJSjQtMWNEUmExV2F3d0p5dnEyS25MU2JOdURFdVoxNEYxWGVVZnNzS2dxM0hmc2gwLVBINzQtUnZuaW0zWnFwcWE5NGoycHFNQjB3WEtpZmI4MTQtbko3LVYyN1Z6S0NrVGgwWFI3cFN4MUYxd3QyeVhBcnVGaDlzdVE",
+      "reason": "outside the Las Vegas valley",
+      "sourceName": "WhoScored.com"
+    },
+    {
+      "title": "One Upper Lane to unveil first sales arrangement shortly",
+      "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxQSjRPbjRjVG5fbGF4c3pIZC04cVpYNTZ3eXczOUpQdWlGb2RkR0I2d3Zkb2RIV0FfY2FfSFJNcUpYaTdmbGV2X1hUckFFS0o3S3FMMDFBdkdfN05xNFc1RHZna052WE5MaGVUd215U0xCV0VhaFdGS29jdGFoMnZJeDBwRUhTbzJWaVJFS3E4MlBSOVJIX1RBVnRlYUtiTi1rMU1FT0x1N0RLcWswQ3k2Rw",
+      "reason": "outside the Las Vegas valley",
+      "sourceName": "The Standard (HK)"
+    },
+    {
+      "title": "Chicago ditched school ratings years ago, but 1 in 5 school board candidates want to bring them back",
+      "url": "https://news.google.com/rss/articles/CBMi2AFBVV95cUxPRlZUTXY1a1pPQTVuSnYyYVpvcXZQYmtmTFpUSWg0YUt3TWF0Z0VzcFJYUHVGbml2Y1dtc1N2WTJJdkdKZzFOR2lsMV80aWNxdExsLURQckxJSjA2Q0NRVEN6VzQyU3M2LUZ3VjFsMVpRdEc5Rm93emFMcHNDeTZ2bGNyMS1LdkNUWGJjNlplQnY3VUI4TzZFdmdfaGJ0ak1UV0lNbWVZTTdCSUJNU1JINnJXeGY1ZGJyaHh3M3kxWVhrWWVRMy0tR2FkMFFlNzA4SkNMY2dBNDk",
+      "reason": "outside the Las Vegas valley",
+      "sourceName": "WBEZ Chicago"
+    },
+    {
+      "title": "Chicago school board president candidates on how they'd balance the CPS budget",
+      "url": "https://news.google.com/rss/articles/CBMilAFBVV95cUxNTHVHTzczM0Z2anRENzZ3SVBfaVlSY0RYaWRkUjVSek9HYl9sOEJnTC0zY1lhbl84NmFwQWVaVmtxYkJZbmRuemxjd2tYekx3cWJnS0NNb1pma2gtbjAxS3lTYnhCVlg4VkxxMDQzSFQwR2ZQc2tmVXczLU5sZjVoTTd4TTJmdkdrQWt2Zy1ldnJRYm5D",
+      "reason": "outside the Las Vegas valley",
+      "sourceName": "CBS News"
+    },
+    {
+      "title": "Overturned truck carrying hazardous materials temporarily shuts down I-26 East",
+      "url": "https://news.google.com/rss/articles/CBMiggJBVV95cUxORDNzaWhHN3RtaExQaXNOSnl1aTlUUjZfbnctSzRxRFYxNk55VUQ2d0RiZTYwWVYyMS1JVlh0c3dYTkJFejRETHpkN1dxdkt5c2xSbkF1LXZ3ME9ZYTFQQUU5OU1WQzlTY3dWNEJDOXVrb1NuS1FocVpoMHRRalBLZU9jVllITDQ0Nk5sNHZXVkc1aTRya2xTcDJZcTNlbVgxNWgxSFhKR0hqa2dYeXd4OGJwRVZ3eUczNFVfTmhQZk5nR1lNNlpGakNicVloZzlScTNjUkNudVpEa0wyelV4TDJwc3Y4M0RtLUJoN0VkRlUyc1JaMzQwOUw4ME9odXJwR1E",
+      "reason": "outside the Las Vegas valley",
+      "sourceName": "WLOS"
+    },
+    {
+      "title": "The Doobie Brothers Set Nine-Night Las Vegas Stand at Fontainebleau in 2027",
+      "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxNMEx4cm1pdGpCVEtsaVZlbHkxVW1KOTdFenlZRHNodUZWT25YdzhFV2NaXzFNT3lRa1p0WjJHSVQ1SVc1cUdwMUdLTnVNRk1BZlFsZUZGRjkza015WTBiZTc2NXhMNXhHTS13V2dwVmlQeHdUaGVmbkxKQnNERUhsa29rLXJ5d1ZaZDZ0amxPVE5yOGU5WUJ2ZExHamoxaVRFd2NSNUNEVFZuYVk",
+      "reason": "no housing, neighborhood, development or lifestyle angle",
+      "sourceName": "96.3 KKLZ"
+    },
+    {
+      "title": "New Ear, Nose and Throat surgery center opens in southwest Las Vegas",
+      "url": "https://news.google.com/rss/articles/CBMipwFBVV95cUxPZWd2MEYtSFFaQzBEajJtUVRHQ1R4VXZ2YnRvbjlvN1JkWWh2YnVWald4VWg2WHhOOEZ4MENfNHJXdzV5aWdzSjFyTVFGa2hraDdqUFpUX2JTXzZ1Q3Nkdy1CWUNqQkhrYjdLTVk4MEowbmY5V0hwRjZxdDl5UUhTbDAxbGNHZmpHampudEtBZTBEb3pUdURYSVoxWkZYQ2FLQWppOVhGSQ",
+      "reason": "no housing, neighborhood, development or lifestyle angle",
+      "sourceName": "FOX5 Vegas"
+    },
+    {
+      "title": "Legend in Las Vegas pizza community dies at 78",
+      "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxOZmpaVTFmQ2FGeUZubUFILW5Hc0J1UTMtQzg5bDhGQVJXVlVzQnM3WGNPSllKYmRkbkxBM01XTlRfLTgyMEJLNm5FSTA5Y2pCaElhcnp2S2EtbXVJU1RwOGFkLTVuT2tvMHRHUVk2b0FzYTZ5ZElOTzYwajZ5dWhXWVVRUUk0ejVfbm5RdWlGQlBTWmJqWUM2Slo4SFBmdw",
+      "reason": "obituary",
+      "sourceName": "Las Vegas Review-Journal"
+    },
+    {
+      "title": "Las Vegas Teen Survived a 10% Chance After Halloween Hit-and-Run, Now Honored With Her Own Day",
+      "url": "https://news.google.com/rss/articles/CBMivwFBVV95cUxPbmRWZG8wNWpuUXpvVkJzWHhJSENyTDVHaEFudldpVER1QmFkV2VIRTI3OVZIR3FHWjJqcXV2UldsRWFwLUFtVFBHeExqWENMZ0JQZkRzalFFeTYxN2pyODRSMVJYb0wzUWlqelF1WkxFd2hLWmZEYjh6RnJuUkN0SzlGdGhEazR5clNyNGFDc25EOUpVc0U1eUxIdGdqblZPRDc2dFRRaHdTZmQ4VlB1NkdhM2ZVeExUQUhqUkJxVQ",
+      "reason": "no housing, neighborhood, development or lifestyle angle",
+      "sourceName": "Hoodline"
+    },
+    {
+      "title": "SWAT Standoff Closes Roads in Southwest Las Vegas, Nevada",
+      "url": "https://news.google.com/rss/articles/CBMihgFBVV95cUxQUjhUWkNUSjJjZE54ZV9zSWFoekdlSDljRy1ibTFoWXVuT0prVmVzSUY0RkFiM0trSW5TWFVCRmpiQjBzRzQyYks3aTJTaGxDMjVUMEVoR0J6dm5UMHFxZU8wWDhSdGhRelBLUGNKMWd4ZDl2b05qV2ZpeVJiWU0yTnhHSjNkQQ",
+      "reason": "no housing, neighborhood, development or lifestyle angle",
+      "sourceName": "cedarnews.net"
+    },
+    {
+      "title": "4200 S Valley View Blvd Unit 3084, Las Vegas, NV 89103",
+      "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxQbENtdUpSb0VWMmhBV2hVdU5CSERtVGpkMEFLakk2b3VMUVZBU1NUYzVtamdoVFpjbEJDQ3gwMDM1UGdJeHNxYTRXejJ0YkpFZS1nT2ZoMUFVYU9jaW9QTzQ3SUNvdGNXLXF4QWxobThlclFkbDZnUV9Nbkx6am1pWExDX1cyMjA4RS1VS0Y2cGlybjBMMDlsWktqUE1aMVJ2SG1uMEh5YWc",
+      "reason": "no housing, neighborhood, development or lifestyle angle",
+      "sourceName": "Realtor.com"
+    },
+    {
+      "title": "Plumbing company offers free water heater safety inspections",
+      "url": "https://news.google.com/rss/articles/CBMi9AFBVV95cUxQaS1KNDM5VjljWjd2aEJ4T1BsV1ozX3hvcmF4ekNodDI3WThyeDBLN3owc0ZSVlhheEJGVldlaHFCX3F6X2JRVTdJMk5lT25mYmdITlQwY1hPaWZQdG9GNmlCeklPYWxyX29fWjFmelFXNS1tcUp2dG9RbTgwQWtRZWdFN0s0RDZJdTgxZHVhZ1cxZTFnUGdNZFdHOU50eUZlSzZuRzFTcmNyQ3VqemNMV3FIU0s3M1ZoVm5MYmZPWEh4OGg3QlNCcldBOVlrRW96RzR4VWdFdk1PekNKdHpBbkdEM2FQYS1WanFoaUpkTXFWUjNO",
+      "reason": "outside the Las Vegas valley",
+      "sourceName": "WBOC TV"
+    },
+    {
+      "title": "Plumbing company offers water test before softener installation",
+      "url": "https://news.google.com/rss/articles/CBMijwFBVV95cUxOSTltSWRwS3UzUHFPaTVhbmhVeFdBMko4U0hJSzJLT3NqRXRZLWVjb295NlRNZ3BXcWxQT3hTaXpqU192TWthcldmWWk3QUFONjBrN1NQeUNBVmlpZVJIdzkxVkhWcFNYREFSZXRKejdPLUVObXZuVjBHcW56NTJqR1hKZDRsdTM3U3o5dERzcw",
+      "reason": "outside the Las Vegas valley",
+      "sourceName": "openPR.com"
+    },
+    {
+      "title": "Flash Flood Warning issued October 31 at 6:21PM PDT until October 31 at 9:15PM PDT by NWS Las Vegas NV",
+      "url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE1WNUNNQ2V5dF9ZckNlWm1PYUZtaTMxY09Rd0Y4endyMG04bnBSbkcxUFJ5aGl5a0stMVZKc0hJUE5GUHRHaHl5Zm90VV9vNGtlS2huaGE4c3dzNFlRbDdlaTJTZjVzS0U",
+      "reason": "no housing, neighborhood, development or lifestyle angle",
+      "sourceName": "Forth.News"
+    },
+    {
+      "title": "6996 Canary Ivy Way, Las Vegas, NV 89156",
+      "url": "https://news.google.com/rss/articles/CBMilgFBVV95cUxQUUdtZEpMVzRWeVZ0bUdadDFwdGNZa3VsREtjOVRSOTg4ZHFaRG1wZkxRRXJfaUVqTnA0VnRraXY2S0UwQ0Jvc0w0ZXA3LVQtUUFqeE1ad2xIQ3RwUUREQktfNVNxd3VQUkota1JSRnMtNHBKNEszQk9pZHoxQTdUaHdIU0diZG4tQVVFbFpVSkUzU1FjOFE",
+      "reason": "no housing, neighborhood, development or lifestyle angle",
+      "sourceName": "Realtor.com"
+    },
+    {
+      "title": "Las Vegas’ ‘Queen of Residencies’ is bigger than ever in Paris comeback",
+      "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxPUzVWRDNZN1VVb0JtTXRDT2drMzc0YUZWUmhFajVsQXVyX1p5c0MwQVZyZzl0eERLQzZMRExudVNqSFJhU1RodHZEZTdpMzBkQ0gwTXI0WEc1dGxkcUJ1dFhvNlhZY3h5aGsteXZJcmhmblNmamdvREo0dUVCY2FpeXBVVTNsMHBKMW5VTjlQQTlPX3RMaUoyczBJa0xFUUlsbUNRQkV2aU9QNVVxOTlhVEJKcw",
+      "reason": "no housing, neighborhood, development or lifestyle angle",
+      "sourceName": "Las Vegas Review-Journal"
+    },
+    {
+      "title": "8617 Dodds Canyon St, Las Vegas, NV 89131",
+      "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxNeUJoSkV4a0dZYWhWN2QyNEMweVNrVzhxcklMbXVaZVg1cWxrRi03ZnBiZHc2aHdfRXRCTUhIVkgwNnlSUXl2S3BQR0VYdUpZWE9JU0VYTFVjcjdlbzlmTTV2aE5XNVgtNVVISEZ2SWRPYTVLWGozMkttQ0d4NHRLV0xEV1NfSVZ2clFBR1FIMl92SFk4aGd3",
+      "reason": "no housing, neighborhood, development or lifestyle angle",
+      "sourceName": "Realtor.com"
+    },
+    {
+      "title": "Growing Minds Preschool Closes in Northwest Las Vegas",
+      "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxOaENtMV9WWGhrVVJLYjAwSW5sZl8xSVpYNVd5d3JNellycXNaWG50NkY4b0g1VzhBbXpTaHJXcnJyeGlKbU1zMHZNSkpUeGVqcVVDYWpHb3NldjVQVVlTeXpOY2ZQOXc5U0p5NnU1bDUwQjFNY1RPUlNsZ1ppRWhLZDNOSVZoOEFjaHFNYmFZeUN1bnhTQnZCRnpkWjhkWFVxWFBHS0FIbFJIYnYtdjZCaEJFNk4",
+      "reason": "no housing, neighborhood, development or lifestyle angle",
+      "sourceName": "Hoodline"
+    },
+    {
+      "title": "Gaming and Leisure Properties Signals Confident Growth",
+      "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxPRktwaUZaYjZHbV8zMzZtQmllbnNFajhTRFM4TExDR2E4aDg1Mnc0bmNORHJOZ2wzejBqMUd3dHlVQXNQOElHc1MxSzNvWVpUS0Q3WVVXTU9uNDlzLXNjeWJpbi1reVptdXJEZG5wV0ZxYzltcFFibmhfRUVRQ3Joa3owbWcwTUtuY2VuSERSVGx0bElfLVlfbEFLTkpqMWxmS2J2cVlJWkdUZw",
+      "reason": "outside the Las Vegas valley",
+      "sourceName": "TipRanks"
+    },
+    {
+      "title": "Kick Up Your Boots, Vegas Style, at Silverton Casino Lodge",
+      "url": "https://news.google.com/rss/articles/CBMizAFBVV95cUxNbHJGUUd1WDFvUkNxQmZZUUFUcUtNOEhDZDRheVA2SUpoYTNWcTlPNklhV29GZmdwQnNVYXlqZWlNTVVYeEo2QTFMY1lMazVvXzh3a2VYOWVhSHIwVzBkekN3cWE2TDk1UjdrZEJWcUdpQms1RHhBenhUZ1h5ZlJ1eUdya09pWTZhSmMyLThhTkdQY3ZtbTY3MEFmWk54TzNMSF9VUW0xV2FFeUt3UElrNS1xSWJhTGtIYzBSeHFhd0RubmlvSkJLOFhoRFI",
+      "reason": "outside the Las Vegas valley",
+      "sourceName": "Western Horseman Magazine"
+    },
+    {
+      "title": "Repairs underway at downtown Las Vegas casino after ‘unexpected water leak’",
+      "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxOdHNTNzlsNHFmUXV2dVBRV2swWmFHd2JzOXlJUlloQ1h3Tmp6OUotWjl5LWZaZ3lvUjlGRER3aXNyTVhjTi1fVXYwcDhpYzFMLThoMFlrRnBkYVRCc1ZLRFQxd0MzY1NBZkN6UUl1bFB5X0lwSm12QTR0QzU3bGQ3bEd2YlU1TE5zeXJzY24xNmpRbFpVY080dUktTG1zak1iQXpDSkxXQl84Wnk3Qi1GaFFDSk0",
+      "reason": "no housing, neighborhood, development or lifestyle angle",
+      "sourceName": "FOX5 Vegas"
+    },
+    {
+      "title": "Best Cheap Spring Break Trips for Families in the U.S. (2026 Guide)",
+      "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxOSk4yOXROVnVQdTBaMjU4cWdVTHBfVjRXNW9IaFhkenFhbVRJck9aOHZ6Q3FRMlhSenlhVmo4VEJTX2R1eVlKMENWcFlMUmNQblhDRE5zdVhrM0lvUzdISnVXQXpNYVAzc2w4ZHlqVTVXN25FY2hvM2hlbkgwbUk0bXZKclk5WmxmZmxuZjhHdlh2QQ",
+      "reason": "outside the Las Vegas valley",
+      "sourceName": "Mommy Poppins"
+    },
+    {
+      "title": "The 5 Best Online Casinos for Real Money Right Now",
+      "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxPeXl0OE01dF9hYndvOTYxQXMyRnhHMXlIUWFud2ZqZllyQ3d5SXd6NlYwSUx6cHE3bkxxZHhjRzY0Y1lnTzFPVV9DMDcxb0xUQWlSVU5NZ3o2MjdiOHA1TE1jS0dvTzlsRXJ6VGhqc0lURy1aSFpzN0k5alk5RFF4UHpRemNzZmRwSlVZWEtpWFo4NXdpYjB4TkNyNGFXdmplVVE",
+      "reason": "outside the Las Vegas valley",
+      "sourceName": "USA Today"
+    },
+    {
+      "title": "50 States, 50 Kid-Approved Adventures You’ll Never Forget",
+      "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxPNnNubVBkRW9pU3pZYTR1RlJfeUt6UHZhQWNaTi01MGVUdW92OF9LX0R0SUwzcV9rSVJnM2tuUmlBQXpBTFNoV2c4cndVejU3WXZMU0liVmRPMHhoV3hPMm5jTVMxMmZZWDA1WGhLSTNaZXp0WThNclZETG9OQXE5eklIYkNoUkkxWGlLM040VFJYZEpHQVlNTVotZU1VZEExQ3pNU1k5YkV6YkFS",
+      "reason": "outside the Las Vegas valley",
+      "sourceName": "Mommy Poppins"
+    },
+    {
+      "title": "Genting Singapore stock plans SGD 1.63 billion rights issue",
+      "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxPeVZIckhnelUxc0hYUzFjNktYaXBTVldrNERPcU5rZzdJbUFXRno0TXJkZ1FER0JIYVF5VnJUSWdQZzkwaHZ2djl4VVhHaUNVTUNONVB0WXZzUncwNllINzFlNTNIYnVONWpELWpELUhWb3AxbFpCTWxseWx1LWNBZk9vSHhYYXZkYWhJMGJxUUMzeDdEa1hJVGc4eXFoUElCRldnbkZ5THRudi1nRDBvb0dMVmlEWmZYTnc",
+      "reason": "outside the Las Vegas valley",
+      "sourceName": "ad-hoc-news.de"
+    },
+    {
+      "title": "Charter Review Commission To Resume Meetings In January",
+      "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxPS0h0UVgxTkliODNvQjZFLXFScS05MmQxZVgzMUxNLVhUcTdlbS1wd3RrQjkwUDVSemlrUUh2SlNPNjFUWU1lOTMxeTJNNmctbFd3cEF5QWxGSUZHWUZPY2FXcWJTZl84QTFSTjZ4YTFnclNPT2dNSFBEaDZfMDQ4Z1Y5YTNWNGVoMTJqMXloMnlVdjk0dVdnOGRDcnnSAaIBQVVfeXFMUGczY2tjMWRJLVB6bGtwVVdvLW01Y1M0NzBVTG92RHotLWU2aUVWSEQ5cWE4Y2EtN2swRHpCcGpmM2FmWmdCeFlIenZHc2RrUzFnaU9YUEVOd2tnaVQ0RW00UkdzNzVDTmQ0X1NIb3dqOEVuVk1sWjhKQVExTkZKWEE5M0RPNkFDYUpnM3JPWUdNUW9MSlc2MnBsandxdXR0ZWZ3",
+      "reason": "outside the Las Vegas valley",
+      "sourceName": "Vancouver Business Journal"
+    },
+    {
+      "title": "Entitlements",
+      "url": "https://news.google.com/rss/articles/CBMigwFBVV95cUxNOTFra3lUbmtzRmlfcFRiNm9CaV9QSElXRWY0eU5Ya2NmTXFWZDBocUxUaWxDU2tEOWxVUXU3UHlWSlpGU2M3Y21HanFITDRXemhkSWtaNG1DLTNEZS1ld29hTlB0R2RYSzNkRmRzRHUySllyWWhvcEt3VEpYQjBhejNtMA",
+      "reason": "outside the Las Vegas valley",
+      "sourceName": "Nevada Business Magazine"
+    },
+    {
+      "title": "Airports collect donations for TSA staffers during government shutdown - ABC News",
+      "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxQQUxtcUk2TmZTRnBJZDNLaGpfeHJxU2otT3drcHRYbHJ5d0hJX2NFaTFxbDEzSnk4OUdvX0JTLWROc3h5bU50dGFFVHlaWHg1N1ktYkZaOVV2Z2tvZFRieTF0bWZfeWUtVFJHaHJhNVI0cUtQZ2dnTy1RTW40eDAyV3hQU1NCSVNlWHRqSFdSVVZ5dW1HTEVUeUVnbE5VbFpKZTNWUHBDR0t3M3PSAbABQVVfeXFMT2lMMTV3R0NILUNjUEYtelUzZTJWcE5YcUR5QjEwRm1ueHFJVEFQdmdIYUtzYUhrVzU4OGVHU0loalpuLXAxZ0poQ2pESS1LbGM3V0dVdU9NNEszOGpNaWN1Yzc1TXJfRk4wb2hmQWhXemExTnV1cUdHSWl4cWhqSmo1dW9UZEhPWkxTTHFLSGoyVG1BV1NNa0o0b0VmdXVwa2RZRXlqWGtwLW5SXzdWWkM",
+      "reason": "outside the Las Vegas valley",
+      "sourceName": "ABC News - Breaking News, Latest News and Videos"
+    },
+    {
+      "title": "Meeting People at the Airport Gate Feels Like a Throwback. At These 32 U.S. Airports, It's Still Possible.",
+      "url": "https://news.google.com/rss/articles/CBMinwFBVV95cUxPbTc5UERWdHF4czE4Yk9LM2hIU1FvU3JRTjVBVF96bUdhdlRVWUIyRUhtZDNJVjZYZWk1cm9HLVhzNmtqTUZ2bVRLZngwRVVlVm1oc0xIVFdid0N2X0U0TjhYMVp1WEVNT19GNDNsRkZHaXdoYThoSjRIekM3aVBUZDNMR0h1N2MyUmdCdC1TUlFGdWs1MFpRMFBoN1Rmbk0",
+      "reason": "outside the Las Vegas valley",
+      "sourceName": "AFAR"
+    },
+    {
+      "title": "United flight turned around after report of passenger making a terroristic threat",
+      "url": "https://news.google.com/rss/articles/CBMihwJBVV95cUxORzktSWJBbzBhOVozcG9rNHRrQ05zRHpScWxpTFBVa3F5Z3QtdnE4ZUFQdFdVbUR3UFhyZlNHS0hKYjZxYVdhMXVYc01Tdk5YRndYd0gzSjZlTzJkS3lOb1h3c2dERTdFMi16eDY0QU1ha01xNEJYdzBwbUxiT3RSb3lwQjNibWZhQ3puZ3RVb2V6amVvaXJ0UlZ0ajRQbjlHSzh5R3RZSXZjaXJZajZKWkIzX3VUZlhDeXVFWl9OTW01cXRTTVJVX0lrMk9ZSGRQOXN4R0JDN3V0NHNENjBmNThydUsyVm9JQVdEOFktUnYweDBQaGNoMGlFWGhuYUdGclozU0Qtcw",
+      "reason": "outside the Las Vegas valley",
+      "sourceName": "Richmond Register"
+    },
+    {
+      "title": "$$$$$[SPORTS-TV]$$$$ New York vs Las Vegas Live Online",
+      "url": "https://news.google.com/rss/articles/CBMinwNBVV95cUxOVGptVHhQVTFCTURmMGJhd1VvUkV4TDNON19venppdmwwX3UzR3NGclNEZmZidm5DV2VBNHZORjV2NmhhSjJyVmpZMUQ4ZkNjQkRGSFZqU0hOY2JCV3BBWndicE1Sc0c4cC1yQmdaNzFBRVA2azNCNjRSTEd5c3p0RTF0T1BRcUVWQWgzTllVZ0UzVng3WGJCNlo5YWt2bF9DNHA1WWtVUlZ4RTNsZi1qS3ZpNTNYMFFxZjJnTTAtSzB4MlBoQ0ZiNEd1UVkxcVVTNmtIUHhzLWJKLU1yMkhiOW1aVmFYQ3NhUzE4WXczNnUwTXR1cnhrM0tsb2RMc3Q3YVF0bEFwMG9qWlktcXU4dXFuYmlzMVlXdWRMZ0l1MV9oMEZyQnRuRUZKOGlKa2RhRVlaLVQ4LUdrT3pQUmhHMDZwLVM3ckxaRzBFQ2FtS1NGdHNnb3JCUXVnLUtNRFY2dzhRa3ZkRnpDcXFQaEQ2b1UzcGp1UjVONmpLZWl4YUd5Skk5djF2bG9xQzlvaGFCd2gtWHduM2pHZ3ZiLUtJ",
+      "reason": "no housing, neighborhood, development or lifestyle angle",
+      "sourceName": "Pierce Manufacturing"
+    },
+    {
+      "title": "‍+>![Here’s Free To Watch!* New York Jets vs Las Vegas Raiders Football 𝐋𝐈𝐕𝐄 Ｆｒｅｅ ＯＮ Ｔｖ Ｃｈａｎｎｅｌ 19 November 2025",
+      "url": "https://news.google.com/rss/articles/CBMi-gJBVV95cUxNQ2FqamN6bnhPYTBvLXA2UV9kbm5paW5KXzlEckVuaWVTd09aRWJ3QThwVzF1YUdCQlVvUmR4SjlEVnZGdXFrd0xhVHpxYms3NVBHUTNEdDdvZEhhc1lxWXBFTVRfSmFXXzRjMlc3MlBJNEY2YXNuTVF0bk1DOHVwd2dSdE5TT0kwSTE1T2JmdG05Sk1reUhPQTFxVkdENzN2MTg2MHl5VUhxQmZkWmRXQzFpWktLV0hlbEVqLUcwNUVmaktreDEtOXk4dzVaeWNpcF9LVXBxcWVmWUI3cng4RFh5aXBUaktkMDY2NjBJSl9ZUVJmdndiSmNVVWNTT2RsbHJKcjJfaGkwSG0yRTZFRVhOYjhHNXV5TDMxTWVKU1g0WG9oOFdUME92NXhKVi1IRXFlUndodmtrTkhOYkVUbGxaRHBpRWFWc1BkYjZ6SEFzTG9LRF9udjRFbUVXbXFncDN5MHRyTVF0eE1DdVNUc1NONFpudFBKSEE",
+      "reason": "sports results",
+      "sourceName": "Pierce Manufacturing"
+    }
+  ],
+  "warnings": []
+}
