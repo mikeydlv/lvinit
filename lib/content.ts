@@ -1123,6 +1123,19 @@ export const guides: Guide[] = [
     href: "/guides/nevada-first-standalone-childrens-hospital-southwest-las-vegas",
   },
   {
+    slug: "casara-west-henderson-affordable-apartments",
+    title: "Casara at West Henderson: 390 Affordable Apartments Approved Near Las Vegas Blvd and Larson Lane",
+    dek: "Henderson's council approved 390 income-restricted apartments near Inspirada. Who qualifies, what's reported on timing, and what isn't confirmed.",
+    byline: "LVINIT Editorial",
+    date: "November 2026",
+    publishedAt: "2026-11-01",
+    category: "Local Feature",
+    // Built by the LVINIT Daily Publisher from Local Radar assignment
+    // LR-CASARA-WEST-HENDERSON. No LVINIT photography of the site; card renders
+    // its designed non-photographic fallback.
+    href: "/guides/casara-west-henderson-affordable-apartments",
+  },
+  {
     slug: "patriot-housing-lv-sunrise-manor-veteran-housing",
     title: "Patriot Housing LV: What Clark County Approved for 348 Veteran-Focused Apartments in Sunrise Manor",
     dek: "Staff recommended denial; commissioners approved it 7-0 on Oct. 7 with conditions. What's approved, what's not known yet.",
