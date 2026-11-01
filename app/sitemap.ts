@@ -57,6 +57,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.7,
     },
     {
+      url: `${BASE_URL}/guides/casara-west-henderson-affordable-apartments`,
+      changeFrequency: "monthly",
+      priority: 0.7,
+    },
+    {
       url: `${BASE_URL}/guides/patriot-housing-lv-sunrise-manor-veteran-housing`,
       changeFrequency: "monthly",
       priority: 0.7,
