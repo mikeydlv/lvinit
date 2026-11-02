@@ -1147,8 +1147,11 @@ export const guides: Guide[] = [
     publishedAt: "2026-10-31",
     category: "Local Feature",
     // Built by the LVINIT Daily Publisher from Local Radar assignment
-    // LR-PATRIOT-HOUSING-LV. No LVINIT photography of the site; card renders
-    // its designed non-photographic fallback.
+    // LR-PATRIOT-HOUSING-LV. Card image is the hero: project rendering
+    // supplied by Mikey (concept art, not a photo of the site).
+    image: "/images/patriot-housing-lv-sunrise-manor-veteran-housing-rendering.webp",
+    imageAlt:
+      "Rendering of the planned Patriot Housing LV apartment community: three-story stucco buildings with balconies, young trees and desert landscaping around a parking area under a blue sky. An artist's concept, not a photo of the site.",
     href: "/guides/patriot-housing-lv-sunrise-manor-veteran-housing",
   },
   {
