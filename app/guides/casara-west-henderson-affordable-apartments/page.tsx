@@ -26,11 +26,23 @@ import {
 //   Coordinated Living of Southern Nevada; land described as former BLM land.
 // OMITTED: exact vote date, rents, amenities, bill number (Henderson record not
 // accessible), anything implying construction has started.
-// IMAGERY: no LVINIT photography of the site. Photoless hero. One Inspirada
-// aerial (Aug. 2026 footage) is used inline, captioned as area context only.
+// IMAGERY: hero is the Ovation developer rendering supplied by Mikey (the file
+// itself is labeled "Developer rendering: Ovation / AI-assisted editorial
+// adaptation"); it is a concept, not a photo, and the article says so. No
+// LVINIT photography of the site. One Inspirada aerial (Aug. 2026 footage) is
+// used inline, captioned as area context only.
 // ---------------------------------------------------------------------------
 
 const PATH = "/guides/casara-west-henderson-affordable-apartments";
+// Hero is a text-free crop of the supplied graphic (its baked-in title and
+// LVINIT mark clash with the page headline); the credit line carries the
+// attribution that was printed on the original. Full graphic = card/OG image.
+const HERO =
+  "/images/casara-west-henderson-affordable-apartments-rendering-hero.webp";
+const HERO_CREDIT =
+  "Developer rendering: Ovation. AI-assisted editorial adaptation.";
+const HERO_ALT =
+  "Developer rendering of the planned Casara at West Henderson apartment community: three-story stucco buildings with balconies, palm trees and desert landscaping along a street, with red rock hills behind. An artist's concept, not a photo of the site.";
 const CONTEXT =
   "/images/editorial/henderson-inspirada-aerial-homes-desert-mountains.jpg";
 const CONTEXT_ALT =
@@ -47,6 +59,10 @@ const meta: StoryMeta = {
   description:
     "Henderson City Council approved Casara at West Henderson, 390 income-restricted apartments near Inspirada. Who qualifies, what's reported on timing, and what isn't confirmed.",
   path: PATH,
+  image: HERO,
+  imageWidth: 1672,
+  imageHeight: 650,
+  imageAlt: HERO_ALT,
   datePublished: "2026-11-01",
   dateModified: "2026-11-01",
   author: "LVINIT Editorial",
@@ -69,6 +85,9 @@ export default function CasaraWestHendersonPage() {
           "Casara at West Henderson: 390 Affordable Apartments Approved Near Las Vegas Blvd and Larson Lane",
         subheadline:
           "Henderson's council signed off on a big income-restricted apartment community on empty desert near Inspirada. Here's who it's for, what's reported on timing, and what's still open.",
+        image: HERO,
+        imageAlt: HERO_ALT,
+        imageCredit: HERO_CREDIT,
         backLink: { label: "All guides", href: "/guides" },
       }}
       relatedStories={{
@@ -237,9 +256,9 @@ export default function CasaraWestHendersonPage() {
           </li>
         </ul>
         <p className="mt-5 text-body-lg text-lvinit-warmgray">
-          I haven&rsquo;t visited the site for this piece and have no LVINIT
-          photos of it, so the page has no hero image rather than a
-          stand-in.
+          The image at the top is a developer rendering of the planned
+          community, adapted for LVINIT, not a photo of the site. I haven&rsquo;t
+          visited the site for this piece and have no LVINIT photos of it.
         </p>
       </StorySection>
 
