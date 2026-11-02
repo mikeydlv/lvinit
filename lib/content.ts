@@ -1123,6 +1123,22 @@ export const guides: Guide[] = [
     href: "/guides/nevada-first-standalone-childrens-hospital-southwest-las-vegas",
   },
   {
+    slug: "echo-trail-park-community-center-southwest-las-vegas",
+    title: "Echo Trail Park: Clark County Approves a 58,000 Sq Ft Community Center for Southwest Las Vegas",
+    dek: "Clark County approved a two-story community center at Echo Trail Park. What's inside, the parking changes, and what's expected by 2028.",
+    byline: "LVINIT Editorial",
+    date: "November 2026",
+    publishedAt: "2026-11-02",
+    category: "Local Feature",
+    // Built by the LVINIT Daily Publisher from Local Radar assignment
+    // LR-ECHO-TRAIL-COMMUNITY-CENTER. Card image = LVINIT photo of the county's
+    // site sign at the park (not a rendering, not a finished building).
+    image: "/images/echo-trail-park-future-community-center-sign-southwest-las-vegas.webp",
+    imageAlt:
+      "Green Clark County sign on the lawn at Echo Trail Park in southwest Las Vegas reading Future Site of Your Community Center, with Commissioner Michael Naft's name and a drawing of the planned building, and homes and mountains in the distance.",
+    href: "/guides/echo-trail-park-community-center-southwest-las-vegas",
+  },
+  {
     slug: "casara-west-henderson-affordable-apartments",
     title: "Casara at West Henderson: 390 Affordable Apartments Approved Near Las Vegas Blvd and Larson Lane",
     dek: "Henderson's council approved 390 income-restricted apartments near Inspirada. Who qualifies, what's reported on timing, and what isn't confirmed.",
