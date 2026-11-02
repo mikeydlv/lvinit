@@ -1131,8 +1131,11 @@ export const guides: Guide[] = [
     publishedAt: "2026-11-01",
     category: "Local Feature",
     // Built by the LVINIT Daily Publisher from Local Radar assignment
-    // LR-CASARA-WEST-HENDERSON. No LVINIT photography of the site; card renders
-    // its designed non-photographic fallback.
+    // LR-CASARA-WEST-HENDERSON. Card image is the hero: Ovation developer
+    // rendering (concept art, not a photo of the site).
+    image: "/images/casara-west-henderson-affordable-apartments-rendering-hero.webp",
+    imageAlt:
+      "Developer rendering of the planned Casara at West Henderson apartment community: three-story stucco buildings with balconies, palm trees and desert landscaping along a street, with red rock hills behind. An artist's concept, not a photo of the site.",
     href: "/guides/casara-west-henderson-affordable-apartments",
   },
   {
