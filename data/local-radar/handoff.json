@@ -557,7 +557,7 @@
  "runs": 10,
  "tomorrowAssignment": {
   "forDate": "2026-11-03",
-  "status": "READY - FIRST-PARTY MEDIA RECOMMENDED",
+  "status": "READY",
   "itemId": "LR-ECHO-TRAIL-COMMUNITY-CENTER",
   "workingHeadline": "Echo Trail Park: Clark County Approves a 58,000 Sq Ft Community Center for Southwest Las Vegas",
   "location": "Echo Trail Park, 5655 S. Buffalo Dr near Russell Rd, southwest Las Vegas",
@@ -582,9 +582,9 @@
    "/guides/nevada-first-standalone-childrens-hospital-southwest-las-vegas"
   ],
   "editorialCategory": "Neighborhoods / Infrastructure & Quality of Life (Southwest Las Vegas)",
-  "firstPartyMediaExists": false,
-  "morningVisitRecommended": true,
-  "publisherNotes": "Do not state $40M (KTNV only) or a construction start. Say 'expected to open in 2028' per Clark County. Note county parks page still says planning phase. If no first-party photos exist, use no-image fallback per CLAUDE.md; do not invent imagery.",
+  "firstPartyMediaExists": true,
+  "morningVisitRecommended": false,
+  "publisherNotes": "Do not state $40M (KTNV only) or a construction start. Say 'expected to open in 2028' per Clark County. Note county parks page still says planning phase. If no first-party photos exist, use no-image fallback per CLAUDE.md; do not invent imagery. IMAGES ARE PRESET: see imageDirectives (hero + card = Future-Echo-Trail-Park-community-center.png; inline = Echo-Trail-Community-Center.png). Do not substitute other images.",
   "morningMission": {
    "where": "Echo Trail Park, 5655 S. Buffalo Dr (public park)",
    "access": "Public park; stay on park grounds/sidewalks; no permission needed for public areas. Do not enter fenced/staged areas.",
@@ -600,6 +600,27 @@
    ],
    "doNotShow": "Do not present the site as under construction or imply the center exists; no renderings are public in sources read",
    "video": "Short vertical: 'What's coming to Echo Trail Park'"
+  },
+  "imageDirectives": {
+   "approvedBy": "Mikey (explicit instruction 2026-11-02); both files are Mikey-supplied and already on main in public/images/",
+   "hero": {
+    "path": "/images/Future-Echo-Trail-Park-community-center.png",
+    "dimensions": "1672x941",
+    "use": "HERO IMAGE for the article AND the main-site/homepage/guide-card placeholder image (lib/content.ts image + imageAlt) AND the og/meta image",
+    "what": "Photo of Clark County's green 'Future Site of Your Community Center' sign (Commissioner Michael Naft) on the lawn at Echo Trail Park, homes and mountains behind",
+    "suggestedAlt": "Green Clark County sign on the lawn at Echo Trail Park in southwest Las Vegas reading Future Site of Your Community Center, with Commissioner Michael Naft's name and a drawing of the planned building, and homes and mountains in the distance.",
+    "note": "Do not call it a rendering. Do not modify the original PNG; make an optimized WebP copy with a descriptive filename (e.g. echo-trail-park-future-community-center-sign-southwest-las-vegas.webp)."
+   },
+   "inline": {
+    "path": "/images/Echo-Trail-Community-Center.png",
+    "dimensions": "1280x720",
+    "use": "REQUIRED inline image in the article body (SEO/AEO), placed near the 'what's planned inside' section, with descriptive alt text and a caption",
+    "what": "Architect's concept rendering of the planned Echo Trail Community Center; printed marks read 'Clark County' and 'LGA Architecture'",
+    "suggestedAlt": "Architect's rendering of the planned Echo Trail Community Center: a two-story entrance with a copper-colored canopy and Echo Trail Community Center signage, desert landscaping and lavender plantings, and people walking and biking out front. A concept, not a photo.",
+    "suggestedCaption": "Rendering of the planned Echo Trail Community Center by LGA Architecture, shown in Clark County materials. A concept, not a photo; final design details may differ.",
+    "note": "Label as a rendering and credit LGA Architecture / Clark County. Optimize a copy, leave the original untouched."
+   },
+   "usageTracking": "After the article is verified live, record hero and inline usage in the image library per CLAUDE.md. Neither file is in the library yet, and neither has prior hero use, so both are hero-eligible."
   }
  },
  "previousAssignments": [
