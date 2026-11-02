@@ -22,11 +22,16 @@ import { StoryPage, StoryLede, StorySection } from "@/components/story";
 //   deed restriction and amenities are DELIBERATELY OMITTED.
 // OMITTED: rents, eligibility, financing sources, groundbreaking, exact
 // amendment wording, county record (not read).
-// IMAGERY: no LVINIT photography of east Las Vegas / Sunrise Manor in the
-// image library. Photoless hero; nothing stands in for the site.
+// IMAGERY: hero and card image are a project rendering supplied by Mikey
+// (approved for use 2026-11-02). It is concept art, not a photo, and the page
+// says so. No LVINIT photography of the site exists.
 // ---------------------------------------------------------------------------
 
 const PATH = "/guides/patriot-housing-lv-sunrise-manor-veteran-housing";
+const HERO = "/images/patriot-housing-lv-sunrise-manor-veteran-housing-rendering.webp";
+const HERO_CREDIT = "Project rendering (concept art, not a photo of the site).";
+const HERO_ALT =
+  "Rendering of the planned Patriot Housing LV apartment community: three-story stucco buildings with balconies, young trees and desert landscaping around a parking area under a blue sky. An artist's concept, not a photo of the site.";
 const linkCls =
   "text-lvinit-blue underline underline-offset-4 decoration-transparent hover:decoration-lvinit-blue";
 const extCls = "text-lvinit-blue underline underline-offset-4";
@@ -39,6 +44,10 @@ const meta: StoryMeta = {
   description:
     "Clark County commissioners approved the $90M Patriot Housing LV project 7-0 on Oct. 7, after staff recommended denial. What's approved, what safeguards were added, and what isn't known yet.",
   path: PATH,
+  image: HERO,
+  imageWidth: 1672,
+  imageHeight: 941,
+  imageAlt: HERO_ALT,
   datePublished: "2026-10-31",
   dateModified: "2026-10-31",
   author: "LVINIT Editorial",
@@ -61,6 +70,9 @@ export default function PatriotHousingPage() {
           "Patriot Housing LV: What Clark County Approved for 348 Veteran-Focused Apartments in Sunrise Manor",
         subheadline:
           "County staff recommended denial. Commissioners approved it 7-0 anyway, with conditions. Here's what's settled and what isn't.",
+        image: HERO,
+        imageAlt: HERO_ALT,
+        imageCredit: HERO_CREDIT,
         backLink: { label: "All guides", href: "/guides" },
       }}
       relatedStories={{
@@ -205,9 +217,9 @@ export default function PatriotHousingPage() {
           </li>
         </ul>
         <p className="mt-5 text-body-lg text-lvinit-warmgray">
-          I haven&rsquo;t visited the site for this piece and there are no LVINIT
-          photos of it yet, so this page has no imagery rather than a
-          stand-in.
+          The image at the top is a rendering of the planned community, not a
+          photo of the site. I haven&rsquo;t visited the site for this piece and
+          have no LVINIT photos of it yet.
         </p>
       </StorySection>
 
