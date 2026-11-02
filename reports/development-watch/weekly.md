@@ -1,24 +1,26 @@
-# LVINIT Development Watch — week ending 2026-10-26
+# LVINIT Development Watch — week ending 2026-11-02
 
 _7 daily report(s)._
 
-- **3 meaningful changes**
+- **2 meaningful changes**
 - 9 monitor items
-- 0 source conflicts
-- 2133 duplicate/noise items suppressed (7 duplicate events, 2126 gate noise, 0 routine agenda items) · 4741 unchanged documents skipped
+- 1 source conflict
+- 2150 duplicate/noise items suppressed (6 duplicate events, 2115 gate noise, 29 routine agenda items) · 4370 unchanged documents skipped
 
 ## Meaningful changes
-- **DEV-2026-10-26-003** Peaks — first time this project has been seen · 65/100 · Medium · CONTENT_BRIEF_INPUT
-- **DEV-2026-10-22-001** Casara at West Henderson — first time this project has been seen · 60/100 · Medium · ADD_TO_NEIGHBORHOOD_GUIDE → /neighborhoods/henderson
-- **DEV-2026-10-26-001** Switch — filed → approved · 47/100 · Medium · ADD_TO_NEIGHBORHOOD_GUIDE → /neighborhoods/north-las-vegas
+- **DEV-2026-10-30-003** Greenbow Park — first time this project has been seen · 57/100 · Medium · CONTENT_BRIEF_INPUT
+- **DEV-2026-10-30-004** Casara of West Henderson — first time this project has been seen · 56/100 · Medium · ADD_TO_NEIGHBORHOOD_GUIDE → /neighborhoods/henderson
 
 ## Monitor
-- DEV-2026-10-20-001 Lorenzi Park — approved · High
-- DEV-2026-10-20-002 Idefix — proposed · Medium
-- DEV-2026-10-20-003 Unnamed employment (Las Vegas (valley-wide)) — "Data center project proposed on federal land gets sent back to square one" — approved · Low
-- DEV-2026-10-21-001 Unnamed residential (Las Vegas (valley-wide)) — "Construction starts on new housing project at former Badlands golf course" — proposed · Low
-- DEV-2026-10-22-002 Unnamed road (Green Valley) — "Cone Zone: 215 beltway widening, Green Valley Parkway revamp reach halfway point" — unclear · Low
-- DEV-2026-10-23-002 Unnamed residential (Clark County) — "Nellis Grove Apartments Groundbreaking in Clark County, NV" — under construction · Low
-- DEV-2026-10-24-001 Intermountain Health Felicia — announced · Medium
-- DEV-2026-10-24-002 Unnamed residential (Las Vegas (valley-wide)) — "In 2022, Mark Wahlberg spent $15.6 million on 2.5 acres of empty Las Vegas land to build a" — unclear · Low
-- DEV-2026-10-26-002 Unnamed residential (Henderson) — "Henderson approves nearly 400 new affordable apartments in south valley" — approved · Low
+- DEV-2026-10-27-001 Intermountain Health Felicia — under construction · Medium
+- DEV-2026-10-27-003 Unnamed residential (City of Las Vegas) — "Las Vegas wants to help older adults with home modifications. Here's who qualifies and for" — announced · Low
+- DEV-2026-10-28-002 Cowabunga Bay's Henderson — announced · Low
+- DEV-2026-10-28-003 Your Cowabunga Family, — announced · Medium
+- DEV-2026-10-28-004 Unnamed park (Summerlin) — "Cowabunga Bay in Henderson shuts down permanently; Summerlin park to stay open" — unclear · Low
+- DEV-2026-10-29-001 Unnamed residential (Las Vegas (valley-wide)) — "Las Vegas Approves 97-Lot Townhome Project Near 215 Beltway" — approved · Low
+- DEV-2026-10-30-002 Unnamed residential (Southwest Las Vegas) — "190 affordable senior apartments now open in southwest Las Vegas" — open · Low
+- DEV-2026-10-30-005 Unnamed residential (Las Vegas (valley-wide)) — "McKnight Senior Village Expands Affordable Senior Housing in Southern Nevada with 60 New A" — unclear · Low
+- DEV-2026-11-01-001 Unnamed residential (City of Las Vegas) — "Las Vegas City Council Approves 97-Unit Townhome Community in La Madre Foothills" — approved · Low
+
+## Conflicts
+- DEV-2026-10-30-001 VEGAS: News 3 Las Vegas says 390 units; KTNV 13 Action News says 190
