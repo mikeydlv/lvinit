@@ -26,7 +26,8 @@ import {
 //   Community Center. The release gives no approval date, cost or funding.
 // - Vote date Wed Sept 2, 2026 per Fox5 (Local Radar read it 2026-11-02).
 // OMITTED: the $40M figure (KTNV only), construction start, hours/fees.
-// IMAGERY: hero = LVINIT photo of the county's "Future Site of Your Community
+// IMAGERY: lead image (card/OG, first figure; the hero is text-only so the
+// headline doesn't sit over the sign's own lettering) = LVINIT photo of the county's "Future Site of Your Community
 // Center" sign (not a rendering). Inline = LGA Architecture concept rendering
 // from Clark County materials, labeled as a concept. Both supplied by Mikey.
 // ---------------------------------------------------------------------------
@@ -78,10 +79,6 @@ export default function EchoTrailCommunityCenterPage() {
         headline: TITLE,
         subheadline:
           "A big indoor recreation building is coming to the park on Buffalo Dr. Here's what the county approved, what's inside, and what to expect before 2028.",
-        image: HERO,
-        imageAlt: HERO_ALT,
-        imageCredit:
-          "LVINIT photo of Clark County's sign at Echo Trail Park. The drawing on the sign is not a photo of a finished building.",
         backLink: { label: "All guides", href: "/guides" },
       }}
       relatedStories={{
@@ -117,6 +114,19 @@ export default function EchoTrailCommunityCenterPage() {
       <StoryLede
         kicker="New & Noteworthy"
         lead="Clark County's Board of Commissioners has unanimously approved a two-story, 58,000-square-foot community center at Echo Trail Park, at Buffalo Drive and Russell Road in southwest Las Vegas. The county expects it to open in 2028."
+      />
+
+      <StoryGallery
+        columns={1}
+        images={[
+          {
+            src: HERO,
+            alt: HERO_ALT,
+            label: "On site",
+            caption:
+              "Clark County's \u201cFuture Site of Your Community Center\u201d sign on the lawn at Echo Trail Park. The drawing on the sign is artwork, not a photo of a finished building.",
+          },
+        ]}
       />
 
       <StorySection heading="What the county approved">
