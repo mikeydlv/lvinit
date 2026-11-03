@@ -57,6 +57,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.7,
     },
     {
+      url: `${BASE_URL}/guides/new-windsor-park-north-las-vegas-93-homes`,
+      changeFrequency: "monthly",
+      priority: 0.7,
+    },
+    {
       url: `${BASE_URL}/guides/echo-trail-park-community-center-southwest-las-vegas`,
       changeFrequency: "monthly",
       priority: 0.7,

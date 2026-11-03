@@ -1123,6 +1123,22 @@ export const guides: Guide[] = [
     href: "/guides/nevada-first-standalone-childrens-hospital-southwest-las-vegas",
   },
   {
+    slug: "new-windsor-park-north-las-vegas-93-homes",
+    title: "New Windsor Park: The 93 Homes North Las Vegas Is Building for a Sinking Neighborhood",
+    dek: "93 single-story homes at Carey Ave and West St for families from the sinking Windsor Park. Funding, timeline and the December 2026 target.",
+    byline: "LVINIT Editorial",
+    date: "November 2026",
+    publishedAt: "2026-11-03",
+    category: "Local Feature",
+    // Built by the LVINIT Daily Publisher from Local Radar assignment
+    // LR-NEW-WINDSOR-PARK-NLV. Card image = aerial of homes under construction
+    // supplied by Mikey (capture date not documented).
+    image: "/images/new-windsor-park-north-las-vegas-homes-under-construction-aerial.webp",
+    imageAlt:
+      "Aerial view of rows of single-story homes under construction in North Las Vegas, with tan sheathing, green weather barrier and white roofs, bulldozers on bare dirt, existing neighborhoods behind and mountains in the distance.",
+    href: "/guides/new-windsor-park-north-las-vegas-93-homes",
+  },
+  {
     slug: "echo-trail-park-community-center-southwest-las-vegas",
     title: "Echo Trail Park: Clark County Approves a 58,000 Sq Ft Community Center for Southwest Las Vegas",
     dek: "Clark County approved a two-story community center at Echo Trail Park. What's inside, the parking changes, and what's expected by 2028.",
