@@ -57,6 +57,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.7,
     },
     {
+      url: `${BASE_URL}/guides/i-215-northern-beltway-trail-north-las-vegas`,
+      changeFrequency: "monthly",
+      priority: 0.7,
+    },
+    {
       url: `${BASE_URL}/guides/new-windsor-park-north-las-vegas-93-homes`,
       changeFrequency: "monthly",
       priority: 0.7,
