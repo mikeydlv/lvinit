@@ -1123,6 +1123,21 @@ export const guides: Guide[] = [
     href: "/guides/nevada-first-standalone-childrens-hospital-southwest-las-vegas",
   },
   {
+    slug: "i-215-northern-beltway-trail-north-las-vegas",
+    title: "The I-215 Northern Beltway Trail: What North Las Vegas Is Building and When You Can Use It",
+    dek: "North Las Vegas broke ground on a paved, lit trail along the 215. Phase 1 is expected in late 2027. What's confirmed and what isn't.",
+    byline: "LVINIT Editorial",
+    date: "November 2026",
+    publishedAt: "2026-11-04",
+    category: "Local Feature",
+    // Built by the LVINIT Daily Publisher from Local Radar LR-I215-NORTHERN-BELTWAY-TRAIL.
+    // Card image is contextual North Las Vegas development, not the trail.
+    image: "/images/editorial/north-las-vegas-new-development-road-mountains.jpg",
+    imageAlt:
+      "Divided road in North Las Vegas passing new homes and vacant desert lots toward rugged mountains under a cloudy sky.",
+    href: "/guides/i-215-northern-beltway-trail-north-las-vegas",
+  },
+  {
     slug: "new-windsor-park-north-las-vegas-93-homes",
     title: "New Windsor Park: The 93 Homes North Las Vegas Is Building for a Sinking Neighborhood",
     dek: "93 single-story homes at Carey Ave and West St for families from the sinking Windsor Park. Funding, timeline and the December 2026 target.",
