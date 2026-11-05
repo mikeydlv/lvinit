@@ -1138,6 +1138,19 @@ export const guides: Guide[] = [
     href: "/guides/i-215-northern-beltway-trail-north-las-vegas",
   },
   {
+    slug: "sloan-lane-bridge-las-vegas-wash-east-las-vegas",
+    title: "The New Sloan Lane Bridge: What Clark County Just Opened Over the Las Vegas Wash",
+    dek: "A $13.9 million extension linking Ruby Creek Drive and Vegas Valley Drive opened Oct. 23. Who it helps, who is wary, and what isn't confirmed.",
+    byline: "LVINIT Editorial",
+    date: "November 2026",
+    publishedAt: "2026-11-05",
+    category: "Local Feature",
+    // Built by the LVINIT Daily Publisher (no Local Radar READY assignment;
+    // Development Watch signal). No card image: no first-party photo of the
+    // corridor exists, so the card uses its designed fallback panel.
+    href: "/guides/sloan-lane-bridge-las-vegas-wash-east-las-vegas",
+  },
+  {
     slug: "new-windsor-park-north-las-vegas-93-homes",
     title: "New Windsor Park: The 93 Homes North Las Vegas Is Building for a Sinking Neighborhood",
     dek: "93 single-story homes at Carey Ave and West St for families from the sinking Windsor Park. Funding, timeline and the December 2026 target.",
