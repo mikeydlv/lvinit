@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "agent": "development-watch",
-  "updated": "2026-11-04",
+  "updated": "2026-11-05",
   "events": {
     "025b2cbfc757": {
       "id": "DEV-2026-09-25-002",
@@ -2991,6 +2991,53 @@
           "SCORE_BELOW_THRESHOLD",
           "CONFIDENCE_NOT_HIGH",
           "NO_PRIMARY_SOURCE"
+        ],
+        "queued": []
+      }
+    },
+    "52584148564e": {
+      "id": "DEV-2026-11-05-001",
+      "fingerprint": "52584148564e",
+      "entity_id": "DEV-P-DB430F1C",
+      "entity_name": "Unnamed residential (Clark County) — \"Clark County approves quicker, easier short-term rental application process\"",
+      "change_class": "NEW",
+      "changes": [
+        "first time this project has been seen"
+      ],
+      "event_type": "approval",
+      "status": "approved",
+      "prior_status": null,
+      "first_seen": "2026-11-05",
+      "last_seen": "2026-11-05",
+      "times_seen": 1,
+      "lifecycle": "NEW",
+      "lifecycle_history": [
+        {
+          "date": "2026-11-05",
+          "lifecycle": "NEW"
+        }
+      ],
+      "action": "MONITOR_ONLY",
+      "target": null,
+      "score": 48,
+      "confidence": "Low",
+      "sources": [
+        {
+          "name": "Nevada Current",
+          "url": "https://nevadacurrent.com/2026/11/04/clark-county-approves-quicker-easier-short-term-rental-application-process",
+          "authority": 8,
+          "published": "2026-11-04T08:30:56.000Z"
+        }
+      ],
+      "superseded_by": null,
+      "handoff": {
+        "eligible": false,
+        "blockers": [
+          "NOT_A_PUBLISHER_ACTION",
+          "SCORE_BELOW_THRESHOLD",
+          "CONFIDENCE_NOT_HIGH",
+          "NO_PRIMARY_SOURCE",
+          "PROVISIONAL_ENTITY"
         ],
         "queued": []
       }
@@ -7229,6 +7276,53 @@
         "queued": []
       }
     },
+    "cb38f8e5717c": {
+      "id": "DEV-2026-11-05-002",
+      "fingerprint": "cb38f8e5717c",
+      "entity_id": "DEV-P-5C2AAB78",
+      "entity_name": "Unnamed residential (City of Las Vegas) — \"Las Vegas City Council approves up to $1.75M for affordable housing\"",
+      "change_class": "NEW",
+      "changes": [
+        "first time this project has been seen"
+      ],
+      "event_type": "approval",
+      "status": "approved",
+      "prior_status": null,
+      "first_seen": "2026-11-05",
+      "last_seen": "2026-11-05",
+      "times_seen": 1,
+      "lifecycle": "NEW",
+      "lifecycle_history": [
+        {
+          "date": "2026-11-05",
+          "lifecycle": "NEW"
+        }
+      ],
+      "action": "MONITOR_ONLY",
+      "target": null,
+      "score": 47,
+      "confidence": "Low",
+      "sources": [
+        {
+          "name": "FOX5 Vegas",
+          "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxQZTVnTktlNUs2QlJ6Qjk4NklXd1Nab29ZWVIzaGVqcmhKVnprVHJmYUVYMk9DOEZ1VnZqUW9EQi0wYUhhRlc3b3lBcGNTSHFiZXJDanZUYWo4ME8zMHU1bm1SUVlDeWdzdHAzenItMDdTVW1rMm5YMWdHbjVTV3FsS2tmcURsUFR3WmdFYWxhYVZrTnFBOTByQW84VHXSAbABQVVfeXFMTzViTTBGd0MtVWJaVzlLaHBNMkw5R2lyWG83LUhDYV9sTTh3bDNJbGxVaVFyR0MwSGIxNzdjbWdxZU8yekd1NWw1SU9SSUtsbGlNTkI5ei1xWlo5YVFHQkgzY19lekFDYnYySkRtek9MRVprOF83NFAwOTBFbjRHdjRic0V6a0hUSnh1ZjFtamZpbkR6M05mbjFQNHREU2ltRk1jTGJkTXd6b01ldnpNRkQ",
+          "authority": 8,
+          "published": "2026-11-05T05:25:00.000Z"
+        }
+      ],
+      "superseded_by": null,
+      "handoff": {
+        "eligible": false,
+        "blockers": [
+          "NOT_A_PUBLISHER_ACTION",
+          "SCORE_BELOW_THRESHOLD",
+          "CONFIDENCE_NOT_HIGH",
+          "NO_PRIMARY_SOURCE",
+          "PROVISIONAL_ENTITY"
+        ],
+        "queued": []
+      }
+    },
     "cd0e68cefbb8": {
       "id": "DEV-2026-10-14-001",
       "fingerprint": "cd0e68cefbb8",
@@ -8714,12 +8808,12 @@
       "changes": [
         "approved → partially open"
       ],
-      "event_type": "partial opening",
+      "event_type": "announcement",
       "status": "partially open",
-      "prior_status": "paused",
+      "prior_status": "partially open",
       "first_seen": "2026-10-11",
-      "last_seen": "2026-11-04",
-      "times_seen": 8,
+      "last_seen": "2026-11-05",
+      "times_seen": 9,
       "lifecycle": "PERSISTING",
       "lifecycle_history": [
         {
@@ -8739,9 +8833,9 @@
           "lifecycle": "PERSISTING"
         }
       ],
-      "action": "UPDATE_EXISTING_ARTICLE",
+      "action": "DUPLICATE",
       "target": "/guides/aries-henderson",
-      "score": 61,
+      "score": 39,
       "confidence": "Medium",
       "sources": [
         {
@@ -8791,15 +8885,23 @@
           "url": "https://ktnv.com/neighborhoods/east-las-vegas/new-sloan-lane-bridge-sidewalk-improves-access-for-east-las-vegas-residents",
           "authority": 8,
           "published": "2026-11-03T23:40:45.000Z"
+        },
+        {
+          "name": "8 News Now",
+          "url": "https://8newsnow.com/all-about-animals/las-vegas-alligator-living-in-vacant-koi-pond-seeks-help-through-nonprofit",
+          "authority": 8,
+          "published": "2026-11-05T01:07:44.000Z"
         }
       ],
       "superseded_by": "aa389dac718a",
       "handoff": {
         "eligible": false,
         "blockers": [
+          "NOT_A_PUBLISHER_ACTION",
           "SCORE_BELOW_THRESHOLD",
           "CONFIDENCE_NOT_HIGH",
           "NO_PRIMARY_SOURCE",
+          "NOT_MATERIAL",
           "NOT_NEW"
         ],
         "queued": []
