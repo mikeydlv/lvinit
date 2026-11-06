@@ -1138,6 +1138,22 @@ export const guides: Guide[] = [
     href: "/guides/i-215-northern-beltway-trail-north-las-vegas",
   },
   {
+    slug: "hualapai-grand-teton-police-substation-park-northwest-las-vegas",
+    title: "A New Police Substation and 2-Acre Park Are Going Up at Hualapai and Grand Teton",
+    dek: "A $27.2 million city project in northwest Las Vegas: a 13,300 sq ft Metro substation and a park, targeting early 2027.",
+    byline: "LVINIT Editorial",
+    date: "November 2026",
+    publishedAt: "2026-11-06",
+    category: "Local Feature",
+    // Built by the LVINIT Daily Publisher from Local Radar WATCH item
+    // LR-HUALAPAI-GRAND-TETON-SUBSTATION-PARK (city release read). Card image =
+    // LVINIT drone still of Skye Canyon (area context, not the project site).
+    image: "/images/editorial/skye-canyon-northwest-las-vegas-neighborhood-aerial-mountains.jpg",
+    imageAlt:
+      "Aerial view of Skye Canyon neighborhoods in northwest Las Vegas spreading toward open desert and the Spring Mountains.",
+    href: "/guides/hualapai-grand-teton-police-substation-park-northwest-las-vegas",
+  },
+  {
     slug: "sloan-lane-bridge-las-vegas-wash-east-las-vegas",
     title: "The New Sloan Lane Bridge: What Clark County Just Opened Over the Las Vegas Wash",
     dek: "A $13.9 million extension linking Ruby Creek Drive and Vegas Valley Drive opened Oct. 23. Who it helps, who is wary, and what isn't confirmed.",
