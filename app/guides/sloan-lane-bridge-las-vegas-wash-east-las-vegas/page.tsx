@@ -19,10 +19,16 @@ import { StoryPage, StoryLede, StorySection } from "@/components/story";
 //   funding per Segerblom; more east-side road work planned.
 // OMITTED ON PURPOSE: lane count, bridge length, bike lanes, contractor, traffic
 //   counts (none reported); exact groundbreaking day (county page gives no date).
-// IMAGERY: none. No first-party photo of this corridor exists in the library.
+// IMAGERY: hero is public/images/hero/sloan-lane-bridge.png, supplied by Mikey
+//   for this article (2026-11-06). Its original capture source is not documented
+//   in the repo, so no photographer credit or "I shot this" claim is made. Alt
+//   text describes only what is visible.
 // ---------------------------------------------------------------------------
 
 const PATH = "/guides/sloan-lane-bridge-las-vegas-wash-east-las-vegas";
+const HERO_IMG = "/images/hero/sloan-lane-bridge.png";
+const HERO_ALT =
+  "Newly paved road with marked crosswalks, yellow pedestrian-crossing signs on an overhead arm and posts, and a fenced concrete bridge wall alongside, with open desert and mountains in the distance under a clear blue sky.";
 const linkCls =
   "text-lvinit-blue underline underline-offset-4 decoration-transparent hover:decoration-lvinit-blue";
 const extCls = "text-lvinit-blue underline underline-offset-4";
@@ -36,6 +42,10 @@ const meta: StoryMeta = {
   description:
     "Clark County opened the $13.9 million Sloan Lane extension and bridge over the Las Vegas Wash on Oct. 23, 2026, linking Ruby Creek Drive to Vegas Valley Drive. What it connects, who is happy, who isn't, and what isn't confirmed.",
   path: PATH,
+  image: HERO_IMG,
+  imageWidth: 1676,
+  imageHeight: 938,
+  imageAlt: HERO_ALT,
   datePublished: "2026-11-05",
   dateModified: "2026-11-05",
   author: "LVINIT Editorial",
@@ -57,6 +67,8 @@ export default function SloanLaneBridgePage() {
         headline: TITLE,
         subheadline:
           "A $13.9 million road extension gives part of the east valley a new way to cross the wash. Residents are split on it.",
+        image: HERO_IMG,
+        imageAlt: HERO_ALT,
         backLink: { label: "All guides", href: "/guides" },
       }}
       relatedStories={{
@@ -209,8 +221,8 @@ export default function SloanLaneBridgePage() {
           </li>
           <li>
             <span className="text-lvinit-black">First-hand look.</span> I
-            haven&rsquo;t driven or filmed this route yet, so there are no
-            LVINIT photos here.
+            haven&rsquo;t filmed or walked this route for LVINIT yet, so this
+            piece rests on county records and news reporting, not a site visit.
           </li>
         </ul>
         <p className="mt-5 text-body-lg text-lvinit-warmgray">

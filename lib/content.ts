@@ -1146,8 +1146,11 @@ export const guides: Guide[] = [
     publishedAt: "2026-11-05",
     category: "Local Feature",
     // Built by the LVINIT Daily Publisher (no Local Radar READY assignment;
-    // Development Watch signal). No card image: no first-party photo of the
-    // corridor exists, so the card uses its designed fallback panel.
+    // Development Watch signal). Card image = the article hero, supplied by
+    // Mikey (original capture source not documented).
+    image: "/images/hero/sloan-lane-bridge.png",
+    imageAlt:
+      "Newly paved road with marked crosswalks, yellow pedestrian-crossing signs on an overhead arm and posts, and a fenced concrete bridge wall alongside, with open desert and mountains in the distance under a clear blue sky.",
     href: "/guides/sloan-lane-bridge-las-vegas-wash-east-las-vegas",
   },
   {
