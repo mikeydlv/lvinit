@@ -62,6 +62,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.7,
     },
     {
+      url: `${BASE_URL}/guides/hualapai-grand-teton-police-substation-park-northwest-las-vegas`,
+      changeFrequency: "monthly",
+      priority: 0.7,
+    },
+    {
       url: `${BASE_URL}/guides/sloan-lane-bridge-las-vegas-wash-east-las-vegas`,
       changeFrequency: "monthly",
       priority: 0.7,
