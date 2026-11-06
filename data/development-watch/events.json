@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "agent": "development-watch",
-  "updated": "2026-11-05",
+  "updated": "2026-11-06",
   "events": {
     "025b2cbfc757": {
       "id": "DEV-2026-09-25-002",
@@ -1052,6 +1052,54 @@
           "NOT_MATERIAL",
           "NOT_NEW",
           "FAIR_HOUSING_SUBJECT"
+        ],
+        "queued": []
+      }
+    },
+    "210bb1e02f28": {
+      "id": "DEV-2026-11-06-004",
+      "fingerprint": "210bb1e02f28",
+      "entity_id": "DEV-M-RESORT-SECOND-TOWER",
+      "entity_name": "M Resort second hotel tower",
+      "change_class": "DUPLICATE",
+      "changes": [
+        "same as LVINIT neighborhood roster (/neighborhoods/henderson)"
+      ],
+      "event_type": "announcement",
+      "status": "open",
+      "prior_status": "open",
+      "first_seen": "2026-11-06",
+      "last_seen": "2026-11-06",
+      "times_seen": 1,
+      "lifecycle": "DUPLICATE",
+      "lifecycle_history": [
+        {
+          "date": "2026-11-06",
+          "lifecycle": "DUPLICATE"
+        }
+      ],
+      "action": "DUPLICATE",
+      "target": "/neighborhoods/henderson",
+      "score": 32,
+      "confidence": "Low",
+      "sources": [
+        {
+          "name": "Las Vegas Review-Journal — Business",
+          "url": "https://reviewjournal.com/business/casinos-gaming/2nd-m-resort-tower-continues-to-boost-revenue-for-penn-3910390",
+          "authority": 8,
+          "published": "2026-11-05T21:55:34.000Z"
+        }
+      ],
+      "superseded_by": null,
+      "handoff": {
+        "eligible": false,
+        "blockers": [
+          "NOT_A_PUBLISHER_ACTION",
+          "SCORE_BELOW_THRESHOLD",
+          "CONFIDENCE_NOT_HIGH",
+          "NO_PRIMARY_SOURCE",
+          "NOT_MATERIAL",
+          "NOT_NEW"
         ],
         "queued": []
       }
@@ -4904,6 +4952,53 @@
         "queued": []
       }
     },
+    "83df2065c6e0": {
+      "id": "DEV-2026-11-06-002",
+      "fingerprint": "83df2065c6e0",
+      "entity_id": "DEV-P-B4CF0CAC",
+      "entity_name": "Unnamed redevelopment (City of Las Vegas) — \"Las Vegas approves $4.2M to bolster downtown theater, arts campus\"",
+      "change_class": "NEW",
+      "changes": [
+        "first time this project has been seen"
+      ],
+      "event_type": "approval",
+      "status": "approved",
+      "prior_status": null,
+      "first_seen": "2026-11-06",
+      "last_seen": "2026-11-06",
+      "times_seen": 1,
+      "lifecycle": "NEW",
+      "lifecycle_history": [
+        {
+          "date": "2026-11-06",
+          "lifecycle": "NEW"
+        }
+      ],
+      "action": "MONITOR_ONLY",
+      "target": null,
+      "score": 51,
+      "confidence": "Low",
+      "sources": [
+        {
+          "name": "Las Vegas Review-Journal — Business",
+          "url": "https://reviewjournal.com/news/politics-and-government/las-vegas/city-approves-4-2m-to-bolster-downtown-theater-arts-campus-3910370",
+          "authority": 8,
+          "published": "2026-11-05T21:29:25.000Z"
+        }
+      ],
+      "superseded_by": null,
+      "handoff": {
+        "eligible": false,
+        "blockers": [
+          "NOT_A_PUBLISHER_ACTION",
+          "SCORE_BELOW_THRESHOLD",
+          "CONFIDENCE_NOT_HIGH",
+          "NO_PRIMARY_SOURCE",
+          "PROVISIONAL_ENTITY"
+        ],
+        "queued": []
+      }
+    },
     "859abb13b145": {
       "id": "DEV-2026-09-23-002",
       "fingerprint": "859abb13b145",
@@ -7062,6 +7157,53 @@
         "queued": []
       }
     },
+    "c1614b3657ba": {
+      "id": "DEV-2026-11-06-001",
+      "fingerprint": "c1614b3657ba",
+      "entity_id": "DEV-P-7804F543",
+      "entity_name": "Unnamed road (Northwest Las Vegas) — \"Nellis flyover to help dedicate new veterans memorial in Las Vegas\"",
+      "change_class": "NEW",
+      "changes": [
+        "first time this project has been seen"
+      ],
+      "event_type": "approval",
+      "status": "approved",
+      "prior_status": null,
+      "first_seen": "2026-11-06",
+      "last_seen": "2026-11-06",
+      "times_seen": 1,
+      "lifecycle": "NEW",
+      "lifecycle_history": [
+        {
+          "date": "2026-11-06",
+          "lifecycle": "NEW"
+        }
+      ],
+      "action": "MONITOR_ONLY",
+      "target": null,
+      "score": 59,
+      "confidence": "Low",
+      "sources": [
+        {
+          "name": "Las Vegas Review-Journal — Local",
+          "url": "https://reviewjournal.com/local/local-las-vegas/nellis-flyover-to-help-dedicate-new-veterans-memorial-in-las-vegas-3910729",
+          "authority": 8,
+          "published": "2026-11-06T13:00:12.000Z"
+        }
+      ],
+      "superseded_by": null,
+      "handoff": {
+        "eligible": false,
+        "blockers": [
+          "NOT_A_PUBLISHER_ACTION",
+          "SCORE_BELOW_THRESHOLD",
+          "CONFIDENCE_NOT_HIGH",
+          "NO_PRIMARY_SOURCE",
+          "PROVISIONAL_ENTITY"
+        ],
+        "queued": []
+      }
+    },
     "c3affab0165f": {
       "id": "DEV-2026-09-23-008",
       "fingerprint": "c3affab0165f",
@@ -7289,13 +7431,17 @@
       "status": "approved",
       "prior_status": null,
       "first_seen": "2026-11-05",
-      "last_seen": "2026-11-05",
-      "times_seen": 1,
-      "lifecycle": "NEW",
+      "last_seen": "2026-11-06",
+      "times_seen": 2,
+      "lifecycle": "PERSISTING",
       "lifecycle_history": [
         {
           "date": "2026-11-05",
           "lifecycle": "NEW"
+        },
+        {
+          "date": "2026-11-06",
+          "lifecycle": "PERSISTING"
         }
       ],
       "action": "MONITOR_ONLY",
@@ -7308,6 +7454,12 @@
           "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxQZTVnTktlNUs2QlJ6Qjk4NklXd1Nab29ZWVIzaGVqcmhKVnprVHJmYUVYMk9DOEZ1VnZqUW9EQi0wYUhhRlc3b3lBcGNTSHFiZXJDanZUYWo4ME8zMHU1bm1SUVlDeWdzdHAzenItMDdTVW1rMm5YMWdHbjVTV3FsS2tmcURsUFR3WmdFYWxhYVZrTnFBOTByQW84VHXSAbABQVVfeXFMTzViTTBGd0MtVWJaVzlLaHBNMkw5R2lyWG83LUhDYV9sTTh3bDNJbGxVaVFyR0MwSGIxNzdjbWdxZU8yekd1NWw1SU9SSUtsbGlNTkI5ei1xWlo5YVFHQkgzY19lekFDYnYySkRtek9MRVprOF83NFAwOTBFbjRHdjRic0V6a0hUSnh1ZjFtamZpbkR6M05mbjFQNHREU2ltRk1jTGJkTXd6b01ldnpNRkQ",
           "authority": 8,
           "published": "2026-11-05T05:25:00.000Z"
+        },
+        {
+          "name": "FOX5 Vegas",
+          "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxNNkpTWDB5aWxQV3dOZVcyWXFpaVcwN3o0aXR2R0tBem9oR0stdWhVckpoekdDMy1YemhGOXMwdEp3ZEExdnk2T0czX19BMC1hRDcyWVlLNm9Sb1NEN1NiRFZ1SlJtbUlUSkIxT090UHIwbHR5TVQxLWxVLXJGX1FfWTRrenJNSERWRnB3aGRpQkJVd0g5MUQtYU05U1FQMnJfcms5Tw",
+          "authority": 8,
+          "published": "2026-11-05T08:46:59.000Z"
         }
       ],
       "superseded_by": null,
@@ -7318,6 +7470,7 @@
           "SCORE_BELOW_THRESHOLD",
           "CONFIDENCE_NOT_HIGH",
           "NO_PRIMARY_SOURCE",
+          "NOT_NEW",
           "PROVISIONAL_ENTITY"
         ],
         "queued": []
@@ -8401,6 +8554,54 @@
         "queued": []
       }
     },
+    "ec7240a0fd86": {
+      "id": "DEV-2026-11-06-003",
+      "fingerprint": "ec7240a0fd86",
+      "entity_id": "DEV-P-A4595888",
+      "entity_name": "Unnamed residential (Las Vegas (valley-wide)) — \"Las Vegas developer building garage condos by Centennial Airport\"",
+      "change_class": "NEW",
+      "changes": [
+        "first time this project has been seen"
+      ],
+      "event_type": "announcement",
+      "status": "unclear",
+      "prior_status": null,
+      "first_seen": "2026-11-06",
+      "last_seen": "2026-11-06",
+      "times_seen": 1,
+      "lifecycle": "REJECTED",
+      "lifecycle_history": [
+        {
+          "date": "2026-11-06",
+          "lifecycle": "REJECTED"
+        }
+      ],
+      "action": "REJECT_LOW_VALUE",
+      "target": null,
+      "score": 32,
+      "confidence": "Low",
+      "sources": [
+        {
+          "name": "The Denver Post",
+          "url": "https://news.google.com/rss/articles/CBMigAFBVV95cUxNcnJfdWVReEpVSFNXcFVGbGRVMXpfODdiWnliSmJxYlVaODZuQ1ZWcnQ1M19KVEJaQXoyd0U4YXgyNUIyUlRicTZ3N1hQT0xya3Y1TWxSS2J3NWl2SnB0TTZabnVXMEpiQmx0bUxHZzhiS2wzTnNGQ2l3T3cwNXBrNA",
+          "authority": 9,
+          "published": "2026-11-03T11:00:43.000Z"
+        }
+      ],
+      "superseded_by": null,
+      "handoff": {
+        "eligible": false,
+        "blockers": [
+          "NOT_A_PUBLISHER_ACTION",
+          "SCORE_BELOW_THRESHOLD",
+          "CONFIDENCE_NOT_HIGH",
+          "NO_PRIMARY_SOURCE",
+          "NOT_NEW",
+          "PROVISIONAL_ENTITY"
+        ],
+        "queued": []
+      }
+    },
     "f06e19f29f62": {
       "id": "DEV-2026-10-15-002",
       "fingerprint": "f06e19f29f62",
@@ -8812,8 +9013,8 @@
       "status": "partially open",
       "prior_status": "partially open",
       "first_seen": "2026-10-11",
-      "last_seen": "2026-11-05",
-      "times_seen": 9,
+      "last_seen": "2026-11-06",
+      "times_seen": 10,
       "lifecycle": "PERSISTING",
       "lifecycle_history": [
         {
@@ -8835,8 +9036,8 @@
       ],
       "action": "DUPLICATE",
       "target": "/guides/aries-henderson",
-      "score": 39,
-      "confidence": "Medium",
+      "score": 36,
+      "confidence": "Low",
       "sources": [
         {
           "name": "Nevada Business Magazine",
@@ -8891,6 +9092,12 @@
           "url": "https://8newsnow.com/all-about-animals/las-vegas-alligator-living-in-vacant-koi-pond-seeks-help-through-nonprofit",
           "authority": 8,
           "published": "2026-11-05T01:07:44.000Z"
+        },
+        {
+          "name": "News 3 Las Vegas",
+          "url": "https://news3lv.com/news/local/las-vegas-home-sales-dip-again-october-2026-real-estate-realtors-property-houses-mortgage-interest-rates-southern-nevada",
+          "authority": 8,
+          "published": "2026-11-06T13:59:35.000Z"
         }
       ],
       "superseded_by": "aa389dac718a",
