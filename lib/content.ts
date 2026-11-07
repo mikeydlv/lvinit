@@ -1138,6 +1138,21 @@ export const guides: Guide[] = [
     href: "/guides/i-215-northern-beltway-trail-north-las-vegas",
   },
   {
+    slug: "summerlin-parkway-trail-summerlin-las-vegas",
+    title: "The Summerlin Parkway Trail: What the City Is Building From the 215 to Rampart",
+    dek: "A $26 million, 3.5-mile trail along Summerlin Parkway, with a wash bridge and Crestdale tunnel. The City lists Spring 2027.",
+    byline: "LVINIT Editorial",
+    date: "November 2026",
+    publishedAt: "2026-11-07",
+    category: "Local Feature",
+    // Built by the LVINIT Daily Publisher from Local Radar LR-SUMMERLIN-PARKWAY-TRAIL.
+    // Card image is a contextual Summerlin photo, not the trail.
+    image: "/images/editorial/summerlin-community-road-flags-desert-cliffs.jpg",
+    imageAlt:
+      "Curving Summerlin road with blue banner flags and a neighborhood directional sign beneath tall desert cliffs.",
+    href: "/guides/summerlin-parkway-trail-summerlin-las-vegas",
+  },
+  {
     slug: "hualapai-grand-teton-police-substation-park-northwest-las-vegas",
     title: "A New Police Substation and 2-Acre Park Are Going Up at Hualapai and Grand Teton",
     dek: "A $27.2 million city project in northwest Las Vegas: a 13,300 sq ft Metro substation and a park, targeting early 2027.",
