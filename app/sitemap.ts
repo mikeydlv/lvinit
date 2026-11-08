@@ -67,6 +67,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.7,
     },
     {
+      url: `${BASE_URL}/guides/hylo-park-north-las-vegas-sports-entertainment-district`,
+      changeFrequency: "monthly",
+      priority: 0.7,
+    },
+    {
       url: `${BASE_URL}/guides/hualapai-grand-teton-police-substation-park-northwest-las-vegas`,
       changeFrequency: "monthly",
       priority: 0.7,
