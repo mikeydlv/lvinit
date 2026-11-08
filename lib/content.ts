@@ -1153,6 +1153,18 @@ export const guides: Guide[] = [
     href: "/guides/summerlin-parkway-trail-summerlin-las-vegas",
   },
   {
+    slug: "hylo-park-north-las-vegas-sports-entertainment-district",
+    title: "Hylo Park in North Las Vegas: What's Open, What's Being Built, and What Comes Next",
+    dek: "A 73-acre youth sports and entertainment district on the old Fiesta Rancho site. Retail and the arena are in use; the field house is still coming.",
+    byline: "LVINIT Editorial",
+    date: "November 2026",
+    publishedAt: "2026-11-08",
+    category: "Local Feature",
+    // Built by the LVINIT Daily Publisher from Local Radar LR-HYLO-PARK-NLV.
+    // No card image: no first-party Hylo Park photo exists yet.
+    href: "/guides/hylo-park-north-las-vegas-sports-entertainment-district",
+  },
+  {
     slug: "hualapai-grand-teton-police-substation-park-northwest-las-vegas",
     title: "A New Police Substation and 2-Acre Park Are Going Up at Hualapai and Grand Teton",
     dek: "A $27.2 million city project in northwest Las Vegas: a 13,300 sq ft Metro substation and a park, targeting early 2027.",
