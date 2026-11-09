@@ -1153,6 +1153,21 @@ export const guides: Guide[] = [
     href: "/guides/summerlin-parkway-trail-summerlin-las-vegas",
   },
   {
+    slug: "pavilion-center-pool-olympic-size-aquatics-summerlin",
+    title: "Pavilion Center Pool in Summerlin: The City's New Outdoor Olympic-Size Pool, Costs and What to Know",
+    dek: "A $18.9 million outdoor Olympic-size pool opened June 29 in Summerlin. Daily swim is $2 to $3; the posted outdoor hours are lap swim.",
+    byline: "LVINIT Editorial",
+    date: "November 2026",
+    publishedAt: "2026-11-09",
+    category: "Local Feature",
+    // Built by the LVINIT Daily Publisher from Local Radar LR-PAVILION-CENTER-AQUATICS.
+    // Card image is a contextual Summerlin West photo, not the pool.
+    image: "/images/editorial/summerlin-west-grand-park-ballfields-playground-aerial.jpg",
+    imageAlt:
+      "Aerial view of Grand Park's shaded playground and ballfields with new homes and desert mountains behind in Summerlin West.",
+    href: "/guides/pavilion-center-pool-olympic-size-aquatics-summerlin",
+  },
+  {
     slug: "hylo-park-north-las-vegas-sports-entertainment-district",
     title: "Hylo Park in North Las Vegas: What's Open, What's Being Built, and What Comes Next",
     dek: "A 73-acre youth sports and entertainment district on the old Fiesta Rancho site. Retail and the arena are in use; the field house is still coming.",
