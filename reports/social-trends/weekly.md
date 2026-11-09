@@ -1,24 +1,23 @@
 # LVINIT Weekly Trend Summary
-WEEK ENDING: 2026-11-02
+WEEK ENDING: 2026-11-09
 
-_Built from 7 daily reports: 2026-10-27, 2026-10-28, 2026-10-29, 2026-10-30, 2026-10-31, 2026-11-01, 2026-11-02. Discovery only — nothing has been published._
+_Built from 7 daily reports: 2026-11-03, 2026-11-04, 2026-11-05, 2026-11-06, 2026-11-07, 2026-11-08, 2026-11-09. Discovery only — nothing has been published._
 
 # BEST CONTENT OPPORTUNITIES THIS WEEK
 
-1. **190 affordable senior apartments now open in southwest Las Vegas** — 30/40, P2 — STRONG OPPORTUNITY, OPEN  
-Full write-up: 2026-10-30-local-trends.md
+1. **New neighborhood restaurant opening in southwest Las Vegas** — 31/40, P2 — STRONG OPPORTUNITY, RUMORED / UNCONFIRMED  
+Full write-up: 2026-11-05-local-trends.md
 
-2. **Baby Boo Crew NICU infants dress up for Halloween at Centennial Hills Hospital** — 29/40, P2 — STRONG OPPORTUNITY, RUMORED / UNCONFIRMED  
-Full write-up: 2026-10-31-local-trends.md
+2. **Mosaic Church to offer $1-per-gallon gas discount at Green Valley Grocery** — 28/40, P2 — STRONG OPPORTUNITY, RUMORED / UNCONFIRMED  
+Full write-up: 2026-11-09-local-trends.md
 
-3. **Intermountain Health breaks ground on children's hospital in southwest Las Vegas** — 28/40, P2 — STRONG OPPORTUNITY, UNDER CONSTRUCTION  
-Full write-up: 2026-10-27-local-trends.md
+3. —
 
 # BEST FIELD SHOOT
 
-**190 affordable senior apartments now open in southwest Las Vegas** — 30/40, P2 — STRONG OPPORTUNITY, OPEN  
+**New neighborhood restaurant opening in southwest Las Vegas** — 31/40, P2 — STRONG OPPORTUNITY, RUMORED / UNCONFIRMED  
 Where: The site itself in Southwest Las Vegas — confirm the location from the source before driving out.  
-Full write-up: 2026-10-30-local-trends.md
+Full write-up: 2026-11-05-local-trends.md
 
 # BEST CAROUSEL
 
@@ -26,8 +25,8 @@ Nothing this week earned this slot.
 
 # BEST SHORT-FORM VIDEO
 
-**Baby Boo Crew NICU infants dress up for Halloween at Centennial Hills Hospital** — 29/40, P2 — STRONG OPPORTUNITY, RUMORED / UNCONFIRMED  
-Full write-up: 2026-10-31-local-trends.md
+**Mosaic Church to offer $1-per-gallon gas discount at Green Valley Grocery** — 28/40, P2 — STRONG OPPORTUNITY, RUMORED / UNCONFIRMED  
+Full write-up: 2026-11-09-local-trends.md
 
 # BEST LONG-FORM VIDEO
 
@@ -35,13 +34,13 @@ Nothing this week earned this slot.
 
 # BEST LVINIT ARTICLE
 
-**Intermountain Health breaks ground on children's hospital in southwest Las Vegas** — 28/40, P2 — STRONG OPPORTUNITY, UNDER CONSTRUCTION  
-Angle: Possible update to /guides/henderson-vs-southwest-las-vegas  
-Full write-up: 2026-10-27-local-trends.md
+**New neighborhood restaurant opening in southwest Las Vegas** — 31/40, P2 — STRONG OPPORTUNITY, RUMORED / UNCONFIRMED  
+Angle: Possible update to /neighborhoods/southwest-las-vegas  
+Full write-up: 2026-11-05-local-trends.md
 
 # TOP EMERGING NEIGHBORHOOD
 
-**Clark County** — 8 topics this week: Clark County working to fix flooded street; Clark County appeals $12M Badlands property tax suit to Nevada Supreme Court; Clark County leaders launch Dusk-2-Dawn campaign to prevent pedestrian deaths; Clark County Fire Department training exercise appears as mansion fire to passersby
+**Clark County** — 6 topics this week: Clark County voters tell News 3 their top issues ahead of Election Day; Allegiant Stadium to welcome thousands of Clark County voters on Election Day; Clark County approves quicker, easier short-term rental application process; First-Time Candidate’s Unconventional Campaign Said No To Corporate/PAC Money, Emphasized Light Rail, Shunned Traditional Election Marketing — And She Won Clark County Commissioner Race
 
 # TOP AUDIENCE QUESTION
 
@@ -49,8 +48,8 @@ No clear, recurring audience question surfaced this week.
 
 # TOP DEVELOPMENT TO WATCH
 
-**190 affordable senior apartments now open in southwest Las Vegas** — OPEN, 30/40, Southwest Las Vegas. First seen 2026-10-30; last change 2026-10-30.  
-Rules-only mode — source summary: The Heirloom at Torrey Pines brings 190 affordable senior apartments to southwest Las Vegas, with $15 million invested by Clark County.
+**New neighborhood restaurant opening in southwest Las Vegas** — RUMORED / UNCONFIRMED, 31/40, Southwest Las Vegas. First seen 2026-11-05; last change 2026-11-05.  
+Rules-only mode — source summary: New neighborhood restaurant opening in southwest Las Vegas
 
 # ONE THING MIKEY SHOULD NOT WASTE TIME ON
 
