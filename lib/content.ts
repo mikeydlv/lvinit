@@ -246,11 +246,11 @@ export const guides: Guide[] = [
     publishedAt: "2026-11-10",
     category: "Local Feature",
     // Built by the LVINIT Daily Publisher from Local Radar LR-DESERT-PINES-EAST-LV.
-    // No first-party photo of the site exists and no library image shows East
-    // Las Vegas, so the card uses a generated editorial cover (not a photo).
-    // Regenerate: node scripts/generate-guide-cover.mjs --slug desert-pines-golf-course-redevelopment-east-las-vegas --category "Local Feature" --subject "Desert Pines" --out desert-pines-redevelopment-editorial-cover.webp
-    image: "/images/covers/desert-pines-redevelopment-editorial-cover.webp",
-    imageMode: "editorial-cover",
+    // Card image = the article hero, an aerial of the Desert Pines course
+    // supplied by Mikey (uploaded 2026-11-10). Superseded generated cover deleted.
+    image: "/images/hero/desert-pines-golf-course-las-vegas-lvinit-hero.png",
+    imageAlt:
+      "Aerial view of the Desert Pines golf course in East Las Vegas, with ponds, pine trees and cart paths, a freeway and neighborhoods beyond, and mountains on the horizon.",
     href: "/guides/desert-pines-golf-course-redevelopment-east-las-vegas",
   },
   {

@@ -35,12 +35,15 @@ import { StoryPage, StoryLede, StorySection } from "@/components/story";
 // OMITTED ON PURPOSE: EDA grant (status unconfirmed), Clark County funding
 //   figure (not read), exact street address, whether the land sale closed,
 //   any "construction has started" claim.
-// IMAGERY: no first-party Desert Pines photo exists yet and no Media Image
-//   Library asset shows East Las Vegas, so the page runs without a hero photo
-//   (card uses a generated editorial cover). Never substitute another area.
+// IMAGERY: hero and card image = aerial of the Desert Pines course supplied
+//   by Mikey (uploaded 2026-11-10; capture date not documented, so the copy
+//   makes no claim about when it was taken). Not a Media Image Library file.
 // ---------------------------------------------------------------------------
 
 const PATH = "/guides/desert-pines-golf-course-redevelopment-east-las-vegas";
+const HERO_IMG = "/images/hero/desert-pines-golf-course-las-vegas-lvinit-hero.png";
+const HERO_ALT =
+  "Aerial view of the Desert Pines golf course in East Las Vegas, with ponds, pine trees and cart paths, a freeway and neighborhoods beyond, and mountains on the horizon.";
 const linkCls =
   "text-lvinit-blue underline underline-offset-4 decoration-transparent hover:decoration-lvinit-blue";
 const extCls = "text-lvinit-blue underline underline-offset-4";
@@ -56,6 +59,10 @@ const meta: StoryMeta = {
   description:
     "Desert Pines Golf Club closed in July 2026. The City of Las Vegas plans about 1,500 mixed-income homes, 10 acres of trails and a training center there. What's approved, what isn't, and the timeline.",
   path: PATH,
+  image: HERO_IMG,
+  imageWidth: 1614,
+  imageHeight: 975,
+  imageAlt: HERO_ALT,
   datePublished: "2026-11-10",
   dateModified: "2026-11-10",
   author: "LVINIT Editorial",
@@ -77,6 +84,8 @@ export default function DesertPinesRedevelopmentPage() {
         headline: TITLE,
         subheadline:
           "The course at Bonanza and Pecos closed in July. Housing, trails and a job-training center are planned, but construction hasn't started.",
+        image: HERO_IMG,
+        imageAlt: HERO_ALT,
         backLink: { label: "All guides", href: "/guides" },
       }}
       relatedStories={{
@@ -300,10 +309,10 @@ export default function DesertPinesRedevelopmentPage() {
             confirm its status, so it&rsquo;s left out of the numbers above.
           </li>
           <li>
-            <span className="text-lvinit-black">First-hand look.</span> I
-            haven&rsquo;t photographed the site for LVINIT yet, so this piece
-            rests on City documents and news reporting. There&rsquo;s no photo
-            here on purpose rather than a stand-in from another part of town.
+            <span className="text-lvinit-black">What the photo shows.</span>{" "}
+            The aerial above is the Desert Pines course itself, not a rendering
+            of the planned community. The plans and timeline in this piece rest
+            on City documents and news reporting.
           </li>
         </ul>
       </StorySection>
