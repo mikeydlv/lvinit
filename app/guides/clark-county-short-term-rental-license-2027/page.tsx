@@ -707,7 +707,8 @@ export default function ClarkCountyStrLicense2027Page() {
         backLink: { label: "LVINIT", href: "/" },
         ctas: [
           { label: "See the key dates", href: "#key-dates", variant: "primary" },
-          { label: "Check the 1,000-foot rule", href: "#thousand-foot-rule", variant: "secondary" },
+          { label: "Check the 1,000-foot rule", href: "#thousand-foot-rule", variant: "secondary",
+            className: "!bg-lvinit-black !text-lvinit-white hover:!bg-lvinit-black/85" },
         ],
       }}
       relatedStories={{
