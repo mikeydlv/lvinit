@@ -262,6 +262,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.7,
     },
     {
+      url: `${BASE_URL}/guides/clark-county-short-term-rental-license-2027`,
+      lastModified: new Date("2026-11-10"),
+      changeFrequency: "weekly",
+      priority: 0.8,
+    },
+    {
       url: `${BASE_URL}/guides/zillow-down-payment-assistance-nevada`,
       changeFrequency: "monthly",
       priority: 0.7,

@@ -238,6 +238,24 @@ export type Guide = {
  */
 export const guides: Guide[] = [
   {
+    slug: "clark-county-short-term-rental-license-2027",
+    title: "Clark County STR Applications Reopen January 2027: New Rules, Dates & Who Qualifies",
+    dek: "The lottery is gone and license appointments start Jan. 5, 2027, but the 1,000-foot rule stays. Key dates, fees, and who can actually qualify in unincorporated Clark County.",
+    byline: "Mikey Del Rosario",
+    date: "November 2026",
+    publishedAt: "2026-11-10",
+    category: "Homeowner Guide",
+    // Sourced from Ordinance No. 5427 (Legistar 26-2339), county code, and
+    // the federal court record. Hero/card: LVINIT Media Image Library still
+    // from Mikey's own drone footage (location unspecified, so the alt names
+    // no place). Library `usage` is recorded only after this goes live.
+    image:
+      "/images/editorial/las-vegas-valley-residential-neighborhood-aerial-mountain-backdrop.jpg",
+    imageAlt:
+      "Aerial view of tile-roofed single-family homes and townhomes on curving streets in the Las Vegas Valley, with mountains on the horizon at golden hour.",
+    href: "/guides/clark-county-short-term-rental-license-2027",
+  },
+  {
     slug: "zillow-down-payment-assistance-nevada",
     title: "Zillow Launches Down Payment Assistance: What Nevada Buyers Need to Know",
     dek: "Zillow Home Loans can now cover up to 3.5% of an FHA down payment, and Nevada is included. Who qualifies, the five-year forgiveness rules, and what you still pay.",
