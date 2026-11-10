@@ -7,6 +7,8 @@ export type StoryHeroCta = {
   label: string;
   href: string;
   variant?: "primary" | "secondary" | "tertiary";
+  /** Optional per-button class overrides (e.g. a solid fill on a photo hero). */
+  className?: string;
 };
 
 export type StoryHeroProps = {
@@ -93,11 +95,14 @@ export default function StoryHero({
           key={c.href + c.label}
           href={c.href}
           variant={c.variant ?? "primary"}
-          className={
+          className={[
             onDark && (c.variant ?? "primary") === "tertiary"
               ? "!text-lvinit-white decoration-lvinit-white"
-              : ""
-          }
+              : "",
+            c.className ?? "",
+          ]
+            .filter(Boolean)
+            .join(" ")}
         >
           {c.label}
         </ButtonLink>
