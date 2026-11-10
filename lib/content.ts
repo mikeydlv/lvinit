@@ -238,6 +238,22 @@ export type Guide = {
  */
 export const guides: Guide[] = [
   {
+    slug: "desert-pines-golf-course-redevelopment-east-las-vegas",
+    title: "What's Happening to the Desert Pines Golf Course in East Las Vegas",
+    dek: "The course at Bonanza and Pecos closed in July. The City plans about 1,500 mixed-income homes, trails and a job-training center there. What's approved, what isn't, and the timeline.",
+    byline: "LVINIT Editorial",
+    date: "November 2026",
+    publishedAt: "2026-11-10",
+    category: "Local Feature",
+    // Built by the LVINIT Daily Publisher from Local Radar LR-DESERT-PINES-EAST-LV.
+    // No first-party photo of the site exists and no library image shows East
+    // Las Vegas, so the card uses a generated editorial cover (not a photo).
+    // Regenerate: node scripts/generate-guide-cover.mjs --slug desert-pines-golf-course-redevelopment-east-las-vegas --category "Local Feature" --subject "Desert Pines" --out desert-pines-redevelopment-editorial-cover.webp
+    image: "/images/covers/desert-pines-redevelopment-editorial-cover.webp",
+    imageMode: "editorial-cover",
+    href: "/guides/desert-pines-golf-course-redevelopment-east-las-vegas",
+  },
+  {
     slug: "clark-county-short-term-rental-license-2027",
     title: "Clark County STR Applications Reopen January 2027: New Rules, Dates & Who Qualifies",
     dek: "The lottery is gone and license appointments start Jan. 5, 2027, but the 1,000-foot rule stays. Key dates, fees, and who can actually qualify in unincorporated Clark County.",

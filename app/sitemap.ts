@@ -262,6 +262,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.7,
     },
     {
+      url: `${BASE_URL}/guides/desert-pines-golf-course-redevelopment-east-las-vegas`,
+      lastModified: new Date("2026-11-10"),
+      changeFrequency: "monthly",
+      priority: 0.7,
+    },
+    {
       url: `${BASE_URL}/guides/clark-county-short-term-rental-license-2027`,
       lastModified: new Date("2026-11-10"),
       changeFrequency: "weekly",
