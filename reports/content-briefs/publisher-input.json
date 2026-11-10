@@ -1,21 +1,21 @@
 {
   "schema_version": 1,
   "agent": "content-brief-generator",
-  "generatedAt": "2026-11-03T20:04:07.610Z",
-  "reportDate": "2026-11-03",
-  "sourceGeneratedAt": "2026-11-03T20:03:02.812Z",
+  "generatedAt": "2026-11-10T20:25:19.451Z",
+  "reportDate": "2026-11-10",
+  "sourceGeneratedAt": "2026-11-10T20:24:57.794Z",
   "fixture": false,
   "status": "ok",
   "source": {
-    "gscReportDate": "2026-11-02",
+    "gscReportDate": "2026-11-09",
     "gscAvailable": true,
     "gscLowVolume": false,
     "handoffMode": "dry-run"
   },
   "scope": "Publisher actions only. Monitor-only and rejected intents are left out; the full report stays in the content-briefs artifact.",
   "skippedByAction": {
-    "MONITOR_ONLY": 1,
-    "REJECT_DUPLICATE": 3
+    "MONITOR_ONLY": 3,
+    "REJECT_DUPLICATE": 4
   },
   "privacy": {
     "rawQueriesIncluded": false,
@@ -24,7 +24,74 @@
   "publisherNote": "Briefs are inference from search demand. Research and confirm every fact before publishing; never publish Search Console figures as editorial facts.",
   "items": [
     {
-      "id": "BRIEF-2026-11-03-001",
+      "id": "BRIEF-2026-11-10-001",
+      "fingerprint": "8c62a8ff3f31",
+      "intentKey": "topic:facet:cost+place:henderson",
+      "workingTitle": null,
+      "primaryQuestion": "What does Henderson actually cost, and what drives that cost?",
+      "intent": "informational",
+      "cluster": "cost-of-housing",
+      "contentType": "expansion of an existing page",
+      "recommendedAction": "EXPAND_EXISTING",
+      "target": "/neighborhoods/henderson",
+      "proposedRoute": null,
+      "keyQuestions": [
+        "What does Henderson actually cost, and what drives that cost?",
+        "How does this cost actually work in Clark County, and who sets it?",
+        "What do buyers most often misunderstand about it before closing?",
+        "How should it change the way someone compares two homes?",
+        "What actually drives the cost difference — purchase price, price per square foot, lot size, age of the housing stock, HOA dues, SID/LID assessments, property tax?",
+        "What would a buyer carry every month in each, beyond the mortgage payment?"
+      ],
+      "relatedPages": [
+        {
+          "route": "/neighborhoods/henderson",
+          "relation": "same",
+          "overlap": 1
+        },
+        {
+          "route": "/guides/aries-henderson",
+          "relation": "same",
+          "overlap": 0.8
+        },
+        {
+          "route": "/guides/fiesta-henderson-redevelopment",
+          "relation": "substantial",
+          "overlap": 0.733
+        },
+        {
+          "route": "/guides/henderson-sport-and-social",
+          "relation": "substantial",
+          "overlap": 0.733
+        },
+        {
+          "route": "/guides/water-street-district-henderson",
+          "relation": "substantial",
+          "overlap": 0.7
+        }
+      ],
+      "duplicateCheck": {
+        "verdict": "same",
+        "ambiguous": false,
+        "bestMatch": {
+          "route": "/neighborhoods/henderson",
+          "overlap": 1,
+          "relation": "same"
+        },
+        "cannibalization": "none"
+      },
+      "flags": [],
+      "score": 76.7,
+      "confidence": "low",
+      "status": "NEW",
+      "handoffStatus": "REPORT_ONLY",
+      "persistenceRuns": 3,
+      "sourceGscReportDate": "2026-11-09",
+      "fairHousingFlag": false,
+      "sourceValidation": "ok"
+    },
+    {
+      "id": "BRIEF-2026-11-10-002",
       "fingerprint": "d585c5768966",
       "intentKey": "topic:place:summerlin",
       "workingTitle": null,
@@ -47,6 +114,11 @@
           "overlap": 1
         },
         {
+          "route": "/guides/summerlin-parkway-trail-summerlin-las-vegas",
+          "relation": "same",
+          "overlap": 0.8
+        },
+        {
           "route": "/guides/municipal-gym-downtown-summerlin",
           "relation": "substantial",
           "overlap": 0.7
@@ -57,14 +129,9 @@
           "overlap": 0.7
         },
         {
-          "route": "/guides/summerlin-vs-henderson",
+          "route": "/guides/pavilion-center-pool-olympic-size-aquatics-summerlin",
           "relation": "substantial",
-          "overlap": 0.56
-        },
-        {
-          "route": "/guides/summerlin-vs-henderson-vs-southwest-las-vegas",
-          "relation": "substantial",
-          "overlap": 0.513
+          "overlap": 0.657
         }
       ],
       "duplicateCheck": {
@@ -78,12 +145,12 @@
         "cannibalization": "none"
       },
       "flags": [],
-      "score": 71.1,
+      "score": 71.5,
       "confidence": "high",
       "status": "PERSISTING",
       "handoffStatus": "WOULD_HAND_OFF (dry run)",
-      "persistenceRuns": 6,
-      "sourceGscReportDate": "2026-11-02",
+      "persistenceRuns": 7,
+      "sourceGscReportDate": "2026-11-09",
       "fairHousingFlag": false,
       "sourceValidation": "ok"
     }
