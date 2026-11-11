@@ -117,7 +117,13 @@ No outreach was sent.
 
 # TOMORROW'S RECOMMENDED LVINIT ASSIGNMENT (Thu 2026-11-12)
 
-**Status: READY — FIRST-PARTY MEDIA RECOMMENDED**
+**Status: READY** (was READY — FIRST-PARTY MEDIA RECOMMENDED; Mikey supplied the hero image on 2026-11-11)
+
+**Image directive (from Mikey):**
+- **Hero:** `public/images/hero/third-street-las-vegas-arts-center-exterior-ai-illustration-lvinit.png`.
+- **Also use it for:** the homepage/guides card image (`lib/content.ts`) and the OG image.
+- **Labeling:** it's an AI illustration. Caption it that way, say "Illustration" in the alt text, and never present it as an official rendering or as what the building will look like.
+- **Image library:** this file isn't in it, so there are no usage records.
 
 - **Working headline:** The old Downtown Cinemas on Third Street is becoming a 250-seat arts venue: what the city approved and when it could open
 - **Location:** 814 S. Third St, downtown Las Vegas Arts District
@@ -136,14 +142,14 @@ No outreach was sent.
 - **Existing LVINIT pages:** none on this project. Related: /neighborhoods/downtown-arts-district.
 - **Category:** Downtown / Arts District / What's being built
 - **First-party media:** none exists.
-- **Morning visit:** yes.
+- **Morning visit:** optional. Real photos would go inline.
 
 # MORNING PHOTO / VIDEO MISSION
 
 - **Where:** 814 S. Third St. Confirm the exact frontage and nearest cross street on arrival.
 - **Public access:** the exterior and the sidewalk only. The interior needs THIRD Street's permission.
 - **When:** roughly 8 to 10 a.m.
-- **Hero shot:** a wide street-level view of the facade and marquee or signage, taken from across Third Street.
+- **Hero shot:** already set (Mikey's illustration). Shoot the facade and marquee from across Third Street as the lead inline photo of the real building.
 - **Supporting shots:**
   - the marquee or entry close-up
   - Third Street looking toward Charleston
