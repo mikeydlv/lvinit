@@ -238,6 +238,23 @@ export type Guide = {
  */
 export const guides: Guide[] = [
   {
+    slug: "third-street-arts-campus-downtown-las-vegas",
+    title: "The Old Downtown Movie Theater on Third Street Is Becoming an Arts Campus",
+    dek: "Nonprofit THIRD Street plans a roughly 250-seat studio theatre first, with the city reimbursing up to $4.2 million. What's approved, what isn't, and when it could open.",
+    byline: "LVINIT Editorial",
+    date: "November 2026",
+    publishedAt: "2026-11-11",
+    category: "Local Feature",
+    // Built by the LVINIT Daily Publisher from Local Radar LR-THIRD-STREET-ARTS-HUB.
+    // Card image = the article hero, an AI illustration supplied and explicitly
+    // approved by Mikey for this story (2026-11-11). Alt text and the article
+    // label it as an illustration, not an official rendering.
+    image: "/images/hero/third-street-las-vegas-arts-center-exterior-ai-illustration-lvinit.png",
+    imageAlt:
+      "Illustration (AI-generated, not an official rendering) of a modern arts center with THIRD Street signage, a glass entry and a second-floor terrace at sunset.",
+    href: "/guides/third-street-arts-campus-downtown-las-vegas",
+  },
+  {
     slug: "desert-pines-golf-course-redevelopment-east-las-vegas",
     title: "What's Happening to the Desert Pines Golf Course in East Las Vegas",
     dek: "The course at Bonanza and Pecos closed in July. The City plans about 1,500 mixed-income homes, trails and a job-training center there. What's approved, what isn't, and the timeline.",
