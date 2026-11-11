@@ -1,8 +1,74 @@
 {
   "schema_version": 1,
   "agent": "development-watch",
-  "updated": "2026-11-10",
+  "updated": "2026-11-11",
   "events": {
+    "01c19f40d9a1": {
+      "id": "DEV-2026-11-11-004",
+      "fingerprint": "01c19f40d9a1",
+      "entity_id": "DEV-VEGAS",
+      "entity_name": "VEGAS",
+      "change_class": "DUPLICATE",
+      "changes": [
+        "same as tracked record"
+      ],
+      "event_type": "partial opening",
+      "status": "partially open",
+      "prior_status": "partially open",
+      "first_seen": "2026-11-11",
+      "last_seen": "2026-11-11",
+      "times_seen": 1,
+      "lifecycle": "DUPLICATE",
+      "lifecycle_history": [
+        {
+          "date": "2026-11-11",
+          "lifecycle": "DUPLICATE"
+        }
+      ],
+      "action": "DUPLICATE",
+      "target": "/guides/aries-henderson",
+      "score": 67,
+      "confidence": "Medium",
+      "sources": [
+        {
+          "name": "8 News Now",
+          "url": "https://8newsnow.com/news/local-news/tgi-fridays-reenters-las-vegas-with-new-franchise-partnership",
+          "authority": 8,
+          "published": "2026-11-11T05:08:32.000Z"
+        },
+        {
+          "name": "News 3 Las Vegas",
+          "url": "https://news3lv.com/news/local/living-grace-homes-opens-safe-sound-campus-shelter-for-expecting-mothers",
+          "authority": 8,
+          "published": "2026-11-11T04:00:23.000Z"
+        },
+        {
+          "name": "News 3 Las Vegas",
+          "url": "https://news3lv.com/news/local/clark-county-breaks-ground-on-blue-diamond-wash-trail-project-in-southwest-valley",
+          "authority": 8,
+          "published": "2026-11-11T01:58:45.000Z"
+        },
+        {
+          "name": "News 3 Las Vegas",
+          "url": "https://news3lv.com/news/local/ndot-to-close-southbound-i-11-jones-boulevard-off-ramp-for-5-days",
+          "authority": 8,
+          "published": "2026-11-10T22:13:37.000Z"
+        }
+      ],
+      "superseded_by": null,
+      "handoff": {
+        "eligible": false,
+        "blockers": [
+          "NOT_A_PUBLISHER_ACTION",
+          "SCORE_BELOW_THRESHOLD",
+          "CONFIDENCE_NOT_HIGH",
+          "NO_PRIMARY_SOURCE",
+          "NOT_MATERIAL",
+          "NOT_NEW"
+        ],
+        "queued": []
+      }
+    },
     "025b2cbfc757": {
       "id": "DEV-2026-09-25-002",
       "fingerprint": "025b2cbfc757",
@@ -1311,11 +1377,15 @@
       "first_seen": "2026-09-26",
       "last_seen": "2026-09-26",
       "times_seen": 1,
-      "lifecycle": "NEW",
+      "lifecycle": "RESOLVED",
       "lifecycle_history": [
         {
           "date": "2026-09-26",
           "lifecycle": "NEW"
+        },
+        {
+          "date": "2026-11-11",
+          "lifecycle": "RESOLVED (aged out)"
         }
       ],
       "action": "MONITOR_ONLY",
@@ -1555,11 +1625,15 @@
       "first_seen": "2026-09-26",
       "last_seen": "2026-09-26",
       "times_seen": 1,
-      "lifecycle": "NEW",
+      "lifecycle": "RESOLVED",
       "lifecycle_history": [
         {
           "date": "2026-09-26",
           "lifecycle": "NEW"
+        },
+        {
+          "date": "2026-11-11",
+          "lifecycle": "RESOLVED (aged out)"
         }
       ],
       "action": "ADD_TO_NEIGHBORHOOD_GUIDE",
@@ -1748,11 +1822,15 @@
       "first_seen": "2026-09-26",
       "last_seen": "2026-09-26",
       "times_seen": 1,
-      "lifecycle": "NEW",
+      "lifecycle": "RESOLVED",
       "lifecycle_history": [
         {
           "date": "2026-09-26",
           "lifecycle": "NEW"
+        },
+        {
+          "date": "2026-11-11",
+          "lifecycle": "RESOLVED (aged out)"
         }
       ],
       "action": "MONITOR_ONLY",
@@ -2366,6 +2444,65 @@
           "NO_PRIMARY_SOURCE",
           "NOT_NEW",
           "FAIR_HOUSING_SUBJECT",
+          "PROVISIONAL_ENTITY"
+        ],
+        "queued": []
+      }
+    },
+    "3f1efcca239b": {
+      "id": "DEV-2026-11-11-002",
+      "fingerprint": "3f1efcca239b",
+      "entity_id": "DEV-P-A74C2F44",
+      "entity_name": "Unnamed park (Southwest Las Vegas) — \"‘We are building community’: New trail coming to southwest Las Vegas\"",
+      "change_class": "NEW",
+      "changes": [
+        "first time this project has been seen"
+      ],
+      "event_type": "announcement",
+      "status": "unclear",
+      "prior_status": null,
+      "first_seen": "2026-11-11",
+      "last_seen": "2026-11-11",
+      "times_seen": 1,
+      "lifecycle": "NEW",
+      "lifecycle_history": [
+        {
+          "date": "2026-11-11",
+          "lifecycle": "NEW"
+        }
+      ],
+      "action": "MONITOR_ONLY",
+      "target": null,
+      "score": 52,
+      "confidence": "Low",
+      "sources": [
+        {
+          "name": "Las Vegas Review-Journal",
+          "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxPbE1xbjZCcVNaemgxZF9HZ1I2VDlSQTlIQTFkTEFoZnZuMXRMbl81am1KTFNlMHUyVWRKU1JFaXpVQWoyMjhHMm4xd3ZxM0JpNU1lQWlGRlFiVHVvbGx0UmFVZFFFSURGNlgxdGozY1YwUjY4TmZuVENNOTVMR3NraXU4MzE0TERNUTVBRVozM1gyWTIxME93bnFrcWE2TDdQVlI1dHlieDFjbDlRc3hROFkxd1RCX2dYUXkwSg",
+          "authority": 8,
+          "published": "2026-11-11T15:19:37.000Z"
+        },
+        {
+          "name": "Las Vegas Review-Journal — Local",
+          "url": "https://reviewjournal.com/local/southwest/we-are-building-community-new-trail-coming-to-southwest-las-vegas-3912753",
+          "authority": 8,
+          "published": "2026-11-11T01:22:20.000Z"
+        },
+        {
+          "name": "Las Vegas Review-Journal",
+          "url": "https://news.google.com/rss/articles/CBMipwNBVV95cUxOajZQaGxydTc1eHVUdmJDX1U4elNSWnhKVFQwYkpnaXhtMEUwYVRiWVhaeXFLNUZpUEhrcExvQmFacGNoNDNzczBhUUlpLXRwM3hPa19mM3N4SXRBVU9wTndSVnVWQ0kzeFM1Y2t0THNoOUwxcmNaRV9hS0tTNTlxVVFDXzJZUzRzXzkzNGd0cFRQekpna2FTYXNVT1VrSTQyMWZUbU1lUVNNQzg3a3dkc0xPUnZQMVRXQjNrS00zWm9VeVJFclZtWjBodWsyOGZIV3pQMFB1R055aXVUbE5JLUlJdzZNSHZTd21Ya29FRWVDUVZnemFWaW9nRTJNNGdLRTk0eTlxcUJMamsxNEU4WjlLUm1vWFBrSHlKN2Q4UVdWT0VpWTQyWURzUzhoRTI4M2dPQk41MlZxWTJEdXJZX2FsWlV3V0tEXy1HS3lkMlA2WlhxUjdIOGpic0pZcnpVWVRyT0ZIT3R1SzdiQ2JROU42THFfWWc5azRoQXBicmhwcjRBOURfdDhzdUNSN1pJNTlmYWVPVjA0U1RzN3l5dDE1U3dVOGc",
+          "authority": 8,
+          "published": "2026-11-11T01:22:00.000Z"
+        }
+      ],
+      "superseded_by": null,
+      "handoff": {
+        "eligible": false,
+        "blockers": [
+          "NOT_A_PUBLISHER_ACTION",
+          "SCORE_BELOW_THRESHOLD",
+          "CONFIDENCE_NOT_HIGH",
+          "NO_PRIMARY_SOURCE",
           "PROVISIONAL_ENTITY"
         ],
         "queued": []
@@ -3001,6 +3138,54 @@
         "queued": []
       }
     },
+    "4dac6f317806": {
+      "id": "DEV-2026-11-11-003",
+      "fingerprint": "4dac6f317806",
+      "entity_id": "DEV-P-F77D4DBD",
+      "entity_name": "Unnamed park (Las Vegas (valley-wide)) — \"Renovated youth ballfields reopen at Las Vegas park\"",
+      "change_class": "NEW",
+      "changes": [
+        "first time this project has been seen"
+      ],
+      "event_type": "announcement",
+      "status": "unclear",
+      "prior_status": null,
+      "first_seen": "2026-11-11",
+      "last_seen": "2026-11-11",
+      "times_seen": 1,
+      "lifecycle": "REJECTED",
+      "lifecycle_history": [
+        {
+          "date": "2026-11-11",
+          "lifecycle": "REJECTED"
+        }
+      ],
+      "action": "REJECT_LOW_VALUE",
+      "target": null,
+      "score": 33,
+      "confidence": "Low",
+      "sources": [
+        {
+          "name": "FOX5 Vegas",
+          "url": "https://news.google.com/rss/articles/CBMijwFBVV95cUxONEJ2Z0hkR3g4Qy1QTE5qY3ozdkdlbXNxdFFNWWJ1VGx0OUNtV0p6U3VyR2NUVXBGb0pQWm5qZ3BXcnViTGFmN1V5TjM3Z3NjOGJWZi00RXpqUmRoUjlxTkY4aGRTUXpBbU9TRkJpOWhjN3BFUHo0dklqRjBOaEdEMkxaU2VlbGpRMHpPeE9Ud9IBowFBVV95cUxPV19OOThaZEo1T0VDdUZUZW92bktaemZ1WDhGYXZDaXVVNmxtc0YxeXItOTZQTmN6TzBzTTNEbHpMNTFuNW1LRG9OS1F4T2dEeWw0cEtXZUpzRFMxUWFNT1ZuQmpUc2lrZjFZZkwtUkxqSnlTVGlBUElvRU9vYl9rc1V5ZHNjQWNwRXhqM3RmbkxTWWliQW45TkxaT2xhcThvS0tn",
+          "authority": 8,
+          "published": "2026-11-11T00:00:00.000Z"
+        }
+      ],
+      "superseded_by": null,
+      "handoff": {
+        "eligible": false,
+        "blockers": [
+          "NOT_A_PUBLISHER_ACTION",
+          "SCORE_BELOW_THRESHOLD",
+          "CONFIDENCE_NOT_HIGH",
+          "NO_PRIMARY_SOURCE",
+          "NOT_NEW",
+          "PROVISIONAL_ENTITY"
+        ],
+        "queued": []
+      }
+    },
     "4e30ee3da479": {
       "id": "DEV-2026-09-26-008",
       "fingerprint": "4e30ee3da479",
@@ -3585,7 +3770,7 @@
       "first_seen": "2026-09-24",
       "last_seen": "2026-09-26",
       "times_seen": 3,
-      "lifecycle": "PERSISTING",
+      "lifecycle": "RESOLVED",
       "lifecycle_history": [
         {
           "date": "2026-09-24",
@@ -3594,6 +3779,10 @@
         {
           "date": "2026-09-25",
           "lifecycle": "PERSISTING"
+        },
+        {
+          "date": "2026-11-11",
+          "lifecycle": "RESOLVED (aged out)"
         }
       ],
       "action": "DUPLICATE",
@@ -4372,11 +4561,15 @@
       "first_seen": "2026-09-26",
       "last_seen": "2026-09-26",
       "times_seen": 1,
-      "lifecycle": "NEW",
+      "lifecycle": "RESOLVED",
       "lifecycle_history": [
         {
           "date": "2026-09-26",
           "lifecycle": "NEW"
+        },
+        {
+          "date": "2026-11-11",
+          "lifecycle": "RESOLVED (aged out)"
         }
       ],
       "action": "MONITOR_ONLY",
@@ -5632,11 +5825,15 @@
       "first_seen": "2026-09-26",
       "last_seen": "2026-09-26",
       "times_seen": 1,
-      "lifecycle": "NEW",
+      "lifecycle": "RESOLVED",
       "lifecycle_history": [
         {
           "date": "2026-09-26",
           "lifecycle": "NEW"
+        },
+        {
+          "date": "2026-11-11",
+          "lifecycle": "RESOLVED (aged out)"
         }
       ],
       "action": "MONITOR_ONLY",
@@ -6062,6 +6259,52 @@
           "CONFIDENCE_NOT_HIGH",
           "NOT_MATERIAL",
           "NOT_NEW"
+        ],
+        "queued": []
+      }
+    },
+    "9f73c60ad525": {
+      "id": "DEV-2026-11-11-001",
+      "fingerprint": "9f73c60ad525",
+      "entity_id": "DEV-BLUE-DIAMOND-WASH-TRAIL",
+      "entity_name": "Blue Diamond Wash Trail",
+      "change_class": "NEW",
+      "changes": [
+        "first time this project has been seen"
+      ],
+      "event_type": "construction",
+      "status": "under construction",
+      "prior_status": null,
+      "first_seen": "2026-11-11",
+      "last_seen": "2026-11-11",
+      "times_seen": 1,
+      "lifecycle": "NEW",
+      "lifecycle_history": [
+        {
+          "date": "2026-11-11",
+          "lifecycle": "NEW"
+        }
+      ],
+      "action": "MONITOR_ONLY",
+      "target": null,
+      "score": 53,
+      "confidence": "Low",
+      "sources": [
+        {
+          "name": "KSNV",
+          "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxNRlV5bkdFN0RzWWpxNHhNRVNrd2VwZ0MxMGdHem9LcDBWV2xUZ3g1ZzNoOVpHUi1lNHBSZmVQWC1CaHIzcGxvTDRSaE9oM05FWVZTU0NTR050dTROb1F5MHFGX1FsT0JnU1QtUUcyMmpzZVhIUFdURXhNUHZZRURmaFFWc2ZjTWwzbWlyVjlKTjV2X0x0ZHlfZmM0bGRPdUhxYTAzX2dQUzRaSmVjS0ZHa1pR",
+          "authority": 8,
+          "published": "2026-11-11T02:01:52.000Z"
+        }
+      ],
+      "superseded_by": null,
+      "handoff": {
+        "eligible": false,
+        "blockers": [
+          "NOT_A_PUBLISHER_ACTION",
+          "SCORE_BELOW_THRESHOLD",
+          "CONFIDENCE_NOT_HIGH",
+          "NO_PRIMARY_SOURCE"
         ],
         "queued": []
       }
@@ -6746,11 +6989,15 @@
       "first_seen": "2026-09-26",
       "last_seen": "2026-09-26",
       "times_seen": 1,
-      "lifecycle": "NEW",
+      "lifecycle": "RESOLVED",
       "lifecycle_history": [
         {
           "date": "2026-09-26",
           "lifecycle": "NEW"
+        },
+        {
+          "date": "2026-11-11",
+          "lifecycle": "RESOLVED (aged out)"
         }
       ],
       "action": "MONITOR_ONLY",
