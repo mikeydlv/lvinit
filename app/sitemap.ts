@@ -262,6 +262,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.7,
     },
     {
+      url: `${BASE_URL}/guides/nevada-state-veterans-memorial-thunderbird-northwest-las-vegas`,
+      lastModified: new Date("2026-11-12"),
+      changeFrequency: "monthly",
+      priority: 0.7,
+    },
+    {
       url: `${BASE_URL}/guides/third-street-arts-campus-downtown-las-vegas`,
       lastModified: new Date("2026-11-11"),
       changeFrequency: "monthly",

@@ -238,6 +238,26 @@ export type Guide = {
  */
 export const guides: Guide[] = [
   {
+    slug: "nevada-state-veterans-memorial-thunderbird-northwest-las-vegas",
+    title: "The Nevada State Veterans Memorial Has a New Home in Northwest Las Vegas",
+    dek: "The 18 bronze statues from outside the old Grant Sawyer state building now stand on a new promenade at Thunderbird Family Sports Complex. What's there, where to find it and why it moved.",
+    byline: "LVINIT Editorial",
+    date: "November 2026",
+    publishedAt: "2026-11-12",
+    category: "Local Feature",
+    // Built by the LVINIT Daily Publisher from Local Radar
+    // LR-NV-STATE-VETERANS-MEMORIAL-THUNDERBIRD. No first-party photo of the
+    // new site exists yet and no library asset shows it, so the card uses a
+    // generated LVINIT editorial cover:
+    //   node scripts/generate-guide-cover.mjs \
+    //     --slug nevada-state-veterans-memorial-thunderbird-northwest-las-vegas \
+    //     --category "Local Feature" --subject "Veterans Memorial" \
+    //     --out nevada-state-veterans-memorial-editorial-cover.webp
+    image: "/images/covers/nevada-state-veterans-memorial-editorial-cover.webp",
+    imageMode: "editorial-cover",
+    href: "/guides/nevada-state-veterans-memorial-thunderbird-northwest-las-vegas",
+  },
+  {
     slug: "third-street-arts-campus-downtown-las-vegas",
     title: "The Old Downtown Movie Theater on Third Street Is Becoming an Arts Campus",
     dek: "Nonprofit THIRD Street plans a roughly 250-seat studio theatre first, with the city reimbursing up to $4.2 million. What's approved, what isn't, and when it could open.",
