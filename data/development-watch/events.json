@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "agent": "development-watch",
-  "updated": "2026-11-12",
+  "updated": "2026-11-13",
   "events": {
     "01c19f40d9a1": {
       "id": "DEV-2026-11-11-004",
@@ -1233,6 +1233,53 @@
         "eligible": false,
         "blockers": [
           "NOT_A_PUBLISHER_ACTION",
+          "CONFIDENCE_NOT_HIGH",
+          "NO_PRIMARY_SOURCE",
+          "PROVISIONAL_ENTITY"
+        ],
+        "queued": []
+      }
+    },
+    "2042956a0536": {
+      "id": "DEV-2026-11-13-001",
+      "fingerprint": "2042956a0536",
+      "entity_id": "DEV-P-66C24458",
+      "entity_name": "Unnamed transit (Las Vegas (valley-wide)) — \"The affordability election delivered billions for public transit\"",
+      "change_class": "NEW",
+      "changes": [
+        "first time this project has been seen"
+      ],
+      "event_type": "announcement",
+      "status": "unclear",
+      "prior_status": null,
+      "first_seen": "2026-11-13",
+      "last_seen": "2026-11-13",
+      "times_seen": 1,
+      "lifecycle": "NEW",
+      "lifecycle_history": [
+        {
+          "date": "2026-11-13",
+          "lifecycle": "NEW"
+        }
+      ],
+      "action": "MONITOR_ONLY",
+      "target": null,
+      "score": 43,
+      "confidence": "Low",
+      "sources": [
+        {
+          "name": "Nevada Current",
+          "url": "https://nevadacurrent.com/2026/11/13/the-affordability-election-delivered-billions-for-public-transit",
+          "authority": 8,
+          "published": "2026-11-13T12:55:22.000Z"
+        }
+      ],
+      "superseded_by": null,
+      "handoff": {
+        "eligible": false,
+        "blockers": [
+          "NOT_A_PUBLISHER_ACTION",
+          "SCORE_BELOW_THRESHOLD",
           "CONFIDENCE_NOT_HIGH",
           "NO_PRIMARY_SOURCE",
           "PROVISIONAL_ENTITY"
@@ -6205,8 +6252,8 @@
       "status": "announced",
       "prior_status": null,
       "first_seen": "2026-10-24",
-      "last_seen": "2026-10-24",
-      "times_seen": 1,
+      "last_seen": "2026-11-13",
+      "times_seen": 2,
       "lifecycle": "REJECTED",
       "lifecycle_history": [
         {
@@ -6224,6 +6271,12 @@
           "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxQQ0tvVE13dkpOMnp0NUIzX0w2NWJXRVJuc3RqY3VCaEhBMk91Qi1rMk9pYmFlXzZSeWNYdFRCQjVkSkxnQW56ZzNTaGZhU1FFMl81UWlaajlmdmZjS2FSNVNEZXBZbU9Jd1l1WTV6ZE5nTU5WSnJtbXhfejJJWVd1UVFLVGR0S3VicWZzUmt4VW90bzByanJQRnZIVGZKdUpTRTlod2RqOWFwdFJSOXhEUWd6eTM",
           "authority": 8,
           "published": "2026-10-23T20:13:57.000Z"
+        },
+        {
+          "name": "KSNV",
+          "url": "https://news.google.com/rss/articles/CBMiygFBVV95cUxPREp5SkNRREg1dFhaMklDX2M5SFpXd3FkSzVKcUhSbTAwa1RUaFllbjlMajVwd1JZT3JsN3JrbmVZamFuVklfRVJ6LVprZjVSOW5PY0ZMcXBsT2RDdWN5ZkhDZWRyeGo0MDhmLTM4N0dQb0NtOVdrMDV5SFQyWTBORi1nNzBNd1pWTmlRVG9HWkpOZHliS1hXZDQ4M3B5c01McHFfbE9OQWdXaERsbzRQVzFFc2J2emxfbmlUc0UzemN4OXNOMnhuRHVn",
+          "authority": 8,
+          "published": "2026-11-08T19:04:29.000Z"
         }
       ],
       "superseded_by": null,
@@ -10037,8 +10090,8 @@
       "status": "partially open",
       "prior_status": "partially open",
       "first_seen": "2026-10-11",
-      "last_seen": "2026-11-10",
-      "times_seen": 12,
+      "last_seen": "2026-11-13",
+      "times_seen": 13,
       "lifecycle": "PERSISTING",
       "lifecycle_history": [
         {
@@ -10060,8 +10113,8 @@
       ],
       "action": "DUPLICATE",
       "target": "/guides/aries-henderson",
-      "score": 47,
-      "confidence": "Medium",
+      "score": 50,
+      "confidence": "Low",
       "sources": [
         {
           "name": "Nevada Business Magazine",
@@ -10134,6 +10187,12 @@
           "url": "https://nevadabusiness.com/2026/11/downtown-hoedown-in-partnership-with-black-buffalo-returns-to-fremont-street-experience-as-official-2026-wrangler-national-finals-rodeo-kickoff-party-dec-2",
           "authority": 8,
           "published": "2026-11-10T18:00:18.000Z"
+        },
+        {
+          "name": "News 3 Las Vegas",
+          "url": "https://news3lv.com/news/local/from-iraq-tours-to-outdoor-guide-vegas-marine-finds-healing-on-the-trail",
+          "authority": 8,
+          "published": "2026-11-12T21:42:04.000Z"
         }
       ],
       "superseded_by": "aa389dac718a",
@@ -10145,8 +10204,7 @@
           "CONFIDENCE_NOT_HIGH",
           "NO_PRIMARY_SOURCE",
           "NOT_MATERIAL",
-          "NOT_NEW",
-          "FAIR_HOUSING_SUBJECT"
+          "NOT_NEW"
         ],
         "queued": []
       }
