@@ -262,6 +262,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.7,
     },
     {
+      url: `${BASE_URL}/guides/blue-diamond-wash-trail-southwest-las-vegas`,
+      lastModified: new Date("2026-11-13"),
+      changeFrequency: "monthly",
+      priority: 0.7,
+    },
+    {
       url: `${BASE_URL}/guides/nevada-state-veterans-memorial-thunderbird-northwest-las-vegas`,
       lastModified: new Date("2026-11-12"),
       changeFrequency: "monthly",

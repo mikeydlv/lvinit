@@ -238,6 +238,26 @@ export type Guide = {
  */
 export const guides: Guide[] = [
   {
+    slug: "blue-diamond-wash-trail-southwest-las-vegas",
+    title: "A Paved Trail Is Coming to the Blue Diamond Wash in Southwest Las Vegas",
+    dek: "Clark County is building a 12- to 15-foot paved trail along the wash from Durango Drive to Hualapai Way, with a crossing at Fort Apache. Where it runs and when it should be done.",
+    byline: "LVINIT Editorial",
+    date: "November 2026",
+    publishedAt: "2026-11-13",
+    category: "Local Feature",
+    // Built by the LVINIT Daily Publisher from Local Radar
+    // LR-BLUE-DIAMOND-WASH-TRAIL. No first-party photo of the wash corridor
+    // exists yet and no library asset shows it, so the card uses a generated
+    // LVINIT editorial cover:
+    //   node scripts/generate-guide-cover.mjs \
+    //     --slug blue-diamond-wash-trail-southwest-las-vegas \
+    //     --category "Local Feature" --subject "Blue Diamond Wash Trail" \
+    //     --out blue-diamond-wash-trail-editorial-cover.webp
+    image: "/images/covers/blue-diamond-wash-trail-editorial-cover.webp",
+    imageMode: "editorial-cover",
+    href: "/guides/blue-diamond-wash-trail-southwest-las-vegas",
+  },
+  {
     slug: "nevada-state-veterans-memorial-thunderbird-northwest-las-vegas",
     title: "The Nevada State Veterans Memorial Has a New Home in Northwest Las Vegas",
     dek: "The 18 bronze statues from outside the old Grant Sawyer state building now stand on a new promenade at Thunderbird Family Sports Complex. What's there, where to find it and why it moved.",
