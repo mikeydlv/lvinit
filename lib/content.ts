@@ -238,6 +238,26 @@ export type Guide = {
  */
 export const guides: Guide[] = [
   {
+    slug: "unrivaled-sports-park-freedom-park-east-las-vegas",
+    title: "The Old Big League Dreams Fields in East Las Vegas Are Now Unrivaled Sports Park",
+    dek: "The replica-ballpark complex at Pecos and Washington reopened Nov. 10 after a renovation the company puts at $6 million. What changed and what's planned for neighborhood families.",
+    byline: "LVINIT Editorial",
+    date: "November 2026",
+    publishedAt: "2026-11-14",
+    category: "Local Feature",
+    // Built by the LVINIT Daily Publisher from Local Radar
+    // LR-UNRIVALED-SPORTS-PARK-FREEDOM-PARK. No first-party photo of the
+    // renovated park exists yet and no library asset shows it, so the card
+    // uses a generated LVINIT editorial cover:
+    //   node scripts/generate-guide-cover.mjs \
+    //     --slug unrivaled-sports-park-freedom-park-east-las-vegas \
+    //     --category "Local Feature" --subject "Unrivaled Sports Park" \
+    //     --out unrivaled-sports-park-editorial-cover.webp
+    image: "/images/covers/unrivaled-sports-park-editorial-cover.webp",
+    imageMode: "editorial-cover",
+    href: "/guides/unrivaled-sports-park-freedom-park-east-las-vegas",
+  },
+  {
     slug: "blue-diamond-wash-trail-southwest-las-vegas",
     title: "A Paved Trail Is Coming to the Blue Diamond Wash in Southwest Las Vegas",
     dek: "Clark County is building a 12- to 15-foot paved trail along the wash from Durango Drive to Hualapai Way, with a crossing at Fort Apache. Where it runs and when it should be done.",
