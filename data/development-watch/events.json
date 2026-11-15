@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "agent": "development-watch",
-  "updated": "2026-11-14",
+  "updated": "2026-11-15",
   "events": {
     "01c19f40d9a1": {
       "id": "DEV-2026-11-11-004",
@@ -4428,11 +4428,15 @@
       "first_seen": "2026-09-30",
       "last_seen": "2026-09-30",
       "times_seen": 1,
-      "lifecycle": "NEW",
+      "lifecycle": "RESOLVED",
       "lifecycle_history": [
         {
           "date": "2026-09-30",
           "lifecycle": "NEW"
+        },
+        {
+          "date": "2026-11-15",
+          "lifecycle": "RESOLVED (aged out)"
         }
       ],
       "action": "ADD_TO_NEIGHBORHOOD_GUIDE",
@@ -4741,6 +4745,54 @@
           "SCORE_BELOW_THRESHOLD",
           "CONFIDENCE_NOT_HIGH",
           "NO_PRIMARY_SOURCE"
+        ],
+        "queued": []
+      }
+    },
+    "6d98481222f1": {
+      "id": "DEV-2026-11-15-002",
+      "fingerprint": "6d98481222f1",
+      "entity_id": "DEV-P-0A5DB123",
+      "entity_name": "Unnamed park (Centennial Hills) — \"Lee Lanier Mosaic Debuts at Centennial Hills Park Las Vegas\"",
+      "change_class": "NEW",
+      "changes": [
+        "first time this project has been seen"
+      ],
+      "event_type": "announcement",
+      "status": "unclear",
+      "prior_status": null,
+      "first_seen": "2026-11-15",
+      "last_seen": "2026-11-15",
+      "times_seen": 1,
+      "lifecycle": "REJECTED",
+      "lifecycle_history": [
+        {
+          "date": "2026-11-15",
+          "lifecycle": "REJECTED"
+        }
+      ],
+      "action": "REJECT_LOW_VALUE",
+      "target": null,
+      "score": 39,
+      "confidence": "Low",
+      "sources": [
+        {
+          "name": "Hoodline",
+          "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxPaVpydG1ndUlOSnNaYUFiMVRoWTFfeks0and2d1hBRHJqZkcxOFpXa21mNmJWUlZPRnNUVXVGR1dOVWpPWE1vcGkwdlZnNldrMWJVNjRORHRDZXRNVFJWak5KZFhqdEs2RjR3OFN1MDlSTVpVTmdXS3E2RWctRjFTZmZOZHlrM3J2Sm5LdTREcEZaekxXcU53d1pWUGU3QnBNaS1Tc2V3N2s",
+          "authority": 9,
+          "published": "2026-11-15T17:07:42.000Z"
+        }
+      ],
+      "superseded_by": null,
+      "handoff": {
+        "eligible": false,
+        "blockers": [
+          "NOT_A_PUBLISHER_ACTION",
+          "SCORE_BELOW_THRESHOLD",
+          "CONFIDENCE_NOT_HIGH",
+          "NO_PRIMARY_SOURCE",
+          "NOT_NEW",
+          "PROVISIONAL_ENTITY"
         ],
         "queued": []
       }
@@ -6364,6 +6416,53 @@
           "CONFIDENCE_NOT_HIGH",
           "NO_PRIMARY_SOURCE",
           "NOT_NEW",
+          "PROVISIONAL_ENTITY"
+        ],
+        "queued": []
+      }
+    },
+    "9d52ec7a70c1": {
+      "id": "DEV-2026-11-15-001",
+      "fingerprint": "9d52ec7a70c1",
+      "entity_id": "DEV-P-CEF65BC2",
+      "entity_name": "Unnamed residential (Las Vegas (valley-wide)) — \"Lady Rebels' Sunday game vs. Montana State canceled due to travel complications\"",
+      "change_class": "NEW",
+      "changes": [
+        "first time this project has been seen"
+      ],
+      "event_type": "cancellation",
+      "status": "cancelled",
+      "prior_status": null,
+      "first_seen": "2026-11-15",
+      "last_seen": "2026-11-15",
+      "times_seen": 1,
+      "lifecycle": "NEW",
+      "lifecycle_history": [
+        {
+          "date": "2026-11-15",
+          "lifecycle": "NEW"
+        }
+      ],
+      "action": "MONITOR_ONLY",
+      "target": null,
+      "score": 44,
+      "confidence": "Low",
+      "sources": [
+        {
+          "name": "8 News Now",
+          "url": "https://8newsnow.com/sports/unlv-sports/lady-rebels-sunday-game-vs-montana-state-canceled-due-to-travel-complications",
+          "authority": 8,
+          "published": "2026-11-14T21:00:48.000Z"
+        }
+      ],
+      "superseded_by": null,
+      "handoff": {
+        "eligible": false,
+        "blockers": [
+          "NOT_A_PUBLISHER_ACTION",
+          "SCORE_BELOW_THRESHOLD",
+          "CONFIDENCE_NOT_HIGH",
+          "NO_PRIMARY_SOURCE",
           "PROVISIONAL_ENTITY"
         ],
         "queued": []
@@ -8409,8 +8508,8 @@
       "status": "unclear",
       "prior_status": null,
       "first_seen": "2026-11-14",
-      "last_seen": "2026-11-14",
-      "times_seen": 1,
+      "last_seen": "2026-11-15",
+      "times_seen": 2,
       "lifecycle": "REJECTED",
       "lifecycle_history": [
         {
@@ -8418,9 +8517,9 @@
           "lifecycle": "REJECTED"
         }
       ],
-      "action": "REJECT_LOW_VALUE",
+      "action": "DUPLICATE",
       "target": null,
-      "score": 35,
+      "score": 29,
       "confidence": "Low",
       "sources": [
         {
@@ -8434,6 +8533,12 @@
           "url": "https://reviewjournal.com/business/housing/developer-buys-foreclosed-las-vegas-hotel-for-new-housing-project-3913941",
           "authority": 8,
           "published": "2026-11-13T22:16:23.000Z"
+        },
+        {
+          "name": "Las Vegas Review-Journal",
+          "url": "https://news.google.com/rss/articles/CBMiqwNBVV95cUxNYnZnRTlXM0hIdXV5a3lHcFpmenhUcDRMczVCVVh3VFdCaUVBWmlkRms5TXU1Wk9fN2VDM3hZN0Etb3N5RkdTOURrbDcydmFZdjlSVHg1R2xMSDZfWVZaaHl6OENKSXRLNjB4MkhGUWExaE9YZnRhX25LWTIxV05UdUJXcHFKMDJEU3V5ZGNmT0tQVHMxaG9EZFpxT3lVb1FaM2VPT2I4a09PZDU3WG1FM1pER1Z6N3BGUUp6cm9RTF9VOWxrRVU5MUp2bll2ZlFwVWVlbS1meldmMjd0QmF6Q3lrdFRNMTZlSm5HYWhobG5zVXZtUXRNbFJfeEhtS2tBUzRZTEdQdy1wSHFpdE5YMXVqUWJpVzdsdFBIQUROU2VoREJWZ3NGRFE2a3RBSjF6aS1zRzdXY1ljZUtLWFY1cktFWTN3QWN5eTdtS0tFWUh4MUs2R3g2czYwTzdhTUNZVFo3WVI3T21HY1d3LUU5V3NrUEFjNkRqaktVRW1IVGRqM18yUzBkUlRvSjVsbUVCNDhiRzllY0s3d1NwRUFxVGluLTlmdnZ4dmxV",
+          "authority": 8,
+          "published": "2026-11-13T22:22:38.000Z"
         }
       ],
       "superseded_by": null,
@@ -8444,6 +8549,7 @@
           "SCORE_BELOW_THRESHOLD",
           "CONFIDENCE_NOT_HIGH",
           "NO_PRIMARY_SOURCE",
+          "NOT_MATERIAL",
           "NOT_NEW",
           "PROVISIONAL_ENTITY"
         ],
@@ -9209,11 +9315,15 @@
       "first_seen": "2026-09-30",
       "last_seen": "2026-09-30",
       "times_seen": 1,
-      "lifecycle": "NEW",
+      "lifecycle": "RESOLVED",
       "lifecycle_history": [
         {
           "date": "2026-09-30",
           "lifecycle": "NEW"
+        },
+        {
+          "date": "2026-11-15",
+          "lifecycle": "RESOLVED (aged out)"
         }
       ],
       "action": "MONITOR_ONLY",
@@ -10211,8 +10321,8 @@
       "status": "partially open",
       "prior_status": "partially open",
       "first_seen": "2026-10-11",
-      "last_seen": "2026-11-13",
-      "times_seen": 13,
+      "last_seen": "2026-11-15",
+      "times_seen": 14,
       "lifecycle": "PERSISTING",
       "lifecycle_history": [
         {
@@ -10234,7 +10344,7 @@
       ],
       "action": "DUPLICATE",
       "target": "/guides/aries-henderson",
-      "score": 50,
+      "score": 53,
       "confidence": "Low",
       "sources": [
         {
@@ -10314,6 +10424,12 @@
           "url": "https://news3lv.com/news/local/from-iraq-tours-to-outdoor-guide-vegas-marine-finds-healing-on-the-trail",
           "authority": 8,
           "published": "2026-11-12T21:42:04.000Z"
+        },
+        {
+          "name": "News 3 Las Vegas",
+          "url": "https://news3lv.com/news/local/new-mosaic-mural-the-wonder-of-nature-unveiled-at-centennial-hills-park",
+          "authority": 8,
+          "published": "2026-11-15T02:05:26.000Z"
         }
       ],
       "superseded_by": "aa389dac718a",
