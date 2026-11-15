@@ -262,6 +262,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.7,
     },
     {
+      url: `${BASE_URL}/guides/red-rock-legacy-trail-summerlin-las-vegas`,
+      lastModified: new Date("2026-11-15"),
+      changeFrequency: "monthly",
+      priority: 0.7,
+    },
+    {
       url: `${BASE_URL}/guides/unrivaled-sports-park-freedom-park-east-las-vegas`,
       lastModified: new Date("2026-11-14"),
       changeFrequency: "monthly",
