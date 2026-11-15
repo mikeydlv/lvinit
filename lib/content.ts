@@ -238,6 +238,26 @@ export type Guide = {
  */
 export const guides: Guide[] = [
   {
+    slug: "red-rock-legacy-trail-summerlin-las-vegas",
+    title: "The First Mile of the Red Rock Legacy Trail Is Open. Here's What You Can Use Now",
+    dek: "About a mile of 12-foot paved path now runs west from Charleston and Sky Vista toward Red Rock Canyon. Where to park, where the Red Rock sign moved, and what the other four phases would add.",
+    byline: "LVINIT Editorial",
+    date: "November 2026",
+    publishedAt: "2026-11-15",
+    category: "Local Feature",
+    // Built by the LVINIT Daily Publisher from Local Radar
+    // LR-RED-ROCK-LEGACY-TRAIL. No first-party photo of the Legacy Trail
+    // exists yet and no library asset shows it, so the card uses a generated
+    // LVINIT editorial cover:
+    //   node scripts/generate-guide-cover.mjs \
+    //     --slug red-rock-legacy-trail-summerlin-las-vegas \
+    //     --category "Local Feature" --subject "Red Rock Legacy Trail" \
+    //     --out red-rock-legacy-trail-editorial-cover.webp
+    image: "/images/covers/red-rock-legacy-trail-editorial-cover.webp",
+    imageMode: "editorial-cover",
+    href: "/guides/red-rock-legacy-trail-summerlin-las-vegas",
+  },
+  {
     slug: "unrivaled-sports-park-freedom-park-east-las-vegas",
     title: "The Old Big League Dreams Fields in East Las Vegas Are Now Unrivaled Sports Park",
     dek: "The replica-ballpark complex at Pecos and Washington reopened Nov. 10 after a renovation the company puts at $6 million. What changed and what's planned for neighborhood families.",
