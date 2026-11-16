@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { buildStoryMetadata, type StoryMeta } from "@/lib/story";
 import { StoryPage, StoryLede, StorySection } from "@/components/story";
@@ -41,13 +42,28 @@ import { StoryPage, StoryLede, StorySection } from "@/components/story";
 //   facility, conflicting reports Nov 12-13); any claim that Phase 1 reaches
 //   the relocated sign lot or the Visitor Center; any first-person visit
 //   claim (no first-party media exists).
-// IMAGERY: no first-party photo of the Legacy Trail exists and no Media Image
-//   Library asset shows it (the Red Rock trailhead/scenic-drive images show
-//   other locations), so the page runs without a hero photo and the card
-//   uses a generated editorial cover. No Media Image Library usage changes.
+// IMAGERY (updated 2026-11-16, HELD FOR REVIEW: do not merge/publish until
+//   Mikey confirms publication permission): two images uploaded by Mikey to
+//   the repo after publication. Both are AI-processed versions of Las Vegas
+//   Review-Journal photos (per Mikey); they are NOT unaltered originals and
+//   NOT first-party LVINIT photos. Optimized to WebP with Sharp at their
+//   native 1672x941 (q84, 16:9); the uploaded PNGs were replaced by the WebP
+//   copies. Every placement carries the SOURCE_NOTE credit (Review-Journal
+//   source + AI-processing disclosure). Hero/card/OG: cyclists on the trail
+//   bridge. Inline ("What's open right now"): aerial of the first mile beside
+//   Charleston Blvd. Not Media Image Library files, so no usedOn/usage
+//   records change. The generated editorial cover was deleted.
+//   Article text is unchanged by request; the "Photos" bullet under "What I
+//   haven't confirmed" still says the page runs without a photo and needs an
+//   editorial decision before publishing.
 // ---------------------------------------------------------------------------
 
 const PATH = "/guides/red-rock-legacy-trail-summerlin-las-vegas";
+const HERO_IMG = "/images/hero/red-rock-legacy-trail-cyclists-bridge-hero.webp";
+const HERO_ALT =
+  "Cyclists crossing the Red Rock Legacy Trail bridge with mountains behind them.";
+const SOURCE_NOTE =
+  "AI-processed version of a Las Vegas Review-Journal photo; not the unaltered original.";
 const linkCls =
   "text-lvinit-blue underline underline-offset-4 decoration-transparent hover:decoration-lvinit-blue";
 const extCls = "text-lvinit-blue underline underline-offset-4";
@@ -69,6 +85,10 @@ const meta: StoryMeta = {
   description:
     "Phase 1 of Clark County's Red Rock Legacy Trail is open: about a mile of 12-foot paved path heading west from Charleston and Sky Vista. Where to park, where the Red Rock sign moved, and what the other four phases would add.",
   path: PATH,
+  image: HERO_IMG,
+  imageWidth: 1672,
+  imageHeight: 941,
+  imageAlt: HERO_ALT,
   datePublished: "2026-11-15",
   dateModified: "2026-11-15",
   author: "LVINIT Editorial",
@@ -81,6 +101,38 @@ const meta: StoryMeta = {
 
 export const metadata: Metadata = buildStoryMetadata(meta);
 
+/**
+ * Inline body photo at its native 16:9 ratio: intrinsic width/height reserve
+ * space (no layout shift), w-full h-auto scales without stretching or
+ * cropping, and next/image lazy-loads it by default.
+ */
+function Figure({
+  src,
+  alt,
+  caption,
+}: {
+  src: string;
+  alt: string;
+  caption: string;
+}) {
+  return (
+    <figure className="mt-8">
+      <Image
+        src={src}
+        alt={alt}
+        width={1672}
+        height={941}
+        loading="lazy"
+        sizes="(max-width: 768px) 100vw, 680px"
+        className="h-auto w-full rounded-lg bg-lvinit-lightgray"
+      />
+      <figcaption className="mt-3 text-caption text-lvinit-warmgray">
+        {caption}
+      </figcaption>
+    </figure>
+  );
+}
+
 export default function RedRockLegacyTrailPage() {
   return (
     <StoryPage
@@ -90,6 +142,9 @@ export default function RedRockLegacyTrailPage() {
         headline: TITLE,
         subheadline:
           "About a mile of paved path now runs west from Charleston and Sky Vista toward Red Rock Canyon. The full trail is planned at about 19 miles, but the rest doesn't have construction dates yet.",
+        image: HERO_IMG,
+        imageAlt: HERO_ALT,
+        imageCredit: SOURCE_NOTE,
         backLink: { label: "All guides", href: "/guides" },
       }}
       relatedStories={{
@@ -193,6 +248,11 @@ export default function RedRockLegacyTrailPage() {
           approved money for it in December 2024, and no start date has been
           set.
         </p>
+        <Figure
+          src="/images/red-rock-legacy-trail-first-mile-aerial.webp"
+          alt="Aerial view of cyclists on the Red Rock Legacy Trail beside Charleston Boulevard."
+          caption={SOURCE_NOTE}
+        />
       </StorySection>
 
       <StorySection heading="Where to park and where the sign went">
