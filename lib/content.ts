@@ -238,6 +238,26 @@ export type Guide = {
  */
 export const guides: Guide[] = [
   {
+    slug: "lee-canyon-2026-27-season-west-bowl-las-vegas",
+    title: "Lee Canyon Opens Nov. 20 With a New Chairlift. Here's What's New on Las Vegas's Local Mountain",
+    dek: "The ski area up Lee Canyon Road opens Friday, Nov. 20. What the new West Bowl chairlift adds, when the new terrain is expected, and what to know before you drive up.",
+    byline: "LVINIT Editorial",
+    date: "November 2026",
+    publishedAt: "2026-11-16",
+    category: "Local Feature",
+    // Built by the LVINIT Daily Publisher from Local Radar
+    // LR-LEE-CANYON-WEST-BOWL-2026. No first-party Lee Canyon photo exists yet
+    // and no library asset shows it, so the card uses a generated LVINIT
+    // editorial cover:
+    //   node scripts/generate-guide-cover.mjs \
+    //     --slug lee-canyon-2026-27-season-west-bowl-las-vegas \
+    //     --category "Local Feature" --subject "Lee Canyon" \
+    //     --out lee-canyon-editorial-cover.webp
+    image: "/images/covers/lee-canyon-editorial-cover.webp",
+    imageMode: "editorial-cover",
+    href: "/guides/lee-canyon-2026-27-season-west-bowl-las-vegas",
+  },
+  {
     slug: "red-rock-legacy-trail-summerlin-las-vegas",
     title: "The First Mile of the Red Rock Legacy Trail Is Open. Here's What You Can Use Now",
     dek: "About a mile of 12-foot paved path now runs west from Charleston and Sky Vista toward Red Rock Canyon. Where to park, where the Red Rock sign moved, and what the other four phases would add.",
