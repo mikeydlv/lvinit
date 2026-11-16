@@ -284,15 +284,13 @@ export const guides: Guide[] = [
     publishedAt: "2026-11-14",
     category: "Local Feature",
     // Built by the LVINIT Daily Publisher from Local Radar
-    // LR-UNRIVALED-SPORTS-PARK-FREEDOM-PARK. No first-party photo of the
-    // renovated park exists yet and no library asset shows it, so the card
-    // uses a generated LVINIT editorial cover:
-    //   node scripts/generate-guide-cover.mjs \
-    //     --slug unrivaled-sports-park-freedom-park-east-las-vegas \
-    //     --category "Local Feature" --subject "Unrivaled Sports Park" \
-    //     --out unrivaled-sports-park-editorial-cover.webp
-    image: "/images/covers/unrivaled-sports-park-editorial-cover.webp",
-    imageMode: "editorial-cover",
+    // LR-UNRIVALED-SPORTS-PARK-FREEDOM-PARK. Card image = the article hero, a
+    // daytime aerial of the complex supplied by Mikey (uploaded 2026-11-16,
+    // edited and extended with AI; the article notes this). Superseded
+    // generated cover deleted.
+    image: "/images/hero/unrivaled-sports-park-las-vegas-hero.webp",
+    imageAlt:
+      "Aerial view of Unrivaled Sports Park in Las Vegas with baseball fields and mountains.",
     href: "/guides/unrivaled-sports-park-freedom-park-east-las-vegas",
   },
   {

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { buildStoryMetadata, type StoryMeta } from "@/lib/story";
 import { StoryPage, StoryLede, StorySection } from "@/components/story";
@@ -36,12 +37,21 @@ import { StoryPage, StoryLede, StorySection } from "@/components/story";
 // OMITTED ON PURPOSE: ballpark hours, prices, walk-in access, 2027 event
 //   dates, lease terms, the 3151 E. Washington Ave address (syndications
 //   only), any first-person visit claim (no first-party media exists).
-// IMAGERY: no first-party or Media Image Library photo of this park exists,
-//   so the page runs without a hero photo (card uses a generated editorial
-//   cover). No Media Image Library usage records change.
+// IMAGERY (updated 2026-11-16): two images uploaded by Mikey to the repo
+//   after publication, edited and extended with AI (per Mikey). Optimized to
+//   WebP with Sharp at their native 1672x941 (q84); the uploaded PNGs were
+//   replaced by the WebP copies. Every placement carries an "Image edited and
+//   extended with AI" note. Hero/card/OG: daytime aerial of the complex.
+//   Inline ("Before you go"): the entrance with the baseball sculpture. Not
+//   Media Image Library files, so no usedOn/usage records change. The
+//   generated editorial cover was deleted.
 // ---------------------------------------------------------------------------
 
 const PATH = "/guides/unrivaled-sports-park-freedom-park-east-las-vegas";
+const HERO_IMG = "/images/hero/unrivaled-sports-park-las-vegas-hero.webp";
+const HERO_ALT =
+  "Aerial view of Unrivaled Sports Park in Las Vegas with baseball fields and mountains.";
+const AI_NOTE = "Image edited and extended with AI.";
 const linkCls =
   "text-lvinit-blue underline underline-offset-4 decoration-transparent hover:decoration-lvinit-blue";
 const extCls = "text-lvinit-blue underline underline-offset-4";
@@ -63,6 +73,10 @@ const meta: StoryMeta = {
   description:
     "The former Big League Dreams complex at Gary Reese Freedom Park reopened Nov. 10 as Unrivaled Sports Park after a renovation the company puts at $6 million. What changed, what's planned for neighborhood families, and what's coming to the park in 2027.",
   path: PATH,
+  image: HERO_IMG,
+  imageWidth: 1672,
+  imageHeight: 941,
+  imageAlt: HERO_ALT,
   datePublished: "2026-11-14",
   dateModified: "2026-11-14",
   author: "LVINIT Editorial",
@@ -75,6 +89,38 @@ const meta: StoryMeta = {
 
 export const metadata: Metadata = buildStoryMetadata(meta);
 
+/**
+ * Inline body photo at its native 16:9 ratio: intrinsic width/height reserve
+ * space (no layout shift), w-full h-auto scales without stretching or
+ * cropping, and next/image lazy-loads it by default.
+ */
+function Figure({
+  src,
+  alt,
+  caption,
+}: {
+  src: string;
+  alt: string;
+  caption: string;
+}) {
+  return (
+    <figure className="mt-8">
+      <Image
+        src={src}
+        alt={alt}
+        width={1672}
+        height={941}
+        loading="lazy"
+        sizes="(max-width: 768px) 100vw, 680px"
+        className="h-auto w-full rounded-lg bg-lvinit-lightgray"
+      />
+      <figcaption className="mt-3 text-caption text-lvinit-warmgray">
+        {caption}
+      </figcaption>
+    </figure>
+  );
+}
+
 export default function UnrivaledSportsParkPage() {
   return (
     <StoryPage
@@ -84,6 +130,9 @@ export default function UnrivaledSportsParkPage() {
         headline: TITLE,
         subheadline:
           "Same six replica ballparks at Pecos and Washington, new name, new turf and renovated restaurants, plus free community days promised for 2027.",
+        image: HERO_IMG,
+        imageAlt: HERO_ALT,
+        imageCredit: AI_NOTE,
         backLink: { label: "All guides", href: "/guides" },
       }}
       relatedStories={{
@@ -243,6 +292,11 @@ export default function UnrivaledSportsParkPage() {
       </StorySection>
 
       <StorySection muted heading="Before you go">
+        <Figure
+          src="/images/unrivaled-sports-park-las-vegas-entrance.webp"
+          alt="Unrivaled Sports Park Las Vegas entrance with a large baseball sculpture."
+          caption={`The entrance to Unrivaled Sports Park Las Vegas. ${AI_NOTE}`}
+        />
         <ul className="list-disc space-y-3 pl-5 text-body-lg text-lvinit-warmgray">
           <li>
             <span className="text-lvinit-black">Park vs. ballpark:</span> the
@@ -283,10 +337,8 @@ export default function UnrivaledSportsParkPage() {
             million.
           </li>
           <li>
-            <span className="text-lvinit-black">Photos.</span> LVINIT
-            doesn&rsquo;t have its own photos of the renovated park yet, so
-            this page runs without one rather than using renderings or old Big
-            League Dreams pictures.
+            <span className="text-lvinit-black">Photos.</span> The images on
+            this page were edited and extended with AI.
           </li>
         </ul>
         <p className="mt-5 text-body-lg text-lvinit-warmgray">
