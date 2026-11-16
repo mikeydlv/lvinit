@@ -262,6 +262,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.7,
     },
     {
+      url: `${BASE_URL}/guides/lee-canyon-2026-27-season-west-bowl-las-vegas`,
+      lastModified: new Date("2026-11-16"),
+      changeFrequency: "monthly",
+      priority: 0.7,
+    },
+    {
       url: `${BASE_URL}/guides/red-rock-legacy-trail-summerlin-las-vegas`,
       lastModified: new Date("2026-11-15"),
       changeFrequency: "monthly",
