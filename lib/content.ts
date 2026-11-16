@@ -264,15 +264,14 @@ export const guides: Guide[] = [
     publishedAt: "2026-11-15",
     category: "Local Feature",
     // Built by the LVINIT Daily Publisher from Local Radar
-    // LR-RED-ROCK-LEGACY-TRAIL. No first-party photo of the Legacy Trail
-    // exists yet and no library asset shows it, so the card uses a generated
-    // LVINIT editorial cover:
-    //   node scripts/generate-guide-cover.mjs \
-    //     --slug red-rock-legacy-trail-summerlin-las-vegas \
-    //     --category "Local Feature" --subject "Red Rock Legacy Trail" \
-    //     --out red-rock-legacy-trail-editorial-cover.webp
-    image: "/images/covers/red-rock-legacy-trail-editorial-cover.webp",
-    imageMode: "editorial-cover",
+    // LR-RED-ROCK-LEGACY-TRAIL. Card image = the article hero: an
+    // AI-processed version of a Las Vegas Review-Journal photo, uploaded by
+    // Mikey 2026-11-16 (the article credits the source and notes the AI
+    // processing). Publication permission pending. Superseded generated
+    // cover deleted.
+    image: "/images/hero/red-rock-legacy-trail-cyclists-bridge-hero.webp",
+    imageAlt:
+      "Cyclists crossing the Red Rock Legacy Trail bridge with mountains behind them.",
     href: "/guides/red-rock-legacy-trail-summerlin-las-vegas",
   },
   {
