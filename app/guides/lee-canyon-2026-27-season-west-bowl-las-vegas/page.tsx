@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { buildStoryMetadata, type StoryMeta } from "@/lib/story";
 import { StoryPage, StoryLede, StorySection } from "@/components/story";
@@ -36,13 +37,22 @@ import { StoryPage, StoryLede, StorySection } from "@/components/story";
 // OMITTED ON PURPOSE: current ticket prices, opening-day hours/lifts/runs,
 //   summit/base elevations, specific chain-law wording, any first-person
 //   visit claim (no first-party media exists yet).
-// IMAGERY: the Media Image Library has no Lee Canyon / Mt. Charleston snow
-//   imagery and no first-party media was added this morning, so the page
-//   runs without a hero photo and the card uses a generated editorial cover.
-//   No Media Image Library usage changes.
+// IMAGERY (updated 2026-11-16): three photos uploaded by Mikey to the repo
+//   after publication, each AI-extended horizontally from a source photo (per
+//   Mikey). Optimized to WebP with Sharp at their native 1672x941; the
+//   uploaded PNGs were replaced by the WebP copies. Every placement carries an
+//   "Image extended with AI" note. Hero/card/OG: lift terminal under
+//   construction. Inline: crew assembling a lift terminal ("What's new this
+//   season") and a snowy ridge ("The bigger picture"), captioned as winter
+//   scenery, not current conditions. Not Media Image Library files, so no
+//   usedOn/usage records change. The generated editorial cover was deleted.
 // ---------------------------------------------------------------------------
 
 const PATH = "/guides/lee-canyon-2026-27-season-west-bowl-las-vegas";
+const HERO_IMG = "/images/hero/lee-canyon-west-bowl-2026-27-hero.webp";
+const HERO_ALT =
+  "Ski lift terminal under construction at Lee Canyon with a rocky mountain backdrop.";
+const AI_NOTE = "Image extended with AI.";
 const linkCls =
   "text-lvinit-blue underline underline-offset-4 decoration-transparent hover:decoration-lvinit-blue";
 const extCls = "text-lvinit-blue underline underline-offset-4";
@@ -62,6 +72,10 @@ const meta: StoryMeta = {
   description:
     "Lee Canyon, the ski area up Lee Canyon Road from Las Vegas, opens for the 2026-27 season on Friday, Nov. 20. What the new West Bowl chairlift adds, when the new terrain is expected, and what to know before you drive up.",
   path: PATH,
+  image: HERO_IMG,
+  imageWidth: 1672,
+  imageHeight: 941,
+  imageAlt: HERO_ALT,
   datePublished: "2026-11-16",
   dateModified: "2026-11-16",
   author: "LVINIT Editorial",
@@ -74,6 +88,38 @@ const meta: StoryMeta = {
 
 export const metadata: Metadata = buildStoryMetadata(meta);
 
+/**
+ * Inline body photo at its native landscape ratio: intrinsic width/height
+ * reserve space (no layout shift), w-full h-auto scales without stretching or
+ * cropping, and next/image lazy-loads it by default.
+ */
+function Figure({
+  src,
+  alt,
+  caption,
+}: {
+  src: string;
+  alt: string;
+  caption: string;
+}) {
+  return (
+    <figure className="mt-8">
+      <Image
+        src={src}
+        alt={alt}
+        width={1672}
+        height={941}
+        loading="lazy"
+        sizes="(max-width: 768px) 100vw, 680px"
+        className="h-auto w-full rounded-lg bg-lvinit-lightgray"
+      />
+      <figcaption className="mt-3 text-caption text-lvinit-warmgray">
+        {caption}
+      </figcaption>
+    </figure>
+  );
+}
+
 export default function LeeCanyonSeasonPage() {
   return (
     <StoryPage
@@ -83,6 +129,9 @@ export default function LeeCanyonSeasonPage() {
         headline: TITLE,
         subheadline:
           "The ski area up Lee Canyon Road opens Friday, Nov. 20. This season adds a new chairlift and a new zone of trails on the west side of the mountain, plus two more surface lifts.",
+        image: HERO_IMG,
+        imageAlt: HERO_ALT,
+        imageCredit: AI_NOTE,
         backLink: { label: "All guides", href: "/guides" },
       }}
       relatedStories={{
@@ -166,6 +215,11 @@ export default function LeeCanyonSeasonPage() {
           Bowl zone, roughly 1,370 feet long and climbing 800 vertical feet,
           that &ldquo;brings five new trails to the mountain.&rdquo;
         </p>
+        <Figure
+          src="/images/lee-canyon-west-bowl-lift-construction.webp"
+          alt="Workers assembling a green ski lift terminal at Lee Canyon."
+          caption={`Lift construction at Lee Canyon. ${AI_NOTE}`}
+        />
         <p className="mt-5 text-body-lg text-lvinit-warmgray">
           KSNV&rsquo;s Nov. 7 report uses a slightly different version of the
           details. It calls the area the Wild West Bowl, counts six new trails
@@ -232,6 +286,11 @@ export default function LeeCanyonSeasonPage() {
           What it is: real snow, a real lift-served mountain and a beginner
           area, close enough to the valley for a half day.
         </p>
+        <Figure
+          src="/images/lee-canyon-snowy-mountain-winter.webp"
+          alt="Snow-covered mountain ridge and pine forest at Lee Canyon."
+          caption={`Lee Canyon in winter. Not a view of current conditions. ${AI_NOTE}`}
+        />
       </StorySection>
 
       <StorySection heading="Tickets: buy ahead">
@@ -349,10 +408,9 @@ export default function LeeCanyonSeasonPage() {
             Not quoted here. Check the resort&rsquo;s site.
           </li>
           <li>
-            <span className="text-lvinit-black">Photos.</span> LVINIT
-            doesn&rsquo;t have its own Lee Canyon photos yet, so this page runs
-            without one rather than passing off another part of the Spring
-            Mountains as Lee Canyon.
+            <span className="text-lvinit-black">Photos.</span> The photos on
+            this page were extended horizontally with AI from source photos,
+            and the snow photo isn&rsquo;t a view of current conditions.
           </li>
         </ul>
       </StorySection>
