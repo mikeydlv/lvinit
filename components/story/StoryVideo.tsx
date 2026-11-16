@@ -19,6 +19,12 @@ export type StoryVideoProps = {
    * for the default direct lazy embed — existing usages are unaffected.
    */
   poster?: string;
+  /**
+   * Optional canonical YouTube watch URL (e.g. "https://www.youtube.com/watch?v=ID").
+   * When set, a "Watch on YouTube" link renders below the player. Omit to keep
+   * the player alone — existing usages are unaffected.
+   */
+  watchUrl?: string;
 };
 
 /**
@@ -35,6 +41,7 @@ export default function StoryVideo({
   intro,
   id = "watch",
   poster,
+  watchUrl,
 }: StoryVideoProps) {
   return (
     <section id={id} aria-label={heading} className="scroll-mt-24">
@@ -71,6 +78,19 @@ export default function StoryVideo({
               />
             )}
           </div>
+          {watchUrl && (
+            <p className="mt-4 text-body">
+              <a
+                href={watchUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-lvinit-blue underline underline-offset-4 decoration-transparent hover:decoration-lvinit-blue"
+              >
+                Watch on YouTube
+                <span className="sr-only"> (opens in a new tab)</span>
+              </a>
+            </p>
+          )}
         </div>
       </Container>
     </section>

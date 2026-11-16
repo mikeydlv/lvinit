@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { buildStoryMetadata, type StoryMeta } from "@/lib/story";
 import Container from "@/components/ui/Container";
-import { StoryPage, StoryLede, StorySection } from "@/components/story";
+import { StoryPage, StoryLede, StorySection, StoryVideo } from "@/components/story";
 
 // ---------------------------------------------------------------------------
 // BUYER NEWS — Zillow Home Loans' FHA down payment assistance, launched
@@ -56,7 +56,20 @@ import { StoryPage, StoryLede, StorySection } from "@/components/story";
 // - Hero (also the homepage/guides card): supplied by Mikey and uploaded to
 //   public/images/hero on 2026-10-28 at his direction. Not a Media Image
 //   Library file, so there is no library `usage` entry to record.
+// - VIDEO (added 2026-11-16): Mikey's long-form explainer on @LVINIT,
+//   youtube.com/watch?v=Gbkw0Llc8Jk (URL supplied by Mikey). Verified
+//   2026-11-16 from YouTube's oEmbed and watch page: public, channel
+//   youtube.com/@lvinit, 7:36 (PT7M36S, not a Short), published
+//   2026-11-11T11:54:35-08:00, and the description covers the program,
+//   eligibility, a $400,000 example, closing costs and conditional forgiveness.
+//   Mikey is testing titles, so VIDEO_TITLE is the title as of that check.
+//   Direct youtube-nocookie lazy embed via StoryVideo, as on other guides;
+//   VideoObject thumbnail is YouTube's own maxresdefault image.
 // ---------------------------------------------------------------------------
+
+const YOUTUBE_ID = "Gbkw0Llc8Jk";
+const VIDEO_TITLE = "Buy a House With No Down Payment? Zillow’s Program Explained";
+const VIDEO_URL = `https://www.youtube.com/watch?v=${YOUTUBE_ID}`;
 
 const HERO_IMAGE = "/images/hero/zillow-down-payment-assistance-nevada-hero.png";
 const HERO_ALT =
@@ -81,6 +94,16 @@ const meta: StoryMeta = {
       path: "/guides/zillow-down-payment-assistance-nevada",
     },
   ],
+  video: {
+    name: VIDEO_TITLE,
+    description:
+      "Mikey Del Rosario of The Scofield Group breaks down Zillow Home Loans' FHA down payment assistance: who may qualify, how the assistance works, a $400,000 purchase example, the closing costs buyers still need to plan for, and the assistance loan's conditional forgiveness and repayment rules if you sell or refinance.",
+    thumbnailUrl: `https://i.ytimg.com/vi/${YOUTUBE_ID}/maxresdefault.jpg`,
+    uploadDate: "2026-11-11T11:54:35-08:00",
+    duration: "PT7M36S",
+    embedUrl: `https://www.youtube.com/embed/${YOUTUBE_ID}`,
+    contentUrl: VIDEO_URL,
+  },
 };
 
 export const metadata: Metadata = buildStoryMetadata(meta);
@@ -267,6 +290,16 @@ export default function ZillowDownPaymentAssistanceNevadaPage() {
           on it.
         </p>
       </StoryLede>
+
+      <StoryVideo
+        id="watch"
+        eyebrow="Watch"
+        heading="Watch: Zillow Down Payment Assistance Explained"
+        intro="Prefer to watch? Mikey Del Rosario breaks down how the assistance works, what Nevada buyers should know, and the costs and conditions to consider."
+        youtubeId={YOUTUBE_ID}
+        title={`${VIDEO_TITLE} | Mikey Del Rosario, LVINIT`}
+        watchUrl={VIDEO_URL}
+      />
 
       <FactsPanel />
 
