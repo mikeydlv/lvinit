@@ -1,23 +1,24 @@
 # LVINIT Weekly Trend Summary
-WEEK ENDING: 2026-11-09
+WEEK ENDING: 2026-11-16
 
-_Built from 7 daily reports: 2026-11-03, 2026-11-04, 2026-11-05, 2026-11-06, 2026-11-07, 2026-11-08, 2026-11-09. Discovery only — nothing has been published._
+_Built from 7 daily reports: 2026-11-10, 2026-11-11, 2026-11-12, 2026-11-13, 2026-11-14, 2026-11-15, 2026-11-16. Discovery only — nothing has been published._
 
 # BEST CONTENT OPPORTUNITIES THIS WEEK
 
-1. **New neighborhood restaurant opening in southwest Las Vegas** — 31/40, P2 — STRONG OPPORTUNITY, RUMORED / UNCONFIRMED  
-Full write-up: 2026-11-05-local-trends.md
+1. **Clark County breaks ground on Blue Diamond Wash Trail project in southwest valley** — 30/40, P2 — STRONG OPPORTUNITY, UNDER CONSTRUCTION  
+Full write-up: 2026-11-11-local-trends.md
 
-2. **Mosaic Church to offer $1-per-gallon gas discount at Green Valley Grocery** — 28/40, P2 — STRONG OPPORTUNITY, RUMORED / UNCONFIRMED  
-Full write-up: 2026-11-09-local-trends.md
+2. **‘We are building community’: New trail coming to southwest Las Vegas** — 30/40, P2 — STRONG OPPORTUNITY, RUMORED / UNCONFIRMED  
+Full write-up: 2026-11-11-local-trends.md
 
-3. —
+3. **Advocates say abandoned dog Beau raises larger animal cruelty concerns** — 29/40, P2 — STRONG OPPORTUNITY, RUMORED / UNCONFIRMED  
+Full write-up: 2026-11-10-local-trends.md
 
 # BEST FIELD SHOOT
 
-**New neighborhood restaurant opening in southwest Las Vegas** — 31/40, P2 — STRONG OPPORTUNITY, RUMORED / UNCONFIRMED  
+**Clark County breaks ground on Blue Diamond Wash Trail project in southwest valley** — 30/40, P2 — STRONG OPPORTUNITY, UNDER CONSTRUCTION  
 Where: The site itself in Southwest Las Vegas — confirm the location from the source before driving out.  
-Full write-up: 2026-11-05-local-trends.md
+Full write-up: 2026-11-11-local-trends.md
 
 # BEST CAROUSEL
 
@@ -25,8 +26,8 @@ Nothing this week earned this slot.
 
 # BEST SHORT-FORM VIDEO
 
-**Mosaic Church to offer $1-per-gallon gas discount at Green Valley Grocery** — 28/40, P2 — STRONG OPPORTUNITY, RUMORED / UNCONFIRMED  
-Full write-up: 2026-11-09-local-trends.md
+**‘We are building community’: New trail coming to southwest Las Vegas** — 30/40, P2 — STRONG OPPORTUNITY, RUMORED / UNCONFIRMED  
+Full write-up: 2026-11-11-local-trends.md
 
 # BEST LONG-FORM VIDEO
 
@@ -34,13 +35,13 @@ Nothing this week earned this slot.
 
 # BEST LVINIT ARTICLE
 
-**New neighborhood restaurant opening in southwest Las Vegas** — 31/40, P2 — STRONG OPPORTUNITY, RUMORED / UNCONFIRMED  
-Angle: Possible update to /neighborhoods/southwest-las-vegas  
-Full write-up: 2026-11-05-local-trends.md
+**Advocates say abandoned dog Beau raises larger animal cruelty concerns** — 29/40, P2 — STRONG OPPORTUNITY, RUMORED / UNCONFIRMED  
+Angle: Possible new article — needs Mikey's angle.  
+Full write-up: 2026-11-10-local-trends.md
 
 # TOP EMERGING NEIGHBORHOOD
 
-**Clark County** — 6 topics this week: Clark County voters tell News 3 their top issues ahead of Election Day; Allegiant Stadium to welcome thousands of Clark County voters on Election Day; Clark County approves quicker, easier short-term rental application process; First-Time Candidate’s Unconventional Campaign Said No To Corporate/PAC Money, Emphasized Light Rail, Shunned Traditional Election Marketing — And She Won Clark County Commissioner Race
+**Northwest Las Vegas** — 4 topics this week: Lockdown lifted at Shadow Ridge High School after 'unsubstantiated' threat; A park, a playground and 18 bronze statues: Las Vegas unveils veterans memorial; Families oppose northwest Las Vegas Valley school boundary changes; $13.4 million Iron Mountain Rd. project begins in northwest valley, adds drains and lights
 
 # TOP AUDIENCE QUESTION
 
@@ -48,8 +49,8 @@ No clear, recurring audience question surfaced this week.
 
 # TOP DEVELOPMENT TO WATCH
 
-**New neighborhood restaurant opening in southwest Las Vegas** — RUMORED / UNCONFIRMED, 31/40, Southwest Las Vegas. First seen 2026-11-05; last change 2026-11-05.  
-Rules-only mode — source summary: New neighborhood restaurant opening in southwest Las Vegas
+**Clark County breaks ground on Blue Diamond Wash Trail project in southwest valley** — UNDER CONSTRUCTION, 30/40, Southwest Las Vegas. First seen 2026-11-11; last change 2026-11-11.  
+Rules-only mode — source summary: Clark County officials broke ground on a new trail project in the southwest Las Vegas Valley on Tuesday, aimed at improving accessibility and connectivity for p
 
 # ONE THING MIKEY SHOULD NOT WASTE TIME ON
 

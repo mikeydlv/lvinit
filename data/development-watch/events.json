@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "agent": "development-watch",
-  "updated": "2026-11-15",
+  "updated": "2026-11-16",
   "events": {
     "01c19f40d9a1": {
       "id": "DEV-2026-11-11-004",
@@ -5012,6 +5012,59 @@
         "queued": []
       }
     },
+    "73fdb355e0e9": {
+      "id": "DEV-2026-11-16-002",
+      "fingerprint": "73fdb355e0e9",
+      "entity_id": "DEV-P-24D37A28",
+      "entity_name": "Unnamed residential (Downtown Las Vegas) — \"Downtown Las Vegas land sells for big new housing project\"",
+      "change_class": "NEW",
+      "changes": [
+        "first time this project has been seen"
+      ],
+      "event_type": "announcement",
+      "status": "unclear",
+      "prior_status": null,
+      "first_seen": "2026-11-16",
+      "last_seen": "2026-11-16",
+      "times_seen": 1,
+      "lifecycle": "NEW",
+      "lifecycle_history": [
+        {
+          "date": "2026-11-16",
+          "lifecycle": "NEW"
+        }
+      ],
+      "action": "MONITOR_ONLY",
+      "target": null,
+      "score": 46,
+      "confidence": "Low",
+      "sources": [
+        {
+          "name": "Las Vegas Review-Journal",
+          "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxOXy1MUjZ1WTdiNm42anRlOVpmOFZ5QzZkb3RucEN4RlpFVHlLMzdjakk3cHhqQmpIdGk2Z0NRUENKcEN4WmxoR2dEU0I4NmQtVHFkc1RzWkFEbTNUVlN2Ylp3cTJYOHdYZ3B3RXBObjRIaUg4eTNNNHdvTGl4NzR0ZnNzcFZpVEZYYTNXbTYwMG5QNml5UElCUlVsc25XeGdBYUpTMXVMakRfX2RUc2E2NDFKbw",
+          "authority": 8,
+          "published": "2026-11-16T14:18:22.000Z"
+        },
+        {
+          "name": "Las Vegas Review-Journal — Business",
+          "url": "https://reviewjournal.com/business/housing/downtown-las-vegas-land-sells-for-big-new-housing-project-3914984",
+          "authority": 8,
+          "published": "2026-11-16T14:00:30.000Z"
+        }
+      ],
+      "superseded_by": null,
+      "handoff": {
+        "eligible": false,
+        "blockers": [
+          "NOT_A_PUBLISHER_ACTION",
+          "SCORE_BELOW_THRESHOLD",
+          "CONFIDENCE_NOT_HIGH",
+          "NO_PRIMARY_SOURCE",
+          "PROVISIONAL_ENTITY"
+        ],
+        "queued": []
+      }
+    },
     "7677098fb604": {
       "id": "DEV-2026-09-24-002",
       "fingerprint": "7677098fb604",
@@ -7050,7 +7103,7 @@
       "first_seen": "2026-09-29",
       "last_seen": "2026-10-01",
       "times_seen": 2,
-      "lifecycle": "PERSISTING",
+      "lifecycle": "RESOLVED",
       "lifecycle_history": [
         {
           "date": "2026-09-29",
@@ -7059,6 +7112,10 @@
         {
           "date": "2026-10-01",
           "lifecycle": "PERSISTING"
+        },
+        {
+          "date": "2026-11-16",
+          "lifecycle": "RESOLVED (aged out)"
         }
       ],
       "action": "DUPLICATE",
@@ -7745,11 +7802,15 @@
       "first_seen": "2026-10-01",
       "last_seen": "2026-10-01",
       "times_seen": 1,
-      "lifecycle": "NEW",
+      "lifecycle": "RESOLVED",
       "lifecycle_history": [
         {
           "date": "2026-10-01",
           "lifecycle": "NEW"
+        },
+        {
+          "date": "2026-11-16",
+          "lifecycle": "RESOLVED (aged out)"
         }
       ],
       "action": "ADD_TO_NEIGHBORHOOD_GUIDE",
@@ -7788,8 +7849,8 @@
       "status": "partially open",
       "prior_status": "partially open",
       "first_seen": "2026-10-06",
-      "last_seen": "2026-10-13",
-      "times_seen": 2,
+      "last_seen": "2026-11-16",
+      "times_seen": 3,
       "lifecycle": "DUPLICATE",
       "lifecycle_history": [
         {
@@ -7799,7 +7860,7 @@
       ],
       "action": "DUPLICATE",
       "target": "/neighborhoods/summerlin",
-      "score": 64,
+      "score": 57,
       "confidence": "Medium",
       "sources": [
         {
@@ -7813,6 +7874,12 @@
           "url": "https://summerlin.com/summerlins-grand-park-village-teeming-with-new-home-options",
           "authority": 5,
           "published": "2026-10-13T11:02:44.000Z"
+        },
+        {
+          "name": "Summerlin news",
+          "url": "https://summerlin.com/kitchens-at-the-heart-of-every-summerlin-home",
+          "authority": 5,
+          "published": "2026-11-16T13:55:26.000Z"
         }
       ],
       "superseded_by": null,
@@ -8356,11 +8423,11 @@
       ],
       "event_type": "construction",
       "status": "under construction",
-      "prior_status": null,
+      "prior_status": "approved",
       "first_seen": "2026-10-17",
-      "last_seen": "2026-10-17",
-      "times_seen": 1,
-      "lifecycle": "RESOLVED",
+      "last_seen": "2026-11-16",
+      "times_seen": 2,
+      "lifecycle": "UPDATED",
       "lifecycle_history": [
         {
           "date": "2026-10-17",
@@ -8369,12 +8436,16 @@
         {
           "date": "2026-10-20",
           "lifecycle": "RESOLVED"
+        },
+        {
+          "date": "2026-11-16",
+          "lifecycle": "UPDATED"
         }
       ],
       "action": "MONITOR_ONLY",
       "target": null,
-      "score": 48,
-      "confidence": "Low",
+      "score": 58,
+      "confidence": "High",
       "sources": [
         {
           "name": "FOX5 Vegas",
@@ -8387,6 +8458,12 @@
           "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxOUWxRU3dOYmhvVUhUZFE1S3lPd0xuV1JwRXNmZjJKbEllWlY4WmgwZG5Idkl2Q1VNNjFGZ1JSQXBoZ1lCdnZ3a0kyU3NLRHc4SnVQampxWlFGQk5SV3B2MDdSU0lpU0ZkTTV0Y1dHTlI3MDRuc2J1ZE9xQjFZZklRSnN6algySUl1Nzh1NlQ5UmZ4cWh6SW1NVVlLQUZ4NjJzVXdnNVdOQWR2UTg",
           "authority": 9,
           "published": "2026-10-16T21:46:15.000Z"
+        },
+        {
+          "name": "City of Las Vegas newsroom",
+          "url": "https://content.govdelivery.com/accounts/NVLASVEGAS/bulletins/4310405",
+          "authority": 1,
+          "published": "2026-11-16T18:00:24.000Z"
         }
       ],
       "superseded_by": "78a530476b0b",
@@ -8395,8 +8472,7 @@
         "blockers": [
           "NOT_A_PUBLISHER_ACTION",
           "SCORE_BELOW_THRESHOLD",
-          "CONFIDENCE_NOT_HIGH",
-          "NO_PRIMARY_SOURCE"
+          "NOT_NEW"
         ],
         "queued": []
       }
@@ -9706,11 +9782,15 @@
       "first_seen": "2026-10-01",
       "last_seen": "2026-10-01",
       "times_seen": 1,
-      "lifecycle": "NEW",
+      "lifecycle": "RESOLVED",
       "lifecycle_history": [
         {
           "date": "2026-10-01",
           "lifecycle": "NEW"
+        },
+        {
+          "date": "2026-11-16",
+          "lifecycle": "RESOLVED (aged out)"
         }
       ],
       "action": "MONITOR_ONLY",
@@ -9806,6 +9886,51 @@
           "NO_PRIMARY_SOURCE",
           "NOT_NEW",
           "PROVISIONAL_ENTITY"
+        ],
+        "queued": []
+      }
+    },
+    "ee6e596bb241": {
+      "id": "DEV-2026-11-16-001",
+      "fingerprint": "ee6e596bb241",
+      "entity_id": "DEV-ICE-AGE-FOSSILS-STATE-PARK",
+      "entity_name": "Ice Age Fossils State Park",
+      "change_class": "NEW",
+      "changes": [
+        "first time this project has been seen"
+      ],
+      "event_type": "access change",
+      "status": "unclear",
+      "prior_status": null,
+      "first_seen": "2026-11-16",
+      "last_seen": "2026-11-16",
+      "times_seen": 1,
+      "lifecycle": "NEW",
+      "lifecycle_history": [
+        {
+          "date": "2026-11-16",
+          "lifecycle": "NEW"
+        }
+      ],
+      "action": "MONITOR_ONLY",
+      "target": null,
+      "score": 46,
+      "confidence": "Low",
+      "sources": [
+        {
+          "name": "City of Las Vegas newsroom",
+          "url": "https://content.govdelivery.com/accounts/NVLASVEGAS/bulletins/432fd38",
+          "authority": 1,
+          "published": "2026-11-16T21:00:18.000Z"
+        }
+      ],
+      "superseded_by": null,
+      "handoff": {
+        "eligible": false,
+        "blockers": [
+          "NOT_A_PUBLISHER_ACTION",
+          "SCORE_BELOW_THRESHOLD",
+          "CONFIDENCE_NOT_HIGH"
         ],
         "queued": []
       }
@@ -10064,6 +10189,52 @@
         "queued": []
       }
     },
+    "f7a8e59e81b5": {
+      "id": "DEV-2026-11-16-003",
+      "fingerprint": "f7a8e59e81b5",
+      "entity_id": "DEV-NASA-LED-FEDERAL-ACADEMY",
+      "entity_name": "NASA-led Federal academy",
+      "change_class": "NEW",
+      "changes": [
+        "first time this project has been seen"
+      ],
+      "event_type": "filing",
+      "status": "filed",
+      "prior_status": null,
+      "first_seen": "2026-11-16",
+      "last_seen": "2026-11-16",
+      "times_seen": 1,
+      "lifecycle": "NEW",
+      "lifecycle_history": [
+        {
+          "date": "2026-11-16",
+          "lifecycle": "NEW"
+        }
+      ],
+      "action": "MONITOR_ONLY",
+      "target": null,
+      "score": 45,
+      "confidence": "Medium",
+      "sources": [
+        {
+          "name": "Las Vegas Sun — News",
+          "url": "https://lasvegassun.com/news/2026/nov/16/nevada-delegation-urges-nasa-to-pick-state-for-new",
+          "authority": 8,
+          "published": "2026-11-16T18:50:00.000Z"
+        }
+      ],
+      "superseded_by": null,
+      "handoff": {
+        "eligible": false,
+        "blockers": [
+          "NOT_A_PUBLISHER_ACTION",
+          "SCORE_BELOW_THRESHOLD",
+          "CONFIDENCE_NOT_HIGH",
+          "NO_PRIMARY_SOURCE"
+        ],
+        "queued": []
+      }
+    },
     "f7ae41d4b3d8": {
       "id": "DEV-2026-10-24-003",
       "fingerprint": "f7ae41d4b3d8",
@@ -10317,12 +10488,12 @@
       "changes": [
         "approved → partially open"
       ],
-      "event_type": "announcement",
+      "event_type": "partial opening",
       "status": "partially open",
       "prior_status": "partially open",
       "first_seen": "2026-10-11",
-      "last_seen": "2026-11-15",
-      "times_seen": 14,
+      "last_seen": "2026-11-16",
+      "times_seen": 15,
       "lifecycle": "PERSISTING",
       "lifecycle_history": [
         {
@@ -10344,7 +10515,7 @@
       ],
       "action": "DUPLICATE",
       "target": "/guides/aries-henderson",
-      "score": 53,
+      "score": 51,
       "confidence": "Low",
       "sources": [
         {
@@ -10430,6 +10601,12 @@
           "url": "https://news3lv.com/news/local/new-mosaic-mural-the-wonder-of-nature-unveiled-at-centennial-hills-park",
           "authority": 8,
           "published": "2026-11-15T02:05:26.000Z"
+        },
+        {
+          "name": "News 3 Las Vegas",
+          "url": "https://news3lv.com/news/local/vehicle-fire-blocks-two-lanes-on-northbound-i-15-near-jean-traffic-alert-primm",
+          "authority": 8,
+          "published": "2026-11-16T00:21:15.000Z"
         }
       ],
       "superseded_by": "aa389dac718a",
