@@ -246,15 +246,13 @@ export const guides: Guide[] = [
     publishedAt: "2026-11-16",
     category: "Local Feature",
     // Built by the LVINIT Daily Publisher from Local Radar
-    // LR-LEE-CANYON-WEST-BOWL-2026. No first-party Lee Canyon photo exists yet
-    // and no library asset shows it, so the card uses a generated LVINIT
-    // editorial cover:
-    //   node scripts/generate-guide-cover.mjs \
-    //     --slug lee-canyon-2026-27-season-west-bowl-las-vegas \
-    //     --category "Local Feature" --subject "Lee Canyon" \
-    //     --out lee-canyon-editorial-cover.webp
-    image: "/images/covers/lee-canyon-editorial-cover.webp",
-    imageMode: "editorial-cover",
+    // LR-LEE-CANYON-WEST-BOWL-2026. Card image = the article hero, a lift
+    // terminal under construction supplied by Mikey (uploaded 2026-11-16,
+    // AI-extended horizontally from a source photo; the article notes this).
+    // Superseded generated cover deleted.
+    image: "/images/hero/lee-canyon-west-bowl-2026-27-hero.webp",
+    imageAlt:
+      "Ski lift terminal under construction at Lee Canyon with a rocky mountain backdrop.",
     href: "/guides/lee-canyon-2026-27-season-west-bowl-las-vegas",
   },
   {
