@@ -14,7 +14,7 @@ import { StoryPage, StoryLede, StorySection, StoryVideo } from "@/components/sto
 // - Zillow Group investor-relations release, October 28, 2026 (SEATTLE, via
 //   PRNewswire), "Zillow Home Loans will now help eligible buyers cover their
 //   FHA down payment." Source for: 43 states + D.C.; the seven excluded states
-//   (AZ, DE, FL, MA, NY, RI, VA); up to 3.5% of the purchase price or
+//   (AZ, DE, FL, MA, NY, RI, VA -- superseded: see 2026-11-17 note below); up to 3.5% of the purchase price or
 //   appraised value, "whichever is lower"; 640 minimum credit score; FHA
 //   purchase loan through Zillow Home Loans; primary residence; buyer must
 //   qualify for the full monthly payment under standard underwriting; second
@@ -23,6 +23,12 @@ import { StoryPage, StoryLede, StorySection, StoryVideo } from "@/components/sto
 //   moves out, sells or refinances before year five; FHA mortgage insurance
 //   applies; up to 6.5% of the buyer's own funds may be added to reach 10%
 //   down; no income cap or first-time-buyer requirement.
+// - EXCLUDED STATES (updated 2026-11-17): Zillow's current program
+//   disclosure on the Zillow Home Loans FHA down payment assistance page
+//   reads "Not available in AZ, DE, FL, MA, NY, VA, or VT." Rhode Island
+//   (from the Oct 28 release) was replaced with Vermont to match it. The
+//   page's FAQ lists only AZ, DE, FL and NY; the disclosure is treated as
+//   the controlling source.
 // - Zillow's newsroom copy of the same announcement (zillow.com/news/...)
 //   returned HTTP 403 to our fetch. Its URL is linked as the primary
 //   announcement, but every claim here was read from the IR version.
@@ -175,7 +181,7 @@ function Bullet({ children }: { children: React.ReactNode }) {
 const FACTS: { label: string; value: string }[] = [
   { label: "Announced", value: "October 28, 2026, by Zillow Home Loans" },
   { label: "Where", value: "43 states plus Washington, D.C. Nevada is included." },
-  { label: "Not available in", value: "Arizona, Delaware, Florida, Massachusetts, New York, Rhode Island, Virginia" },
+  { label: "Not available in", value: "Arizona, Delaware, Florida, Massachusetts, New York, Vermont, Virginia" },
   { label: "Loan", value: "FHA purchase mortgage through Zillow Home Loans, primary residence only" },
   { label: "Assistance", value: "Up to 3.5% of the purchase price or appraised value, whichever is lower" },
   { label: "Structure", value: "Forgivable second loan: 0% interest, no monthly payment" },
@@ -306,8 +312,8 @@ export default function ZillowDownPaymentAssistanceNevadaPage() {
       <StorySection muted heading="Is Zillow's down payment assistance available in Nevada?">
         <p className="text-body-lg text-lvinit-warmgray">
           Yes. Zillow launched it in 43 states plus Washington, D.C., and Nevada isn&rsquo;t
-          on the exclusion list. The seven states left out are Arizona, Delaware, Florida,
-          Massachusetts, New York, Rhode Island and Virginia. If you&rsquo;ve been looking at
+          on the exclusion list. Zillow&rsquo;s current disclosure lists the seven states left out as
+          Arizona, Delaware, Florida, Massachusetts, New York, Vermont and Virginia. If you&rsquo;ve been looking at
           homes across the river in Arizona as well, that side is out.
         </p>
         <p className="mt-5 text-body-lg text-lvinit-warmgray">
