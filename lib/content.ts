@@ -238,6 +238,19 @@ export type Guide = {
  */
 export const guides: Guide[] = [
   {
+    slug: "iron-mountain-road-extension-decatur-closure-northwest-las-vegas",
+    title: "Decatur Is Closed Near Ice Age Fossils State Park: What the Iron Mountain Road Project Means",
+    dek: "The City of Las Vegas started a $13.4M Iron Mountain Road extension Nov. 16, fully closing Decatur up to the state park entrance. Detours, phases and the expected 2027 finish.",
+    byline: "LVINIT Editorial",
+    date: "November 2026",
+    publishedAt: "2026-11-17",
+    category: "Local Feature",
+    // Built by the LVINIT Daily Publisher from Local Radar assignment
+    // LR-IRON-MOUNTAIN-RD-EXTENSION. No LVINIT photography of the corridor
+    // yet, so the card renders its designed non-photographic fallback.
+    href: "/guides/iron-mountain-road-extension-decatur-closure-northwest-las-vegas",
+  },
+  {
     slug: "lee-canyon-2026-27-season-west-bowl-las-vegas",
     title: "Lee Canyon Opens Nov. 20 With a New Chairlift. Here's What's New on Las Vegas's Local Mountain",
     dek: "The ski area up Lee Canyon Road opens Friday, Nov. 20. What the new West Bowl chairlift adds, when the new terrain is expected, and what to know before you drive up.",
