@@ -1,20 +1,20 @@
 {
   "schema_version": 1,
   "agent": "content-brief-generator",
-  "generatedAt": "2026-11-10T20:25:19.451Z",
-  "reportDate": "2026-11-10",
-  "sourceGeneratedAt": "2026-11-10T20:24:57.794Z",
+  "generatedAt": "2026-11-17T21:39:34.468Z",
+  "reportDate": "2026-11-17",
+  "sourceGeneratedAt": "2026-11-17T21:39:19.461Z",
   "fixture": false,
   "status": "ok",
   "source": {
-    "gscReportDate": "2026-11-09",
+    "gscReportDate": "2026-11-16",
     "gscAvailable": true,
     "gscLowVolume": false,
     "handoffMode": "dry-run"
   },
   "scope": "Publisher actions only. Monitor-only and rejected intents are left out; the full report stays in the content-briefs artifact.",
   "skippedByAction": {
-    "MONITOR_ONLY": 3,
+    "MONITOR_ONLY": 1,
     "REJECT_DUPLICATE": 4
   },
   "privacy": {
@@ -24,7 +24,7 @@
   "publisherNote": "Briefs are inference from search demand. Research and confirm every fact before publishing; never publish Search Console figures as editorial facts.",
   "items": [
     {
-      "id": "BRIEF-2026-11-10-001",
+      "id": "BRIEF-2026-11-17-001",
       "fingerprint": "8c62a8ff3f31",
       "intentKey": "topic:facet:cost+place:henderson",
       "workingTitle": null,
@@ -81,17 +81,17 @@
         "cannibalization": "none"
       },
       "flags": [],
-      "score": 76.7,
+      "score": 83,
       "confidence": "low",
-      "status": "NEW",
+      "status": "PERSISTING",
       "handoffStatus": "REPORT_ONLY",
-      "persistenceRuns": 3,
-      "sourceGscReportDate": "2026-11-09",
+      "persistenceRuns": 4,
+      "sourceGscReportDate": "2026-11-16",
       "fairHousingFlag": false,
       "sourceValidation": "ok"
     },
     {
-      "id": "BRIEF-2026-11-10-002",
+      "id": "BRIEF-2026-11-17-002",
       "fingerprint": "d585c5768966",
       "intentKey": "topic:place:summerlin",
       "workingTitle": null,
@@ -129,9 +129,9 @@
           "overlap": 0.7
         },
         {
-          "route": "/guides/pavilion-center-pool-olympic-size-aquatics-summerlin",
+          "route": "/guides/red-rock-legacy-trail-summerlin-las-vegas",
           "relation": "substantial",
-          "overlap": 0.657
+          "overlap": 0.68
         }
       ],
       "duplicateCheck": {
@@ -149,8 +149,180 @@
       "confidence": "high",
       "status": "PERSISTING",
       "handoffStatus": "WOULD_HAND_OFF (dry run)",
-      "persistenceRuns": 7,
-      "sourceGscReportDate": "2026-11-09",
+      "persistenceRuns": 8,
+      "sourceGscReportDate": "2026-11-16",
+      "fairHousingFlag": false,
+      "sourceValidation": "ok"
+    },
+    {
+      "id": "BRIEF-2026-11-17-003",
+      "fingerprint": "02fc0cb6353e",
+      "intentKey": "topic:concept:mortgage-rates",
+      "workingTitle": null,
+      "primaryQuestion": "What does someone deciding where to live need to understand about mortgage rates?",
+      "intent": "discovery",
+      "cluster": "market",
+      "contentType": "focused update of an existing page",
+      "recommendedAction": "UPDATE_EXISTING",
+      "target": "/guides/las-vegas-mortgage-rates",
+      "proposedRoute": null,
+      "keyQuestions": [
+        "What does someone deciding where to live need to understand about mortgage rates?",
+        "What do the current numbers actually mean for someone deciding now?",
+        "What would change that reading?"
+      ],
+      "relatedPages": [
+        {
+          "route": "/guides/las-vegas-mortgage-rates",
+          "relation": "same",
+          "overlap": 1
+        },
+        {
+          "route": "/guides/las-vegas-mortgage-rates-19-month-high",
+          "relation": "same",
+          "overlap": 0.867
+        },
+        {
+          "route": "/guides/las-vegas-mortgage-rates-approach-7-percent",
+          "relation": "same",
+          "overlap": 0.8
+        },
+        {
+          "route": "/guides/las-vegas-mortgage-rates-september-2026",
+          "relation": "substantial",
+          "overlap": 0.74
+        },
+        {
+          "route": "/guides/is-las-vegas-a-buyers-market",
+          "relation": "adjacent",
+          "overlap": 0.4
+        }
+      ],
+      "duplicateCheck": {
+        "verdict": "same",
+        "ambiguous": false,
+        "bestMatch": {
+          "route": "/guides/las-vegas-mortgage-rates",
+          "overlap": 1,
+          "relation": "same"
+        },
+        "cannibalization": "potential"
+      },
+      "flags": [
+        "CANNIBALIZATION"
+      ],
+      "score": 57.3,
+      "confidence": "low",
+      "status": "NEW",
+      "handoffStatus": "REPORT_ONLY",
+      "persistenceRuns": 4,
+      "sourceGscReportDate": "2026-11-16",
+      "fairHousingFlag": false,
+      "sourceValidation": "ok"
+    },
+    {
+      "id": "BRIEF-2026-11-17-004",
+      "fingerprint": "8508db5792d9",
+      "intentKey": "topic:concept:home-prices",
+      "workingTitle": null,
+      "primaryQuestion": "What does someone deciding where to live need to understand about home prices?",
+      "intent": "discovery",
+      "cluster": "market",
+      "contentType": "expansion of an existing page",
+      "recommendedAction": "EXPAND_EXISTING",
+      "target": "/guides/las-vegas-starter-home-prices-2026",
+      "proposedRoute": null,
+      "keyQuestions": [
+        "What does someone deciding where to live need to understand about home prices?",
+        "What do the current numbers actually mean for someone deciding now?",
+        "What would change that reading?"
+      ],
+      "relatedPages": [
+        {
+          "route": "/guides/las-vegas-home-prices-august-2026",
+          "relation": "substantial",
+          "overlap": 0.6
+        },
+        {
+          "route": "/guides/las-vegas-home-prices-july-2026",
+          "relation": "substantial",
+          "overlap": 0.6
+        },
+        {
+          "route": "/guides/las-vegas-starter-home-prices-2026",
+          "relation": "substantial",
+          "overlap": 0.6
+        },
+        {
+          "route": "/guides/will-las-vegas-home-prices-drop",
+          "relation": "substantial",
+          "overlap": 0.6
+        },
+        {
+          "route": "/guides/las-vegas-mortgage-rates",
+          "relation": "adjacent",
+          "overlap": 0.29
+        }
+      ],
+      "duplicateCheck": {
+        "verdict": "substantial",
+        "ambiguous": false,
+        "bestMatch": {
+          "route": "/guides/las-vegas-home-prices-august-2026",
+          "overlap": 0.6,
+          "relation": "substantial"
+        },
+        "cannibalization": "none"
+      },
+      "flags": [],
+      "score": 56.1,
+      "confidence": "low",
+      "status": "NEW",
+      "handoffStatus": "REPORT_ONLY",
+      "persistenceRuns": 2,
+      "sourceGscReportDate": "2026-11-16",
+      "fairHousingFlag": false,
+      "sourceValidation": "ok"
+    },
+    {
+      "id": "BRIEF-2026-11-17-005",
+      "fingerprint": "6c4fcbdfe03a",
+      "intentKey": "topic:concept:development+place:north-las-vegas",
+      "workingTitle": null,
+      "primaryQuestion": null,
+      "intent": "topic",
+      "cluster": "development",
+      "contentType": null,
+      "recommendedAction": "UPDATE_EXISTING",
+      "target": "/guides/one-civic-center-north-las-vegas-redevelopment",
+      "proposedRoute": null,
+      "keyQuestions": [],
+      "relatedPages": [
+        {
+          "route": "/neighborhoods/north-las-vegas",
+          "relation": "ranking",
+          "overlap": null
+        }
+      ],
+      "duplicateCheck": {
+        "verdict": "same",
+        "ambiguous": false,
+        "bestMatch": {
+          "route": "/guides/one-civic-center-north-las-vegas-redevelopment",
+          "overlap": 0.8,
+          "relation": "same"
+        },
+        "cannibalization": "none"
+      },
+      "flags": [
+        "CURRENT_RESEARCH_REQUIRED"
+      ],
+      "score": 49.7,
+      "confidence": "low",
+      "status": "NEW",
+      "handoffStatus": "NOT_APPLICABLE",
+      "persistenceRuns": 1,
+      "sourceGscReportDate": "2026-11-16",
       "fairHousingFlag": false,
       "sourceValidation": "ok"
     }
