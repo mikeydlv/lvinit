@@ -238,6 +238,19 @@ export type Guide = {
  */
 export const guides: Guide[] = [
   {
+    slug: "lorenzi-park-tennis-center-central-las-vegas",
+    title: "Lorenzi Park Is Getting a $4.9M Tennis Center. Here's What's Being Built",
+    dek: "The City of Las Vegas breaks ground Nov. 19 on three new courts, 10 refinished courts and a new clubhouse at Lorenzi Park, renamed the Marty Hennessey Tennis Center.",
+    byline: "LVINIT Editorial",
+    date: "November 2026",
+    publishedAt: "2026-11-18",
+    category: "Local Feature",
+    // Built by the LVINIT Daily Publisher from Local Radar assignment
+    // LR-LORENZI-PARK-TENNIS-CENTER. No LVINIT photography of Lorenzi Park
+    // yet, so the card renders its designed non-photographic fallback.
+    href: "/guides/lorenzi-park-tennis-center-central-las-vegas",
+  },
+  {
     slug: "iron-mountain-road-extension-decatur-closure-northwest-las-vegas",
     title: "Decatur Is Closed Near Ice Age Fossils State Park: What the Iron Mountain Road Project Means",
     dek: "The City of Las Vegas started a $13.4M Iron Mountain Road extension Nov. 16, fully closing Decatur up to the state park entrance. Detours, phases and the expected 2027 finish.",
