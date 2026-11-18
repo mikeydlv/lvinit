@@ -262,6 +262,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.7,
     },
     {
+      url: `${BASE_URL}/guides/lorenzi-park-tennis-center-central-las-vegas`,
+      lastModified: new Date("2026-11-18"),
+      changeFrequency: "monthly",
+      priority: 0.7,
+    },
+    {
       url: `${BASE_URL}/guides/iron-mountain-road-extension-decatur-closure-northwest-las-vegas`,
       lastModified: new Date("2026-11-17"),
       changeFrequency: "monthly",
