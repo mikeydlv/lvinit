@@ -262,6 +262,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.7,
     },
     {
+      url: `${BASE_URL}/guides/mountains-edge-recreation-center-regional-park-phase-ii-southwest-las-vegas`,
+      lastModified: new Date("2026-11-19"),
+      changeFrequency: "monthly",
+      priority: 0.7,
+    },
+    {
       url: `${BASE_URL}/guides/lorenzi-park-tennis-center-central-las-vegas`,
       lastModified: new Date("2026-11-18"),
       changeFrequency: "monthly",
