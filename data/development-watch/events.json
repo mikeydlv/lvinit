@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "agent": "development-watch",
-  "updated": "2026-11-18",
+  "updated": "2026-11-19",
   "events": {
     "01c19f40d9a1": {
       "id": "DEV-2026-11-11-004",
@@ -2155,6 +2155,51 @@
           "NO_PRIMARY_SOURCE",
           "NOT_NEW",
           "PROVISIONAL_ENTITY"
+        ],
+        "queued": []
+      }
+    },
+    "3716c16b372b": {
+      "id": "DEV-2026-11-19-001",
+      "fingerprint": "3716c16b372b",
+      "entity_id": "DEV-COMMERCIAL-CENTER",
+      "entity_name": "Commercial Center",
+      "change_class": "MATERIAL_UPDATE",
+      "changes": [
+        "unclear → approved"
+      ],
+      "event_type": "approval",
+      "status": "approved",
+      "prior_status": null,
+      "first_seen": "2026-11-19",
+      "last_seen": "2026-11-19",
+      "times_seen": 1,
+      "lifecycle": "NEW",
+      "lifecycle_history": [
+        {
+          "date": "2026-11-19",
+          "lifecycle": "NEW"
+        }
+      ],
+      "action": "UPDATE_EXISTING_ARTICLE",
+      "target": "/guides/summerlin-vs-henderson-vs-southwest-las-vegas",
+      "score": 64,
+      "confidence": "Medium",
+      "sources": [
+        {
+          "name": "8 News Now",
+          "url": "https://8newsnow.com/news/local-news/insomniac-clark-county-still-negotiating-commercial-center-agreement",
+          "authority": 8,
+          "published": "2026-11-19T06:43:20.000Z"
+        }
+      ],
+      "superseded_by": null,
+      "handoff": {
+        "eligible": false,
+        "blockers": [
+          "SCORE_BELOW_THRESHOLD",
+          "CONFIDENCE_NOT_HIGH",
+          "NO_PRIMARY_SOURCE"
         ],
         "queued": []
       }
@@ -4521,13 +4566,13 @@
       "changes": [
         "first time this project has been seen"
       ],
-      "event_type": "construction",
+      "event_type": "announcement",
       "status": "under construction",
-      "prior_status": null,
+      "prior_status": "under construction",
       "first_seen": "2026-09-30",
-      "last_seen": "2026-09-30",
-      "times_seen": 1,
-      "lifecycle": "RESOLVED",
+      "last_seen": "2026-11-19",
+      "times_seen": 2,
+      "lifecycle": "PERSISTING",
       "lifecycle_history": [
         {
           "date": "2026-09-30",
@@ -4536,27 +4581,40 @@
         {
           "date": "2026-11-15",
           "lifecycle": "RESOLVED (aged out)"
+        },
+        {
+          "date": "2026-11-19",
+          "lifecycle": "PERSISTING"
         }
       ],
-      "action": "ADD_TO_NEIGHBORHOOD_GUIDE",
-      "target": "/neighborhoods/henderson",
-      "score": 62,
-      "confidence": "Medium",
+      "action": "DUPLICATE",
+      "target": "/guides/henderson-vs-southwest-las-vegas",
+      "score": 52,
+      "confidence": "Low",
       "sources": [
         {
           "name": "News 3 Las Vegas",
           "url": "https://news3lv.com/news/local/100m-retail-redevelopment-breaks-ground-henderson-green-valley-ranch-the-cliffs-las-vegas-valley",
           "authority": 8,
           "published": "2026-09-30T13:52:13.000Z"
+        },
+        {
+          "name": "Las Vegas Review-Journal — Business",
+          "url": "https://reviewjournal.com/business/casinos-gaming/henderson-hotel-casino-unveils-final-phase-of-200m-transformation-3916418",
+          "authority": 8,
+          "published": "2026-11-19T17:00:23.000Z"
         }
       ],
       "superseded_by": null,
       "handoff": {
         "eligible": false,
         "blockers": [
+          "NOT_A_PUBLISHER_ACTION",
           "SCORE_BELOW_THRESHOLD",
           "CONFIDENCE_NOT_HIGH",
-          "NO_PRIMARY_SOURCE"
+          "NO_PRIMARY_SOURCE",
+          "NOT_MATERIAL",
+          "NOT_NEW"
         ],
         "queued": []
       }
@@ -5513,6 +5571,59 @@
         "queued": []
       }
     },
+    "7a730e0cb3f8": {
+      "id": "DEV-2026-11-19-002",
+      "fingerprint": "7a730e0cb3f8",
+      "entity_id": "DEV-P-4874637B",
+      "entity_name": "Unnamed residential (Clark County) — \"Clark County approves 77-home plan for Wayne Newton’s former ranch\"",
+      "change_class": "NEW",
+      "changes": [
+        "first time this project has been seen"
+      ],
+      "event_type": "approval",
+      "status": "approved",
+      "prior_status": null,
+      "first_seen": "2026-11-19",
+      "last_seen": "2026-11-19",
+      "times_seen": 1,
+      "lifecycle": "NEW",
+      "lifecycle_history": [
+        {
+          "date": "2026-11-19",
+          "lifecycle": "NEW"
+        }
+      ],
+      "action": "MONITOR_ONLY",
+      "target": null,
+      "score": 55,
+      "confidence": "Low",
+      "sources": [
+        {
+          "name": "FOX5 Vegas",
+          "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxQSEVaRjRxZ0RWVU1SM1lEcGVuYWxyNXQxcVI0ZHdrVVV6Q3prdlRwdTNlMk52RXBNWGVDQTc2anRYa2s5QjhCNmxqMGg5TVBrRFlndGVKUi1RdENKcS1YZTNKNzhjOGdBc0g0TkxXVWZMWnF3UU5QNGVEbFBnbGY4YUVjRmxySDNSSldJRFd4ejVvbkNPeml6djZOSWdFc3k1NVBqdVpSNTVrMGt6MXNZcUxva2zSAbQBQVVfeXFMUEhFWkY0cWdEVlVNUjNZRHBlbmFscjV0MXFSNGR3a1VVekN6a3ZUcHUzZTJOdkVwTVhlQ0E3Nmp0WGtrOUI4QjZsajBoOU1Qa0RZZ3RlSlItUXRDSnEtWGUzSjc4YzhnQXNINE5MV1VmTFpxd1FOUDRlRGxQZ2xmOGFFY0ZsckgzUkpXSURXeHo1b25DT3ppenY2TklnRXN5NTVQanVaUjU1azBrejFzWXFMb2ts",
+          "authority": 8,
+          "published": "2026-11-19T05:37:00.000Z"
+        },
+        {
+          "name": "FOX5 Vegas",
+          "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxOLUtrMXNlb2d6RmU0ME41TEFpLUVwMlV1MkZDMnUxNkw3aW44RWdvQXFWMm5XT3EtN3RrRUd4UVVlbDJidUVyTlBOcGZiamtwd0hkaVVNZDVjRlI0RHczRER1NVgtUWllY1FQbGE4cHdLaTd3MDc5MmRFd1RjMHBzaXRaM1hTZFgwUWp4dElqSXZKckNpbnRGOFRPcWpNX0F40gG0AUFVX3lxTFBIRVpGNHFnRFZVTVIzWURwZW5hbHI1dDFxUjRkd2tVVXpDemt2VHB1M2UyTnZFcE1YZUNBNzZqdFhrazlCOEI2bGowaDlNUGtEWWd0ZUpSLVF0Q0pxLVhlM0o3OGM4Z0FzSDROTFdVZkxacXdRTlA0ZURsUGdsZjhhRWNGbHJIM1JKV0lEV3h6NW9uQ096aXp2Nk5JZ0VzeTU1UGp1WlI1NWswa3oxc1lxTG9rbA",
+          "authority": 8,
+          "published": "2026-11-19T05:37:00.000Z"
+        }
+      ],
+      "superseded_by": null,
+      "handoff": {
+        "eligible": false,
+        "blockers": [
+          "NOT_A_PUBLISHER_ACTION",
+          "SCORE_BELOW_THRESHOLD",
+          "CONFIDENCE_NOT_HIGH",
+          "NO_PRIMARY_SOURCE",
+          "PROVISIONAL_ENTITY"
+        ],
+        "queued": []
+      }
+    },
     "7ab60c9e2147": {
       "id": "DEV-2026-10-17-005",
       "fingerprint": "7ab60c9e2147",
@@ -6020,6 +6131,101 @@
         "queued": []
       }
     },
+    "8b0517109e7f": {
+      "id": "DEV-2026-11-19-006",
+      "fingerprint": "8b0517109e7f",
+      "entity_id": "DEV-P-3F313692",
+      "entity_name": "Unnamed road (Las Vegas (valley-wide)) — \"Winter weather, poor driving conditions prompt closure of Nevada offices\"",
+      "change_class": "NEW",
+      "changes": [
+        "first time this project has been seen"
+      ],
+      "event_type": "access change",
+      "status": "unclear",
+      "prior_status": null,
+      "first_seen": "2026-11-19",
+      "last_seen": "2026-11-19",
+      "times_seen": 1,
+      "lifecycle": "REJECTED",
+      "lifecycle_history": [
+        {
+          "date": "2026-11-19",
+          "lifecycle": "REJECTED"
+        }
+      ],
+      "action": "REJECT_LOW_VALUE",
+      "target": null,
+      "score": 34,
+      "confidence": "Low",
+      "sources": [
+        {
+          "name": "8 News Now",
+          "url": "https://8newsnow.com/news/local-news/winter-weather-poor-driving-conditions-prompt-closure-of-nevada-offices",
+          "authority": 8,
+          "published": "2026-11-19T21:09:14.000Z"
+        }
+      ],
+      "superseded_by": null,
+      "handoff": {
+        "eligible": false,
+        "blockers": [
+          "NOT_A_PUBLISHER_ACTION",
+          "SCORE_BELOW_THRESHOLD",
+          "CONFIDENCE_NOT_HIGH",
+          "NO_PRIMARY_SOURCE",
+          "NOT_NEW",
+          "FAIR_HOUSING_SUBJECT",
+          "PROVISIONAL_ENTITY"
+        ],
+        "queued": []
+      }
+    },
+    "8ed6c9df0ddc": {
+      "id": "DEV-2026-11-19-003",
+      "fingerprint": "8ed6c9df0ddc",
+      "entity_id": "DEV-P-3792E31E",
+      "entity_name": "Unnamed park (Las Vegas (valley-wide)) — \"Ribbon-Cutting For Little Free Library\"",
+      "change_class": "NEW",
+      "changes": [
+        "first time this project has been seen"
+      ],
+      "event_type": "opening",
+      "status": "open",
+      "prior_status": null,
+      "first_seen": "2026-11-19",
+      "last_seen": "2026-11-19",
+      "times_seen": 1,
+      "lifecycle": "NEW",
+      "lifecycle_history": [
+        {
+          "date": "2026-11-19",
+          "lifecycle": "NEW"
+        }
+      ],
+      "action": "MONITOR_ONLY",
+      "target": null,
+      "score": 47,
+      "confidence": "Low",
+      "sources": [
+        {
+          "name": "City of Las Vegas newsroom",
+          "url": "https://content.govdelivery.com/accounts/NVLASVEGAS/bulletins/4332b23",
+          "authority": 1,
+          "published": "2026-11-19T15:00:34.000Z"
+        }
+      ],
+      "superseded_by": null,
+      "handoff": {
+        "eligible": false,
+        "blockers": [
+          "NOT_A_PUBLISHER_ACTION",
+          "SCORE_BELOW_THRESHOLD",
+          "CONFIDENCE_NOT_HIGH",
+          "PROVISIONAL_ENTITY"
+        ],
+        "queued": []
+      }
+    },
     "90a52bc07d13": {
       "id": "DEV-2026-11-18-001",
       "fingerprint": "90a52bc07d13",
@@ -6033,19 +6239,23 @@
       "status": "approved",
       "prior_status": "proposed",
       "first_seen": "2026-11-18",
-      "last_seen": "2026-11-18",
-      "times_seen": 1,
-      "lifecycle": "NEW",
+      "last_seen": "2026-11-19",
+      "times_seen": 2,
+      "lifecycle": "PERSISTING",
       "lifecycle_history": [
         {
           "date": "2026-11-18",
           "lifecycle": "NEW"
+        },
+        {
+          "date": "2026-11-19",
+          "lifecycle": "PERSISTING"
         }
       ],
-      "action": "MONITOR_ONLY",
+      "action": "UPDATE_EXISTING_ARTICLE",
       "target": "/guides/wayne-newton-casa-de-shenandoah-redevelopment",
-      "score": 58,
-      "confidence": "Low",
+      "score": 63,
+      "confidence": "Medium",
       "sources": [
         {
           "name": "Las Vegas Review-Journal — Business",
@@ -6058,10 +6268,10 @@
       "handoff": {
         "eligible": false,
         "blockers": [
-          "NOT_A_PUBLISHER_ACTION",
           "SCORE_BELOW_THRESHOLD",
           "CONFIDENCE_NOT_HIGH",
-          "NO_PRIMARY_SOURCE"
+          "NO_PRIMARY_SOURCE",
+          "NOT_NEW"
         ],
         "queued": []
       }
@@ -6544,6 +6754,54 @@
           "NO_PRIMARY_SOURCE",
           "NOT_NEW",
           "FAIR_HOUSING_SUBJECT"
+        ],
+        "queued": []
+      }
+    },
+    "995a7658f60c": {
+      "id": "DEV-2026-11-19-004",
+      "fingerprint": "995a7658f60c",
+      "entity_id": "DEV-P-E68907C1",
+      "entity_name": "Unnamed road (Las Vegas (valley-wide)) — \"Caesars Palace reveals redesign plans for Bacchanal Buffet ahead of 2027 closure\"",
+      "change_class": "NEW",
+      "changes": [
+        "first time this project has been seen"
+      ],
+      "event_type": "opening",
+      "status": "open",
+      "prior_status": null,
+      "first_seen": "2026-11-19",
+      "last_seen": "2026-11-19",
+      "times_seen": 1,
+      "lifecycle": "NEW",
+      "lifecycle_history": [
+        {
+          "date": "2026-11-19",
+          "lifecycle": "NEW"
+        }
+      ],
+      "action": "MONITOR_ONLY",
+      "target": null,
+      "score": 42,
+      "confidence": "Low",
+      "sources": [
+        {
+          "name": "Las Vegas Sun — Business",
+          "url": "https://lasvegassun.com/news/2026/nov/19/caesars-palace-reveals-redesign-plans-for-bacchana",
+          "authority": 8,
+          "published": "2026-11-19T10:00:00.000Z"
+        }
+      ],
+      "superseded_by": null,
+      "handoff": {
+        "eligible": false,
+        "blockers": [
+          "NOT_A_PUBLISHER_ACTION",
+          "SCORE_BELOW_THRESHOLD",
+          "CONFIDENCE_NOT_HIGH",
+          "NO_PRIMARY_SOURCE",
+          "FAIR_HOUSING_SUBJECT",
+          "PROVISIONAL_ENTITY"
         ],
         "queued": []
       }
@@ -8614,12 +8872,12 @@
       "changes": [
         "first time this project has been seen"
       ],
-      "event_type": "announcement",
+      "event_type": "construction",
       "status": "under construction",
       "prior_status": "under construction",
       "first_seen": "2026-10-17",
-      "last_seen": "2026-11-18",
-      "times_seen": 4,
+      "last_seen": "2026-11-19",
+      "times_seen": 5,
       "lifecycle": "PERSISTING",
       "lifecycle_history": [
         {
@@ -8641,7 +8899,7 @@
       ],
       "action": "DUPLICATE",
       "target": "/guides/lorenzi-park-tennis-center-central-las-vegas",
-      "score": 38,
+      "score": 39,
       "confidence": "Low",
       "sources": [
         {
@@ -8673,6 +8931,12 @@
           "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxOUXVqX19RUkhid1dOQjluWXkzMmFKajJzM243VEY4dHRMOHVqMzZ1UjhJeU5ONlBsNTVPbzQ0VklJa19McUJqdmdZSUV0T3NpdWlWaXk5LXROMk45TGZEelJoYzJWYlhVMFdETmhodkZ6T3F0TEE3c1RmZHpmLXVqWkFkWTNzdzdMU2d6RkxxRERTZ0c1WWJjbWc1TUJNUmx2VEZCUGdrSXQ",
           "authority": 9,
           "published": "2026-11-18T15:57:36.000Z"
+        },
+        {
+          "name": "Las Vegas Sun",
+          "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxQX0IwdE9tVE5MU0wySUZpZUlDUGhySUZoTHlQZURkamtNNVBpcVZ1b01qWUxYRmlITmNDSDZQcEFfQ0wtUFhDTmt5aFVnb2syQlptQl9PbnpyMER5SVdMLUFiVUdWeDJ5WnhSLXlwVG1tMGtRR0NDblhxc2g2VjlBTktOVy1XYUFfWFdnejRlSktNSlktVW1n",
+          "authority": 8,
+          "published": "2026-11-19T10:00:00.000Z"
         }
       ],
       "superseded_by": "78a530476b0b",
@@ -10789,6 +11053,52 @@
           "CONFIDENCE_NOT_HIGH",
           "NO_PRIMARY_SOURCE",
           "NOT_NEW",
+          "PROVISIONAL_ENTITY"
+        ],
+        "queued": []
+      }
+    },
+    "fe6f9d65ab08": {
+      "id": "DEV-2026-11-19-005",
+      "fingerprint": "fe6f9d65ab08",
+      "entity_id": "DEV-P-25923175",
+      "entity_name": "Unnamed park (Clark County) — \"Clark County Advances Mountain’s Edge Regional Park Expansion and Community Center Project\"",
+      "change_class": "NEW",
+      "changes": [
+        "first time this project has been seen"
+      ],
+      "event_type": "announcement",
+      "status": "unclear",
+      "prior_status": null,
+      "first_seen": "2026-11-19",
+      "last_seen": "2026-11-19",
+      "times_seen": 1,
+      "lifecycle": "NEW",
+      "lifecycle_history": [
+        {
+          "date": "2026-11-19",
+          "lifecycle": "NEW"
+        }
+      ],
+      "action": "MONITOR_ONLY",
+      "target": null,
+      "score": 41,
+      "confidence": "Low",
+      "sources": [
+        {
+          "name": "Clark County (.gov)",
+          "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTE5NMkVjaUNUNEYyaFk1LURLb0xBaU44WVNhd1Byb2p0VUhmNVN4R2pwOHpQUVFxdXh5TC15N2diTk5jLUltOVRlLWRyVE04WDdiN292T0JZOFVyVHdpUlNFTlN2VXRqbE9xdU81cGF0Wjl5OEt6",
+          "authority": 1,
+          "published": "2026-11-19T06:20:39.000Z"
+        }
+      ],
+      "superseded_by": null,
+      "handoff": {
+        "eligible": false,
+        "blockers": [
+          "NOT_A_PUBLISHER_ACTION",
+          "SCORE_BELOW_THRESHOLD",
+          "CONFIDENCE_NOT_HIGH",
           "PROVISIONAL_ENTITY"
         ],
         "queued": []
