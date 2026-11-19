@@ -238,6 +238,20 @@ export type Guide = {
  */
 export const guides: Guide[] = [
   {
+    slug: "mountains-edge-recreation-center-regional-park-phase-ii-southwest-las-vegas",
+    title: "Mountain's Edge Is Getting a Rec Center and a Bigger Regional Park. Here's What Clark County Just Approved",
+    dek: "Clark County picked CORE Construction for a new Mountain's Edge recreation center and Phase II of Mountain's Edge Regional Park, estimated at $85M to $90M combined.",
+    byline: "LVINIT Editorial",
+    date: "November 2026",
+    publishedAt: "2026-11-19",
+    category: "Local Feature",
+    // Built by the LVINIT Daily Publisher from Local Radar assignment
+    // LR-MOUNTAINS-EDGE-REC-CENTER-PARK-PHASE-II. No LVINIT photography of
+    // Mountain's Edge Regional Park yet, so the card renders its designed
+    // non-photographic fallback.
+    href: "/guides/mountains-edge-recreation-center-regional-park-phase-ii-southwest-las-vegas",
+  },
+  {
     slug: "lorenzi-park-tennis-center-central-las-vegas",
     title: "Lorenzi Park Is Getting a $4.9M Tennis Center. Here's What's Being Built",
     dek: "The City of Las Vegas breaks ground Nov. 19 on three new courts, 10 refinished courts and a new clubhouse at Lorenzi Park, renamed the Marty Hennessey Tennis Center.",
