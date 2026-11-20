@@ -262,6 +262,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.7,
     },
     {
+      url: `${BASE_URL}/guides/life-time-durango-opening-southwest-las-vegas`,
+      lastModified: new Date("2026-11-20"),
+      changeFrequency: "monthly",
+      priority: 0.7,
+    },
+    {
       url: `${BASE_URL}/guides/mountains-edge-recreation-center-regional-park-phase-ii-southwest-las-vegas`,
       lastModified: new Date("2026-11-19"),
       changeFrequency: "monthly",
