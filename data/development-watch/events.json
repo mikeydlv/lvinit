@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "agent": "development-watch",
-  "updated": "2026-11-19",
+  "updated": "2026-11-20",
   "events": {
     "01c19f40d9a1": {
       "id": "DEV-2026-11-11-004",
@@ -5584,18 +5584,22 @@
       "status": "approved",
       "prior_status": null,
       "first_seen": "2026-11-19",
-      "last_seen": "2026-11-19",
-      "times_seen": 1,
-      "lifecycle": "NEW",
+      "last_seen": "2026-11-20",
+      "times_seen": 2,
+      "lifecycle": "PERSISTING",
       "lifecycle_history": [
         {
           "date": "2026-11-19",
           "lifecycle": "NEW"
+        },
+        {
+          "date": "2026-11-20",
+          "lifecycle": "PERSISTING"
         }
       ],
       "action": "MONITOR_ONLY",
       "target": null,
-      "score": 55,
+      "score": 51,
       "confidence": "Low",
       "sources": [
         {
@@ -5609,6 +5613,12 @@
           "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxOLUtrMXNlb2d6RmU0ME41TEFpLUVwMlV1MkZDMnUxNkw3aW44RWdvQXFWMm5XT3EtN3RrRUd4UVVlbDJidUVyTlBOcGZiamtwd0hkaVVNZDVjRlI0RHczRER1NVgtUWllY1FQbGE4cHdLaTd3MDc5MmRFd1RjMHBzaXRaM1hTZFgwUWp4dElqSXZKckNpbnRGOFRPcWpNX0F40gG0AUFVX3lxTFBIRVpGNHFnRFZVTVIzWURwZW5hbHI1dDFxUjRkd2tVVXpDemt2VHB1M2UyTnZFcE1YZUNBNzZqdFhrazlCOEI2bGowaDlNUGtEWWd0ZUpSLVF0Q0pxLVhlM0o3OGM4Z0FzSDROTFdVZkxacXdRTlA0ZURsUGdsZjhhRWNGbHJIM1JKV0lEV3h6NW9uQ096aXp2Nk5JZ0VzeTU1UGp1WlI1NWswa3oxc1lxTG9rbA",
           "authority": 8,
           "published": "2026-11-19T05:37:00.000Z"
+        },
+        {
+          "name": "Wisevoter",
+          "url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxNc2RfOVFmUjNRaFZtVFI4VUE0S0hRdDZnUzBta2o2dWMxWTdiUXJlUjJaT0ZrVXlSckxMaWV6LWFpcHJZYXJxX2hwVC05VzhIQXZvTTRYTFZPcUZfWmtCUFFfSUJBWXg2X2xtMW5CU3hGbjNYTGg3dnVtWkNzcHJGek9vRnRwSFlPcnFELURhU3pBVHR3b2FFMWRkT2lnVEJhd1J1bS0zVENXWWl6aHc",
+          "authority": 9,
+          "published": "2026-11-18T22:24:09.000Z"
         }
       ],
       "superseded_by": null,
@@ -5619,6 +5629,7 @@
           "SCORE_BELOW_THRESHOLD",
           "CONFIDENCE_NOT_HIGH",
           "NO_PRIMARY_SOURCE",
+          "NOT_NEW",
           "PROVISIONAL_ENTITY"
         ],
         "queued": []
@@ -8968,11 +8979,15 @@
       "first_seen": "2026-10-05",
       "last_seen": "2026-10-05",
       "times_seen": 1,
-      "lifecycle": "NEW",
+      "lifecycle": "RESOLVED",
       "lifecycle_history": [
         {
           "date": "2026-10-05",
           "lifecycle": "NEW"
+        },
+        {
+          "date": "2026-11-20",
+          "lifecycle": "RESOLVED (aged out)"
         }
       ],
       "action": "MONITOR_ONLY",
@@ -10707,6 +10722,51 @@
           "NO_PRIMARY_SOURCE",
           "NOT_NEW",
           "PROVISIONAL_ENTITY"
+        ],
+        "queued": []
+      }
+    },
+    "f49e9f381bf9": {
+      "id": "DEV-2026-11-20-001",
+      "fingerprint": "f49e9f381bf9",
+      "entity_id": "DEV-HAAS-AUTOMATION-PLANT",
+      "entity_name": "Haas Automation manufacturing plant",
+      "change_class": "MATERIAL_UPDATE",
+      "changes": [
+        "under construction → open"
+      ],
+      "event_type": "opening",
+      "status": "open",
+      "prior_status": "under construction",
+      "first_seen": "2026-11-20",
+      "last_seen": "2026-11-20",
+      "times_seen": 1,
+      "lifecycle": "NEW",
+      "lifecycle_history": [
+        {
+          "date": "2026-11-20",
+          "lifecycle": "NEW"
+        }
+      ],
+      "action": "UPDATE_EXISTING_ARTICLE",
+      "target": "/neighborhoods/henderson",
+      "score": 55,
+      "confidence": "Medium",
+      "sources": [
+        {
+          "name": "KTNV 13 Action News",
+          "url": "https://ktnv.com/neighborhoods/henderson/haas-automation-opens-massive-henderson-factory-promising-more-than-650-local-jobs-and-future-growth",
+          "authority": 8,
+          "published": "2026-11-20T02:21:01.000Z"
+        }
+      ],
+      "superseded_by": null,
+      "handoff": {
+        "eligible": false,
+        "blockers": [
+          "SCORE_BELOW_THRESHOLD",
+          "CONFIDENCE_NOT_HIGH",
+          "NO_PRIMARY_SOURCE"
         ],
         "queued": []
       }
