@@ -238,6 +238,19 @@ export type Guide = {
  */
 export const guides: Guide[] = [
   {
+    slug: "life-time-durango-opening-southwest-las-vegas",
+    title: "Life Time Durango Is Set to Open Dec. 14. Here's What's Going Into the Big Club Across From IKEA",
+    dek: "Life Time says its 128,000-square-foot club at Durango and Sunset is arriving Dec. 14, with indoor and outdoor pools, six indoor pickleball courts, kids space and coworking.",
+    byline: "LVINIT Editorial",
+    date: "November 2026",
+    publishedAt: "2026-11-20",
+    category: "Local Feature",
+    // Built by the LVINIT Daily Publisher from Local Radar assignment
+    // LR-LIFE-TIME-DURANGO. No LVINIT photography of the club yet, so the
+    // card renders its designed non-photographic fallback.
+    href: "/guides/life-time-durango-opening-southwest-las-vegas",
+  },
+  {
     slug: "mountains-edge-recreation-center-regional-park-phase-ii-southwest-las-vegas",
     title: "Mountain's Edge Is Getting a Rec Center and a Bigger Regional Park. Here's What Clark County Just Approved",
     dek: "Clark County picked CORE Construction for a new Mountain's Edge recreation center and Phase II of Mountain's Edge Regional Park, estimated at $85M to $90M combined.",
