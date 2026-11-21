@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "agent": "development-watch",
-  "updated": "2026-11-20",
+  "updated": "2026-11-21",
   "events": {
     "01c19f40d9a1": {
       "id": "DEV-2026-11-11-004",
@@ -3491,7 +3491,7 @@
       "first_seen": "2026-10-05",
       "last_seen": "2026-10-06",
       "times_seen": 2,
-      "lifecycle": "PERSISTING",
+      "lifecycle": "RESOLVED",
       "lifecycle_history": [
         {
           "date": "2026-10-05",
@@ -3500,6 +3500,10 @@
         {
           "date": "2026-10-06",
           "lifecycle": "PERSISTING"
+        },
+        {
+          "date": "2026-11-21",
+          "lifecycle": "RESOLVED (aged out)"
         }
       ],
       "action": "DUPLICATE",
@@ -8013,6 +8017,54 @@
         "queued": []
       }
     },
+    "ae9b79301290": {
+      "id": "DEV-2026-11-21-001",
+      "fingerprint": "ae9b79301290",
+      "entity_id": "DEV-P-2D550D3A",
+      "entity_name": "Unnamed land (Downtown Las Vegas) — \"The Mob Museum Expands Downtown Las Vegas Footprint With New Land Acquisition\"",
+      "change_class": "NEW",
+      "changes": [
+        "first time this project has been seen"
+      ],
+      "event_type": "announcement",
+      "status": "unclear",
+      "prior_status": null,
+      "first_seen": "2026-11-21",
+      "last_seen": "2026-11-21",
+      "times_seen": 1,
+      "lifecycle": "REJECTED",
+      "lifecycle_history": [
+        {
+          "date": "2026-11-21",
+          "lifecycle": "REJECTED"
+        }
+      ],
+      "action": "REJECT_LOW_VALUE",
+      "target": null,
+      "score": 30,
+      "confidence": "Low",
+      "sources": [
+        {
+          "name": "Nevada Business Magazine",
+          "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxPS2lxcnMxOXEyRmVlbUxNTS1tWHh5TG1FbUVsZ0V3cXRoMTlfejBPU1V6WEdjV1VVTHBISWZiVFpfQmRJVnZENmk5bzhscVU5Q2tGa05hNzdNZU9sMUpDc0t6TFFIc3NsNWlxdWNmdldXMTJwVWxFeXVyMFpaVXgwNGFZVlQ0NnhNWDZ4UGEySlpRcmdoTXZsMUFOcHJOYkJYS0xpV1VlRGV1cUhqWWtkTjFZOA",
+          "authority": 8,
+          "published": "2026-11-17T16:37:01.000Z"
+        }
+      ],
+      "superseded_by": null,
+      "handoff": {
+        "eligible": false,
+        "blockers": [
+          "NOT_A_PUBLISHER_ACTION",
+          "SCORE_BELOW_THRESHOLD",
+          "CONFIDENCE_NOT_HIGH",
+          "NO_PRIMARY_SOURCE",
+          "NOT_NEW",
+          "PROVISIONAL_ENTITY"
+        ],
+        "queued": []
+      }
+    },
     "b0dfd0c685dd": {
       "id": "DEV-2026-11-12-001",
       "fingerprint": "b0dfd0c685dd",
@@ -8883,12 +8935,12 @@
       "changes": [
         "first time this project has been seen"
       ],
-      "event_type": "construction",
+      "event_type": "announcement",
       "status": "under construction",
       "prior_status": "under construction",
       "first_seen": "2026-10-17",
-      "last_seen": "2026-11-19",
-      "times_seen": 5,
+      "last_seen": "2026-11-21",
+      "times_seen": 6,
       "lifecycle": "PERSISTING",
       "lifecycle_history": [
         {
@@ -8910,7 +8962,7 @@
       ],
       "action": "DUPLICATE",
       "target": "/guides/lorenzi-park-tennis-center-central-las-vegas",
-      "score": 39,
+      "score": 38,
       "confidence": "Low",
       "sources": [
         {
@@ -8948,6 +9000,12 @@
           "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxQX0IwdE9tVE5MU0wySUZpZUlDUGhySUZoTHlQZURkamtNNVBpcVZ1b01qWUxYRmlITmNDSDZQcEFfQ0wtUFhDTmt5aFVnb2syQlptQl9PbnpyMER5SVdMLUFiVUdWeDJ5WnhSLXlwVG1tMGtRR0NDblhxc2g2VjlBTktOVy1XYUFfWFdnejRlSktNSlktVW1n",
           "authority": 8,
           "published": "2026-11-19T10:00:00.000Z"
+        },
+        {
+          "name": "102.7 Coyote Country",
+          "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxQcFdiX0lfWnFvYVBmN3J2ZHBEQzZBX0Y3VmhTbDItZk1ZOFozYTNTYXI3ZHRwUDRmMGhhSnNLRkFXUGNKSEhZQVhwYWpXNmxQczdIYk4xV3VzVS1WX1MxUE9aWFJIbkVadWpxYWNkbzNxSVIwLWkxVmRENEpiRzVIN0FQZUo5enhQc242WHI5dTFSVG81cUxWREtwZkdPaTZCVXFqUURPcGhuTU9MeUZCTzk2WQ",
+          "authority": 9,
+          "published": "2026-11-18T15:57:36.000Z"
         }
       ],
       "superseded_by": "78a530476b0b",
@@ -9588,11 +9646,15 @@
       "first_seen": "2026-10-06",
       "last_seen": "2026-10-06",
       "times_seen": 1,
-      "lifecycle": "NEW",
+      "lifecycle": "RESOLVED",
       "lifecycle_history": [
         {
           "date": "2026-10-06",
           "lifecycle": "NEW"
+        },
+        {
+          "date": "2026-11-21",
+          "lifecycle": "RESOLVED (aged out)"
         }
       ],
       "action": "MONITOR_ONLY",
