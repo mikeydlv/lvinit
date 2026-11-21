@@ -238,6 +238,19 @@ export type Guide = {
  */
 export const guides: Guide[] = [
   {
+    slug: "sloan-junction-industrial-master-plan-south-las-vegas",
+    title: "What Is ‘Sloan Junction’? Clark County’s Plan for a 774-Acre Industrial Hub at the Valley’s South Edge",
+    dek: "Clark County presented a master plan to turn the batch plants and yards around the I-15 Sloan Road exit into a coordinated industrial park. It was received, not adopted. Here's what's in it.",
+    byline: "LVINIT Editorial",
+    date: "November 2026",
+    publishedAt: "2026-11-21",
+    category: "Local Feature",
+    // Built by the LVINIT Daily Publisher from Local Radar assignment
+    // LR-SLOAN-JUNCTION-INDUSTRIAL-MASTER-PLAN. No LVINIT photography of the
+    // Sloan area yet, so the card renders its designed non-photographic fallback.
+    href: "/guides/sloan-junction-industrial-master-plan-south-las-vegas",
+  },
+  {
     slug: "life-time-durango-opening-southwest-las-vegas",
     title: "Life Time Durango Is Set to Open Dec. 14. Here's What's Going Into the Big Club Across From IKEA",
     dek: "Life Time says its 128,000-square-foot club at Durango and Sunset is arriving Dec. 14, with indoor and outdoor pools, six indoor pickleball courts, kids space and coworking.",
