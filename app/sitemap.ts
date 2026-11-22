@@ -262,6 +262,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.7,
     },
     {
+      url: `${BASE_URL}/guides/binions-horseshoe-sign-neon-museum-relighting-downtown-las-vegas`,
+      lastModified: new Date("2026-11-22"),
+      changeFrequency: "monthly",
+      priority: 0.7,
+    },
+    {
       url: `${BASE_URL}/guides/sloan-junction-industrial-master-plan-south-las-vegas`,
       lastModified: new Date("2026-11-21"),
       changeFrequency: "monthly",
