@@ -262,6 +262,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.7,
     },
     {
+      url: `${BASE_URL}/guides/opportunity-village-northwest-campus-bettys-village-north-las-vegas`,
+      lastModified: new Date("2026-11-23"),
+      changeFrequency: "monthly",
+      priority: 0.7,
+    },
+    {
       url: `${BASE_URL}/guides/binions-horseshoe-sign-neon-museum-relighting-downtown-las-vegas`,
       lastModified: new Date("2026-11-22"),
       changeFrequency: "monthly",

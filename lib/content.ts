@@ -238,6 +238,19 @@ export type Guide = {
  */
 export const guides: Guide[] = [
   {
+    slug: "opportunity-village-northwest-campus-bettys-village-north-las-vegas",
+    title: "What’s Being Built at Rome and Thom: Opportunity Village’s $59M Northwest Campus and Betty’s Village North",
+    dek: "The project off Decatur and the 215 is Opportunity Village's fourth campus: program space, a thrift boutique, cafe and art gallery, plus 90 homes for adults with and without disabilities. What's planned, and what's still unconfirmed.",
+    byline: "LVINIT Editorial",
+    date: "November 2026",
+    publishedAt: "2026-11-23",
+    category: "Local Feature",
+    // Built by the LVINIT Daily Publisher from Local Radar assignment
+    // LR-OPPORTUNITY-VILLAGE-NORTHWEST-CAMPUS-BETTYS-VILLAGE-NORTH. No LVINIT
+    // photography of Rome/Thom yet, so the card renders its designed fallback.
+    href: "/guides/opportunity-village-northwest-campus-bettys-village-north-las-vegas",
+  },
+  {
     slug: "binions-horseshoe-sign-neon-museum-relighting-downtown-las-vegas",
     title: "The Binion’s Horseshoe Sign Relights at the Neon Museum Dec. 1. Here’s What It Is and How to See It",
     dek: "The restored 1988 horseshoe that once marked Binion's west entrance at Fremont and 1st gets its lights back in the Neon Boneyard on Giving Tuesday. What was restored, what tickets cost, and what the museum hasn't said yet.",
