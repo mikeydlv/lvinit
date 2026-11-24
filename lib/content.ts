@@ -238,6 +238,19 @@ export type Guide = {
  */
 export const guides: Guide[] = [
   {
+    slug: "ccsd-facility-master-plan-school-consolidations-las-vegas",
+    title: "CCSD’s $3.7B School Plan: Which Las Vegas Schools Would Consolidate, Rebuild or Renovate",
+    dek: "CCSD's draft facility plan would renovate 19 schools, replace 8 and consolidate 6 from 2027 to 2030. The named schools by area and year, what's not decided, and the Dec. 2 board work session.",
+    byline: "LVINIT Editorial",
+    date: "November 2026",
+    publishedAt: "2026-11-24",
+    category: "Local Feature",
+    // Built by the LVINIT Daily Publisher from Local Radar assignment
+    // LR-CCSD-FACILITY-MASTER-PLAN-RECOMMENDATIONS-2026. No LVINIT photography
+    // of the named campuses yet, so the card renders its designed fallback.
+    href: "/guides/ccsd-facility-master-plan-school-consolidations-las-vegas",
+  },
+  {
     slug: "opportunity-village-northwest-campus-bettys-village-north-las-vegas",
     title: "What’s Being Built at Rome and Thom: Opportunity Village’s $59M Northwest Campus and Betty’s Village North",
     dek: "The project off Decatur and the 215 is Opportunity Village's fourth campus: program space, a thrift boutique, cafe and art gallery, plus 90 homes for adults with and without disabilities. What's planned, and what's still unconfirmed.",
