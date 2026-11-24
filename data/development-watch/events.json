@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "agent": "development-watch",
-  "updated": "2026-11-22",
+  "updated": "2026-11-23",
   "events": {
     "01c19f40d9a1": {
       "id": "DEV-2026-11-11-004",
@@ -123,6 +123,51 @@
           "NO_PRIMARY_SOURCE",
           "FAIR_HOUSING_SUBJECT",
           "PROVISIONAL_ENTITY"
+        ],
+        "queued": []
+      }
+    },
+    "02bbc7752d7e": {
+      "id": "DEV-2026-11-23-002",
+      "fingerprint": "02bbc7752d7e",
+      "entity_id": "DEV-SUNSET-STATION",
+      "entity_name": "Sunset Station",
+      "change_class": "NEW",
+      "changes": [
+        "first time this project has been seen"
+      ],
+      "event_type": "opening",
+      "status": "open",
+      "prior_status": null,
+      "first_seen": "2026-11-23",
+      "last_seen": "2026-11-23",
+      "times_seen": 1,
+      "lifecycle": "NEW",
+      "lifecycle_history": [
+        {
+          "date": "2026-11-23",
+          "lifecycle": "NEW"
+        }
+      ],
+      "action": "ADD_TO_NEIGHBORHOOD_GUIDE",
+      "target": "/neighborhoods/henderson",
+      "score": 44,
+      "confidence": "Medium",
+      "sources": [
+        {
+          "name": "Las Vegas Review-Journal — Business",
+          "url": "https://reviewjournal.com/business/casinos-gaming/henderson-hotel-casino-unveils-new-arrival-experience-in-87m-renovation-3918522",
+          "authority": 8,
+          "published": "2026-11-24T00:08:04.000Z"
+        }
+      ],
+      "superseded_by": null,
+      "handoff": {
+        "eligible": false,
+        "blockers": [
+          "SCORE_BELOW_THRESHOLD",
+          "CONFIDENCE_NOT_HIGH",
+          "NO_PRIMARY_SOURCE"
         ],
         "queued": []
       }
@@ -4929,11 +4974,15 @@
       "first_seen": "2026-10-08",
       "last_seen": "2026-10-08",
       "times_seen": 1,
-      "lifecycle": "NEW",
+      "lifecycle": "RESOLVED",
       "lifecycle_history": [
         {
           "date": "2026-10-08",
           "lifecycle": "NEW"
+        },
+        {
+          "date": "2026-11-23",
+          "lifecycle": "RESOLVED (aged out)"
         }
       ],
       "action": "UPDATE_EXISTING_ARTICLE",
@@ -5286,18 +5335,22 @@
       "status": "unclear",
       "prior_status": null,
       "first_seen": "2026-11-16",
-      "last_seen": "2026-11-16",
-      "times_seen": 1,
-      "lifecycle": "NEW",
+      "last_seen": "2026-11-23",
+      "times_seen": 2,
+      "lifecycle": "PERSISTING",
       "lifecycle_history": [
         {
           "date": "2026-11-16",
           "lifecycle": "NEW"
+        },
+        {
+          "date": "2026-11-23",
+          "lifecycle": "PERSISTING"
         }
       ],
-      "action": "MONITOR_ONLY",
+      "action": "DUPLICATE",
       "target": null,
-      "score": 46,
+      "score": 36,
       "confidence": "Low",
       "sources": [
         {
@@ -5311,6 +5364,12 @@
           "url": "https://reviewjournal.com/business/housing/downtown-las-vegas-land-sells-for-big-new-housing-project-3914984",
           "authority": 8,
           "published": "2026-11-16T14:00:30.000Z"
+        },
+        {
+          "name": "Las Vegas Review-Journal",
+          "url": "https://news.google.com/rss/articles/CBMimwFBVV95cUxOMjlDVXljc3Qwa2RhcHVwRHpudXdzdUhaMDY0cnVpM2NfTnBSdTNva0wtaVpublFHU2dReGxadFl3VWZKWDA2azdZblBFd3lRNkE3RU9OdFpxcC1qVmZSN3FkbkVrRUw2VVV4ejZPOEhwQ2JsRWVhMG1zQTZlaTdPMllsR1F4cy1iUGd2NnVTb1E0YWV3N3pHSVM3cw",
+          "authority": 8,
+          "published": "2026-11-18T01:35:02.000Z"
         }
       ],
       "superseded_by": null,
@@ -5321,6 +5380,8 @@
           "SCORE_BELOW_THRESHOLD",
           "CONFIDENCE_NOT_HIGH",
           "NO_PRIMARY_SOURCE",
+          "NOT_MATERIAL",
+          "NOT_NEW",
           "PROVISIONAL_ENTITY"
         ],
         "queued": []
@@ -5389,7 +5450,7 @@
       "first_seen": "2026-10-06",
       "last_seen": "2026-10-08",
       "times_seen": 2,
-      "lifecycle": "PERSISTING",
+      "lifecycle": "RESOLVED",
       "lifecycle_history": [
         {
           "date": "2026-10-06",
@@ -5398,6 +5459,10 @@
         {
           "date": "2026-10-08",
           "lifecycle": "PERSISTING"
+        },
+        {
+          "date": "2026-11-23",
+          "lifecycle": "RESOLVED (aged out)"
         }
       ],
       "action": "MONITOR_ONLY",
@@ -5688,8 +5753,8 @@
       "status": "approved",
       "prior_status": null,
       "first_seen": "2026-11-19",
-      "last_seen": "2026-11-20",
-      "times_seen": 2,
+      "last_seen": "2026-11-23",
+      "times_seen": 3,
       "lifecycle": "PERSISTING",
       "lifecycle_history": [
         {
@@ -5703,7 +5768,7 @@
       ],
       "action": "MONITOR_ONLY",
       "target": null,
-      "score": 51,
+      "score": 55,
       "confidence": "Low",
       "sources": [
         {
@@ -5723,6 +5788,12 @@
           "url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxNc2RfOVFmUjNRaFZtVFI4VUE0S0hRdDZnUzBta2o2dWMxWTdiUXJlUjJaT0ZrVXlSckxMaWV6LWFpcHJZYXJxX2hwVC05VzhIQXZvTTRYTFZPcUZfWmtCUFFfSUJBWXg2X2xtMW5CU3hGbjNYTGg3dnVtWkNzcHJGek9vRnRwSFlPcnFELURhU3pBVHR3b2FFMWRkT2lnVEJhd1J1bS0zVENXWWl6aHc",
           "authority": 9,
           "published": "2026-11-18T22:24:09.000Z"
+        },
+        {
+          "name": "FOX5 Vegas",
+          "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxPR1BkZ2EwSEdSbVNxNEFVQzhpcWQ4azlpRU1Ud0dTeG81N0NxVDRNaExWdU1vdkNWT0UtN0s0cEUyYkpkVUxWOExKRFQtZHBRc3haV3RjQzRpNjkzZ2hOck5tZWdrWUdrYUQteFZRM0JyN2FPYVZnRFVYdGpBM3B1aTB3ZFNESG1mUW9FUjRIQ1JCQldaeTVpWW1wZWlHaDV6Q3IwbFRBYl8",
+          "authority": 8,
+          "published": "2026-11-19T03:51:00.000Z"
         }
       ],
       "superseded_by": null,
@@ -7766,6 +7837,52 @@
           "CONFIDENCE_NOT_HIGH",
           "NO_PRIMARY_SOURCE",
           "PROVISIONAL_ENTITY"
+        ],
+        "queued": []
+      }
+    },
+    "a66cc386a22b": {
+      "id": "DEV-2026-11-23-001",
+      "fingerprint": "a66cc386a22b",
+      "entity_id": "DEV-SOUND",
+      "entity_name": "Sound",
+      "change_class": "NEW",
+      "changes": [
+        "first time this project has been seen"
+      ],
+      "event_type": "partial opening",
+      "status": "partially open",
+      "prior_status": null,
+      "first_seen": "2026-11-23",
+      "last_seen": "2026-11-23",
+      "times_seen": 1,
+      "lifecycle": "NEW",
+      "lifecycle_history": [
+        {
+          "date": "2026-11-23",
+          "lifecycle": "NEW"
+        }
+      ],
+      "action": "ADD_TO_NEIGHBORHOOD_GUIDE",
+      "target": "/neighborhoods/henderson",
+      "score": 57,
+      "confidence": "Medium",
+      "sources": [
+        {
+          "name": "KTNV 13 Action News",
+          "url": "https://ktnv.com/news/living-grace-homes-expands-with-new-henderson-campus-for-pregnant-women-in-need",
+          "authority": 8,
+          "published": "2026-11-24T00:39:10.000Z"
+        }
+      ],
+      "superseded_by": null,
+      "handoff": {
+        "eligible": false,
+        "blockers": [
+          "SCORE_BELOW_THRESHOLD",
+          "CONFIDENCE_NOT_HIGH",
+          "NO_PRIMARY_SOURCE",
+          "FAIR_HOUSING_SUBJECT"
         ],
         "queued": []
       }
@@ -10007,11 +10124,15 @@
       "first_seen": "2026-10-08",
       "last_seen": "2026-10-08",
       "times_seen": 1,
-      "lifecycle": "NEW",
+      "lifecycle": "RESOLVED",
       "lifecycle_history": [
         {
           "date": "2026-10-08",
           "lifecycle": "NEW"
+        },
+        {
+          "date": "2026-11-23",
+          "lifecycle": "RESOLVED (aged out)"
         }
       ],
       "action": "MONITOR_ONLY",
@@ -11388,12 +11509,12 @@
       "changes": [
         "approved → partially open"
       ],
-      "event_type": "land deal",
+      "event_type": "announcement",
       "status": "partially open",
       "prior_status": "partially open",
       "first_seen": "2026-10-11",
-      "last_seen": "2026-11-22",
-      "times_seen": 16,
+      "last_seen": "2026-11-23",
+      "times_seen": 17,
       "lifecycle": "PERSISTING",
       "lifecycle_history": [
         {
@@ -11415,7 +11536,7 @@
       ],
       "action": "DUPLICATE",
       "target": "/guides/aries-henderson",
-      "score": 58,
+      "score": 54,
       "confidence": "Medium",
       "sources": [
         {
@@ -11513,6 +11634,12 @@
           "url": "https://nevadabusiness.com/2026/11/the-mob-museum-expands-downtown-las-vegas-footprint-with-new-land-acquisition",
           "authority": 8,
           "published": "2026-11-17T16:30:27.000Z"
+        },
+        {
+          "name": "News 3 Las Vegas",
+          "url": "https://news3lv.com/news/local/nevada-office-of-safety-grant-to-fund-childrens-traffic-garden-at-wells-park",
+          "authority": 8,
+          "published": "2026-11-23T21:05:48.000Z"
         }
       ],
       "superseded_by": "aa389dac718a",
@@ -11524,7 +11651,8 @@
           "CONFIDENCE_NOT_HIGH",
           "NO_PRIMARY_SOURCE",
           "NOT_MATERIAL",
-          "NOT_NEW"
+          "NOT_NEW",
+          "FAIR_HOUSING_SUBJECT"
         ],
         "queued": []
       }
