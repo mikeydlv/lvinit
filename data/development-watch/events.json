@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "agent": "development-watch",
-  "updated": "2026-11-23",
+  "updated": "2026-11-24",
   "events": {
     "01c19f40d9a1": {
       "id": "DEV-2026-11-11-004",
@@ -1695,6 +1695,54 @@
         "queued": []
       }
     },
+    "2b0f97fd3b65": {
+      "id": "DEV-2026-11-24-002",
+      "fingerprint": "2b0f97fd3b65",
+      "entity_id": "DEV-P-C8E52B21",
+      "entity_name": "Unnamed road (Las Vegas (valley-wide)) — \"Harry Reid-bound travelers will get some road construction relief for Thanksgiving\"",
+      "change_class": "NEW",
+      "changes": [
+        "first time this project has been seen"
+      ],
+      "event_type": "access change",
+      "status": "proposed",
+      "prior_status": null,
+      "first_seen": "2026-11-24",
+      "last_seen": "2026-11-24",
+      "times_seen": 1,
+      "lifecycle": "REJECTED",
+      "lifecycle_history": [
+        {
+          "date": "2026-11-24",
+          "lifecycle": "REJECTED"
+        }
+      ],
+      "action": "REJECT_LOW_VALUE",
+      "target": null,
+      "score": 37,
+      "confidence": "Low",
+      "sources": [
+        {
+          "name": "Las Vegas Sun — News",
+          "url": "https://lasvegassun.com/news/2026/nov/24/harry-reid-bound-travelers-will-get-some-road-cons",
+          "authority": 8,
+          "published": "2026-11-24T10:00:00.000Z"
+        }
+      ],
+      "superseded_by": null,
+      "handoff": {
+        "eligible": false,
+        "blockers": [
+          "NOT_A_PUBLISHER_ACTION",
+          "SCORE_BELOW_THRESHOLD",
+          "CONFIDENCE_NOT_HIGH",
+          "NO_PRIMARY_SOURCE",
+          "NOT_NEW",
+          "PROVISIONAL_ENTITY"
+        ],
+        "queued": []
+      }
+    },
     "2c9feeac6b7d": {
       "id": "DEV-2026-09-28-003",
       "fingerprint": "2c9feeac6b7d",
@@ -2203,7 +2251,7 @@
       "first_seen": "2026-10-07",
       "last_seen": "2026-10-09",
       "times_seen": 2,
-      "lifecycle": "PERSISTING",
+      "lifecycle": "RESOLVED",
       "lifecycle_history": [
         {
           "date": "2026-10-07",
@@ -2212,6 +2260,10 @@
         {
           "date": "2026-10-09",
           "lifecycle": "PERSISTING"
+        },
+        {
+          "date": "2026-11-24",
+          "lifecycle": "RESOLVED (aged out)"
         }
       ],
       "action": "DUPLICATE",
@@ -3199,7 +3251,7 @@
       "first_seen": "2026-10-07",
       "last_seen": "2026-10-09",
       "times_seen": 2,
-      "lifecycle": "PERSISTING",
+      "lifecycle": "RESOLVED",
       "lifecycle_history": [
         {
           "date": "2026-10-07",
@@ -3208,6 +3260,10 @@
         {
           "date": "2026-10-09",
           "lifecycle": "PERSISTING"
+        },
+        {
+          "date": "2026-11-24",
+          "lifecycle": "RESOLVED (aged out)"
         }
       ],
       "action": "MONITOR_ONLY",
@@ -3761,11 +3817,15 @@
       "first_seen": "2026-10-09",
       "last_seen": "2026-10-09",
       "times_seen": 1,
-      "lifecycle": "NEW",
+      "lifecycle": "RESOLVED",
       "lifecycle_history": [
         {
           "date": "2026-10-09",
           "lifecycle": "NEW"
+        },
+        {
+          "date": "2026-11-24",
+          "lifecycle": "RESOLVED (aged out)"
         }
       ],
       "action": "ADD_TO_NEIGHBORHOOD_GUIDE",
@@ -6458,6 +6518,52 @@
           "CONFIDENCE_NOT_HIGH",
           "NO_PRIMARY_SOURCE",
           "NOT_NEW"
+        ],
+        "queued": []
+      }
+    },
+    "930f411a4801": {
+      "id": "DEV-2026-11-24-001",
+      "fingerprint": "930f411a4801",
+      "entity_id": "DEV-NASA-S-JOHNSON-SPACE-CENTER",
+      "entity_name": "NASA's Johnson Space Center",
+      "change_class": "NEW",
+      "changes": [
+        "first time this project has been seen"
+      ],
+      "event_type": "filing",
+      "status": "filed",
+      "prior_status": null,
+      "first_seen": "2026-11-24",
+      "last_seen": "2026-11-24",
+      "times_seen": 1,
+      "lifecycle": "NEW",
+      "lifecycle_history": [
+        {
+          "date": "2026-11-24",
+          "lifecycle": "NEW"
+        }
+      ],
+      "action": "MONITOR_ONLY",
+      "target": null,
+      "score": 47,
+      "confidence": "Medium",
+      "sources": [
+        {
+          "name": "Las Vegas Sun — News",
+          "url": "https://lasvegassun.com/news/2026/nov/24/nevada-students-dream-of-a-space-career-without-le",
+          "authority": 8,
+          "published": "2026-11-24T10:00:00.000Z"
+        }
+      ],
+      "superseded_by": null,
+      "handoff": {
+        "eligible": false,
+        "blockers": [
+          "NOT_A_PUBLISHER_ACTION",
+          "SCORE_BELOW_THRESHOLD",
+          "CONFIDENCE_NOT_HIGH",
+          "NO_PRIMARY_SOURCE"
         ],
         "queued": []
       }
@@ -11509,12 +11615,12 @@
       "changes": [
         "approved → partially open"
       ],
-      "event_type": "announcement",
+      "event_type": "access change",
       "status": "partially open",
       "prior_status": "partially open",
       "first_seen": "2026-10-11",
-      "last_seen": "2026-11-23",
-      "times_seen": 17,
+      "last_seen": "2026-11-24",
+      "times_seen": 18,
       "lifecycle": "PERSISTING",
       "lifecycle_history": [
         {
@@ -11536,7 +11642,7 @@
       ],
       "action": "DUPLICATE",
       "target": "/guides/aries-henderson",
-      "score": 54,
+      "score": 49,
       "confidence": "Medium",
       "sources": [
         {
@@ -11640,6 +11746,12 @@
           "url": "https://news3lv.com/news/local/nevada-office-of-safety-grant-to-fund-childrens-traffic-garden-at-wells-park",
           "authority": 8,
           "published": "2026-11-23T21:05:48.000Z"
+        },
+        {
+          "name": "KTNV 13 Action News",
+          "url": "https://ktnv.com/news/rtc-warns-of-heavy-thanksgiving-traffic-on-i-15-announces-holiday-bus-schedules",
+          "authority": 8,
+          "published": "2026-11-24T21:14:14.000Z"
         }
       ],
       "superseded_by": "aa389dac718a",
@@ -11651,8 +11763,7 @@
           "CONFIDENCE_NOT_HIGH",
           "NO_PRIMARY_SOURCE",
           "NOT_MATERIAL",
-          "NOT_NEW",
-          "FAIR_HOUSING_SUBJECT"
+          "NOT_NEW"
         ],
         "queued": []
       }
