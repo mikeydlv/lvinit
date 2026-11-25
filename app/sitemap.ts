@@ -262,6 +262,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.7,
     },
     {
+      url: `${BASE_URL}/guides/las-vegas-nonfunctional-grass-ban-2027-fines-2028`,
+      lastModified: new Date("2026-11-25"),
+      changeFrequency: "monthly",
+      priority: 0.7,
+    },
+    {
       url: `${BASE_URL}/guides/ccsd-facility-master-plan-school-consolidations-las-vegas`,
       lastModified: new Date("2026-11-24"),
       changeFrequency: "monthly",
