@@ -238,6 +238,22 @@ export type Guide = {
  */
 export const guides: Guide[] = [
   {
+    slug: "las-vegas-nonfunctional-grass-ban-2027-fines-2028",
+    title: "Las Vegas’ Decorative Grass Ban Starts Jan. 1. Fines Wait Until 2028. Here’s Who It Affects",
+    dek: "The nonfunctional grass ban still starts Jan. 1, 2027. SNWA backed waiting until 2028 to charge for it. Who's affected (not your front yard), the 2027 waiver deadlines and the rebate.",
+    byline: "LVINIT Editorial",
+    date: "November 2026",
+    publishedAt: "2026-11-25",
+    category: "Local Feature",
+    // Built by the LVINIT Daily Publisher from Local Radar assignment
+    // LR-SNWA-NONFUNCTIONAL-TURF-ENFORCEMENT-2028. Card image is a contextual
+    // LVINIT photo of a desert-landscaped entry road, not a specific conversion.
+    image: "/images/editorial/north-las-vegas-dr-horton-heartland-bay-entry-road.jpg",
+    imageAlt:
+      "Divided community entry road in North Las Vegas lined with desert shrubs and young trees instead of grass, with new homes and mountains behind.",
+    href: "/guides/las-vegas-nonfunctional-grass-ban-2027-fines-2028",
+  },
+  {
     slug: "ccsd-facility-master-plan-school-consolidations-las-vegas",
     title: "CCSD’s $3.7B School Plan: Which Las Vegas Schools Would Consolidate, Rebuild or Renovate",
     dek: "CCSD's draft facility plan would renovate 19 schools, replace 8 and consolidate 6 from 2027 to 2030. The named schools by area and year, what's not decided, and the Dec. 2 board work session.",
