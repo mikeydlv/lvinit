@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "agent": "development-watch",
-  "updated": "2026-11-24",
+  "updated": "2026-11-25",
   "events": {
     "01c19f40d9a1": {
       "id": "DEV-2026-11-11-004",
@@ -2742,38 +2742,51 @@
       "changes": [
         "filed → approved"
       ],
-      "event_type": "approval",
+      "event_type": "land deal",
       "status": "approved",
-      "prior_status": "filed",
+      "prior_status": "approved",
       "first_seen": "2026-10-26",
-      "last_seen": "2026-10-26",
-      "times_seen": 1,
-      "lifecycle": "NEW",
+      "last_seen": "2026-11-25",
+      "times_seen": 2,
+      "lifecycle": "PERSISTING",
       "lifecycle_history": [
         {
           "date": "2026-10-26",
           "lifecycle": "NEW"
+        },
+        {
+          "date": "2026-11-25",
+          "lifecycle": "PERSISTING"
         }
       ],
-      "action": "ADD_TO_NEIGHBORHOOD_GUIDE",
-      "target": "/neighborhoods/north-las-vegas",
-      "score": 47,
-      "confidence": "Medium",
+      "action": "DUPLICATE",
+      "target": null,
+      "score": 42,
+      "confidence": "Low",
       "sources": [
         {
           "name": "Nevada Current",
           "url": "https://nevadacurrent.com/2026/10/26/third-data-center-gas-plant-seeks-approval-as-gas-pipeline-expansion-advances",
           "authority": 8,
           "published": "2026-10-26T12:00:46.000Z"
+        },
+        {
+          "name": "Las Vegas Review-Journal — Business",
+          "url": "https://reviewjournal.com/business/vegas-business/innovation/data-center-giants-land-buying-binge-in-las-vegas-comes-to-500m-3919168",
+          "authority": 8,
+          "published": "2026-11-25T13:00:19.000Z"
         }
       ],
       "superseded_by": null,
       "handoff": {
         "eligible": false,
         "blockers": [
+          "NOT_A_PUBLISHER_ACTION",
           "SCORE_BELOW_THRESHOLD",
           "CONFIDENCE_NOT_HIGH",
-          "NO_PRIMARY_SOURCE"
+          "NO_PRIMARY_SOURCE",
+          "NOT_MATERIAL",
+          "NOT_NEW"
         ],
         "queued": []
       }
@@ -4661,6 +4674,53 @@
           "CONFIDENCE_NOT_HIGH",
           "NO_PRIMARY_SOURCE",
           "NOT_NEW",
+          "PROVISIONAL_ENTITY"
+        ],
+        "queued": []
+      }
+    },
+    "64cc96ab3544": {
+      "id": "DEV-2026-11-25-001",
+      "fingerprint": "64cc96ab3544",
+      "entity_id": "DEV-P-9A830F3B",
+      "entity_name": "Unnamed residential (Henderson) — \"Adopt a furry friend at 'Home for the Holidays' event\"",
+      "change_class": "NEW",
+      "changes": [
+        "first time this project has been seen"
+      ],
+      "event_type": "announcement",
+      "status": "unclear",
+      "prior_status": null,
+      "first_seen": "2026-11-25",
+      "last_seen": "2026-11-25",
+      "times_seen": 1,
+      "lifecycle": "NEW",
+      "lifecycle_history": [
+        {
+          "date": "2026-11-25",
+          "lifecycle": "NEW"
+        }
+      ],
+      "action": "MONITOR_ONLY",
+      "target": null,
+      "score": 47,
+      "confidence": "Low",
+      "sources": [
+        {
+          "name": "8 News Now",
+          "url": "https://8newsnow.com/news/adopt-a-furry-friend-at-home-for-the-holidays-event",
+          "authority": 8,
+          "published": "2026-11-25T22:45:44.000Z"
+        }
+      ],
+      "superseded_by": null,
+      "handoff": {
+        "eligible": false,
+        "blockers": [
+          "NOT_A_PUBLISHER_ACTION",
+          "SCORE_BELOW_THRESHOLD",
+          "CONFIDENCE_NOT_HIGH",
+          "NO_PRIMARY_SOURCE",
           "PROVISIONAL_ENTITY"
         ],
         "queued": []
@@ -9202,6 +9262,53 @@
         "queued": []
       }
     },
+    "c42c9f7b2147": {
+      "id": "DEV-2026-11-25-002",
+      "fingerprint": "c42c9f7b2147",
+      "entity_id": "DEV-P-7AF887D2",
+      "entity_name": "Unnamed mixed use (Northwest Las Vegas) — \"Developer Files Plans for Costco-Anchored Shopping Center in Northwest Las Vegas\"",
+      "change_class": "NEW",
+      "changes": [
+        "first time this project has been seen"
+      ],
+      "event_type": "announcement",
+      "status": "proposed",
+      "prior_status": null,
+      "first_seen": "2026-11-25",
+      "last_seen": "2026-11-25",
+      "times_seen": 1,
+      "lifecycle": "NEW",
+      "lifecycle_history": [
+        {
+          "date": "2026-11-25",
+          "lifecycle": "NEW"
+        }
+      ],
+      "action": "MONITOR_ONLY",
+      "target": null,
+      "score": 43,
+      "confidence": "Low",
+      "sources": [
+        {
+          "name": "102.7 Coyote Country",
+          "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxNM1UwVnNrYkJjV2tNQzBXS2t2S2pYXzgyQzB3YmRTUldNbHRNU0l1QTFNdjNjTU5zejNINHhic01HZXg3MVBRYzdrS2NKbGZ3dDU3dHhmTkxfSXVEcC1WV1VOcWdIcEh3MFl1dWlYM2JIUGVRbUhfMDBMT1d2QXZxYk5KRG9HdGI0bWdiLVMwNWNObUlHUFIzaTZQMnlaRWxOLW5sWXBNZkFscUhEOUtzSDZFVGdxTDI3dWhLUg",
+          "authority": 9,
+          "published": "2026-11-25T14:25:33.000Z"
+        }
+      ],
+      "superseded_by": null,
+      "handoff": {
+        "eligible": false,
+        "blockers": [
+          "NOT_A_PUBLISHER_ACTION",
+          "SCORE_BELOW_THRESHOLD",
+          "CONFIDENCE_NOT_HIGH",
+          "NO_PRIMARY_SOURCE",
+          "PROVISIONAL_ENTITY"
+        ],
+        "queued": []
+      }
+    },
     "c56ef308d630": {
       "id": "DEV-2026-11-10-001",
       "fingerprint": "c56ef308d630",
@@ -10477,11 +10584,15 @@
       "first_seen": "2026-10-10",
       "last_seen": "2026-10-10",
       "times_seen": 1,
-      "lifecycle": "NEW",
+      "lifecycle": "RESOLVED",
       "lifecycle_history": [
         {
           "date": "2026-10-10",
           "lifecycle": "NEW"
+        },
+        {
+          "date": "2026-11-25",
+          "lifecycle": "RESOLVED (aged out)"
         }
       ],
       "action": "MONITOR_ONLY",
@@ -11125,7 +11236,7 @@
       "first_seen": "2026-10-02",
       "last_seen": "2026-10-10",
       "times_seen": 2,
-      "lifecycle": "PERSISTING",
+      "lifecycle": "RESOLVED",
       "lifecycle_history": [
         {
           "date": "2026-10-02",
@@ -11134,6 +11245,10 @@
         {
           "date": "2026-10-10",
           "lifecycle": "PERSISTING"
+        },
+        {
+          "date": "2026-11-25",
+          "lifecycle": "RESOLVED (aged out)"
         }
       ],
       "action": "MONITOR_ONLY",
