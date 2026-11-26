@@ -262,6 +262,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.7,
     },
     {
+      url: `${BASE_URL}/guides/holiday-lights-las-vegas-2026`,
+      lastModified: new Date("2026-11-26"),
+      changeFrequency: "monthly",
+      priority: 0.7,
+    },
+    {
       url: `${BASE_URL}/guides/las-vegas-nonfunctional-grass-ban-2027-fines-2028`,
       lastModified: new Date("2026-11-25"),
       changeFrequency: "monthly",

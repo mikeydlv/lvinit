@@ -238,6 +238,19 @@ export type Guide = {
  */
 export const guides: Guide[] = [
   {
+    slug: "holiday-lights-las-vegas-2026",
+    title: "Where to See Holiday Lights in Las Vegas This Year: Glittering Lights, Magical Forest, Ethel M and Enchant",
+    dek: "The four big holiday light displays around the valley this season, from the Speedway drive-thru to the $3 Ethel M cactus garden. Dates, hours, what it costs and what to know before you go.",
+    byline: "LVINIT Editorial",
+    date: "November 2026",
+    publishedAt: "2026-11-26",
+    category: "Local Feature",
+    // Built by the LVINIT Daily Publisher from Local Radar assignment
+    // LR-HOLIDAY-LIGHTS-GUIDE-2026. No LVINIT photography of the displays yet,
+    // so the card renders its designed fallback.
+    href: "/guides/holiday-lights-las-vegas-2026",
+  },
+  {
     slug: "las-vegas-nonfunctional-grass-ban-2027-fines-2028",
     title: "Las Vegas’ Decorative Grass Ban Starts Jan. 1. Fines Wait Until 2028. Here’s Who It Affects",
     dek: "The nonfunctional grass ban still starts Jan. 1, 2027. SNWA backed waiting until 2028 to charge for it. Who's affected (not your front yard), the 2027 waiver deadlines and the rebate.",
