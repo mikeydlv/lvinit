@@ -28,6 +28,10 @@ export type StoryHeroProps = {
    *  / CC BY-SA 2.0"). Omit for Mikey's own photography, which the footer
    *  already credits. */
   imageCredit?: string;
+  /** Optional Tailwind object-position classes for the full-bleed crop, e.g.
+   *  "object-[30%_50%] sm:object-center" to keep the subject in frame on
+   *  narrow (portrait) mobile screens. Defaults to "object-center". */
+  imagePositionClass?: string;
   backLink?: { label: string; href: string };
   ctas?: StoryHeroCta[];
 };
@@ -40,6 +44,7 @@ export default function StoryHero({
   imageAlt,
   imageTitle,
   imageCredit,
+  imagePositionClass,
   backLink,
   ctas,
 }: StoryHeroProps) {
@@ -120,7 +125,7 @@ export default function StoryHero({
           fill
           priority
           sizes="100vw"
-          className="object-cover object-center"
+          className={`object-cover ${imagePositionClass ?? "object-center"}`}
         />
         <div
           aria-hidden="true"
