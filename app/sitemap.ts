@@ -269,7 +269,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: `${BASE_URL}/guides/ccsd-facility-master-plan-school-consolidations-las-vegas`,
-      lastModified: new Date("2026-11-24"),
+      lastModified: new Date("2026-11-26"),
       changeFrequency: "monthly",
       priority: 0.7,
     },
