@@ -238,6 +238,129 @@ export type Guide = {
  */
 export const guides: Guide[] = [
   {
+    slug: "las-vegas-nonfunctional-grass-ban-2027-fines-2028",
+    title: "Las Vegas’ Decorative Grass Ban Starts Jan. 1. Fines Wait Until 2028. Here’s Who It Affects",
+    dek: "The nonfunctional grass ban still starts Jan. 1, 2027. SNWA backed waiting until 2028 to charge for it. Who's affected (not your front yard), the 2027 waiver deadlines and the rebate.",
+    byline: "LVINIT Editorial",
+    date: "November 2026",
+    publishedAt: "2026-11-25",
+    category: "Local Feature",
+    // Built by the LVINIT Daily Publisher from Local Radar assignment
+    // LR-SNWA-NONFUNCTIONAL-TURF-ENFORCEMENT-2028. Card image is a contextual
+    // LVINIT photo of a desert-landscaped entry road, not a specific conversion.
+    image: "/images/editorial/north-las-vegas-dr-horton-heartland-bay-entry-road.jpg",
+    imageAlt:
+      "Divided community entry road in North Las Vegas lined with desert shrubs and young trees instead of grass, with new homes and mountains behind.",
+    href: "/guides/las-vegas-nonfunctional-grass-ban-2027-fines-2028",
+  },
+  {
+    slug: "ccsd-facility-master-plan-school-consolidations-las-vegas",
+    title: "CCSD’s $3.7B School Plan: Which Las Vegas Schools Would Consolidate, Rebuild or Renovate",
+    dek: "CCSD's draft facility plan would renovate 19 schools, replace 8 and consolidate 6 from 2027 to 2030. The named schools by area and year, what's not decided, and the Dec. 2 board work session.",
+    byline: "LVINIT Editorial",
+    date: "November 2026",
+    publishedAt: "2026-11-24",
+    category: "Local Feature",
+    // Built by the LVINIT Daily Publisher from Local Radar assignment
+    // LR-CCSD-FACILITY-MASTER-PLAN-RECOMMENDATIONS-2026. No LVINIT photography
+    // of the named campuses yet, so the card renders its designed fallback.
+    href: "/guides/ccsd-facility-master-plan-school-consolidations-las-vegas",
+  },
+  {
+    slug: "opportunity-village-northwest-campus-bettys-village-north-las-vegas",
+    title: "What’s Being Built at Rome and Thom: Opportunity Village’s $59M Northwest Campus and Betty’s Village North",
+    dek: "The project off Decatur and the 215 is Opportunity Village's fourth campus: program space, a thrift boutique, cafe and art gallery, plus 90 homes for adults with and without disabilities. What's planned, and what's still unconfirmed.",
+    byline: "LVINIT Editorial",
+    date: "November 2026",
+    publishedAt: "2026-11-23",
+    category: "Local Feature",
+    // Built by the LVINIT Daily Publisher from Local Radar assignment
+    // LR-OPPORTUNITY-VILLAGE-NORTHWEST-CAMPUS-BETTYS-VILLAGE-NORTH. No LVINIT
+    // photography of Rome/Thom yet, so the card renders its designed fallback.
+    href: "/guides/opportunity-village-northwest-campus-bettys-village-north-las-vegas",
+  },
+  {
+    slug: "binions-horseshoe-sign-neon-museum-relighting-downtown-las-vegas",
+    title: "The Binion’s Horseshoe Sign Relights at the Neon Museum Dec. 1. Here’s What It Is and How to See It",
+    dek: "The restored 1988 horseshoe that once marked Binion's west entrance at Fremont and 1st gets its lights back in the Neon Boneyard on Giving Tuesday. What was restored, what tickets cost, and what the museum hasn't said yet.",
+    byline: "LVINIT Editorial",
+    date: "November 2026",
+    publishedAt: "2026-11-22",
+    category: "Local Feature",
+    // Built by the LVINIT Daily Publisher from Local Radar assignment
+    // LR-BINIONS-HORSESHOE-SIGN-NEON-MUSEUM. No LVINIT photography of the Neon
+    // Museum or Fremont Street yet, so the card renders its designed fallback.
+    href: "/guides/binions-horseshoe-sign-neon-museum-relighting-downtown-las-vegas",
+  },
+  {
+    slug: "sloan-junction-industrial-master-plan-south-las-vegas",
+    title: "What Is ‘Sloan Junction’? Clark County’s Plan for a 774-Acre Industrial Hub at the Valley’s South Edge",
+    dek: "Clark County presented a master plan to turn the batch plants and yards around the I-15 Sloan Road exit into a coordinated industrial park. It was received, not adopted. Here's what's in it.",
+    byline: "LVINIT Editorial",
+    date: "November 2026",
+    publishedAt: "2026-11-21",
+    category: "Local Feature",
+    // Built by the LVINIT Daily Publisher from Local Radar assignment
+    // LR-SLOAN-JUNCTION-INDUSTRIAL-MASTER-PLAN. No LVINIT photography of the
+    // Sloan area yet, so the card renders its designed non-photographic fallback.
+    href: "/guides/sloan-junction-industrial-master-plan-south-las-vegas",
+  },
+  {
+    slug: "life-time-durango-opening-southwest-las-vegas",
+    title: "Life Time Durango Is Set to Open Dec. 14. Here's What's Going Into the Big Club Across From IKEA",
+    dek: "Life Time says its 128,000-square-foot club at Durango and Sunset is arriving Dec. 14, with indoor and outdoor pools, six indoor pickleball courts, kids space and coworking.",
+    byline: "LVINIT Editorial",
+    date: "November 2026",
+    publishedAt: "2026-11-20",
+    category: "Local Feature",
+    // Built by the LVINIT Daily Publisher from Local Radar assignment
+    // LR-LIFE-TIME-DURANGO. No LVINIT photography of the club yet, so the
+    // card renders its designed non-photographic fallback.
+    href: "/guides/life-time-durango-opening-southwest-las-vegas",
+  },
+  {
+    slug: "mountains-edge-recreation-center-regional-park-phase-ii-southwest-las-vegas",
+    title: "Mountain's Edge Is Getting a Rec Center and a Bigger Regional Park. Here's What Clark County Just Approved",
+    dek: "Clark County picked CORE Construction for a new Mountain's Edge recreation center and Phase II of Mountain's Edge Regional Park, estimated at $85M to $90M combined.",
+    byline: "LVINIT Editorial",
+    date: "November 2026",
+    publishedAt: "2026-11-19",
+    category: "Local Feature",
+    // Built by the LVINIT Daily Publisher from Local Radar assignment
+    // LR-MOUNTAINS-EDGE-REC-CENTER-PARK-PHASE-II. Card image = Mikey's aerial
+    // of Mountain's Edge Regional Park (same image as the article hero).
+    image: "/images/hero/mountains-edge-regional-park-las-vegas-hero.webp",
+    imageAlt:
+      "Aerial view of Mountain's Edge Regional Park in southwest Las Vegas: lighted baseball and softball fields, a turf field, a playground, shade structures and parking lots, with open desert, neighborhoods and mountains beyond under a cloudy sky.",
+    href: "/guides/mountains-edge-recreation-center-regional-park-phase-ii-southwest-las-vegas",
+  },
+  {
+    slug: "lorenzi-park-tennis-center-central-las-vegas",
+    title: "Lorenzi Park Is Getting a $4.9M Tennis Center. Here's What's Being Built",
+    dek: "The City of Las Vegas breaks ground Nov. 19 on three new courts, 10 refinished courts and a new clubhouse at Lorenzi Park, renamed the Marty Hennessey Tennis Center.",
+    byline: "LVINIT Editorial",
+    date: "November 2026",
+    publishedAt: "2026-11-18",
+    category: "Local Feature",
+    // Built by the LVINIT Daily Publisher from Local Radar assignment
+    // LR-LORENZI-PARK-TENNIS-CENTER. No LVINIT photography of Lorenzi Park
+    // yet, so the card renders its designed non-photographic fallback.
+    href: "/guides/lorenzi-park-tennis-center-central-las-vegas",
+  },
+  {
+    slug: "iron-mountain-road-extension-decatur-closure-northwest-las-vegas",
+    title: "Decatur Is Closed Near Ice Age Fossils State Park: What the Iron Mountain Road Project Means",
+    dek: "The City of Las Vegas started a $13.4M Iron Mountain Road extension Nov. 16, fully closing Decatur up to the state park entrance. Detours, phases and the expected 2027 finish.",
+    byline: "LVINIT Editorial",
+    date: "November 2026",
+    publishedAt: "2026-11-17",
+    category: "Local Feature",
+    // Built by the LVINIT Daily Publisher from Local Radar assignment
+    // LR-IRON-MOUNTAIN-RD-EXTENSION. No LVINIT photography of the corridor
+    // yet, so the card renders its designed non-photographic fallback.
+    href: "/guides/iron-mountain-road-extension-decatur-closure-northwest-las-vegas",
+  },
+  {
     slug: "lee-canyon-2026-27-season-west-bowl-las-vegas",
     title: "Lee Canyon Opens Nov. 20 With a New Chairlift. Here's What's New on Las Vegas's Local Mountain",
     dek: "The ski area up Lee Canyon Road opens Friday, Nov. 20. What the new West Bowl chairlift adds, when the new terrain is expected, and what to know before you drive up.",
