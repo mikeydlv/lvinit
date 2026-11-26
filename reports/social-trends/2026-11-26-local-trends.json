@@ -1,0 +1,890 @@
+{
+  "schema_version": 1,
+  "agent": "local-trends",
+  "date": "2026-11-26",
+  "fixture": false,
+  "mode": "rules",
+  "modeReason": "no ANTHROPIC_API_KEY is configured",
+  "model": null,
+  "counts": {
+    "read": 379,
+    "sourcesOk": 11,
+    "fresh": 62,
+    "judged": 5,
+    "alreadyReviewed": 179,
+    "deferred": 0
+  },
+  "usage": null,
+  "health": [
+    {
+      "id": "henderson-news",
+      "name": "City of Henderson newsroom",
+      "tier": "official",
+      "ok": true,
+      "status": 200,
+      "items": 44,
+      "error": null
+    },
+    {
+      "id": "city-lv-news",
+      "name": "City of Las Vegas newsroom",
+      "tier": "official",
+      "ok": true,
+      "status": 200,
+      "items": 25,
+      "error": null
+    },
+    {
+      "id": "rj-business",
+      "name": "Las Vegas Review-Journal — Business",
+      "tier": "news",
+      "ok": true,
+      "status": 200,
+      "items": 30,
+      "error": null
+    },
+    {
+      "id": "rj-local",
+      "name": "Las Vegas Review-Journal — Local",
+      "tier": "news",
+      "ok": true,
+      "status": 200,
+      "items": 30,
+      "error": null
+    },
+    {
+      "id": "sun-business",
+      "name": "Las Vegas Sun — Business",
+      "tier": "news",
+      "ok": true,
+      "status": 200,
+      "items": 20,
+      "error": null
+    },
+    {
+      "id": "sun-news",
+      "name": "Las Vegas Sun — News",
+      "tier": "news",
+      "ok": true,
+      "status": 200,
+      "items": 20,
+      "error": null
+    },
+    {
+      "id": "vegas-inc",
+      "name": "Vegas Inc",
+      "tier": "news",
+      "ok": true,
+      "status": 200,
+      "items": 20,
+      "error": null
+    },
+    {
+      "id": "ktnv",
+      "name": "KTNV 13 Action News",
+      "tier": "news",
+      "ok": true,
+      "status": 200,
+      "items": 30,
+      "error": null
+    },
+    {
+      "id": "8newsnow",
+      "name": "8 News Now",
+      "tier": "news",
+      "ok": true,
+      "status": 200,
+      "items": 19,
+      "error": null
+    },
+    {
+      "id": "news3lv",
+      "name": "News 3 Las Vegas",
+      "tier": "news",
+      "ok": true,
+      "status": 200,
+      "items": 41,
+      "error": null
+    },
+    {
+      "id": "nevada-current",
+      "name": "Nevada Current",
+      "tier": "news",
+      "ok": true,
+      "status": 200,
+      "items": 100,
+      "error": null
+    },
+    {
+      "id": "reddit",
+      "name": "Reddit (r/vegas, r/LasVegas, r/henderson, r/summerlin)",
+      "tier": "social",
+      "ok": false,
+      "status": 404,
+      "items": 0,
+      "error": null
+    },
+    {
+      "id": "google-news",
+      "name": "Google News search (41 targeted queries)",
+      "tier": "news",
+      "ok": false,
+      "status": 207,
+      "items": 0,
+      "error": "41 of 41 queries failed"
+    }
+  ],
+  "topics": [
+    {
+      "key": "las-vegas-valley-wide-las-vegas-airport-passenger-traffic-do",
+      "isExisting": false,
+      "name": "Las Vegas airport passenger traffic down in October amid higher fares",
+      "kind": "project",
+      "area": "Las Vegas (valley-wide)",
+      "category": "D. Transportation / infrastructure",
+      "status": "RUMORED / UNCONFIRMED",
+      "statusEvidence": null,
+      "statusEvidenceId": null,
+      "materialNewInfo": false,
+      "whatChanged": "",
+      "scores": {
+        "local_relevance": 3,
+        "relocation_value": 4,
+        "conversation_potential": 2,
+        "visual_potential": 3,
+        "evergreen_value": 4,
+        "real_estate_connection": 3,
+        "novelty": 2,
+        "lvinit_fit": 3
+      },
+      "whyItMatters": "Rules-only mode — source summary: Higher airfares appear to be taking their toll on the number of passengers using Harry Reid International Airport with October traffic down 5%.",
+      "whyPeopleCare": "Needs Mikey's angle (rules-only mode cannot judge audience).",
+      "hook": "Needs Mikey's angle (rules-only mode does not write hooks).",
+      "bestFormat": "Instagram carousel",
+      "secondaryFormats": [
+        "LVINIT article"
+      ],
+      "flywheel": [],
+      "fieldShoot": {
+        "recommended": false,
+        "locationType": "",
+        "shots": [],
+        "drone": "",
+        "aRoll": "",
+        "urgency": "no shoot needed"
+      },
+      "articleOpportunity": "Possible update to /guides/binions-horseshoe-sign-neon-museum-relighting-downtown-las-vegas",
+      "existingContent": [
+        {
+          "route": "/guides/binions-horseshoe-sign-neon-museum-relighting-downtown-las-vegas",
+          "action": "internal link",
+          "note": "Related by area/topic (rules match)."
+        },
+        {
+          "route": "/guides/las-vegas-down-payment-assistance-programs-2026",
+          "action": "internal link",
+          "note": "Related by area/topic (rules match)."
+        },
+        {
+          "route": "/guides/las-vegas-home-prices-august-2026",
+          "action": "internal link",
+          "note": "Related by area/topic (rules match)."
+        }
+      ],
+      "missingConfirmation": "No source text states the project's status.",
+      "promotionTrigger": "",
+      "sources": [
+        {
+          "id": "c-ab1254136e",
+          "title": "Las Vegas airport passenger traffic down in October amid higher fares",
+          "sourceName": "Las Vegas Review-Journal — Business",
+          "url": "https://reviewjournal.com/business/tourism/reid-airport-passenger-traffic-down-5-in-october-7-for-year-3919309",
+          "published": "2026-11-25",
+          "tier": "news",
+          "via": "rj-business"
+        }
+      ],
+      "signals": [],
+      "total": 24,
+      "band": "P3",
+      "priority": "P3",
+      "capped": null,
+      "statusEvidenceUrl": null,
+      "surface": true,
+      "surfaceReasons": [
+        "new"
+      ],
+      "statusNote": null
+    },
+    {
+      "key": "las-vegas-valley-wide-raiders-give-back-to-southern-nevada-t",
+      "isExisting": false,
+      "name": "Raiders give back to Southern Nevada through Thanksgiving community initiatives",
+      "kind": "project",
+      "area": "Las Vegas (valley-wide)",
+      "category": "G. Local lifestyle",
+      "status": "RUMORED / UNCONFIRMED",
+      "statusEvidence": null,
+      "statusEvidenceId": null,
+      "materialNewInfo": false,
+      "whatChanged": "",
+      "scores": {
+        "local_relevance": 3,
+        "relocation_value": 4,
+        "conversation_potential": 2,
+        "visual_potential": 4,
+        "evergreen_value": 4,
+        "real_estate_connection": 2,
+        "novelty": 2,
+        "lvinit_fit": 3
+      },
+      "whyItMatters": "Rules-only mode — source summary: Raiders give back to Southern Nevada through Thanksgiving community initiatives",
+      "whyPeopleCare": "Needs Mikey's angle (rules-only mode cannot judge audience).",
+      "hook": "Needs Mikey's angle (rules-only mode does not write hooks).",
+      "bestFormat": "Reel / TikTok / Short",
+      "secondaryFormats": [
+        "LVINIT article"
+      ],
+      "flywheel": [],
+      "fieldShoot": {
+        "recommended": true,
+        "locationType": "The site itself in Las Vegas (valley-wide) — confirm the location from the source before driving out.",
+        "shots": [],
+        "drone": "",
+        "aRoll": "",
+        "urgency": "shoot this month"
+      },
+      "articleOpportunity": "Possible update to /guides/buying-new-construction-las-vegas",
+      "existingContent": [
+        {
+          "route": "/guides/buying-new-construction-las-vegas",
+          "action": "internal link",
+          "note": "Related by area/topic (rules match)."
+        },
+        {
+          "route": "/guides/echo-trail-park-community-center-southwest-las-vegas",
+          "action": "internal link",
+          "note": "Related by area/topic (rules match)."
+        },
+        {
+          "route": "/guides/gholson-landing-affordable-housing-east-las-vegas",
+          "action": "internal link",
+          "note": "Related by area/topic (rules match)."
+        }
+      ],
+      "missingConfirmation": "No source text states the project's status.",
+      "promotionTrigger": "",
+      "sources": [
+        {
+          "id": "c-194f768f1e",
+          "title": "Raiders give back to Southern Nevada through Thanksgiving community initiatives",
+          "sourceName": "News 3 Las Vegas",
+          "url": "https://news3lv.com/news/local/raiders-give-back-to-southern-nevada-through-thanksgiving-community-initiatives",
+          "published": "2026-11-26",
+          "tier": "news",
+          "via": "news3lv"
+        }
+      ],
+      "signals": [],
+      "total": 24,
+      "band": "P3",
+      "priority": "P3",
+      "capped": null,
+      "statusEvidenceUrl": null,
+      "surface": true,
+      "surfaceReasons": [
+        "new"
+      ],
+      "statusNote": null
+    },
+    {
+      "key": "las-vegas-valley-wide-spirit-exit-still-keeping-las-vegas-fl",
+      "isExisting": false,
+      "name": "Spirit exit still keeping Las Vegas flights pricier; expert gives tips to save on flights",
+      "kind": "project",
+      "area": "Las Vegas (valley-wide)",
+      "category": "D. Transportation / infrastructure",
+      "status": "PROPOSED",
+      "statusEvidence": "Rachel Motekaitis, who flew into Las Vegas from Dallas, said her trip went mostly as planned.",
+      "statusEvidenceId": "c-a00311cdc1",
+      "materialNewInfo": false,
+      "whatChanged": "",
+      "scores": {
+        "local_relevance": 3,
+        "relocation_value": 4,
+        "conversation_potential": 2,
+        "visual_potential": 3,
+        "evergreen_value": 4,
+        "real_estate_connection": 3,
+        "novelty": 2,
+        "lvinit_fit": 3
+      },
+      "whyItMatters": "Rules-only mode — source summary: Holiday crowds are expected at Harry Reid International, but getting there is pricier: NerdWallet says travel costs are up 9% and airfare up 27% year over year. Experts cite fewer budget seats after Spirit’s exit.",
+      "whyPeopleCare": "Needs Mikey's angle (rules-only mode cannot judge audience).",
+      "hook": "Needs Mikey's angle (rules-only mode does not write hooks).",
+      "bestFormat": "Instagram carousel",
+      "secondaryFormats": [
+        "LVINIT article"
+      ],
+      "flywheel": [],
+      "fieldShoot": {
+        "recommended": false,
+        "locationType": "",
+        "shots": [],
+        "drone": "",
+        "aRoll": "",
+        "urgency": "no shoot needed"
+      },
+      "articleOpportunity": "Possible update to /guides/henderson-vs-southwest-las-vegas",
+      "existingContent": [
+        {
+          "route": "/guides/henderson-vs-southwest-las-vegas",
+          "action": "internal link",
+          "note": "Related by area/topic (rules match)."
+        },
+        {
+          "route": "/guides/holiday-lights-las-vegas-2026",
+          "action": "internal link",
+          "note": "Related by area/topic (rules match)."
+        },
+        {
+          "route": "/guides/las-vegas-new-home-sales-july-2026",
+          "action": "internal link",
+          "note": "Related by area/topic (rules match)."
+        }
+      ],
+      "missingConfirmation": "",
+      "promotionTrigger": "",
+      "sources": [
+        {
+          "id": "c-a00311cdc1",
+          "title": "Spirit exit still keeping Las Vegas flights pricier; expert gives tips to save on flights",
+          "sourceName": "News 3 Las Vegas",
+          "url": "https://news3lv.com/news/local/spirit-exit-still-keeping-las-vegas-flights-pricier-expert-gives-tips-to-save-on-flights",
+          "published": "2026-11-26",
+          "tier": "news",
+          "via": "news3lv"
+        }
+      ],
+      "signals": [],
+      "total": 24,
+      "band": "P3",
+      "priority": "P3",
+      "capped": null,
+      "statusEvidenceUrl": "https://news3lv.com/news/local/spirit-exit-still-keeping-las-vegas-flights-pricier-expert-gives-tips-to-save-on-flights",
+      "surface": true,
+      "surfaceReasons": [
+        "new"
+      ],
+      "statusNote": null
+    },
+    {
+      "key": "las-vegas-valley-wide-error-delays-las-vegas-smith-s-grocery",
+      "isExisting": false,
+      "name": "‘Error’ delays Las Vegas Smith’s grocery store shooter sentencing",
+      "kind": "project",
+      "area": "Las Vegas (valley-wide)",
+      "category": "B. Neighborhood changes",
+      "status": "RUMORED / UNCONFIRMED",
+      "statusEvidence": null,
+      "statusEvidenceId": null,
+      "materialNewInfo": false,
+      "whatChanged": "",
+      "scores": {
+        "local_relevance": 3,
+        "relocation_value": 4,
+        "conversation_potential": 2,
+        "visual_potential": 4,
+        "evergreen_value": 3,
+        "real_estate_connection": 3,
+        "novelty": 2,
+        "lvinit_fit": 3
+      },
+      "whyItMatters": "Rules-only mode — source summary: The television news microphone was not supposed to be where an Arizona mother delivered her plea for justice, but a clerical error forced her into a Las Vegas courthouse lobby and away from the man who killed her daughter.",
+      "whyPeopleCare": "Needs Mikey's angle (rules-only mode cannot judge audience).",
+      "hook": "Needs Mikey's angle (rules-only mode does not write hooks).",
+      "bestFormat": "Reel / TikTok / Short",
+      "secondaryFormats": [
+        "LVINIT article"
+      ],
+      "flywheel": [],
+      "fieldShoot": {
+        "recommended": true,
+        "locationType": "The site itself in Las Vegas (valley-wide) — confirm the location from the source before driving out.",
+        "shots": [],
+        "drone": "",
+        "aRoll": "",
+        "urgency": "shoot this month"
+      },
+      "articleOpportunity": "Possible update to /guides/binions-horseshoe-sign-neon-museum-relighting-downtown-las-vegas",
+      "existingContent": [
+        {
+          "route": "/guides/binions-horseshoe-sign-neon-museum-relighting-downtown-las-vegas",
+          "action": "internal link",
+          "note": "Related by area/topic (rules match)."
+        },
+        {
+          "route": "/guides/blue-diamond-wash-trail-southwest-las-vegas",
+          "action": "internal link",
+          "note": "Related by area/topic (rules match)."
+        },
+        {
+          "route": "/guides/buying-new-construction-las-vegas",
+          "action": "internal link",
+          "note": "Related by area/topic (rules match)."
+        }
+      ],
+      "missingConfirmation": "No source text states the project's status.",
+      "promotionTrigger": "",
+      "sources": [
+        {
+          "id": "c-2e01ca6d33",
+          "title": "‘Error’ delays Las Vegas Smith’s grocery store shooter sentencing",
+          "sourceName": "8 News Now",
+          "url": "https://8newsnow.com/investigators/error-delays-las-vegas-smiths-grocery-store-shooter-sentencing",
+          "published": "2026-11-26",
+          "tier": "news",
+          "via": "8newsnow"
+        }
+      ],
+      "signals": [],
+      "total": 24,
+      "band": "P3",
+      "priority": "P3",
+      "capped": null,
+      "statusEvidenceUrl": null,
+      "surface": true,
+      "surfaceReasons": [
+        "new"
+      ],
+      "statusNote": null
+    },
+    {
+      "key": "las-vegas-valley-wide-when-home-is-no-longer-an-option-what-",
+      "isExisting": false,
+      "name": "When home is no longer an option, what happens to the family pet? Las Vegas shelter helps families in need",
+      "kind": "project",
+      "area": "Las Vegas (valley-wide)",
+      "category": "G. Local lifestyle",
+      "status": "RUMORED / UNCONFIRMED",
+      "statusEvidence": null,
+      "statusEvidenceId": null,
+      "materialNewInfo": false,
+      "whatChanged": "",
+      "scores": {
+        "local_relevance": 3,
+        "relocation_value": 4,
+        "conversation_potential": 2,
+        "visual_potential": 4,
+        "evergreen_value": 4,
+        "real_estate_connection": 2,
+        "novelty": 2,
+        "lvinit_fit": 3
+      },
+      "whyItMatters": "Rules-only mode — source summary: When home is no longer an option, finding a safe place to stay can come with another difficult question: What happens to the family pet? Here's how a local shelter is stepping in to help",
+      "whyPeopleCare": "Needs Mikey's angle (rules-only mode cannot judge audience).",
+      "hook": "Needs Mikey's angle (rules-only mode does not write hooks).",
+      "bestFormat": "Reel / TikTok / Short",
+      "secondaryFormats": [
+        "LVINIT article"
+      ],
+      "flywheel": [],
+      "fieldShoot": {
+        "recommended": true,
+        "locationType": "The site itself in Las Vegas (valley-wide) — confirm the location from the source before driving out.",
+        "shots": [],
+        "drone": "",
+        "aRoll": "",
+        "urgency": "shoot this month"
+      },
+      "articleOpportunity": "Possible update to /guides/las-vegas-down-payment-assistance-programs-2026",
+      "existingContent": [
+        {
+          "route": "/guides/las-vegas-down-payment-assistance-programs-2026",
+          "action": "internal link",
+          "note": "Related by area/topic (rules match)."
+        },
+        {
+          "route": "/guides/las-vegas-home-prices-august-2026",
+          "action": "internal link",
+          "note": "Related by area/topic (rules match)."
+        },
+        {
+          "route": "/guides/las-vegas-home-prices-july-2026",
+          "action": "internal link",
+          "note": "Related by area/topic (rules match)."
+        }
+      ],
+      "missingConfirmation": "No source text states the project's status.",
+      "promotionTrigger": "",
+      "sources": [
+        {
+          "id": "c-8fdc77a9fc",
+          "title": "When home is no longer an option, what happens to the family pet? Las Vegas shelter helps families in need",
+          "sourceName": "KTNV 13 Action News",
+          "url": "https://ktnv.com/neighborhoods/east-las-vegas/when-home-is-no-longer-an-option-what-happens-to-the-family-pet-las-vegas-shelter-helps-families-in-need",
+          "published": "2026-11-25",
+          "tier": "news",
+          "via": "ktnv"
+        }
+      ],
+      "signals": [],
+      "total": 24,
+      "band": "P3",
+      "priority": "P3",
+      "capped": null,
+      "statusEvidenceUrl": null,
+      "surface": true,
+      "surfaceReasons": [
+        "new"
+      ],
+      "statusNote": null
+    }
+  ],
+  "rejected": [],
+  "filtered": [
+    {
+      "title": "Thunderbirds make history during 2026 show season",
+      "url": "https://8newsnow.com/news/local-news/thunderbirds-make-history-during-2026-show-season",
+      "reason": "no housing, neighborhood, development or lifestyle angle",
+      "sourceName": "8 News Now"
+    },
+    {
+      "title": "Electric dirt bike rider killed in southwest Las Vegas crash",
+      "url": "https://8newsnow.com/news/local-news/fatal-motorcycle-crash-closes-roads-in-the-southwest-valley",
+      "reason": "crime / public safety",
+      "sourceName": "8 News Now"
+    },
+    {
+      "title": "City of Las Vegas stops popular backyard horse show, 'Gladius the Show' after complaint",
+      "url": "https://8newsnow.com/news/local-news/city-of-las-vegas-stops-popular-backyard-horse-show-gladius-the-show-after-complaint",
+      "reason": "no housing, neighborhood, development or lifestyle angle",
+      "sourceName": "8 News Now"
+    },
+    {
+      "title": "Wild horse advocates sue to stop Nevada roundup",
+      "url": "https://8newsnow.com/news/local-news/wild-horse-advocates-sue-to-stop-nevada-roundup",
+      "reason": "no housing, neighborhood, development or lifestyle angle",
+      "sourceName": "8 News Now"
+    },
+    {
+      "title": "New evidence obtained from deadly First Friday shooting in downtown Las Vegas",
+      "url": "https://8newsnow.com/news/local-news/new-evidence-obtained-from-deadly-first-friday-shooting-in-downtown-las-vegas",
+      "reason": "crime / public safety",
+      "sourceName": "8 News Now"
+    },
+    {
+      "title": "Nye County deputies seize 101 guns following Pahrump standoff",
+      "url": "https://8newsnow.com/news/local-news/nye-county-deputies-seize-101-guns-following-pahrump-standoff",
+      "reason": "no housing, neighborhood, development or lifestyle angle",
+      "sourceName": "8 News Now"
+    },
+    {
+      "title": "Las Vegas Rescue Mission serves hundreds of free Thanksgiving meals to those in need",
+      "url": "https://8newsnow.com/news/local-news/las-vegas-rescue-mission-serves-hundreds-of-free-thanksgiving-meals-to-those-in-need",
+      "reason": "no housing, neighborhood, development or lifestyle angle",
+      "sourceName": "8 News Now"
+    },
+    {
+      "title": "Ahead of Thanksgiving, more Americans struggle to put food on the table",
+      "url": "https://nevadacurrent.com/2026/11/26/repub/ahead-of-thanksgiving-more-americans-struggle-to-put-food-on-the-table",
+      "reason": "no housing, neighborhood, development or lifestyle angle",
+      "sourceName": "Nevada Current"
+    },
+    {
+      "title": "Trump heads to Arizona next week for a high-stakes expansion of TSMC's computer chip factories",
+      "url": "https://lasvegassun.com/news/2026/nov/26/trump-heads-to-arizona-next-week-for-a-high-stakes",
+      "reason": "no housing, neighborhood, development or lifestyle angle",
+      "sourceName": "Las Vegas Sun — News"
+    },
+    {
+      "title": "Las Vegas mom’s home burglarized during son's memorial",
+      "url": "https://8newsnow.com/crime/las-vegas-moms-home-burglarized-during-sons-memorial",
+      "reason": "crime / public safety",
+      "sourceName": "8 News Now"
+    },
+    {
+      "title": "Grupos defensores de los caballos salvajes presentan una demanda para detener la captura de 600 caballos en Nevada",
+      "url": "https://lasvegassun.com/news/2026/nov/26/grupos-defensores-de-los-caballos-salvajes-present",
+      "reason": "no housing, neighborhood, development or lifestyle angle",
+      "sourceName": "Las Vegas Sun — News"
+    },
+    {
+      "title": "What's closed on Thanksgiving and when stores reopen on Black Friday",
+      "url": "https://lasvegassun.com/news/2026/nov/25/whats-closed-on-thanksgiving-and-when-stores-reope",
+      "reason": "no housing, neighborhood, development or lifestyle angle",
+      "sourceName": "Las Vegas Sun — News"
+    },
+    {
+      "title": "Vance says Jensen Huang won't need a pardon as scrutiny of Nvidia scandal builds in Washington",
+      "url": "https://lasvegassun.com/news/2026/nov/25/vance-says-jensen-huang-wont-need-a-pardon-as-scru",
+      "reason": "no housing, neighborhood, development or lifestyle angle",
+      "sourceName": "Las Vegas Sun — News"
+    },
+    {
+      "title": "Inmate dies at Southern Nevada prison, officials say",
+      "url": "https://reviewjournal.com/crime/inmate-dies-at-high-desert-corrections-officials-say-3919440",
+      "reason": "no housing, neighborhood, development or lifestyle angle",
+      "sourceName": "Las Vegas Review-Journal — Local"
+    },
+    {
+      "title": "A’s owner John Fisher talks San Jose Earthquakes sale, his move to Vegas",
+      "url": "https://lasvegassun.com/news/2026/nov/26/as-owner-john-fisher-talks-san-jose-earthquakes-sa",
+      "reason": "no identifiable Las Vegas-area location",
+      "sourceName": "Las Vegas Sun — News"
+    },
+    {
+      "title": "100 Black Men of Las Vegas and Nevada deliver 6,000 Thanksgiving meals valleywide",
+      "url": "https://news3lv.com/news/local/100-black-men-of-las-vegas-and-nevada-deliver-6000-thanksgiving-meals-valleywide",
+      "reason": "no housing, neighborhood, development or lifestyle angle",
+      "sourceName": "News 3 Las Vegas"
+    },
+    {
+      "title": "AI-driven volatility shakes Wall Street, and 401(k) savers may feel the swings",
+      "url": "https://news3lv.com/news/local/ai-driven-volatility-shakes-wall-street-and-401k-savers-may-feel-the-swings",
+      "reason": "no housing, neighborhood, development or lifestyle angle",
+      "sourceName": "News 3 Las Vegas"
+    },
+    {
+      "title": "Las Vegas police seek help identifying two suspects in armed robbery near S. Decatur Blvd.",
+      "url": "https://news3lv.com/news/local/las-vegas-police-seek-help-identifying-two-suspects-in-armed-robbery-near-s-decatur-blvd",
+      "reason": "crime / public safety",
+      "sourceName": "News 3 Las Vegas"
+    },
+    {
+      "title": "Giving thanks for Americans who refused to surrender democracy",
+      "url": "https://lasvegassun.com/news/2026/nov/26/giving-thanks-for-americans-who-refused-to-surrend",
+      "reason": "no housing, neighborhood, development or lifestyle angle",
+      "sourceName": "Las Vegas Sun — News"
+    },
+    {
+      "title": "Thanksgiving shopping deals bring spike in scam risk, bankers group warns",
+      "url": "https://news3lv.com/news/local/thanksgiving-shopping-deals-bring-spike-in-scam-risk-bankers-group-warns",
+      "reason": "no housing, neighborhood, development or lifestyle angle",
+      "sourceName": "News 3 Las Vegas"
+    },
+    {
+      "title": "Las Vegans can foster shelter dogs for Thanksgiving through Animal Foundation program",
+      "url": "https://news3lv.com/news/local/las-vegans-can-foster-shelter-dogs-for-thanksgiving-through-animal-foundation-program",
+      "reason": "no housing, neighborhood, development or lifestyle angle",
+      "sourceName": "News 3 Las Vegas"
+    },
+    {
+      "title": "Trump’s ugly remarks to reporter show the world who he really is",
+      "url": "https://lasvegassun.com/news/2026/nov/26/trumps-ugly-remarks-to-reporter-show-the-world-who",
+      "reason": "no housing, neighborhood, development or lifestyle angle",
+      "sourceName": "Las Vegas Sun — News"
+    },
+    {
+      "title": "Para las familias del sur de Nevada que viven al límite, los pañales gratuitos son un alivio",
+      "url": "https://lasvegassun.com/news/2026/nov/26/para-las-familias-del-sur-de-nevada-que-viven-al-l",
+      "reason": "no housing, neighborhood, development or lifestyle angle",
+      "sourceName": "Las Vegas Sun — News"
+    },
+    {
+      "title": "Expert shares tips on how to host inclusive holiday gatherings",
+      "url": "https://ktnv.com/expert-shares-tips-on-how-to-host-inclusive-holiday-gatherings",
+      "reason": "no identifiable Las Vegas-area location",
+      "sourceName": "KTNV 13 Action News"
+    },
+    {
+      "title": "Henderson girl writes Christmas book inspired by her brothers, donates proceeds to help others",
+      "url": "https://ktnv.com/neighborhoods/henderson/henderson-girl-writes-christmas-book-inspired-by-her-brothers-donates-proceeds-to-help-others",
+      "reason": "no housing, neighborhood, development or lifestyle angle",
+      "sourceName": "KTNV 13 Action News"
+    },
+    {
+      "title": "Nevada ranks third-highest in nation for job growth",
+      "url": "https://reviewjournal.com/business/nevada-ranks-third-highest-in-nation-for-job-growth-3919598",
+      "reason": "no housing, neighborhood, development or lifestyle angle",
+      "sourceName": "Las Vegas Review-Journal — Business"
+    },
+    {
+      "title": "Cold War veterans doubtful about benefits bill in lame-duck session",
+      "url": "https://ktnv.com/news/cold-war-veterans-doubtful-about-benefits-bill-in-lame-duck-session",
+      "reason": "no housing, neighborhood, development or lifestyle angle",
+      "sourceName": "KTNV 13 Action News"
+    },
+    {
+      "title": "‘Native art in the contemporary’: Arts District store, gallery platforms Indigenous artists",
+      "url": "https://reviewjournal.com/local/local-las-vegas/downtown/native-art-in-the-contemporary-arts-district-store-gallery-platforms-indigenous-artists-3919628",
+      "reason": "no housing, neighborhood, development or lifestyle angle",
+      "sourceName": "Las Vegas Review-Journal — Business"
+    },
+    {
+      "title": "Major retailer reverses major Apple Pay decision ahead of Black Friday",
+      "url": "https://reviewjournal.com/business/major-retailer-reverses-major-apple-pay-decision-ahead-of-black-friday-3919500",
+      "reason": "no housing, neighborhood, development or lifestyle angle",
+      "sourceName": "Las Vegas Review-Journal — Business"
+    },
+    {
+      "title": "For Southern Nevada families stretched thin, free diapers bring relief",
+      "url": "https://lasvegassun.com/news/2026/nov/26/for-military-families-stretched-thin-free-diapers",
+      "reason": "no housing, neighborhood, development or lifestyle angle",
+      "sourceName": "Las Vegas Sun — News"
+    },
+    {
+      "title": "Supreme Court has brought the need for expansion upon itself",
+      "url": "https://lasvegassun.com/news/2026/nov/26/supreme-court-has-brought-the-need-for-expansion-u",
+      "reason": "no housing, neighborhood, development or lifestyle angle",
+      "sourceName": "Las Vegas Sun — News"
+    },
+    {
+      "title": "‘Share our good fortune’: Charity feeds Thanksgiving feast to 750 homeless people",
+      "url": "https://reviewjournal.com/local/local-las-vegas/share-our-good-fortune-charity-feeds-thanksgiving-feast-to-750-homeless-people-3919715",
+      "reason": "no housing, neighborhood, development or lifestyle angle",
+      "sourceName": "Las Vegas Review-Journal — Local"
+    },
+    {
+      "title": "Olofsson lifting Golden Knights and treasuring second stint in Vegas",
+      "url": "https://lasvegassun.com/news/2026/nov/26/olofsson-lifting-golden-knights-and-treasuring-sec",
+      "reason": "no identifiable Las Vegas-area location",
+      "sourceName": "Las Vegas Sun — News"
+    },
+    {
+      "title": "The time for immigration reform is now, with or without Trump",
+      "url": "https://lasvegassun.com/news/2026/nov/26/the-time-for-immigration-reform-is-now-with-or-wit",
+      "reason": "no housing, neighborhood, development or lifestyle angle",
+      "sourceName": "Las Vegas Sun — News"
+    },
+    {
+      "title": "Police make arrest in suspicious death of woman whose body was found in Henderson",
+      "url": "https://ktnv.com/news/crime/police-make-arrest-in-suspicious-death-of-woman-whose-body-was-found-in-henderson",
+      "reason": "crime / public safety",
+      "sourceName": "KTNV 13 Action News"
+    },
+    {
+      "title": "Thanksgiving weekend will be calm in Las Vegas. But rain is returning soon",
+      "url": "https://reviewjournal.com/local/weather/thanksgiving-weekend-will-be-calm-in-las-vegas-but-rain-is-returning-soon-3919447",
+      "reason": "no housing, neighborhood, development or lifestyle angle",
+      "sourceName": "Las Vegas Review-Journal — Local"
+    },
+    {
+      "title": "‘Saul Goodman IRL?’: Las Vegas lawyer’s courthouse videos draw millions of views",
+      "url": "https://reviewjournal.com/crime/saul-goodman-irl-las-vegas-lawyers-courthouse-videos-draw-millions-of-views-3919677",
+      "reason": "no housing, neighborhood, development or lifestyle angle",
+      "sourceName": "Las Vegas Review-Journal — Local"
+    },
+    {
+      "title": "Raiders coach Klint Kubiak optimistic Brock Bowers returns Sunday night from ankle injury",
+      "url": "https://lasvegassun.com/news/2026/nov/25/raiders-coach-klint-kubiak-optimistic-brock-bowers",
+      "reason": "sports results",
+      "sourceName": "Las Vegas Sun — News"
+    },
+    {
+      "title": "Clean energy shouldn’t cost us the desert",
+      "url": "https://lasvegassun.com/news/2026/nov/26/clean-energy-shouldnt-cost-us-the-desert",
+      "reason": "no identifiable Las Vegas-area location",
+      "sourceName": "Las Vegas Sun — News"
+    },
+    {
+      "title": "Driver fleeing police hits LVMPD patrol cars, crashes on I-11 near Elkhorn Road",
+      "url": "https://ktnv.com/news/driver-fleeing-police-hits-lvmpd-patrol-cars-crashes-on-i-11-near-elkhorn-road",
+      "reason": "crime / public safety",
+      "sourceName": "KTNV 13 Action News"
+    },
+    {
+      "title": "Las Vegas police arrest suspect after pursuit ends in crash near I-11",
+      "url": "https://8newsnow.com/news/local-news/las-vegas-police-arrest-suspect-after-pursuit-ends-in-crash-near-i-11",
+      "reason": "crime / public safety",
+      "sourceName": "8 News Now"
+    },
+    {
+      "title": "Senate Democrats, please show a little discipline",
+      "url": "https://lasvegassun.com/news/2026/nov/26/senate-democrats-please-show-a-little-discipline",
+      "reason": "no housing, neighborhood, development or lifestyle angle",
+      "sourceName": "Las Vegas Sun — News"
+    },
+    {
+      "title": "What stores are open, closed on Thanksgiving Day 2026?",
+      "url": "https://8newsnow.com/news/national-news/what-stores-are-open-closed-on-thanksgiving-day-2026",
+      "reason": "no housing, neighborhood, development or lifestyle angle",
+      "sourceName": "8 News Now"
+    },
+    {
+      "title": "Southern Nevada feasts on Thanksgiving sunshine with some gusts",
+      "url": "https://8newsnow.com/weather/southern-nevada-feasts-on-thanksgiving-sunshine-with-some-gusts",
+      "reason": "no housing, neighborhood, development or lifestyle angle",
+      "sourceName": "8 News Now"
+    },
+    {
+      "title": "Nevada ranks No. 2 in U.S. for chance to strike gold: Study",
+      "url": "https://8newsnow.com/news/local-news/nevada-ranks-no-2-in-u-s-for-chance-to-strike-gold-study",
+      "reason": "no housing, neighborhood, development or lifestyle angle",
+      "sourceName": "8 News Now"
+    },
+    {
+      "title": "Man arrested in 2025 death of woman found near Henderson intersection",
+      "url": "https://8newsnow.com/news/local-news/man-arrested-in-2025-death-of-woman-found-near-henderson-intersection",
+      "reason": "crime / public safety",
+      "sourceName": "8 News Now"
+    },
+    {
+      "title": "'Drinksgiving’: Las Vegas officials warn of impaired driving dangers ahead of Thanksgiving",
+      "url": "https://news3lv.com/news/local/drinksgiving-las-vegas-officials-warn-of-impaired-driving-dangers-ahead-of-thanksgiving",
+      "reason": "no housing, neighborhood, development or lifestyle angle",
+      "sourceName": "News 3 Las Vegas"
+    },
+    {
+      "title": "Suspect arrested after striking LVMPD patrol cars during police chase in northwest valley",
+      "url": "https://news3lv.com/news/local/suspect-arrested-after-striking-lvmpd-patrol-cars-during-police-chase-in-northwest-valley",
+      "reason": "crime / public safety",
+      "sourceName": "News 3 Las Vegas"
+    },
+    {
+      "title": "Catholic Charities serves 750 people with Thanksgiving feast for 61st consecutive year",
+      "url": "https://news3lv.com/news/local/catholic-charities-serves-750-people-with-thanksgiving-feast-for-61st-consecutive-year",
+      "reason": "no housing, neighborhood, development or lifestyle angle",
+      "sourceName": "News 3 Las Vegas"
+    },
+    {
+      "title": "Truck crashes into wall and fire hydrant in south valley crash at Silverado Ranch",
+      "url": "https://news3lv.com/news/local/truck-hits-wall-and-fire-hydrant-in-south-valley-crash-at-silverado-ranch",
+      "reason": "crime / public safety",
+      "sourceName": "News 3 Las Vegas"
+    },
+    {
+      "title": "Raiders rookie QB Fernando Mendoza prepares for prime-time test against Browns",
+      "url": "https://news3lv.com/news/local/raiders-rookie-qb-fernando-mendoza-prepares-for-prime-time-test-against-browns",
+      "reason": "no identifiable Las Vegas-area location",
+      "sourceName": "News 3 Las Vegas"
+    },
+    {
+      "title": "Henderson police arrest suspect in connection with woman's death in Oct. 2025",
+      "url": "https://news3lv.com/news/local/henderson-police-arrest-suspect-in-connection-with-womans-death-in-oct-2025",
+      "reason": "crime / public safety",
+      "sourceName": "News 3 Las Vegas"
+    },
+    {
+      "title": "Circus Circus announces Black Friday, Cyber Monday deals in Las Vegas",
+      "url": "https://8newsnow.com/news/local-news/circus-circus-announces-black-friday-cyber-monday-deals-in-las-vegas",
+      "reason": "no housing, neighborhood, development or lifestyle angle",
+      "sourceName": "8 News Now"
+    },
+    {
+      "title": "The Shade Tree hosts Thanksgiving celebration for shelter residents",
+      "url": "https://news3lv.com/news/local/the-shade-tree-hosts-thanksgiving-celebration-for-shelter-residents",
+      "reason": "no housing, neighborhood, development or lifestyle angle",
+      "sourceName": "News 3 Las Vegas"
+    },
+    {
+      "title": "Lee Canyon to opens Bluebird Chair for ski season",
+      "url": "https://8newsnow.com/news/local-news/lee-canyon-to-opens-bluebird-chair-for-ski-season",
+      "reason": "no housing, neighborhood, development or lifestyle angle",
+      "sourceName": "8 News Now"
+    },
+    {
+      "title": "Holiday pop-ups bring festive cheer and boost to local businesses",
+      "url": "https://news3lv.com/news/local/holiday-pop-ups-bring-festive-cheer-and-boost-to-local-businesses",
+      "reason": "no housing, neighborhood, development or lifestyle angle",
+      "sourceName": "News 3 Las Vegas"
+    },
+    {
+      "title": "Shoplifting and ‘teen takeovers’ deserve real penalties",
+      "url": "https://lasvegassun.com/news/2026/nov/26/shoplifting-and-teen-takeovers-deserve-real-penalt",
+      "reason": "no housing, neighborhood, development or lifestyle angle",
+      "sourceName": "Las Vegas Sun — News"
+    }
+  ],
+  "warnings": []
+}

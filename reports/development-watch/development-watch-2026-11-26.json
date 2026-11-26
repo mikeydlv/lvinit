@@ -1,0 +1,1329 @@
+{
+  "schema_version": 1,
+  "agent": "development-watch",
+  "date": "2026-11-26",
+  "fixture": false,
+  "summary": {
+    "meaningfulChanges": 1,
+    "sourcesChecked": 17,
+    "sourcesFailed": [
+      "reddit",
+      "google-news",
+      "inspirada-news",
+      "google-news-dev"
+    ],
+    "sourcesManual": [
+      "clark-newsroom",
+      "nlv-newsroom",
+      "ndot",
+      "rtc",
+      "henderson-215",
+      "sec-edgar"
+    ],
+    "itemsRead": 399,
+    "itemsUnchanged": 225,
+    "itemsPassedGate": 2,
+    "noiseSuppressed": 69,
+    "agendaItemsSuppressed": 0,
+    "newEvents": 1,
+    "materialUpdates": 0,
+    "duplicatesIgnored": 1,
+    "monitorOnly": 0,
+    "conflicts": 0,
+    "handoffCandidates": 0,
+    "handoffMode": "dry-run"
+  },
+  "events": [
+    {
+      "fingerprint": "565ec005c029",
+      "entityId": "DEV-WELLS-PARK",
+      "entityName": "Wells Park",
+      "entityOrigin": "discovered",
+      "provisional": false,
+      "developer": null,
+      "jurisdiction": null,
+      "area": "henderson",
+      "areaLabel": "Henderson",
+      "topics": [
+        "park"
+      ],
+      "changeClass": "NEW",
+      "changes": [
+        {
+          "kind": "NEW_PROJECT",
+          "detail": "first time this project has been seen"
+        }
+      ],
+      "eventType": "approval",
+      "priorStatus": null,
+      "priorFrom": null,
+      "status": "approved",
+      "observedStatus": "approved",
+      "evidence": "Henderson was approved for a $65,000 grant to build a new children's traffic garden at Wells Park.",
+      "evidenceUrl": "https://ktnv.com/neighborhoods/henderson/henderson-approved-for-65k-grant-to-build-childrens-traffic-garden-teaching-road-safety-at-wells-park",
+      "evidenceAuthority": 8,
+      "units": null,
+      "acres": null,
+      "dollars": null,
+      "targetYear": null,
+      "targetText": null,
+      "targetKind": null,
+      "conflicts": [],
+      "date": "2026-11-26",
+      "detected": "approval: first time this project has been seen — “Henderson was approved for a $65,000 grant to build a new children's traffic garden at Wells Park.”",
+      "verified": "Not verified by a primary source.",
+      "interpretation": "An approval moves Wells Park from idea to entitled plan; it can still change before construction.",
+      "recommendation": "Consider adding Wells Park to /neighborhoods/henderson with its status and a primary source.",
+      "coverage": [],
+      "pillar": "/neighborhoods/henderson",
+      "score": 54,
+      "scoreComponents": {
+        "geography": 15,
+        "housing": 0,
+        "neighborhood": 10,
+        "access": 0,
+        "scale": 0,
+        "change": 9,
+        "authority": 6,
+        "certainty": 3,
+        "coverage": 6,
+        "decision": 5
+      },
+      "confidence": "Medium",
+      "confidenceReasons": [
+        "reputable reporting, article text"
+      ],
+      "promotionalOnly": false,
+      "fairHousing": {
+        "sensitiveSubject": true,
+        "subjectHits": [
+          {
+            "blocked": true,
+            "category": "familial-status",
+            "reason": "Familial status is a protected class — content cannot be framed around who lives there.",
+            "matched": "children",
+            "source": "KTNV 13 Action News"
+          }
+        ],
+        "framingClean": true,
+        "framingHits": []
+      },
+      "action": "ADD_TO_NEIGHBORHOOD_GUIDE",
+      "target": "/neighborhoods/henderson",
+      "actionRationale": "belongs in the /neighborhoods/henderson Development Watch roster",
+      "previousLifecycle": null,
+      "id": "DEV-2026-11-26-001",
+      "firstSeen": "2026-11-26",
+      "lifecycle": "NEW",
+      "handoff": {
+        "eligible": false,
+        "blockers": [
+          "SCORE_BELOW_THRESHOLD",
+          "CONFIDENCE_NOT_HIGH",
+          "NO_PRIMARY_SOURCE",
+          "FAIR_HOUSING_SUBJECT"
+        ],
+        "reasons": [
+          "relevance score below the handoff threshold",
+          "confidence is not High",
+          "no primary (authority 1–7) source supports it",
+          "the project's own framing touches a protected class — human review only"
+        ]
+      },
+      "sources": [
+        {
+          "name": "KTNV 13 Action News",
+          "title": "Henderson approved for $65K grant to build children's traffic garden teaching road safety at Wells Park",
+          "url": "https://ktnv.com/neighborhoods/henderson/henderson-approved-for-65k-grant-to-build-childrens-traffic-garden-teaching-road-safety-at-wells-park",
+          "authority": 8,
+          "authorityLabel": "reputable local reporting",
+          "authorityClass": "secondary",
+          "published": "2026-11-26T03:01:42.000Z",
+          "via": "ktnv",
+          "evidence": "Henderson was approved for a $65,000 grant to build a new children's traffic garden at Wells Park.",
+          "evidenceStatus": "approved",
+          "evidenceIn": "body"
+        }
+      ]
+    },
+    {
+      "fingerprint": "fe71712e18fe",
+      "entityId": "DEV-VEGAS",
+      "entityName": "VEGAS",
+      "entityOrigin": "discovered",
+      "provisional": false,
+      "developer": null,
+      "jurisdiction": null,
+      "area": "las-vegas",
+      "areaLabel": "Las Vegas (valley-wide)",
+      "topics": [
+        "residential"
+      ],
+      "changeClass": "DUPLICATE",
+      "changes": [
+        {
+          "kind": "NO_CHANGE",
+          "detail": "same as tracked record"
+        }
+      ],
+      "eventType": "filing",
+      "priorStatus": "partially open",
+      "priorFrom": "tracked record",
+      "status": "partially open",
+      "observedStatus": "filed",
+      "evidence": "LAS VEGAS (KLAS) - The City of Las Vegas is stopping a popular equestrian stunt show in a North Valley neighborhood after a complaint was filed on November 19.",
+      "evidenceUrl": "https://8newsnow.com/news/local-news/city-of-las-vegas-stops-popular-backyard-horse-show-gladius-the-show-after-complaint",
+      "evidenceAuthority": 8,
+      "units": null,
+      "acres": null,
+      "dollars": null,
+      "targetYear": null,
+      "targetText": null,
+      "targetKind": null,
+      "conflicts": [],
+      "date": "2026-11-26",
+      "detected": "filing: same as tracked record — “LAS VEGAS (KLAS) - The City of Las Vegas is stopping a popular equestrian stunt show in a North Valley neighborhood after a complaint was filed on November 19.”",
+      "verified": "Not verified by a primary source.",
+      "interpretation": "Early-stage change to housing supply in Las Vegas (valley-wide); worth tracking, not yet worth acting on.",
+      "recommendation": null,
+      "coverage": [
+        {
+          "route": "/guides/aries-henderson",
+          "kind": "dedicated",
+          "title": "Aries Henderson: What Buyers Should Know About Henderson's New Community"
+        },
+        {
+          "route": "/guides/binions-horseshoe-sign-neon-museum-relighting-downtown-las-vegas",
+          "kind": "dedicated",
+          "title": "Binion's Horseshoe Sign Relighting at the Neon Museum, Dec. 1"
+        },
+        {
+          "route": "/guides/blue-diamond-wash-trail-southwest-las-vegas",
+          "kind": "dedicated",
+          "title": "Blue Diamond Wash Trail: Route, Timeline & What's Being Built"
+        },
+        {
+          "route": "/guides/buying-new-construction-las-vegas",
+          "kind": "dedicated",
+          "title": "Buying New Construction in Las Vegas: How It Works"
+        },
+        {
+          "route": "/guides/casara-west-henderson-affordable-apartments",
+          "kind": "dedicated",
+          "title": "Casara at West Henderson: 390 Affordable Apartments Approved Near Las Vegas Blvd and Larson Lane"
+        },
+        {
+          "route": "/guides/ccsd-facility-master-plan-school-consolidations-las-vegas",
+          "kind": "dedicated",
+          "title": "CCSD Facility Master Plan: School Consolidations & Rebuilds"
+        },
+        {
+          "route": "/guides/clark-county-short-term-rental-license-2027",
+          "kind": "dedicated",
+          "title": "Clark County Short-Term Rental License 2027: Dates, Rules & Who Qualifies"
+        },
+        {
+          "route": "/guides/closing-costs-las-vegas-buyers",
+          "kind": "dedicated",
+          "title": "${TITLE}"
+        },
+        {
+          "route": "/guides/desert-pines-golf-course-redevelopment-east-las-vegas",
+          "kind": "dedicated",
+          "title": "Desert Pines Golf Course Redevelopment: What's Planned in East Las Vegas"
+        },
+        {
+          "route": "/guides/echo-trail-park-community-center-southwest-las-vegas",
+          "kind": "dedicated",
+          "title": "${TITLE}"
+        },
+        {
+          "route": "/guides/fiesta-henderson-redevelopment",
+          "kind": "dedicated",
+          "title": "The Fiesta Henderson Site Finally Has a Plan. Here's What's Real, and What Isn't Yet"
+        },
+        {
+          "route": "/guides/first-summer-in-vegas",
+          "kind": "dedicated",
+          "title": "Surviving Your First Las Vegas Summer"
+        },
+        {
+          "route": "/guides/gholson-landing-affordable-housing-east-las-vegas",
+          "kind": "dedicated",
+          "title": "Gholson Landing Just Opened 121 Affordable Apartments in East Las Vegas"
+        },
+        {
+          "route": "/guides/henderson-sport-and-social",
+          "kind": "dedicated",
+          "title": "Henderson Sport & Social: Full Tour, Prices, Hours & What to Know Before Visiting"
+        },
+        {
+          "route": "/guides/henderson-vs-southwest-las-vegas",
+          "kind": "dedicated",
+          "title": "Henderson vs. Southwest Las Vegas: Where Should You Actually Move?"
+        },
+        {
+          "route": "/guides/hoa-fees-las-vegas-what-to-check",
+          "kind": "dedicated",
+          "title": "HOA Fees in Las Vegas: What to Check Before You Make an Offer"
+        },
+        {
+          "route": "/guides/hualapai-grand-teton-police-substation-park-northwest-las-vegas",
+          "kind": "dedicated",
+          "title": "${TITLE}"
+        },
+        {
+          "route": "/guides/hylo-park-north-las-vegas-sports-entertainment-district",
+          "kind": "dedicated",
+          "title": "${TITLE}"
+        },
+        {
+          "route": "/guides/i-215-northern-beltway-trail-north-las-vegas",
+          "kind": "dedicated",
+          "title": "${TITLE}"
+        },
+        {
+          "route": "/guides/iron-mountain-road-extension-decatur-closure-northwest-las-vegas",
+          "kind": "dedicated",
+          "title": "Decatur Closure and Iron Mountain Road Extension, Northwest Las Vegas"
+        },
+        {
+          "route": "/guides/is-las-vegas-a-buyers-market",
+          "kind": "dedicated",
+          "title": "Is Las Vegas a Buyer's Market Right Now?"
+        },
+        {
+          "route": "/guides/las-vegas-down-payment-assistance-programs-2026",
+          "kind": "dedicated",
+          "title": "You Don't Need 20% Down To Buy a Home in Las Vegas"
+        },
+        {
+          "route": "/guides/las-vegas-home-prices-august-2026",
+          "kind": "dedicated",
+          "title": "Las Vegas Home Prices Dipped Again in August 2026 — and Fewer Homes Are Selling"
+        },
+        {
+          "route": "/guides/las-vegas-home-prices-july-2026",
+          "kind": "dedicated",
+          "title": "Las Vegas Home Prices Pulled Back From Their Record High in July 2026"
+        },
+        {
+          "route": "/guides/las-vegas-housing-market",
+          "kind": "dedicated",
+          "title": "Las Vegas Housing Market: Prices, Inventory and Sales Right Now"
+        },
+        {
+          "route": "/guides/las-vegas-mortgage-rates",
+          "kind": "dedicated",
+          "title": "Las Vegas Mortgage Rates: Where They Are and What They Do to Your Payment"
+        },
+        {
+          "route": "/guides/las-vegas-mortgage-rates-19-month-high",
+          "kind": "dedicated",
+          "title": "Mortgage Rates Just Hit Their Highest Point Since January 2025"
+        },
+        {
+          "route": "/guides/las-vegas-mortgage-rates-approach-7-percent",
+          "kind": "dedicated",
+          "title": "Mortgage Rates Kept Climbing. Daily Trackers Already Show 7%."
+        },
+        {
+          "route": "/guides/las-vegas-mortgage-rates-september-2026",
+          "kind": "dedicated",
+          "title": "Mortgage Rates Just Hit a 13-Month High. Here's What It Actually Means for Las Vegas Buyers."
+        },
+        {
+          "route": "/guides/las-vegas-new-home-sales-july-2026",
+          "kind": "dedicated",
+          "title": "Las Vegas New-Home Sales Jumped in July 2026 — But Builders Are Still Pulling Back"
+        },
+        {
+          "route": "/guides/las-vegas-starter-home-prices-2026",
+          "kind": "dedicated",
+          "title": "Las Vegas Starter Homes Have More Than Doubled Since 2016 — And They Just Got a Little Cheaper"
+        },
+        {
+          "route": "/guides/lee-canyon-2026-27-season-west-bowl-las-vegas",
+          "kind": "dedicated",
+          "title": "Lee Canyon 2026-27: Opening Day, New West Bowl Lift & What to Know"
+        },
+        {
+          "route": "/guides/life-time-durango-opening-southwest-las-vegas",
+          "kind": "dedicated",
+          "title": "Life Time Durango Opening Dec. 14: What's Inside"
+        },
+        {
+          "route": "/guides/lorenzi-park-tennis-center-central-las-vegas",
+          "kind": "dedicated",
+          "title": "Lorenzi Park Tennis Center Expansion, Central Las Vegas"
+        },
+        {
+          "route": "/guides/maryland-parkway-red-line-rtc-las-vegas",
+          "kind": "dedicated",
+          "title": "The Maryland Parkway RED LINE: What's Running, and What's Still Torn Up"
+        },
+        {
+          "route": "/guides/monument-hills-northwest-las-vegas",
+          "kind": "dedicated",
+          "title": "Monument Hills: What a New 6,000-Home Community Means for Northwest Las Vegas"
+        },
+        {
+          "route": "/guides/mountains-edge-recreation-center-regional-park-phase-ii-southwest-las-vegas",
+          "kind": "dedicated",
+          "title": "Mountain's Edge Recreation Center & Regional Park Phase II"
+        },
+        {
+          "route": "/guides/moving-to-las-vegas",
+          "kind": "dedicated",
+          "title": "Moving to Las Vegas: Where to Start"
+        },
+        {
+          "route": "/guides/municipal-gym-downtown-summerlin",
+          "kind": "dedicated",
+          "title": "Municipal Gym Is Coming to Downtown Summerlin: What We Know Before the Nov. 2 Founding Sale"
+        },
+        {
+          "route": "/guides/nevada-first-standalone-childrens-hospital-southwest-las-vegas",
+          "kind": "dedicated",
+          "title": "Nevada's First Standalone Children's Hospital Just Broke Ground in Southwest Las Vegas"
+        },
+        {
+          "route": "/guides/nevada-property-tax-abatement-resale-buyers",
+          "kind": "dedicated",
+          "title": "Why the Seller's Nevada Property Tax Bill May Not Be Yours"
+        },
+        {
+          "route": "/guides/nevada-state-veterans-memorial-thunderbird-northwest-las-vegas",
+          "kind": "dedicated",
+          "title": "Nevada State Veterans Memorial at Thunderbird: What's There & Where"
+        },
+        {
+          "route": "/guides/new-build-vs-resale-las-vegas",
+          "kind": "dedicated",
+          "title": "New Build vs Resale in Las Vegas: Which Should You Buy?"
+        },
+        {
+          "route": "/guides/new-windsor-park-north-las-vegas-93-homes",
+          "kind": "dedicated",
+          "title": "${TITLE}"
+        },
+        {
+          "route": "/guides/one-civic-center-north-las-vegas-redevelopment",
+          "kind": "dedicated",
+          "title": "One Civic Center: What's Actually Happening at North Las Vegas's Old City Hall Site"
+        },
+        {
+          "route": "/guides/opportunity-village-northwest-campus-bettys-village-north-las-vegas",
+          "kind": "dedicated",
+          "title": "Opportunity Village Northwest Campus & Betty's Village North"
+        },
+        {
+          "route": "/guides/patriot-housing-lv-sunrise-manor-veteran-housing",
+          "kind": "dedicated",
+          "title": "Patriot Housing LV: What Clark County Approved for 348 Veteran-Focused Apartments in Sunrise Manor"
+        },
+        {
+          "route": "/guides/pavilion-center-pool-olympic-size-aquatics-summerlin",
+          "kind": "dedicated",
+          "title": "${TITLE}"
+        },
+        {
+          "route": "/guides/red-rock-legacy-trail-summerlin-las-vegas",
+          "kind": "dedicated",
+          "title": "Red Rock Legacy Trail: What's Open, Where to Park & What's Next"
+        },
+        {
+          "route": "/guides/sandstone-tule-springs-north-las-vegas",
+          "kind": "dedicated",
+          "title": "Sandstone at Tule Springs: KB Home Opens a 1,500-Home North Las Vegas Community"
+        },
+        {
+          "route": "/guides/sids-and-lids-las-vegas-home-buyers",
+          "kind": "dedicated",
+          "title": "${TITLE}"
+        },
+        {
+          "route": "/guides/sloan-junction-industrial-master-plan-south-las-vegas",
+          "kind": "dedicated",
+          "title": "Sloan Junction: Clark County's 774-Acre Industrial Plan"
+        },
+        {
+          "route": "/guides/sloan-lane-bridge-las-vegas-wash-east-las-vegas",
+          "kind": "dedicated",
+          "title": "${TITLE}"
+        },
+        {
+          "route": "/guides/summerlin-parkway-trail-summerlin-las-vegas",
+          "kind": "dedicated",
+          "title": "${TITLE}"
+        },
+        {
+          "route": "/guides/summerlin-vs-henderson",
+          "kind": "dedicated",
+          "title": "Summerlin vs. Henderson: Where Should You Actually Move?"
+        },
+        {
+          "route": "/guides/summerlin-vs-henderson-vs-southwest-las-vegas",
+          "kind": "dedicated",
+          "title": "Summerlin vs Henderson vs Southwest Las Vegas"
+        },
+        {
+          "route": "/guides/the-foundry-lennar-cashman-downtown-las-vegas",
+          "kind": "dedicated",
+          "title": "The Foundry: What Lennar's 1,000-Home Neighborhood at Cashman Means for Downtown Las Vegas"
+        },
+        {
+          "route": "/guides/third-street-arts-campus-downtown-las-vegas",
+          "kind": "dedicated",
+          "title": "THIRD Street Arts Campus: What's Going Into the Old Downtown Theater"
+        },
+        {
+          "route": "/guides/unrivaled-sports-park-freedom-park-east-las-vegas",
+          "kind": "dedicated",
+          "title": "Unrivaled Sports Park Las Vegas: What Changed at Big League Dreams"
+        },
+        {
+          "route": "/guides/water-street-district-henderson",
+          "kind": "dedicated",
+          "title": "Henderson's Water Street District Just Survived a Bankruptcy. Here's What's Actually There Now"
+        },
+        {
+          "route": "/guides/wayne-newton-casa-de-shenandoah-redevelopment",
+          "kind": "dedicated",
+          "title": "Wayne Newton's Casa de Shenandoah Could Become a 77-Home Neighborhood"
+        },
+        {
+          "route": "/guides/what-500k-buys-in-las-vegas",
+          "kind": "dedicated",
+          "title": "What $500K Actually Gets You in Las Vegas"
+        },
+        {
+          "route": "/guides/will-las-vegas-home-prices-drop",
+          "kind": "dedicated",
+          "title": "Inventory Is Rising in Las Vegas. So Why Aren't Home Prices Falling?"
+        },
+        {
+          "route": "/guides/zillow-down-payment-assistance-nevada",
+          "kind": "dedicated",
+          "title": "Zillow Launches Down Payment Assistance: What Nevada Buyers Need to Know"
+        },
+        {
+          "route": "/neighborhoods/downtown-arts-district",
+          "kind": "dedicated",
+          "title": "The Downtown Arts District"
+        },
+        {
+          "route": "/neighborhoods/henderson",
+          "kind": "dedicated",
+          "title": "Henderson"
+        },
+        {
+          "route": "/neighborhoods/henderson/four-seasons-private-residences",
+          "kind": "dedicated",
+          "title": "Four Seasons Private Residences"
+        },
+        {
+          "route": "/neighborhoods/north-las-vegas",
+          "kind": "dedicated",
+          "title": "Living in North Las Vegas"
+        },
+        {
+          "route": "/neighborhoods/southwest-las-vegas",
+          "kind": "dedicated",
+          "title": "Southwest Las Vegas"
+        },
+        {
+          "route": "/neighborhoods/summerlin",
+          "kind": "dedicated",
+          "title": "Summerlin"
+        },
+        {
+          "route": "/neighborhoods/summerlin/fourth-of-july-parade",
+          "kind": "dedicated",
+          "title": "Summerlin Fourth of July Parade"
+        },
+        {
+          "route": "/guides/holiday-lights-las-vegas-2026",
+          "kind": "mention",
+          "title": "Holiday Lights in Las Vegas 2026: Dates, Hours & Tips"
+        },
+        {
+          "route": "/guides/las-vegas-nonfunctional-grass-ban-2027-fines-2028",
+          "kind": "mention",
+          "title": "Las Vegas Grass Ban 2027: Fines Delayed to 2028"
+        }
+      ],
+      "pillar": null,
+      "score": 43,
+      "scoreComponents": {
+        "geography": 10,
+        "housing": 8,
+        "neighborhood": 4,
+        "access": 0,
+        "scale": 0,
+        "change": 0,
+        "authority": 6,
+        "certainty": 3,
+        "coverage": 10,
+        "decision": 2
+      },
+      "confidence": "Medium",
+      "confidenceReasons": [
+        "reputable reporting, article text"
+      ],
+      "promotionalOnly": false,
+      "fairHousing": {
+        "sensitiveSubject": false,
+        "subjectHits": [],
+        "framingClean": true,
+        "framingHits": []
+      },
+      "action": "DUPLICATE",
+      "target": "/guides/aries-henderson",
+      "actionRationale": "nothing new compared with what is already known",
+      "previousLifecycle": "PERSISTING",
+      "id": "DEV-2026-10-11-001",
+      "firstSeen": "2026-10-11",
+      "lifecycle": "PERSISTING",
+      "handoff": {
+        "eligible": false,
+        "blockers": [
+          "NOT_A_PUBLISHER_ACTION",
+          "SCORE_BELOW_THRESHOLD",
+          "CONFIDENCE_NOT_HIGH",
+          "NO_PRIMARY_SOURCE",
+          "NOT_MATERIAL",
+          "NOT_NEW"
+        ],
+        "reasons": [
+          "the action is not a Publisher task",
+          "relevance score below the handoff threshold",
+          "confidence is not High",
+          "no primary (authority 1–7) source supports it",
+          "not a new project or material change",
+          "already reported on an earlier run"
+        ]
+      },
+      "sources": [
+        {
+          "name": "8 News Now",
+          "title": "City of Las Vegas stops popular backyard horse show, 'Gladius the Show' after complaint",
+          "url": "https://8newsnow.com/news/local-news/city-of-las-vegas-stops-popular-backyard-horse-show-gladius-the-show-after-complaint",
+          "authority": 8,
+          "authorityLabel": "reputable local reporting",
+          "authorityClass": "secondary",
+          "published": "2026-11-26T00:08:27.000Z",
+          "via": "8newsnow",
+          "evidence": "LAS VEGAS (KLAS) - The City of Las Vegas is stopping a popular equestrian stunt show in a North Valley neighborhood after a complaint was filed on November 19.",
+          "evidenceStatus": "filed",
+          "evidenceIn": "body"
+        }
+      ]
+    }
+  ],
+  "noise": [
+    {
+      "title": "‘Native art in the contemporary’: Arts District store, gallery platforms Indigenous artists",
+      "url": "https://reviewjournal.com/local/local-las-vegas/downtown/native-art-in-the-contemporary-arts-district-store-gallery-platforms-indigenous-artists-3919628",
+      "source": "Las Vegas Review-Journal — Business",
+      "reason": "no development topic"
+    },
+    {
+      "title": "Nevada ranks third-highest in nation for job growth",
+      "url": "https://reviewjournal.com/business/nevada-ranks-third-highest-in-nation-for-job-growth-3919598",
+      "source": "Las Vegas Review-Journal — Business",
+      "reason": "no development topic"
+    },
+    {
+      "title": "Major retailer reverses major Apple Pay decision ahead of Black Friday",
+      "url": "https://reviewjournal.com/business/major-retailer-reverses-major-apple-pay-decision-ahead-of-black-friday-3919500",
+      "source": "Las Vegas Review-Journal — Business",
+      "reason": "no development topic"
+    },
+    {
+      "title": "Las Vegas airport passenger traffic down in October amid higher fares",
+      "url": "https://reviewjournal.com/business/tourism/reid-airport-passenger-traffic-down-5-in-october-7-for-year-3919309",
+      "source": "Las Vegas Review-Journal — Business",
+      "reason": "no development topic"
+    },
+    {
+      "title": "‘Share our good fortune’: Charity feeds Thanksgiving feast to 750 homeless people",
+      "url": "https://reviewjournal.com/local/local-las-vegas/share-our-good-fortune-charity-feeds-thanksgiving-feast-to-750-homeless-people-3919715",
+      "source": "Las Vegas Review-Journal — Local",
+      "reason": "no development topic"
+    },
+    {
+      "title": "‘Saul Goodman IRL?’: Las Vegas lawyer’s courthouse videos draw millions of views",
+      "url": "https://reviewjournal.com/crime/saul-goodman-irl-las-vegas-lawyers-courthouse-videos-draw-millions-of-views-3919677",
+      "source": "Las Vegas Review-Journal — Local",
+      "reason": "no development topic"
+    },
+    {
+      "title": "Heartfelt homecoming: North Las Vegas toddler comes home for 1st time after transplant",
+      "url": "https://reviewjournal.com/local/north-las-vegas/heartfelt-homecoming-north-las-vegas-toddler-comes-home-for-first-time-after-transplant-3919602",
+      "source": "Las Vegas Review-Journal — Local",
+      "reason": "describes, but reports no change"
+    },
+    {
+      "title": "E-bike driver dies in southwest Las Vegas Valley crash",
+      "url": "https://reviewjournal.com/local/southwest/motorcyclist-dies-in-southwest-las-vegas-valley-crash-police-say-3919503",
+      "source": "Las Vegas Review-Journal — Local",
+      "reason": "crime / public safety"
+    },
+    {
+      "title": "Thanksgiving weekend will be calm in Las Vegas. But rain is returning soon",
+      "url": "https://reviewjournal.com/local/weather/thanksgiving-weekend-will-be-calm-in-las-vegas-but-rain-is-returning-soon-3919447",
+      "source": "Las Vegas Review-Journal — Local",
+      "reason": "no development topic"
+    },
+    {
+      "title": "Inmate dies at Southern Nevada prison, officials say",
+      "url": "https://reviewjournal.com/crime/inmate-dies-at-high-desert-corrections-officials-say-3919440",
+      "source": "Las Vegas Review-Journal — Local",
+      "reason": "no development topic"
+    },
+    {
+      "title": "Grupos defensores de los caballos salvajes presentan una demanda para detener la captura de 600 caballos en Nevada",
+      "url": "https://lasvegassun.com/news/2026/nov/26/grupos-defensores-de-los-caballos-salvajes-present",
+      "source": "Las Vegas Sun — News",
+      "reason": "no development topic"
+    },
+    {
+      "title": "Trump heads to Arizona next week for a high-stakes expansion of TSMC's computer chip factories",
+      "url": "https://lasvegassun.com/news/2026/nov/26/trump-heads-to-arizona-next-week-for-a-high-stakes",
+      "source": "Las Vegas Sun — News",
+      "reason": "no development topic"
+    },
+    {
+      "title": "A’s owner John Fisher talks San Jose Earthquakes sale, his move to Vegas",
+      "url": "https://lasvegassun.com/news/2026/nov/26/as-owner-john-fisher-talks-san-jose-earthquakes-sa",
+      "source": "Las Vegas Sun — News",
+      "reason": "describes, but reports no change"
+    },
+    {
+      "title": "Giving thanks for Americans who refused to surrender democracy",
+      "url": "https://lasvegassun.com/news/2026/nov/26/giving-thanks-for-americans-who-refused-to-surrend",
+      "source": "Las Vegas Sun — News",
+      "reason": "no development topic"
+    },
+    {
+      "title": "Clean energy shouldn’t cost us the desert",
+      "url": "https://lasvegassun.com/news/2026/nov/26/clean-energy-shouldnt-cost-us-the-desert",
+      "source": "Las Vegas Sun — News",
+      "reason": "no development topic"
+    },
+    {
+      "title": "Shoplifting and ‘teen takeovers’ deserve real penalties",
+      "url": "https://lasvegassun.com/news/2026/nov/26/shoplifting-and-teen-takeovers-deserve-real-penalt",
+      "source": "Las Vegas Sun — News",
+      "reason": "no development topic"
+    },
+    {
+      "title": "Olofsson lifting Golden Knights and treasuring second stint in Vegas",
+      "url": "https://lasvegassun.com/news/2026/nov/26/olofsson-lifting-golden-knights-and-treasuring-sec",
+      "source": "Las Vegas Sun — News",
+      "reason": "no development topic"
+    },
+    {
+      "title": "Wild horse groups sue to stop roundup of 600 Nevada horses",
+      "url": "https://lasvegassun.com/news/2026/nov/26/wild-horse-groups-sue-to-stop-roundup-of-600-nevad",
+      "source": "Las Vegas Sun — News",
+      "reason": "no development topic"
+    },
+    {
+      "title": "The time for immigration reform is now, with or without Trump",
+      "url": "https://lasvegassun.com/news/2026/nov/26/the-time-for-immigration-reform-is-now-with-or-wit",
+      "source": "Las Vegas Sun — News",
+      "reason": "no development topic"
+    },
+    {
+      "title": "Supreme Court has brought the need for expansion upon itself",
+      "url": "https://lasvegassun.com/news/2026/nov/26/supreme-court-has-brought-the-need-for-expansion-u",
+      "source": "Las Vegas Sun — News",
+      "reason": "no development topic"
+    },
+    {
+      "title": "Trump’s ugly remarks to reporter show the world who he really is",
+      "url": "https://lasvegassun.com/news/2026/nov/26/trumps-ugly-remarks-to-reporter-show-the-world-who",
+      "source": "Las Vegas Sun — News",
+      "reason": "no development topic"
+    },
+    {
+      "title": "Senate Democrats, please show a little discipline",
+      "url": "https://lasvegassun.com/news/2026/nov/26/senate-democrats-please-show-a-little-discipline",
+      "source": "Las Vegas Sun — News",
+      "reason": "no development topic"
+    },
+    {
+      "title": "Para las familias del sur de Nevada que viven al límite, los pañales gratuitos son un alivio",
+      "url": "https://lasvegassun.com/news/2026/nov/26/para-las-familias-del-sur-de-nevada-que-viven-al-l",
+      "source": "Las Vegas Sun — News",
+      "reason": "no development topic"
+    },
+    {
+      "title": "For Southern Nevada families stretched thin, free diapers bring relief",
+      "url": "https://lasvegassun.com/news/2026/nov/26/for-military-families-stretched-thin-free-diapers",
+      "source": "Las Vegas Sun — News",
+      "reason": "no development topic"
+    },
+    {
+      "title": "Raiders coach Klint Kubiak optimistic Brock Bowers returns Sunday night from ankle injury",
+      "url": "https://lasvegassun.com/news/2026/nov/25/raiders-coach-klint-kubiak-optimistic-brock-bowers",
+      "source": "Las Vegas Sun — News",
+      "reason": "sports results"
+    },
+    {
+      "title": "What's closed on Thanksgiving and when stores reopen on Black Friday",
+      "url": "https://lasvegassun.com/news/2026/nov/25/whats-closed-on-thanksgiving-and-when-stores-reope",
+      "source": "Las Vegas Sun — News",
+      "reason": "no development topic"
+    },
+    {
+      "title": "Vance says Jensen Huang won't need a pardon as scrutiny of Nvidia scandal builds in Washington",
+      "url": "https://lasvegassun.com/news/2026/nov/25/vance-says-jensen-huang-wont-need-a-pardon-as-scru",
+      "source": "Las Vegas Sun — News",
+      "reason": "no development topic"
+    },
+    {
+      "title": "Cold War veterans doubtful about benefits bill in lame-duck session",
+      "url": "https://ktnv.com/news/cold-war-veterans-doubtful-about-benefits-bill-in-lame-duck-session",
+      "source": "KTNV 13 Action News",
+      "reason": "no development topic"
+    },
+    {
+      "title": "Henderson girl writes Christmas book inspired by her brothers, donates proceeds to help others",
+      "url": "https://ktnv.com/neighborhoods/henderson/henderson-girl-writes-christmas-book-inspired-by-her-brothers-donates-proceeds-to-help-others",
+      "source": "KTNV 13 Action News",
+      "reason": "no development topic"
+    },
+    {
+      "title": "Driver fleeing police hits LVMPD patrol cars, crashes on I-11 near Elkhorn Road",
+      "url": "https://ktnv.com/news/driver-fleeing-police-hits-lvmpd-patrol-cars-crashes-on-i-11-near-elkhorn-road",
+      "source": "KTNV 13 Action News",
+      "reason": "crime / public safety"
+    },
+    {
+      "title": "Expert shares tips on how to host inclusive holiday gatherings",
+      "url": "https://ktnv.com/expert-shares-tips-on-how-to-host-inclusive-holiday-gatherings",
+      "source": "KTNV 13 Action News",
+      "reason": "opinion / advice piece"
+    },
+    {
+      "title": "When home is no longer an option, what happens to the family pet? Las Vegas shelter helps families in need",
+      "url": "https://ktnv.com/neighborhoods/east-las-vegas/when-home-is-no-longer-an-option-what-happens-to-the-family-pet-las-vegas-shelter-helps-families-in-need",
+      "source": "KTNV 13 Action News",
+      "reason": "describes, but reports no change"
+    },
+    {
+      "title": "Police make arrest in suspicious death of woman whose body was found in Henderson",
+      "url": "https://ktnv.com/news/crime/police-make-arrest-in-suspicious-death-of-woman-whose-body-was-found-in-henderson",
+      "source": "KTNV 13 Action News",
+      "reason": "crime / public safety"
+    },
+    {
+      "title": "Las Vegas police arrest suspect after pursuit ends in crash near I-11",
+      "url": "https://8newsnow.com/news/local-news/las-vegas-police-arrest-suspect-after-pursuit-ends-in-crash-near-i-11",
+      "source": "8 News Now",
+      "reason": "crime / public safety"
+    },
+    {
+      "title": "What stores are open, closed on Thanksgiving Day 2026?",
+      "url": "https://8newsnow.com/news/national-news/what-stores-are-open-closed-on-thanksgiving-day-2026",
+      "source": "8 News Now",
+      "reason": "no development topic"
+    },
+    {
+      "title": "30 restaurants that will be open on Thanksgiving",
+      "url": "https://8newsnow.com/news/national-news/30-restaurants-that-will-be-open-on-thanksgiving",
+      "source": "8 News Now",
+      "reason": "development is not what the story is about"
+    },
+    {
+      "title": "Lee Canyon to opens Bluebird Chair for ski season",
+      "url": "https://8newsnow.com/news/local-news/lee-canyon-to-opens-bluebird-chair-for-ski-season",
+      "source": "8 News Now",
+      "reason": "no development topic"
+    },
+    {
+      "title": "Police search for 2 armed robbery suspects in Las Vegas",
+      "url": "https://8newsnow.com/news/local-news/police-search-for-2-armed-robbery-suspects-in-las-vegas",
+      "source": "8 News Now",
+      "reason": "crime / public safety"
+    },
+    {
+      "title": "Nevada ranks No. 2 in U.S. for chance to strike gold: Study",
+      "url": "https://8newsnow.com/news/local-news/nevada-ranks-no-2-in-u-s-for-chance-to-strike-gold-study",
+      "source": "8 News Now",
+      "reason": "no development topic"
+    },
+    {
+      "title": "Circus Circus announces Black Friday, Cyber Monday deals in Las Vegas",
+      "url": "https://8newsnow.com/news/local-news/circus-circus-announces-black-friday-cyber-monday-deals-in-las-vegas",
+      "source": "8 News Now",
+      "reason": "no development topic"
+    },
+    {
+      "title": "Las Vegas mom’s home burglarized during son's memorial",
+      "url": "https://8newsnow.com/crime/las-vegas-moms-home-burglarized-during-sons-memorial",
+      "source": "8 News Now",
+      "reason": "crime / public safety"
+    },
+    {
+      "title": "New evidence obtained from deadly First Friday shooting in downtown Las Vegas",
+      "url": "https://8newsnow.com/news/local-news/new-evidence-obtained-from-deadly-first-friday-shooting-in-downtown-las-vegas",
+      "source": "8 News Now",
+      "reason": "crime / public safety"
+    },
+    {
+      "title": "Southern Nevada feasts on Thanksgiving sunshine with some gusts",
+      "url": "https://8newsnow.com/weather/southern-nevada-feasts-on-thanksgiving-sunshine-with-some-gusts",
+      "source": "8 News Now",
+      "reason": "no development topic"
+    },
+    {
+      "title": "‘Error’ delays Las Vegas Smith’s grocery store shooter sentencing",
+      "url": "https://8newsnow.com/investigators/error-delays-las-vegas-smiths-grocery-store-shooter-sentencing",
+      "source": "8 News Now",
+      "reason": "no development topic"
+    },
+    {
+      "title": "Nye County deputies seize 101 guns following Pahrump standoff",
+      "url": "https://8newsnow.com/news/local-news/nye-county-deputies-seize-101-guns-following-pahrump-standoff",
+      "source": "8 News Now",
+      "reason": "no development topic"
+    },
+    {
+      "title": "Electric dirt bike rider killed in southwest Las Vegas crash",
+      "url": "https://8newsnow.com/news/local-news/fatal-motorcycle-crash-closes-roads-in-the-southwest-valley",
+      "source": "8 News Now",
+      "reason": "crime / public safety"
+    },
+    {
+      "title": "Thunderbirds make history during 2026 show season",
+      "url": "https://8newsnow.com/news/local-news/thunderbirds-make-history-during-2026-show-season",
+      "source": "8 News Now",
+      "reason": "no development topic"
+    },
+    {
+      "title": "Las Vegas Rescue Mission serves hundreds of free Thanksgiving meals to those in need",
+      "url": "https://8newsnow.com/news/local-news/las-vegas-rescue-mission-serves-hundreds-of-free-thanksgiving-meals-to-those-in-need",
+      "source": "8 News Now",
+      "reason": "no development topic"
+    },
+    {
+      "title": "Man arrested in 2025 death of woman found near Henderson intersection",
+      "url": "https://8newsnow.com/news/local-news/man-arrested-in-2025-death-of-woman-found-near-henderson-intersection",
+      "source": "8 News Now",
+      "reason": "crime / public safety"
+    },
+    {
+      "title": "Wild horse advocates sue to stop Nevada roundup",
+      "url": "https://8newsnow.com/news/local-news/wild-horse-advocates-sue-to-stop-nevada-roundup",
+      "source": "8 News Now",
+      "reason": "no development topic"
+    },
+    {
+      "title": "Catholic Charities serves 750 people with Thanksgiving feast for 61st consecutive year",
+      "url": "https://news3lv.com/news/local/catholic-charities-serves-750-people-with-thanksgiving-feast-for-61st-consecutive-year",
+      "source": "News 3 Las Vegas",
+      "reason": "no development topic"
+    },
+    {
+      "title": "Suspect arrested after striking LVMPD patrol cars during police chase in northwest valley",
+      "url": "https://news3lv.com/news/local/suspect-arrested-after-striking-lvmpd-patrol-cars-during-police-chase-in-northwest-valley",
+      "source": "News 3 Las Vegas",
+      "reason": "crime / public safety"
+    },
+    {
+      "title": "Shelter dogs enjoy gourmet Thanksgiving feast at Animal Foundation",
+      "url": "https://news3lv.com/news/local/shelter-dogs-enjoy-gourmet-thanksgiving-feast-at-animal-foundation",
+      "source": "News 3 Las Vegas",
+      "reason": "no development topic"
+    },
+    {
+      "title": "Truck crashes into wall and fire hydrant in south valley crash at Silverado Ranch",
+      "url": "https://news3lv.com/news/local/truck-hits-wall-and-fire-hydrant-in-south-valley-crash-at-silverado-ranch",
+      "source": "News 3 Las Vegas",
+      "reason": "crime / public safety"
+    },
+    {
+      "title": "Holiday pop-ups bring festive cheer and boost to local businesses",
+      "url": "https://news3lv.com/news/local/holiday-pop-ups-bring-festive-cheer-and-boost-to-local-businesses",
+      "source": "News 3 Las Vegas",
+      "reason": "no development topic"
+    },
+    {
+      "title": "Electric dirt bike rider dies after hitting pole South Grand Canyon near Russell Rd",
+      "url": "https://news3lv.com/news/local/electric-dirt-bike-rider-dies-after-hitting-pole-south-grand-canyon-near-russell-rd",
+      "source": "News 3 Las Vegas",
+      "reason": "crime / public safety"
+    },
+    {
+      "title": "Raiders rookie QB Fernando Mendoza prepares for prime-time test against Browns",
+      "url": "https://news3lv.com/news/local/raiders-rookie-qb-fernando-mendoza-prepares-for-prime-time-test-against-browns",
+      "source": "News 3 Las Vegas",
+      "reason": "no development topic"
+    },
+    {
+      "title": "Raiders give back to Southern Nevada through Thanksgiving community initiatives",
+      "url": "https://news3lv.com/news/local/raiders-give-back-to-southern-nevada-through-thanksgiving-community-initiatives",
+      "source": "News 3 Las Vegas",
+      "reason": "no development topic"
+    },
+    {
+      "title": "100 Black Men of Las Vegas and Nevada deliver 6,000 Thanksgiving meals valleywide",
+      "url": "https://news3lv.com/news/local/100-black-men-of-las-vegas-and-nevada-deliver-6000-thanksgiving-meals-valleywide",
+      "source": "News 3 Las Vegas",
+      "reason": "no development topic"
+    },
+    {
+      "title": "AI-driven volatility shakes Wall Street, and 401(k) savers may feel the swings",
+      "url": "https://news3lv.com/news/local/ai-driven-volatility-shakes-wall-street-and-401k-savers-may-feel-the-swings",
+      "source": "News 3 Las Vegas",
+      "reason": "no development topic"
+    },
+    {
+      "title": "Holiday travel surges at Harry Reid International Airport as FAA outage worries linger",
+      "url": "https://news3lv.com/news/local/holiday-travel-surges-at-harry-reid-international-airport-as-faa-outage-worries-linger",
+      "source": "News 3 Las Vegas",
+      "reason": "no development topic"
+    },
+    {
+      "title": "'Drinksgiving’: Las Vegas officials warn of impaired driving dangers ahead of Thanksgiving",
+      "url": "https://news3lv.com/news/local/drinksgiving-las-vegas-officials-warn-of-impaired-driving-dangers-ahead-of-thanksgiving",
+      "source": "News 3 Las Vegas",
+      "reason": "no development topic"
+    },
+    {
+      "title": "Las Vegas police seek help identifying two suspects in armed robbery near S. Decatur Blvd.",
+      "url": "https://news3lv.com/news/local/las-vegas-police-seek-help-identifying-two-suspects-in-armed-robbery-near-s-decatur-blvd",
+      "source": "News 3 Las Vegas",
+      "reason": "crime / public safety"
+    },
+    {
+      "title": "The Shade Tree hosts Thanksgiving celebration for shelter residents",
+      "url": "https://news3lv.com/news/local/the-shade-tree-hosts-thanksgiving-celebration-for-shelter-residents",
+      "source": "News 3 Las Vegas",
+      "reason": "no development topic"
+    },
+    {
+      "title": "Spirit exit still keeping Las Vegas flights pricier; expert gives tips to save on flights",
+      "url": "https://news3lv.com/news/local/spirit-exit-still-keeping-las-vegas-flights-pricier-expert-gives-tips-to-save-on-flights",
+      "source": "News 3 Las Vegas",
+      "reason": "no development topic"
+    },
+    {
+      "title": "Las Vegans can foster shelter dogs for Thanksgiving through Animal Foundation program",
+      "url": "https://news3lv.com/news/local/las-vegans-can-foster-shelter-dogs-for-thanksgiving-through-animal-foundation-program",
+      "source": "News 3 Las Vegas",
+      "reason": "development is not what the story is about"
+    },
+    {
+      "title": "Thanksgiving shopping deals bring spike in scam risk, bankers group warns",
+      "url": "https://news3lv.com/news/local/thanksgiving-shopping-deals-bring-spike-in-scam-risk-bankers-group-warns",
+      "source": "News 3 Las Vegas",
+      "reason": "no development topic"
+    },
+    {
+      "title": "Henderson police arrest suspect in connection with woman's death in Oct. 2025",
+      "url": "https://news3lv.com/news/local/henderson-police-arrest-suspect-in-connection-with-womans-death-in-oct-2025",
+      "source": "News 3 Las Vegas",
+      "reason": "crime / public safety"
+    },
+    {
+      "title": "Ahead of Thanksgiving, more Americans struggle to put food on the table",
+      "url": "https://nevadacurrent.com/2026/11/26/repub/ahead-of-thanksgiving-more-americans-struggle-to-put-food-on-the-table",
+      "source": "Nevada Current",
+      "reason": "no development topic"
+    }
+  ],
+  "suppressedAgenda": [],
+  "health": [
+    {
+      "id": "henderson-news",
+      "name": "City of Henderson newsroom",
+      "tier": "official",
+      "ok": true,
+      "status": 200,
+      "items": 44,
+      "error": null,
+      "authority": 1,
+      "method": "rss",
+      "shared": true
+    },
+    {
+      "id": "city-lv-news",
+      "name": "City of Las Vegas newsroom",
+      "tier": "official",
+      "ok": true,
+      "status": 200,
+      "items": 25,
+      "error": null,
+      "authority": 1,
+      "method": "rss",
+      "shared": true
+    },
+    {
+      "id": "rj-business",
+      "name": "Las Vegas Review-Journal — Business",
+      "tier": "news",
+      "ok": true,
+      "status": 200,
+      "items": 30,
+      "error": null,
+      "authority": 8,
+      "method": "rss",
+      "shared": true
+    },
+    {
+      "id": "rj-local",
+      "name": "Las Vegas Review-Journal — Local",
+      "tier": "news",
+      "ok": true,
+      "status": 200,
+      "items": 30,
+      "error": null,
+      "authority": 8,
+      "method": "rss",
+      "shared": true
+    },
+    {
+      "id": "sun-business",
+      "name": "Las Vegas Sun — Business",
+      "tier": "news",
+      "ok": true,
+      "status": 200,
+      "items": 20,
+      "error": null,
+      "authority": 8,
+      "method": "rss",
+      "shared": true
+    },
+    {
+      "id": "sun-news",
+      "name": "Las Vegas Sun — News",
+      "tier": "news",
+      "ok": true,
+      "status": 200,
+      "items": 20,
+      "error": null,
+      "authority": 8,
+      "method": "rss",
+      "shared": true
+    },
+    {
+      "id": "vegas-inc",
+      "name": "Vegas Inc",
+      "tier": "news",
+      "ok": true,
+      "status": 200,
+      "items": 20,
+      "error": null,
+      "authority": 8,
+      "method": "rss",
+      "shared": true
+    },
+    {
+      "id": "ktnv",
+      "name": "KTNV 13 Action News",
+      "tier": "news",
+      "ok": true,
+      "status": 200,
+      "items": 30,
+      "error": null,
+      "authority": 8,
+      "method": "rss",
+      "shared": true
+    },
+    {
+      "id": "8newsnow",
+      "name": "8 News Now",
+      "tier": "news",
+      "ok": true,
+      "status": 200,
+      "items": 19,
+      "error": null,
+      "authority": 8,
+      "method": "rss",
+      "shared": true
+    },
+    {
+      "id": "news3lv",
+      "name": "News 3 Las Vegas",
+      "tier": "news",
+      "ok": true,
+      "status": 200,
+      "items": 41,
+      "error": null,
+      "authority": 8,
+      "method": "rss",
+      "shared": true
+    },
+    {
+      "id": "nevada-current",
+      "name": "Nevada Current",
+      "tier": "news",
+      "ok": true,
+      "status": 200,
+      "items": 100,
+      "error": null,
+      "authority": 8,
+      "method": "rss",
+      "shared": true
+    },
+    {
+      "id": "reddit",
+      "name": "Reddit (r/vegas, r/LasVegas, r/henderson, r/summerlin)",
+      "tier": "social",
+      "ok": false,
+      "status": 404,
+      "items": 0,
+      "error": null,
+      "authority": 10,
+      "method": "rss",
+      "shared": true
+    },
+    {
+      "id": "google-news",
+      "name": "Google News targeted searches (Local Trend Agent queries)",
+      "tier": "news",
+      "ok": false,
+      "status": 207,
+      "items": 0,
+      "error": "41 of 41 queries failed",
+      "authority": 8,
+      "method": "google-news",
+      "shared": true
+    },
+    {
+      "id": "clark-newsroom",
+      "name": "Clark County newsroom",
+      "authority": 1,
+      "method": "manual",
+      "ok": false,
+      "manual": true,
+      "status": "SOURCE_CHECK_REQUIRED",
+      "error": "No working RSS; news URLs return 404 to automated requests. County decisions are read from Legistar (clark-legistar) instead; county news arrives through local outlets."
+    },
+    {
+      "id": "nlv-newsroom",
+      "name": "City of North Las Vegas newsroom",
+      "authority": 1,
+      "method": "manual",
+      "ok": false,
+      "manual": true,
+      "status": "SOURCE_CHECK_REQUIRED",
+      "error": "Returns 403 (bot protection) to automated requests, including the RSS path. Check by hand before relying on an NLV claim."
+    },
+    {
+      "id": "clark-legistar",
+      "name": "Clark County Commission, Planning and Zoning agendas",
+      "authority": 2,
+      "method": "legistar",
+      "ok": true,
+      "status": 200,
+      "items": 0,
+      "note": "0 meeting(s) read, 6 unchanged since last run, 0 routine applicant bundle(s) suppressed"
+    },
+    {
+      "id": "ndot",
+      "name": "Nevada Department of Transportation news",
+      "authority": 3,
+      "method": "manual",
+      "ok": false,
+      "manual": true,
+      "status": "SOURCE_CHECK_REQUIRED",
+      "error": "Returns 403 to automated requests. NDOT projects arrive through the targeted Google News queries; verify on dot.nv.gov by hand."
+    },
+    {
+      "id": "rtc",
+      "name": "RTC Southern Nevada news",
+      "authority": 4,
+      "method": "manual",
+      "ok": false,
+      "manual": true,
+      "status": "SOURCE_CHECK_REQUIRED",
+      "error": "Cloudflare returns 403 to automated requests, including /feed/. Covered through Google News; verify by hand."
+    },
+    {
+      "id": "summerlin-news",
+      "name": "Summerlin news",
+      "authority": 5,
+      "method": "wp-json",
+      "etag": null,
+      "lastModified": "Thu, 26 Nov 2026 23:16:13 GMT",
+      "ok": true,
+      "status": 200,
+      "items": 20
+    },
+    {
+      "id": "skye-canyon-news",
+      "name": "Skye Canyon blog",
+      "authority": 5,
+      "method": "rss",
+      "skipped": "weekly cadence — last success 2026-11-22"
+    },
+    {
+      "id": "cadence-news",
+      "name": "Cadence news",
+      "authority": 5,
+      "method": "rss",
+      "skipped": "weekly cadence — last success 2026-11-22"
+    },
+    {
+      "id": "lake-las-vegas-news",
+      "name": "Lake Las Vegas news",
+      "authority": 5,
+      "method": "rss",
+      "skipped": "weekly cadence — last success 2026-11-22"
+    },
+    {
+      "id": "inspirada-news",
+      "name": "Inspirada news",
+      "authority": 5,
+      "method": "rss",
+      "etag": null,
+      "lastModified": null,
+      "ok": false,
+      "status": 0,
+      "error": "fetch failed"
+    },
+    {
+      "id": "henderson-215",
+      "name": "Henderson 215 Project schedule",
+      "authority": 6,
+      "method": "manual",
+      "ok": false,
+      "manual": true,
+      "status": "SOURCE_CHECK_REQUIRED",
+      "error": "Schedule is an image/JS page (about 450 characters of readable text) and the WordPress post feed is empty, so a hash would only detect template changes. Check by hand."
+    },
+    {
+      "id": "sec-edgar",
+      "name": "SEC EDGAR filings (Howard Hughes, Red Rock Resorts, Boyd, builders)",
+      "authority": 7,
+      "method": "manual",
+      "ok": false,
+      "manual": true,
+      "status": "SOURCE_CHECK_REQUIRED",
+      "error": "Not automated in v1. Useful for confirming a corporate project decision a news story reports."
+    },
+    {
+      "id": "nevada-business",
+      "name": "Nevada Business Magazine",
+      "authority": 8,
+      "method": "rss",
+      "skipped": "weekly cadence — last success 2026-11-22"
+    },
+    {
+      "id": "google-news-dev",
+      "name": "Google News targeted searches (development + tracked projects) (24 queries: 12 development + 12 tracked-project)",
+      "authority": 8,
+      "method": "google-news",
+      "ok": false,
+      "status": 207,
+      "items": 0,
+      "error": "24 of 24 queries failed"
+    }
+  ]
+}

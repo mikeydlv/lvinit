@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "agent": "development-watch",
-  "updated": "2026-11-25",
+  "updated": "2026-11-26",
   "events": {
     "01c19f40d9a1": {
       "id": "DEV-2026-11-11-004",
@@ -4116,6 +4116,52 @@
         "queued": []
       }
     },
+    "565ec005c029": {
+      "id": "DEV-2026-11-26-001",
+      "fingerprint": "565ec005c029",
+      "entity_id": "DEV-WELLS-PARK",
+      "entity_name": "Wells Park",
+      "change_class": "NEW",
+      "changes": [
+        "first time this project has been seen"
+      ],
+      "event_type": "approval",
+      "status": "approved",
+      "prior_status": null,
+      "first_seen": "2026-11-26",
+      "last_seen": "2026-11-26",
+      "times_seen": 1,
+      "lifecycle": "NEW",
+      "lifecycle_history": [
+        {
+          "date": "2026-11-26",
+          "lifecycle": "NEW"
+        }
+      ],
+      "action": "ADD_TO_NEIGHBORHOOD_GUIDE",
+      "target": "/neighborhoods/henderson",
+      "score": 54,
+      "confidence": "Medium",
+      "sources": [
+        {
+          "name": "KTNV 13 Action News",
+          "url": "https://ktnv.com/neighborhoods/henderson/henderson-approved-for-65k-grant-to-build-childrens-traffic-garden-teaching-road-safety-at-wells-park",
+          "authority": 8,
+          "published": "2026-11-26T03:01:42.000Z"
+        }
+      ],
+      "superseded_by": null,
+      "handoff": {
+        "eligible": false,
+        "blockers": [
+          "SCORE_BELOW_THRESHOLD",
+          "CONFIDENCE_NOT_HIGH",
+          "NO_PRIMARY_SOURCE",
+          "FAIR_HOUSING_SUBJECT"
+        ],
+        "queued": []
+      }
+    },
     "5701a48ff683": {
       "id": "DEV-2026-09-28-002",
       "fingerprint": "5701a48ff683",
@@ -7228,7 +7274,7 @@
       "first_seen": "2026-10-10",
       "last_seen": "2026-10-11",
       "times_seen": 2,
-      "lifecycle": "PERSISTING",
+      "lifecycle": "RESOLVED",
       "lifecycle_history": [
         {
           "date": "2026-10-10",
@@ -7237,6 +7283,10 @@
         {
           "date": "2026-10-11",
           "lifecycle": "PERSISTING"
+        },
+        {
+          "date": "2026-11-26",
+          "lifecycle": "RESOLVED (aged out)"
         }
       ],
       "action": "MONITOR_ONLY",
@@ -11730,12 +11780,12 @@
       "changes": [
         "approved → partially open"
       ],
-      "event_type": "access change",
+      "event_type": "filing",
       "status": "partially open",
       "prior_status": "partially open",
       "first_seen": "2026-10-11",
-      "last_seen": "2026-11-24",
-      "times_seen": 18,
+      "last_seen": "2026-11-26",
+      "times_seen": 19,
       "lifecycle": "PERSISTING",
       "lifecycle_history": [
         {
@@ -11757,7 +11807,7 @@
       ],
       "action": "DUPLICATE",
       "target": "/guides/aries-henderson",
-      "score": 49,
+      "score": 43,
       "confidence": "Medium",
       "sources": [
         {
@@ -11867,6 +11917,12 @@
           "url": "https://ktnv.com/news/rtc-warns-of-heavy-thanksgiving-traffic-on-i-15-announces-holiday-bus-schedules",
           "authority": 8,
           "published": "2026-11-24T21:14:14.000Z"
+        },
+        {
+          "name": "8 News Now",
+          "url": "https://8newsnow.com/news/local-news/city-of-las-vegas-stops-popular-backyard-horse-show-gladius-the-show-after-complaint",
+          "authority": 8,
+          "published": "2026-11-26T00:08:27.000Z"
         }
       ],
       "superseded_by": "aa389dac718a",
