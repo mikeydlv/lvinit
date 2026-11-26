@@ -39,15 +39,20 @@ import { StoryPage, StoryLede, StorySection } from "@/components/story";
 // Brinley, Mannion, Cortney, Williams, Edwards, Mendoza, Lincoln, Herron
 // (not verified); the superintendent quote (KSNV only); any theory about the
 // missing item 5.
-// IMAGERY — No LVINIT photography of any named campus exists in the image
-// library, and no first-party media was added the morning of publication.
-// Photoless StoryHero and no card image, per the standard fallback. No CCSD
+// IMAGERY — Hero, OG and card image (added 2026-11-26 at Mikey's request):
+// public/images/hero/ccsd-school-facilities-plan-las-vegas.png, uploaded by
+// Mikey; served as an optimized .webp copy (original PNG kept). It is a
+// general school-and-bus scene, NOT one of the named campuses, so the alt
+// text and the in-article note don't identify a school or location. No CCSD
 // renderings or news photos (no rights).
 // ---------------------------------------------------------------------------
 
 const PATH = "/guides/ccsd-facility-master-plan-school-consolidations-las-vegas";
 const TITLE =
   "CCSD’s $3.7B School Plan: Which Las Vegas Schools Would Consolidate, Rebuild or Renovate";
+const HERO = "/images/hero/ccsd-school-facilities-plan-las-vegas.webp";
+const HERO_ALT =
+  "A yellow school bus parked at the curb in front of a single-story tan block school building with teal trim and glass doors, with shade trees, palm trees and desert mountains under a blue sky.";
 const RELEASE_URL =
   "https://fmp.ccsd.net/2026/11/24/ccsd-releases-facility-master-plan-recommendations/";
 const DOCS_URL = "https://fmp.ccsd.net/documents";
@@ -67,8 +72,12 @@ const meta: StoryMeta = {
   description:
     "CCSD's draft facility plan would spend $3.7B to renovate 19 schools, replace 8 and consolidate 6. Here are the named schools by area and year, what's not decided, and the Dec. 2 board work session.",
   path: PATH,
+  image: HERO,
+  imageWidth: 1672,
+  imageHeight: 941,
+  imageAlt: HERO_ALT,
   datePublished: "2026-11-24",
-  dateModified: "2026-11-24",
+  dateModified: "2026-11-26",
   author: "LVINIT Editorial",
   breadcrumbs: [
     { name: "Home", path: "/" },
@@ -88,6 +97,8 @@ export default function CcsdFacilityMasterPlanPage() {
         headline: TITLE,
         subheadline:
           "The Clark County School District just named the first specific schools in its long-range building plan. Here's what's proposed, where those schools are, and what's still not decided.",
+        image: HERO,
+        imageAlt: HERO_ALT,
         backLink: { label: "All guides", href: "/guides" },
       }}
       relatedStories={{
@@ -308,9 +319,9 @@ export default function CcsdFacilityMasterPlanPage() {
           .
         </p>
         <p className={`mt-5 ${pCls}`}>
-          LVINIT hasn&rsquo;t photographed these campuses for this story, so
-          there are no photos here rather than borrowed renderings.
-          We&rsquo;ll update this after the Dec. 2 work session.
+          The photo at the top is a general school scene, not one of the
+          campuses named in the plan. We&rsquo;ll update this after the
+          Dec. 2 work session.
         </p>
       </StorySection>
 

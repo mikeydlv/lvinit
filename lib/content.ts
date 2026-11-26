@@ -262,8 +262,11 @@ export const guides: Guide[] = [
     publishedAt: "2026-11-24",
     category: "Local Feature",
     // Built by the LVINIT Daily Publisher from Local Radar assignment
-    // LR-CCSD-FACILITY-MASTER-PLAN-RECOMMENDATIONS-2026. No LVINIT photography
-    // of the named campuses yet, so the card renders its designed fallback.
+    // LR-CCSD-FACILITY-MASTER-PLAN-RECOMMENDATIONS-2026. Card image = the
+    // article hero Mikey uploaded (general school scene, not a named campus).
+    image: "/images/hero/ccsd-school-facilities-plan-las-vegas.webp",
+    imageAlt:
+      "A yellow school bus parked at the curb in front of a single-story tan block school building with teal trim and glass doors, with shade trees, palm trees and desert mountains under a blue sky.",
     href: "/guides/ccsd-facility-master-plan-school-consolidations-las-vegas",
   },
   {
