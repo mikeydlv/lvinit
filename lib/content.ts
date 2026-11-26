@@ -327,9 +327,11 @@ export const guides: Guide[] = [
     publishedAt: "2026-11-19",
     category: "Local Feature",
     // Built by the LVINIT Daily Publisher from Local Radar assignment
-    // LR-MOUNTAINS-EDGE-REC-CENTER-PARK-PHASE-II. No LVINIT photography of
-    // Mountain's Edge Regional Park yet, so the card renders its designed
-    // non-photographic fallback.
+    // LR-MOUNTAINS-EDGE-REC-CENTER-PARK-PHASE-II. Card image = Mikey's aerial
+    // of Mountain's Edge Regional Park (same image as the article hero).
+    image: "/images/hero/mountains-edge-regional-park-las-vegas-hero.webp",
+    imageAlt:
+      "Aerial view of Mountain's Edge Regional Park in southwest Las Vegas: lighted baseball and softball fields, a turf field, a playground, shade structures and parking lots, with open desert, neighborhoods and mountains beyond under a cloudy sky.",
     href: "/guides/mountains-edge-recreation-center-regional-park-phase-ii-southwest-las-vegas",
   },
   {

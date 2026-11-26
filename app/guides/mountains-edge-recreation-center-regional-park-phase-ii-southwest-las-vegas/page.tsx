@@ -30,17 +30,21 @@ import { StoryPage, StoryLede, StorySection } from "@/components/story";
 // features, size, architect and exact site; any aquatic center; any contract
 // price (the ranges are RFP estimates); any tie to the $222.5M bond item;
 // the park's street address (not verified this run).
-// IMAGERY — No Mountain's Edge Regional Park photography exists in the image
-// library and no first-party media was added before this run. Photoless
-// StoryHero and no card image, per the standard fallback. Existing
-// "park in Mountain's Edge" and Exploration Peak Park images are NOT this park
-// and are not used.
+// IMAGERY — Hero and card image (added 2026-11-26): Mikey's own aerial of
+// Mountain's Edge Regional Park, uploaded to public/images/hero/. Alt text
+// describes the existing park only; it does not label any open desert in the
+// frame as the Phase II or rec-center site (that site isn't published).
+// Existing "park in Mountain's Edge" and Exploration Peak Park images are NOT
+// this park and are not used.
 // ---------------------------------------------------------------------------
 
 const PATH =
   "/guides/mountains-edge-recreation-center-regional-park-phase-ii-southwest-las-vegas";
 const TITLE =
   "Mountain's Edge Is Getting a Rec Center and a Bigger Regional Park. Here's What Clark County Just Approved";
+const HERO = "/images/hero/mountains-edge-regional-park-las-vegas-hero.webp";
+const HERO_ALT =
+  "Aerial view of Mountain's Edge Regional Park in southwest Las Vegas: lighted baseball and softball fields, a turf field, a playground, shade structures and parking lots, with open desert, neighborhoods and mountains beyond under a cloudy sky.";
 const linkCls =
   "text-lvinit-blue underline underline-offset-4 decoration-transparent hover:decoration-lvinit-blue";
 const extCls = "text-lvinit-blue underline underline-offset-4";
@@ -51,8 +55,12 @@ const meta: StoryMeta = {
   description:
     "Clark County picked CORE Construction for a new Mountain's Edge recreation center and Phase II of Mountain's Edge Regional Park, estimated at $85M to $90M combined. What's planned and what isn't set yet.",
   path: PATH,
+  image: HERO,
+  imageWidth: 1448,
+  imageHeight: 1086,
+  imageAlt: HERO_ALT,
   datePublished: "2026-11-19",
-  dateModified: "2026-11-19",
+  dateModified: "2026-11-26",
   author: "LVINIT Editorial",
   breadcrumbs: [
     { name: "Home", path: "/" },
@@ -72,6 +80,8 @@ export default function MountainsEdgeRecCenterParkPhaseIIPage() {
         headline: TITLE,
         subheadline:
           "Two linked projects, one builder and roughly $85 million to $90 million in estimated cost. Here's what's actually decided and what isn't yet.",
+        image: HERO,
+        imageAlt: HERO_ALT,
         backLink: { label: "All guides", href: "/guides" },
       }}
       relatedStories={{
@@ -279,9 +289,9 @@ export default function MountainsEdgeRecCenterParkPhaseIIPage() {
             price.
           </li>
           <li>
-            <span className="text-lvinit-black">Photos.</span> There are no
-            LVINIT photos of Mountain&rsquo;s Edge Regional Park yet, so this
-            page has no imagery rather than a stand-in from somewhere else.
+            <span className="text-lvinit-black">What the photo shows.</span>{" "}
+            The aerial at the top is the park as it is today. The open desert
+            around it isn&rsquo;t a confirmed expansion or rec-center site.
           </li>
         </ul>
       </StorySection>
