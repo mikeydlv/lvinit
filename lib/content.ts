@@ -390,7 +390,7 @@ export const guides: Guide[] = [
     // LR-RED-ROCK-LEGACY-TRAIL. Card image = the article hero: an
     // AI-processed version of a Las Vegas Review-Journal photo, uploaded by
     // Mikey 2026-11-16 (the article credits the source and notes the AI
-    // processing). Publication permission pending. Superseded generated
+    // processing). Publication cleared by Mikey 2026-11-26. Superseded generated
     // cover deleted.
     image: "/images/hero/red-rock-legacy-trail-cyclists-bridge-hero.webp",
     imageAlt:

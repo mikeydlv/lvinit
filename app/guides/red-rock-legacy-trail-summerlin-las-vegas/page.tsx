@@ -45,8 +45,8 @@ import { StoryPage, StoryLede, StorySection } from "@/components/story";
 // IMAGERY (updated 2026-11-16): two images uploaded by Mikey after
 //   publication. They are AI-processed versions of Las Vegas Review-Journal
 //   photos, NOT unaltered originals and NOT LVINIT photography. Publication
-//   permission was NOT confirmed when they were added; do not merge/publish
-//   until they are cleared. Optimized to WebP with Sharp at their native
+//   permission was confirmed as cleared by Mikey on 2026-11-26 before
+//   publication. Optimized to WebP with Sharp at their native
 //   1672x941 (q84); the uploaded PNGs were replaced by the WebP copies. Every
 //   placement carries the source credit and the AI-processing note.
 //   Hero/card/OG: cyclists on the trail bridge. Inline ("What's open right
