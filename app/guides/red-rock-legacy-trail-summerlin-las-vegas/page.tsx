@@ -143,6 +143,9 @@ export default function RedRockLegacyTrailPage() {
         image: HERO_IMG,
         imageAlt: HERO_ALT,
         imageCredit: IMG_CREDIT,
+        // Portrait mobile hero: shift the crop left so the lead cyclists stay
+        // in frame; desktop keeps the centred near-16:9 crop.
+        imagePositionClass: "object-[30%_50%] sm:object-center",
         backLink: { label: "All guides", href: "/guides" },
       }}
       relatedStories={{
@@ -395,10 +398,10 @@ export default function RedRockLegacyTrailPage() {
             page doesn&rsquo;t give one, so I&rsquo;m not citing one.
           </li>
           <li>
-            <span className="text-lvinit-black">Photos.</span> LVINIT
-            doesn&rsquo;t have its own photos of the Legacy Trail yet, so this
-            page runs without one rather than passing off another part of Red
-            Rock as this trail.
+            <span className="text-lvinit-black">Photos.</span> The images on
+            this page are AI-processed versions of Las Vegas Review-Journal
+            photos, not the unaltered originals. LVINIT doesn&rsquo;t have its
+            own photos of the Legacy Trail yet.
           </li>
         </ul>
       </StorySection>
