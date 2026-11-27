@@ -238,6 +238,19 @@ export type Guide = {
  */
 export const guides: Guide[] = [
   {
+    slug: "nevada-dmv-silverado-office-henderson-closed-south-las-vegas",
+    title: "The Henderson DMV Is Gone. What to Know About Nevada’s New Silverado DMV in the South Valley",
+    dek: "Nevada DMV closed its Henderson office and moved it, plus CDL services, into one big new office off Valley View. Where it is, hours, appointments and what you can skip the trip for.",
+    byline: "LVINIT Editorial",
+    date: "November 2026",
+    publishedAt: "2026-11-27",
+    category: "Moving Here",
+    // Built by the LVINIT Daily Publisher from Local Radar assignment
+    // LR-NV-DMV-SILVERADO-RANCH-OFFICE. No LVINIT photography of the office
+    // yet, so the card renders its designed fallback.
+    href: "/guides/nevada-dmv-silverado-office-henderson-closed-south-las-vegas",
+  },
+  {
     slug: "holiday-lights-las-vegas-2026",
     title: "Where to See Holiday Lights in Las Vegas This Year: Glittering Lights, Magical Forest, Ethel M and Enchant",
     dek: "The four big holiday light displays around the valley this season, from the Speedway drive-thru to the $3 Ethel M cactus garden. Dates, hours, what it costs and what to know before you go.",

@@ -262,6 +262,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.7,
     },
     {
+      url: `${BASE_URL}/guides/nevada-dmv-silverado-office-henderson-closed-south-las-vegas`,
+      lastModified: new Date("2026-11-27"),
+      changeFrequency: "monthly",
+      priority: 0.7,
+    },
+    {
       url: `${BASE_URL}/guides/holiday-lights-las-vegas-2026`,
       lastModified: new Date("2026-11-26"),
       changeFrequency: "monthly",
